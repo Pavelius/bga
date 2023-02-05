@@ -1,0 +1,4 @@
+#Item
+
+Longsword weight(15) cost(15)
+ weapon damage(1 8)
