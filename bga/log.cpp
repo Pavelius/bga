@@ -123,3 +123,15 @@ const char* log::skipwscr(const char* p) {
 	}
 	return p;
 }
+
+void log::readdir(const char* url, const char* filter, fnread proc) {
+	for(io::file::find file(url); file; file.next()) {
+		auto pn = file.name();
+		if(pn[0] == '.')
+			continue;
+		if(filter && !szpmatch(pn, filter))
+			continue;
+		char temp[260];
+		proc(file.fullname(temp));
+	}
+}

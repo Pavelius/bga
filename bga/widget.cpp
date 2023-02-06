@@ -1,22 +1,39 @@
 #include "bsreq.h"
 #include "crt.h"
+#include "draw.h"
+#include "draw_gui.h"
+#include "resid.h"
 #include "widget.h"
 
-BSDATAC(widget, 128)
-BSMETA(widget) = {
-	BSREQ(id),
-	{}};
+using namespace draw;
 
-const widget* lastwidget;
-
-void widget::paint() const {
-	auto push_last = lastwidget;
-	lastwidget = this; proc();
-	lastwidget = push_last;
+static void background() {
+	image(gui.res, gui.value, 0);
 }
 
-void widget::add(const char* id, fnevent proc, fnevent click) {
-	auto p = (widget*)bsdata<widget>::source.addfind(id);
-	p->proc = proc;
-	p->click = click;
+static void button() {
+	auto frame = gui.frames[0];
+	auto pressed = hot.pressed && ishilite();
+	if(pressed)
+		frame = gui.frames[1];
+	image(gui.res, frame, 0);
+	auto pn = gui.id;
+	if(pn) {
+		auto push_caret = caret;
+		if(pressed) {
+			caret.x += 1;
+			caret.y += 2;
+		}
+		texta(pn, AlignCenterCenter);
+	}
 }
+
+static void label() {
+}
+
+BSDATA(widget) = {
+	{"Background", background},
+	{"Button", button},
+	{"Label", label},
+};
+BSDATAF(widget)

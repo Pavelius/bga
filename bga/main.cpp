@@ -2,6 +2,7 @@
 #include "bsreq.h"
 #include "crt.h"
 #include "draw.h"
+#include "draw_control.h"
 #include "draw_object.h"
 #include "log.h"
 #include "resid.h"
@@ -12,13 +13,10 @@ void check_translation();
 void initialize_translation(const char* locale);
 void util_main();
 
-static void main_scene() {
-	rectf();
-	image(100, 100, gres(res::GUIREC), 0, 0);
-}
-
 static void start_main() {
-	draw::scene(main_scene);
+	last_form = bsdata<form>::find("GUICHP1B");
+	if(last_form)
+		draw::scene(last_form->paintscene);
 }
 
 static void initialize() {
@@ -37,11 +35,13 @@ int main(int argc, char* argv[]) {
 #endif // _DEBUG
 	draw::object::initialize();
 	bsreq::read("rules/Basic.txt");
+	log::readdir("forms", "*.txt", form::read);
 	initialize_translation("ru");
 	initialize();
 	check_translation();
 	if(log::geterrors())
 		return -1;
+	colors::text = color(255, 255, 255);
 	pbeforemodal = beforemodal;
 	pbackground = background;
 	//answers::beforepaint = answers_beforepaint;

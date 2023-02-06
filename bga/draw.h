@@ -201,7 +201,6 @@ void					getwindowpos(point& pos, point& size, unsigned* flags);
 void					glyph(int sym, unsigned flags);
 void					gradv(const color c1, const color c2, int skip = 0);
 void					gradh(const color c1, const color c2, int skip = 0);
-const sprite*			gres(const char* name, const char* folder = 0, point size = {}, int ox = 0, int oy = 0);
 void					hexagon();
 int						hittest(int x, int test_x, const char* string, int lenght);
 int						hittest(rect rc, const char* string, unsigned state, point mouse);
