@@ -9,6 +9,7 @@ using namespace draw;
 
 void check_translation();
 void initialize_translation(const char* locale);
+void util_main();
 
 static void main_scene() {
 }
@@ -28,6 +29,9 @@ static void background() {
 
 int main(int argc, char* argv[]) {
 	srand(getcputime());
+#ifdef _DEBUG
+	util_main();
+#endif // _DEBUG
 	draw::object::initialize();
 	bsreq::read("rules/Basic.txt");
 	initialize_translation("ru");

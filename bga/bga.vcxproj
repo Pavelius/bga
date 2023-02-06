@@ -28,6 +28,7 @@
     <ClCompile Include="ability.cpp" />
     <ClCompile Include="answers.cpp" />
     <ClCompile Include="bsreq.cpp" />
+    <ClCompile Include="bstream.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="crt.cpp" />
     <ClCompile Include="crt_translate.cpp" />
@@ -46,6 +47,7 @@
     <ClCompile Include="logparse.cpp" />
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="main_util.cpp" />
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="nameable.cpp" />
     <ClCompile Include="point.cpp" />
@@ -53,8 +55,10 @@
     <ClCompile Include="screenshoot.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="scripting.cpp" />
+    <ClCompile Include="sprite_util.cpp" />
     <ClCompile Include="stringact.cpp" />
     <ClCompile Include="stringbuilder.cpp" />
+    <ClCompile Include="surface_serial.cpp" />
     <ClCompile Include="szdup.cpp" />
     <ClCompile Include="variant.cpp" />
     <ClCompile Include="wear.cpp" />
@@ -63,12 +67,15 @@
     <ClCompile Include="win_draw.cpp" />
     <ClCompile Include="win_io_file.cpp" />
     <ClCompile Include="win_time.cpp" />
+    <ClCompile Include="zip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h" />
     <ClInclude Include="answers.h" />
     <ClInclude Include="bsreq.h" />
+    <ClInclude Include="bstream.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="coloration.h" />
     <ClInclude Include="creature.h" />
     <ClInclude Include="crt.h" />
     <ClInclude Include="draw.h" />
@@ -80,14 +87,17 @@
     <ClInclude Include="log.h" />
     <ClInclude Include="logparse.h" />
     <ClInclude Include="magic.h" />
+    <ClInclude Include="main_util.h" />
     <ClInclude Include="nameable.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="pushvalue.h" />
     <ClInclude Include="range.h" />
     <ClInclude Include="rect.h" />
+    <ClInclude Include="rects.h" />
     <ClInclude Include="resid.h" />
     <ClInclude Include="screenshoot.h" />
     <ClInclude Include="script.h" />
+    <ClInclude Include="sprite_util.h" />
     <ClInclude Include="stringact.h" />
     <ClInclude Include="stringbuilder.h" />
     <ClInclude Include="tag.h" />

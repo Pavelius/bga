@@ -19,6 +19,9 @@
     <Filter Include="platform">
       <UniqueIdentifier>{77797725-0262-4445-b638-cf0d9dafa2f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{bf637da8-ca55-44db-a400-4c1ad2c2d468}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\rules\Basic.txt">
@@ -149,6 +152,21 @@
     <ClCompile Include="szdup.cpp">
       <Filter>support</Filter>
     </ClCompile>
+    <ClCompile Include="main_util.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite_util.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="zip.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="bstream.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="surface_serial.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -243,6 +261,21 @@
     </ClInclude>
     <ClInclude Include="gender.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="main_util.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="rects.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_util.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="coloration.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="bstream.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
