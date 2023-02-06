@@ -209,6 +209,9 @@
     <ClCompile Include="resid.cpp">
       <Filter>interface</Filter>
     </ClCompile>
+    <ClCompile Include="draw_command.cpp">
+      <Filter>interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -323,6 +326,9 @@
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="resid.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="draw_command.h">
       <Filter>interface</Filter>
     </ClInclude>
   </ItemGroup>

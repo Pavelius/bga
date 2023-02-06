@@ -12,7 +12,6 @@ struct guii {
 	const sprite*	res;
 	unsigned short	frames[4];
 	bool			hilited, disabled;
-	static fnevent	apply;
 	void			clear();
 };
 extern guii gui;

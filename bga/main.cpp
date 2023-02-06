@@ -20,22 +20,13 @@ static void chapter_prepare() {
 	}
 }
 
-static void chapter_apply() {
-	if(equal(gui.id, "Done")) {
-		execute(buttonok);
-	}
-}
-
 static void start_main() {
 	auto push_prepare = form::prepare;
-	auto push_apply = gui.apply;
 	last_form = bsdata<form>::find("GUICHP0B");
 	form::prepare = chapter_prepare;
-	guii::apply = chapter_apply;
 	if(last_form)
 		draw::scene(last_form->paintscene);
 	form::prepare = push_prepare;
-	gui.apply = push_apply;
 }
 
 static void initialize() {
