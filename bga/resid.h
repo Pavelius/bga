@@ -5,7 +5,7 @@ struct sprite;
 namespace res {
 enum token : unsigned short {
 	NONE,
-	STONEBIG,
+	STONEBIG, REALMS, NORMAL,
 	CURSORS, CURSARW, COLGRAD, COLOR,
 	GACTN,
 	GBTNBFRM, GBTNJBTN, GBTNLRG, GBTNMED, GBTNMED2, GBTNMINS, GBTNPLUS, GBTNOPT1, GBTNOPT2,
@@ -65,9 +65,9 @@ enum token : unsigned short {
 struct residi {
 	const char*		id;
 	const char*		folder;
-	const sprite*	data;
+	sprite*			data;
 	bool			error;
-	const sprite*	get();
+	sprite*			get();
 };
-const sprite* gres(res::token i);
-const sprite* gres(const char* id);
+sprite* gres(res::token i);
+sprite* gres(const char* id);

@@ -245,7 +245,7 @@ static void write_value(void* object, const bsreq* req, int index, const valuei&
 	else if(req->is(KindText))
 		req->set(p1, (long)szdup(v.text));
 	else if(req->is(KindScalar)) {
-		if(req->count > 0)
+		if(req->count > 1)
 			write_value(req->ptr(object, index), req->type, 0, v);
 		else
 			write_value(req->ptr(object), req->type + index, 0, v);

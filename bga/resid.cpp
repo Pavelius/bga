@@ -3,13 +3,16 @@
 
 using namespace res;
 
+const char* font = "art/fonts";
 const char* root = "art/pma";
 const char* chra = "art/characters";
 const char* mons = "art/monsters";
 const char* proj = "art/projectiles";
 
 BSDATA(residi) = {
-	{"NONE"}, {"STONEBIG", root}, {"CURSORS", root}, {"CURSARW", root}, {"COLGRAD", root}, {"COLOR", root},
+	{"NONE"},
+	{"STONEBIG", font}, {"REALMS", font}, {"NORMAL", font},
+	{"CURSORS", root}, {"CURSARW", root}, {"COLGRAD", root}, {"COLOR", root},
 	{"GACTN", root},
 	{"GBTNBFRM", root}, {"GBTNJBTN", root}, {"GBTNLRG", root}, {"GBTNMED", root}, {"GBTNMED2", root}, {"GBTNMINS", root}, {"GBTNPLUS", root}, {"GBTNOPT1", root}, {"GBTNOPT2", root},
 	{"GBTNSPB1", root}, {"GBTNSPB2", root}, {"GBTNSPB3", root},
@@ -65,7 +68,7 @@ BSDATA(residi) = {
 };
 assert_enum(residi, res::MSKAA)
 
-const sprite* residi::get() {
+sprite* residi::get() {
 	if(data)
 		return data;
 	if(!data && !error) {
@@ -76,13 +79,13 @@ const sprite* residi::get() {
 	return data;
 }
 
-const sprite* gres(res::token i) {
+sprite* gres(res::token i) {
 	if(i == NONE)
 		return 0;
 	return bsdata<residi>::elements[i].get();
 }
 
-const sprite* gres(const char* id) {
+sprite* gres(const char* id) {
 	auto p = bsdata<residi>::find(id);
 	if(!p)
 		return 0;

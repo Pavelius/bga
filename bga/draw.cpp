@@ -53,11 +53,11 @@ bool			    line_antialiasing = true;
 static const void*	drag_object;
 point				draw::dragmouse;
 // Metrics
-sprite*				metrics::font = (sprite*)loadb("art/fonts/font.pma");
-sprite*				metrics::h1 = (sprite*)loadb("art/fonts/h1.pma");
-sprite*				metrics::h2 = (sprite*)loadb("art/fonts/h2.pma");
-sprite*				metrics::h3 = (sprite*)loadb("art/fonts/h3.pma");
-sprite*				metrics::small = (sprite*)loadb("art/fonts/small.pma");
+sprite*				metrics::font;
+sprite*				metrics::h1;
+sprite*				metrics::h2;
+sprite*				metrics::h3;
+sprite*				metrics::small;
 sprite*				metrics::icons = (sprite*)loadb("art/fonts/icons.pma");
 int					metrics::padding = 2, metrics::border = 4;
 //

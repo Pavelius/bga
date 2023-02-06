@@ -35,6 +35,7 @@ void form::paint() const {
 		auto push_fore = fore;
 		if(e.fore.r || e.fore.g || e.fore.b)
 			fore = e.fore;
+		gui.hilited = ishilite();
 		e.visual->proc();
 		fore = push_fore;
 	}

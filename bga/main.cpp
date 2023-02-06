@@ -14,7 +14,7 @@ void initialize_translation(const char* locale);
 void util_main();
 
 static void start_main() {
-	last_form = bsdata<form>::find("GUICHP1B");
+	last_form = bsdata<form>::find("GUICHP0B");
 	if(last_form)
 		draw::scene(last_form->paintscene);
 }
@@ -41,6 +41,10 @@ int main(int argc, char* argv[]) {
 	check_translation();
 	if(log::geterrors())
 		return -1;
+	metrics::font = gres(res::NORMAL);
+	metrics::h1 = gres(res::STONEBIG);
+	metrics::h2 = gres(res::STONEBIG);
+	metrics::h3 = gres(res::STONEBIG);
 	colors::text = color(255, 255, 255);
 	pbeforemodal = beforemodal;
 	pbackground = background;
