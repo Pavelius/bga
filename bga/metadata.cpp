@@ -1,6 +1,7 @@
 #include "ability.h"
 #include "bsreq.h"
 #include "color.h"
+#include "colorgrad.h"
 #include "crt.h"
 #include "draw_control.h"
 #include "item.h"
@@ -14,6 +15,7 @@ BSMETA(varianti) = {BSREQ(id), {}};
 
 BSDATAC(itemi, 512)
 BSDATAD(variant)
+BSDATAC(colorgrad, 32)
 BSDATAC(control, 1024)
 BSDATAC(form, 128)
 
@@ -26,6 +28,9 @@ BSMETA(abilityi) = {
 	{}};
 BSMETA(color) = {
 	BSREQ(r), BSREQ(g), BSREQ(b),
+	{}};
+BSMETA(colorgrad) = {
+	BSREQ(id), BSREQ(indecies),
 	{}};
 BSMETA(control) = {
 	BSREQ(visual), BSREQ(resource), BSREQ(x), BSREQ(y), BSREQ(width), BSREQ(height),
@@ -67,6 +72,7 @@ BSDATA(varianti) = {
 	{"NoVariant"},
 	{"Ability", VAR(abilityi, 1)},
 	{"Control", VAR(control, 6)},
+	{"ColorGrad", VAR(colorgrad, 1)},
 	{"Item", VAR(itemi, 1)},
 	{"Rate", VAR(magici, 1)},
 	{"Resource", VAR(residi, 1)},

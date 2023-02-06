@@ -9,6 +9,6 @@ struct command {
 	fnevent			proc;
 	unsigned		key;
 	fnallowrun		allow;
-	static void		execute(const char* id);
+	static void		execute(const char* id, int param);
 };
 }

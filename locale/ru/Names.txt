@@ -1,4 +1,5 @@
 AppTitle: Врата Балдура
+DefaultColor: По-умолчанию
 Description: Описание
 Done: Завершить
 Replay: Заново

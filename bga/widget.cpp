@@ -1,4 +1,5 @@
 #include "bsreq.h"
+#include "colorgrad.h"
 #include "crt.h"
 #include "draw.h"
 #include "draw_command.h"
@@ -26,7 +27,7 @@ static const char* getname() {
 
 static void interactive_execute() {
 	if(hot.key == MouseLeft && !hot.pressed && gui.hilited)
-		command::execute(gui.id);
+		command::execute(gui.id, gui.value);
 }
 
 static void pressed_button() {
@@ -66,10 +67,33 @@ static void label() {
 	font = push_font;
 }
 
+static void pressed_colorgrad(int index) {
+	auto push_caret = caret;
+	if(hot.pressed && gui.hilited) {
+		caret.x += 1;
+		caret.y += 1;
+	}
+	auto push_palt = palt; palt = pallette;
+	set_color(4, index);
+	image(gres(res::COLGRAD), 0, ImagePallette);
+	palt = push_palt;
+	caret = push_caret;
+}
+
+static void color_picker() {
+	auto color_index = color_indecies[gui.value];
+	pressed_button();
+	if(color_index == -1)
+		return;
+	pressed_colorgrad(color_index);
+	interactive_execute();
+}
+
 BSDATA(widget) = {
 	{"Background", background},
 	{"Button", button},
 	{"ButtonNT", button_no_text},
+	{"ColorPicker", color_picker},
 	{"Label", label},
 };
 BSDATAF(widget)

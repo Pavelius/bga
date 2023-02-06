@@ -191,6 +191,9 @@
     <ClCompile Include="draw_command.cpp">
       <Filter>interface</Filter>
     </ClCompile>
+    <ClCompile Include="colorgrad.cpp">
+      <Filter>interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -309,6 +312,12 @@
     </ClInclude>
     <ClInclude Include="draw_command.h">
       <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="colorgrad.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="race.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

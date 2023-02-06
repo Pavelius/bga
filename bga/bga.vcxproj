@@ -33,6 +33,7 @@
     <ClCompile Include="bsreq.cpp" />
     <ClCompile Include="bstream.cpp" />
     <ClCompile Include="color.cpp" />
+    <ClCompile Include="colorgrad.cpp" />
     <ClCompile Include="crt.cpp" />
     <ClCompile Include="crt_translate.cpp" />
     <ClCompile Include="draw.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="bstream.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="coloration.h" />
+    <ClInclude Include="colorgrad.h" />
     <ClInclude Include="creature.h" />
     <ClInclude Include="crt.h" />
     <ClInclude Include="draw.h" />
@@ -101,6 +103,7 @@
     <ClInclude Include="nameable.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="pushvalue.h" />
+    <ClInclude Include="race.h" />
     <ClInclude Include="range.h" />
     <ClInclude Include="rect.h" />
     <ClInclude Include="rects.h" />

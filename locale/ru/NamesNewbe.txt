@@ -1,2 +1,1 @@
-﻿Cancel: 
-Colors: 
+﻿Colors: 
