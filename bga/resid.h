@@ -1,6 +1,6 @@
 #pragma once
 
-#pragma once
+struct sprite;
 
 namespace res {
 enum token : unsigned short {
@@ -61,3 +61,9 @@ enum token : unsigned short {
 	Count
 };
 }
+struct residi {
+	const char*		id;
+	const sprite*	data;
+	bool			error;
+};
+const sprite* gres(res::token i);

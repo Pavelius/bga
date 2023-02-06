@@ -4,6 +4,7 @@
 #include "draw.h"
 #include "draw_object.h"
 #include "log.h"
+#include "resid.h"
 
 using namespace draw;
 
@@ -12,6 +13,8 @@ void initialize_translation(const char* locale);
 void util_main();
 
 static void main_scene() {
+	rectf();
+	image(100, 100, gres(res::GUIREC), 0, 0);
 }
 
 static void start_main() {
