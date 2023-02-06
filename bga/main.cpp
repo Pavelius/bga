@@ -2,6 +2,7 @@
 #include "bsreq.h"
 #include "crt.h"
 #include "draw.h"
+#include "draw_gui.h"
 #include "draw_control.h"
 #include "draw_object.h"
 #include "log.h"
@@ -13,10 +14,28 @@ void check_translation();
 void initialize_translation(const char* locale);
 void util_main();
 
+static void chapter_prepare() {
+	if(equal(gui.id, "Description")) {
+		gui.text = "Uncle Tad always sad `You must follow the rabbit`. And I always follow, when rabit is in zone of my sight.";
+	}
+}
+
+static void chapter_apply() {
+	if(equal(gui.id, "Done")) {
+		execute(buttonok);
+	}
+}
+
 static void start_main() {
+	auto push_prepare = form::prepare;
+	auto push_apply = gui.apply;
 	last_form = bsdata<form>::find("GUICHP0B");
+	form::prepare = chapter_prepare;
+	guii::apply = chapter_apply;
 	if(last_form)
 		draw::scene(last_form->paintscene);
+	form::prepare = push_prepare;
+	gui.apply = push_apply;
 }
 
 static void initialize() {
@@ -48,14 +67,11 @@ int main(int argc, char* argv[]) {
 	colors::text = color(255, 255, 255);
 	pbeforemodal = beforemodal;
 	pbackground = background;
-	//answers::beforepaint = answers_beforepaint;
-	//answers::paintcell = menubt;
-	//pfinish = finish;
-	//ptips = tips;
 	awindow.flags = WFResize | WFMinmax;
 	metrics::border = 5;
 	metrics::padding = 1;
 	initialize(getnm("AppTitle"));
+	settimer(100);
 	setnext(start_main);
 	start();
 	return 0;

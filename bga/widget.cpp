@@ -12,9 +12,19 @@ static void background() {
 }
 
 static const char* getname() {
-	if(!gui.id)
-		return "";
-	return getnm(gui.id);
+	const char* pn = 0;
+	if(gui.text)
+		pn = gui.text;
+	if(!pn && gui.id)
+		pn = getnm(gui.id);
+	if(!pn)
+		pn = "";
+	return pn;
+}
+
+static void default_command() {
+	if(gui.apply)
+		gui.apply();
 }
 
 static void button() {
@@ -30,6 +40,8 @@ static void button() {
 		caret.y += 2;
 	}
 	texta(pn, AlignCenterCenter);
+	if(hot.key==MouseLeft && !hot.pressed && gui.hilited)
+		default_command();
 }
 
 static void label() {

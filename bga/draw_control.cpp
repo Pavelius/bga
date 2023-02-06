@@ -7,6 +7,7 @@
 using namespace draw;
 
 form* draw::last_form;
+fnevent form::prepare;
 
 void form::read(const char* url) {
 	auto control_start = bsdata<control>::source.getcount();
@@ -24,7 +25,8 @@ void form::paint() const {
 	rectpush push;
 	auto push_gui = gui;
 	for(auto& e : controls) {
-		caret.x = e.x; caret.y = e.y;
+		caret.x = push.caret.x + e.x;
+		caret.y = push.caret.y + e.y;
 		width = e.width; height = e.height;
 		gui.clear();
 		gui.id = e.id;
@@ -36,6 +38,8 @@ void form::paint() const {
 		if(e.fore.r || e.fore.g || e.fore.b)
 			fore = e.fore;
 		gui.hilited = ishilite();
+		if(prepare)
+			prepare();
 		e.visual->proc();
 		fore = push_fore;
 	}

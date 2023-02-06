@@ -1,1 +1,4 @@
 AppTitle: Врата Балдура
+Description: Описание
+Done: Завершить
+Replay: Заново
