@@ -1,7 +1,0 @@
-﻿#Control
-
-Background GUICHP 0 0 0 0 value(1)
-Button GBTNBFRM 412 529 205 40 frames(1 2 3 0) 
-Label STONEBIG 193 35 412 30 // World Map
-Label NONE 421 321 337 153 fore(255 255 255) 
-Button GBTNBFRM 183 529 205 39 frames(1 2 3 0) value(3)

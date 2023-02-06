@@ -45,28 +45,7 @@
     <Text Include="..\forms\GUICHP0B.txt">
       <Filter>forms</Filter>
     </Text>
-    <Text Include="..\forms\GUICHP1B.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUICHP2B.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUICHP3B.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUICHP4B.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUICHP5B.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUICHP6B.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUICHP7B.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUICHP8B.txt">
+    <Text Include="..\forms\COLOR.txt">
       <Filter>forms</Filter>
     </Text>
   </ItemGroup>

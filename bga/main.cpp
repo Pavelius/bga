@@ -22,7 +22,7 @@ static void chapter_prepare() {
 
 static void start_main() {
 	auto push_prepare = form::prepare;
-	last_form = bsdata<form>::find("GUICHP0B");
+	last_form = bsdata<form>::find("COLOR");
 	form::prepare = chapter_prepare;
 	if(last_form)
 		draw::scene(last_form->paintscene);

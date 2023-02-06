@@ -1,6 +1,0 @@
-﻿#Control
-
-Button GBTNSTD 338 422 126 26 frames(1 2 3 0) 
-Label NONE 109 22 409 28 
-Label NONE 72 298 501 90 fore(255 255 255) 
-Button GBTNSTD 177 422 126 26 frames(1 2 3 0) value(3)
