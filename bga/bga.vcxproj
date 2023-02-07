@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClInclude Include="ability.h" />
     <ClInclude Include="moveable.h" />
+    <ClInclude Include="portrait.h" />
     <ClInclude Include="resinfo.h" />
     <ClInclude Include="answers.h" />
     <ClInclude Include="bsreq.h" />

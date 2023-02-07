@@ -143,8 +143,8 @@ static void quick_weapon_button() {
 }
 
 static void quick_weapon_item() {
-	image(gui.res, gui.value, 0);
 	auto pi = last_creature->wears + (QuickWeapon + gui.value * 2);
+	image(gui.res, gui.value, 0);
 	if(!(*pi)) {
 		strokeout(paint_empthy_weapon, -2);
 		return;
@@ -153,7 +153,7 @@ static void quick_weapon_item() {
 
 static void quick_offhand_item() {
 	auto pi = last_creature->wears + (QuickWeapon + gui.value * 2);
-	image(gui.res, gui.value, 0);
+	image(gui.res, 8 + gui.value, 0);
 	if(!(*pi)) {
 		strokeout(paint_empthy_offhand, -2);
 		return;

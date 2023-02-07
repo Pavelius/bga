@@ -5,7 +5,9 @@
 #include "crt.h"
 #include "creature.h"
 #include "draw_control.h"
+#include "gender.h"
 #include "item.h"
+#include "portrait.h"
 #include "race.h"
 #include "variant.h"
 #include "widget.h"
@@ -20,6 +22,7 @@ BSDATAC(control, 1024)
 BSDATAC(creature, 256)
 BSDATAC(form, 128)
 BSDATAC(itemi, 512)
+BSDATAC(racei, 32)
 BSDATAD(variant)
 
 NOBSDATA(color)
@@ -55,6 +58,12 @@ BSMETA(itemi) = {
 	{}};
 BSMETA(magici) = {
 	BSREQ(id),
+	{}};
+BSMETA(portraiti) = {
+	BSREQ(id),
+	BSREQ(colors),
+	BSFLG(genders, genderi),
+	BSFLG(races, racei),
 	{}};
 BSMETA(racei) = {
 	BSREQ(id),

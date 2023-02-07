@@ -346,5 +346,8 @@
     <ClInclude Include="moveable.h">
       <Filter>interface</Filter>
     </ClInclude>
+    <ClInclude Include="portrait.h">
+      <Filter>logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
