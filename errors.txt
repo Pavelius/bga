@@ -1,5 +1,4 @@
-﻿In file `forms/GUIINV08.txt`:
- Line 69: Not found identifier `QuickOffhandButton`
- Line 73: Not found identifier `QuickOffhandButton`
- Line 77: Not found identifier `QuickOffhandButton`
- Line 81: Not found identifier `QuickOffhandButton`
+﻿In file `rules/Portraits.txt`:
+ Line 65: Not found requisit `FORC1_L`
+ Line 65: Expected token `(`
+ Line 65: Expected line feed

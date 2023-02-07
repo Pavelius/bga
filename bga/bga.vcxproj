@@ -28,6 +28,7 @@
     <Text Include="..\locale\ru\NamesNewbe.txt" />
     <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Items.txt" />
+    <Text Include="..\rules\Portraits.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
@@ -44,7 +45,6 @@
     <ClCompile Include="draw_command.cpp" />
     <ClCompile Include="draw_control.cpp" />
     <ClCompile Include="draw_gui.cpp" />
-    <ClCompile Include="draw_object.cpp" />
     <ClCompile Include="draw_scene.cpp" />
     <ClCompile Include="draw_text.cpp" />
     <ClCompile Include="draw_textf.cpp" />
@@ -101,7 +101,6 @@
     <ClInclude Include="draw_command.h" />
     <ClInclude Include="draw_control.h" />
     <ClInclude Include="draw_gui.h" />
-    <ClInclude Include="draw_object.h" />
     <ClInclude Include="gender.h" />
     <ClInclude Include="io_stream.h" />
     <ClInclude Include="item.h" />

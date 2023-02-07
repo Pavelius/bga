@@ -54,6 +54,9 @@
     <Text Include="..\forms\GUIINV08.txt">
       <Filter>forms</Filter>
     </Text>
+    <Text Include="..\rules\Portraits.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -120,9 +123,6 @@
       <Filter>interface</Filter>
     </ClCompile>
     <ClCompile Include="draw_answers.cpp">
-      <Filter>interface</Filter>
-    </ClCompile>
-    <ClCompile Include="draw_object.cpp">
       <Filter>interface</Filter>
     </ClCompile>
     <ClCompile Include="color.cpp">
@@ -272,9 +272,6 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="draw.h">
-      <Filter>interface</Filter>
-    </ClInclude>
-    <ClInclude Include="draw_object.h">
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="color.h">

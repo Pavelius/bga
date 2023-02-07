@@ -2704,26 +2704,6 @@ void draw::dropshadow() {
 	fore = push_fore;
 }
 
-void draw::setposru() {
-	width = 320;
-	caret.x = getwidth() - width - metrics::padding - metrics::border;
-	caret.y = metrics::padding + metrics::border;
-}
-
-void draw::setposlu() {
-	setpos(metrics::padding + metrics::border, metrics::padding + metrics::border);
-	width = 400;
-}
-
-void draw::setposct() {
-	width = dialog_width;
-	setpos((canvas->width - width) / 2, 30);
-}
-
-void draw::setposld() {
-	setpos(metrics::padding + metrics::border, getheight() - metrics::padding - metrics::border - texth());
-}
-
 void draw::set(int x, int y) {
 	caret.x = x - camera.x;
 	caret.y = y - camera.y;

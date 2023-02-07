@@ -22,6 +22,7 @@ BSDATAC(control, 1024)
 BSDATAC(creature, 256)
 BSDATAC(form, 128)
 BSDATAC(itemi, 512)
+BSDATAC(portraiti, 256)
 BSDATAC(racei, 32)
 BSDATAD(variant)
 
@@ -90,6 +91,7 @@ BSDATA(varianti) = {
 	{"Control", VAR(control, 6)},
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"Item", VAR(itemi, 1)},
+	{"Portrait", VAR(portraiti, 1)},
 	{"Rate", VAR(magici, 1)},
 	{"Resource", VAR(residi, 1)},
 	{"Widget", VAR(widget, 1)},

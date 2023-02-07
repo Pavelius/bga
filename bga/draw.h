@@ -302,8 +302,4 @@ void start();
 }
 namespace draw {
 bool isclipped(int size);
-void setposct();
-void setposld();
-void setposlu();
-void setposru();
 }

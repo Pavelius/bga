@@ -6,7 +6,6 @@
 #include "draw.h"
 #include "draw_gui.h"
 #include "draw_control.h"
-#include "draw_object.h"
 #include "log.h"
 #include "resid.h"
 
@@ -32,30 +31,31 @@ static void beforemodal() {
 static void background() {
 }
 
+static void read_rules() {
+	bsreq::read("rules/Colors.txt");
+	bsreq::read("rules/Portraits.txt");
+	log::readdir("forms", "*.txt", form::read);
+}
+
 int main(int argc, char* argv[]) {
 	srand(getcputime());
+	read_rules();
 #ifdef _DEBUG
 	util_main();
 #endif // _DEBUG
-	draw::object::initialize();
-	bsreq::read("rules/Colors.txt");
-	log::readdir("forms", "*.txt", form::read);
 	initialize_translation("ru");
+	check_translation();
 	initialize_widgets();
 	initialize_ui();
-	check_translation();
 	if(log::geterrors())
 		return -1;
 	metrics::font = gres(res::NORMAL);
 	metrics::h1 = gres(res::STONEBIG);
-	metrics::h2 = gres(res::STONEBIG);
+	metrics::h2 = gres(res::REALMS);
 	metrics::h3 = gres(res::STONEBIG);
 	colors::text = color(255, 255, 255);
 	pbeforemodal = beforemodal;
 	pbackground = background;
-	awindow.flags = WFResize | WFMinmax;
-	metrics::border = 5;
-	metrics::padding = 1;
 	initialize(getnm("AppTitle"));
 	settimer(100);
 	setnext(start_main);

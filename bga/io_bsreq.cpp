@@ -58,6 +58,7 @@ static void skip(const char* command) {
 static bool isvalue() {
 	return (p[0] == '-' && isnum(p[1]))
 		|| (p[0] == '\"')
+		|| (p[0] == '\'')
 		|| isnum(p[0])
 		|| ischa(p[0]);
 }
