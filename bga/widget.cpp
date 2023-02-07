@@ -4,7 +4,7 @@
 #include "draw.h"
 #include "draw_command.h"
 #include "draw_gui.h"
-#include "resid.h"
+#include "resinfo.h"
 #include "script.h"
 #include "widget.h"
 
@@ -87,6 +87,22 @@ static void color_picker() {
 		return;
 	pressed_colorgrad(color_index);
 	interactive_execute();
+}
+
+static void cursor_paint() {
+	auto cicle = cursor.cicle;
+	if(cursor.id == res::CURSORS) {
+		auto pressed = hot.pressed;
+		if(pressed)
+			cicle += 1;
+	}
+	image(hot.mouse.x, hot.mouse.y, gres(cursor.id), cicle, 0);
+}
+
+void initialize_ui() {
+	pfinish = cursor_paint;
+	cursor.set(res::CURSORS, 0);
+	draw::syscursor(false);
 }
 
 BSDATA(widget) = {

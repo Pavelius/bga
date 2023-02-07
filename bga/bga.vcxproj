@@ -44,6 +44,7 @@
     <ClCompile Include="draw_control.cpp" />
     <ClCompile Include="draw_gui.cpp" />
     <ClCompile Include="draw_object.cpp" />
+    <ClCompile Include="draw_scene.cpp" />
     <ClCompile Include="draw_text.cpp" />
     <ClCompile Include="draw_textf.cpp" />
     <ClCompile Include="gender.cpp" />
@@ -62,6 +63,7 @@
     <ClCompile Include="point.cpp" />
     <ClCompile Include="range.cpp" />
     <ClCompile Include="resid.cpp" />
+    <ClCompile Include="resinfo.cpp" />
     <ClCompile Include="screenshoot.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="scripting.cpp" />
@@ -81,6 +83,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h" />
+    <ClInclude Include="moveable.h" />
+    <ClInclude Include="resinfo.h" />
     <ClInclude Include="answers.h" />
     <ClInclude Include="bsreq.h" />
     <ClInclude Include="bstream.h" />
@@ -197,6 +201,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -225,6 +230,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

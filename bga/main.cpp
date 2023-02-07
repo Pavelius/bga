@@ -14,6 +14,7 @@ using namespace draw;
 void check_translation();
 void initialize_translation(const char* locale);
 void initialize_widgets();
+void initialize_ui();
 void util_main();
 
 static void start_main() {
@@ -21,9 +22,6 @@ static void start_main() {
 	//set_color("HairNormal");
 	//default_color = 10;
 	form::open("GUIINV08");
-}
-
-static void initialize() {
 }
 
 static void beforemodal() {
@@ -42,7 +40,7 @@ int main(int argc, char* argv[]) {
 	log::readdir("forms", "*.txt", form::read);
 	initialize_translation("ru");
 	initialize_widgets();
-	initialize();
+	initialize_ui();
 	check_translation();
 	if(log::geterrors())
 		return -1;
