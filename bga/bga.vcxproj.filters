@@ -54,9 +54,6 @@
     <Text Include="..\forms\GUIINV08.txt">
       <Filter>forms</Filter>
     </Text>
-    <Text Include="..\rules\Portraits.txt">
-      <Filter>rules</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -213,6 +210,9 @@
       <Filter>interface</Filter>
     </ClCompile>
     <ClCompile Include="creature.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="portrait.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>

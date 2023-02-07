@@ -22,7 +22,6 @@ BSDATAC(control, 1024)
 BSDATAC(creature, 256)
 BSDATAC(form, 128)
 BSDATAC(itemi, 512)
-BSDATAC(portraiti, 256)
 BSDATAC(racei, 32)
 BSDATAD(variant)
 

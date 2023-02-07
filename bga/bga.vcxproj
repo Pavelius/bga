@@ -28,7 +28,6 @@
     <Text Include="..\locale\ru\NamesNewbe.txt" />
     <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Items.txt" />
-    <Text Include="..\rules\Portraits.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
@@ -63,6 +62,7 @@
     <ClCompile Include="moveable.cpp" />
     <ClCompile Include="nameable.cpp" />
     <ClCompile Include="point.cpp" />
+    <ClCompile Include="portrait.cpp" />
     <ClCompile Include="range.cpp" />
     <ClCompile Include="resid.cpp" />
     <ClCompile Include="resinfo.cpp" />

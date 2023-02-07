@@ -57,7 +57,7 @@ static void paint_objects() {
 	auto push_clip = clipping;
 	last_screen = {caret.x, caret.y, caret.x + width, caret.y + height};
 	setclip(last_screen);
-	auto count = 0;// getobjects(source, source + sizeof(source) / sizeof(source[0]));
+	size_t count = 0;// getobjects(source, source + sizeof(source) / sizeof(source[0]));
 	sortobjects(source, count);
 	for(size_t i = 0; i < count; i++) {
 		draw::caret = source[i]->getscreen();

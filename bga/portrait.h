@@ -1,8 +1,10 @@
+#include "gender.h"
+
 #pragma once
 
 struct portraiti {
 	const char*		id;
 	unsigned char	colors[4];
-	unsigned		genders;
+	gender_s		genders;
 	unsigned		races;
 };
