@@ -20,8 +20,9 @@ struct form {
 	const char*		id;
 	sliceu<control>	controls;
 	static fnevent	prepare;
+	static long		choose(const char* id);
+	static void		open(const char* id);
 	void			paint() const;
-	static void		paintscene();
 	static void		read(const char* url);
 };
 extern form* last_form;

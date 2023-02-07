@@ -19,9 +19,8 @@ void util_main();
 static void start_main() {
 	clear_indecies();
 	set_color("HairNormal");
-	last_form = bsdata<form>::find("COLOR");
-	if(last_form)
-		draw::scene(last_form->paintscene);
+	default_color = 10;
+	auto color_index = form::choose("GUICHP0B");
 }
 
 static void initialize() {

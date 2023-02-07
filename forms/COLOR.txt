@@ -1,6 +1,6 @@
 ﻿#Control
 
-Background COLOR 0 0 0 0 value(0)
+Background COLOR 0 0 203 265
 ColorPicker INVBUT2 49 163 23 23 frames(2 3 0 0) value(25) id("ColorPick")
 ColorPicker INVBUT2 49 191 23 23 frames(2 3 0 0) value(30) id("ColorPick")
 ColorPicker INVBUT2 77 191 23 23 frames(2 3 0 0) value(31) id("ColorPick")

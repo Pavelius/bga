@@ -1,6 +1,6 @@
 ﻿#Control
 
-Background GUICHP 0 0 0 0 value(0)
+Background GUICHP 0 0 800 600 value(0)
 Button GBTNBFRM 412 529 205 40 frames(1 2 3 0) id("Done")
 Button GBTNBFRM 183 529 205 40 frames(1 2 3 0) id("Replay")
 
