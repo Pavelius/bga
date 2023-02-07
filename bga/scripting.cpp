@@ -2,6 +2,7 @@
 #include "creature.h"
 #include "draw.h"
 #include "draw_command.h"
+#include "draw_control.h"
 #include "script.h"
 
 using namespace draw;
@@ -29,9 +30,24 @@ static void check_quick_weapon() {
 	last_creature->weapon_index = (unsigned char)hot.param;
 }
 
+static void choose_creature_color() {
+	auto push_default = default_color;
+	auto index = hot.param;
+	auto pi = bsdata<portraiti>::elements + last_creature->portrait;
+	switch(index) {
+	case 0: set_color("SkinNormal"); break;
+	case 1: set_color("HairNormal"); break;
+	default: set_color("HairNormal"); break;
+	}
+	default_color = pi->colors[index];
+	last_creature->colors[index] = (unsigned char)form::choose("COLOR");
+	default_color = push_default;
+}
+
 BSDATA(draw::command) = {
 	{"Cancel", draw::buttoncancel, KeyEscape},
 	{"CheckQuickWeapon", check_quick_weapon},
+	{"ChooseCreatureColor", choose_creature_color},
 	{"ColorPick", color_pick},
 	{"DefaultColor", default_color_pick, KeyEscape},
 	{"Done", draw::buttonok, KeyEnter},

@@ -8,6 +8,13 @@ BSDATA(abilityi) = {
 	{"Intellegence"},
 	{"Wisdow"},
 	{"Charisma"},
+	{"AC"},
+	{"Attack"},
+	{"AttackMelee"},
+	{"AttackRanged"},
+	{"Damage"},
+	{"DamageMelee"},
+	{"DamageRanged"},
 	{"HitPoints"},
 	{"Stamina"},
 };

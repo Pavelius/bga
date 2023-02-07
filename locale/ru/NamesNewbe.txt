@@ -1,5 +1,5 @@
-﻿Coins: 
-Ground: 
+﻿Ground: 
+Name: 
 QuickItem: 
 QuickWeapon: 
 Quiver: 

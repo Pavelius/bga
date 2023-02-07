@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h" />
+    <ClInclude Include="actable.h" />
     <ClInclude Include="collection.h" />
     <ClInclude Include="moveable.h" />
     <ClInclude Include="portrait.h" />

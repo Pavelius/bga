@@ -352,5 +352,8 @@
     <ClInclude Include="collection.h">
       <Filter>support</Filter>
     </ClInclude>
+    <ClInclude Include="actable.h">
+      <Filter>logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

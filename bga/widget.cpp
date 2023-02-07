@@ -90,15 +90,15 @@ static void label() {
 	font = push_font;
 }
 
-static void pressed_colorgrad(int index) {
+static void pressed_colorgrad(int index, int size) {
 	auto push_caret = caret;
 	if(hot.pressed && gui.hilited) {
-		caret.x += 1;
+		caret.x += 1 + size;
 		caret.y += 1;
 	}
 	auto push_palt = palt; palt = pallette;
 	set_color(4, index);
-	image(gres(res::COLGRAD), 0, ImagePallette);
+	image(gres(res::COLGRAD), size, ImagePallette);
 	palt = push_palt;
 	caret = push_caret;
 }
@@ -108,7 +108,16 @@ static void color_picker() {
 	pressed_button();
 	if(color_index == -1)
 		return;
-	pressed_colorgrad(color_index);
+	pressed_colorgrad(color_index, 0);
+	interactive_execute();
+}
+
+static void creature_color() {
+	auto color_index = last_creature->colors[gui.value];
+	pressed_button();
+	if(color_index == -1)
+		return;
+	pressed_colorgrad(color_index, 1);
 	interactive_execute();
 }
 
@@ -164,13 +173,47 @@ static void portrait_large() {
 	image(gres(PORTL), last_creature->portrait, 0);
 }
 
+static void portrait_small() {
+	image(gres(PORTS), last_creature->portrait, 0);
+}
+
+static void number() {
+	auto push_font = font;
+	if(gui.res)
+		font = gui.res;
+	char temp[64]; stringbuilder sb(temp);
+	sb.add("%1i", gui.value);
+	texta(temp, AlignCenterCenter);
+	font = push_font;
+}
+
+static void creature_ability() {
+	if(equal(gui.id, "HPMax"))
+		gui.value = last_creature->hp_max;
+	else if(equal(gui.id, "HP"))
+		gui.value = last_creature->hp;
+	else if(equal(gui.id, "Coins"))
+		gui.value = last_creature->coins;
+	else {
+		auto pn = bsdata<abilityi>::find(gui.id);
+		if(!pn)
+			return;
+		auto i = pn - bsdata<abilityi>::elements;
+		gui.value = last_creature->get((ability_s)i);
+	}
+	number();
+}
+
 BSDATA(widget) = {
 	{"Background", background},
 	{"Button", button},
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},
+	{"CreatureAbility", creature_ability},
+	{"CreatureColor", creature_color},
 	{"Label", label},
 	{"PortraitLarge", portrait_large},
+	{"PortraitSmall", portrait_small},
 	{"QuickWeaponButton", quick_weapon_button},
 	{"QuickWeaponItem", quick_weapon_item},
 	{"QuickOffhandItem", quick_offhand_item},

@@ -3,3 +3,5 @@
 HairAasimar indecies(3 5 79 81 110 4 80 111)
 HairNormal indecies(6 0 2 1 4 111 80 3 81 7 82 79)
 HairWoodElf indecies(1 2 4 7 112 114)
+
+SkinNormal indecies(107 8 114 9 10 85 84 12 16 15 17 108 106 113 14 13 105 83)
