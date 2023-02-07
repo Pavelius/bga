@@ -1,4 +1,2 @@
-﻿In file `forms/GUICHP7B.txt`:
- Line 4: Not found identifier `REALMS`
-In file `forms/GUICHP8B.txt`:
- Line 4: Not found identifier `REALMS`
+﻿In file `forms/GUIINV08.txt`:
+ Line 43: Not found identifier `CIFF4INV`

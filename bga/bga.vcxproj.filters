@@ -48,6 +48,12 @@
     <Text Include="..\forms\COLOR.txt">
       <Filter>forms</Filter>
     </Text>
+    <Text Include="..\forms\GUIINVAB.txt">
+      <Filter>forms</Filter>
+    </Text>
+    <Text Include="..\forms\GUIINV08.txt">
+      <Filter>forms</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

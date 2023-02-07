@@ -5,6 +5,7 @@
 #include "crt.h"
 #include "draw_control.h"
 #include "item.h"
+#include "race.h"
 #include "variant.h"
 #include "widget.h"
 
@@ -52,6 +53,10 @@ BSMETA(itemi) = {
 	{}};
 BSMETA(magici) = {
 	BSREQ(id),
+	{}};
+BSMETA(racei) = {
+	BSREQ(id),
+	BSREQ(skin), BSREQ(hairs),
 	{}};
 BSMETA(rangei) = {
 	BSREQ(id),

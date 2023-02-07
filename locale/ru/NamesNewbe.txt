@@ -1,1 +1,5 @@
-﻿Header: 
+﻿Ground: 
+QuickItem: 
+QuickWeapon: 
+Quiver: 
+SkinColor: 

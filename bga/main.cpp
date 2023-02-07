@@ -17,10 +17,10 @@ void initialize_widgets();
 void util_main();
 
 static void start_main() {
-	clear_indecies();
-	set_color("HairNormal");
-	default_color = 10;
-	auto color_index = form::choose("GUICHP0B");
+	//clear_indecies();
+	//set_color("HairNormal");
+	//default_color = 10;
+	form::open("GUIINV08");
 }
 
 static void initialize() {

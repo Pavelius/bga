@@ -11,7 +11,7 @@ const char* proj = "art/projectiles";
 
 BSDATA(residi) = {
 	{"NONE"},
-	{"STONEBIG", font}, {"REALMS", font}, {"NORMAL", font},
+	{"STONEBIG", font}, {"REALMS", font}, {"NORMAL", font}, {"TOOLFONT", font},
 	{"CURSORS", root}, {"CURSARW", root}, {"COLGRAD", root}, {"COLOR", root},
 	{"GACTN", root},
 	{"GBTNBFRM", root}, {"GBTNJBTN", root}, {"GBTNLRG", root}, {"GBTNMED", root}, {"GBTNMED2", root}, {"GBTNMINS", root}, {"GBTNPLUS", root}, {"GBTNOPT1", root}, {"GBTNOPT2", root},
@@ -61,9 +61,7 @@ BSDATA(residi) = {
 	{"WQSSP", chra}, {"WQNSP", chra}, {"WQMSP", chra}, {"WQLSP", chra},
 	{"WQSSS", chra}, {"WQNSS", chra}, {"WQMSS", chra}, {"WQLSS", chra},
 	{"WQSWH", chra}, {"WQNWH", chra}, {"WQMWH", chra}, {"WQLWH", chra},
-	//
 	{"ARARROW", proj},
-	//
 	{"MGO1", mons}, {"MSKA", mons}, {"MSKAA", mons},
 };
 assert_enum(residi, res::MSKAA)
