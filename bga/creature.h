@@ -4,3 +4,4 @@
 
 struct creature : wearable {
 };
+extern creature* last_creature;

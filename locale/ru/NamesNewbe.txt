@@ -1,5 +1,5 @@
-﻿Ground: 
+﻿Coins: 
+Ground: 
 QuickItem: 
 QuickWeapon: 
 Quiver: 
-SkinColor: 

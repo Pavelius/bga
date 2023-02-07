@@ -1,4 +1,5 @@
 #include "bsreq.h"
+#include "creature.h"
 #include "colorgrad.h"
 #include "crt.h"
 #include "draw.h"
@@ -9,6 +10,23 @@
 #include "widget.h"
 
 using namespace draw;
+using namespace res;
+
+static void cursor_paint() {
+	auto cicle = cursor.cicle;
+	if(cursor.id == res::CURSORS) {
+		auto pressed = hot.pressed;
+		if(pressed)
+			cicle += 1;
+	}
+	image(hot.mouse.x, hot.mouse.y, gres(cursor.id), cicle, 0);
+}
+
+void initialize_ui() {
+	pfinish = cursor_paint;
+	cursor.set(res::CURSORS, 0);
+	draw::syscursor(false);
+}
 
 static void background() {
 	image(gui.res, gui.value, 0);
@@ -30,12 +48,17 @@ static void interactive_execute() {
 		command::execute(gui.id, gui.value);
 }
 
+static void button(const sprite* p, unsigned short fiu, unsigned short fip) {
+	rectpush push;
+	auto& f = p->get(fiu);
+	width = f.sx;
+	height = f.sy;
+	auto pressed = ishilite() && hot.pressed;
+	image(p, pressed ? fip : fiu, 0);
+}
+
 static void pressed_button() {
-	auto frame = gui.frames[0];
-	auto pressed = hot.pressed && gui.hilited;
-	if(pressed)
-		frame = gui.frames[1];
-	image(gui.res, frame, 0);
+	button(gui.res, gui.frames[gui.checked ? 2 : 0], gui.frames[1]);
 }
 
 static void pressed_text() {
@@ -89,20 +112,52 @@ static void color_picker() {
 	interactive_execute();
 }
 
-static void cursor_paint() {
-	auto cicle = cursor.cicle;
-	if(cursor.id == res::CURSORS) {
-		auto pressed = hot.pressed;
-		if(pressed)
-			cicle += 1;
-	}
-	image(hot.mouse.x, hot.mouse.y, gres(cursor.id), cicle, 0);
+static void scroll() {
+	if(!gui.res)
+		return;
+	auto& f = gui.res->get(gui.frames[1]);
+	auto w = f.sx;
+	auto h = f.sy;
+	auto sh = gui.res->get(gui.frames[4]).sy;
+	auto push_caret = caret;
+	button(gui.res, gui.frames[1], gui.frames[0]);
+	caret.y = push_caret.y + height - h;
+	button(gui.res, gui.frames[3], gui.frames[2]);
+	caret.y = push_caret.y + h;
+	//auto dy = height - h * 2 - sh;
+	button(gui.res, gui.frames[4], gui.frames[5]);
+	caret = push_caret;
 }
 
-void initialize_ui() {
-	pfinish = cursor_paint;
-	cursor.set(res::CURSORS, 0);
-	draw::syscursor(false);
+static void paint_empthy_weapon() {
+	image(gres(STON), 17, 0);
+}
+
+static void paint_empthy_offhand() {
+	image(gres(STON), 13, 0);
+}
+
+static void quick_weapon_button() {
+	gui.checked = (gui.value == last_creature->weapon_index);
+	button_no_text();
+}
+
+static void quick_weapon_item() {
+	image(gui.res, gui.value, 0);
+	auto pi = last_creature->wears + (QuickWeapon + gui.value * 2);
+	if(!(*pi)) {
+		strokeout(paint_empthy_weapon, -2);
+		return;
+	}
+}
+
+static void quick_offhand_item() {
+	auto pi = last_creature->wears + (QuickWeapon + gui.value * 2);
+	image(gui.res, gui.value, 0);
+	if(!(*pi)) {
+		strokeout(paint_empthy_offhand, -2);
+		return;
+	}
 }
 
 BSDATA(widget) = {
@@ -111,5 +166,9 @@ BSDATA(widget) = {
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},
 	{"Label", label},
+	{"QuickWeaponButton", quick_weapon_button},
+	{"QuickWeaponItem", quick_weapon_item},
+	{"QuickOffhandItem", quick_offhand_item},
+	{"Scroll", scroll},
 };
 BSDATAF(widget)

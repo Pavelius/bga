@@ -12,7 +12,7 @@ struct control : point {
 	short			width, height;
 	const widget*	visual;
 	residi*			resource;
-	unsigned short	frames[4];
+	unsigned short	frames[6];
 	color			fore;
 	int				value;
 };

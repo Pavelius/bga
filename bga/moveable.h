@@ -2,7 +2,11 @@
 
 #pragma once
 
-struct moveable {
-	point		position;
-	void		paint() const; // Exported function
+struct drawable : point {
+	unsigned char	alpha, priority;
+	point			getscreen() const;
+};
+struct moveable : drawable {
+	unsigned short	frame, cicle;
+	void			paint() const; // Exported function
 };

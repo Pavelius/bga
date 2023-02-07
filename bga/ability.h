@@ -4,8 +4,7 @@
 
 enum ability_s : unsigned char {
 	Strenght, Dexterity, Constitution, Intelligence, Wisdow, Charisma,
-	HitPoints,
+	HitPoints, Stamina,
 };
-
 struct abilityi : nameable {
 };

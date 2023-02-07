@@ -2,6 +2,7 @@
 #include "bsreq.h"
 #include "crt.h"
 #include "colorgrad.h"
+#include "creature.h"
 #include "draw.h"
 #include "draw_gui.h"
 #include "draw_control.h"
@@ -18,6 +19,7 @@ void initialize_ui();
 void util_main();
 
 static void start_main() {
+	last_creature = bsdata<creature>::add();
 	//clear_indecies();
 	//set_color("HairNormal");
 	//default_color = 10;
@@ -36,7 +38,7 @@ int main(int argc, char* argv[]) {
 	util_main();
 #endif // _DEBUG
 	draw::object::initialize();
-	bsreq::read("rules/Basic.txt");
+	bsreq::read("rules/Colors.txt");
 	log::readdir("forms", "*.txt", form::read);
 	initialize_translation("ru");
 	initialize_widgets();

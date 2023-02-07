@@ -1,2 +1,5 @@
 ﻿In file `forms/GUIINV08.txt`:
- Line 43: Not found identifier `CIFF4INV`
+ Line 69: Not found identifier `QuickOffhandButton`
+ Line 73: Not found identifier `QuickOffhandButton`
+ Line 77: Not found identifier `QuickOffhandButton`
+ Line 81: Not found identifier `QuickOffhandButton`

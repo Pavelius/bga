@@ -2549,8 +2549,8 @@ void draw::strokeout(fnevent proc, int dx) {
 		dx = metrics::border;
 	caret.x -= dx;
 	caret.y -= dx;
-	width += metrics::border * 2;
-	height += metrics::border * 2;
+	width += dx * 2;
+	height += dx * 2;
 	proc();
 }
 

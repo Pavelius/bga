@@ -26,7 +26,7 @@
     <Text Include="..\forms\GUIINVAB.txt" />
     <Text Include="..\locale\ru\Names.txt" />
     <Text Include="..\locale\ru\NamesNewbe.txt" />
-    <Text Include="..\rules\Basic.txt" />
+    <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Items.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +36,7 @@
     <ClCompile Include="bstream.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="colorgrad.cpp" />
+    <ClCompile Include="creature.cpp" />
     <ClCompile Include="crt.cpp" />
     <ClCompile Include="crt_translate.cpp" />
     <ClCompile Include="draw.cpp" />
@@ -59,6 +60,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_util.cpp" />
     <ClCompile Include="metadata.cpp" />
+    <ClCompile Include="moveable.cpp" />
     <ClCompile Include="nameable.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="range.cpp" />
@@ -67,6 +69,7 @@
     <ClCompile Include="screenshoot.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="scripting.cpp" />
+    <ClCompile Include="serialize.cpp" />
     <ClCompile Include="sprite_util.cpp" />
     <ClCompile Include="stringact.cpp" />
     <ClCompile Include="stringbuilder.cpp" />
@@ -178,9 +181,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
@@ -201,7 +202,6 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

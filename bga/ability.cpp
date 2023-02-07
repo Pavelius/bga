@@ -9,5 +9,6 @@ BSDATA(abilityi) = {
 	{"Wisdow"},
 	{"Charisma"},
 	{"HitPoints"},
+	{"Stamina"},
 };
-assert_enum(abilityi, HitPoints)
+assert_enum(abilityi, Stamina)

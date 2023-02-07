@@ -3,6 +3,7 @@
 #include "color.h"
 #include "colorgrad.h"
 #include "crt.h"
+#include "creature.h"
 #include "draw_control.h"
 #include "item.h"
 #include "race.h"
@@ -14,11 +15,12 @@ using namespace draw;
 BSMETA(variant) = {{}};
 BSMETA(varianti) = {BSREQ(id), {}};
 
-BSDATAC(itemi, 512)
-BSDATAD(variant)
 BSDATAC(colorgrad, 32)
 BSDATAC(control, 1024)
+BSDATAC(creature, 256)
 BSDATAC(form, 128)
+BSDATAC(itemi, 512)
+BSDATAD(variant)
 
 NOBSDATA(color)
 NOBSDATA(dice)

@@ -10,8 +10,8 @@ struct guii {
 	int				value;
 	void*			source;
 	const sprite*	res;
-	unsigned short	frames[4];
-	bool			hilited, disabled;
+	unsigned short	frames[6];
+	bool			hilited, checked, disabled;
 	void			clear();
 };
 extern guii gui;

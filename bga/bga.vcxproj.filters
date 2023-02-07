@@ -27,7 +27,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\rules\Basic.txt">
+    <Text Include="..\rules\Colors.txt">
       <Filter>rules</Filter>
     </Text>
     <Text Include="..\rules\Items.txt">
@@ -205,6 +205,15 @@
     </ClCompile>
     <ClCompile Include="draw_scene.cpp">
       <Filter>interface</Filter>
+    </ClCompile>
+    <ClCompile Include="serialize.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="moveable.cpp">
+      <Filter>interface</Filter>
+    </ClCompile>
+    <ClCompile Include="creature.cpp">
+      <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
