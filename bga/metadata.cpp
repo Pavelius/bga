@@ -62,7 +62,7 @@ BSMETA(magici) = {
 BSMETA(portraiti) = {
 	BSREQ(id),
 	BSREQ(colors),
-	BSFLG(genders, genderi),
+	BSENM(gender, genderi),
 	BSFLG(races, racei),
 	{}};
 BSMETA(racei) = {

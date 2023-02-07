@@ -1,3 +1,4 @@
+#include "collection.h"
 #include "crt.h"
 #include "portrait.h"
 
@@ -88,3 +89,16 @@ BSDATA(portraiti) = {
 	{"2MHUM7", {8, 0, 39, 66}, Male},
 };
 BSDATAF(portraiti)
+
+static bool filter_gender(const void* object, int param) {
+	return ((portraiti*)object)->gender == (gender_s)param;
+}
+
+short unsigned random_portrait(gender_s gender) {
+	collection<portraiti> source;
+	source.select();
+	source.match(filter_gender, gender, true);
+	if(!source)
+		return 0;
+	return source.random() - bsdata<portraiti>::elements;
+}

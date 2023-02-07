@@ -1,4 +1,2 @@
-﻿In file `rules/Portraits.txt`:
- Line 65: Not found requisit `FORC1_L`
- Line 65: Expected token `(`
+﻿In file `forms/GUIINV08.txt`:
  Line 65: Expected line feed

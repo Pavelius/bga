@@ -19,6 +19,7 @@ void util_main();
 
 static void start_main() {
 	last_creature = bsdata<creature>::add();
+	last_creature->portrait = random_portrait(Female);
 	//clear_indecies();
 	//set_color("HairNormal");
 	//default_color = 10;

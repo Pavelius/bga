@@ -160,12 +160,17 @@ static void quick_offhand_item() {
 	}
 }
 
+static void portrait_large() {
+	image(gres(PORTL), last_creature->portrait, 0);
+}
+
 BSDATA(widget) = {
 	{"Background", background},
 	{"Button", button},
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},
 	{"Label", label},
+	{"PortraitLarge", portrait_large},
 	{"QuickWeaponButton", quick_weapon_button},
 	{"QuickWeaponItem", quick_weapon_item},
 	{"QuickOffhandItem", quick_offhand_item},

@@ -1,6 +1,7 @@
 ﻿#Control
 
 Background GUIINV 0 0 800 600
+PortraitLarge GBTNSTD 20 79 210 330
 
 Button STONSLOT 572 228 36 36 value(5)
 Button STONSLOT 611 228 36 36 value(6)
@@ -62,7 +63,6 @@ Button STONSLOT 517 379 36 36 frames(0 1 0 0) value(80)
 Button STONSLOT 612 379 36 36 frames(0 1 0 0) value(81)
 Button INVBUT2 252 191 42 42 frames(0 1 0 0) value(82)
 Button INVBUT2 252 231 42 42 frames(0 1 0 0) value(83)
-Button GBTNSTD 20 79 210 330 frames(0 1 0 0) value(84)
 
 QuickWeaponButton INVBUT3 572 48 24 36 frames(0 1 2) value(0) id(CheckQuickWeapon)
 QuickWeaponItem STONSLOT 600 49 36 36 value(0)

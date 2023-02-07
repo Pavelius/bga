@@ -215,6 +215,9 @@
     <ClCompile Include="portrait.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="collection.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -345,6 +348,9 @@
     </ClInclude>
     <ClInclude Include="portrait.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="collection.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
