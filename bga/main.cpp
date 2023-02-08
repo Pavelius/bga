@@ -34,6 +34,7 @@ static void background() {
 
 static void read_rules() {
 	bsreq::read("rules/Colors.txt");
+	bsreq::read("rules/Races.txt");
 	log::readdir("forms", "*.txt", form::read);
 }
 

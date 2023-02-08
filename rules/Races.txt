@@ -1,0 +1,5 @@
+#Race
+
+Human hairs(HairNormal) skin(SkinNormal)
+Dwarf hairs(HairNormal) skin(SkinNormal)
+Elf hairs(HairNormal) skin(SkinNormal)

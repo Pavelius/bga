@@ -1,7 +1,11 @@
 #ColorGrad
 
 HairAasimar indecies(3 5 79 81 110 4 80 111)
+HairDark indecies(79 110 5 3 0)
+HairGold indecies(0 1 2 5 6 4)
+HairGray indecies(79 110 5 6)
 HairNormal indecies(6 0 2 1 4 111 80 3 81 7 82 79)
+HairTiefling indecies(0 1 2 4 6 7 80 18 19 20)
 HairWoodElf indecies(1 2 4 7 112 114)
 
 SkinNormal indecies(107 8 114 9 10 85 84 12 16 15 17 108 106 113 14 13 105 83)

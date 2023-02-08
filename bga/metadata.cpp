@@ -1,7 +1,6 @@
 #include "ability.h"
 #include "bsreq.h"
 #include "color.h"
-#include "colorgrad.h"
 #include "crt.h"
 #include "creature.h"
 #include "draw_control.h"
@@ -91,6 +90,7 @@ BSDATA(varianti) = {
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"Item", VAR(itemi, 1)},
 	{"Portrait", VAR(portraiti, 1)},
+	{"Race", VAR(racei, 1)},
 	{"Rate", VAR(magici, 1)},
 	{"Resource", VAR(residi, 1)},
 	{"Widget", VAR(widget, 1)},

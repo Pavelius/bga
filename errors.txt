@@ -1,2 +1,2 @@
-﻿In file `forms/GUIINV08.txt`:
- Line 65: Expected line feed
+﻿In file `rules/Races.txt`:
+ Line 3: Not found requisit `hair`
