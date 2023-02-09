@@ -38,6 +38,7 @@ static void start_main() {
 	last_creature = bsdata<creature>::add();
 	last_creature->create(Male);
 	last_creature->additem(citem("BattleAxe"));
+	last_creature->additem(citem("LeatherArmor"));
 	form::open("GUIINV08");
 	//open_widget("ItemList");
 }

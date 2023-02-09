@@ -1,5 +1,4 @@
-﻿Colors: 
-Ground: 
+﻿Ground: 
 Name: 
 QuickItem: 
 QuickWeapon: 

@@ -1,8 +1,10 @@
 #Item
 
 NoItem
+
 BattleAxe weight(6) cost(100) avatar(72) wear(QuickWeapon)
  weapon type(Slashing) damage(1 8)
  flags Dangerous
 BattleAxeP1 weight(6) cost(100) avatar(73) magic(1)
  weapon type(Slashing) damage(1 8 1) bonus(1)
+LeatherArmor weight(15) cost(10) avatar(43) wear(Body)
