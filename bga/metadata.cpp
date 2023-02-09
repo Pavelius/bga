@@ -3,11 +3,13 @@
 #include "color.h"
 #include "crt.h"
 #include "creature.h"
+#include "door.h"
 #include "draw_control.h"
 #include "gender.h"
 #include "item.h"
 #include "portrait.h"
 #include "race.h"
+#include "region.h"
 #include "variant.h"
 #include "widget.h"
 
@@ -19,9 +21,13 @@ BSMETA(varianti) = {BSREQ(id), {}};
 BSDATAC(colorgrad, 32)
 BSDATAC(control, 1024)
 BSDATAC(creature, 256)
+BSDATAC(door, 64)
+BSDATAC(doortile, 256)
 BSDATAC(form, 128)
 BSDATAC(itemi, 512)
+BSDATAC(point, 256*256)
 BSDATAC(racei, 32)
+BSDATAC(region, 128)
 BSDATAD(variant)
 
 NOBSDATA(color)
@@ -49,8 +55,7 @@ BSMETA(form) = {
 	BSREQ(controls),
 	{}};
 BSMETA(itemi) = {
-	BSREQ(id), BSREQ(id_unidentified),
-	BSENM(rate, magici),
+	BSREQ(id),
 	BSREQ(weapon),
 	BSREQ(count), BSREQ(weight), BSREQ(cost),
 	BSREQ(dress), BSREQ(use),

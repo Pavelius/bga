@@ -8,10 +8,7 @@
 
 #pragma once
 
-struct animationi {
-	const char*		avatar;
-	const char*		ground;
-	res::token		wear, thrown;
+struct itemresi {
 };
 struct weaponi {
 	char			bonus, ac, magic;
@@ -19,12 +16,11 @@ struct weaponi {
 	range_s			range;
 };
 struct itemi : nameable {
-	const char*		id_unidentified;
-	magic_s			rate;
 	unsigned		count, weight, cost;
-	variants		dress, use;
-	animationi		animation;
 	weaponi			weapon;
+	variants		dress, use;
+	short			avatar, ground;
+	res::token		equiped, thrown;
 	wear_s			wear;
 };
 struct item {
@@ -32,9 +28,8 @@ struct item {
 	unsigned char	count;
 	union {
 		struct {
-			unsigned char broken : 2;
 			unsigned char identified : 1;
-			unsigned char charges : 5;
+			unsigned char personal : 1;
 		};
 		unsigned char data;
 	};

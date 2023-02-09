@@ -33,6 +33,8 @@
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
     <ClCompile Include="answers.cpp" />
+    <ClCompile Include="archive.cpp" />
+    <ClCompile Include="area.cpp" />
     <ClCompile Include="bsreq.cpp" />
     <ClCompile Include="bstream.cpp" />
     <ClCompile Include="collection.cpp" />
@@ -61,6 +63,7 @@
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_util.cpp" />
+    <ClCompile Include="map.cpp" />
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="moveable.cpp" />
     <ClCompile Include="nameable.cpp" />
@@ -73,7 +76,6 @@
     <ClCompile Include="screenshoot.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="scripting.cpp" />
-    <ClCompile Include="serialize.cpp" />
     <ClCompile Include="sprite_util.cpp" />
     <ClCompile Include="stringact.cpp" />
     <ClCompile Include="stringbuilder.cpp" />
@@ -91,10 +93,15 @@
   <ItemGroup>
     <ClInclude Include="ability.h" />
     <ClInclude Include="actable.h" />
+    <ClInclude Include="archive.h" />
+    <ClInclude Include="area.h" />
     <ClInclude Include="collection.h" />
+    <ClInclude Include="door.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="moveable.h" />
     <ClInclude Include="portrait.h" />
+    <ClInclude Include="region.h" />
     <ClInclude Include="resinfo.h" />
     <ClInclude Include="answers.h" />
     <ClInclude Include="bsreq.h" />

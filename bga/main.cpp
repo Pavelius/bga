@@ -17,13 +17,18 @@ void initialize_widgets();
 void initialize_ui();
 void util_main();
 
+static void open_widget(const char* id) {
+	auto p = bsdata<widget>::find(id);
+	if(!p)
+		return;
+	scene(p->proc);
+}
+
 static void start_main() {
 	last_creature = bsdata<creature>::add();
-	last_creature->create(Female);
-	//clear_indecies();
-	//set_color("HairNormal");
-	//default_color = 10;
-	form::open("GUIINV08");
+	last_creature->create(Male);
+	//form::open("GUIINV08");
+	open_widget("ItemList");
 }
 
 static void beforemodal() {

@@ -204,13 +204,35 @@ static void creature_ability() {
 	number();
 }
 
+static void items_list() {
+	rectf();
+	auto ps = gres(ITEMS);
+	auto push_caret = caret;
+	caret.x = 0; caret.y = 0;
+	auto start_caret = caret;
+	auto dx = 32, dy = 32;
+	auto maxcount = ps->count / 2;
+	for(auto i = 0; i < maxcount; i++) {
+		image(ps, i * 2, 0);
+		caret.x += dx;
+		if(((i + 1) % 20) == 0) {
+			caret.x = start_caret.x;
+			caret.y += dy;
+		}
+		if(caret.y >= clipping.y2)
+			break;
+	}
+}
+
 BSDATA(widget) = {
+	{"AreaMap", background},
 	{"Background", background},
 	{"Button", button},
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},
 	{"CreatureAbility", creature_ability},
 	{"CreatureColor", creature_color},
+	{"ItemList", items_list},
 	{"Label", label},
 	{"PortraitLarge", portrait_large},
 	{"PortraitSmall", portrait_small},

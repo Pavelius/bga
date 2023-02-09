@@ -206,9 +206,6 @@
     <ClCompile Include="draw_scene.cpp">
       <Filter>interface</Filter>
     </ClCompile>
-    <ClCompile Include="serialize.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="moveable.cpp">
       <Filter>interface</Filter>
     </ClCompile>
@@ -226,6 +223,15 @@
     </ClCompile>
     <ClCompile Include="race.cpp">
       <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="area.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="archive.cpp">
+      <Filter>support</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -366,6 +372,21 @@
     </ClInclude>
     <ClInclude Include="game.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="area.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="region.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="door.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="archive.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

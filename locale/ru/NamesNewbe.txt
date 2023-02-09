@@ -1,6 +1,1 @@
-﻿Colors: 
-Ground: 
-Name: 
-QuickItem: 
-QuickWeapon: 
-Quiver: 
+﻿
