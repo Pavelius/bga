@@ -1,5 +1,33 @@
 #include "item.h"
 
+BSDATA(itemfi) = {
+	{"TwoHanded"},
+	{"Balanced"},
+	{"UltraBalanced"},
+	{"Dangerous"},
+	{"Cursed"},
+	{"BrilliantEnergy"},
+	{"Defending"},
+	{"Disruption"},
+	{"Distance"},
+	{"Flaming"},
+	{"FlamingBurst"},
+	{"Frost"},
+	{"GhostTouch"},
+	{"Holy"},
+	{"IcyBurst"},
+	{"Keen"},
+	{"Seeking"},
+	{"Shock"},
+	{"ShockingBurst"},
+	{"Speed"},
+	{"Unholy"},
+	{"Vicious"},
+	{"Vorpal"},
+	{"Wounding"},
+};
+assert_enum(itemfi, Wounding)
+
 int	item::getcostall() const {
 	auto cost = getcost() * geti().count;
 	auto default_count = geti().count;

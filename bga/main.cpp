@@ -27,8 +27,8 @@ static void open_widget(const char* id) {
 static void start_main() {
 	last_creature = bsdata<creature>::add();
 	last_creature->create(Male);
-	//form::open("GUIINV08");
-	open_widget("ItemList");
+	form::open("GUIINV08");
+	//open_widget("ItemList");
 }
 
 static void beforemodal() {
@@ -40,6 +40,7 @@ static void background() {
 static void read_rules() {
 	bsreq::read("rules/Colors.txt");
 	bsreq::read("rules/Races.txt");
+	bsreq::read("rules/Items.txt");
 	log::readdir("forms", "*.txt", form::read);
 }
 

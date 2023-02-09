@@ -1,2 +1,3 @@
-﻿In file `rules/Races.txt`:
- Line 3: Not found requisit `hair`
+﻿In file `rules/Items.txt`:
+ Line 7: Not found requisit `multiplier`
+ Line 7: Not found requisit `magic`

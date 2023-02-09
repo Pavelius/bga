@@ -23,8 +23,8 @@ BSDATAC(control, 1024)
 BSDATAC(creature, 256)
 BSDATAC(door, 64)
 BSDATAC(doortile, 256)
-BSDATAC(form, 128)
 BSDATAC(itemi, 512)
+BSDATAC(form, 128)
 BSDATAC(point, 256*256)
 BSDATAC(racei, 32)
 BSDATAC(region, 128)
@@ -47,6 +47,9 @@ BSMETA(control) = {
 	BSREQ(visual), BSREQ(resource), BSREQ(x), BSREQ(y), BSREQ(width), BSREQ(height),
 	BSREQ(value), BSREQ(frames), BSREQ(fore), BSREQ(id),
 	{}};
+BSMETA(damagei) = {
+	BSREQ(id),
+	{}};
 BSMETA(dice) = {
 	BSREQ(c), BSREQ(d), BSREQ(b), BSREQ(m),
 	{}};
@@ -58,7 +61,12 @@ BSMETA(itemi) = {
 	BSREQ(id),
 	BSREQ(weapon),
 	BSREQ(count), BSREQ(weight), BSREQ(cost),
-	BSREQ(dress), BSREQ(use),
+	BSFLG(flags, itemfi),
+	BSREQ(magic),
+	BSREQ(avatar), BSREQ(ground),
+	{}};
+BSMETA(itemfi) = {
+	BSREQ(id),
 	{}};
 BSMETA(magici) = {
 	BSREQ(id),
@@ -80,7 +88,8 @@ BSMETA(residi) = {
 	BSREQ(id),
 	{}};
 BSMETA(weaponi) = {
-	BSREQ(bonus), BSREQ(ac), BSREQ(magic),
+	BSREQ(bonus), BSREQ(ac),
+	BSENM(type, damagei),
 	BSREQ(damage),
 	BSENM(range, rangei),
 	{}};

@@ -1,1 +1,5 @@
-﻿
+﻿Ground: 
+Name: 
+QuickItem: 
+QuickWeapon: 
+Quiver: 

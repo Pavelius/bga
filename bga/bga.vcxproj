@@ -43,11 +43,13 @@
     <ClCompile Include="creature.cpp" />
     <ClCompile Include="crt.cpp" />
     <ClCompile Include="crt_translate.cpp" />
+    <ClCompile Include="damage.cpp" />
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="draw_answers.cpp" />
     <ClCompile Include="draw_command.cpp" />
     <ClCompile Include="draw_control.cpp" />
     <ClCompile Include="draw_gui.cpp" />
+    <ClCompile Include="draw_list.cpp" />
     <ClCompile Include="draw_scene.cpp" />
     <ClCompile Include="draw_text.cpp" />
     <ClCompile Include="draw_textf.cpp" />
@@ -96,7 +98,9 @@
     <ClInclude Include="archive.h" />
     <ClInclude Include="area.h" />
     <ClInclude Include="collection.h" />
+    <ClInclude Include="damage.h" />
     <ClInclude Include="door.h" />
+    <ClInclude Include="draw_list.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="moveable.h" />

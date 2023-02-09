@@ -139,7 +139,10 @@ static void scroll() {
 }
 
 static void paint_empthy_weapon() {
-	image(gres(STON), 17, 0);
+	if(gui.value == last_creature->weapon_index)
+		image(gres(ITEMS), 0, 0);
+	else
+		image(gres(STON), 17, 0);
 }
 
 static void paint_empthy_offhand() {
@@ -156,6 +159,8 @@ static void quick_weapon_item() {
 	image(gui.res, gui.value, 0);
 	if(!(*pi)) {
 		strokeout(paint_empthy_weapon, -2);
+		if(gui.value == last_creature->weapon_index)
+			image(gres(STONSLOT), 34, 0);
 		return;
 	}
 }
@@ -204,25 +209,43 @@ static void creature_ability() {
 	number();
 }
 
+#ifdef _DEBUG
+const char* unique_item_res[];
 static void items_list() {
+	rectpush push;
+	fore = colors::gray;
 	rectf();
 	auto ps = gres(ITEMS);
-	auto push_caret = caret;
 	caret.x = 0; caret.y = 0;
 	auto start_caret = caret;
-	auto dx = 32, dy = 32;
 	auto maxcount = ps->count / 2;
-	for(auto i = 0; i < maxcount; i++) {
+	width = 32, height = 32;
+	int hilited = -1;
+	for(auto i = 20 * 0; i < maxcount; i++) {
 		image(ps, i * 2, 0);
-		caret.x += dx;
+		if(ishilite())
+			hilited = i;
+		caret.x += width;
 		if(((i + 1) % 20) == 0) {
 			caret.x = start_caret.x;
-			caret.y += dy;
+			caret.y += height;
 		}
 		if(caret.y >= clipping.y2)
 			break;
 	}
+	fore = colors::text;
+	if(hilited != -1) {
+		caret.x = 20 * width + metrics::padding * 4;
+		caret.y = 0;
+		text(unique_item_res[hilited]);
+		caret.y += texth();
+		text(str("%1i", hilited));
+		caret.x += width;
+		caret.y += height * 2;
+		image(ps, hilited * 2 + 1, 0);
+	}
 }
+#endif // _DEBUG
 
 BSDATA(widget) = {
 	{"AreaMap", background},
@@ -232,7 +255,6 @@ BSDATA(widget) = {
 	{"ColorPicker", color_picker},
 	{"CreatureAbility", creature_ability},
 	{"CreatureColor", creature_color},
-	{"ItemList", items_list},
 	{"Label", label},
 	{"PortraitLarge", portrait_large},
 	{"PortraitSmall", portrait_small},
@@ -240,5 +262,8 @@ BSDATA(widget) = {
 	{"QuickWeaponItem", quick_weapon_item},
 	{"QuickOffhandItem", quick_offhand_item},
 	{"Scroll", scroll},
+#ifdef _DEBUG
+	{"ItemList", items_list},
+#endif // _DEBUG
 };
 BSDATAF(widget)
