@@ -6,6 +6,7 @@
 struct colorgrad {
 	const char*			id;
 	adat<unsigned char> indecies;
+	static void			initialize();
 };
 
 extern color pallette[256];

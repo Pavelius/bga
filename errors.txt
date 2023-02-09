@@ -1,3 +1,2 @@
 ﻿In file `rules/Items.txt`:
- Line 7: Not found requisit `multiplier`
- Line 7: Not found requisit `magic`
+ Line 4: Not found identifier `QuickWeapons`

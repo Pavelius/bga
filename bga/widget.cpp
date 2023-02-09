@@ -4,6 +4,7 @@
 #include "crt.h"
 #include "draw.h"
 #include "draw_command.h"
+#include "draw_control.h"
 #include "draw_gui.h"
 #include "resinfo.h"
 #include "script.h"
@@ -11,6 +12,9 @@
 
 using namespace draw;
 using namespace res;
+
+static item drag_item;
+static item *drag_item_source, *drag_item_dest;
 
 static void cursor_paint() {
 	auto cicle = cursor.cicle;
@@ -154,24 +158,104 @@ static void quick_weapon_button() {
 	button_no_text();
 }
 
+static void paint_draggable() {
+	if(drag_item_source) {
+		if(hot.key == MouseRight
+			|| hot.key == KeyEscape
+			|| (hot.key == MouseLeft && hot.pressed))
+			execute(buttoncancel);
+	}
+	drag_item_dest = 0;
+	last_form->paint();
+}
+
+static void begin_drag_item() {
+	auto push_cursor = cursor;
+	auto push_drag = drag_item_source;
+	drag_item_source = (item*)hot.object;
+	drag_item = *drag_item_source;
+	drag_item_source->clear();
+	cursor.id = ITEMS;
+	cursor.cicle = drag_item.geti().avatar * 2 + 1;
+	scene(paint_draggable);
+	if(!drag_item_dest)
+		*drag_item_source = drag_item;
+	else {
+		if(*drag_item_dest)
+			last_creature->additem(*drag_item_dest);
+		*drag_item_dest = drag_item;
+	}
+	drag_item_source = push_drag;
+	cursor = push_cursor;
+}
+
+static void allow_drop_target(item* pi, wear_s slot) {
+	if(drag_item_source) {
+		if(gui.hilited) {
+			drag_item_dest = pi;
+			image(gui.res, 25, 0);
+		}
+	}
+}
+
+static void paint_item(item& it) {
+	auto push_caret = caret;
+	setoffset(2, 2);
+	image(gres(ITEMS), it.geti().avatar * 2, 0);
+	caret = push_caret;
+}
+
+static void paint_item_dragable(item& it) {
+	paint_item(it);
+	if(gui.hilited && !drag_item_source) {
+		if(hot.key == MouseLeft && hot.pressed)
+			execute(begin_drag_item, 0, 0, &it);
+	}
+}
+
+static void backpack_button() {
+	auto pi = last_creature->wears + Backpack + gui.value;
+	auto index = gui.value % 8;
+	if(index >= 4)
+		index += 4;
+	image(gui.res, index, 0);
+	allow_drop_target(pi, Backpack);
+	if(*pi)
+		paint_item_dragable(*pi);
+}
+
+static void paint_drop_target(item* pi, wear_s slot) {
+	if(drag_item_source && drag_item.canequip(slot)) {
+		if(gui.hilited) {
+			image(gui.res, 25, 0);
+			drag_item_dest = pi;
+		} else
+			image(gui.res, 16, 0);
+	}
+}
+
 static void quick_weapon_item() {
 	auto pi = last_creature->wears + (QuickWeapon + gui.value * 2);
 	image(gui.res, gui.value, 0);
-	if(!(*pi)) {
+	paint_drop_target(pi, QuickWeapon);
+	if(!(*pi))
 		strokeout(paint_empthy_weapon, -2);
+	else
+		paint_item_dragable(*pi);
+	if(!drag_item_source) {
 		if(gui.value == last_creature->weapon_index)
 			image(gres(STONSLOT), 34, 0);
-		return;
 	}
 }
 
 static void quick_offhand_item() {
-	auto pi = last_creature->wears + (QuickWeapon + gui.value * 2);
+	auto pi = last_creature->wears + (QuickOffhand + gui.value * 2);
 	image(gui.res, 8 + gui.value, 0);
-	if(!(*pi)) {
+	paint_drop_target(pi, QuickOffhand);
+	if(!(*pi))
 		strokeout(paint_empthy_offhand, -2);
-		return;
-	}
+	else
+		paint_item_dragable(*pi);
 }
 
 static void portrait_large() {
@@ -250,6 +334,7 @@ static void items_list() {
 BSDATA(widget) = {
 	{"AreaMap", background},
 	{"Background", background},
+	{"BackpackButton", backpack_button},
 	{"Button", button},
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},

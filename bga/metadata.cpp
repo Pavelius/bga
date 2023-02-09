@@ -63,7 +63,8 @@ BSMETA(itemi) = {
 	BSREQ(count), BSREQ(weight), BSREQ(cost),
 	BSFLG(flags, itemfi),
 	BSREQ(magic),
-	BSREQ(avatar), BSREQ(ground),
+	BSREQ(avatar), BSREQ(ground), BSENM(equiped, residi), BSENM(thrown, residi),
+	BSENM(wear, weari),
 	{}};
 BSMETA(itemfi) = {
 	BSREQ(id),
@@ -92,6 +93,9 @@ BSMETA(weaponi) = {
 	BSENM(type, damagei),
 	BSREQ(damage),
 	BSENM(range, rangei),
+	{}};
+BSMETA(weari) = {
+	BSREQ(id),
 	{}};
 BSMETA(widget) = {
 	BSREQ(id),

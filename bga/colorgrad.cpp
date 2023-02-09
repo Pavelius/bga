@@ -28,6 +28,6 @@ void set_color(const char* id) {
 		color_indecies[index++] = i;
 }
 
-void initialize_widgets() {
+void colorgrad::initialize() {
 	pallette_bitmap.read("art/bmp/MPALETTE.bmp");
 }

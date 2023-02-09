@@ -17,6 +17,16 @@ void initialize_widgets();
 void initialize_ui();
 void util_main();
 
+static item& citem(const char* id) {
+	static item it;
+	it.clear();
+	auto pi = bsdata<itemi>::find(id);
+	if(pi) {
+		it.type = pi - bsdata<itemi>::elements;
+	}
+	return it;
+}
+
 static void open_widget(const char* id) {
 	auto p = bsdata<widget>::find(id);
 	if(!p)
@@ -27,14 +37,9 @@ static void open_widget(const char* id) {
 static void start_main() {
 	last_creature = bsdata<creature>::add();
 	last_creature->create(Male);
+	last_creature->additem(citem("BattleAxe"));
 	form::open("GUIINV08");
 	//open_widget("ItemList");
-}
-
-static void beforemodal() {
-}
-
-static void background() {
 }
 
 static void read_rules() {
@@ -52,7 +57,7 @@ int main(int argc, char* argv[]) {
 #endif // _DEBUG
 	initialize_translation("ru");
 	check_translation();
-	initialize_widgets();
+	colorgrad::initialize();
 	initialize_ui();
 	if(log::geterrors())
 		return -1;
@@ -61,8 +66,6 @@ int main(int argc, char* argv[]) {
 	metrics::h2 = gres(res::REALMS);
 	metrics::h3 = gres(res::STONEBIG);
 	colors::text = color(255, 255, 255);
-	pbeforemodal = beforemodal;
-	pbackground = background;
 	initialize(getnm("AppTitle"));
 	settimer(100);
 	setnext(start_main);
