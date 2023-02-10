@@ -41,6 +41,7 @@ void form::paint() const {
 		gui.clear();
 		gui.id = e.id;
 		gui.value = e.value;
+		gui.data = e.data;
 		if(e.resource)
 			gui.res = e.resource->get();
 		memcpy(gui.frames, e.frames, sizeof(gui.frames));

@@ -13,8 +13,19 @@ static void addb(stringbuilder& sb, const char* id, int value) {
 void status_info() {
 }
 
-void getinfo(stringbuilder& sb, item* pi) {
-	auto& ei = pi->geti();
+static void add_description(stringbuilder& sb, const char* id) {
+	auto pn = getdescription(id);
+	if(!pn)
+		return;
+	sb.addn(pn);
+	sb.add("\n");
+}
+
+void item::getinfo(stringbuilder& sb) const {
+	auto& ei = geti();
+	add_description(sb, ei.id);
 	if(ei.magic)
 		addb(sb, "MagicBonus", ei.magic);
+	if(ei.weight)
+		addv(sb, "Weight", str("%1i pounds", ei.weight));
 }

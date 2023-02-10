@@ -48,6 +48,7 @@ BSDATA(draw::command) = {
 	{"Cancel", draw::buttoncancel, KeyEscape},
 	{"CheckQuickWeapon", check_quick_weapon},
 	{"ChooseCreatureColor", choose_creature_color},
+	{"Close", draw::buttoncancel, KeyEscape},
 	{"ColorPick", color_pick},
 	{"DefaultColor", default_color_pick, KeyEscape},
 	{"Done", draw::buttonok, KeyEnter},

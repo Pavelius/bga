@@ -1,2 +1,2 @@
-﻿In file `rules/Items.txt`:
- Line 4: Not found identifier `QuickWeapons`
+﻿In file `forms/GUIINV08.txt`:
+ Line 57: Can't find variant `ChooseCreatu1reColor`

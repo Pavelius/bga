@@ -1,3 +1,5 @@
+#include "variant.h"
+
 #pragma once
 
 typedef void (*fnevent)();
@@ -12,6 +14,7 @@ struct guii {
 	const sprite*	res;
 	unsigned short	frames[6];
 	bool			hilited, checked, disabled;
+	variant			data;
 	void			clear();
 };
 extern guii gui;

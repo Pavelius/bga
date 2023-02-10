@@ -1,3 +1,4 @@
-﻿Colors: 
+﻿Close: 
+MagicBonus: 
 Test: 
-Text: 
+Weight: 

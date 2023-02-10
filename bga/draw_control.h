@@ -3,6 +3,7 @@
 #include "point.h"
 #include "resid.h"
 #include "widget.h"
+#include "variant.h"
 
 #pragma once
 
@@ -15,6 +16,7 @@ struct control : point {
 	unsigned short	frames[6];
 	color			fore;
 	int				value;
+	variant			data;
 };
 struct form {
 	const char*		id;

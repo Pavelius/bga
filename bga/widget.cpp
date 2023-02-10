@@ -15,6 +15,7 @@ using namespace res;
 
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
+static char description_text[4096];
 
 static void cursor_paint() {
 	auto cicle = cursor.cicle;
@@ -42,14 +43,22 @@ static const char* getname() {
 		pn = gui.text;
 	if(!pn && gui.id)
 		pn = getnm(gui.id);
+	if(!pn && gui.data)
+		pn = gui.data.getname();
 	if(!pn)
 		pn = "";
 	return pn;
 }
 
 static void interactive_execute() {
-	if(hot.key == MouseLeft && !hot.pressed && gui.hilited)
-		command::execute(gui.id, gui.value);
+	if(gui.data.iskind<command>()) {
+		auto p = bsdata<command>::elements + gui.data.value;
+		auto run = (hot.key == MouseLeft && !hot.pressed && gui.hilited);
+		if(p->key && hot.key == p->key)
+			run = true;
+		if(run)
+			execute(p->proc, gui.value);
+	}
 }
 
 static void button(const sprite* p, unsigned short fiu, unsigned short fip) {
@@ -84,6 +93,14 @@ static void button() {
 static void button_no_text() {
 	pressed_button();
 	interactive_execute();
+}
+
+static void textarea() {
+	auto push_font = font;
+	if(gui.res)
+		font = gui.res;
+	textf(getname());
+	font = push_font;
 }
 
 static void label() {
@@ -347,6 +364,13 @@ static void item_name() {
 	label();
 }
 
+static void item_description() {
+	stringbuilder sb(description_text);
+	last_item->getinfo(sb);
+	gui.text = description_text;
+	textarea();
+}
+
 #ifdef _DEBUG
 const char* unique_item_res[];
 #endif // _DEBUG
@@ -406,6 +430,7 @@ BSDATA(widget) = {
 	{"CreatureColor", creature_color},
 	{"GearButton", gear_button},
 	{"ItemName", item_name},
+	{"ItemDescription", item_description},
 	{"ItemList", items_list},
 	{"Label", label},
 	{"PortraitLarge", portrait_large},

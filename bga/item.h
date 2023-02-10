@@ -56,6 +56,7 @@ struct item {
 	int				getcost() const { return geti().cost; }
 	int				getcostall() const;
 	const itemi&	geti() const { return bsdata<itemi>::elements[type]; }
+	void			getinfo(stringbuilder& sb) const;
 	const char*		getname() const;
 };
 extern item* last_item;
