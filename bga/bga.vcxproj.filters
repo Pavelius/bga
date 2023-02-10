@@ -57,6 +57,9 @@
     <Text Include="..\rules\Races.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\forms\GIITMH08.txt">
+      <Filter>forms</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

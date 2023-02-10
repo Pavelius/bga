@@ -7,7 +7,6 @@ BSDATA(itemfi) = {
 	{"Dangerous"},
 	{"Cursed"},
 	{"BrilliantEnergy"},
-	{"Defending"},
 	{"Disruption"},
 	{"Distance"},
 	{"Flaming"},
@@ -27,6 +26,12 @@ BSDATA(itemfi) = {
 	{"Wounding"},
 };
 assert_enum(itemfi, Wounding)
+
+item* last_item;
+
+const char* item::getname() const {
+	return getnm(geti().id);
+}
 
 int	item::getcostall() const {
 	auto cost = getcost() * geti().count;

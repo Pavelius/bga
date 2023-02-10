@@ -2,4 +2,14 @@ AppTitle: Врата Балдура
 DefaultColor: По-умолчанию
 Description: Описание
 Done: Завершить
+Ground: На земле
+Name: Наименование
+QuickItem: Предметы
+QuickWeapon: Оружие
+Quiver: Колчан
 Replay: Заново
+
+BattleAxe: Боевой топор
+BattleAxeP1: Боевой топор +1
+LeatherArmor: Кожанная броня
+PotionOfHealing: Зелье лечения

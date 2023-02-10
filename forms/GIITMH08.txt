@@ -1,0 +1,13 @@
+﻿#Control
+
+Background GIITMH08 0 0 513 481
+ItemName STONEBIG 36 37 357 30 // Item
+Label NORMAL 26 111 290 18 id("Test")
+Label NORMAL 23 132 445 286 fore(250 250 250) id("Text")
+Scroll GBTNSCRL 480 109 12 311 frames(1 0 3 2 4 5) 
+
+Button GBTNMED 20 432 156 24 frames(1 2 3 0) value(8)
+Button GBTNMED 179 432 156 24 frames(1 2 3 0) value(9)
+Button GBTNMED 338 432 156 24 frames(1 2 3 0) value(4) id("Done")
+
+// Label NORMAL 314 111 152 18 id("Test")

@@ -1,5 +1,3 @@
-﻿Ground: 
-Name: 
-QuickItem: 
-QuickWeapon: 
-Quiver: 
+﻿Colors: 
+Test: 
+Text: 

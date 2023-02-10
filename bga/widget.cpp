@@ -153,6 +153,10 @@ static void paint_empthy_offhand() {
 	image(gres(STON), 13, 0);
 }
 
+static void paint_empthy_gear() {
+	image(gres(STON), gui.value, 0);
+}
+
 static void quick_weapon_button() {
 	gui.checked = (gui.value == last_creature->weapon_index);
 	button_no_text();
@@ -198,18 +202,31 @@ static void allow_drop_target(item* pi, wear_s slot) {
 	}
 }
 
-static void paint_item(item& it) {
-	auto push_caret = caret;
-	setoffset(2, 2);
-	image(gres(ITEMS), it.geti().avatar * 2, 0);
-	caret = push_caret;
+static void item_information() {
+	auto push_last = last_item;
+	last_item = (item*)hot.object;
+	form::open("GIITMH08");
+	last_item = push_last;
 }
 
-static void paint_item_dragable(item& it) {
-	paint_item(it);
+static void paint_item(const item* pi) {
+	if(!pi)
+		return;
+	auto push_caret = caret;
+	setoffset(2, 2);
+	image(gres(ITEMS), pi->geti().avatar * 2, 0);
+	caret = push_caret;
+	if(!drag_item_source) {
+		if(gui.hilited && hot.key == MouseRight && hot.pressed)
+			execute(item_information, 0, 0, pi);
+	}
+}
+
+static void paint_item_dragable(item* pi) {
+	paint_item(pi);
 	if(gui.hilited && !drag_item_source) {
 		if(hot.key == MouseLeft && hot.pressed)
-			execute(begin_drag_item, 0, 0, &it);
+			execute(begin_drag_item, 0, 0, pi);
 	}
 }
 
@@ -221,7 +238,7 @@ static void backpack_button() {
 	image(gui.res, index, 0);
 	allow_drop_target(pi, Backpack);
 	if(*pi)
-		paint_item_dragable(*pi);
+		paint_item_dragable(pi);
 }
 
 static void paint_drop_target(item* pi, wear_s slot) {
@@ -234,6 +251,38 @@ static void paint_drop_target(item* pi, wear_s slot) {
 	}
 }
 
+static void gear_button() {
+	auto type = (wear_s)(Head + gui.value);
+	auto pi = last_creature->wears + type;
+	paint_drop_target(pi, type);
+	if(*pi)
+		paint_item_dragable(pi);
+	else
+		strokeout(paint_empthy_gear, -2);
+}
+
+static void paint_empthy_quiver() {
+	image(gres(STON), 11, 0);
+}
+
+static void quiver_button() {
+	auto pi = last_creature->wears + Quiver + gui.value;
+	image(gui.res, gui.value, 0);
+	paint_drop_target(pi, Quiver);
+	if(*pi)
+		paint_item_dragable(pi);
+	else
+		strokeout(paint_empthy_quiver, -2);
+}
+
+static void quick_item_button() {
+	auto pi = last_creature->wears + QuickItem + gui.value;
+	image(gui.res, gui.value, 0);
+	paint_drop_target(pi, QuickItem);
+	if(*pi)
+		paint_item_dragable(pi);
+}
+
 static void quick_weapon_item() {
 	auto pi = last_creature->wears + (QuickWeapon + gui.value * 2);
 	image(gui.res, gui.value, 0);
@@ -241,7 +290,7 @@ static void quick_weapon_item() {
 	if(!(*pi))
 		strokeout(paint_empthy_weapon, -2);
 	else
-		paint_item_dragable(*pi);
+		paint_item_dragable(pi);
 	if(!drag_item_source) {
 		if(gui.value == last_creature->weapon_index)
 			image(gres(STONSLOT), 34, 0);
@@ -255,7 +304,7 @@ static void quick_offhand_item() {
 	if(!(*pi))
 		strokeout(paint_empthy_offhand, -2);
 	else
-		paint_item_dragable(*pi);
+		paint_item_dragable(pi);
 }
 
 static void portrait_large() {
@@ -293,9 +342,22 @@ static void creature_ability() {
 	number();
 }
 
+static void item_name() {
+	gui.text = last_item->getname();
+	label();
+}
+
 #ifdef _DEBUG
 const char* unique_item_res[];
+#endif // _DEBUG
+
 static void items_list() {
+#ifdef _DEBUG
+	static int origin;
+	switch(hot.key) {
+	case KeyUp: origin -= 20; break;
+	case KeyDown: origin += 20; break;
+	}
 	rectpush push;
 	fore = colors::gray;
 	rectf();
@@ -305,7 +367,9 @@ static void items_list() {
 	auto maxcount = ps->count / 2;
 	width = 32, height = 32;
 	int hilited = -1;
-	for(auto i = 20 * 0; i < maxcount; i++) {
+	if(origin < 0)
+		origin = 0;
+	for(auto i = origin; i < maxcount; i++) {
 		image(ps, i * 2, 0);
 		if(ishilite())
 			hilited = i;
@@ -328,8 +392,8 @@ static void items_list() {
 		caret.y += height * 2;
 		image(ps, hilited * 2 + 1, 0);
 	}
-}
 #endif // _DEBUG
+}
 
 BSDATA(widget) = {
 	{"AreaMap", background},
@@ -340,15 +404,17 @@ BSDATA(widget) = {
 	{"ColorPicker", color_picker},
 	{"CreatureAbility", creature_ability},
 	{"CreatureColor", creature_color},
+	{"GearButton", gear_button},
+	{"ItemName", item_name},
+	{"ItemList", items_list},
 	{"Label", label},
 	{"PortraitLarge", portrait_large},
 	{"PortraitSmall", portrait_small},
+	{"QuickItemButton", quick_item_button},
 	{"QuickWeaponButton", quick_weapon_button},
 	{"QuickWeaponItem", quick_weapon_item},
 	{"QuickOffhandItem", quick_offhand_item},
+	{"QuiverButton", quiver_button},
 	{"Scroll", scroll},
-#ifdef _DEBUG
-	{"ItemList", items_list},
-#endif // _DEBUG
 };
 BSDATAF(widget)

@@ -11,7 +11,7 @@
 
 enum itemf_s : unsigned char {
 	TwoHanded, Balanced, UltraBalanced, Dangerous, Cursed,
-	BrilliantEnergy, Defending, Disruption, Distance, Flaming,
+	BrilliantEnergy, Disruption, Distance, Flaming,
 	FlamingBurst, Frost, GhostTouch, Holy, IcyBurst,
 	Keen, Seeking, Shock, ShockingBurst, Speed,
 	Unholy, Vicious, Vorpal, Wounding,
@@ -56,4 +56,6 @@ struct item {
 	int				getcost() const { return geti().cost; }
 	int				getcostall() const;
 	const itemi&	geti() const { return bsdata<itemi>::elements[type]; }
+	const char*		getname() const;
 };
+extern item* last_item;
