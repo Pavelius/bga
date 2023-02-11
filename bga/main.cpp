@@ -14,7 +14,6 @@ using namespace draw;
 void check_translation();
 void initialize_translation(const char* locale);
 void initialize_widgets();
-void initialize_ui();
 void util_main();
 
 static item& citem(const char* id) {
@@ -27,19 +26,17 @@ static item& citem(const char* id) {
 	return it;
 }
 
-static void open_widget(const char* id) {
-	auto p = bsdata<widget>::find(id);
-	if(!p)
-		return;
-	scene(p->proc);
-}
-
 static void start_main() {
 	last_creature = bsdata<creature>::add();
 	last_creature->create(Male);
+	last_creature->basic.abilitites[Dexterity] += 2;
+	last_creature->update();
 	last_creature->additem(citem("BattleAxe"));
 	last_creature->additem(citem("BattleAxeP1"));
 	last_creature->additem(citem("LeatherArmor"));
+	last_creature->additem(citem("StuddedLeatherArmor"));
+	last_creature->additem(citem("ScaleMail"));
+	last_creature->additem(citem("LongSword"));
 	last_creature->additem(citem("PotionOfHealing"));
 	form::open("GUIINV08");
 	//open_widget("ItemList");
@@ -61,7 +58,7 @@ int main(int argc, char* argv[]) {
 	initialize_translation("ru");
 	check_translation();
 	colorgrad::initialize();
-	initialize_ui();
+	widget::initialize();
 	if(log::geterrors())
 		return -1;
 	metrics::font = gres(res::NORMAL);

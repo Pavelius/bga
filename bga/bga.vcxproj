@@ -25,6 +25,7 @@
     <Text Include="..\forms\GUICHP0B.txt" />
     <Text Include="..\forms\GUIINV08.txt" />
     <Text Include="..\forms\GUIINVAB.txt" />
+    <Text Include="..\locale\ru\ItemDescriptions.txt" />
     <Text Include="..\locale\ru\Names.txt" />
     <Text Include="..\locale\ru\NamesNewbe.txt" />
     <Text Include="..\rules\Colors.txt" />
@@ -68,6 +69,7 @@
     <ClCompile Include="main_util.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="metadata.cpp" />
+    <ClCompile Include="modifier.cpp" />
     <ClCompile Include="moveable.cpp" />
     <ClCompile Include="nameable.cpp" />
     <ClCompile Include="point.cpp" />
@@ -104,6 +106,7 @@
     <ClInclude Include="draw_list.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="modifier.h" />
     <ClInclude Include="moveable.h" />
     <ClInclude Include="portrait.h" />
     <ClInclude Include="region.h" />

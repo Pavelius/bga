@@ -1,4 +1,2 @@
-﻿Close: 
-MagicBonus: 
+﻿LongSword: 
 Test: 
-Weight: 

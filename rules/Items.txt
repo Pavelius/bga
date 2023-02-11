@@ -5,8 +5,18 @@ NoItem
 BattleAxe weight(6) cost(100) avatar(72) wear(QuickWeapon)
  weapon type(Slashing) damage(1 8)
  flags Dangerous
-BattleAxeP1 weight(6) cost(100) avatar(73) wear(QuickWeapon) magic(1) 
+BattleAxeP1 weight(6) cost(100) avatar(73) wear(QuickWeapon) magic(1) basic(BattleAxe)
  weapon type(Slashing) damage(1 8 1) bonus(1)
  flags Dangerous
-LeatherArmor weight(15) cost(10) avatar(43) wear(Body)
+LongSword weight(4) cost(15) avatar(821) wear(QuickWeapon)
+ weapon type(Slashing) damage(1 8)
+ flags Balanced
+
+LeatherArmor weight(15) cost(10) avatar(43) wear(Body) max_dex_bonus(6)
+ wearing ArmorBonus+2 SpellFailure+10
+StuddedLeatherArmor weight(20) cost(25) avatar(45) wear(Body) max_dex_bonus(5)
+ wearing ArmorBonus+3 SpellFailure+15 ArmorCheckPenalty-1
+ScaleMail weight(30) cost(50) avatar(50) wear(Body) max_dex_bonus(3)
+ wearing ArmorBonus+4 SpellFailure+25 ArmorCheckPenalty-4
+
 PotionOfHealing weight(1) cost(150) avatar(620) wear(QuickItem)

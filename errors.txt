@@ -1,2 +1,2 @@
 ﻿In file `forms/GUIINV08.txt`:
- Line 57: Can't find variant `ChooseCreatu1reColor`
+ Line 96: Not found identifier `None`

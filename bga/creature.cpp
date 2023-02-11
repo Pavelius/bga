@@ -1,3 +1,4 @@
+#include "modifier.h"
 #include "creature.h"
 
 creature* last_creature;
@@ -17,21 +18,63 @@ static void finish(creature* p) {
 	p->hp = p->hp_max;
 }
 
+void creature::apply(variant v) {
+	if(v.iskind<abilityi>()) {
+		switch(modifier) {
+		case Permanent: basic.abilitites[v.value] += v.counter; break;
+		default: abilitites[v.value] += v.counter; break;
+		}
+	}
+}
+
+void creature::apply(const variants& source) {
+	auto push_modifier = modifier; modifier = NoModifier;
+	auto push_modifiers = apply_modifiers; apply_modifiers = 0;
+	for(auto v : source)
+		apply(v);
+	modifier = push_modifier;
+	apply_modifiers = push_modifiers;
+}
+
 void creature::clear() {
 	memset(this, 0, sizeof(*this));
 }
 
 void creature::create(gender_s gender) {
+	clear();
 	this->gender = gender;
 	this->portrait = random_portrait(gender);
+	for(auto i = Strenght; i <= Charisma; i = (ability_s)(i + 1))
+		basic.abilitites[i] = 10;
 	apply_portraits(this);
 	finish(this);
 }
 
+static void update_wears(creature* p) {
+	for(auto& e : p->equipment()) {
+		if(e)
+			p->apply(e.geti().wearing);
+	}
+}
+
+static int get_dex_bonus(int dex_bonus, int max_dex_bonus) {
+	if(max_dex_bonus) {
+		if(max_dex_bonus == -1)
+			max_dex_bonus = 0;
+		if(dex_bonus > max_dex_bonus)
+			dex_bonus = max_dex_bonus;
+	}
+	return dex_bonus;
+}
+
 void creature::update_abilities() {
 	auto level = 1;
-	abilitites[AC] += getbonus(Dexterity);
+	// Armor class
+	abilitites[DodgeBonus] += get_dex_bonus(getbonus(Dexterity), wears[Body].geti().max_dex_bonus),
 	abilitites[AC] += 10;
+	abilitites[AC] += abilitites[DodgeBonus];
+	abilitites[AC] += abilitites[ArmorBonus];
+	// Hit points
 	hp_max = get(HitPoints) + level * getbonus(Constitution);
 	if(hp_max < level)
 		hp_max = level;
@@ -41,5 +84,6 @@ void creature::update_abilities() {
 
 void creature::update() {
 	copy(*static_cast<statable*>(this), basic);
+	update_wears(this);
 	update_abilities();
 }

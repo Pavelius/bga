@@ -6,8 +6,7 @@ struct widget {
 	const char*		id;
 	fnevent			proc, click;
 	explicit operator bool() const { return id != 0; }
-	static void		add(const char* id, fnevent proc, fnevent click = 0);
-	static void		button(); // External function
-	void			paint() const;
+	static void		initialize();
+	static void		open(const char* id);
 };
 extern const widget* lastwidget;

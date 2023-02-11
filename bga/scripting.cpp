@@ -44,6 +44,10 @@ static void choose_creature_color() {
 	default_color = push_default;
 }
 
+static void show_item_list() {
+	widget::open("ItemList");
+}
+
 BSDATA(draw::command) = {
 	{"Cancel", draw::buttoncancel, KeyEscape},
 	{"CheckQuickWeapon", check_quick_weapon},
@@ -52,5 +56,6 @@ BSDATA(draw::command) = {
 	{"ColorPick", color_pick},
 	{"DefaultColor", default_color_pick, KeyEscape},
 	{"Done", draw::buttonok, KeyEnter},
+	{"ShowItemList", show_item_list, Ctrl + 'I'},
 };
 BSDATAF(draw::command)

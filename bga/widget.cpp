@@ -17,6 +17,11 @@ static item drag_item;
 static item *drag_item_source, *drag_item_dest;
 static char description_text[4096];
 
+static void update_creature() {
+	if(last_creature)
+		last_creature->update();
+}
+
 static void cursor_paint() {
 	auto cicle = cursor.cicle;
 	if(cursor.id == res::CURSORS) {
@@ -27,10 +32,17 @@ static void cursor_paint() {
 	image(hot.mouse.x, hot.mouse.y, gres(cursor.id), cicle, 0);
 }
 
-void initialize_ui() {
+void widget::initialize() {
 	pfinish = cursor_paint;
 	cursor.set(res::CURSORS, 0);
 	draw::syscursor(false);
+}
+
+void widget::open(const char* id) {
+	auto p = bsdata<widget>::find(id);
+	if(!p)
+		return;
+	scene(p->proc);
 }
 
 static void background() {
@@ -196,6 +208,7 @@ static void begin_drag_item() {
 	drag_item_source = (item*)hot.object;
 	drag_item = *drag_item_source;
 	drag_item_source->clear();
+	update_creature();
 	cursor.id = ITEMS;
 	cursor.cicle = drag_item.geti().avatar * 2 + 1;
 	scene(paint_draggable);
@@ -208,6 +221,7 @@ static void begin_drag_item() {
 	}
 	drag_item_source = push_drag;
 	cursor = push_cursor;
+	update_creature();
 }
 
 static void allow_drop_target(item* pi, wear_s slot) {
@@ -364,6 +378,12 @@ static void item_name() {
 	label();
 }
 
+static void item_avatar() {
+	auto i = last_item->geti().avatar * 2;
+	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
+	//rectb();
+}
+
 static void item_description() {
 	stringbuilder sb(description_text);
 	last_item->getinfo(sb);
@@ -371,53 +391,18 @@ static void item_description() {
 	textarea();
 }
 
-#ifdef _DEBUG
-const char* unique_item_res[];
-#endif // _DEBUG
-
-static void items_list() {
-#ifdef _DEBUG
-	static int origin;
-	switch(hot.key) {
-	case KeyUp: origin -= 20; break;
-	case KeyDown: origin += 20; break;
-	}
-	rectpush push;
-	fore = colors::gray;
-	rectf();
-	auto ps = gres(ITEMS);
-	caret.x = 0; caret.y = 0;
-	auto start_caret = caret;
-	auto maxcount = ps->count / 2;
-	width = 32, height = 32;
-	int hilited = -1;
-	if(origin < 0)
-		origin = 0;
-	for(auto i = origin; i < maxcount; i++) {
-		image(ps, i * 2, 0);
-		if(ishilite())
-			hilited = i;
-		caret.x += width;
-		if(((i + 1) % 20) == 0) {
-			caret.x = start_caret.x;
-			caret.y += height;
-		}
-		if(caret.y >= clipping.y2)
-			break;
-	}
-	fore = colors::text;
-	if(hilited != -1) {
-		caret.x = 20 * width + metrics::padding * 4;
-		caret.y = 0;
-		text(unique_item_res[hilited]);
-		caret.y += texth();
-		text(str("%1i", hilited));
-		caret.x += width;
-		caret.y += height * 2;
-		image(ps, hilited * 2 + 1, 0);
-	}
-#endif // _DEBUG
+static void item_action_button() {
 }
+
+static void hot_key() {
+	auto ps = (command*)gui.data;
+	if(!ps || !ps->key)
+		return;
+	if(hot.key == ps->key)
+		execute(ps->proc, gui.value, 0, 0);
+}
+
+void util_items_list();
 
 BSDATA(widget) = {
 	{"AreaMap", background},
@@ -429,9 +414,11 @@ BSDATA(widget) = {
 	{"CreatureAbility", creature_ability},
 	{"CreatureColor", creature_color},
 	{"GearButton", gear_button},
+	{"ItemActionButton", item_action_button},
+	{"ItemAvatar", item_avatar},
 	{"ItemName", item_name},
 	{"ItemDescription", item_description},
-	{"ItemList", items_list},
+	{"HotKey", hot_key},
 	{"Label", label},
 	{"PortraitLarge", portrait_large},
 	{"PortraitSmall", portrait_small},
@@ -441,5 +428,8 @@ BSDATA(widget) = {
 	{"QuickOffhandItem", quick_offhand_item},
 	{"QuiverButton", quiver_button},
 	{"Scroll", scroll},
+#ifdef _DEBUG
+	{"ItemList", util_items_list},
+#endif // _DEBUG
 };
 BSDATAF(widget)

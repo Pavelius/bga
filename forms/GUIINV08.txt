@@ -60,16 +60,16 @@ CreatureColor INVBUT2 507 191 42 42 frames(0 1 0 0) value(2) data(ChooseCreature
 CreatureColor INVBUT2 507 231 42 42 frames(0 1 0 0) value(3) data(ChooseCreatureColor)
 
 Label NORMAL 575 20 206 22 id("QuickWeapon")
-QuickWeaponButton INVBUT3 572 48 24 36 frames(0 1 2) value(0) id(CheckQuickWeapon)
+QuickWeaponButton INVBUT3 572 48 24 36 frames(0 1 2) value(0) data(CheckQuickWeapon)
 QuickWeaponItem STONSLOT 600 49 36 36 value(0)
 QuickOffhandItem STONSLOT 639 49 36 36 value(0)
-QuickWeaponButton INVBUT3 572 88 24 36 frames(3 4 5) value(1) id(CheckQuickWeapon)
+QuickWeaponButton INVBUT3 572 88 24 36 frames(3 4 5) value(1) data(CheckQuickWeapon)
 QuickWeaponItem STONSLOT 600 89 36 36 value(1)
 QuickOffhandItem STONSLOT 639 89 36 36 value(1)
-QuickWeaponButton INVBUT3 679 48 24 36 frames(6 7 8) value(2) id(CheckQuickWeapon)
+QuickWeaponButton INVBUT3 679 48 24 36 frames(6 7 8) value(2) data(CheckQuickWeapon)
 QuickWeaponItem STONSLOT 707 49 36 36 value(2)
 QuickOffhandItem STONSLOT 746 49 36 36 value(2)
-QuickWeaponButton INVBUT3 679 88 24 36 frames(9 10 11) value(3) id(CheckQuickWeapon)
+QuickWeaponButton INVBUT3 679 88 24 36 frames(9 10 11) value(3) data(CheckQuickWeapon)
 QuickWeaponItem STONSLOT 707 89 36 36 value(3)
 QuickOffhandItem STONSLOT 746 89 36 36 value(3)
 
@@ -92,3 +92,5 @@ Button STONSLOT 572 379 36 36 value(70)
 Label TOOLFONT 341 281 117 14
 
 Scroll GBTNSCRL 655 302 12 112 frames(1 0 3 2 4 5)
+
+HotKey NONE 0 0 0 0 data(ShowItemList)

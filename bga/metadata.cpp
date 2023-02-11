@@ -63,12 +63,14 @@ BSMETA(form) = {
 	{}};
 BSMETA(itemi) = {
 	BSREQ(id),
+	BSREQ(basic),
 	BSREQ(weapon),
 	BSREQ(count), BSREQ(weight), BSREQ(cost),
 	BSFLG(flags, itemfi),
-	BSREQ(magic),
+	BSREQ(magic), BSREQ(max_dex_bonus),
 	BSREQ(avatar), BSREQ(ground), BSENM(equiped, residi), BSENM(thrown, residi),
 	BSENM(wear, weari),
+	BSREQ(wearing), BSREQ(use),
 	{}};
 BSMETA(itemfi) = {
 	BSREQ(id),
@@ -93,7 +95,7 @@ BSMETA(residi) = {
 	BSREQ(id),
 	{}};
 BSMETA(weaponi) = {
-	BSREQ(bonus), BSREQ(ac),
+	BSREQ(bonus),
 	BSENM(type, damagei),
 	BSREQ(damage),
 	BSENM(range, rangei),

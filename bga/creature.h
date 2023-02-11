@@ -10,6 +10,8 @@
 struct creature : moveable, actable, wearable, avatarable, coloration, statable {
 	statable	basic;
 	short		hp, hp_max;
+	void		apply(const variants& source);
+	void		apply(variant v);
 	void		clear();
 	void		create(gender_s gender);
 	void		update();

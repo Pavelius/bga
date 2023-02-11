@@ -25,7 +25,7 @@ struct weaponi {
 	damage_s		type;
 	dice			damage;
 	range_s			range;
-	char			bonus, ac;
+	char			bonus;
 };
 struct itemi : nameable {
 	unsigned		count, weight, cost;
@@ -35,7 +35,9 @@ struct itemi : nameable {
 	unsigned		flags;
 	wear_s			wear;
 	char			magic;
-	variants		use, wearon;
+	variants		use, wearing;
+	itemi*			basic;
+	char			max_dex_bonus;
 	bool			is(itemf_s v) const { return (flags & (1 << v)) != 0; }
 };
 struct item {
@@ -49,6 +51,7 @@ struct item {
 		unsigned char data;
 	};
 	constexpr item() : type(0), count(0), data(0) {}
+	item(unsigned short type) : type(type), count(geti().count ? geti().count - 1 : 0), data(0) {}
 	constexpr explicit operator bool() { return type != 0; }
 	void			add(item& v);
 	bool			canequip(wear_s v) const;

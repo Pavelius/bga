@@ -1,15 +1,31 @@
 AppTitle: Врата Балдура
+ArmorBonus: Бонус брони
+ArmorCheckPenalty: Штраф брони на проверки
+AttackBonus: Бонус к атаке
+Close: Закрыть
+Damage: Повреждения
 DefaultColor: По-умолчанию
 Description: Описание
 Done: Завершить
 Ground: На земле
+Kg: кг.
+MagicBonus: Магический бонус
+MaxDexterityBonus: Максимальный бонус ловкости
 Name: Наименование
 QuickItem: Предметы
 QuickWeapon: Оружие
 Quiver: Колчан
 Replay: Заново
+SpellFailure: Неудача при создании заклинания
+Weight: Вес
+
+BludgeonDamage: урона
+PierceDamage: колющего урона
+SlashingDamage: режущего урона
 
 BattleAxe: Боевой топор
 BattleAxeP1: Боевой топор +1
 LeatherArmor: Кожанная броня
 PotionOfHealing: Зелье лечения
+ScaleMail: Чешуйчатый доспех
+StuddedLeatherArmor: Клепанная кожанная броня
