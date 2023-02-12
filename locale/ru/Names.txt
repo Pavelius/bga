@@ -1,3 +1,4 @@
+And: И
 AppTitle: Врата Балдура
 ArmorBonus: Бонус брони
 ArmorCheckPenalty: Штраф брони на проверки
@@ -23,11 +24,15 @@ BludgeonDamage: урона
 PierceDamage: колющего урона
 SlashingDamage: режущего урона
 
+ColdDamage: урона от холода
+FireDamage: огненного урона
+
 BattleAxe: Боевой топор
 BattleAxeP1: Боевой топор +1
 HalfPlate: Полу-латы
 LeatherArmor: Кожанная броня
 LongSword: Длинный меч
+LongSwordFlaming: Длинный меч сожжения +2
 PotionOfHealing: Зелье лечения
 ScaleMail: Чешуйчатый доспех
 StuddedLeatherArmor: Клепанная кожанная броня

@@ -457,6 +457,10 @@ static void quick_offhand_item() {
 		strokeout(paint_empthy_offhand, -2);
 	else
 		paint_item_dragable(pi);
+	if(!drag_item_source && pi && *pi && last_creature->useoffhand()) {
+		if(gui.value == last_creature->weapon_index)
+			image(gres(STONSLOT), 34, 0);
+	}
 }
 
 static void portrait_large() {

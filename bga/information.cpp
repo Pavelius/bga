@@ -58,14 +58,18 @@ static void addd(stringbuilder& sb, const char* id, const dice& value) {
 		sb.add("%+1i", value.b);
 }
 
-static void addd(stringbuilder& sb, const char* id, const dice& value, damage_s type) {
-	if(!value)
-		return;
-	sb.addn("%1:", getnm(id));
+static void addv(stringbuilder& sb, const dice& value, damage_s type) {
 	sb.adds("%1id%2i", value.c, value.d);
 	if(value.b)
 		sb.add("%+1i", value.b);
 	sb.adds(getnm(str("%1Damage", bsdata<damagei>::elements[type].id)));
+}
+
+static void addd(stringbuilder& sb, const char* id, const dice& value, damage_s type) {
+	if(!value)
+		return;
+	sb.addn("%1:", getnm(id));
+	addv(sb, value, type);
 }
 
 void item::getinfo(stringbuilder& sb) const {
@@ -75,6 +79,14 @@ void item::getinfo(stringbuilder& sb) const {
 	if(ei.wear == QuickWeapon) {
 		addb(sb, "AttackBonus", ei.weapon.bonus, "%+1i");
 		addd(sb, "Damage", ei.weapon.damage, ei.weapon.type);
+		if(ei.is(Flaming)) {
+			sb.adds("%-And ");
+			addv(sb, {1, 6}, Fire);
+		}
+		if(ei.is(Frost)) {
+			sb.adds("%-And ");
+			addv(sb, {1, 6}, Cold);
+		}
 	}
 	add_statistics(sb, ei.wearing);
 	add_db(sb, "MaxDexterityBonus", ei.max_dex_bonus);

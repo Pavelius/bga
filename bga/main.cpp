@@ -20,9 +20,8 @@ static item& citem(const char* id) {
 	static item it;
 	it.clear();
 	auto pi = bsdata<itemi>::find(id);
-	if(pi) {
+	if(pi)
 		it.type = pi - bsdata<itemi>::elements;
-	}
 	return it;
 }
 
@@ -43,7 +42,7 @@ static void start_main() {
 	last_creature->additem(citem("LeatherArmor"));
 	last_creature->additem(citem("StuddedLeatherArmor"));
 	last_creature->additem(citem("ScaleMail"));
-	last_creature->additem(citem("LongSword"));
+	last_creature->additem(citem("LongSwordFlaming"));
 	last_creature->additem(citem("HalfPlate"));
 	last_creature->additem(citem("PotionOfHealing"));
 	last_creature->additem(citem("Helm"));

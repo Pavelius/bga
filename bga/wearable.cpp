@@ -53,3 +53,8 @@ void wearable::equip(item& v) {
 //	}
 //	return false;
 //}
+
+bool wearable::useoffhand() const {
+	return wears[QuickWeapon + weapon_index]
+		&& !wears[QuickWeapon + weapon_index].geti().is(TwoHanded);
+}

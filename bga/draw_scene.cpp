@@ -5,6 +5,3 @@
 void moveable::paint() const {
 
 }
-
-void scene_render() {
-}
