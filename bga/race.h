@@ -5,7 +5,7 @@
 #pragma once
 
 enum race_s : unsigned char {
-	Human, Dwarf, Elf, HalfElf, HalfOrc,
+	Human, Dwarf, Elf, Gnome, HalfElf, Halfling, HalfOrc,
 };
 
 struct racei : nameable {

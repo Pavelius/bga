@@ -3,11 +3,13 @@
 #include "coloration.h"
 #include "moveable.h"
 #include "portrait.h"
+#include "race.h"
 #include "wearable.h"
 
 #pragma once
 
 struct creature : moveable, actable, wearable, avatarable, coloration, statable {
+	race_s		race;
 	statable	basic;
 	short		hp, hp_max;
 	void		apply(const variants& source);

@@ -1,4 +1,5 @@
 #include "bsreq.h"
+#include "class.h"
 #include "creature.h"
 #include "colorgrad.h"
 #include "crt.h"
@@ -6,13 +7,17 @@
 #include "draw_command.h"
 #include "draw_control.h"
 #include "draw_gui.h"
+#include "race.h"
 #include "resinfo.h"
 #include "script.h"
 #include "widget.h"
 
+enum class_s : unsigned char;
+
 using namespace draw;
 using namespace res;
 
+static long current_tick;
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
 static char description_text[4096];
@@ -32,7 +37,12 @@ static void cursor_paint() {
 	image(hot.mouse.x, hot.mouse.y, gres(cursor.id), cicle, 0);
 }
 
+static void paint_background() {
+	current_tick = getcputime();
+}
+
 void widget::initialize() {
+	pbackground = paint_background;
 	pfinish = cursor_paint;
 	cursor.set(res::CURSORS, 0);
 	draw::syscursor(false);
@@ -43,6 +53,117 @@ void widget::open(const char* id) {
 	if(!p)
 		return;
 	scene(p->proc);
+}
+
+static res::token getanimation(race_s race, gender_s gender, class_s type, int ai, int& ws) {
+	res::token icn;
+	switch(race) {
+	case Dwarf:
+	case Gnome:
+		icn = res::CDMB1;
+		ws = 0;
+		break;
+	case Elf:
+	case HalfElf:
+		if(gender == Female)
+			icn = res::CEFB1;
+		else
+			icn = res::CEMB1;
+		ws = 2;
+		break;
+	case Halfling:
+		if(gender == Female)
+			icn = res::CIFB1;
+		else
+			icn = res::CIMB1;
+		if(type == Wizard || type == Sorcerer)
+			type = Rogue;
+		if(ai > 1)
+			ai = 1;
+		ws = 0;
+		break;
+	default:
+		if(gender == Female) {
+			ws = 1;
+			icn = res::CHFB1;
+		} else {
+			ws = 3;
+			icn = res::CHMB1;
+		}
+		break;
+	}
+	if(type == Wizard || type == Sorcerer)
+		icn = (res::token)(icn + (res::CDMW1 - res::CDMB1) + ai);
+	else if(type == Cleric)
+		icn = (res::token)(icn + ai);
+	else if(type == Rogue && ai)
+		icn = (res::token)(icn + (res::CDMT1 - res::CDMB1));
+	else {
+		if(ai == 3)
+			icn = (res::token)(icn + 4);
+		else
+			icn = (res::token)(icn + ai);
+	}
+	return icn;
+}
+
+static int getarmorindex(const item& e) {
+	switch(e.geti().required[0]) {
+	case ArmorProfeciencyLight: return 1;
+	case ArmorProfeciencyMedium: return 2;
+	case ArmorProfeciencyHeavy: return 3;
+	default: return 0;
+	}
+	return 0;
+}
+
+static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {
+	if(!equipment)
+		return;
+	auto tb = equipment.geti().equiped;
+	if(tb)
+		image(gres(res::token(tb + ws)), frame, flags, pallette);
+}
+
+static void paperdoll(const coloration& colors, race_s race, gender_s gender, class_s type, int animation, int orientation, const item& armor, const item& weapon, const item& offhand, const item& helm) {
+	sprite* source;
+	unsigned flags;
+	int ws;
+	source = gres(getanimation(race, gender, type, getarmorindex(armor), ws));
+	if(!source)
+		return;
+	const int directions = 9;
+	int o = orientation;
+	if(o >= directions) {
+		flags = ImageMirrorH;
+		o = (9 - 1) * 2 - o;
+	} else
+		flags = 0;
+	color pallette[256]; colors.setpallette(pallette);
+	auto frame = source->ganim(animation * directions + o, current_tick / 100);
+	image(source, frame, flags, pallette);
+	painting_equipment(weapon, ws, frame, flags, pallette);
+	painting_equipment(helm, ws, frame, flags, pallette);
+	painting_equipment(offhand, ws, frame, flags, pallette);
+}
+
+static void paperdoll() {
+	static int orientation = 1;
+	auto push_caret = caret;
+	caret.x += width / 2;
+	caret.y += height / 2 + 20;
+	paperdoll(*last_creature,
+		last_creature->race, last_creature->gender, Fighter, 1, orientation,
+		last_creature->wears[Body], last_creature->getweapon(), last_creature->getoffhand(), last_creature->wears[Head]);
+	caret = push_caret;
+	switch(hot.key) {
+	case KeyLeft:
+		execute(cbsetint, (orientation >= 15) ? 0 : orientation + 1, 0, &orientation);
+		break;
+	case KeyRight:
+		execute(cbsetint, (orientation <= 0) ? 15 : orientation - 1, 0, &orientation);
+		break;
+	}
 }
 
 static void background() {
@@ -130,7 +251,7 @@ static void pressed_colorgrad(int index, int size) {
 		caret.y += 1;
 	}
 	auto push_palt = palt; palt = pallette;
-	set_color(4, index);
+	set_color(pallette, 4, index);
 	image(gres(res::COLGRAD), size, ImagePallette);
 	palt = push_palt;
 	caret = push_caret;
@@ -487,6 +608,7 @@ BSDATA(widget) = {
 	{"GearButton", gear_button},
 	{"HotKey", hot_key},
 	{"Label", label},
+	{"Paperdoll", paperdoll},
 	{"PortraitLarge", portrait_large},
 	{"QuickItemButton", quick_item_button},
 	{"QuickWeaponButton", quick_weapon_button},

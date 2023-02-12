@@ -42,7 +42,7 @@ GearButton STONSLOT 255 136 36 36 value(6)
 GearButton STONSLOT 510 22 36 36 value(7)
 GearButton STONSLOT 510 136 36 36 value(8)
 
-Button STONSLOT 339 86 126 160 value(50) id("Test")
+Paperdoll STONSLOT 339 86 126 160 value(50) id("Test")
 
 // Statistic labels
 CreatureAbility NORMAL 704 141 70 20 id("Coins")

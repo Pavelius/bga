@@ -42,6 +42,7 @@
     <ClCompile Include="bstream.cpp" />
     <ClCompile Include="collection.cpp" />
     <ClCompile Include="color.cpp" />
+    <ClCompile Include="coloration.cpp" />
     <ClCompile Include="colorgrad.cpp" />
     <ClCompile Include="creature.cpp" />
     <ClCompile Include="crt.cpp" />
@@ -56,6 +57,7 @@
     <ClCompile Include="draw_scene.cpp" />
     <ClCompile Include="draw_text.cpp" />
     <ClCompile Include="draw_textf.cpp" />
+    <ClCompile Include="feat.cpp" />
     <ClCompile Include="gender.cpp" />
     <ClCompile Include="information.cpp" />
     <ClCompile Include="io_bsreq.cpp" />
@@ -100,10 +102,12 @@
     <ClInclude Include="actable.h" />
     <ClInclude Include="archive.h" />
     <ClInclude Include="area.h" />
+    <ClInclude Include="class.h" />
     <ClInclude Include="collection.h" />
     <ClInclude Include="damage.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="draw_list.h" />
+    <ClInclude Include="feat.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="moveable.h" />
@@ -143,7 +147,6 @@
     <ClInclude Include="sprite_util.h" />
     <ClInclude Include="stringact.h" />
     <ClInclude Include="stringbuilder.h" />
-    <ClInclude Include="tag.h" />
     <ClInclude Include="variant.h" />
     <ClInclude Include="wear.h" />
     <ClInclude Include="wearable.h" />

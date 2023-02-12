@@ -11,7 +11,7 @@ struct wearable {
 	slice<item>	backpack() { return slice<item>(wears + Backpack, wears + LastBackpack + 1); }
 	void		equip(item& v);
 	slice<item>	equipment() { return slice<item>(wears + Head, wears + LastQuickWeapon + 1); }
-	item*		getweapon() { return wears + QuickWeapon + weapon_index * 2; }
-	item*		getoffhand() { return wears + QuickOffhand + weapon_index * 2; }
+	item&		getweapon() { return wears[QuickWeapon + weapon_index * 2]; }
+	item&		getoffhand() { return wears[QuickOffhand + weapon_index * 2]; }
 	// bool		useitem(const itemi* pi);
 };

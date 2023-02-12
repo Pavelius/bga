@@ -58,6 +58,9 @@ BSMETA(damagei) = {
 BSMETA(dice) = {
 	BSREQ(c), BSREQ(d), BSREQ(b), BSREQ(m),
 	{}};
+BSMETA(feati) = {
+	BSREQ(id),
+	{}};
 BSMETA(form) = {
 	BSREQ(id),
 	BSREQ(controls),
@@ -68,6 +71,7 @@ BSMETA(itemi) = {
 	BSREQ(weapon),
 	BSREQ(count), BSREQ(weight), BSREQ(cost),
 	BSFLG(flags, itemfi),
+	BSENM(required, feati),
 	BSREQ(magic), BSREQ(max_dex_bonus),
 	BSREQ(avatar), BSREQ(ground), BSENM(equiped, residi), BSENM(thrown, residi),
 	BSENM(wear, weari),

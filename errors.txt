@@ -1,10 +1,4 @@
-﻿In file `forms/GACTN008.txt`:
- Line 18: Not found identifier `PortraitSmall`
- Line 19: Not found identifier `PortraitSmall`
- Line 20: Not found identifier `PortraitSmall`
- Line 21: Not found identifier `PortraitSmall`
- Line 22: Not found identifier `PortraitSmall`
- Line 23: Not found identifier `PortraitSmall`
+﻿In file `rules/Items.txt`:
+ Line 16: Not found identifier `ProficiencyLongswor1d`
 In file `forms/GUIINV08.txt`:
- Line 98: Can't find variant `GACTN008`
- Line 99: Can't find variant `GCOMM008`
+ Line 100: Can't find variant `GCOMM008`

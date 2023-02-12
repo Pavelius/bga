@@ -11,7 +11,7 @@ static void copy(T& e1, const T& e2) {
 
 static void apply_portraits(creature* p) {
 	auto pi = bsdata<portraiti>::elements + p->portrait;
-	memcpy(p->colors, pi->colors, sizeof(pi->colors));
+	p->setcolor(pi->colors);
 }
 
 static void finish(creature* p) {

@@ -248,6 +248,12 @@
     <ClCompile Include="modifier.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="coloration.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="feat.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -263,9 +269,6 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="range.h">
-      <Filter>logic</Filter>
-    </ClInclude>
-    <ClInclude Include="tag.h">
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="wear.h">
@@ -407,6 +410,12 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="modifier.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="class.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="feat.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

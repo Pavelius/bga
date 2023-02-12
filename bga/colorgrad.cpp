@@ -8,8 +8,8 @@ static surface pallette_bitmap;
 color pallette[256];
 short color_indecies[34], default_color;
 
-void set_color(int start, int index) {
-	memcpy(pallette + start, pallette_bitmap.ptr(0, index), 12 * sizeof(color));
+void set_color(color* pallette, int start, int index, int count) {
+	memcpy(pallette + start, pallette_bitmap.ptr(0, index), count * sizeof(color));
 }
 
 void clear_indecies() {

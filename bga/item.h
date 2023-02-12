@@ -1,6 +1,7 @@
 #include "crt.h"
 #include "damage.h"
 #include "dice.h"
+#include "feat.h"
 #include "magic.h"
 #include "range.h"
 #include "resid.h"
@@ -38,6 +39,7 @@ struct itemi : nameable {
 	variants		use, wearing;
 	itemi*			basic;
 	char			max_dex_bonus;
+	feat_s			required[3];
 	bool			is(itemf_s v) const { return (flags & (1 << v)) != 0; }
 };
 struct item {
