@@ -361,12 +361,41 @@ static void choose_creature() {
 	last_creature = (creature*)hot.object;
 }
 
+static void hits_bar(int current, int maximum) {
+	if(!maximum)
+		return;
+	auto nw = 45 * current / maximum;
+	if(!nw)
+		return;
+	auto index = 4;
+	if(current == maximum)
+		index = 0;
+	else if(current >= maximum * 4 / 5)
+		index = 1;
+	else if(current >= maximum * 3 / 5)
+		index = 2;
+	else if(current >= maximum * 2 / 5)
+		index = 3;
+	auto push_clipping = clipping;
+	setclip({caret.x, caret.y, caret.x + nw, caret.y + height});
+	image(gres(GUIHITPT), index, 0);
+	clipping = push_clipping;
+}
+
+static void creature_hits(const creature* pc) {
+	auto push_caret = caret;
+	caret.x += 1; caret.y += 48;
+	hits_bar(pc->hp, pc->hp_max);
+	caret = push_caret;
+}
+
 static void portrait_bar() {
 	rectpush push;
 	caret.x += 505; caret.y += 4;
 	width = height = 46;
 	for(auto i = 0; i < 6; i++) {
 		portrait_small(party[i]);
+		creature_hits(party[i]);
 		if(ishilite() && hot.key==MouseLeft && hot.pressed)
 			execute(choose_creature, 0, 0, party[i]);
 		caret.x += 49;

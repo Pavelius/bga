@@ -94,10 +94,14 @@ static bool filter_gender(const void* object, int param) {
 	return ((portraiti*)object)->gender == (gender_s)param;
 }
 
-short unsigned random_portrait(gender_s gender) {
+short unsigned random_portrait(gender_s gender, portraiti** exclude) {
 	collection<portraiti> source;
 	source.select();
 	source.match(filter_gender, gender, true);
+	if(exclude) {
+		for(auto p = exclude; *p; p++)
+			source.remove(*p);
+	}
 	if(!source)
 		return 0;
 	return source.random() - bsdata<portraiti>::elements;

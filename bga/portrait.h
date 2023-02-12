@@ -11,4 +11,4 @@ struct portraiti {
 struct avatarable {
 	short unsigned	portrait;
 };
-short unsigned		random_portrait(gender_s gender);
+short unsigned		random_portrait(gender_s gender, portraiti** exclude = 0);

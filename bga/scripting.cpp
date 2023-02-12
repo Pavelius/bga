@@ -48,6 +48,11 @@ static void show_item_list() {
 	widget::open("ItemList");
 }
 
+static void make_scrap() {
+	if(last_creature->hp > 0)
+		last_creature->hp--;
+}
+
 BSDATA(draw::command) = {
 	{"Cancel", draw::buttoncancel, KeyEscape},
 	{"CheckQuickWeapon", check_quick_weapon},
@@ -56,6 +61,7 @@ BSDATA(draw::command) = {
 	{"ColorPick", color_pick},
 	{"DefaultColor", default_color_pick, KeyEscape},
 	{"Done", draw::buttonok, KeyEnter},
+	{"MakeScrap", make_scrap, Ctrl + 'D'},
 	{"ShowItemList", show_item_list, Ctrl + 'I'},
 };
 BSDATAF(draw::command)

@@ -63,9 +63,6 @@
     <Text Include="..\locale\ru\ItemDescriptions.txt">
       <Filter>locale</Filter>
     </Text>
-    <Text Include="..\forms\GACTN008.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\forms\GCOMM008.txt">
       <Filter>forms</Filter>
     </Text>

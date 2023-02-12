@@ -15,6 +15,7 @@ static void apply_portraits(creature* p) {
 }
 
 static void finish(creature* p) {
+	p->basic.abilitites[HitPoints] += 10;
 	p->update();
 	p->hp = p->hp_max;
 }
@@ -41,10 +42,20 @@ void creature::clear() {
 	memset(this, 0, sizeof(*this));
 }
 
+static short unsigned random_portrait_no_party(gender_s gender) {
+	portraiti* exist[sizeof(party) / sizeof(party[0]) + 1];
+	auto ps = exist;
+	for(auto p : party) {
+		if(p)
+			*ps++ = bsdata<portraiti>::elements + p->portrait;
+	}
+	return random_portrait(gender, exist);
+}
+
 void creature::create(gender_s gender) {
 	clear();
 	this->gender = gender;
-	this->portrait = random_portrait(gender);
+	this->portrait = random_portrait_no_party(gender);
 	for(auto i = Strenght; i <= Charisma; i = (ability_s)(i + 1))
 		basic.abilitites[i] = 10;
 	apply_portraits(this);
@@ -72,7 +83,7 @@ void creature::update_abilities() {
 	auto level = 1;
 	// Armor class
 	abilitites[DodgeBonus] += get_dex_bonus(getbonus(Dexterity), wears[Body].geti().max_dex_bonus),
-	abilitites[AC] += 10;
+		abilitites[AC] += 10;
 	abilitites[AC] += abilitites[DodgeBonus];
 	abilitites[AC] += abilitites[ArmorBonus];
 	// Hit points
