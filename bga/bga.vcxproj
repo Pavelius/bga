@@ -21,6 +21,8 @@
   <ItemGroup>
     <Text Include="..\errors.txt" />
     <Text Include="..\forms\COLOR.txt" />
+    <Text Include="..\forms\GACTN008.txt" />
+    <Text Include="..\forms\GCOMM008.txt" />
     <Text Include="..\forms\GIITMH08.txt" />
     <Text Include="..\forms\GUICHP0B.txt" />
     <Text Include="..\forms\GUIINV08.txt" />
@@ -55,7 +57,6 @@
     <ClCompile Include="draw_scene.cpp" />
     <ClCompile Include="draw_text.cpp" />
     <ClCompile Include="draw_textf.cpp" />
-    <ClCompile Include="game.cpp" />
     <ClCompile Include="gender.cpp" />
     <ClCompile Include="information.cpp" />
     <ClCompile Include="io_bsreq.cpp" />
@@ -104,7 +105,6 @@
     <ClInclude Include="damage.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="draw_list.h" />
-    <ClInclude Include="game.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="moveable.h" />

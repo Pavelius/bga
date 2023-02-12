@@ -25,7 +25,9 @@ SlashingDamage: режущего урона
 
 BattleAxe: Боевой топор
 BattleAxeP1: Боевой топор +1
+HalfPlate: Полу-латы
 LeatherArmor: Кожанная броня
+LongSword: Длинный меч
 PotionOfHealing: Зелье лечения
 ScaleMail: Чешуйчатый доспех
 StuddedLeatherArmor: Клепанная кожанная броня

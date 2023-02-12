@@ -18,5 +18,7 @@ StuddedLeatherArmor weight(20) cost(25) avatar(45) wear(Body) max_dex_bonus(5)
  wearing ArmorBonus+3 SpellFailure+15 ArmorCheckPenalty-1
 ScaleMail weight(30) cost(50) avatar(50) wear(Body) max_dex_bonus(3)
  wearing ArmorBonus+4 SpellFailure+25 ArmorCheckPenalty-4
+HalfPlate weight(50) cost(600) avatar(42) wear(Body) max_dex_bonus(-1)
+ wearing ArmorBonus+7 SpellFailure+40 ArmorCheckPenalty-7
 
 PotionOfHealing weight(1) cost(150) avatar(620) wear(QuickItem)

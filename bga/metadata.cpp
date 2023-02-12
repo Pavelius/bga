@@ -46,7 +46,8 @@ BSMETA(colorgrad) = {
 	{}};
 BSMETA(control) = {
 	BSREQ(visual), BSREQ(resource), BSREQ(x), BSREQ(y), BSREQ(width), BSREQ(height),
-	BSREQ(value), BSREQ(frames), BSREQ(fore), BSREQ(id), BSREQ(data),
+	BSREQ(value), BSREQ(frames), BSREQ(fore),
+	BSREQ(id), BSREQ(data),
 	{}};
 BSMETA(command) = {
 	BSREQ(id),
@@ -113,6 +114,7 @@ BSDATA(varianti) = {
 	{"Control", VAR(control, 6)},
 	{"Command", VAR(command, 1)},
 	{"ColorGrad", VAR(colorgrad, 1)},
+	{"Form", VAR(form, 1)},
 	{"Item", VAR(itemi, 1)},
 	{"Portrait", VAR(portraiti, 1)},
 	{"Race", VAR(racei, 1)},

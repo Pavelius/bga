@@ -342,8 +342,40 @@ static void portrait_large() {
 	image(gres(PORTL), last_creature->portrait, 0);
 }
 
-static void portrait_small() {
-	image(gres(PORTS), last_creature->portrait, 0);
+static void hilight_protrait() {
+	auto push_fore = fore;
+	fore = colors::green;
+	strokeout(rectb, -1);
+	fore = push_fore;
+}
+
+static void portrait_small(creature* pc) {
+	if(last_creature == pc)
+		hilight_protrait();
+	rectpush push;
+	setoffset(2, 2);
+	image(gres(PORTS), pc->portrait, 0);
+}
+
+static void choose_creature() {
+	last_creature = (creature*)hot.object;
+}
+
+static void portrait_bar() {
+	rectpush push;
+	caret.x += 505; caret.y += 4;
+	width = height = 46;
+	for(auto i = 0; i < 6; i++) {
+		portrait_small(party[i]);
+		if(ishilite() && hot.key==MouseLeft && hot.pressed)
+			execute(choose_creature, 0, 0, party[i]);
+		caret.x += 49;
+	}
+}
+
+static void action_panel_na() {
+	image(gres(GACTN), 1, 0);
+	portrait_bar();
 }
 
 static void number() {
@@ -394,6 +426,10 @@ static void item_description() {
 static void item_action_button() {
 }
 
+static void paint_form() {
+	bsdata<form>::elements[gui.data.value].paint();
+}
+
 static void hot_key() {
 	auto ps = (command*)gui.data;
 	if(!ps || !ps->key)
@@ -405,6 +441,7 @@ static void hot_key() {
 void util_items_list();
 
 BSDATA(widget) = {
+	{"ActionPanelNA", action_panel_na},
 	{"AreaMap", background},
 	{"Background", background},
 	{"BackpackButton", backpack_button},
@@ -413,15 +450,15 @@ BSDATA(widget) = {
 	{"ColorPicker", color_picker},
 	{"CreatureAbility", creature_ability},
 	{"CreatureColor", creature_color},
-	{"GearButton", gear_button},
+	{"Form", paint_form},
 	{"ItemActionButton", item_action_button},
 	{"ItemAvatar", item_avatar},
 	{"ItemName", item_name},
 	{"ItemDescription", item_description},
+	{"GearButton", gear_button},
 	{"HotKey", hot_key},
 	{"Label", label},
 	{"PortraitLarge", portrait_large},
-	{"PortraitSmall", portrait_small},
 	{"QuickItemButton", quick_item_button},
 	{"QuickWeaponButton", quick_weapon_button},
 	{"QuickWeaponItem", quick_weapon_item},

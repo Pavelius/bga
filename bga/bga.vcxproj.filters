@@ -63,6 +63,12 @@
     <Text Include="..\locale\ru\ItemDescriptions.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\forms\GACTN008.txt">
+      <Filter>forms</Filter>
+    </Text>
+    <Text Include="..\forms\GCOMM008.txt">
+      <Filter>forms</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -224,9 +230,6 @@
     <ClCompile Include="collection.cpp">
       <Filter>support</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="race.cpp">
       <Filter>logic</Filter>
     </ClCompile>
@@ -383,9 +386,6 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="actable.h">
-      <Filter>logic</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="map.h">

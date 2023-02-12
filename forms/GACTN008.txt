@@ -1,0 +1,30 @@
+﻿#Control
+
+Background GACTN 0 433 0 0
+// Button GUIBTBUT 6 12 38 38 frames(0 1 0 0) value(0)
+// Button GUIBTBUT 47 12 38 38 frames(2 3 0 0) value(1)
+// Button GUIBTBUT 88 12 38 38 frames(4 5 0 0) value(2)
+// Button GUIBTBUT 129 12 38 38 frames(6 7 0 0) value(3)
+// Button GUIBTBUT 170 12 38 38 frames(8 9 0 0) value(4)
+// Button GUIBTBUT 211 12 38 38 frames(10 11 0 0) value(5)
+// Button GUIBTBUT 252 12 38 38 frames(12 13 0 0) value(6)
+// Button GUIBTBUT 293 12 38 38 frames(14 15 0 0) value(7)
+// Button GUIBTBUT 334 12 38 38 frames(16 17 0 0) value(8)
+// Button GUIBTBUT 375 12 38 38 frames(18 19 0 0) value(9)
+// Button GUIBTBUT 416 12 38 38 frames(20 21 0 0) value(10)
+// Button GUIBTBUT 457 12 38 38 frames(22 23 0 0) value(11)
+
+// Party portrait
+//PortraitSmall GUIRSPOR 505 4 46 46 frames(0 1 0 0) 
+//PortraitSmall GUIRSPOR 554 4 46 46 frames(0 1 0 0) value(1)
+//PortraitSmall GUIRSPOR 603 4 46 46 frames(0 1 0 0) value(2)
+//PortraitSmall GUIRSPOR 652 4 46 46 frames(0 1 0 0) value(3)
+//PortraitSmall GUIRSPOR 701 4 46 46 frames(0 1 0 0) value(4)
+//PortraitSmall GUIRSPOR 750 4 46 46 frames(0 1 0 0) value(5)
+
+//Button GUIHITPT 506 52 45 4 frames(0 0 0 0) value(50)
+//Button GUIHITPT 555 52 45 4 frames(0 0 0 0) value(51)
+//Button GUIHITPT 604 52 45 4 frames(0 0 0 0) value(52)
+//Button GUIHITPT 653 52 45 4 frames(0 0 0 0) value(53)
+//Button GUIHITPT 702 52 45 4 frames(0 0 0 0) value(54)
+//Button GUIHITPT 751 52 45 4 frames(0 0 0 0) value(55)

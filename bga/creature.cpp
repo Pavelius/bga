@@ -1,6 +1,7 @@
 #include "modifier.h"
 #include "creature.h"
 
+creature* party[6];
 creature* last_creature;
 
 template<typename T>

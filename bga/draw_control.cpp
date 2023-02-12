@@ -34,9 +34,11 @@ void form::paint() const {
 				push_caret.x += e.x;
 				push_caret.y += e.y;
 			}
+			caret = push_caret;
+		} else {
+			caret.x = push_caret.x + e.x;
+			caret.y = push_caret.y + e.y;
 		}
-		caret.x = push_caret.x + e.x;
-		caret.y = push_caret.y + e.y;
 		width = e.width; height = e.height;
 		gui.clear();
 		gui.id = e.id;

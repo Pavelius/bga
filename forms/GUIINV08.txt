@@ -94,3 +94,6 @@ Label TOOLFONT 341 281 117 14
 Scroll GBTNSCRL 655 302 12 112 frames(1 0 3 2 4 5)
 
 HotKey NONE 0 0 0 0 data(ShowItemList)
+
+ActionPanelNA NONE 0 433 0 0
+Form NONE 0 493 0 0 data(GCOMM008)

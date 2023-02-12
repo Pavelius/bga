@@ -17,7 +17,7 @@ BSDATA(residi) = {
 	{"GBTNBFRM", root}, {"GBTNJBTN", root}, {"GBTNLRG", root}, {"GBTNMED", root}, {"GBTNMED2", root}, {"GBTNMINS", root}, {"GBTNPLUS", root}, {"GBTNOPT1", root}, {"GBTNOPT2", root},
 	{"GBTNSPB1", root}, {"GBTNSPB2", root}, {"GBTNSPB3", root},
 	{"GBTNPOR", root}, {"GUICONT", root}, {"GUIMAP", root}, {"GUIMAPWC", root}, {"GUIREC", root}, {"GBTNRECB", root}, {"GBTNSCRL", root}, {"GBTNSTD", root},
-	{"GCOMM", root}, {"GCOMMBTN", root}, {"FLAG1", root},
+	{"GCOMM", root}, {"GCOMMSB", root}, {"GCOMMBTN", root}, {"FLAG1", root},
 	{"INVBUT2", root}, {"INVBUT3", root}, {"ITEMS", root}, {"GROUND", root}, {"CONTAINER", root}, {"SCROLLS", root}, {"FORM", root},
 	{"CDMB1", chra}, {"CDMB2", chra}, {"CDMB3", chra}, {"CDMC4", chra}, {"CDMF4", chra}, {"CDMT1", chra}, {"CDMW1", chra}, {"CDMW2", chra}, {"CDMW3", chra}, {"CDMW4", chra},
 	{"CEFB1", chra}, {"CEFB2", chra}, {"CEFB3", chra}, {"CEFC4", chra}, {"CEFF4", chra}, {"CEFT1", chra}, {"CEFW1", chra}, {"CEFW2", chra}, {"CEFW3", chra}, {"CEFW4", chra},

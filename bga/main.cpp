@@ -26,17 +26,25 @@ static item& citem(const char* id) {
 	return it;
 }
 
+static void create_party() {
+	for(auto i = 0; i < 6; i++) {
+		last_creature = bsdata<creature>::add();
+		last_creature->create(Male);
+		last_creature->basic.abilitites[Dexterity] += 6;
+		last_creature->update();
+		party[i] = last_creature;
+	}
+}
+
 static void start_main() {
-	last_creature = bsdata<creature>::add();
-	last_creature->create(Male);
-	last_creature->basic.abilitites[Dexterity] += 2;
-	last_creature->update();
+	create_party();
 	last_creature->additem(citem("BattleAxe"));
 	last_creature->additem(citem("BattleAxeP1"));
 	last_creature->additem(citem("LeatherArmor"));
 	last_creature->additem(citem("StuddedLeatherArmor"));
 	last_creature->additem(citem("ScaleMail"));
 	last_creature->additem(citem("LongSword"));
+	last_creature->additem(citem("HalfPlate"));
 	last_creature->additem(citem("PotionOfHealing"));
 	form::open("GUIINV08");
 	//open_widget("ItemList");

@@ -18,3 +18,4 @@ struct creature : moveable, actable, wearable, avatarable, coloration, statable 
 	void		update_abilities();
 };
 extern creature* last_creature;
+extern creature* party[6];
