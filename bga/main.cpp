@@ -46,8 +46,10 @@ static void start_main() {
 	last_creature->additem(citem("LongSword"));
 	last_creature->additem(citem("HalfPlate"));
 	last_creature->additem(citem("PotionOfHealing"));
+	last_creature->additem(citem("Helm"));
+	last_creature->additem(citem("HelmFull"));
+	last_creature->additem(citem("LargeShield"));
 	form::open("GUIINV08");
-	//open_widget("ItemList");
 }
 
 static void read_rules() {
