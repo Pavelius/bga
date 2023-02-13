@@ -27,27 +27,27 @@ static item& citem(const char* id) {
 
 static void create_party() {
 	for(auto i = 0; i < 6; i++) {
-		last_creature = bsdata<creature>::add();
-		last_creature->create(Male);
-		last_creature->basic.abilitites[Dexterity] += 6;
-		last_creature->update();
-		party[i] = last_creature;
+		player = bsdata<creature>::add();
+		player->create(Male, Fighter);
+		player->basic.abilitites[Dexterity] += 6;
+		player->update();
+		party[i] = player;
 	}
 }
 
 static void start_main() {
 	create_party();
-	last_creature->additem(citem("BattleAxe"));
-	last_creature->additem(citem("BattleAxeP1"));
-	last_creature->additem(citem("LeatherArmor"));
-	last_creature->additem(citem("StuddedLeatherArmor"));
-	last_creature->additem(citem("ScaleMail"));
-	last_creature->additem(citem("LongSwordFlaming"));
-	last_creature->additem(citem("HalfPlate"));
-	last_creature->additem(citem("PotionOfHealing"));
-	last_creature->additem(citem("Helm"));
-	last_creature->additem(citem("HelmFull"));
-	last_creature->additem(citem("LargeShield"));
+	player->additem(citem("BattleAxe"));
+	player->additem(citem("BattleAxeP1"));
+	player->additem(citem("LeatherArmor"));
+	player->additem(citem("StuddedLeatherArmor"));
+	player->additem(citem("ScaleMail"));
+	player->additem(citem("LongSwordFlaming"));
+	player->additem(citem("HalfPlate"));
+	player->additem(citem("PotionOfHealing"));
+	player->additem(citem("Helm"));
+	player->additem(citem("HelmFull"));
+	player->additem(citem("LargeShield"));
 	form::open("GUIINV08");
 }
 

@@ -38,8 +38,10 @@
     <ClCompile Include="answers.cpp" />
     <ClCompile Include="archive.cpp" />
     <ClCompile Include="area.cpp" />
+    <ClCompile Include="attack.cpp" />
     <ClCompile Include="bsreq.cpp" />
     <ClCompile Include="bstream.cpp" />
+    <ClCompile Include="class.cpp" />
     <ClCompile Include="collection.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="coloration.cpp" />
@@ -102,6 +104,7 @@
     <ClInclude Include="actable.h" />
     <ClInclude Include="archive.h" />
     <ClInclude Include="area.h" />
+    <ClInclude Include="attack.h" />
     <ClInclude Include="class.h" />
     <ClInclude Include="collection.h" />
     <ClInclude Include="damage.h" />

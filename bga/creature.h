@@ -1,6 +1,7 @@
 #include "ability.h"
 #include "actable.h"
 #include "coloration.h"
+#include "class.h"
 #include "moveable.h"
 #include "portrait.h"
 #include "race.h"
@@ -8,16 +9,16 @@
 
 #pragma once
 
-struct creature : moveable, actable, wearable, avatarable, coloration, statable {
+struct creature : moveable, actable, wearable, classa, avatarable, coloration, statable {
 	race_s		race;
 	statable	basic;
 	short		hp, hp_max;
 	void		apply(const variants& source);
 	void		apply(variant v);
 	void		clear();
-	void		create(gender_s gender);
+	void		create(gender_s gender, class_s classv);
 	void		update();
 	void		update_abilities();
 };
-extern creature* last_creature;
+extern creature* player;
 extern creature* party[6];

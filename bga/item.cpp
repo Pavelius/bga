@@ -29,12 +29,34 @@ assert_enum(itemfi, Wounding)
 
 item* last_item;
 
+void weaponi::clear() {
+	memset(this, 0, sizeof(*this));
+}
+
 const char* item::getname() const {
 	return getnm(geti().id);
 }
 
+int itemi::getcritical() const {
+	auto v = 0;
+	if(FGT(flags, Balanced))
+		v++;
+	if(FGT(flags, UltraBalanced))
+		v += 2;
+	if(FGT(flags, Keen))
+		v += 2;
+	return 20 - v;
+}
+
+int itemi::getmultiplier() const {
+	auto v = 2;
+	if(FGT(flags, Dangerous))
+		v++;
+	return v;
+}
+
 int	item::getcostall() const {
-	auto cost = getcost() * geti().count;
+	auto cost = getcost() * count;
 	auto default_count = geti().count;
 	if(default_count)
 		cost = cost / default_count;

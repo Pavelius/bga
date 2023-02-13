@@ -27,6 +27,7 @@ struct weaponi {
 	dice			damage;
 	range_s			range;
 	char			bonus;
+	void			clear();
 };
 struct itemi : nameable {
 	unsigned		count, weight, cost;
@@ -40,6 +41,8 @@ struct itemi : nameable {
 	itemi*			basic;
 	char			max_dex_bonus;
 	feat_s			required[3];
+	int				getcritical() const;
+	int				getmultiplier() const;
 	bool			is(itemf_s v) const { return (flags & (1 << v)) != 0; }
 };
 struct item {
@@ -49,6 +52,7 @@ struct item {
 		struct {
 			unsigned char identified : 1;
 			unsigned char personal : 1;
+			unsigned char charges : 6;
 		};
 		unsigned char data;
 	};

@@ -23,8 +23,8 @@ static item *drag_item_source, *drag_item_dest;
 static char description_text[4096];
 
 static void update_creature() {
-	if(last_creature)
-		last_creature->update();
+	if(player)
+		player->update();
 }
 
 static void cursor_paint() {
@@ -152,9 +152,9 @@ static void paperdoll() {
 	auto push_caret = caret;
 	caret.x += width / 2;
 	caret.y += height / 2 + 20;
-	paperdoll(*last_creature,
-		last_creature->race, last_creature->gender, Fighter, 1, orientation,
-		last_creature->wears[Body], last_creature->getweapon(), last_creature->getoffhand(), last_creature->wears[Head]);
+	paperdoll(*player,
+		player->race, player->gender, player->getmainclass(), 1, orientation,
+		player->wears[Body], player->getweapon(), player->getoffhand(), player->wears[Head]);
 	caret = push_caret;
 	switch(hot.key) {
 	case KeyLeft:
@@ -267,7 +267,7 @@ static void color_picker() {
 }
 
 static void creature_color() {
-	auto color_index = last_creature->colors[gui.value];
+	auto color_index = player->colors[gui.value];
 	pressed_button();
 	if(color_index == -1)
 		return;
@@ -293,7 +293,7 @@ static void scroll() {
 }
 
 static void paint_empthy_weapon() {
-	if(gui.value == last_creature->weapon_index)
+	if(gui.value == player->weapon_index)
 		image(gres(ITEMS), 0, 0);
 	else
 		image(gres(STON), 17, 0);
@@ -308,7 +308,7 @@ static void paint_empthy_gear() {
 }
 
 static void quick_weapon_button() {
-	gui.checked = (gui.value == last_creature->weapon_index);
+	gui.checked = (gui.value == player->weapon_index);
 	button_no_text();
 }
 
@@ -337,7 +337,7 @@ static void begin_drag_item() {
 		*drag_item_source = drag_item;
 	else {
 		if(*drag_item_dest)
-			last_creature->additem(*drag_item_dest);
+			player->additem(*drag_item_dest);
 		*drag_item_dest = drag_item;
 	}
 	drag_item_source = push_drag;
@@ -383,7 +383,7 @@ static void paint_item_dragable(item* pi) {
 }
 
 static void backpack_button() {
-	auto pi = last_creature->wears + Backpack + gui.value;
+	auto pi = player->wears + Backpack + gui.value;
 	auto index = gui.value % 8;
 	if(index >= 4)
 		index += 4;
@@ -405,7 +405,7 @@ static void paint_drop_target(item* pi, wear_s slot) {
 
 static void gear_button() {
 	auto type = (wear_s)(Head + gui.value);
-	auto pi = last_creature->wears + type;
+	auto pi = player->wears + type;
 	paint_drop_target(pi, type);
 	if(*pi)
 		paint_item_dragable(pi);
@@ -418,7 +418,7 @@ static void paint_empthy_quiver() {
 }
 
 static void quiver_button() {
-	auto pi = last_creature->wears + Quiver + gui.value;
+	auto pi = player->wears + Quiver + gui.value;
 	image(gui.res, gui.value, 0);
 	paint_drop_target(pi, Quiver);
 	if(*pi)
@@ -428,7 +428,7 @@ static void quiver_button() {
 }
 
 static void quick_item_button() {
-	auto pi = last_creature->wears + QuickItem + gui.value;
+	auto pi = player->wears + QuickItem + gui.value;
 	image(gui.res, gui.value, 0);
 	paint_drop_target(pi, QuickItem);
 	if(*pi)
@@ -436,7 +436,7 @@ static void quick_item_button() {
 }
 
 static void quick_weapon_item() {
-	auto pi = last_creature->wears + (QuickWeapon + gui.value * 2);
+	auto pi = player->wears + (QuickWeapon + gui.value * 2);
 	image(gui.res, gui.value, 0);
 	paint_drop_target(pi, QuickWeapon);
 	if(!(*pi))
@@ -444,27 +444,27 @@ static void quick_weapon_item() {
 	else
 		paint_item_dragable(pi);
 	if(!drag_item_source) {
-		if(gui.value == last_creature->weapon_index)
+		if(gui.value == player->weapon_index)
 			image(gres(STONSLOT), 34, 0);
 	}
 }
 
 static void quick_offhand_item() {
-	auto pi = last_creature->wears + (QuickOffhand + gui.value * 2);
+	auto pi = player->wears + (QuickOffhand + gui.value * 2);
 	image(gui.res, 8 + gui.value, 0);
 	paint_drop_target(pi, QuickOffhand);
 	if(!(*pi))
 		strokeout(paint_empthy_offhand, -2);
 	else
 		paint_item_dragable(pi);
-	if(!drag_item_source && pi && *pi && last_creature->useoffhand()) {
-		if(gui.value == last_creature->weapon_index)
+	if(!drag_item_source && pi && *pi && player->useoffhand()) {
+		if(gui.value == player->weapon_index)
 			image(gres(STONSLOT), 34, 0);
 	}
 }
 
 static void portrait_large() {
-	image(gres(PORTL), last_creature->portrait, 0);
+	image(gres(PORTL), player->portrait, 0);
 }
 
 static void hilight_protrait() {
@@ -475,7 +475,7 @@ static void hilight_protrait() {
 }
 
 static void portrait_small(creature* pc) {
-	if(last_creature == pc)
+	if(player == pc)
 		hilight_protrait();
 	rectpush push;
 	setoffset(2, 2);
@@ -483,7 +483,7 @@ static void portrait_small(creature* pc) {
 }
 
 static void choose_creature() {
-	last_creature = (creature*)hot.object;
+	player = (creature*)hot.object;
 }
 
 static void hits_bar(int current, int maximum) {
@@ -544,17 +544,17 @@ static void number() {
 
 static void creature_ability() {
 	if(equal(gui.id, "HPMax"))
-		gui.value = last_creature->hp_max;
+		gui.value = player->hp_max;
 	else if(equal(gui.id, "HP"))
-		gui.value = last_creature->hp;
+		gui.value = player->hp;
 	else if(equal(gui.id, "Coins"))
-		gui.value = last_creature->coins;
+		gui.value = player->coins;
 	else {
 		auto pn = bsdata<abilityi>::find(gui.id);
 		if(!pn)
 			return;
 		auto i = pn - bsdata<abilityi>::elements;
-		gui.value = last_creature->get((ability_s)i);
+		gui.value = player->get((ability_s)i);
 	}
 	number();
 }

@@ -254,6 +254,12 @@
     <ClCompile Include="feat.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="class.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="attack.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -416,6 +422,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="feat.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="attack.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

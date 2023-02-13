@@ -27,20 +27,20 @@ static void default_color_pick() {
 }
 
 static void check_quick_weapon() {
-	last_creature->weapon_index = (unsigned char)hot.param;
+	player->weapon_index = (unsigned char)hot.param;
 }
 
 static void choose_creature_color() {
 	auto push_default = default_color;
 	auto index = hot.param;
-	auto pi = bsdata<portraiti>::elements + last_creature->portrait;
+	auto pi = bsdata<portraiti>::elements + player->portrait;
 	switch(index) {
 	case 0: set_color("SkinNormal"); break;
 	case 1: set_color("HairNormal"); break;
 	default: set_color("HairNormal"); break;
 	}
 	default_color = pi->colors[index];
-	last_creature->colors[index] = (unsigned char)form::choose("COLOR");
+	player->colors[index] = (unsigned char)form::choose("COLOR");
 	default_color = push_default;
 }
 
@@ -49,8 +49,8 @@ static void show_item_list() {
 }
 
 static void make_scrap() {
-	if(last_creature->hp > 0)
-		last_creature->hp--;
+	if(player->hp > 0)
+		player->hp--;
 }
 
 BSDATA(draw::command) = {
