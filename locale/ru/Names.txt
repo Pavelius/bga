@@ -4,6 +4,8 @@ ArmorBonus: Бонус брони
 ArmorCheckPenalty: Штраф брони на проверки
 AttackBonus: Бонус к атаке
 Close: Закрыть
+CriticalHitLine: Критический удар: при результате %1i-20 урон x%2i
+CriticalHitLine20: Критический удар: при результате 20 урон x%2i
 Damage: Повреждения
 DefaultColor: По-умолчанию
 Description: Описание

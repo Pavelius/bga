@@ -1,6 +1,5 @@
 #include "ability.h"
 #include "colorgrad.h"
-#include "nameable.h"
 
 #pragma once
 

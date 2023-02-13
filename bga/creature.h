@@ -16,7 +16,8 @@ struct creature : moveable, actable, wearable, classa, avatarable, coloration, s
 	void		apply(const variants& source);
 	void		apply(variant v);
 	void		clear();
-	void		create(gender_s gender, class_s classv);
+	void		create(gender_s gender);
+	void		create(race_s race, gender_s gender, class_s classv, unsigned short portrait);
 	void		update();
 	void		update_abilities();
 };

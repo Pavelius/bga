@@ -60,15 +60,22 @@ static void raise_class(creature* player, class_s classv) {
 	player->classes[classv]++;
 }
 
-void creature::create(gender_s gender, class_s classv) {
+void creature::create(race_s race, gender_s gender, class_s classv, unsigned short portrait) {
 	clear();
 	this->gender = gender;
-	this->portrait = random_portrait_no_party(gender);
+	this->portrait = portrait; // random_portrait_no_party(gender);
+	this->race = race;
 	for(auto i = Strenght; i <= Charisma; i = (ability_s)(i + 1))
 		basic.abilitites[i] = 10;
 	apply_portraits(this);
 	raise_class(this, classv);
 	finish(this);
+}
+
+void creature::create(gender_s gender) {
+	auto pi = random_portrait_no_party(gender);
+	auto p = bsdata<portraiti>::elements + pi;
+	create(p->race, p->gender, p->classv, pi);
 }
 
 static void update_wears(creature* p) {

@@ -28,7 +28,7 @@ static item& citem(const char* id) {
 static void create_party() {
 	for(auto i = 0; i < 6; i++) {
 		player = bsdata<creature>::add();
-		player->create(Male, Fighter);
+		player->create(Male);
 		player->basic.abilitites[Dexterity] += 6;
 		player->update();
 		party[i] = player;

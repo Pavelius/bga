@@ -9,6 +9,7 @@ BSDATA(classi) = {
 	{"Sorcerer"},
 	{"Wizard"},
 };
+assert_enum(classi, Wizard)
 
 class_s	classa::getmainclass() const {
 	auto result = Commoner;

@@ -38,6 +38,9 @@ NOBSDATA(weaponi)
 BSMETA(abilityi) = {
 	BSREQ(id),
 	{}};
+BSMETA(classi) = {
+	BSREQ(id),
+	{}};
 BSMETA(color) = {
 	BSREQ(r), BSREQ(g), BSREQ(b),
 	{}};
@@ -87,7 +90,8 @@ BSMETA(portraiti) = {
 	BSREQ(id),
 	BSREQ(colors),
 	BSENM(gender, genderi),
-	BSFLG(races, racei),
+	BSENM(race, racei),
+	BSENM(classv, classi),
 	{}};
 BSMETA(racei) = {
 	BSREQ(id),

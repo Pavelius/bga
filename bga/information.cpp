@@ -72,6 +72,10 @@ static void addd(stringbuilder& sb, const char* id, const dice& value, damage_s 
 	addv(sb, value, type);
 }
 
+static void add_critical(stringbuilder& sb, int critical, int multiplier, unsigned flags) {
+	sb.addn(getnm(critical == 20 ? "CriticalHitLine20" : "CriticalHitLine"), critical, multiplier);
+}
+
 void item::getinfo(stringbuilder& sb) const {
 	auto& ei = geti();
 	add_description(sb, ei.id, ei.basic);
@@ -87,6 +91,7 @@ void item::getinfo(stringbuilder& sb) const {
 			sb.adds("%-And ");
 			addv(sb, {1, 6}, Cold);
 		}
+		add_critical(sb, ei.getcritical(), ei.getmultiplier(), ei.flags);
 	}
 	add_statistics(sb, ei.wearing);
 	add_db(sb, "MaxDexterityBonus", ei.max_dex_bonus);
