@@ -13,5 +13,6 @@ struct wearable {
 	slice<item>	equipment() { return slice<item>(wears + Head, wears + LastQuickWeapon + 1); }
 	item&		getweapon() { return wears[QuickWeapon + weapon_index * 2]; }
 	item&		getoffhand() { return wears[QuickOffhand + weapon_index * 2]; }
+	bool		have(const item* p) const { return p >= wears && p < wears + sizeof(wears) / sizeof(wears[0]); }
 	bool		useoffhand() const;
 };

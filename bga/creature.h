@@ -1,5 +1,6 @@
 #include "ability.h"
 #include "actable.h"
+#include "collection.h"
 #include "coloration.h"
 #include "class.h"
 #include "moveable.h"
@@ -13,8 +14,6 @@ struct creature : moveable, actable, wearable, classa, avatarable, coloration, s
 	race_s		race;
 	statable	basic;
 	short		hp, hp_max;
-	void		apply(const variants& source);
-	void		apply(variant v);
 	void		clear();
 	void		create(gender_s gender);
 	void		create(race_s race, gender_s gender, class_s classv, unsigned short portrait);
@@ -23,3 +22,4 @@ struct creature : moveable, actable, wearable, classa, avatarable, coloration, s
 };
 extern creature* player;
 extern creature* party[6];
+extern collection<creature> selected_creatures;

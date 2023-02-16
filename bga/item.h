@@ -46,8 +46,8 @@ struct itemi : nameable {
 	bool			is(itemf_s v) const { return (flags & (1 << v)) != 0; }
 };
 struct item {
-	unsigned short	type;
-	unsigned char	count;
+	unsigned short type;
+	unsigned char count;
 	union {
 		struct {
 			unsigned char identified : 1;

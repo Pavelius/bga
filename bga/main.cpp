@@ -48,6 +48,7 @@ static void start_main() {
 	player->additem(citem("Helm"));
 	player->additem(citem("HelmFull"));
 	player->additem(citem("LargeShield"));
+	player->additem(citem("TwoHandedSword"));
 	form::open("GUIINV08");
 }
 

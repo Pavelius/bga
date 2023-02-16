@@ -323,6 +323,11 @@ static void paint_draggable() {
 	last_form->paint();
 }
 
+static creature* getowner(const item* p) {
+	auto i = bsdata<creature>::source.indexof(p);
+	return (i == -1) ? 0 : (creature*)bsdata<creature>::source.ptr(i);
+}
+
 static void begin_drag_item() {
 	auto push_cursor = cursor;
 	auto push_drag = drag_item_source;
@@ -335,10 +340,14 @@ static void begin_drag_item() {
 	scene(paint_draggable);
 	if(!drag_item_dest)
 		*drag_item_source = drag_item;
-	else {
+	else if(player->have(drag_item_dest)) {
 		if(*drag_item_dest)
 			player->additem(*drag_item_dest);
 		*drag_item_dest = drag_item;
+	} else {
+		auto pn = getowner(drag_item_dest);
+		if(pn)
+			pn->additem(drag_item);
 	}
 	drag_item_source = push_drag;
 	cursor = push_cursor;
@@ -474,16 +483,30 @@ static void hilight_protrait() {
 	fore = push_fore;
 }
 
+static void hilight_drag_protrait() {
+	auto push_fore = fore;
+	fore = colors::red;
+	strokeout(rectb, -1);
+	fore = push_fore;
+}
+
 static void portrait_small(creature* pc) {
-	if(player == pc)
-		hilight_protrait();
 	rectpush push;
+	if(selected_creatures.is(pc))
+		hilight_protrait();
 	setoffset(2, 2);
 	image(gres(PORTS), pc->portrait, 0);
+	if(drag_item_source && player != pc && draw::ishilite()) {
+		drag_item_dest = pc->wears;
+		hilight_drag_protrait();
+	}
 }
 
 static void choose_creature() {
 	player = (creature*)hot.object;
+	if(!hot.param)
+		selected_creatures.clear();
+	selected_creatures.add(player);
 }
 
 static void hits_bar(int current, int maximum) {
@@ -521,8 +544,9 @@ static void portrait_bar() {
 	for(auto i = 0; i < 6; i++) {
 		portrait_small(party[i]);
 		creature_hits(party[i]);
-		if(ishilite() && hot.key==MouseLeft && hot.pressed)
-			execute(choose_creature, 0, 0, party[i]);
+		auto key = hot.key & CommandMask;
+		if(ishilite() && key == MouseLeft && hot.pressed)
+			execute(choose_creature, (hot.key & Shift) != 0, 0, party[i]);
 		caret.x += 49;
 	}
 }
@@ -567,7 +591,6 @@ static void item_name() {
 static void item_avatar() {
 	auto i = last_item->geti().avatar * 2;
 	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
-	//rectb();
 }
 
 static void item_description() {

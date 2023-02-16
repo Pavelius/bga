@@ -22,3 +22,10 @@ class_s	classa::getmainclass() const {
 	}
 	return result;
 }
+
+int	classa::getlevel() const {
+	auto result = 0;
+	for(auto v : classes)
+		result += v;
+	return result;
+}

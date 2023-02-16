@@ -18,6 +18,10 @@ LongSwordFlaming weight(4) cost(15) avatar(821) equiped(WQSS1) wear(QuickWeapon)
  weapon type(Slashing) damage(1 8 2) bonus(2)
  flags Balanced Flaming
  required ProficiencyLongsword
+TwoHandedSword weight(4) cost(15) avatar(866) equiped(WQSS2) wear(QuickWeapon)
+ weapon type(Slashing) damage(2 6)
+ flags Balanced TwoHanded
+ required ProficiencyLongsword
 
 LeatherArmor weight(15) cost(10) avatar(43) wear(Body) max_dex_bonus(6)
  wearing ArmorBonus+2 SpellFailure+10

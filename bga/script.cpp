@@ -1,8 +1,7 @@
 #include "script.h"
 #include "list.h"
 
-script::fnapply script::apply;
-bool script::stop;
+bool stop_script;
 
 template<> void fnscript<script>(int value, int bonus) {
 	auto p = bsdata<script>::elements + value;
@@ -36,21 +35,15 @@ void script::run(variant v) {
 }
 
 void script::run(const variants& source) {
-	if(stop)
+	if(stop_script)
 		return;
-	auto push_stop = stop;
-	auto push_apply = apply;
+	auto push_stop = stop_script;
 	for(auto v : source) {
-		if(stop)
+		if(stop_script)
 			break;
-		if(apply) {
-			apply(v);
-			apply = 0;
-		} else
-			run(v);
+		run(v);
 	}
-	apply = push_apply;
-	stop = push_stop;
+	stop_script = push_stop;
 }
 
 bool script::allow(variant v) {

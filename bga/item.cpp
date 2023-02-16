@@ -56,8 +56,9 @@ int itemi::getmultiplier() const {
 }
 
 int	item::getcostall() const {
-	auto cost = getcost() * count;
-	auto default_count = geti().count;
+	auto& ei = geti();
+	auto cost = ei.cost * count;
+	auto default_count = ei.count;
 	if(default_count)
 		cost = cost / default_count;
 	return cost;
