@@ -23,6 +23,7 @@ struct form {
 	sliceu<control>	controls;
 	static fnevent	prepare;
 	static long		choose(const char* id);
+	bool			iswindowed() const;
 	static void		open(const char* id);
 	void			paint() const;
 	static void		read(const char* url);

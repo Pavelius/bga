@@ -14,47 +14,45 @@ static struct video_8t {
 
 static HWND		hwnd;
 static point	minimum;
-extern rect		sys_static_area;
-static bool		use_mouse = true;
 
 static struct sys_key_mapping {
-	unsigned    key;
-	unsigned    id;
+	unsigned key;
+	unsigned id;
 } sys_key_mapping_data[] = {{VK_CONTROL, Ctrl},
-{VK_MENU, Alt},
-{VK_SHIFT, Shift},
-{VK_LEFT, KeyLeft},
-{VK_RIGHT, KeyRight},
-{VK_UP, KeyUp},
-{VK_DOWN, KeyDown},
-{VK_PRIOR, KeyPageUp},
-{VK_NEXT, KeyPageDown},
-{VK_HOME, KeyHome},
-{VK_END, KeyEnd},
-{VK_BACK, KeyBackspace},
-{VK_DELETE, KeyDelete},
-{VK_RETURN, KeyEnter},
-{VK_ESCAPE, KeyEscape},
-{VK_SPACE, KeySpace},
-{VK_TAB, KeyTab},
-{VK_F1, F1},
-{VK_F2, F2},
-{VK_F3, F3},
-{VK_F4, F4},
-{VK_F5, F5},
-{VK_F6, F6},
-{VK_F7, F7},
-{VK_F8, F8},
-{VK_F9, F9},
-{VK_F10, F10},
-{VK_F11, F11},
-{VK_F12, F12},
-{VK_MULTIPLY, (unsigned)'*'},
-{VK_DIVIDE, (unsigned)'/'},
-{VK_ADD, (unsigned)'+'},
-{VK_SUBTRACT, (unsigned)'-'},
-{VK_OEM_COMMA, (unsigned)','},
-{VK_OEM_PERIOD, (unsigned)'.'},
+	{VK_MENU, Alt},
+	{VK_SHIFT, Shift},
+	{VK_LEFT, KeyLeft},
+	{VK_RIGHT, KeyRight},
+	{VK_UP, KeyUp},
+	{VK_DOWN, KeyDown},
+	{VK_PRIOR, KeyPageUp},
+	{VK_NEXT, KeyPageDown},
+	{VK_HOME, KeyHome},
+	{VK_END, KeyEnd},
+	{VK_BACK, KeyBackspace},
+	{VK_DELETE, KeyDelete},
+	{VK_RETURN, KeyEnter},
+	{VK_ESCAPE, KeyEscape},
+	{VK_SPACE, KeySpace},
+	{VK_TAB, KeyTab},
+	{VK_F1, F1},
+	{VK_F2, F2},
+	{VK_F3, F3},
+	{VK_F4, F4},
+	{VK_F5, F5},
+	{VK_F6, F6},
+	{VK_F7, F7},
+	{VK_F8, F8},
+	{VK_F9, F9},
+	{VK_F10, F10},
+	{VK_F11, F11},
+	{VK_F12, F12},
+	{VK_MULTIPLY, (unsigned)'*'},
+	{VK_DIVIDE, (unsigned)'/'},
+	{VK_ADD, (unsigned)'+'},
+	{VK_SUBTRACT, (unsigned)'-'},
+	{VK_OEM_COMMA, (unsigned)','},
+	{VK_OEM_PERIOD, (unsigned)'.'},
 };
 
 static int tokey(unsigned key) {
@@ -80,85 +78,43 @@ static void set_cursor(cursor e) {
 }
 
 static int handle(MSG& msg) {
-	POINT pt;
-	TRACKMOUSEEVENT tm;
 	switch(msg.message) {
 	case WM_MOUSEMOVE:
 		if(msg.hwnd != hwnd)
 			break;
-		if(!use_mouse)
-			break;
-		memset(&tm, 0, sizeof(tm));
-		tm.cbSize = sizeof(tm);
-		tm.dwFlags = TME_LEAVE | TME_HOVER;
-		tm.hwndTrack = hwnd;
-		tm.dwHoverTime = HOVER_DEFAULT;
-		TrackMouseEvent(&tm);
 		hot.mouse.x = LOWORD(msg.lParam);
 		hot.mouse.y = HIWORD(msg.lParam);
-		if(draw::dragactive())
-			return MouseMove;
-		if(hot.mouse.in(sys_static_area))
-			return InputNoUpdate;
-		return MouseMove;
-	case WM_MOUSELEAVE:
-		if(msg.hwnd != hwnd)
-			break;
-		if(!use_mouse)
-			break;
-		GetCursorPos(&pt);
-		ScreenToClient(msg.hwnd, &pt);
-		hot.mouse.x = (short)pt.x;
-		if(hot.mouse.x < 0)
-			hot.mouse.x = -10000;
-		hot.mouse.y = (short)pt.y;
-		if(hot.mouse.y < 0)
-			hot.mouse.y = -10000;
 		return MouseMove;
 	case WM_LBUTTONDOWN:
 		if(msg.hwnd != hwnd)
-			break;
-		if(!use_mouse)
 			break;
 		hot.pressed = true;
 		return MouseLeft;
 	case WM_LBUTTONDBLCLK:
 		if(msg.hwnd != hwnd)
 			break;
-		if(!use_mouse)
-			break;
 		hot.pressed = true;
 		return MouseLeftDBL;
 	case WM_LBUTTONUP:
 		if(msg.hwnd != hwnd)
-			break;
-		if(!use_mouse)
 			break;
 		if(!hot.pressed)
 			break;
 		hot.pressed = false;
 		return MouseLeft;
 	case WM_RBUTTONDOWN:
-		if(!use_mouse)
-			break;
 		hot.pressed = true;
 		return MouseRight;
 	case WM_RBUTTONUP:
-		if(!use_mouse)
-			break;
 		hot.pressed = false;
 		return MouseRight;
 	case WM_MOUSEWHEEL:
-		if(!use_mouse)
-			break;
 		if(msg.wParam & 0x80000000)
 			return MouseWheelDown;
 		else
 			return MouseWheelUp;
 		break;
 	case WM_MOUSEHOVER:
-		if(!use_mouse)
-			break;
 		return InputIdle;
 	case WM_TIMER:
 		if(msg.hwnd != hwnd)
@@ -215,12 +171,6 @@ static LRESULT CALLBACK WndProc(HWND hwnd, unsigned uMsg, WPARAM wParam, LPARAM 
 		((MINMAXINFO*)lParam)->ptMinTrackSize.x = minimum.x;
 		((MINMAXINFO*)lParam)->ptMinTrackSize.y = minimum.y;
 		return 0;
-	case WM_SETCURSOR:
-		if(LOWORD(lParam) == HTCLIENT) {
-			set_cursor(hot.cursor);
-			return 1;
-		}
-		break;
 	}
 	return DefWindowProcA(hwnd, uMsg, wParam, lParam);
 }
@@ -252,11 +202,11 @@ void draw::getwindowpos(point& pos, point& size, unsigned* flags) {
 		GetWindowPlacement(hwnd, &wp);
 		*flags = 0;
 		auto wf = GetWindowLongA(hwnd, GWL_STYLE);
-		if(wp.showCmd==SW_SHOWMAXIMIZED)
+		if(wp.showCmd == SW_SHOWMAXIMIZED)
 			*flags |= WFMaximized;
-		if(wf&WS_THICKFRAME)
+		if(wf & WS_THICKFRAME)
 			*flags |= WFResize;
-		if(wf&WS_MINIMIZEBOX)
+		if(wf & WS_MINIMIZEBOX)
 			*flags |= WFMinmax;
 	}
 }
@@ -285,15 +235,6 @@ void draw::create(int x, int y, int width, int height, unsigned flags, int bpp) 
 		height = (screen_h / 3) * 2;
 	// custom
 	unsigned dwStyle = WS_CAPTION | WS_SYSMENU; // Windows Style;
-	if(flags&WFResize)
-		dwStyle |= WS_THICKFRAME;
-	else
-		dwStyle |= WS_BORDER;
-	if(flags&WFMinmax) {
-		dwStyle |= WS_MINIMIZEBOX;
-		if(flags&WFResize)
-			dwStyle |= WS_MAXIMIZEBOX;
-	}
 	RECT MinimumRect = {0, 0, width, height};
 	AdjustWindowRectEx(&MinimumRect, dwStyle, 0, 0);
 	minimum.x = 800;
@@ -318,10 +259,7 @@ void draw::create(int x, int y, int width, int height, unsigned flags, int bpp) 
 		0, 0, GetModuleHandleA(0), 0);
 	if(!hwnd)
 		return;
-	int cmdShow = SW_SHOWNORMAL;
-	if(flags&WFMaximized)
-		cmdShow = SW_SHOWMAXIMIZED;
-	ShowWindow(hwnd, cmdShow);
+	ShowWindow(hwnd, SW_SHOWNORMAL);
 	// Update mouse coordinates
 	POINT pt; GetCursorPos(&pt);
 	ScreenToClient(hwnd, &pt);
@@ -368,7 +306,7 @@ int draw::rawinput() {
 		TranslateMessage(&msg);
 		DispatchMessageA(&msg);
 		unsigned m = handle(msg);
-		if(m == InputNoUpdate)
+		if(m == InputNoUpdate || m == MouseMove)
 			continue;
 		if(m) {
 			m = handle_event(m);

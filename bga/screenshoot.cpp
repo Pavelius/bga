@@ -13,11 +13,14 @@ screenshoot::screenshoot(rect rc, bool fade) : surface(rc.width(), rc.height(), 
 			auto push_clip = clipping;
 			auto push_alpha = alpha;
 			auto push_fore = fore;
+			auto push_caret = caret;
+			caret.clear();
 			canvas = this;
 			setclip();
 			alpha = 128;
 			fore = colors::form;
-			//rectf({0, 0, width, height});
+			rectf();
+			caret = push_caret;
 			fore = push_fore;
 			alpha = push_alpha;
 			clipping = push_clip;
@@ -36,4 +39,16 @@ void screenshoot::restore() {
 	setclip();
 	if(draw::canvas)
 		blit(*draw::canvas, x, y, width, height, 0, *this, 0, 0);
+}
+
+long screenshoot::open(fnevent proc, bool faded) {
+	screenshoot push(faded);
+	while(ismodal()) {
+		push.restore();
+		paintstart();
+		proc();
+		paintfinish();
+		domodal();
+	}
+	return getresult();
 }

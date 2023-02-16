@@ -3,11 +3,16 @@
 #include "draw_control.h"
 #include "draw_gui.h"
 #include "log.h"
+#include "screenshoot.h"
 
 using namespace draw;
 
 form* draw::last_form;
 fnevent form::prepare;
+
+bool form::iswindowed() const {
+	return controls && controls.begin()[0].height != 0;
+}
 
 void form::read(const char* url) {
 	auto control_start = bsdata<control>::source.getcount();
@@ -29,7 +34,7 @@ void form::paint() const {
 		if(equal(e.visual->id, "Background")) {
 			if(e.width || e.height) {
 				push_caret.x = (getwidth() - e.width) / 2;
-				push_caret.y = (getheight() - e.height) / 2;
+				push_caret.y = (getheight() - e.height) / 4;
 			} else {
 				push_caret.x += e.x;
 				push_caret.y += e.y;
@@ -66,16 +71,24 @@ static void paintscene() {
 void form::open(const char* id) {
 	auto push_form = last_form;
 	last_form = bsdata<form>::find(id);
-	if(last_form)
-		draw::scene(paintscene);
+	if(last_form) {
+		if(last_form->iswindowed())
+			screenshoot::open(paintscene, true);
+		else
+			draw::scene(paintscene);
+	}
 	last_form = push_form;
 }
 
 long form::choose(const char* id) {
 	auto push_form = last_form;
 	last_form = bsdata<form>::find(id);
-	if(last_form)
-		draw::scene(paintscene);
+	if(last_form) {
+		if(last_form->iswindowed())
+			screenshoot::open(paintscene, true);
+		else
+			draw::scene(paintscene);
+	}
 	last_form = push_form;
 	return getresult();
 }

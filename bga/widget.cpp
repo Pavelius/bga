@@ -43,7 +43,7 @@ static void paint_background() {
 
 void widget::initialize() {
 	pbackground = paint_background;
-	pfinish = cursor_paint;
+	ptips = cursor_paint;
 	cursor.set(res::CURSORS, 0);
 	draw::syscursor(false);
 }

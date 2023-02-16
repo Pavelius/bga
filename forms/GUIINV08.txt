@@ -1,6 +1,6 @@
 ﻿#Control
 
-Background GUIINV 0 0 800 600
+Background GUIINV 0 0 0 0
 
 // Right panel
 PortraitLarge GBTNSTD 20 79 210 330
