@@ -68,19 +68,7 @@ static void paintscene() {
 	last_form->paint();
 }
 
-void form::open(const char* id) {
-	auto push_form = last_form;
-	last_form = bsdata<form>::find(id);
-	if(last_form) {
-		if(last_form->iswindowed())
-			screenshoot::open(paintscene, true);
-		else
-			draw::scene(paintscene);
-	}
-	last_form = push_form;
-}
-
-long form::choose(const char* id) {
+long form::open(const char* id) {
 	auto push_form = last_form;
 	last_form = bsdata<form>::find(id);
 	if(last_form) {
@@ -91,4 +79,13 @@ long form::choose(const char* id) {
 	}
 	last_form = push_form;
 	return getresult();
+}
+
+static void runscene() {
+	draw::scene(paintscene);
+}
+
+void form::nextscene(const char* id) {
+	last_form = bsdata<form>::find(id);
+	setnext(runscene);
 }

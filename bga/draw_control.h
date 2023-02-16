@@ -22,9 +22,9 @@ struct form {
 	const char*		id;
 	sliceu<control>	controls;
 	static fnevent	prepare;
-	static long		choose(const char* id);
 	bool			iswindowed() const;
-	static void		open(const char* id);
+	static void		nextscene(const char* id);
+	static long		open(const char* id);
 	void			paint() const;
 	static void		read(const char* url);
 };

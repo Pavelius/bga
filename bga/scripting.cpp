@@ -40,7 +40,7 @@ static void choose_creature_color() {
 	default: set_color("HairNormal"); break;
 	}
 	default_color = pi->colors[index];
-	player->colors[index] = (unsigned char)form::choose("COLOR");
+	player->colors[index] = (unsigned char)form::open("COLOR");
 	default_color = push_default;
 }
 
@@ -53,6 +53,18 @@ static void make_scrap() {
 		player->hp--;
 }
 
+static void open_form(const char* id) {
+	form::nextscene(id);
+}
+
+static void game_inventory() {
+	open_form("GUIINV08");
+}
+
+static void game_journal() {
+	open_form("GUIJRNL");
+}
+
 BSDATA(draw::command) = {
 	{"Cancel", draw::buttoncancel, KeyEscape},
 	{"CheckQuickWeapon", check_quick_weapon},
@@ -61,6 +73,8 @@ BSDATA(draw::command) = {
 	{"ColorPick", color_pick},
 	{"DefaultColor", default_color_pick, KeyEscape},
 	{"Done", draw::buttonok, KeyEnter},
+	{"GameInventory", game_inventory, 'I'},
+	{"GameJournal", game_journal, 'J'},
 	{"MakeScrap", make_scrap, Ctrl + 'D'},
 	{"ShowItemList", show_item_list, Ctrl + 'I'},
 };

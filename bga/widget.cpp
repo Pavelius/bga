@@ -21,6 +21,7 @@ static long current_tick;
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
 static char description_text[4096];
+static const char* game_mode_dialog[] = {0, "GUIINV08", 0, 0, 0, 0};
 
 static void update_creature() {
 	if(player)
@@ -114,7 +115,6 @@ static int getarmorindex(const item& e) {
 	case ArmorProfeciencyHeavy: return 3;
 	default: return 0;
 	}
-	return 0;
 }
 
 static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {

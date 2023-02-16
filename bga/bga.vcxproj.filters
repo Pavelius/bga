@@ -66,6 +66,9 @@
     <Text Include="..\forms\GCOMM008.txt">
       <Filter>forms</Filter>
     </Text>
+    <Text Include="..\forms\GUIJRNL.txt">
+      <Filter>forms</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

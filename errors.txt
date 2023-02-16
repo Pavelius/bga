@@ -1,4 +1,4 @@
-﻿In file `rules/Items.txt`:
- Line 16: Not found identifier `ProficiencyLongswor1d`
+﻿In file `forms/GCOMM008.txt`:
+ Line 7: Can't find variant `GUIINV08`
 In file `forms/GUIINV08.txt`:
  Line 100: Can't find variant `GCOMM008`

@@ -49,7 +49,7 @@ static void start_main() {
 	player->additem(citem("HelmFull"));
 	player->additem(citem("LargeShield"));
 	player->additem(citem("TwoHandedSword"));
-	form::open("GUIINV08");
+	form::nextscene("GUIINV08");
 }
 
 static void read_rules() {
