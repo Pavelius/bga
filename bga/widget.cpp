@@ -566,20 +566,33 @@ static void number() {
 }
 
 static void creature_ability() {
-	if(equal(gui.id, "HPMax"))
+	if(gui.data.iskind<abilityi>())
+		gui.value = player->get((ability_s)gui.data.value);
+	else if(equal(gui.id, "HPMax"))
 		gui.value = player->hp_max;
 	else if(equal(gui.id, "HP"))
 		gui.value = player->hp;
 	else if(equal(gui.id, "Coins"))
 		gui.value = player->coins;
-	else {
-		auto pn = bsdata<abilityi>::find(gui.id);
-		if(!pn)
-			return;
-		auto i = pn - bsdata<abilityi>::elements;
-		gui.value = player->get((ability_s)i);
-	}
 	number();
+}
+
+static void creature_ability_bonus() {
+	if(gui.data.iskind<abilityi>())
+		gui.value = player->getbonus((ability_s)gui.data.value);
+	char temp[32]; stringbuilder sb(temp);
+	auto push_fore = fore;
+	if(gui.value > 0) {
+		sb.add("%+1i", gui.value);
+		fore = colors::green;
+	} else if(gui.value < 0) {
+		fore = colors::red;
+		sb.add("%+1i", gui.value);
+	} else
+		sb.add("%+1i", gui.value);
+	gui.text = temp;
+	label();
+	fore = push_fore;
 }
 
 static void item_name() {
@@ -625,6 +638,7 @@ BSDATA(widget) = {
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},
 	{"CreatureAbility", creature_ability},
+	{"CreatureAbilityBonus", creature_ability_bonus},
 	{"CreatureColor", creature_color},
 	{"Form", paint_form},
 	{"ItemActionButton", item_action_button},

@@ -81,6 +81,9 @@
     <Text Include="..\forms\GUISPL08.txt">
       <Filter>forms</Filter>
     </Text>
+    <Text Include="..\forms\GUIREC08.txt">
+      <Filter>forms</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

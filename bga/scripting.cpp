@@ -77,6 +77,10 @@ static void game_spells() {
 	open_form("GUISPL");
 }
 
+static void game_charsheet() {
+	open_form("GUIREC");
+}
+
 BSDATA(draw::command) = {
 	{"Cancel", draw::buttoncancel, KeyEscape},
 	{"CheckQuickWeapon", check_quick_weapon},
@@ -86,6 +90,7 @@ BSDATA(draw::command) = {
 	{"DefaultColor", default_color_pick, KeyEscape},
 	{"Done", draw::buttonok, KeyEnter},
 	{"GameAreaMap", game_area_map, 'M'},
+	{"GameCharsheet", game_charsheet, 'C'},
 	{"GameInventory", game_inventory, 'I'},
 	{"GameJournal", game_journal, 'J'},
 	{"GameOptions", game_options, KeyEscape},

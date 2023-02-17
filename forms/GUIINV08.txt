@@ -46,7 +46,7 @@ Paperdoll STONSLOT 339 86 126 160 value(50) id("Test")
 
 // Statistic labels
 CreatureAbility NORMAL 704 141 70 20 id("Coins")
-CreatureAbility REALMS 721 243 34 32 id("AC")
+CreatureAbility REALMS 721 243 34 32 data(AC)
 CreatureAbility REALMS 710 353 54 16 id("HPMax") 
 CreatureAbility REALMS 710 371 54 16 id("HP")
 

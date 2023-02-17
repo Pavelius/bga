@@ -1,3 +1,2 @@
-﻿In file `forms/GUIPRB.txt`:
- Line 3: Not found identifier `GUIPR`
- Line 34: Not found identifier `STONESM3`
+﻿In file `forms/GUIREC08.txt`:
+ Line 3: Not found identifier `GUIREC08`
