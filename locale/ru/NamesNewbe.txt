@@ -1,1 +1,9 @@
-﻿
+﻿AreaMap: 
+AreaNotes: 
+KnownSpells: 
+MemorizedSpells: 
+Options: 
+Slots: 
+SpellLevel: 
+SpellSlotsAvailable: 
+Version: 

@@ -21,7 +21,6 @@ static long current_tick;
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
 static char description_text[4096];
-static const char* game_mode_dialog[] = {0, "GUIINV08", 0, 0, 0, 0};
 
 static void update_creature() {
 	if(player)

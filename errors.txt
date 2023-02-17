@@ -1,4 +1,3 @@
-﻿In file `forms/GCOMM008.txt`:
- Line 7: Can't find variant `GUIINV08`
-In file `forms/GUIINV08.txt`:
- Line 100: Can't find variant `GCOMM008`
+﻿In file `forms/GUIPRB.txt`:
+ Line 3: Not found identifier `GUIPR`
+ Line 34: Not found identifier `STONESM3`

@@ -65,6 +65,18 @@ static void game_journal() {
 	open_form("GUIJRNL");
 }
 
+static void game_area_map() {
+	open_form("GUIMAPAB");
+}
+
+static void game_options() {
+	open_form("STONEOPT");
+}
+
+static void game_spells() {
+	open_form("GUISPL");
+}
+
 BSDATA(draw::command) = {
 	{"Cancel", draw::buttoncancel, KeyEscape},
 	{"CheckQuickWeapon", check_quick_weapon},
@@ -73,8 +85,11 @@ BSDATA(draw::command) = {
 	{"ColorPick", color_pick},
 	{"DefaultColor", default_color_pick, KeyEscape},
 	{"Done", draw::buttonok, KeyEnter},
+	{"GameAreaMap", game_area_map, 'M'},
 	{"GameInventory", game_inventory, 'I'},
 	{"GameJournal", game_journal, 'J'},
+	{"GameOptions", game_options, KeyEscape},
+	{"GameSpells", game_spells, 'S'},
 	{"MakeScrap", make_scrap, Ctrl + 'D'},
 	{"ShowItemList", show_item_list, Ctrl + 'I'},
 };

@@ -27,6 +27,10 @@
     <Text Include="..\forms\GUIINV08.txt" />
     <Text Include="..\forms\GUIINVAB.txt" />
     <Text Include="..\forms\GUIJRNL.txt" />
+    <Text Include="..\forms\GUIMAPAB.txt" />
+    <Text Include="..\forms\GUIMAPGM.txt" />
+    <Text Include="..\forms\GUISPL08.txt" />
+    <Text Include="..\forms\STONEOPT.txt" />
     <Text Include="..\locale\ru\ItemDescriptions.txt" />
     <Text Include="..\locale\ru\Names.txt" />
     <Text Include="..\locale\ru\NamesNewbe.txt" />
