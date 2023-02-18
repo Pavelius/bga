@@ -13,6 +13,7 @@
 struct creature : moveable, actable, wearable, classa, avatarable, coloration, statable {
 	race_s		race;
 	statable	basic;
+	unsigned char alignment;
 	short		hp, hp_max;
 	unsigned	experience;
 	void		clear();

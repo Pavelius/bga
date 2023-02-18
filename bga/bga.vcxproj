@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
+    <ClCompile Include="alignment.cpp" />
     <ClCompile Include="answers.cpp" />
     <ClCompile Include="archive.cpp" />
     <ClCompile Include="area.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="ability.h" />
     <ClInclude Include="actable.h" />
     <ClInclude Include="advance.h" />
+    <ClInclude Include="alignment.h" />
     <ClInclude Include="archive.h" />
     <ClInclude Include="area.h" />
     <ClInclude Include="attack.h" />

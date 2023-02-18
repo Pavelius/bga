@@ -1,4 +1,5 @@
 #include "ability.h"
+#include "alignment.h"
 #include "creature.h"
 #include "item.h"
 #include "stringbuilder.h"
@@ -135,11 +136,8 @@ static void addclasses(stringbuilder& sb, const classa& source) {
 	if(!level)
 		return;
 	addh(sb, getnm("CharacterLevel"), level);
-	for(auto i = (class_s)0; i <= Wizard; i = (class_s)(i + 1)) {
-		if(!source.classes[i])
-			continue;
-		sb.addn("%1 %2i", getnm(bsdata<classi>::elements[i].id), source.classes[i]);
-	}
+	for(auto i = (class_s)0; i <= Wizard; i = (class_s)(i + 1))
+		addb(sb, bsdata<classi>::elements[i].id, source.classes[i]);
 	addend(sb);
 }
 
@@ -147,6 +145,9 @@ void creature::getinfo(stringbuilder& sb) const {
 	addclasses(sb, *this);
 	addh(sb, getnm("CharacterRace"));
 	sb.addn("%1 %2", bsdata<racei>::elements[race].getname(), getnm(bsdata<genderi>::elements[gender].id));
+	addend(sb);
+	addh(sb, getnm("Alignment"));
+	sb.addn(bsdata<alignmenti>::elements[alignment].getname());
 	addend(sb);
 	addh(sb, getnm("Experience"));
 	addb(sb, "Current", experience, 0, false);

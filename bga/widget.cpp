@@ -691,9 +691,12 @@ static void button_info_tab() {
 
 static void text_description() {
 	auto push_font = font;
+	auto push_clipping = clipping;
 	if(gui.res)
 		font = gui.res;
+	setclipall();
 	textf(description_text);
+	clipping = push_clipping;
 	font = push_font;
 }
 

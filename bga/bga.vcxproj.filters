@@ -287,6 +287,9 @@
     <ClCompile Include="attack.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="alignment.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -455,6 +458,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="advance.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="alignment.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
