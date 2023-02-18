@@ -1,13 +1,1 @@
-﻿Alignment: 
-AreaMap: 
-AreaNotes: 
-KnownSpells: 
-LawfulGood: 
-LevelUp: 
-MemorizedSpells: 
-Options: 
-Slots: 
-SpellLevel: 
-SpellSlotsAvailable: 
-Version: 
-WeightAllowance: 
+﻿

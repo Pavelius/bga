@@ -290,6 +290,12 @@
     <ClCompile Include="alignment.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="console.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="scrolltext.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -462,6 +468,9 @@
     </ClInclude>
     <ClInclude Include="alignment.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="scrolltext.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

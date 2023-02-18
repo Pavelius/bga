@@ -11,6 +11,7 @@
 
 using namespace draw;
 
+void add_console(const char* format);
 void check_translation();
 void initialize_translation(const char* locale);
 void util_main();
@@ -29,13 +30,13 @@ static void create_party() {
 	for(auto i = 0; i < 6; i++) {
 		player = bsdata<creature>::add();
 		player->create(Male);
-		player->basic.abilitites[Dexterity] += 6;
 		player->update();
 		party[i] = player;
 	}
 }
 
 static void start_main() {
+	add_console("Create party...");
 	create_party();
 	player->additem(citem("BattleAxe"));
 	player->additem(citem("BattleAxeP1"));

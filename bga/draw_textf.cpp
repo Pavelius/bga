@@ -12,6 +12,7 @@ using namespace draw;
 int draw::tab_pixels = 0;
 static const char* text_start_string;
 static int text_start_horiz;
+static bool force_full_render;
 static point maxcaret;
 
 static void apply_line_feed(int x1, int dy) {
@@ -397,7 +398,8 @@ void draw::textf(const char* p) {
 		if(caret.y < clipping.y1) {
 			text_start_string = p;
 			text_start_horiz = caret.y - clipping.y1;
-		}
+		} else if(!force_full_render && caret.y > clipping.y2)
+			break;
 		if(match(&p, "#--")) // Header small
 			p = textfln(skipsp(p), caret.x, x2, colors::h3, metrics::small);
 		else if(match(&p, "###")) // Header 3
@@ -424,18 +426,28 @@ void draw::textf(const char* p) {
 	height = push_height;
 }
 
-void draw::textf(const char* string, const char*& cashe_string, int& cashe_origin) {
-	textf(string);
-	cashe_string = text_start_string;
-	cashe_origin = text_start_horiz;
+void draw::textf(const char* string, int& cashe_origin, int& cashe_string) {
+	auto push_caret = caret;
+	if(cashe_string == -1) {
+		textf(string);
+		cashe_string = text_start_string ? text_start_string - string : 0;
+		cashe_origin = text_start_horiz;
+	} else {
+		caret.y += cashe_origin;
+		textf(string + cashe_string);
+	}
+	caret = push_caret;
 }
 
 void draw::textfs(const char* string) {
 	auto push_caret = caret;
 	auto push_clipping = clipping;
 	auto push_maxcaret = maxcaret;
+	auto push_force = force_full_render;
+	force_full_render = true;
 	clipping.clear(); caret = {};
 	textf(string);
+	force_full_render = push_force;
 	clipping = push_clipping;
 	caret = push_caret;
 	width = maxcaret.x;

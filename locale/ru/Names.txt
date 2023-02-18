@@ -63,7 +63,7 @@ Reflexes: Рефлексы
 Will: Воля
 
 Str: Сил
-Dex: Сил
+Dex: Лов
 Con: Тел
 Int: Инт
 Wis: Муд

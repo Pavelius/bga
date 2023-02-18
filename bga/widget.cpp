@@ -10,22 +10,23 @@
 #include "race.h"
 #include "resinfo.h"
 #include "script.h"
+#include "scrolltext.h"
 #include "widget.h"
-
-enum class_s : unsigned char;
 
 using namespace draw;
 using namespace res;
 
 const char* getkg(int weight);
+extern array console_data;
 
 static long current_tick;
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
 static int current_info_tab;
-static char description_text[4096];
 static fnevent update_proc;
 static bool need_update;
+static char description_text[4096];
+static scrolltext area_description;
 stringbuilder description(description_text);
 
 static void update_creature() {
@@ -49,13 +50,18 @@ static void update_creature_info() {
 	}
 }
 
-static void form_opening() {
+static void invalidate_description() {
 	need_update = true;
+	area_description.invalidate();
+}
+
+static void form_opening() {
+	invalidate_description();
 }
 
 static void set_value_and_update() {
 	cbsetint();
-	need_update = true;
+	invalidate_description();
 }
 
 static void cursor_paint() {
@@ -70,6 +76,22 @@ static void cursor_paint() {
 
 static void paint_background() {
 	current_tick = getcputime();
+}
+
+static void paint_logs(const char* format, int& origin, int& format_origin, int& maximum) {
+	if(!format)
+		return;
+	rectpush push;
+	if(format_origin == -1) {
+		textfs(format);
+		maximum = height;
+		height = push.height;
+		width = push.width;
+		caret = push.caret;
+		if(maximum > height)
+			caret.y -= maximum - height;
+	}
+	textf(format, origin, format_origin);
 }
 
 void widget::initialize() {
@@ -537,7 +559,7 @@ static void choose_creature() {
 	if(!hot.param)
 		selected_creatures.clear();
 	selected_creatures.add(player);
-	need_update = true;
+	invalidate_description();
 }
 
 static void hits_bar(int current, int maximum) {
@@ -691,12 +713,11 @@ static void button_info_tab() {
 
 static void text_description() {
 	auto push_font = font;
-	auto push_clipping = clipping;
 	if(gui.res)
 		font = gui.res;
-	setclipall();
-	textf(description_text);
-	clipping = push_clipping;
+	area_description.paint(description_text);
+	if(gui.hilited)
+		area_description.input();
 	font = push_font;
 }
 
