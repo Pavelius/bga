@@ -6,3 +6,20 @@ Fighter 1 ArmorProficiency
  elements ArmorProficiency+3 ShieldProficiency
 Fighter 1 SavingThrows
  elements Fortitude+2
+
+Rogue 1 WeaponProficiency
+ elements MartialWeaponBow+1 MartialWeaponLargeSword+1 MartialWeaponPolearm+1
+Rogue 1 ArmorProficiency
+ elements ArmorProficiency+1
+Rogue 1 SavingThrows
+ elements Reflexes+2
+
+Cleric 1 WeaponProficiency
+ elements MartialWeaponFlail+1 MartialWeaponHammer+1
+Cleric 1 ArmorProficiency
+ elements ArmorProficiency+3 ShieldProficiency
+Cleric 1 SavingThrows
+ elements Fortitude+2 Will+2
+
+Wizard 1 SavingThrows
+ elements Will+2

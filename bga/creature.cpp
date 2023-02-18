@@ -53,11 +53,22 @@ static void apply(const variants& source) {
 		script::run(v);
 }
 
+static void apply_advance(variant v) {
+	if(v.iskind<abilityi>()) {
+		if(v.value >= MartialWeaponAxe && v.value <= MartialWeaponPolearm) {
+			if(player->basic.abilitites[v.value] < v.counter)
+				player->basic.abilitites[v.value] = v.counter;
+		} else
+			script::run(v);
+	} else
+		script::run(v);
+}
+
 static void apply_advance(const variants& source) {
 	pushvalue push_modifier(modifier, Permanent);
 	pushvalue push_modifiers(apply_modifiers);
 	for(auto v : source)
-		script::run(v);
+		apply_advance(v);
 }
 
 static void apply_advance(variant v, int level) {
