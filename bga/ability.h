@@ -8,6 +8,8 @@ enum ability_s : unsigned char {
 	Strenght, Dexterity, Constitution, Intelligence, Wisdow, Charisma,
 	AC, ArmorBonus, DodgeBonus, ArmorCheckPenalty, SpellFailure,
 	Attack, AttackMelee, AttackRanged, Damage, DamageMelee, DamageRanged,
+	Fortitude, Reflexes, Will,
+	WeightAllowance,
 	SneakAttack,
 	ArmorProficiency,
 	MartialWeaponAxe, MartialWeaponBow, MartialWeaponFlail, MartialWeaponGreatSword, MartialWeaponHammer,

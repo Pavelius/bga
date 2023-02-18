@@ -1,4 +1,5 @@
 #include "ability.h"
+#include "advance.h"
 #include "bsreq.h"
 #include "color.h"
 #include "crt.h"
@@ -8,9 +9,11 @@
 #include "draw_control.h"
 #include "gender.h"
 #include "item.h"
+#include "modifier.h"
 #include "portrait.h"
 #include "race.h"
 #include "region.h"
+#include "script.h"
 #include "variant.h"
 #include "widget.h"
 
@@ -19,6 +22,7 @@ using namespace draw;
 BSMETA(variant) = {{}};
 BSMETA(varianti) = {BSREQ(id), {}};
 
+BSDATAC(advancei, 512)
 BSDATAC(colorgrad, 32)
 BSDATAC(control, 1024)
 BSDATAC(creature, 256)
@@ -37,6 +41,10 @@ NOBSDATA(weaponi)
 
 BSMETA(abilityi) = {
 	BSREQ(id),
+	{}};
+BSMETA(advancei) = {
+	BSREQ(parent), BSREQ(level), BSREQ(id),
+	BSREQ(elements),
 	{}};
 BSMETA(classi) = {
 	BSREQ(id),
@@ -86,6 +94,9 @@ BSMETA(itemfi) = {
 BSMETA(magici) = {
 	BSREQ(id),
 	{}};
+BSMETA(modifieri) = {
+	BSREQ(id),
+	{}};
 BSMETA(portraiti) = {
 	BSREQ(id),
 	BSREQ(colors),
@@ -119,12 +130,15 @@ BSMETA(widget) = {
 BSDATA(varianti) = {
 	{"NoVariant"},
 	{"Ability", VAR(abilityi, 1)},
+	{"Advance", VAR(advancei, 3)},
+	{"Class", VAR(classi, 1)},
 	{"Control", VAR(control, 6)},
 	{"Command", VAR(command, 1)},
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"Feat", VAR(feati, 1)},
 	{"Form", VAR(form, 1)},
 	{"Item", VAR(itemi, 1)},
+	{"Modifier", VAR(modifieri, 1), 0, 0, fnscript<modifieri>},
 	{"Portrait", VAR(portraiti, 1)},
 	{"Race", VAR(racei, 1)},
 	{"Rate", VAR(magici, 1)},

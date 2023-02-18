@@ -8,7 +8,7 @@
 using namespace draw;
 
 form* draw::last_form;
-fnevent form::prepare;
+fnevent form::prepare, form::opening;
 
 bool form::iswindowed() const {
 	return controls && controls.begin()[0].height != 0;
@@ -72,6 +72,8 @@ long form::open(const char* id) {
 	auto push_form = last_form;
 	last_form = bsdata<form>::find(id);
 	if(last_form) {
+		if(opening)
+			opening();
 		if(last_form->iswindowed())
 			screenshoot::open(paintscene, true);
 		else
@@ -87,5 +89,7 @@ static void runscene() {
 
 void form::nextscene(const char* id) {
 	last_form = bsdata<form>::find(id);
+	if(opening)
+		opening();
 	setnext(runscene);
 }

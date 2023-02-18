@@ -7,6 +7,8 @@
 
 using namespace draw;
 
+extern stringbuilder sb;
+
 static void test(int bonus) {
 }
 

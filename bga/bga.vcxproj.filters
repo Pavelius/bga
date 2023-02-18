@@ -90,6 +90,9 @@
     <Text Include="..\locale\ru\FeatNames.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\rules\Advance.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -449,6 +452,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="attack.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="advance.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

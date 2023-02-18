@@ -1,0 +1,6 @@
+#Advance
+
+Fighter 1 WeaponProficiency
+ elements MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponLargeSword MartialWeaponPolearm
+Fighter 1 ArmorProficiency
+ elements ArmorProficiency+3

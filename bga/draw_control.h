@@ -21,7 +21,7 @@ struct control : point {
 struct form {
 	const char*		id;
 	sliceu<control>	controls;
-	static fnevent	prepare;
+	static fnevent	prepare, opening;
 	bool			iswindowed() const;
 	static void		nextscene(const char* id);
 	static long		open(const char* id);

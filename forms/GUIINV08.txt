@@ -42,7 +42,7 @@ GearButton STONSLOT 255 136 36 36 value(6)
 GearButton STONSLOT 510 22 36 36 value(7)
 GearButton STONSLOT 510 136 36 36 value(8)
 
-Paperdoll STONSLOT 339 86 126 160 value(50) id("Test")
+Paperdoll STONSLOT 339 86 126 160 value(50)
 
 // Statistic labels
 CreatureAbility NORMAL 704 141 70 20 id("Coins")
@@ -89,7 +89,7 @@ Button STONSLOT 572 339 36 36 value(69)
 Button STONSLOT 572 379 36 36 value(70)
 
 // Total weight info
-Label TOOLFONT 341 281 117 14
+CreatureWeight TOOLFONT 341 281 117 14
 
 Scroll GBTNSCRL 655 302 12 112 frames(1 0 3 2 4 5)
 

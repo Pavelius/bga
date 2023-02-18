@@ -58,3 +58,17 @@ bool wearable::useoffhand() const {
 	return wears[QuickWeapon + weapon_index]
 		&& !wears[QuickWeapon + weapon_index].geti().is(TwoHanded);
 }
+
+int	wearable::getencumbrance() const {
+	auto w = allowed_weight / 3;
+	auto n = allowed_weight;
+	if(weight > n)
+		return 3;
+	n -= w;
+	if(weight > n)
+		return 2;
+	n -= w;
+	if(weight > n)
+		return 1;
+	return 0;
+}

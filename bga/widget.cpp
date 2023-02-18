@@ -17,15 +17,45 @@ enum class_s : unsigned char;
 using namespace draw;
 using namespace res;
 
+const char* getkg(int weight);
+
 static long current_tick;
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
 static int current_info_tab;
 static char description_text[4096];
+static fnevent update_proc;
+static bool need_update;
+stringbuilder description(description_text);
 
 static void update_creature() {
 	if(player)
 		player->update();
+}
+
+static void update_item_description() {
+	description.clear();
+	last_item->getinfo(description);
+}
+
+static void update_creature_info() {
+	if(!need_update)
+		return;
+	need_update = false;
+	description.clear();
+	switch(current_info_tab) {
+	case 0: player->getinfo(description); break;
+	default: break;
+	}
+}
+
+static void form_opening() {
+	need_update = true;
+}
+
+static void set_value_and_update() {
+	cbsetint();
+	need_update = true;
 }
 
 static void cursor_paint() {
@@ -45,6 +75,7 @@ static void paint_background() {
 void widget::initialize() {
 	pbackground = paint_background;
 	ptips = cursor_paint;
+	form::opening = form_opening;
 	cursor.set(res::CURSORS, 0);
 	draw::syscursor(false);
 }
@@ -364,6 +395,7 @@ static void allow_drop_target(item* pi, wear_s slot) {
 static void item_information() {
 	auto push_last = last_item;
 	last_item = (item*)hot.object;
+	update_item_description();
 	form::open("GIITMH08");
 	last_item = push_last;
 }
@@ -505,6 +537,7 @@ static void choose_creature() {
 	if(!hot.param)
 		selected_creatures.clear();
 	selected_creatures.add(player);
+	need_update = true;
 }
 
 static void hits_bar(int current, int maximum) {
@@ -599,6 +632,24 @@ static void creature_race() {
 	label();
 }
 
+static void apply_weight_color() {
+	switch(player->getencumbrance()) {
+	case 3: case 2: fore = colors::red; break;
+	case 1: fore = colors::yellow; break;
+	default: break;
+	}
+}
+
+static void creature_weight() {
+	char temp[260]; stringbuilder sb(temp);
+	sb.add(getkg(player->weight));
+	sb.adds("%-1", getnm("From"));
+	sb.adds(getkg(player->allowed_weight));
+	gui.text = temp;
+	apply_weight_color();
+	label();
+}
+
 static void item_name() {
 	gui.text = last_item->getname();
 	label();
@@ -607,13 +658,6 @@ static void item_name() {
 static void item_avatar() {
 	auto i = last_item->geti().avatar * 2;
 	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
-}
-
-static void item_description() {
-	stringbuilder sb(description_text);
-	last_item->getinfo(sb);
-	gui.text = description_text;
-	textarea();
 }
 
 static void item_action_button() {
@@ -638,11 +682,19 @@ static void button_check(int& value) {
 	if(hot.key == ('1' + gui.value))
 		run = true;
 	if(run)
-		execute(cbsetint, gui.value, 0, &value);
+		execute(set_value_and_update, gui.value, 0, &value);
 }
 
 static void button_info_tab() {
 	button_check(current_info_tab);
+}
+
+static void text_description() {
+	auto push_font = font;
+	if(gui.res)
+		font = gui.res;
+	textf(description_text);
+	font = push_font;
 }
 
 void util_items_list();
@@ -660,11 +712,12 @@ BSDATA(widget) = {
 	{"CreatureAbilityBonus", creature_ability_bonus},
 	{"CreatureColor", creature_color},
 	{"CreatureRace", creature_race},
+	{"CreatureWeight", creature_weight},
+	{"TextDescription", text_description},
 	{"Form", paint_form},
 	{"ItemActionButton", item_action_button},
 	{"ItemAvatar", item_avatar},
 	{"ItemName", item_name},
-	{"ItemDescription", item_description},
 	{"GearButton", gear_button},
 	{"HotKey", hot_key},
 	{"Label", label},
@@ -676,6 +729,7 @@ BSDATA(widget) = {
 	{"QuickOffhandItem", quick_offhand_item},
 	{"QuiverButton", quiver_button},
 	{"Scroll", scroll},
+	{"UpdateCreatureInfo", update_creature_info},
 #ifdef _DEBUG
 	{"ItemList", util_items_list},
 #endif // _DEBUG

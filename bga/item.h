@@ -55,7 +55,7 @@ struct item {
 		};
 		unsigned char data;
 	};
-	constexpr item() : type(0), count(0), data(0) {}
+	constexpr item() : type(0), count(1), data(0) {}
 	item(unsigned short type) : type(type), count(geti().count ? geti().count - 1 : 0), data(0) {}
 	constexpr explicit operator bool() const { return type != 0; }
 	void			add(item& v);
@@ -66,5 +66,6 @@ struct item {
 	const itemi&	geti() const { return bsdata<itemi>::elements[type]; }
 	void			getinfo(stringbuilder& sb) const;
 	const char*		getname() const;
+	int				getweight() const { return count * geti().weight; }
 };
 extern item* last_item;

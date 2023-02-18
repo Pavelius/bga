@@ -37,6 +37,7 @@
     <Text Include="..\locale\ru\ItemNames.txt" />
     <Text Include="..\locale\ru\Names.txt" />
     <Text Include="..\locale\ru\NamesNewbe.txt" />
+    <Text Include="..\rules\Advance.txt" />
     <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Items.txt" />
     <Text Include="..\rules\Races.txt" />
@@ -110,6 +111,7 @@
   <ItemGroup>
     <ClInclude Include="ability.h" />
     <ClInclude Include="actable.h" />
+    <ClInclude Include="advance.h" />
     <ClInclude Include="archive.h" />
     <ClInclude Include="area.h" />
     <ClInclude Include="attack.h" />

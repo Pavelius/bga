@@ -13,7 +13,6 @@ using namespace draw;
 
 void check_translation();
 void initialize_translation(const char* locale);
-void initialize_widgets();
 void util_main();
 
 static item& citem(const char* id) {
@@ -22,6 +21,7 @@ static item& citem(const char* id) {
 	auto pi = bsdata<itemi>::find(id);
 	if(pi)
 		it.type = pi - bsdata<itemi>::elements;
+	it.count = 1;
 	return it;
 }
 
@@ -49,6 +49,7 @@ static void start_main() {
 	player->additem(citem("HelmFull"));
 	player->additem(citem("LargeShield"));
 	player->additem(citem("TwoHandedSword"));
+	player->update();
 	form::nextscene("GUIINV08");
 }
 
@@ -56,6 +57,7 @@ static void read_rules() {
 	bsreq::read("rules/Colors.txt");
 	bsreq::read("rules/Races.txt");
 	bsreq::read("rules/Items.txt");
+	bsreq::read("rules/Advance.txt");
 	log::readdir("forms", "*.txt", form::read);
 }
 
@@ -74,8 +76,12 @@ int main(int argc, char* argv[]) {
 	metrics::font = gres(res::NORMAL);
 	metrics::h1 = gres(res::STONEBIG);
 	metrics::h2 = gres(res::REALMS);
-	metrics::h3 = gres(res::STONEBIG);
+	metrics::h3 = gres(res::NORMAL);
 	colors::text = color(255, 255, 255);
+	colors::h1 = colors::text.mix(colors::button, 64);
+	colors::h2 = colors::text.mix(colors::button, 96);
+	colors::h3 = color(244, 214, 66);
+	colors::special = color(244, 214, 66);
 	initialize(getnm("AppTitle"));
 	settimer(100);
 	setnext(start_main);

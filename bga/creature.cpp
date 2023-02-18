@@ -1,3 +1,4 @@
+#include "advance.h"
 #include "creature.h"
 #include "modifier.h"
 #include "pushvalue.h"
@@ -6,6 +7,12 @@
 creature* party[6];
 creature* player;
 collection<creature> selected_creatures;
+
+static int heavy_load[] = {
+	5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
+	115, 130, 150, 175, 200, 230, 260, 300, 350,
+	400, 460, 520, 600, 700, 800, 920, 1040, 1200, 1400
+};
 
 template<typename T>
 static void copy(T& e1, const T& e2) {
@@ -40,6 +47,20 @@ static void apply(const variants& source) {
 		apply(v);
 }
 
+static void apply_advance(const variants& source) {
+	pushvalue push_modifier(modifier, Permanent);
+	pushvalue push_modifiers(apply_modifiers);
+	for(auto v : source)
+		apply(v);
+}
+
+static void apply_advance(variant v, int level) {
+	for(auto& e : bsdata<advancei>()) {
+		if(e.parent == v && e.level == level)
+			apply_advance(e.elements);
+	}
+}
+
 void creature::clear() {
 	memset(this, 0, sizeof(*this));
 }
@@ -55,7 +76,26 @@ static short unsigned random_portrait_no_party(gender_s gender) {
 }
 
 static void raise_class(class_s classv) {
+	variant v = bsdata<classi>::elements + classv;
+	apply_advance(v, player->classes[classv]);
 	player->classes[classv]++;
+}
+
+static int compare_char(const void* v1, const void* v2) {
+	return *((char*)v2) - *((char*)v1);
+}
+
+static int roll_4d6() {
+	char temp[4];
+	for(auto& v : temp)
+		v = xrand(1, 6);
+	qsort(temp, sizeof(temp) / sizeof(temp[0]), sizeof(temp[0]), compare_char);
+	return temp[0] + temp[1] + temp[2];
+}
+
+static void random_ability() {
+	for(auto i = Strenght; i <= Charisma; i = (ability_s)(i + 1))
+		player->basic.abilitites[i] = roll_4d6();
 }
 
 void creature::create(race_s race, gender_s gender, class_s classv, unsigned short portrait) {
@@ -64,8 +104,7 @@ void creature::create(race_s race, gender_s gender, class_s classv, unsigned sho
 	this->gender = gender;
 	this->portrait = portrait;
 	this->race = race;
-	for(auto i = Strenght; i <= Charisma; i = (ability_s)(i + 1))
-		basic.abilitites[i] = 10;
+	random_ability();
 	apply_portraits();
 	raise_class(classv);
 	finish();
@@ -94,6 +133,16 @@ static int get_dex_bonus(int dex_bonus, int max_dex_bonus) {
 	return dex_bonus;
 }
 
+static void update_weight() {
+	player->weight = 0;
+	for(auto& e : player->wears) {
+		if(e)
+			player->weight += e.getweight();
+	}
+	auto strenght = player->get(Strenght);
+	player->allowed_weight = maptbl(heavy_load, strenght);
+}
+
 void creature::update_abilities() {
 	auto level = getlevel();
 	// Armor class
@@ -114,6 +163,7 @@ void creature::update() {
 	copy(*static_cast<statable*>(this), basic);
 	update_wears();
 	update_abilities();
+	update_weight();
 }
 
 static bool isallow(const statable& source, variant v) {

@@ -4,6 +4,7 @@
 static const char* format_percent = "%1i%%";
 static const char* format_bonus = "%+1i";
 static const char* format_d6 = "%+1id6";
+static const char* format_weight = "%1i lb";
 
 BSDATA(abilityi) = {
 	{"Strenght"},
@@ -23,6 +24,10 @@ BSDATA(abilityi) = {
 	{"Damage"},
 	{"DamageMelee"},
 	{"DamageRanged"},
+	{"Fortitude", format_bonus},
+	{"Reflexes", format_bonus},
+	{"Will", format_bonus},
+	{"WeightAllowance", format_weight},
 	{"SneakAttack", format_d6},
 	{"ArmorProficiency"},
 	{"MartialWeaponAxe"},
