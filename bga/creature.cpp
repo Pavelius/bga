@@ -123,13 +123,12 @@ static bool isallow(const statable& source, variant v) {
 	if(!level)
 		level = 1;
 	if(v.iskind<abilityi>())
-		return level <= source.abilitites[v.value];
+		return source.abilitites[v.value] >= level;
+	else if(v.iskind<feati>())
+		return source.feats.is((feat_s)v.value);
 	return true;
 }
 
 bool creature::isusable(const item& it) const {
-	auto& ei = it.geti();
-	if(ei.armor_proficiency && ei.armor_proficiency < get(ArmorProficiency))
-		return false;
-	return isallow(*this, ei.required);
+	return isallow(*this, it.geti().required);
 }

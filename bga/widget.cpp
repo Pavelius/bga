@@ -109,7 +109,10 @@ static res::token getanimation(race_s race, gender_s gender, class_s type, int a
 }
 
 static int getarmorindex(const item& e) {
-	return e.geti().armor_proficiency;
+	auto v = e.geti().required;
+	if(v.iskind<abilityi>() && v.value == ArmorProficiency)
+		return v.counter;
+	return 0;
 }
 
 static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {

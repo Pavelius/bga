@@ -75,7 +75,7 @@ BSMETA(itemi) = {
 	BSREQ(required),
 	BSREQ(count), BSREQ(weight), BSREQ(cost),
 	BSFLG(flags, itemfi),
-	BSREQ(magic), BSREQ(max_dex_bonus), BSREQ(armor_proficiency),
+	BSREQ(magic), BSREQ(max_dex_bonus),
 	BSREQ(avatar), BSREQ(ground), BSENM(equiped, residi), BSENM(thrown, residi),
 	BSENM(wear, weari),
 	BSREQ(wearing), BSREQ(use),

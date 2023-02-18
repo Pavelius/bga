@@ -76,17 +76,17 @@ static void add_critical(stringbuilder& sb, int critical, int multiplier, unsign
 	sb.addn(getnm(critical == 20 ? "CriticalHitLine20" : "CriticalHitLine"), critical, multiplier);
 }
 
-static void addreq(stringbuilder& sb, const char* ps, const char* value) {
-	if(!value || !value[0])
-		return;
-	if(!ps[0])
-		sb.addn("\n%1", getnm("Required"));
-	sb.addn("  %1", value);
-}
-
-static const char* getapname(int index) {
-	static const char* source[] = {"None", "Light", "Medium", "Heavy"};
-	return getnm(str("%1ArmorProficiency", source[index]));
+static const char* getfeatname(variant v) {
+	static const char* armor_proficiency[] = {0, "LightArmorProficiency", "MediumArmorProficiency", "HeavyArmorProficiency"};
+	if(v.iskind<abilityi>()) {
+		switch(v.value) {
+		case ArmorProficiency:
+			return getnm(maptbl(armor_proficiency, v.counter));
+		default:
+			return getnm(bsdata<abilityi>::elements[v.value].id);
+		}
+	} else
+		return v.getname();
 }
 
 void item::getinfo(stringbuilder& sb) const {
@@ -108,10 +108,7 @@ void item::getinfo(stringbuilder& sb) const {
 	}
 	add_statistics(sb, ei.wearing);
 	add_db(sb, "MaxDexterityBonus", ei.max_dex_bonus);
-	addv(sb, "Weight", getkg(ei.weight));
-	auto ps = sb.get();
-	if(ei.armor_proficiency)
-		addreq(sb, ps, getapname(ei.armor_proficiency));
 	if(ei.required)
-		addreq(sb, ps, ei.required.getname());
+		addv(sb, "Required", getfeatname(ei.required));
+	addv(sb, "Weight", getkg(ei.weight));
 }

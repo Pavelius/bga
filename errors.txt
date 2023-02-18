@@ -1,5 +1,6 @@
 ﻿In file `rules/Items.txt`:
- Line 30: Can't find variant `ShieldProfeciency`
+ Line 33: Not found requisit `armor_proficiency`
+ Line 34: Not found requisit `armor_proficiency`
 In file `forms/GUIINV08.txt`:
  Line 100: Can't find variant `GCOMM008`
 In file `forms/GUIJRNL.txt`:

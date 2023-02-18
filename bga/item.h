@@ -38,7 +38,7 @@ struct itemi : nameable {
 	char			magic;
 	variants		use, wearing;
 	itemi*			basic;
-	char			max_dex_bonus, armor_proficiency;
+	char			max_dex_bonus;
 	variant			required;
 	int				getcritical() const;
 	int				getmultiplier() const;

@@ -1,13 +1,1 @@
-﻿Biography: 
-Cha: 
-Con: 
-Customize: 
-Dex: 
-Export: 
-Human: 
-Information: 
-Int: 
-LevelUp: 
-Str: 
-Wis: 
-test: 
+﻿
