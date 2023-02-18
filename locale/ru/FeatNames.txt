@@ -1,0 +1,8 @@
+LightArmorProficiency: Ношение легкой брони
+MediumArmorProficiency: Ношение средней брони
+HeavyArmorProficiency: Ношение тяжелой брони
+MartialWeaponAxe: Владение топорами
+MartialWeaponGreatSword: Владение двуручными клинками
+MartialWeaponLargeSword: Владение клинками
+
+ShieldProficiency: Владение щитом

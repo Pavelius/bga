@@ -1,2 +1,14 @@
-﻿In file `forms/GUIREC08.txt`:
- Line 3: Not found identifier `GUIREC08`
+﻿In file `rules/Items.txt`:
+ Line 30: Can't find variant `ShieldProfeciency`
+In file `forms/GUIINV08.txt`:
+ Line 100: Can't find variant `GCOMM008`
+In file `forms/GUIJRNL.txt`:
+ Line 13: Can't find variant `GCOMM008`
+In file `forms/GUIMAPAB.txt`:
+ Line 12: Can't find variant `GCOMM008`
+In file `forms/GUIREC08.txt`:
+ Line 50: Can't find variant `GCOMM008`
+In file `forms/GUISPL08.txt`:
+ Line 103: Can't find variant `GCOMM008`
+In file `forms/STONEOPT.txt`:
+ Line 14: Can't find variant `GCOMM008`

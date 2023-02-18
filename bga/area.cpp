@@ -195,14 +195,14 @@ static bool load_ard_file(const char* name, char* sprite_resname) {
 }
 
 void map::read(const char* name) {
-	//char rsts[8];
+	char rsts[8];
 	//res::cleanup();
-	//if(!load_ard_file(name, rsts))
-	//	return false;
-	//if(!load_tls_file(rsts))
-	//	return false;
-	//if(!load_mmp_file(rsts))
-	//	return false;
+	if(!load_ard_file(name, rsts))
+		return;
+	if(!load_tls_file(rsts))
+		return;
+	if(!load_mmp_file(rsts))
+		return;
 	//worldmap::set(worldmap::getarea(name));
 }
 

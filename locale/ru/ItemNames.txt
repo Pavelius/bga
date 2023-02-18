@@ -1,0 +1,9 @@
+BattleAxe: Боевой топор
+BattleAxeP1: Боевой топор +1
+HalfPlate: Полу-латы
+LeatherArmor: Кожанная броня
+LongSword: Длинный меч
+LongSwordFlaming: Длинный меч сожжения +2
+PotionOfHealing: Зелье лечения
+ScaleMail: Чешуйчатый доспех
+StuddedLeatherArmor: Клепанная кожанная броня

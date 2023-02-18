@@ -1,7 +1,6 @@
+#include "ability.h"
 #include "crt.h"
-#include "damage.h"
 #include "dice.h"
-#include "feat.h"
 #include "magic.h"
 #include "range.h"
 #include "resid.h"
@@ -39,8 +38,8 @@ struct itemi : nameable {
 	char			magic;
 	variants		use, wearing;
 	itemi*			basic;
-	char			max_dex_bonus;
-	feat_s			required[3];
+	char			max_dex_bonus, armor_proficiency;
+	variant			required;
 	int				getcritical() const;
 	int				getmultiplier() const;
 	bool			is(itemf_s v) const { return (flags & (1 << v)) != 0; }

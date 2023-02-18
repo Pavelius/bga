@@ -15,10 +15,12 @@ Kg: кг.
 MagicBonus: Магический бонус
 MaxDexterityBonus: Максимальный бонус ловкости
 Name: Наименование
+Proficiency: Владение
 QuickItem: Предметы
 QuickWeapon: Оружие
 Quiver: Колчан
 Replay: Заново
+Required: Требования
 SpellFailure: Неудача при создании заклинания
 Weight: Вес
 
@@ -28,13 +30,3 @@ SlashingDamage: режущего урона
 
 ColdDamage: урона от холода
 FireDamage: огненного урона
-
-BattleAxe: Боевой топор
-BattleAxeP1: Боевой топор +1
-HalfPlate: Полу-латы
-LeatherArmor: Кожанная броня
-LongSword: Длинный меч
-LongSwordFlaming: Длинный меч сожжения +2
-PotionOfHealing: Зелье лечения
-ScaleMail: Чешуйчатый доспех
-StuddedLeatherArmor: Клепанная кожанная броня

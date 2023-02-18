@@ -3,9 +3,6 @@
 
 BSDATA(feati) = {
 	{"Alertness"},
-	{"ArmorProfeciencyLight"},
-	{"ArmorProfeciencyMedium"},
-	{"ArmorProfeciencyHeavy"},
 	{"BlindFight"},
 	{"Cleave"},
 	{"CombatCasting"},
@@ -35,7 +32,7 @@ BSDATA(feati) = {
 	{"PreciseShoot"},
 	{"RapidShoot"},
 	{"RapidReload"},
-	{"ShieldProfeciency"},
+	{"ShieldProficiency"},
 	{"ShortOnTheRun"},
 	{"SpellFocus"},
 	{"SpringAttack"},

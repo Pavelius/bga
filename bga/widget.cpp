@@ -20,6 +20,7 @@ using namespace res;
 static long current_tick;
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
+static int current_info_tab;
 static char description_text[4096];
 
 static void update_creature() {
@@ -108,12 +109,7 @@ static res::token getanimation(race_s race, gender_s gender, class_s type, int a
 }
 
 static int getarmorindex(const item& e) {
-	switch(e.geti().required[0]) {
-	case ArmorProfeciencyLight: return 1;
-	case ArmorProfeciencyMedium: return 2;
-	case ArmorProfeciencyHeavy: return 3;
-	default: return 0;
-	}
+	return e.geti().armor_proficiency;
 }
 
 static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {
@@ -595,6 +591,11 @@ static void creature_ability_bonus() {
 	fore = push_fore;
 }
 
+static void creature_race() {
+	gui.text = bsdata<racei>::elements[player->race].getname();
+	label();
+}
+
 static void item_name() {
 	gui.text = last_item->getname();
 	label();
@@ -627,6 +628,20 @@ static void hot_key() {
 		execute(ps->proc, gui.value, 0, 0);
 }
 
+static void button_check(int& value) {
+	gui.checked = (value == gui.value);
+	pressed_button();
+	auto run = (hot.key == MouseLeft && !hot.pressed && gui.hilited);
+	if(hot.key == ('1' + gui.value))
+		run = true;
+	if(run)
+		execute(cbsetint, gui.value, 0, &value);
+}
+
+static void button_info_tab() {
+	button_check(current_info_tab);
+}
+
 void util_items_list();
 
 BSDATA(widget) = {
@@ -635,11 +650,13 @@ BSDATA(widget) = {
 	{"Background", background},
 	{"BackpackButton", backpack_button},
 	{"Button", button},
+	{"ButtonInfoTab", button_info_tab},
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},
 	{"CreatureAbility", creature_ability},
 	{"CreatureAbilityBonus", creature_ability_bonus},
 	{"CreatureColor", creature_color},
+	{"CreatureRace", creature_race},
 	{"Form", paint_form},
 	{"ItemActionButton", item_action_button},
 	{"ItemAvatar", item_avatar},

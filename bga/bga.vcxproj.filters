@@ -84,6 +84,12 @@
     <Text Include="..\forms\GUIREC08.txt">
       <Filter>forms</Filter>
     </Text>
+    <Text Include="..\locale\ru\ItemNames.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\FeatNames.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

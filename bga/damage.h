@@ -7,3 +7,4 @@ enum damage_s : unsigned char {
 struct damagei {
 	const char*	id;
 };
+typedef char damagea[Sonic + 1];

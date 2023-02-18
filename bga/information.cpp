@@ -76,6 +76,19 @@ static void add_critical(stringbuilder& sb, int critical, int multiplier, unsign
 	sb.addn(getnm(critical == 20 ? "CriticalHitLine20" : "CriticalHitLine"), critical, multiplier);
 }
 
+static void addreq(stringbuilder& sb, const char* ps, const char* value) {
+	if(!value || !value[0])
+		return;
+	if(!ps[0])
+		sb.addn("\n%1", getnm("Required"));
+	sb.addn("  %1", value);
+}
+
+static const char* getapname(int index) {
+	static const char* source[] = {"None", "Light", "Medium", "Heavy"};
+	return getnm(str("%1ArmorProficiency", source[index]));
+}
+
 void item::getinfo(stringbuilder& sb) const {
 	auto& ei = geti();
 	add_description(sb, ei.id, ei.basic);
@@ -96,4 +109,9 @@ void item::getinfo(stringbuilder& sb) const {
 	add_statistics(sb, ei.wearing);
 	add_db(sb, "MaxDexterityBonus", ei.max_dex_bonus);
 	addv(sb, "Weight", getkg(ei.weight));
+	auto ps = sb.get();
+	if(ei.armor_proficiency)
+		addreq(sb, ps, getapname(ei.armor_proficiency));
+	if(ei.required)
+		addreq(sb, ps, ei.required.getname());
 }

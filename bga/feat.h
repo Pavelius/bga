@@ -4,7 +4,6 @@
 
 enum feat_s : unsigned char {
 	Alertness,
-	ArmorProfeciencyLight, ArmorProfeciencyMedium, ArmorProfeciencyHeavy,
 	BlindFight,
 	Cleave, CombatCasting, CombatExpertise, CombatReflexes,
 	DeadlyPercision, DeflectsArrows, Dodge, Endurance,
@@ -16,7 +15,7 @@ enum feat_s : unsigned char {
 	Mobiliy, Multiattack,
 	PointBlankShoot, PowerAttack, PreciseShoot,
 	RapidShoot, RapidReload,
-	ShieldProfeciency,
+	ShieldProficiency,
 	ShortOnTheRun,
 	SpellFocus,
 	SpringAttack, StunningFist,

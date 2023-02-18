@@ -2,47 +2,35 @@
 
 NoItem
 
-BattleAxe weight(6) cost(100) avatar(72) equiped(WQSAX) wear(QuickWeapon)
+BattleAxe weight(6) cost(100) avatar(72) equiped(WQSAX) wear(QuickWeapon) required(MartialWeaponAxe)
  weapon type(Slashing) damage(1 8)
  flags Dangerous
- required ProficiencyAxe
-BattleAxeP1 weight(6) cost(100) avatar(73) equiped(WQSAX) wear(QuickWeapon) magic(1) basic(BattleAxe)
+BattleAxeP1 weight(6) cost(100) avatar(73) equiped(WQSAX) wear(QuickWeapon) required(MartialWeaponAxe) magic(1) basic(BattleAxe)
  weapon type(Slashing) damage(1 8 1) bonus(1)
  flags Dangerous
- required ProficiencyAxe
-LongSword weight(4) cost(15) avatar(821) equiped(WQSS1) wear(QuickWeapon)
+LongSword weight(4) cost(15) avatar(821) equiped(WQSS1) wear(QuickWeapon) required(MartialWeaponLargeSword)
  weapon type(Slashing) damage(1 8)
  flags Balanced
- required ProficiencyLongsword
-LongSwordFlaming weight(4) cost(15) avatar(821) equiped(WQSS1) wear(QuickWeapon) magic(2) basic(LongSword)
+LongSwordFlaming weight(4) cost(15) avatar(821) equiped(WQSS1) wear(QuickWeapon) required(MartialWeaponLargeSword) magic(2) basic(LongSword)
  weapon type(Slashing) damage(1 8 2) bonus(2)
  flags Balanced Flaming
- required ProficiencyLongsword
-TwoHandedSword weight(4) cost(15) avatar(866) equiped(WQSS2) wear(QuickWeapon)
+TwoHandedSword weight(4) cost(15) avatar(866) equiped(WQSS2) wear(QuickWeapon) required(MartialWeaponGreatSword) 
  weapon type(Slashing) damage(2 6)
  flags Balanced TwoHanded
- required ProficiencyLongsword
 
-LeatherArmor weight(15) cost(10) avatar(43) wear(Body) max_dex_bonus(6)
+LeatherArmor weight(15) cost(10) avatar(43) wear(Body) max_dex_bonus(6) armor_proficiency(1)
  wearing ArmorBonus+2 SpellFailure+10
- required ArmorProfeciencyLight
-StuddedLeatherArmor weight(20) cost(25) avatar(45) wear(Body) max_dex_bonus(5)
+StuddedLeatherArmor weight(20) cost(25) avatar(45) wear(Body) max_dex_bonus(5) armor_proficiency(1)
  wearing ArmorBonus+3 SpellFailure+15 ArmorCheckPenalty-1
- required ArmorProfeciencyLight
-ScaleMail weight(30) cost(50) avatar(50) wear(Body) max_dex_bonus(3)
+ScaleMail weight(30) cost(50) avatar(50) wear(Body) max_dex_bonus(3) armor_proficiency(2)
  wearing ArmorBonus+4 SpellFailure+25 ArmorCheckPenalty-4
- required ArmorProfeciencyMedium
-HalfPlate weight(50) cost(600) avatar(42) wear(Body) max_dex_bonus(-1)
+HalfPlate weight(50) cost(600) avatar(42) wear(Body) max_dex_bonus(-1) armor_proficiency(3)
  wearing ArmorBonus+7 SpellFailure+40 ArmorCheckPenalty-7
- required ArmorProfeciencyHeavy
 
-LargeShield weight(20) cost(5) avatar(740) wear(QuickOffhand) equiped(WQSD2)
+LargeShield weight(20) cost(5) avatar(740) wear(QuickOffhand) equiped(WQSD2) required(ShieldProficiency) 
  wearing ArmorBonus+2 SpellFailure+15 ArmorCheckPenalty-2
- required ShieldProfeciency
 
-Helm weight(5) cost(5) avatar(437) wear(Head) equiped(WQSH1)
- required ArmorProfeciencyMedium
-HelmFull weight(10) cost(10) avatar(442) wear(Head) equiped(WQSH0)
- required ArmorProfeciencyMedium
+Helm weight(5) cost(5) avatar(437) wear(Head) equiped(WQSH1) armor_proficiency(2)
+HelmFull weight(10) cost(10) avatar(442) wear(Head) equiped(WQSH0) armor_proficiency(2)
 
 PotionOfHealing weight(1) cost(150) avatar(620) wear(QuickItem)
