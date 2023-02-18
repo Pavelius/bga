@@ -35,6 +35,7 @@ Required: Требования
 SavingThrows: Броски спасения
 SpellFailure: Неудача при создании заклинания
 Weight: Вес
+WeightAllowance: Максимальный переносимый вес
 
 BludgeonDamage: урона
 PierceDamage: колющего урона

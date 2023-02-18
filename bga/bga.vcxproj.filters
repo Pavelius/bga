@@ -93,6 +93,9 @@
     <Text Include="..\rules\Advance.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\locale\ru\AlignmentNames.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

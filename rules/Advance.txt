@@ -1,6 +1,8 @@
 #Advance
 
 Fighter 1 WeaponProficiency
- elements MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponLargeSword MartialWeaponPolearm
+ elements MartialWeaponAxe+1 MartialWeaponBow+1 MartialWeaponFlail+1 MartialWeaponGreatSword+1 MartialWeaponHammer+1 MartialWeaponLargeSword+1 MartialWeaponPolearm+1
 Fighter 1 ArmorProficiency
- elements ArmorProficiency+3
+ elements ArmorProficiency+3 ShieldProficiency
+Fighter 1 SavingThrows
+ elements Fortitude+2

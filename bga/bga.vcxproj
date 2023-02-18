@@ -32,6 +32,7 @@
     <Text Include="..\forms\GUIREC08.txt" />
     <Text Include="..\forms\GUISPL08.txt" />
     <Text Include="..\forms\STONEOPT.txt" />
+    <Text Include="..\locale\ru\AlignmentNames.txt" />
     <Text Include="..\locale\ru\FeatNames.txt" />
     <Text Include="..\locale\ru\ItemDescriptions.txt" />
     <Text Include="..\locale\ru\ItemNames.txt" />

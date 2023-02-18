@@ -129,13 +129,13 @@ BSMETA(widget) = {
 
 BSDATA(varianti) = {
 	{"NoVariant"},
-	{"Ability", VAR(abilityi, 1)},
+	{"Ability", VAR(abilityi, 1), 0, 0, fnscript<abilityi>},
 	{"Advance", VAR(advancei, 3)},
 	{"Class", VAR(classi, 1)},
 	{"Control", VAR(control, 6)},
 	{"Command", VAR(command, 1)},
 	{"ColorGrad", VAR(colorgrad, 1)},
-	{"Feat", VAR(feati, 1)},
+	{"Feat", VAR(feati, 1), 0, 0, fnscript<feati>},
 	{"Form", VAR(form, 1)},
 	{"Item", VAR(itemi, 1)},
 	{"Modifier", VAR(modifieri, 1), 0, 0, fnscript<modifieri>},

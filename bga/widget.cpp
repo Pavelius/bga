@@ -422,11 +422,21 @@ static void item_information() {
 	last_item = push_last;
 }
 
+static void layer(color v) {
+	auto push_alpha = alpha; alpha = 26;
+	auto push_fore = fore; fore = v;
+	rectf();
+	alpha = push_alpha;
+	fore = push_fore;
+}
+
 static void paint_item(const item* pi) {
 	if(!pi)
 		return;
 	auto push_caret = caret;
 	setoffset(2, 2);
+	if(!player->isusable(*pi))
+		layer(colors::red);
 	image(gres(ITEMS), pi->geti().avatar * 2, 0);
 	caret = push_caret;
 	if(!drag_item_source) {
@@ -456,11 +466,13 @@ static void backpack_button() {
 
 static void paint_drop_target(item* pi, wear_s slot) {
 	if(drag_item_source && drag_item.canequip(slot)) {
-		if(gui.hilited) {
-			image(gui.res, 25, 0);
-			drag_item_dest = pi;
-		} else
-			image(gui.res, 16, 0);
+		if(player->isusable(drag_item)) {
+			if(gui.hilited) {
+				image(gui.res, 25, 0);
+				drag_item_dest = pi;
+			} else
+				image(gui.res, 16, 0);
+		}
 	}
 }
 

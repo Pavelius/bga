@@ -1,0 +1,9 @@
+Alignment: Мировозрение
+
+LawfulGood: Законопослушный добрый
+LawfulNeutral: Законопослушно нейтральный
+LawfulEvil: Законопослушно злой
+
+NeutralGood: Нейтрально добрый
+TrueNeutral: Истинно нейтральный
+NeutralEvil: Нейтрально злой

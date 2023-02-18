@@ -30,28 +30,34 @@ static void finish() {
 	player->hp = player->hp_max;
 }
 
-static void apply(variant v) {
-	if(v.iskind<abilityi>()) {
+template<> void fnscript<abilityi>(int value, int counter) {
+	switch(modifier) {
+	case Permanent: player->basic.abilitites[value] += counter; break;
+	default: player->abilitites[value] += counter; break;
+	}
+}
+
+template<> void fnscript<feati>(int value, int counter) {
+	if(counter >= 0) {
 		switch(modifier) {
-		case Permanent: player->basic.abilitites[v.value] += v.counter; break;
-		default: player->abilitites[v.value] += v.counter; break;
+		case Permanent: player->basic.feats.set(value); break;
+		default: player->feats.set(value); break;
 		}
-	} else
-		script::run(v);
+	}
 }
 
 static void apply(const variants& source) {
 	pushvalue push_modifier(modifier, NoModifier);
 	pushvalue push_modifiers(apply_modifiers);
 	for(auto v : source)
-		apply(v);
+		script::run(v);
 }
 
 static void apply_advance(const variants& source) {
 	pushvalue push_modifier(modifier, Permanent);
 	pushvalue push_modifiers(apply_modifiers);
 	for(auto v : source)
-		apply(v);
+		script::run(v);
 }
 
 static void apply_advance(variant v, int level) {
@@ -77,8 +83,9 @@ static short unsigned random_portrait_no_party(gender_s gender) {
 
 static void raise_class(class_s classv) {
 	variant v = bsdata<classi>::elements + classv;
-	apply_advance(v, player->classes[classv]);
-	player->classes[classv]++;
+	auto new_level = player->classes[classv] + 1;
+	apply_advance(v, new_level);
+	player->classes[classv] = new_level;
 }
 
 static int compare_char(const void* v1, const void* v2) {
