@@ -499,5 +499,11 @@
     <ClInclude Include="container.h">
       <Filter>logic</Filter>
     </ClInclude>
+    <ClInclude Include="entrance.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="animation.h">
+      <Filter>logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

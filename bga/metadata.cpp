@@ -1,5 +1,6 @@
 #include "ability.h"
 #include "advance.h"
+#include "animation.h"
 #include "bsreq.h"
 #include "color.h"
 #include "crt.h"
@@ -8,6 +9,7 @@
 #include "door.h"
 #include "draw_command.h"
 #include "draw_control.h"
+#include "entrance.h"
 #include "gender.h"
 #include "item.h"
 #include "modifier.h"
@@ -25,12 +27,14 @@ BSMETA(variant) = {{}};
 BSMETA(varianti) = {BSREQ(id), {}};
 
 BSDATAC(advancei, 512)
+BSDATAC(animation, 128)
 BSDATAC(colorgrad, 32)
 BSDATAC(control, 1024)
 BSDATAC(container, 128)
 BSDATAC(creature, 256)
 BSDATAC(door, 64)
 BSDATAC(doortile, 256)
+BSDATAC(entrance, 64)
 BSDATAC(itemi, 512)
 BSDATAC(itemground, 512)
 BSDATAC(form, 128)

@@ -123,6 +123,7 @@
     <ClInclude Include="actable.h" />
     <ClInclude Include="advance.h" />
     <ClInclude Include="alignment.h" />
+    <ClInclude Include="animation.h" />
     <ClInclude Include="archive.h" />
     <ClInclude Include="area.h" />
     <ClInclude Include="attack.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="door.h" />
     <ClInclude Include="draw_list.h" />
     <ClInclude Include="drawable.h" />
+    <ClInclude Include="entrance.h" />
     <ClInclude Include="feat.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />

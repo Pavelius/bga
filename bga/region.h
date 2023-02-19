@@ -8,13 +8,10 @@ enum region_type_s {
 };
 struct region : drawable {
 	region_type_s	type;
-	const char*		name;
 	point			launch;
 	point			use;
 	rect			box;
 	char			move_to_area[8];
 	char			move_to_entrance[32];
 	sliceu<point>	points;
-	int				getcursor() const;
-	//bool			isvisible() const { return type != RegionTriger; }
 };

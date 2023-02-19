@@ -1,9 +1,11 @@
+#include "animation.h"
 #include "archive.h"
 #include "area.h"
 #include "container.h"
 #include "creature.h"
 #include "door.h"
 #include "draw.h"
+#include "entrance.h"
 #include "io_stream.h"
 #include "item.h"
 #include "map.h"
@@ -75,12 +77,12 @@ void map::clear() {
 	memset(statemap, 0, sizeof(statemap));
 	memset(lightmap, 0, sizeof(lightmap));
 	memset(lightpal, 0, sizeof(lightpal));
-	//bsdata<animation>::source.clear();
+	bsdata<animation>::source.clear();
 	bsdata<container>::source.clear();
 	bsdata<creature>::source.clear();
 	bsdata<door>::source.clear();
 	bsdata<doortile>::source.clear();
-	//bsdata<entrance>::source.clear();
+	bsdata<entrance>::source.clear();
 	bsdata<itemground>::source.clear();
 	//bsdata<itemcont>::source.clear();
 	bsdata<region>::source.clear();
@@ -166,8 +168,8 @@ bool archive_ard(io::stream& file, bool writemode, char* sprites_resname) {
 	ar.set(bsdata<door>::source);
 	ar.set(bsdata<region>::source);
 	ar.set(bsdata<container>::source);
-	//ar.set<entrance>(bsdata<entrance>::source);
-	//ar.set<animation>(bsdata<animation>::source);
+	ar.set(bsdata<entrance>::source);
+	ar.set(bsdata<animation>::source);
 	return true;
 }
 
