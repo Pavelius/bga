@@ -1,4 +1,5 @@
 #include "ability.h"
+#include "area.h"
 #include "bsreq.h"
 #include "crt.h"
 #include "colorgrad.h"
@@ -51,6 +52,7 @@ static void start_main() {
 	player->additem(citem("LargeShield"));
 	player->additem(citem("TwoHandedSword"));
 	player->update();
+	map::read("AR1000");
 	form::nextscene("GUIINV08");
 }
 

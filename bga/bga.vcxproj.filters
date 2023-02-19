@@ -96,6 +96,9 @@
     <Text Include="..\locale\ru\AlignmentNames.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\forms\GGAME.txt">
+      <Filter>forms</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -299,6 +302,9 @@
     <ClCompile Include="scrolltext.cpp">
       <Filter>support</Filter>
     </ClCompile>
+    <ClCompile Include="draw_object.cpp">
+      <Filter>interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -474,6 +480,9 @@
     </ClInclude>
     <ClInclude Include="scrolltext.h">
       <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="draw_object.h">
+      <Filter>interface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,3 +1,4 @@
+#include "area.h"
 #include "bsreq.h"
 #include "class.h"
 #include "creature.h"
@@ -7,6 +8,8 @@
 #include "draw_command.h"
 #include "draw_control.h"
 #include "draw_gui.h"
+#include "draw_object.h"
+#include "map.h"
 #include "race.h"
 #include "resinfo.h"
 #include "script.h"
@@ -18,6 +21,8 @@ using namespace res;
 
 const char* getkg(int weight);
 extern array console_data;
+
+const int tile_size = 64;
 
 static long current_tick;
 static item drag_item;
@@ -430,6 +435,61 @@ static void layer(color v) {
 	fore = push_fore;
 }
 
+static void paint_minimap() {
+	rectpush push;
+	auto mm = map::getminimap();
+	auto& sf = mm->get(0);
+	caret.x += (width - sf.sx) / 2;
+	caret.y += (height - sf.sy) / 2;
+	width = sf.sx; height = sf.sy;
+	image(mm, 0, 0);
+	//rect rm;
+	//rm.x1 = x2m(camera.x - camera_size.x / 2);
+	//rm.y1 = y2m(camera.y - camera_size.y / 2);
+	//rm.x2 = x2m(camera.x + camera_size.x / 2);
+	//rm.y2 = y2m(camera.y + camera_size.y / 2);
+	//rectb(rm, colors::white);
+	for(auto p : party) {
+		if(!p || !(*p))
+			continue;
+		//	auto position = p->getposition();
+		//	auto x1 = x2m(position.x);
+		//	auto y1 = y2m(position.y);
+		//	circle(x1, y1, 2, colors::green);
+	}
+}
+
+static void render_tiles() {
+	auto sp = map::getareasprite();
+	if(!sp)
+		return;
+	int tx0 = camera.y / tile_size, ty0 = camera.x / tile_size;
+	int dx = width / tile_size + 1, dy = height / tile_size + 1;
+	int tx1 = tx0 + dx, ty1 = ty0 + dy;
+	int ty = ty0;
+	while(ty < ty1) {
+		int tx = tx0;
+		while(tx < tx1) {
+			auto x = tx * tile_size - camera.x;
+			auto y = ty * tile_size - camera.y;
+			draw::image(x, y, sp, map::gettile(ty * 64 + tx), 0);
+			tx++;
+		}
+		ty++;
+	}
+}
+
+static void setup_visible_area() {
+	last_screen.set(caret.x, caret.y, caret.x + width, caret.y + height);
+	last_area = last_screen; last_area.move(camera.x, camera.y);
+	last_area.offset(-128, -128);
+}
+
+static void area_map() {
+	setup_visible_area();
+	render_tiles();
+}
+
 static void paint_item(const item* pi) {
 	if(!pi)
 		return;
@@ -737,7 +797,8 @@ void util_items_list();
 
 BSDATA(widget) = {
 	{"ActionPanelNA", action_panel_na},
-	{"AreaMap", background},
+	{"AreaMinimap", paint_minimap},
+	{"AreaMap", area_map},
 	{"Background", background},
 	{"BackpackButton", backpack_button},
 	{"Button", button},

@@ -123,13 +123,16 @@ unsigned char map::getstate(short unsigned index) {
 	return statemap[index];
 }
 
-static const char* gmurl(char* temp, const char* name, const char* ext = "ard") {
-	zcpy(temp, "data/area/");
-	zcat(temp, name);
-	if(ext) {
-		zcat(temp, ".");
-		zcat(temp, ext);
-	}
+static const char* gmurl(char* temp, const char* name, const char* ext = 0, const char* suffix = 0) {
+	stringbuilder sb(temp, temp + 259);
+	sb.add("art/area/");
+	sb.add(name);
+	if(suffix)
+		sb.add(suffix);
+	if(!ext)
+		ext = "ard";
+	sb.add(".");
+	sb.add(ext);
 	return temp;
 }
 
@@ -154,10 +157,8 @@ static bool load_mmp_file(const char* name) {
 	char temp[260];
 	if(sprites_minimap)
 		delete sprites_minimap;
-	gmurl(temp, name, 0);
-	zcat(temp, "MM.pma");
-	sprites_minimap = (sprite*)loadb(temp);
-	return sprites != 0;
+	sprites_minimap = (sprite*)loadb(gmurl(temp, name, "pma", "MM"));
+	return sprites_minimap != 0;
 }
 
 bool archive_ard(io::stream& file, bool writemode, char* sprites_resname) {

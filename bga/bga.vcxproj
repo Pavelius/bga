@@ -22,6 +22,7 @@
     <Text Include="..\errors.txt" />
     <Text Include="..\forms\COLOR.txt" />
     <Text Include="..\forms\GCOMM008.txt" />
+    <Text Include="..\forms\GGAME.txt" />
     <Text Include="..\forms\GIITMH08.txt" />
     <Text Include="..\forms\GUICHP0B.txt" />
     <Text Include="..\forms\GUIINV08.txt" />
@@ -68,6 +69,7 @@
     <ClCompile Include="draw_control.cpp" />
     <ClCompile Include="draw_gui.cpp" />
     <ClCompile Include="draw_list.cpp" />
+    <ClCompile Include="draw_object.cpp" />
     <ClCompile Include="draw_scene.cpp" />
     <ClCompile Include="draw_text.cpp" />
     <ClCompile Include="draw_textf.cpp" />
@@ -125,6 +127,7 @@
     <ClInclude Include="damage.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="draw_list.h" />
+    <ClInclude Include="draw_object.h" />
     <ClInclude Include="feat.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />

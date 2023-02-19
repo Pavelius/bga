@@ -56,6 +56,8 @@ static void make_scrap() {
 }
 
 static void open_form(const char* id) {
+	if(last_form == bsdata<form>::find(id))
+		id = "GGAME";
 	form::nextscene(id);
 }
 

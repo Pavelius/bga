@@ -1,2 +1,2 @@
-﻿In file `forms/GIITMH08.txt`:
- Line 6: Not found identifier `ItemDescription`
+﻿In file `forms/GUIMAPAB.txt`:
+ Line 7: Not found identifier `AreamMap`
