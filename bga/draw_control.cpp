@@ -8,7 +8,8 @@
 using namespace draw;
 
 form* draw::last_form;
-fnevent form::prepare, form::opening;
+static form* next_last_form;
+fnevent form::prepare, form::opening, form::closing;
 
 bool form::iswindowed() const {
 	return controls && controls.begin()[0].height != 0;
@@ -78,18 +79,23 @@ long form::open(const char* id) {
 			screenshoot::open(paintscene, true);
 		else
 			draw::scene(paintscene);
+		if(closing)
+			closing();
 	}
 	last_form = push_form;
 	return getresult();
 }
 
 static void runscene() {
+	last_form = next_last_form;
+	if(form::opening)
+		form::opening();
 	draw::scene(paintscene);
+	if(form::closing)
+		form::closing();
 }
 
 void form::nextscene(const char* id) {
-	last_form = bsdata<form>::find(id);
-	if(opening)
-		opening();
+	next_last_form = bsdata<form>::find(id);
 	setnext(runscene);
 }

@@ -5,15 +5,14 @@ using namespace map;
 
 namespace {
 struct nodei {
-	indext				index;
-	short unsigned		next;
-	void				clear() { index = Blocked; next = Blocked; }
+	indext			index;
+	short unsigned	next;
+	void			clear() { index = Blocked; next = Blocked; }
 	constexpr explicit operator bool() const { return index != Blocked; }
 };
 }
 
-unsigned char map::width;
-unsigned char map::height;
+int map::width, map::height, map::height_tiles;
 
 static move_directions all_aroud[] = {Left, Right, Up, Down, LeftUp, LeftDown, RightUp, RightDown};
 static unsigned short path_stack[256 * 256];

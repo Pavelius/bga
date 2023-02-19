@@ -4,6 +4,7 @@
 #include "crt.h"
 #include "colorgrad.h"
 #include "creature.h"
+#include "door.h"
 #include "draw.h"
 #include "draw_gui.h"
 #include "draw_control.h"
@@ -39,6 +40,7 @@ static void create_party() {
 static void start_main() {
 	add_console("Read area...");
 	map::read("AR1000");
+	camera = {600, 200};
 	add_console("Create party...");
 	create_party();
 	player->additem(citem("BattleAxe"));

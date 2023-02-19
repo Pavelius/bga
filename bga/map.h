@@ -9,6 +9,7 @@ enum move_directions {
 namespace map {
 typedef short unsigned	indext;
 typedef indext(*pget)(indext);
+extern int				width, height, height_tiles; // current map height
 void					blockimpassable(indext free_state = 0);
 void					clear();
 void					createwave(indext start, int size);
@@ -24,7 +25,6 @@ indext					getpathindex(short unsigned node);
 indext					getpathgoal(short unsigned node);
 inline int				getx(indext index) { return index % 256; }
 inline int				gety(indext index) { return index / 256; }
-extern unsigned char	height; // current map height
 void					initialize();
 extern bool				isblock(indext index);
 extern bool				isblock(indext index, int size);
@@ -41,5 +41,4 @@ short unsigned			stepfrom(indext index);
 short unsigned			stepto(indext index);
 move_directions			to(move_directions d, move_directions d1);
 unsigned short			to(indext index, move_directions d);
-extern unsigned char	width; // current map width
 }

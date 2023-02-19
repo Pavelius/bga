@@ -66,13 +66,14 @@
     <ClCompile Include="crt.cpp" />
     <ClCompile Include="crt_translate.cpp" />
     <ClCompile Include="damage.cpp" />
+    <ClCompile Include="door.cpp" />
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="draw_answers.cpp" />
     <ClCompile Include="draw_command.cpp" />
     <ClCompile Include="draw_control.cpp" />
     <ClCompile Include="draw_gui.cpp" />
     <ClCompile Include="draw_list.cpp" />
-    <ClCompile Include="draw_object.cpp" />
+    <ClCompile Include="drawable.cpp" />
     <ClCompile Include="draw_scene.cpp" />
     <ClCompile Include="draw_text.cpp" />
     <ClCompile Include="draw_textf.cpp" />
@@ -91,7 +92,6 @@
     <ClCompile Include="map.cpp" />
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="modifier.cpp" />
-    <ClCompile Include="moveable.cpp" />
     <ClCompile Include="nameable.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="portrait.cpp" />
@@ -131,11 +131,10 @@
     <ClInclude Include="damage.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="draw_list.h" />
-    <ClInclude Include="draw_object.h" />
+    <ClInclude Include="drawable.h" />
     <ClInclude Include="feat.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />
-    <ClInclude Include="moveable.h" />
     <ClInclude Include="portrait.h" />
     <ClInclude Include="region.h" />
     <ClInclude Include="resinfo.h" />

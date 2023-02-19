@@ -195,6 +195,11 @@ static bool load_ard_file(const char* name, char* sprite_resname) {
 	return archive_ard(file, false, sprite_resname);
 }
 
+static void use_all_doors() {
+	for(auto& e : bsdata<door>())
+		e.use(e.opened);
+}
+
 void map::read(const char* name) {
 	char rsts[8];
 	//res::cleanup();
@@ -204,6 +209,7 @@ void map::read(const char* name) {
 		return;
 	if(!load_mmp_file(rsts))
 		return;
+	use_all_doors();
 	//worldmap::set(worldmap::getarea(name));
 }
 

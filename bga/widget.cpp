@@ -4,11 +4,12 @@
 #include "creature.h"
 #include "colorgrad.h"
 #include "crt.h"
+#include "door.h"
 #include "draw.h"
 #include "draw_command.h"
 #include "draw_control.h"
 #include "draw_gui.h"
-#include "draw_object.h"
+#include "drawable.h"
 #include "map.h"
 #include "race.h"
 #include "resinfo.h"
@@ -25,6 +26,7 @@ extern array console_data;
 const int tile_size = 64;
 
 static long current_tick;
+static point hotspot;
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
 static int current_info_tab;
@@ -32,6 +34,7 @@ static fnevent update_proc;
 static bool need_update;
 static char description_text[4096];
 static scrolltext area_description;
+static resinfo default_cursor;
 stringbuilder description(description_text);
 
 static void update_creature() {
@@ -63,6 +66,13 @@ static void invalidate_description() {
 
 static void form_opening() {
 	invalidate_description();
+	if(equal(last_form->id, "GGAME"))
+		default_cursor = cursor;
+}
+
+static void form_closing() {
+	if(equal(last_form->id, "GGAME"))
+		cursor = default_cursor;
 }
 
 static void set_value_and_update() {
@@ -92,7 +102,7 @@ static void cursor_paint() {
 			cicle += 1;
 		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
 	} else {
-		auto ti = pi->ganim(cursor.cicle, current_tick / 64);
+		auto ti = pi->ganim(cursor.cicle, current_tick / 32);
 		image(hot.mouse.x, hot.mouse.y, pi, ti, 0);
 	}
 }
@@ -121,6 +131,7 @@ void widget::initialize() {
 	pbackground = paint_background;
 	ptips = cursor_paint;
 	form::opening = form_opening;
+	form::closing = form_closing;
 	cursor.set(res::CURSORS, 0);
 	draw::syscursor(false);
 }
@@ -521,6 +532,10 @@ static void paint_tiles() {
 static void apply_shifer() {
 	rect screen = {0, 0, getwidth(), getheight()};
 	int index = -1;
+	if(!hot.mouse.in(last_screen))
+		cursor.set(CURSORS, 0);
+	else
+		cursor.set(CURSORS, 4);
 	const int sz = 4;
 	auto d = hot.mouse;
 	if(d.x <= screen.x1)
@@ -537,13 +552,8 @@ static void apply_shifer() {
 		index = (d.y <= screen.y1 + sz) ? 7 : (d.y <= screen.y2 - sz) ? 0 : 1;
 	else
 		index = (d.y <= screen.x1 + sz) ? 2 : (d.y <= screen.y2 - sz) ? -1 : 6;
-	if(index == -1) {
-		if(!hot.mouse.in(last_screen))
-			cursor.set(CURSORS, 0);
-		else
-			cursor.set(CURSORS, 4);
+	if(index == -1)
 		return;
-	}
 	const int camera_step = 16;
 	cursor.set(CURSARW, index);
 	switch(index) {
@@ -559,12 +569,86 @@ static void setup_visible_area() {
 	last_screen.set(caret.x, caret.y, caret.x + width, caret.y + height);
 	last_area = last_screen; last_area.move(camera.x, camera.y);
 	last_area.offset(-128, -128);
+	hotspot = camera + hot.mouse;
+	hilite_drawable = 0;
+}
+
+static void prepare_objects() {
+	objects.clear();
+	for(auto& e : bsdata<door>()) {
+		if(!e.position.in(last_area))
+			continue;
+		objects.add(&e);
+	}
+}
+
+static void sort_objects() {
+	objects.sort(drawable::compare);
+}
+
+static void polygon(const sliceu<point>& source) {
+	auto pb = source.begin();
+	auto pe = source.end();
+	if(pb >= pe)
+		return;
+	caret = pb[0] - camera;
+	for(auto p = pb + 1; p < pe; p++)
+		line(p->x - camera.x, p->y - camera.y);
+	line(pb->x - camera.x, pb->y - camera.y);
+}
+
+static void polygon_green(const sliceu<point>& source) {
+	auto push_fore = fore;
+	fore = colors::green;
+	polygon(source);
+	fore = push_fore;
+}
+
+static void polygon_red(const sliceu<point>& source) {
+	auto push_fore = fore;
+	fore = colors::red;
+	polygon(source);
+	fore = push_fore;
+}
+
+static void paint_object(drawable* object) {
+	if(bsdata<door>::have(object)) {
+		auto p = (door*)object;
+		auto n = p->getpoints();
+		if(p->ishilite()) {
+			polygon_green(n);
+			cursor.cicle = p->cursor;
+		}
+	}
+}
+
+static bool ishilite(const drawable* object) {
+	if(bsdata<door>::have(object)) {
+		auto p = (door*)object;
+		if(hotspot.in(p->box)) {
+			auto n = p->getpoints();
+			return inside(hotspot, n.begin(), n.size());
+		}
+	}
+	return false;
+}
+
+static void paint_objects() {
+	auto push_caret = caret;
+	for(auto p : objects) {
+		caret = p->position - camera;
+		if(ishilite(p))
+			hilite_drawable = p;
+		paint_object(p);
+	}
 }
 
 static void area_map() {
-	setup_visible_area();
 	apply_shifer();
+	setup_visible_area();
 	paint_tiles();
+	prepare_objects();
+	paint_objects();
 }
 
 static void paint_item(const item* pi) {

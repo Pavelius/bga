@@ -257,9 +257,6 @@
     <ClCompile Include="draw_scene.cpp">
       <Filter>interface</Filter>
     </ClCompile>
-    <ClCompile Include="moveable.cpp">
-      <Filter>interface</Filter>
-    </ClCompile>
     <ClCompile Include="creature.cpp">
       <Filter>logic</Filter>
     </ClCompile>
@@ -311,10 +308,13 @@
     <ClCompile Include="scrolltext.cpp">
       <Filter>support</Filter>
     </ClCompile>
-    <ClCompile Include="draw_object.cpp">
+    <ClCompile Include="drawable.cpp">
       <Filter>interface</Filter>
     </ClCompile>
     <ClCompile Include="skill.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="door.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -439,9 +439,6 @@
     <ClInclude Include="resinfo.h">
       <Filter>interface</Filter>
     </ClInclude>
-    <ClInclude Include="moveable.h">
-      <Filter>interface</Filter>
-    </ClInclude>
     <ClInclude Include="portrait.h">
       <Filter>logic</Filter>
     </ClInclude>
@@ -493,7 +490,7 @@
     <ClInclude Include="scrolltext.h">
       <Filter>support</Filter>
     </ClInclude>
-    <ClInclude Include="draw_object.h">
+    <ClInclude Include="drawable.h">
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="skill.h">

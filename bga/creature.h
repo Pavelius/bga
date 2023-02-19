@@ -3,14 +3,14 @@
 #include "collection.h"
 #include "coloration.h"
 #include "class.h"
-#include "moveable.h"
+#include "drawable.h"
 #include "portrait.h"
 #include "race.h"
 #include "wearable.h"
 
 #pragma once
 
-struct creature : moveable, actable, wearable, classa, avatarable, coloration, statable {
+struct creature : drawable, actable, wearable, classa, avatarable, coloration, statable {
 	race_s		race;
 	statable	basic;
 	unsigned char alignment;
