@@ -11,7 +11,6 @@ enum map_states {
 	StateExplored = 0x80
 };
 
-static unsigned char max_height;
 static sprite* sprites;
 static sprite* sprites_minimap;
 unsigned char map::heightmap[256 * 256];
@@ -68,7 +67,7 @@ void map::clear() {
 		sprites_minimap = 0;
 	}
 	initialize();
-	height = width = max_height = 0;
+	height = width = height_tiles = 0;
 	memset(tilemap, 0, sizeof(tilemap));
 	memset(heightmap, 0, sizeof(heightmap));
 	memset(statemap, 0, sizeof(statemap));
@@ -169,17 +168,17 @@ bool archive_ard(io::stream& file, bool writemode, char* sprites_resname) {
 		return false;
 	// Заголовок
 	ar.set(map::width);
-	ar.set(map::height); max_height = (map::height * 12 + 15) / 16;
+	ar.set(map::height); map::height_tiles = (map::height * 12 + 15) / 16;
 	ar.set(sprites_resname, 8);
 	// Карты тайлов
-	archive_bitmap(ar, (unsigned char*)map::tilemap, 16, 64 * sizeof(map::tilemap[0]), map::width / 4, max_height / 4, 0);
+	archive_bitmap(ar, (unsigned char*)map::tilemap, 16, 64 * sizeof(map::tilemap[0]), map::width / 4, map::height_tiles / 4, 0);
 	archive_bitmap(ar, map::lightmap, 8, 256, map::width, map::height, lightpal);
 	archive_bitmap(ar, map::statemap, 8, 256, map::width, map::height, 0);
 	// Объекты
 	ar.set(bsdata<point>::source);
 	ar.set(bsdata<doortile>::source);
-	ar.set(bsdata<door>::source);
-	//ar.set<region>(bsdata<region>::source);
+	ar.setc<door>(bsdata<door>::source);
+	ar.setc<region>(bsdata<region>::source);
 	//ar.set<container>(bsdata<container>::source);
 	//ar.set<entrance>(bsdata<entrance>::source);
 	//ar.set<animation>(bsdata<animation>::source);

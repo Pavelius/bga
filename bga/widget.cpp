@@ -12,6 +12,7 @@
 #include "drawable.h"
 #include "map.h"
 #include "race.h"
+#include "region.h"
 #include "resinfo.h"
 #include "script.h"
 #include "scrolltext.h"
@@ -85,13 +86,13 @@ static void correct_camera() {
 		camera.x = map::width * 16 - last_screen.width();
 	if(camera.x < 0)
 		camera.x = 0;
-	if(camera.y + last_screen.width() > map::height * 12)
-		camera.y = map::height * 16 - last_screen.height();
+	if(camera.y + last_screen.height() > map::height_tiles * 16)
+		camera.y = map::height_tiles * 16 - last_screen.height();
 	if(camera.y < 0)
 		camera.y = 0;
 }
 
-static void cursor_paint() {
+static void paint_cursor() {
 	auto pi = gres(cursor.id);
 	if(!pi)
 		return;
@@ -101,10 +102,11 @@ static void cursor_paint() {
 		if(pressed)
 			cicle += 1;
 		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
-	} else {
+	} else if(cursor.id==res::CURSARW) {
 		auto ti = pi->ganim(cursor.cicle, current_tick / 32);
 		image(hot.mouse.x, hot.mouse.y, pi, ti, 0);
-	}
+	} else
+		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
 }
 
 static void paint_background() {
@@ -129,7 +131,7 @@ static void paint_logs(const char* format, int& origin, int& format_origin, int&
 
 void widget::initialize() {
 	pbackground = paint_background;
-	ptips = cursor_paint;
+	ptips = paint_cursor;
 	form::opening = form_opening;
 	form::closing = form_closing;
 	cursor.set(res::CURSORS, 0);
@@ -516,6 +518,10 @@ static void paint_tiles() {
 	int tx0 = camera.x / tile_size, ty0 = camera.y / tile_size;
 	int dx = width / tile_size + 1, dy = height / tile_size + 1;
 	int tx1 = tx0 + dx, ty1 = ty0 + dy;
+	if(tx1 > map::width / 4 - 1)
+		tx1 = map::width / 4 - 1;
+	if(ty1 > map::height_tiles / 4 - 1)
+		ty1 = map::height_tiles / 4 - 1;
 	int ty = ty0;
 	while(ty <= ty1) {
 		int tx = tx0;
@@ -580,6 +586,11 @@ static void prepare_objects() {
 			continue;
 		objects.add(&e);
 	}
+	for(auto& e : bsdata<region>()) {
+		if(!e.position.in(last_area))
+			continue;
+		objects.add(&e);
+	}
 }
 
 static void sort_objects() {
@@ -619,6 +630,9 @@ static void paint_object(drawable* object) {
 			polygon_green(n);
 			cursor.cicle = p->cursor;
 		}
+	} else if(bsdata<region>::have(object)) {
+		auto p = (region*)object;
+		polygon_red(p->points);
 	}
 }
 
@@ -629,6 +643,10 @@ static bool ishilite(const drawable* object) {
 			auto n = p->getpoints();
 			return inside(hotspot, n.begin(), n.size());
 		}
+	} else if(bsdata<region>::have(object)) {
+		auto p = (region*)object;
+		if(hotspot.in(p->box)) 
+			return inside(hotspot, p->points.begin(), p->points.size());
 	}
 	return false;
 }

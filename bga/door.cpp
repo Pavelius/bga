@@ -1,4 +1,5 @@
 #include "area.h"
+#include "door.h"
 
 void door::use(bool open) {
 	if(open) {

@@ -1,6 +1,5 @@
 #include "crt.h"
 #include "color.h"
-#include "door.h"
 #include "point.h"
 #include "stringbuilder.h"
 
