@@ -1,7 +1,16 @@
 Alchemy: Алхимия
+AnimalEmpathy: Общение с животными
+Bluff: Обман
 Concentration: Концентрация
 Diplomacy: Дипломатия
+DisableDevice: Обезвредить устройство
+Hide: Прятаться
 Intimidate: Запугивание
 KnowledgeArcana: Знания тайного
+MoveSilently: Двигаться тихо
+OpenLock: Вскрыть замок
+PickPocket: Очистить карманы
+Search: Обыск
 SpellCraft: Знания заклинаний
+UseMagicDevice: Использовать волшебные предметы
 WildernessLore: Знание дикой местности

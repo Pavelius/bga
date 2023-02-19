@@ -70,14 +70,31 @@ static void set_value_and_update() {
 	invalidate_description();
 }
 
+static void correct_camera() {
+	if(camera.x + last_screen.width() > map::width * 16)
+		camera.x = map::width * 16 - last_screen.width();
+	if(camera.x < 0)
+		camera.x = 0;
+	if(camera.y + last_screen.width() > map::height * 12)
+		camera.y = map::height * 16 - last_screen.height();
+	if(camera.y < 0)
+		camera.y = 0;
+}
+
 static void cursor_paint() {
+	auto pi = gres(cursor.id);
+	if(!pi)
+		return;
 	auto cicle = cursor.cicle;
 	if(cursor.id == res::CURSORS) {
 		auto pressed = hot.pressed;
 		if(pressed)
 			cicle += 1;
+		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
+	} else {
+		auto ti = pi->ganim(cursor.cicle, current_tick / 64);
+		image(hot.mouse.x, hot.mouse.y, pi, ti, 0);
 	}
-	image(hot.mouse.x, hot.mouse.y, gres(cursor.id), cicle, 0);
 }
 
 static void paint_background() {
@@ -481,17 +498,17 @@ static void paint_minimap() {
 	}
 }
 
-static void render_tiles() {
+static void paint_tiles() {
 	auto sp = map::getareasprite();
 	if(!sp)
 		return;
-	int tx0 = camera.y / tile_size, ty0 = camera.x / tile_size;
+	int tx0 = camera.x / tile_size, ty0 = camera.y / tile_size;
 	int dx = width / tile_size + 1, dy = height / tile_size + 1;
 	int tx1 = tx0 + dx, ty1 = ty0 + dy;
 	int ty = ty0;
-	while(ty < ty1) {
+	while(ty <= ty1) {
 		int tx = tx0;
-		while(tx < tx1) {
+		while(tx <= tx1) {
 			auto x = tx * tile_size - camera.x;
 			auto y = ty * tile_size - camera.y;
 			draw::image(x, y, sp, map::gettile(ty * 64 + tx), 0);
@@ -499,6 +516,43 @@ static void render_tiles() {
 		}
 		ty++;
 	}
+}
+
+static void apply_shifer() {
+	rect screen = {0, 0, getwidth(), getheight()};
+	int index = -1;
+	const int sz = 4;
+	auto d = hot.mouse;
+	if(d.x <= screen.x1)
+		d.x = screen.x1;
+	else if(d.x >= screen.x2 - 1)
+		d.x = screen.x2 - 1;
+	if(d.y <= screen.y1)
+		d.y = screen.y1;
+	else if(d.y >= screen.y2 - 1)
+		d.y = screen.y2 - 1;
+	if(d.x <= screen.x1 + sz)
+		index = (d.y <= screen.y1 + sz) ? 3 : (d.y < screen.x2 - sz) ? 4 : 5;
+	else if(d.x >= screen.x2 - sz)
+		index = (d.y <= screen.y1 + sz) ? 7 : (d.y <= screen.y2 - sz) ? 0 : 1;
+	else
+		index = (d.y <= screen.x1 + sz) ? 2 : (d.y <= screen.y2 - sz) ? -1 : 6;
+	if(index == -1) {
+		if(!hot.mouse.in(last_screen))
+			cursor.set(CURSORS, 0);
+		else
+			cursor.set(CURSORS, 4);
+		return;
+	}
+	const int camera_step = 16;
+	cursor.set(CURSARW, index);
+	switch(index) {
+	case 0: camera.x += camera_step; break;
+	case 2: camera.y -= camera_step; break;
+	case 4: camera.x -= camera_step; break;
+	case 6: camera.y += camera_step; break;
+	}
+	correct_camera();
 }
 
 static void setup_visible_area() {
@@ -509,7 +563,8 @@ static void setup_visible_area() {
 
 static void area_map() {
 	setup_visible_area();
-	render_tiles();
+	apply_shifer();
+	paint_tiles();
 }
 
 static void paint_item(const item* pi) {
