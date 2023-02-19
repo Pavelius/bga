@@ -14,6 +14,7 @@
 #include "race.h"
 #include "region.h"
 #include "script.h"
+#include "skill.h"
 #include "variant.h"
 #include "widget.h"
 

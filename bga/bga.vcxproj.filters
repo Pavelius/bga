@@ -305,6 +305,9 @@
     <ClCompile Include="draw_object.cpp">
       <Filter>interface</Filter>
     </ClCompile>
+    <ClCompile Include="skill.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -483,6 +486,9 @@
     </ClInclude>
     <ClInclude Include="draw_object.h">
       <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="skill.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
