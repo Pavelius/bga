@@ -102,6 +102,12 @@
     <Text Include="..\rules\Skills.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\rules\Classes.txt">
+      <Filter>rules</Filter>
+    </Text>
+    <Text Include="..\locale\ru\SkillNames.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

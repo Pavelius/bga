@@ -60,6 +60,7 @@ static void start_main() {
 static void read_rules() {
 	bsreq::read("rules/Colors.txt");
 	bsreq::read("rules/Races.txt");
+	bsreq::read("rules/Classes.txt");
 	bsreq::read("rules/Items.txt");
 	bsreq::read("rules/Advance.txt");
 	log::readdir("forms", "*.txt", form::read);

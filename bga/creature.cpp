@@ -25,7 +25,6 @@ static void apply_portraits() {
 }
 
 static void finish() {
-	player->basic.abilitites[HitPoints] += 10;
 	player->update();
 	player->hp = player->hp_max;
 }
@@ -95,11 +94,57 @@ static short unsigned random_portrait_no_party(gender_s gender) {
 	return random_portrait(gender, exist);
 }
 
+static void raise_hit_points(class_s v) {
+	if(player->getlevel() == 1 && ischaracter(v))
+		player->basic.abilitites[HitPoints] += bsdata<classi>::elements[v].hit_points;
+	else
+		player->basic.abilitites[HitPoints] += xrand(1, bsdata<classi>::elements[v].hit_points);
+}
+
 static void raise_class(class_s classv) {
 	variant v = bsdata<classi>::elements + classv;
-	auto new_level = player->classes[classv] + 1;
-	apply_advance(v, new_level);
-	player->classes[classv] = new_level;
+	player->classes[classv] = player->classes[classv] + 1;
+	apply_advance(v, player->classes[classv]);
+}
+
+static int get_maximum_rang() {
+	return player->getlevel() + 3;
+}
+
+static bool is_class_skill(const void* object) {
+	auto n = bsdata<skilli>::source.indexof(object);
+	if(n == -1)
+		return false;
+	return player->isclass((skill_s)n);
+}
+
+static void raise_random_skills(int points) {
+	collection<skilli> source;
+	source.select();
+	source.random();
+	auto maximum_rang = get_maximum_rang();
+	for(auto p : source) {
+		if(points <= 0)
+			break;
+		auto v = (skill_s)bsdata<skilli>::source.indexof(p);
+		if(player->isclass(v)) {
+			auto n = maximum_rang - player->basic.skills[v];
+			if(n >= 0) {
+				if(n > points)
+					n = points;
+				player->basic.skills[v] += n;
+				points -= n;
+			}
+		} else {
+			auto n = maximum_rang / 2 - player->basic.skills[v];
+			if(n >= 0) {
+				//if(n * 2 > points)
+				//	n = points / 2;
+				//player->basic.skills[v] += n;
+				//points -= n * 2;
+			}
+		}
+	}
 }
 
 static int compare_char(const void* v1, const void* v2) {
@@ -119,6 +164,16 @@ static void random_ability() {
 		player->basic.abilitites[i] = roll_4d6();
 }
 
+static int get_skill_points(class_s v) {
+	auto n = bsdata<classi>::elements[v].skill_points;
+	n += player->basic.getbonus(Intelligence);
+	if(n < 1)
+		n = 1;
+	if(player->getlevel() == 1)
+		n *= 4;
+	return n;
+}
+
 void creature::create(race_s race, gender_s gender, class_s classv, unsigned short portrait) {
 	pushvalue push_player(player, this);
 	clear();
@@ -128,6 +183,8 @@ void creature::create(race_s race, gender_s gender, class_s classv, unsigned sho
 	random_ability();
 	apply_portraits();
 	raise_class(classv);
+	raise_random_skills(get_skill_points(classv));
+	raise_hit_points(classv);
 	finish();
 }
 
@@ -140,7 +197,7 @@ void creature::create(gender_s gender) {
 bool creature::isclass(skill_s v) const {
 	for(auto i = (class_s)0; i <= Wizard; i = (class_s)(i + 1)) {
 		if(classes[i]) {
-			if((bsdata<skilli>::elements[v].classes & FG(i)) != 0)
+			if(FGT(bsdata<classi>::elements[i].skills, v))
 				return true;
 		}
 	}
@@ -175,6 +232,11 @@ static void update_weight() {
 	player->allowed_weight = maptbl(heavy_load, strenght);
 }
 
+static void update_skills() {
+	for(auto i = (skill_s)0; i <= WildernessLore; i = (skill_s)(i + 1))
+		player->skills[i] += player->getbonus(bsdata<skilli>::elements[i].ability);
+}
+
 void creature::update_abilities() {
 	auto level = getlevel();
 	// Armor class
@@ -195,6 +257,7 @@ void creature::update() {
 	copy(*static_cast<statable*>(this), basic);
 	update_wears();
 	update_abilities();
+	update_skills();
 	update_weight();
 }
 

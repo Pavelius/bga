@@ -49,6 +49,8 @@ BSMETA(advancei) = {
 	{}};
 BSMETA(classi) = {
 	BSREQ(id),
+	BSREQ(hit_points), BSREQ(skill_points),
+	BSFLG(skills, skilli),
 	{}};
 BSMETA(color) = {
 	BSREQ(r), BSREQ(g), BSREQ(b),
@@ -118,7 +120,6 @@ BSMETA(residi) = {
 BSMETA(skilli) = {
 	BSREQ(id),
 	BSENM(ability, abilityi),
-	BSFLG(classes, classi),
 	{}};
 BSMETA(weaponi) = {
 	BSREQ(bonus),

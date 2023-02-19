@@ -2,13 +2,13 @@
 #include "crt.h"
 
 BSDATA(classi) = {
-	{"Commoner"},
-	{"Fighter"},
-	{"Cleric"},
-	{"Ranger"},
-	{"Rogue"},
-	{"Sorcerer"},
-	{"Wizard"},
+	{"Commoner", 4, 2},
+	{"Fighter", 10, 2},
+	{"Cleric", 8, 2},
+	{"Ranger", 8, 6},
+	{"Rogue", 6, 8},
+	{"Sorcerer", 4, 2},
+	{"Wizard", 4, 2},
 };
 assert_enum(classi, Wizard)
 
@@ -34,4 +34,13 @@ int	classa::getlevel() const {
 unsigned classa::getnextlevel() const {
 	auto new_level = getlevel() + 1;
 	return new_level * (new_level - 1) * 500;
+}
+
+bool ischaracter(class_s v) {
+	switch(v) {
+	case Cleric: case Fighter: case Ranger: case Rogue: case Sorcerer: case Wizard:
+		return true;
+	default:
+		return false;
+	}
 }

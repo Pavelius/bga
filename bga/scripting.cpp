@@ -9,11 +9,17 @@ using namespace draw;
 
 extern stringbuilder sb;
 
-static void test(int bonus) {
+static void heal(int bonus) {
+	auto n = player->hp + bonus;
+	if(n < 0)
+		n = 0;
+	else if(n > player->hp_max)
+		n = player->hp_max;
+	player->hp = n;
 }
 
 BSDATA(script) = {
-	{"Test", test}
+	{"Heal", heal},
 };
 BSDATAF(script)
 
@@ -51,8 +57,7 @@ static void show_item_list() {
 }
 
 static void make_scrap() {
-	if(player->hp > 0)
-		player->hp--;
+	heal(-1);
 }
 
 static void open_form(const char* id) {

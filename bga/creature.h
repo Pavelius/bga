@@ -23,6 +23,7 @@ struct creature : moveable, actable, wearable, classa, avatarable, coloration, s
 	bool		isusable(const item& it) const;
 	void		getinfo(stringbuilder& sb) const;
 	void		getskillsinfo(stringbuilder& sb) const;
+	int			getskillpoints() const;
 	void		update();
 	void		update_abilities();
 };

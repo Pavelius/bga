@@ -158,7 +158,7 @@ void creature::getinfo(stringbuilder& sb) const {
 	addb(sb, "NextLevel", getnextlevel(), 0, false);
 	addend(sb);
 	addh(sb, getnm("SavingThrows"));
-	for(auto i = Fortitude; i<=Will; i=(ability_s)(i+1))
+	for(auto i = Fortitude; i <= Will; i = (ability_s)(i + 1))
 		addb(sb, i, get(i), false);
 	addend(sb);
 	addh(sb, getnm("AbilityStatistic"));
@@ -166,6 +166,14 @@ void creature::getinfo(stringbuilder& sb) const {
 }
 
 void creature::getskillsinfo(stringbuilder& sb) const {
+	addh(sb, getnm("Skills"));
+	for(auto i = (skill_s)0; i <= WildernessLore; i = (skill_s)(i + 1)) {
+		auto raw_level = basic.get(i);
+		auto level = get(i);
+		if(raw_level > 0)
+			sb.addn("%1%+2i", bsdata<skilli>::elements[i].getname(), level);
+	}
+	addend(sb);
 	addh(sb, getnm("Feats"));
 	for(auto i = ArmorProficiency; i <= MartialWeaponPolearm; i = (ability_s)(i + 1)) {
 		auto level = get(i);

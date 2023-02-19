@@ -1,0 +1,14 @@
+#Class
+
+Cleric
+ skills Alchemy Concentration Diplomacy KnowledgeArcana SpellCraft
+Fighter
+ skills Intimidate WildernessLore
+Ranger
+ skills AnimalEmpathy Concentration Hide MoveSilently Search
+Rogue
+ skills Bluff DisableDevice Hide Intimidate MoveSilently OpenLock PickPocket Search UseMagicDevice
+Sorcerer
+ skills Alchemy Concentration KnowledgeArcana SpellCraft
+Wizard
+ skills Alchemy Concentration KnowledgeArcana SpellCraft

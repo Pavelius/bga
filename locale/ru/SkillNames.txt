@@ -1,0 +1,5 @@
+Alchemy: Алхимия
+Concentration: Концентрация
+Diplomacy: Дипломатия
+Intimidate: Запугивание
+WildernessLore: Знание дикой местности
