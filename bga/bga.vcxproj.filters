@@ -496,5 +496,8 @@
     <ClInclude Include="skill.h">
       <Filter>logic</Filter>
     </ClInclude>
+    <ClInclude Include="container.h">
+      <Filter>logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

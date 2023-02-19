@@ -8,10 +8,9 @@ extern struct drawable* hilite_drawable;
 
 struct drawable {
 	point			position;
-	unsigned char	alpha, priority, random, layer;
-	constexpr explicit operator bool() const { return layer != 0; }
 	void			clear();
 	static int		compare(const void* v1, const void* v2);
+	int				getpriority() const;
 	bool			ishilite() const { return this == hilite_drawable; };
 };
 extern collection<drawable> objects;

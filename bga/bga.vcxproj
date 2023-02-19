@@ -128,6 +128,7 @@
     <ClInclude Include="attack.h" />
     <ClInclude Include="class.h" />
     <ClInclude Include="collection.h" />
+    <ClInclude Include="container.h" />
     <ClInclude Include="damage.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="draw_list.h" />

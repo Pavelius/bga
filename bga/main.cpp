@@ -40,7 +40,7 @@ static void create_party() {
 static void start_main() {
 	add_console("Read area...");
 	map::read("AR1000");
-	camera = {600, 200};
+	camera = {300, 1000};
 	add_console("Create party...");
 	create_party();
 	player->additem(citem("BattleAxe"));

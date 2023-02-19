@@ -3,6 +3,7 @@
 #include "class.h"
 #include "creature.h"
 #include "colorgrad.h"
+#include "container.h"
 #include "crt.h"
 #include "door.h"
 #include "draw.h"
@@ -502,7 +503,7 @@ static void paint_minimap() {
 	//rm.y2 = y2m(camera.y + camera_size.y / 2);
 	//rectb(rm, colors::white);
 	for(auto p : party) {
-		if(!p || !(*p))
+		if(!p)
 			continue;
 		//	auto position = p->getposition();
 		//	auto x1 = x2m(position.x);
@@ -587,6 +588,13 @@ static void prepare_objects() {
 		objects.add(&e);
 	}
 	for(auto& e : bsdata<region>()) {
+		if(e.type == RegionTriger)
+			continue;
+		if(!e.position.in(last_area))
+			continue;
+		objects.add(&e);
+	}
+	for(auto& e : bsdata<container>()) {
 		if(!e.position.in(last_area))
 			continue;
 		objects.add(&e);
@@ -625,14 +633,24 @@ static void polygon_red(const sliceu<point>& source) {
 static void paint_object(drawable* object) {
 	if(bsdata<door>::have(object)) {
 		auto p = (door*)object;
-		auto n = p->getpoints();
 		if(p->ishilite()) {
-			polygon_green(n);
+			polygon_green(p->getpoints());
 			cursor.cicle = p->cursor;
 		}
 	} else if(bsdata<region>::have(object)) {
 		auto p = (region*)object;
-		polygon_red(p->points);
+		if(p->ishilite()) {
+			switch(p->type) {
+			case RegionInfo: cursor.cicle = 22; break;
+			case RegionTravel: cursor.cicle = 34; break;
+			}
+		}
+	} else if(bsdata<container>::have(object)) {
+		auto p = (container*)object;
+		if(p->ishilite()) {
+			polygon_green(p->points);
+			cursor.cicle = 2;
+		}
 	}
 }
 
@@ -646,6 +664,10 @@ static bool ishilite(const drawable* object) {
 	} else if(bsdata<region>::have(object)) {
 		auto p = (region*)object;
 		if(hotspot.in(p->box)) 
+			return inside(hotspot, p->points.begin(), p->points.size());
+	} else if(bsdata<container>::have(object)) {
+		auto p = (container*)object;
+		if(hotspot.in(p->box))
 			return inside(hotspot, p->points.begin(), p->points.size());
 	}
 	return false;
@@ -666,6 +688,7 @@ static void area_map() {
 	setup_visible_area();
 	paint_tiles();
 	prepare_objects();
+	sort_objects();
 	paint_objects();
 }
 

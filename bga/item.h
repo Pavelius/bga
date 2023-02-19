@@ -1,6 +1,7 @@
 #include "ability.h"
 #include "crt.h"
 #include "dice.h"
+#include "drawable.h"
 #include "magic.h"
 #include "range.h"
 #include "resid.h"
@@ -67,5 +68,7 @@ struct item {
 	void			getinfo(stringbuilder& sb) const;
 	const char*		getname() const;
 	int				getweight() const { return count * geti().weight; }
+};
+struct itemground : drawable, item {
 };
 extern item* last_item;

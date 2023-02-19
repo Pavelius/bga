@@ -3,6 +3,7 @@
 #include "bsreq.h"
 #include "color.h"
 #include "crt.h"
+#include "container.h"
 #include "creature.h"
 #include "door.h"
 #include "draw_command.h"
@@ -26,10 +27,12 @@ BSMETA(varianti) = {BSREQ(id), {}};
 BSDATAC(advancei, 512)
 BSDATAC(colorgrad, 32)
 BSDATAC(control, 1024)
+BSDATAC(container, 128)
 BSDATAC(creature, 256)
 BSDATAC(door, 64)
 BSDATAC(doortile, 256)
 BSDATAC(itemi, 512)
+BSDATAC(itemground, 512)
 BSDATAC(form, 128)
 BSDATAC(point, 256*256)
 BSDATAC(region, 128)

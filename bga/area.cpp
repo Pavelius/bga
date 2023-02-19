@@ -1,9 +1,11 @@
 #include "archive.h"
 #include "area.h"
+#include "container.h"
 #include "creature.h"
 #include "door.h"
 #include "draw.h"
 #include "io_stream.h"
+#include "item.h"
 #include "map.h"
 #include "region.h"
 
@@ -74,12 +76,12 @@ void map::clear() {
 	memset(lightmap, 0, sizeof(lightmap));
 	memset(lightpal, 0, sizeof(lightpal));
 	//bsdata<animation>::source.clear();
-	//bsdata<container>::source.clear();
+	bsdata<container>::source.clear();
 	bsdata<creature>::source.clear();
 	bsdata<door>::source.clear();
 	bsdata<doortile>::source.clear();
 	//bsdata<entrance>::source.clear();
-	//bsdata<itemground>::source.clear();
+	bsdata<itemground>::source.clear();
 	//bsdata<itemcont>::source.clear();
 	bsdata<region>::source.clear();
 	bsdata<point>::source.clear();
@@ -144,22 +146,6 @@ static void archive_bitmap(archive& e, unsigned char* output, int output_bpp, in
 		e.set(pal, sizeof(color) * 256);
 }
 
-static bool load_tls_file(const char* name) {
-	char temp[260];
-	if(sprites)
-		delete sprites;
-	sprites = (sprite*)loadb(gmurl(temp, name, "pma"));
-	return sprites != 0;
-}
-
-static bool load_mmp_file(const char* name) {
-	char temp[260];
-	if(sprites_minimap)
-		delete sprites_minimap;
-	sprites_minimap = (sprite*)loadb(gmurl(temp, name, "pma", "MM"));
-	return sprites_minimap != 0;
-}
-
 bool archive_ard(io::stream& file, bool writemode, char* sprites_resname) {
 	archive ar(file, writemode);
 	if(!ar.signature("ARD"))
@@ -177,12 +163,28 @@ bool archive_ard(io::stream& file, bool writemode, char* sprites_resname) {
 	// Îáúåêòû
 	ar.set(bsdata<point>::source);
 	ar.set(bsdata<doortile>::source);
-	ar.setc<door>(bsdata<door>::source);
-	ar.setc<region>(bsdata<region>::source);
-	//ar.set<container>(bsdata<container>::source);
+	ar.set(bsdata<door>::source);
+	ar.set(bsdata<region>::source);
+	ar.set(bsdata<container>::source);
 	//ar.set<entrance>(bsdata<entrance>::source);
 	//ar.set<animation>(bsdata<animation>::source);
 	return true;
+}
+
+static bool load_tls_file(const char* name) {
+	char temp[260];
+	if(sprites)
+		delete sprites;
+	sprites = (sprite*)loadb(gmurl(temp, name, "pma"));
+	return sprites != 0;
+}
+
+static bool load_mmp_file(const char* name) {
+	char temp[260];
+	if(sprites_minimap)
+		delete sprites_minimap;
+	sprites_minimap = (sprite*)loadb(gmurl(temp, name, "pma", "MM"));
+	return sprites_minimap != 0;
 }
 
 static bool load_ard_file(const char* name, char* sprite_resname) {
