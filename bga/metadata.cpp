@@ -32,7 +32,6 @@ BSDATAC(doortile, 256)
 BSDATAC(itemi, 512)
 BSDATAC(form, 128)
 BSDATAC(point, 256*256)
-BSDATAC(racei, 32)
 BSDATAC(region, 128)
 BSDATAD(variant)
 

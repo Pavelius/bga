@@ -2,4 +2,6 @@ Alchemy: Алхимия
 Concentration: Концентрация
 Diplomacy: Дипломатия
 Intimidate: Запугивание
+KnowledgeArcana: Знания тайного
+SpellCraft: Знания заклинаний
 WildernessLore: Знание дикой местности
