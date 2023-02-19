@@ -55,9 +55,12 @@ static void apply(const variants& source) {
 
 static void apply_advance(variant v) {
 	if(v.iskind<abilityi>()) {
-		if(v.value >= MartialWeaponAxe && v.value <= MartialWeaponPolearm) {
-			if(player->basic.abilitites[v.value] < v.counter)
-				player->basic.abilitites[v.value] = v.counter;
+		if(v.value >= SimpleWeaponMace && v.value <= MartialWeaponPolearm) {
+			auto level = v.counter;
+			if(!level)
+				level = 1;
+			if(player->basic.abilitites[v.value] < level)
+				player->basic.abilitites[v.value] = level;
 		} else
 			script::run(v);
 	} else
@@ -158,6 +161,7 @@ static void update_weight() {
 			player->weight += e.getweight();
 	}
 	auto strenght = player->get(Strenght);
+	strenght += player->get(WeightAllowance);
 	player->allowed_weight = maptbl(heavy_load, strenght);
 }
 

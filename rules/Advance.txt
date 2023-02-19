@@ -1,25 +1,30 @@
 #Advance
 
 Fighter 1 WeaponProficiency
- elements MartialWeaponAxe+1 MartialWeaponBow+1 MartialWeaponFlail+1 MartialWeaponGreatSword+1 MartialWeaponHammer+1 MartialWeaponLargeSword+1 MartialWeaponPolearm+1
+ elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponSmallBlades\
+  MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponLargeSword MartialWeaponPolearm
 Fighter 1 ArmorProficiency
  elements ArmorProficiency+3 ShieldProficiency
 Fighter 1 SavingThrows
  elements Fortitude+2
 
 Rogue 1 WeaponProficiency
- elements MartialWeaponBow+1 MartialWeaponLargeSword+1 MartialWeaponPolearm+1
+ elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponSmallBlades\
+  MartialWeaponBow MartialWeaponLargeSword MartialWeaponPolearm
 Rogue 1 ArmorProficiency
  elements ArmorProficiency+1
 Rogue 1 SavingThrows
  elements Reflexes+2
 
 Cleric 1 WeaponProficiency
- elements MartialWeaponFlail+1 MartialWeaponHammer+1
+ elements SimpleWeaponMace SimpleWeaponStaff\
+  MartialWeaponFlail MartialWeaponHammer
 Cleric 1 ArmorProficiency
  elements ArmorProficiency+3 ShieldProficiency
 Cleric 1 SavingThrows
  elements Fortitude+2 Will+2
 
+Wizard 1 WeaponProficiency
+ elements SimpleWeaponMissile SimpleWeaponStaff SimpleWeaponSmallBlades
 Wizard 1 SavingThrows
  elements Will+2

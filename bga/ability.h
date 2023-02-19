@@ -12,6 +12,7 @@ enum ability_s : unsigned char {
 	WeightAllowance,
 	SneakAttack,
 	ArmorProficiency,
+	SimpleWeaponMace, SimpleWeaponMissile, SimpleWeaponStaff, SimpleWeaponSmallBlades,
 	MartialWeaponAxe, MartialWeaponBow, MartialWeaponFlail, MartialWeaponGreatSword, MartialWeaponHammer,
 	MartialWeaponLargeSword, MartialWeaponPolearm,
 	HitPoints, Stamina,

@@ -1,8 +1,18 @@
 LightArmorProficiency: Ношение легкой брони
 MediumArmorProficiency: Ношение средней брони
 HeavyArmorProficiency: Ношение тяжелой брони
+
+SimpleWeaponMace: Владение булавой
+SimpleWeaponMissile: Владение стрелковым оружием
+SimpleWeaponSmallBlades: Владение кинжалами
+SimpleWeaponStaff: Владение посохом
+
 MartialWeaponAxe: Владение топорами
+MartialWeaponBow: Владение луком
+MartialWeaponFlail: Владение цепом
 MartialWeaponGreatSword: Владение двуручными клинками
+MartialWeaponHammer: Владение молотом
 MartialWeaponLargeSword: Владение клинками
+MartialWeaponPolearm: Владение древковым оружием
 
 ShieldProficiency: Владение щитом

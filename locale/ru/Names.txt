@@ -18,10 +18,12 @@ Description: Описание
 Done: Завершить
 Experience: Опыт
 Export: Экспорт
+Feats: Особенности
 From: из
 Ground: На земле
 Information: Информация
 Kg: кг.
+LevelUp: Развитие
 MagicBonus: Магический бонус
 MaxDexterityBonus: Максимальный бонус ловкости
 Name: Наименование

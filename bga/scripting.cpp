@@ -85,6 +85,13 @@ static void game_charsheet() {
 	open_form("GUIREC");
 }
 
+static void level_up() {
+}
+
+static bool allow_level_up() {
+	return player->experience >= player->getnextlevel();
+}
+
 BSDATA(draw::command) = {
 	{"Cancel", draw::buttoncancel, KeyEscape},
 	{"CheckQuickWeapon", check_quick_weapon},
@@ -99,6 +106,7 @@ BSDATA(draw::command) = {
 	{"GameJournal", game_journal, 'J'},
 	{"GameOptions", game_options, KeyEscape},
 	{"GameSpells", game_spells, 'S'},
+	{"LevelUp", level_up, 0, allow_level_up},
 	{"MakeScrap", make_scrap, Ctrl + 'D'},
 	{"ShowItemList", show_item_list, Ctrl + 'I'},
 };

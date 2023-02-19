@@ -82,16 +82,20 @@ static void add_critical(stringbuilder& sb, int critical, int multiplier, unsign
 	sb.addn(getnm(critical == 20 ? "CriticalHitLine20" : "CriticalHitLine"), critical, multiplier);
 }
 
-static const char* getfeatname(variant v) {
+static const char* getfeatname(ability_s i, int level) {
 	static const char* armor_proficiency[] = {0, "LightArmorProficiency", "MediumArmorProficiency", "HeavyArmorProficiency"};
-	if(v.iskind<abilityi>()) {
-		switch(v.value) {
-		case ArmorProficiency:
-			return getnm(maptbl(armor_proficiency, v.counter));
-		default:
-			return getnm(bsdata<abilityi>::elements[v.value].id);
-		}
-	} else
+	switch(i) {
+	case ArmorProficiency:
+		return getnm(maptbl(armor_proficiency, level));
+	default:
+		return getnm(bsdata<abilityi>::elements[i].id);
+	}
+}
+
+static const char* getfeatname(variant v) {
+	if(v.iskind<abilityi>())
+		return getfeatname((ability_s)v.value, v.counter);
+	else
 		return v.getname();
 }
 
@@ -151,7 +155,7 @@ void creature::getinfo(stringbuilder& sb) const {
 	addend(sb);
 	addh(sb, getnm("Experience"));
 	addb(sb, "Current", experience, 0, false);
-	addb(sb, "NextLevel", 1000, 0, false);
+	addb(sb, "NextLevel", getnextlevel(), 0, false);
 	addend(sb);
 	addh(sb, getnm("SavingThrows"));
 	for(auto i = Fortitude; i<=Will; i=(ability_s)(i+1))
@@ -159,4 +163,18 @@ void creature::getinfo(stringbuilder& sb) const {
 	addend(sb);
 	addh(sb, getnm("AbilityStatistic"));
 	addv(sb, "WeightAllowance", getkg(allowed_weight));
+}
+
+void creature::getskillsinfo(stringbuilder& sb) const {
+	addh(sb, getnm("Feats"));
+	for(auto i = ArmorProficiency; i <= MartialWeaponPolearm; i = (ability_s)(i + 1)) {
+		auto level = get(i);
+		if(level)
+			sb.addn(getfeatname(i, level));
+	}
+	for(auto i = Alertness; i <= WhirlwindAttack; i = (feat_s)(i + 1)) {
+		if(is(i))
+			sb.addn(bsdata<feati>::elements[i].getname());
+	}
+	addend(sb);
 }

@@ -51,6 +51,7 @@ static void update_creature_info() {
 	description.clear();
 	switch(current_info_tab) {
 	case 0: player->getinfo(description); break;
+	case 2: player->getskillsinfo(description); break;
 	default: break;
 	}
 }
@@ -240,6 +241,8 @@ static const char* getname() {
 }
 
 static void interactive_execute() {
+	if(gui.disabled)
+		return;
 	if(gui.data.iskind<command>()) {
 		auto p = bsdata<command>::elements + gui.data.value;
 		auto run = (hot.key == MouseLeft && !hot.pressed && gui.hilited);
@@ -256,30 +259,49 @@ static void button(const sprite* p, unsigned short fiu, unsigned short fip) {
 	width = f.sx;
 	height = f.sy;
 	auto pressed = ishilite() && hot.pressed;
+	if(gui.disabled)
+		pressed = false;
 	image(p, pressed ? fip : fiu, 0);
 }
 
+static void allow_disable_button() {
+	if(gui.disabled)
+		return;
+	if(gui.data.iskind<command>()) {
+		if(bsdata<command>::elements[gui.data.value].allow) {
+			if(!bsdata<command>::elements[gui.data.value].allow())
+				gui.disabled = true;
+		}
+	}
+}
+
 static void pressed_button() {
-	button(gui.res, gui.frames[gui.checked ? 2 : 0], gui.frames[1]);
+	button(gui.res, gui.frames[gui.disabled ? 3 : gui.checked ? 2 : 0], gui.frames[1]);
 }
 
 static void pressed_text() {
 	auto push_caret = caret;
-	if(hot.pressed && gui.hilited) {
+	auto push_fore = fore;
+	if(gui.disabled)
+		fore = fore.mix(colors::black);
+	else if(hot.pressed && gui.hilited) {
 		caret.x += 1;
 		caret.y += 2;
 	}
 	texta(getname(), AlignCenterCenter);
+	fore = push_fore;
 	caret = push_caret;
 }
 
 static void button() {
+	allow_disable_button();
 	pressed_button();
 	interactive_execute();
 	pressed_text();
 }
 
 static void button_no_text() {
+	allow_disable_button();
 	pressed_button();
 	interactive_execute();
 }

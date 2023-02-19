@@ -11,4 +11,5 @@ struct classa {
 	char			classes[Wizard + 1];
 	int				getlevel() const;
 	class_s			getmainclass() const;
+	unsigned		getnextlevel() const;
 };

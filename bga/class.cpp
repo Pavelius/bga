@@ -29,3 +29,8 @@ int	classa::getlevel() const {
 		result += v;
 	return result;
 }
+
+unsigned classa::getnextlevel() const {
+	auto new_level = getlevel() + 1;
+	return new_level * (new_level - 1) * 500;
+}

@@ -1,4 +1,5 @@
 #include "flagable.h"
+#include "nameable.h"
 
 #pragma once
 
@@ -23,17 +24,10 @@ enum feat_s : unsigned char {
 	FocusAxes, FocusDaggers,
 	FocusMaces, FocusPolearm, FocusShooting, FocusSwords,
 	WhirlwindAttack,
-	ProficiencyAxe, ProficiencyClub, ProficiencyCrossbow,
-	ProficiencyDagger, ProficiencyGreatweapon, ProficiencyHeavyCrossbow,
-	ProficiencyMace, ProficiencySimple, ProficiencySpear,
-	ProficiencyLongbow, ProficiencyLongsword,
-	ProficiencyScimitar, ProficiencyShortbow, ProficiencyShortsword,
-	ProficiencyBastardsword, ProficiencyCatana, ProficiencyWaraxe,
 	FastMovement, Illiteracy,
 	HateGoblinoids, Infravision, ImmunityToSleepSpell, FindSecretDoors, Lucky, PreciseThrower,
 	SaveBonusVsEnchantment, SaveBonusVsFear, SaveBonusVsIllusion, SaveBonusVsPoison, SaveBonusVsSpell, Stability, Stonecunning,
 };
-struct feati {
-	const char* id;
+struct feati : nameable {
 };
 typedef flagable<(Stonecunning + 7) / 8> featf;

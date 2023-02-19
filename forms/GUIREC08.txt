@@ -8,7 +8,7 @@ CreatureRace NORMAL 258 23 115 28
 
 UpdateCreatureInfo NONE 0 0 0 0
 
-Button GBTNSTD 655 379 117 25 frames(1 2 3 0) value(37) id("LevelUp")
+Button GBTNSTD 655 379 117 25 frames(1 2 0 3) value(37) data(LevelUp)
 
 Label NORMAL 253 78 45 30 id("Str")
 Label NORMAL 253 116 45 30 id("Dex")
