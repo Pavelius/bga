@@ -1,0 +1,33 @@
+#Skill
+
+Alchemy
+ classes Wizard Cleric
+AnimalEmpathy
+Bluff
+ classes Rogue Cleric
+Concentration
+ classes Cleric Wizard
+Diplomacy
+ classes Rogue Cleric
+DisableDevice
+ classes Rogue
+Hide
+ classes Rogue
+Intimidate
+ classes Fighter Rogue
+KnowledgeArcana
+ classes Cleric Wizard
+MoveSilently
+ classes Rogue
+OpenLock
+ classes Rogue
+PickPocket
+ classes Rogue
+Search
+ classes Rogue
+SpellCraft
+ classes Cleric Wizard
+UseMagicDevice
+ classes Rogue
+WildernessLore
+ classes Fighter

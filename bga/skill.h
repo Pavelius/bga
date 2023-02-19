@@ -12,6 +12,7 @@ enum skill_s : unsigned char {
 };
 struct skilli : nameable {
 	ability_s	ability;
+	unsigned	classes;
 };
 struct skilla {
 	char		skills[WildernessLore + 1];

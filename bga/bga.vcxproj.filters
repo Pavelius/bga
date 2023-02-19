@@ -99,6 +99,9 @@
     <Text Include="..\forms\GGAME.txt">
       <Filter>forms</Filter>
     </Text>
+    <Text Include="..\rules\Skills.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

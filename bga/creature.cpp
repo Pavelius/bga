@@ -137,6 +137,16 @@ void creature::create(gender_s gender) {
 	create(p->race, p->gender, p->classv, pi);
 }
 
+bool creature::isclass(skill_s v) const {
+	for(auto i = (class_s)0; i <= Wizard; i = (class_s)(i + 1)) {
+		if(classes[i]) {
+			if((bsdata<skilli>::elements[v].classes & FG(i)) != 0)
+				return true;
+		}
+	}
+	return false;
+}
+
 static void update_wears() {
 	for(auto& e : player->equipment()) {
 		if(e)

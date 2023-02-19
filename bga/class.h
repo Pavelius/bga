@@ -2,7 +2,7 @@
 
 enum class_s : unsigned char {
 	Commoner,
-	Fighter, Cleric, Rogue, Sorcerer, Wizard,
+	Fighter, Cleric, Rogue, Ranger, Sorcerer, Wizard,
 };
 struct classi {
 	const char*		id;

@@ -19,6 +19,7 @@ struct creature : moveable, actable, wearable, classa, avatarable, coloration, s
 	void		clear();
 	void		create(gender_s gender);
 	void		create(race_s race, gender_s gender, class_s classv, unsigned short portrait);
+	bool		isclass(skill_s v) const;
 	bool		isusable(const item& it) const;
 	void		getinfo(stringbuilder& sb) const;
 	void		getskillsinfo(stringbuilder& sb) const;

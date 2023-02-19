@@ -115,6 +115,11 @@ BSMETA(rangei) = {
 BSMETA(residi) = {
 	BSREQ(id),
 	{}};
+BSMETA(skilli) = {
+	BSREQ(id),
+	BSENM(ability, abilityi),
+	BSFLG(classes, classi),
+	{}};
 BSMETA(weaponi) = {
 	BSREQ(bonus),
 	BSENM(type, damagei),
@@ -144,6 +149,7 @@ BSDATA(varianti) = {
 	{"Race", VAR(racei, 1)},
 	{"Rate", VAR(magici, 1)},
 	{"Resource", VAR(residi, 1)},
+	{"Skill", VAR(skilli, 1)},
 	{"Widget", VAR(widget, 1)},
 };
 BSDATAF(varianti)

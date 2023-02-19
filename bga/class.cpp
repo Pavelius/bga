@@ -5,6 +5,7 @@ BSDATA(classi) = {
 	{"Commoner"},
 	{"Fighter"},
 	{"Cleric"},
+	{"Ranger"},
 	{"Rogue"},
 	{"Sorcerer"},
 	{"Wizard"},

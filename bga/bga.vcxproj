@@ -43,6 +43,7 @@
     <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Items.txt" />
     <Text Include="..\rules\Races.txt" />
+    <Text Include="..\rules\Skills.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
