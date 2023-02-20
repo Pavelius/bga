@@ -1,0 +1,6 @@
+﻿#AR1003Info248_306
+This big, wheezing iron stove reminds you of the barkeep.
+
+#AR1003Info688_174
+Inscribed on the helm is "Botany Bay."
+

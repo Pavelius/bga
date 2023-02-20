@@ -1,0 +1,12 @@
+﻿#AR2001Info430_1674
+You open the door and glance inside.  You see nothing of interest.
+
+#AR2001Info524_1493
+This is an outhouse.
+
+#AR2001Info299_600
+This is an outhouse.
+
+#AR2001Info2222_379
+A landslide has blocked the pass.  It appears to have been deliberately caused.  You see the bodies of goblins among the rubble.
+

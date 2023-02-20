@@ -1,0 +1,15 @@
+﻿#AR3100Info745_1103
+This wooden pylon has one glowing ward rune, similar to the ones on the wooden archway in the Goblin Warrens.
+
+#AR3100Info919_1162
+This wooden pylon has one glowing ward rune, similar to the ones on the wooden archway in the Goblin Warrens.
+
+#AR3100Info597_1779
+This banner bears the silhouette of a chimera.
+
+#AR3100Info851_1867
+This banner bears the silhouette of a chimera.
+
+#AR3100Info2234_575
+Rising steam bellows from this rusty, iron grate.  On the inside can be seen three thick, steel bars which lock the grate from the inside.  Gaining access to the inside of the fortress through this grate looks very unlikely.
+

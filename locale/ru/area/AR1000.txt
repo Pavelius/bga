@@ -1,0 +1,24 @@
+﻿#AR1000Info1698_143
+This mighty wooden crane looks like it was designed to haul lumber up the cliff to the town of Targos above.
+
+#AR1000Info2058_965
+Inscribed on the side of this ship is the name, "The Wicked Wench."
+
+#AR1000Info806_1282
+This ship looks like it was recently shored and pieces of the hull were removed. 
+
+#AR1000Info2656_1053
+One of the smaller fishing boats used by the crew of the Wicked Wench on Maer Dualdon.  You considered using it as a life boat several times during the journey.
+
+#AR1000Info2097_1429
+The side of this ship bears the inscription, "Gutboy's Revenge."
+
+#AR1000Info2698_2176
+Although a light still shines from above, the door to this lighthouse has been hastily boarded up.  There is no way inside.
+
+#AR1000Info2476_1744
+Inscribed on the hull of this ship is the name "Dualdon's Wake."
+
+#AR1000Info989_1864
+"The Salty Dog Tavern"
+

@@ -1,0 +1,45 @@
+﻿#AR6104Info1716_2620
+This bridge has received a considerable amount of damage and cannot be traversed in its current state.  It looks like it could be safer to walk on if bound with enough rope.
+
+#AR6104Info1714_2626
+This bridge has been partially repaired with rope and is still somewhat unsafe to walk on, but it can be traversed.
+
+#AR6104Info1717_2629
+This bridge has been completely repaired and can be traversed safely.
+
+#AR6104Info1684_1041
+It's difficult to tell, but this is the remnant of a once impressive jewel-encrusted throne.
+
+#AR6104Info1681_1043
+This is a large, jewel-encrusted throne.
+
+#AR6104Info1525_2236
+This once imposing citadel lies in ruins.
+
+#AR6104Info1525_2238
+This grand citadel, made from obsidian, seems suitable for large-sized individuals.
+
+#AR6104Info2219_2227
+This once majestic palace has been completely destroyed.
+
+#AR6104Info2190_2200
+This palace, delicately carved from a block of obsidian, looks elegant yet simple.
+
+#AR6104Info2899_2254
+This open architecture shows signs that it once functioned as an embassy, but has fallen victim to intense combat that took place here.
+
+#AR6104Info2904_2251
+This open architecture appears to be an embassy.
+
+#AR6104Info2617_1669
+This amphitheatre currently stands in disrepair but has seen recent use.
+
+#AR6104Info2614_1663
+This open amphitheatre, carved from obsidian, has bleachers wrapping around one end and a stage on the other.
+
+#AR6104Info2526_1177
+Some of the bars on this large iron-wrought cage have been pulled apart by a being of great strength.
+
+#AR6104Info2534_1176
+This large iron-wrought cage is sealed tight.
+

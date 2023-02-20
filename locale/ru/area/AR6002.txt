@@ -1,0 +1,75 @@
+﻿#AR6002Info425_1134
+Carved into this stone marker are the following words: "Hrothgar's Glen.  Dedicated to the men and women from Easthaven who attempted to aid Kuldahar in its time of need.  1284 DR."
+
+#AR6002Info685_396
+"Hrothgar of Hillsfar.  Leader of the Easthaven Expedition.  d. 1281."
+
+#AR6002Info601_405
+"Accalia of Tempus.  Warrior-Priestess.  b. 1255 - d. 1281."
+
+#AR6002Info501_415
+"Erevain Blacksheaf.  Martyred Hero of Dragon's Eye.  d. 1281."
+
+#AR6002Info816_436
+"Hildreth Highhammer.  Dwarven Warrior.  d. 1281."
+
+#AR6002Info902_422
+"Kaleel Potts.  Loyal Husband.  b. 1250 - d. 1281."
+
+#AR6002Info992_411
+"Turbesh.  Father of Jermsy and Betha.  d. 1281."
+
+#AR6002Info1101_449
+"Betha.  Daughter of Turbesh.  Sister of Jermsy.  d. 1281."
+
+#AR6002Info382_538
+"Silas.  Brother of Mirek.  b. 1262. - d. 1281."
+
+#AR6002Info508_517
+"Brother Gus.  Servant of Ilmater.  d. 1282."
+
+#AR6002Info634_557
+"Brother Ferg.  Servant of Ilmater.  d. 1282."
+
+#AR6002Info883_549
+"Brady Willows.  Husband of Alma Willows.  b. 1216 - d. 1281."
+
+#AR6002Info988_527
+"Alma Willows.  Wife of Brady Willows.  b. 1221 - d. 1281."
+
+#AR6002Info1085_530
+"The Voice of Durdel Anatha.  Cursed Paladin of Torm.  Put to rest in 1282 DR."
+
+#AR6002Info484_694
+"Thad Meriwether.  Merchant.  d. 1285."
+
+#AR6002Info589_674
+"Iphegenia.  'Mother Egenia'.  Humble Servant of Ilmater.  d. 1296."
+
+#AR6002Info803_1009
+"Kaison.  Thrown from his steed along Slow Cedric's Gallop.  d. 1301."
+
+#AR6002Info948_1125
+"Hattoch.  The Darkest Man of the North, Terror of Bremen.  d. 1301."
+
+#AR6002Info987_961
+"Dray.  Froze in a Blizzard near the Sea of Moving Ice.  d. 1299."
+
+#AR6002Info1142_1087
+"Eliza Becek.  Representative to the Ten-Towns and Driver of the Meatwagon along the Bremen Trail.  Lost in the Great Blizzard of 1301."
+
+#AR6002Info1159_919
+"Jediza Flim.  A Spirited Fellow.  d. 1301."
+
+#AR6002Info1324_1034
+"Jimvold the Gardener.  A Master of His Trade.  d. 1301."
+
+#AR6002Info1461_764
+"Verdan.  A Fine Musician.  d. 1309."
+
+#AR6002Info1636_856
+"Kyanka.  Writer of Humorous Stories.  d. 1302."
+
+#AR6002Info1340_864
+"Old Kholsa, traveler and farmer.  Perished in his bed at the age of a hundred and seven. d.1300."
+

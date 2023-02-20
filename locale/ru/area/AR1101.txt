@@ -1,0 +1,15 @@
+﻿#AR1101Info368_205
+This bed doesn't look like it's been slept in.
+
+#AR1101Info386_364
+This armor looks more ceremonial than practical.  It bears the colors of Neverwinter on the tabard.
+
+#AR1101Info745_283
+This frightening-looking stove has a menacing air about it.  It seems to be daring you to stick your hand into its maw.
+
+#AR1101Info553_227
+This stove is the twin of the ugly one across the room, except there is more ash and soot covering its surface.
+
+#AR1101Info680_233
+A thick crust of oatmeal and cinnamon covers the interior of this pot. 
+

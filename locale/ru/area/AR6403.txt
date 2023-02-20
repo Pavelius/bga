@@ -1,0 +1,21 @@
+﻿#AR6403Info636_811
+The purpose of this strange machine is unknown.  It does, however, emit a low humming noise and your hair stands on end as you near it.
+
+#AR6403Info455_772
+This is obviously a control panel for the machine next to it.  However, you have no idea just what it is that it does.
+
+#AR6403Info186_441
+This is one of many control panels for the astrolab.  It appears functional, but you are not sure what it does.
+
+#AR6403Info408_390
+This is one of many control panels for the astrolab.  It appears functional, but you are not sure what it does.
+
+#AR6403Info530_352
+This is one of many control panels for the astrolab.  It appears functional, but you are not sure what it does.
+
+#AR6403Info671_328
+This is one of many control panels for the astrolab.  It appears functional, but you are not sure what it does.
+
+#AR6403Info895_381
+This is one of many control panels for the astrolab.  It appears functional, but you are not sure what it does.
+

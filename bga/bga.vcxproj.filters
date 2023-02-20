@@ -33,12 +33,6 @@
     <Text Include="..\rules\Items.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\locale\ru\Names.txt">
-      <Filter>locale</Filter>
-    </Text>
-    <Text Include="..\locale\ru\NamesNewbe.txt">
-      <Filter>locale</Filter>
-    </Text>
     <Text Include="..\errors.txt">
       <Filter>rules</Filter>
     </Text>
@@ -59,9 +53,6 @@
     </Text>
     <Text Include="..\forms\GIITMH08.txt">
       <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\locale\ru\ItemDescriptions.txt">
-      <Filter>locale</Filter>
     </Text>
     <Text Include="..\forms\GCOMM008.txt">
       <Filter>forms</Filter>
@@ -84,17 +75,8 @@
     <Text Include="..\forms\GUIREC08.txt">
       <Filter>forms</Filter>
     </Text>
-    <Text Include="..\locale\ru\ItemNames.txt">
-      <Filter>locale</Filter>
-    </Text>
-    <Text Include="..\locale\ru\FeatNames.txt">
-      <Filter>locale</Filter>
-    </Text>
     <Text Include="..\rules\Advance.txt">
       <Filter>rules</Filter>
-    </Text>
-    <Text Include="..\locale\ru\AlignmentNames.txt">
-      <Filter>locale</Filter>
     </Text>
     <Text Include="..\forms\GGAME.txt">
       <Filter>forms</Filter>
@@ -105,7 +87,25 @@
     <Text Include="..\rules\Classes.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\locale\ru\SkillNames.txt">
+    <Text Include="..\locale\ru\core\AlignmentNames.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\core\FeatNames.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\core\ItemDescriptions.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\core\ItemNames.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\core\Names.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\core\NamesNewbe.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\core\SkillNames.txt">
       <Filter>locale</Filter>
     </Text>
   </ItemGroup>

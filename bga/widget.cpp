@@ -488,20 +488,59 @@ static void layer(color v) {
 	fore = push_fore;
 }
 
+static point minimap_origin, minimap_size;
+
+static point m2mm(point mm) {
+	mm.x = mm.x / 8;
+	mm.y = mm.y / 8;
+	return minimap_origin + mm;
+}
+
+static point mm2m(point m) {
+	m = m - minimap_origin;
+	m.x *= 8;
+	m.y *= 8;
+	return m;
+}
+
+static void set_camera() {
+	camera.x = (short)(hot.param - last_screen.width() / 2);
+	camera.y = (short)(hot.param2 - last_screen.height() / 2);
+	correct_camera();
+}
+
 static void paint_minimap() {
+	if(last_screen.x2 == 0) {
+		last_screen.x2 = 800;
+		last_screen.y2 = 433;
+	}
 	rectpush push;
+	// Minimap image
 	auto mm = map::getminimap();
 	auto& sf = mm->get(0);
 	caret.x += (width - sf.sx) / 2;
 	caret.y += (height - sf.sy) / 2;
 	width = sf.sx; height = sf.sy;
+	minimap_origin = caret;
+	minimap_size.x = sf.sx;
+	minimap_size.y = sf.sy;
 	image(mm, 0, 0);
-	//rect rm;
-	//rm.x1 = x2m(camera.x - camera_size.x / 2);
-	//rm.y1 = y2m(camera.y - camera_size.y / 2);
-	//rm.x2 = x2m(camera.x + camera_size.x / 2);
-	//rm.y2 = y2m(camera.y + camera_size.y / 2);
-	//rectb(rm, colors::white);
+	if(ishilite()) {
+		if(hot.key == MouseLeft && hot.pressed) {
+			auto np = mm2m(hot.mouse);
+			execute(set_camera, np.x, np.y, 0);
+		}
+	}
+	// Screen rect
+	caret = m2mm(camera);
+	point cameral = camera;
+	cameral.x += last_screen.width();
+	cameral.y += last_screen.height();
+	cameral = m2mm(cameral);
+	width = cameral.x - caret.x;
+	height = cameral.y - caret.y;
+	rectb();
+	// Party position
 	for(auto p : party) {
 		if(!p)
 			continue;

@@ -1,0 +1,15 @@
+﻿#AR2100Info1895_399
+You open the door and glance inside.  You see nothing of interest.
+
+#AR2100Info1127_162
+This area is littered with junk.
+
+#AR2100Info1320_119
+This appears to be an entrance to a cave.  The ground outside is littered with carrion.
+
+#AR2100Info1499_114
+This appears to be an entrance to a cave.  The ground outside is littered with carrion.
+
+#AR2100Info1796_749
+This small cabin is unapproachable.  How anyone could get to it without resorting to magic is beyond you.
+

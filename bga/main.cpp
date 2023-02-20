@@ -16,6 +16,7 @@ using namespace draw;
 void add_console(const char* format);
 void check_translation();
 void initialize_translation(const char* locale);
+void read_descriptions(const char* folder);
 void util_main();
 
 static item& citem(const char* id) {
@@ -75,6 +76,7 @@ int main(int argc, char* argv[]) {
 	util_main();
 #endif // _DEBUG
 	initialize_translation("ru");
+	read_descriptions("area");
 	check_translation();
 	colorgrad::initialize();
 	widget::initialize();

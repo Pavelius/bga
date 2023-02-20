@@ -1,0 +1,30 @@
+﻿#AR6000Info1266_673
+This ruined hut appears to have been torn down and partially burned.  Something terrible happened here... you can feel it just by looking at the structure.
+
+#AR6000Info2758_804
+This wheel appears to have been locked in place, though it seems mechanically sound.
+
+#AR6000Info1554_1395
+These crops could not naturally grow in the Spine of the World's harsh environment.
+
+#AR6000Info1636_1384
+These crops could not naturally grow in the Spine of the World's harsh environment.
+
+#AR6000Info1953_1456
+These crops could not naturally grow in the Spine of the World's harsh environment.
+
+#AR6000Info2859_1311
+These crops could not naturally grow in the Spine of the World's harsh environment.
+
+#AR6000Info2119_1338
+The entrance to this house has been boarded up and covered with arcane wards.  It looks like the occupant left in some haste... or else is living somewhere else within the Pass.
+
+#AR6000Info3454_495
+This well leads down deep into the ground and does not seem to have been used in some time. 
+
+#AR6000Info3266_497
+The door to this hut has been boarded up and carved with various wards against serpents and the undead.  It appears the occupants... or occupant... left in some haste. 
+
+#AR6000Info753_1305
+The door to this hut has been boarded up and carved with various wards against serpents and the undead.  It appears the occupants... or occupant... left in some haste. 
+

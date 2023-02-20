@@ -1,0 +1,57 @@
+﻿#AR5101Info412_668
+The shield of this dour-faced dwarf statue is emblazoned with a broken crossbow bolt.
+
+#AR5101Info993_954
+The shield of this dour-faced dwarf statue is emblazoned with a broken crossbow bolt.
+
+#AR5101Info263_388
+This huge statue of the duergar deity Laduguer seems to glare down upon you judgmentally.
+
+#AR5101Info2443_516
+This person must have perished in terrible agony... they weren't even allowed to die with their boots on.
+
+#AR5101Info2355_453
+An iron maiden - it looks almost cozy in a "bloody spikes driven into your face, chest and bowels" sort of way.
+
+#AR5101Info2816_1443
+These appear to be large, stone-shelled eggs that are imbedded, out of reach, into the cavern wall.
+
+#AR5101Info2984_1617
+These appear to be large, stone-shelled eggs that are imbedded, out of reach, into the cavern wall.
+
+#AR5101Info3277_1487
+These appear to be large, stone-shelled eggs that are imbedded, out of reach, into the cavern wall.
+
+#AR5101Info307_453
+This altar is emblazoned with dwarven runes: Laduguer, the Exile, the Gray Protector, Master of Crafts, the Slave Driver, the Taskmaster, the Harsh.
+
+#AR5101Info378_454
+This altar is emblazoned with dwarven runes: Laduguer, the Exile, the Gray Protector, Master of Crafts, the Slave Driver, the Taskmaster, the Harsh.
+
+#AR5101Info680_412
+These are sacks of grain, dried mushrooms, salted meats and so on.  Despite the dizzying variety of foodstuffs, all look wholly unpalatable.
+
+#AR5101Info979_467
+These are kegs of dark duergar bitter-ale, a thick, potent, and foul-tasting brew known to make even the stoutest of gold dwarves grimace in disgust.
+
+#AR5101Info767_303
+These are kegs of dark duergar bitter-ale, a thick, potent, and foul-tasting brew known to make even the stoutest of gold dwarves grimace in disgust.
+
+#AR5101Info687_320
+These are kegs of dark duergar bitter-ale, a thick, potent, and foul-tasting brew known to make even the stoutest of gold dwarves grimace in disgust.
+
+#AR5101Info2636_584
+An iron maiden - it looks almost cozy in a "bloody spikes driven into your face, chest and bowels" sort of way.
+
+#AR5101Info1801_433
+A bucket of thick orcish gruel known as "karap."  You do NOT want to eat this.
+
+#AR5101Info1979_465
+A bucket of thick orcish gruel known as "karap."  You do NOT want to eat this.
+
+#AR5101Info1990_609
+A bucket of thick orcish gruel known as "karap."  You do NOT want to eat this.
+
+#AR5101Info1450_309
+These are keys to the old dungeon cells that now serve as quarters for Dargab's orc slave-soldiers.
+

@@ -1,0 +1,18 @@
+﻿#AR6304Info970_844
+These barrels, and the bags next to them, contain foodstuffs.  It looks as though they are being used to make the next meal for the guards on this floor of the keep.
+
+#AR6304Info1011_540
+This hallway seems to have been recently repaired.  However, upon closer examination into its dark reaches, you can see that it has been sealed off and leads to nowhere.
+
+#AR6304Info2320_494
+This hallway leads to the War Tower.
+
+#AR6304Info2799_1322
+This hallway leads to the Cleric Tower.
+
+#AR6304Info1662_2111
+This hallway leads to the Officer Tower.
+
+#AR6304Info263_1275
+This hallway leads to the Wizard Tower.
+

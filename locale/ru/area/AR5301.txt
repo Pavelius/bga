@@ -1,0 +1,12 @@
+﻿#AR5301Info1081_632
+This web-shrouded bronze statue seems oddly out of place.  The craftsmanship is fine, but it does not appear to be finished.
+
+#AR5301Info3221_2628
+This strange substance has the appearance of liquid webbing and molten metal.  Despite this, the pool is perfectly still and does not give off any heat.
+
+#AR5301Info3531_2528
+This strange substance has the appearance of liquid webbing and molten metal.  Despite this, the pool is perfectly still and does not give off any heat.
+
+#AR5301Info1662_1767
+This appears to be a small but well-stocked alchemical laboratory.
+

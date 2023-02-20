@@ -1,0 +1,63 @@
+﻿#AR6001Info475_848
+This dilapidated tower appears to have fallen apart with age and the growth of the tree behind it.
+
+#AR6001Info1144_1939
+These smithing materials look like they were haphazardly dragged here and left in a corner.
+
+#AR6001Info1656_2522
+This mound of stones holds a glowing green gemstone.  Even at this distance, you can feel the warmth emanating from its shining facets.
+
+#AR6001Info2529_1824
+These two statues appear to be of druids.  Though the bodies are similar, the faces are quite different.  The left statue has a plaque at the bottom that reads, "Tolben."  The right statue's plaque reads, "Arundel."
+
+#AR6001Info1127_1173
+These huge roots have recently been hacked apart.
+
+#AR6001Info597_1252
+These huge roots have recently been hacked apart.
+
+#AR6001Info237_2006
+This home has been hastily boarded up... it looks as if the occupants had to leave quickly.
+
+#AR6001Info878_1791
+This home has been hastily boarded up... it looks as if the occupants had to leave quickly.
+
+#AR6001Info739_1154
+This structure looks like it might have been a store of some sort, but the entrance has been boarded up, and the word "CLOSED" has been carved on one of the planks.
+
+#AR6001Info1232_651
+Carved above the entrance to this structure is the silhouette of a great tree with a man resting beneath it.  The door is nailed shut, however, and the word "No Vacancy - Gerbash" has been carved into one of the planks. 
+
+#AR6001Info1588_514
+The sign of the hammer is above this door, but the building is closed, and it doesn't look like it's seen much life in the past few months.
+
+#AR6001Info2991_194
+It looks like a small stairway once led up to the door of this building, but it looks to have been torn down and used to nail up the door. 
+
+#AR6001Info3443_556
+This structure looks like it might have been a store of some sort, but the entrance has been boarded up, and the word "CLOSED" has been carved on one of the planks.
+
+#AR6001Info3748_947
+Unlike the other buildings, this one appears to extend out over the eastern ridge of Kuldahar.  There is no sign of life within, and the door is sealed shut much like the other buildings. 
+
+#AR6001Info2804_1390
+A sign above the door of this structure depicts a great wind carrying seven silhouettes up into the air.  The structure is sealed, but the wood used in the building's construction does not look native to Kuldahar.
+
+#AR6001Info3041_1849
+A name engraved above the door reads, "Mirek, Keeper of the Vale."  The door is sealed, and there is no sign of life within.
+
+#AR6001Info2008_1667
+A potter's wheel decorates the sign above the entrance.  The door is nailed shut, and the word "CLOSED" has been chiseled into the wood.
+
+#AR6001Info2059_931
+An old sign above this door shows a tangle of roots around a beer mug.  It may have once been an inn, but it looks to have been abandoned a short while ago.
+
+#AR6001Info2204_998
+This looks to be an old storehouse for the inn next door.  The entrance has been nailed shut, and there is no sign of anyone within.
+
+#AR6001Info1865_917
+This looks like a modest dwelling attached to the inn next door.  There is no sign of any inhabitants, and the door is sealed shut.
+
+#AR6001Info3222_2689
+Based on the sudden drop, it looks as if an earthquake or stone shape spell was used to terminate this path. 
+

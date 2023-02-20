@@ -60,10 +60,17 @@ static void make_scrap() {
 	heal(-1);
 }
 
-static void open_form(const char* id) {
-	if(last_form == bsdata<form>::find(id))
-		id = "GGAME";
-	form::nextscene(id);
+static void open_form(const char* id, bool open_only_in_game = false) {
+	if(open_only_in_game) {
+		if(last_form == bsdata<form>::find("GGAME"))
+			form::nextscene(id);
+		else
+			form::nextscene("GGAME");
+	} else {
+		if(last_form == bsdata<form>::find(id))
+			id = "GGAME";
+		form::nextscene(id);
+	}
 }
 
 static void game_inventory() {
@@ -79,7 +86,7 @@ static void game_area_map() {
 }
 
 static void game_options() {
-	open_form("STONEOPT");
+	open_form("STONEOPT", true);
 }
 
 static void game_spells() {
