@@ -1,4 +1,2 @@
 ﻿AreaMap: 
 AreaNotes: 
-Options: 
-Version: 

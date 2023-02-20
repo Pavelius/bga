@@ -13,6 +13,7 @@ extern unsigned char heightmap[256 * 256];
 extern unsigned char statemap[256 * 256];
 extern unsigned char lightmap[256 * 256];
 extern unsigned short tilemap[64 * 64];
+extern char areaname[12];
 
 int getday(unsigned value);
 int gethour(unsigned value);
@@ -20,8 +21,10 @@ int gettile(short unsigned index);
 
 unsigned char getorientation(point s, point d);
 unsigned char getstate(short unsigned index);
+
 unsigned short getindex(point pos);
 unsigned short getindex(point pos, int size);
+
 point getfree(point position, int size);
 point getposition(short unsigned index, int size);
 

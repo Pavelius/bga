@@ -11,6 +11,7 @@
 #include "draw_control.h"
 #include "draw_gui.h"
 #include "drawable.h"
+#include "floattext.h"
 #include "map.h"
 #include "race.h"
 #include "region.h"
@@ -638,6 +639,13 @@ static void prepare_objects() {
 			continue;
 		objects.add(&e);
 	}
+	for(auto& e : bsdata<floattext>()) {
+		if(!e)
+			continue;
+		if(!e.position.in(last_area))
+			continue;
+		objects.add(&e);
+	}
 }
 
 static void sort_objects() {
@@ -690,6 +698,9 @@ static void paint_object(drawable* object) {
 			polygon_green(p->points);
 			cursor.cicle = 2;
 		}
+	} else if(bsdata<floattext>::have(object)) {
+		auto p = (floattext*)object;
+		p->paint();
 	}
 }
 
@@ -722,6 +733,25 @@ static void paint_objects() {
 	}
 }
 
+static const char* gettipsname(point position) {
+	return str("%3Info%1i_%2i", position.x, position.y, map::areaname);
+}
+
+static void apply_hilite_command() {
+	if(!hilite_drawable)
+		return;
+	if(hot.key == MouseLeft && hot.pressed) {
+		if(bsdata<region>::have(hilite_drawable)) {
+			auto p = (region*)hilite_drawable;
+			if(p->type == RegionInfo) {
+				auto pn = getdescription(gettipsname(p->position));
+				if(pn)
+					add_float_text(hotspot, pn, 320, 1000 * 3);
+			}
+		}
+	}
+}
+
 static void area_map() {
 	apply_shifer();
 	setup_visible_area();
@@ -729,6 +759,7 @@ static void area_map() {
 	prepare_objects();
 	sort_objects();
 	paint_objects();
+	apply_hilite_command();
 }
 
 static void paint_item(const item* pi) {

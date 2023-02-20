@@ -10,6 +10,7 @@
 #include "draw_command.h"
 #include "draw_control.h"
 #include "entrance.h"
+#include "floattext.h"
 #include "gender.h"
 #include "item.h"
 #include "modifier.h"
@@ -35,6 +36,7 @@ BSDATAC(creature, 256)
 BSDATAC(door, 64)
 BSDATAC(doortile, 256)
 BSDATAC(entrance, 64)
+BSDATAC(floattext, 64)
 BSDATAC(itemi, 512)
 BSDATAC(itemground, 512)
 BSDATAC(form, 128)

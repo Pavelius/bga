@@ -6,6 +6,7 @@
 #include "door.h"
 #include "draw.h"
 #include "entrance.h"
+#include "floattext.h"
 #include "io_stream.h"
 #include "item.h"
 #include "map.h"
@@ -21,6 +22,7 @@ unsigned char map::heightmap[256 * 256];
 unsigned char map::statemap[256 * 256];
 unsigned char map::lightmap[256 * 256];
 unsigned short map::tilemap[64 * 64];
+char map::areaname[12];
 static color lightpal[256];
 
 static const unsigned char orientations_5b5[25] = {
@@ -87,7 +89,7 @@ void map::clear() {
 	//bsdata<itemcont>::source.clear();
 	bsdata<region>::source.clear();
 	bsdata<point>::source.clear();
-	//bsdata<floattext>::source.clear();
+	bsdata<floattext>::source.clear();
 }
 
 void map::settile(short unsigned index, short unsigned tile) {
@@ -148,7 +150,7 @@ static void archive_bitmap(archive& e, unsigned char* output, int output_bpp, in
 		e.set(pal, sizeof(color) * 256);
 }
 
-bool archive_ard(io::stream& file, bool writemode, char* sprites_resname) {
+bool archive_ard(io::stream& file, bool writemode) {
 	archive ar(file, writemode);
 	if(!ar.signature("ARD"))
 		return false;
@@ -157,7 +159,7 @@ bool archive_ard(io::stream& file, bool writemode, char* sprites_resname) {
 	// Заголовок
 	ar.set(map::width);
 	ar.set(map::height); map::height_tiles = (map::height * 12 + 15) / 16;
-	ar.set(sprites_resname, 8);
+	ar.set(map::areaname, 8);
 	// Карты тайлов
 	archive_bitmap(ar, (unsigned char*)map::tilemap, 16, 64 * sizeof(map::tilemap[0]), map::width / 4, map::height_tiles / 4, 0);
 	archive_bitmap(ar, map::lightmap, 8, 256, map::width, map::height, lightpal);
@@ -189,13 +191,13 @@ static bool load_mmp_file(const char* name) {
 	return sprites_minimap != 0;
 }
 
-static bool load_ard_file(const char* name, char* sprite_resname) {
+static bool load_ard_file(const char* name) {
 	char temp[260];
 	io::file file(gmurl(temp, name));
 	if(!file)
 		return false;
 	map::clear();
-	return archive_ard(file, false, sprite_resname);
+	return archive_ard(file, false);
 }
 
 static void use_all_doors() {
@@ -204,13 +206,12 @@ static void use_all_doors() {
 }
 
 void map::read(const char* name) {
-	char rsts[8];
 	//res::cleanup();
-	if(!load_ard_file(name, rsts))
+	if(!load_ard_file(name))
 		return;
-	if(!load_tls_file(rsts))
+	if(!load_tls_file(areaname))
 		return;
-	if(!load_mmp_file(rsts))
+	if(!load_mmp_file(areaname))
 		return;
 	use_all_doors();
 	//worldmap::set(worldmap::getarea(name));

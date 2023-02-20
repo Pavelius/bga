@@ -317,6 +317,9 @@
     <ClCompile Include="door.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="floattext.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -503,6 +506,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="animation.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="floattext.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
