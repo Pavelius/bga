@@ -254,9 +254,6 @@
     <ClCompile Include="resinfo.cpp">
       <Filter>interface</Filter>
     </ClCompile>
-    <ClCompile Include="draw_scene.cpp">
-      <Filter>interface</Filter>
-    </ClCompile>
     <ClCompile Include="creature.cpp">
       <Filter>logic</Filter>
     </ClCompile>
@@ -277,9 +274,6 @@
     </ClCompile>
     <ClCompile Include="archive.cpp">
       <Filter>support</Filter>
-    </ClCompile>
-    <ClCompile Include="draw_list.cpp">
-      <Filter>interface</Filter>
     </ClCompile>
     <ClCompile Include="damage.cpp">
       <Filter>logic</Filter>
@@ -322,6 +316,12 @@
     </ClCompile>
     <ClCompile Include="timer.cpp">
       <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="entrance.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -469,9 +469,6 @@
     <ClInclude Include="archive.h">
       <Filter>support</Filter>
     </ClInclude>
-    <ClInclude Include="draw_list.h">
-      <Filter>interface</Filter>
-    </ClInclude>
     <ClInclude Include="damage.h">
       <Filter>logic</Filter>
     </ClInclude>
@@ -519,6 +516,9 @@
     </ClInclude>
     <ClInclude Include="timer.h">
       <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

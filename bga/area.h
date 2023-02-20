@@ -28,6 +28,7 @@ unsigned short getindex(point pos, int size);
 point getfree(point position, int size);
 point getposition(short unsigned index, int size);
 
+void enter(const char* area, const char* entrance);
 void getpassedtime(stringbuilder& sb, unsigned value);
 void read(const char* name);
 void settile(short unsigned index, short unsigned tile);
@@ -39,3 +40,5 @@ const sprite* getminimap();
 const sprite* getareasprite();
 
 }
+
+void setcamera(point v);

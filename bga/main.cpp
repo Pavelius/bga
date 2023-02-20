@@ -9,6 +9,7 @@
 #include "draw.h"
 #include "draw_gui.h"
 #include "draw_control.h"
+#include "game.h"
 #include "log.h"
 #include "resid.h"
 
@@ -30,6 +31,7 @@ static item& citem(const char* id) {
 }
 
 static void create_party() {
+	logm("Create party...");
 	for(auto i = 0; i < 6; i++) {
 		player = bsdata<creature>::add();
 		player->create(Male);
@@ -39,10 +41,7 @@ static void create_party() {
 }
 
 static void start_main() {
-	logm("Read area...");
-	map::read("AR1000");
-	camera = {300, 1000};
-	logm("Create party...");
+	enter("AR1000", "FR1001");
 	create_party();
 	player->additem(citem("BattleAxe"));
 	player->additem(citem("BattleAxeP1"));
@@ -57,7 +56,6 @@ static void start_main() {
 	player->additem(citem("LargeShield"));
 	player->additem(citem("TwoHandedSword"));
 	player->update();
-	form::nextscene("GUIINV08");
 }
 
 static void read_rules() {

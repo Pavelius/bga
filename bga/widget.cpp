@@ -3,6 +3,7 @@
 #include "class.h"
 #include "creature.h"
 #include "colorgrad.h"
+#include "console.h"
 #include "container.h"
 #include "crt.h"
 #include "door.h"
@@ -12,6 +13,7 @@
 #include "draw_gui.h"
 #include "drawable.h"
 #include "floattext.h"
+#include "game.h"
 #include "map.h"
 #include "race.h"
 #include "region.h"
@@ -69,12 +71,12 @@ static void invalidate_description() {
 
 static void form_opening() {
 	invalidate_description();
-	if(equal(last_form->id, "GGAME"))
+	//if(equal(last_form->id, "GGAME"))
 		default_cursor = cursor;
 }
 
 static void form_closing() {
-	if(equal(last_form->id, "GGAME"))
+	//if(equal(last_form->id, "GGAME"))
 		cursor = default_cursor;
 }
 
@@ -504,10 +506,15 @@ static point mm2m(point m) {
 	return m;
 }
 
-static void set_camera() {
-	camera.x = (short)(hot.param - last_screen.width() / 2);
-	camera.y = (short)(hot.param2 - last_screen.height() / 2);
+void setcamera(point v) {
+	v.x -= last_screen.width() / 2;
+	v.y -= last_screen.height() / 2;
+	camera = v;
 	correct_camera();
+}
+
+static void set_camera() {
+	setcamera({(short)hot.param, (short)hot.param2});
 }
 
 static void paint_minimap() {
@@ -526,7 +533,9 @@ static void paint_minimap() {
 	minimap_size.x = sf.sx;
 	minimap_size.y = sf.sy;
 	image(mm, 0, 0);
+	cursor = default_cursor;
 	if(ishilite()) {
+		cursor.cicle = 44;
 		if(hot.key == MouseLeft && hot.pressed) {
 			auto np = mm2m(hot.mouse);
 			execute(set_camera, np.x, np.y, 0);
@@ -761,9 +770,21 @@ static void apply_hilite_command() {
 			auto p = (region*)hilite_drawable;
 			if(p->type == RegionInfo) {
 				auto pn = getdescription(gettipsname(p->position));
-				if(pn)
+				if(pn) {
 					add_float_text(hotspot, pn, 320, 1000 * 5, p);
-			}
+					logm("[+%1]", pn);
+				}
+			} else if(p->type == RegionTravel)
+				enter(p->move_to_area, p->move_to_entrance);
+		} else if(bsdata<door>::have(hilite_drawable)) {
+			auto p = (door*)hilite_drawable;
+			if(p->opened)
+				p->use(false);
+			else
+				p->use(true);
+		} else if(bsdata<container>::have(hilite_drawable)) {
+			auto p = (container*)hilite_drawable;
+			logm("This is %1", p->name);
 		}
 	}
 }
@@ -1088,7 +1109,7 @@ static void text_console() {
 		font = gui.res;
 	area_console.paint((char*)console_data.data);
 	if(gui.hilited)
-		area_description.input();
+		area_console.input();
 	font = push_font;
 }
 

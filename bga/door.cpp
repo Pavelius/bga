@@ -9,4 +9,5 @@ void door::use(bool open) {
 		for(auto& e : tiles)
 			map::settile(e.index, e.closed);
 	}
+	opened = open;
 }
