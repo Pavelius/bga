@@ -3,6 +3,7 @@
 #include "bsreq.h"
 #include "crt.h"
 #include "colorgrad.h"
+#include "console.h"
 #include "creature.h"
 #include "door.h"
 #include "draw.h"
@@ -13,7 +14,6 @@
 
 using namespace draw;
 
-void add_console(const char* format);
 void check_translation();
 void initialize_translation(const char* locale);
 void read_descriptions(const char* folder);
@@ -39,10 +39,10 @@ static void create_party() {
 }
 
 static void start_main() {
-	add_console("Read area...");
+	logm("Read area...");
 	map::read("AR1000");
 	camera = {300, 1000};
-	add_console("Create party...");
+	logm("Create party...");
 	create_party();
 	player->additem(citem("BattleAxe"));
 	player->additem(citem("BattleAxeP1"));

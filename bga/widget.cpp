@@ -18,6 +18,7 @@
 #include "resinfo.h"
 #include "script.h"
 #include "scrolltext.h"
+#include "timer.h"
 #include "widget.h"
 
 using namespace draw;
@@ -28,7 +29,6 @@ extern array console_data;
 
 const int tile_size = 64;
 
-static long current_tick;
 static point hotspot;
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
@@ -36,7 +36,7 @@ static int current_info_tab;
 static fnevent update_proc;
 static bool need_update;
 static char description_text[4096];
-static scrolltext area_description;
+static scrolltext area_description, area_console;
 static resinfo default_cursor;
 stringbuilder description(description_text);
 
@@ -112,7 +112,7 @@ static void paint_cursor() {
 }
 
 static void paint_background() {
-	current_tick = getcputime();
+	update_tick();
 }
 
 static void paint_logs(const char* format, int& origin, int& format_origin, int& maximum) {
@@ -620,6 +620,17 @@ static void setup_visible_area() {
 	hilite_drawable = 0;
 }
 
+static void update_floattext_tail() {
+	auto pb = bsdata<floattext>::begin();
+	auto pe = bsdata<floattext>::end();
+	while(pe > pb) {
+		pe--;
+		if(*(pe))
+			break;
+		bsdata<floattext>::source.count--;
+	}
+}
+
 static void prepare_objects() {
 	objects.clear();
 	for(auto& e : bsdata<door>()) {
@@ -642,10 +653,15 @@ static void prepare_objects() {
 	for(auto& e : bsdata<floattext>()) {
 		if(!e)
 			continue;
+		if(e.stop_visible < current_game_tick) {
+			e.clear();
+			continue;
+		}
 		if(!e.position.in(last_area))
 			continue;
 		objects.add(&e);
 	}
+	update_floattext_tail();
 }
 
 static void sort_objects() {
@@ -746,13 +762,14 @@ static void apply_hilite_command() {
 			if(p->type == RegionInfo) {
 				auto pn = getdescription(gettipsname(p->position));
 				if(pn)
-					add_float_text(hotspot, pn, 320, 1000 * 3);
+					add_float_text(hotspot, pn, 320, 1000 * 5, p);
 			}
 		}
 	}
 }
 
 static void area_map() {
+	update_game_tick();
 	apply_shifer();
 	setup_visible_area();
 	paint_tiles();
@@ -1065,6 +1082,16 @@ static void text_description() {
 	font = push_font;
 }
 
+static void text_console() {
+	auto push_font = font;
+	if(gui.res)
+		font = gui.res;
+	area_console.paint((char*)console_data.data);
+	if(gui.hilited)
+		area_description.input();
+	font = push_font;
+}
+
 void util_items_list();
 
 BSDATA(widget) = {
@@ -1082,6 +1109,7 @@ BSDATA(widget) = {
 	{"CreatureColor", creature_color},
 	{"CreatureRace", creature_race},
 	{"CreatureWeight", creature_weight},
+	{"TextConsole", text_console},
 	{"TextDescription", text_description},
 	{"Form", paint_form},
 	{"ItemActionButton", item_action_button},

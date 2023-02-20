@@ -110,6 +110,7 @@
     <ClCompile Include="stringbuilder.cpp" />
     <ClCompile Include="surface_serial.cpp" />
     <ClCompile Include="szdup.cpp" />
+    <ClCompile Include="timer.cpp" />
     <ClCompile Include="variant.cpp" />
     <ClCompile Include="wear.cpp" />
     <ClCompile Include="wearable.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="attack.h" />
     <ClInclude Include="class.h" />
     <ClInclude Include="collection.h" />
+    <ClInclude Include="console.h" />
     <ClInclude Include="container.h" />
     <ClInclude Include="damage.h" />
     <ClInclude Include="door.h" />
@@ -178,6 +180,7 @@
     <ClInclude Include="sprite_util.h" />
     <ClInclude Include="stringact.h" />
     <ClInclude Include="stringbuilder.h" />
+    <ClInclude Include="timer.h" />
     <ClInclude Include="variant.h" />
     <ClInclude Include="wear.h" />
     <ClInclude Include="wearable.h" />

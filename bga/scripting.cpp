@@ -1,9 +1,11 @@
 #include "colorgrad.h"
+#include "console.h"
 #include "creature.h"
 #include "draw.h"
 #include "draw_command.h"
 #include "draw_control.h"
 #include "script.h"
+#include "timer.h"
 
 using namespace draw;
 
@@ -56,8 +58,8 @@ static void show_item_list() {
 	widget::open("ItemList");
 }
 
-static void make_scrap() {
-	heal(-1);
+static void debug_test() {
+	logm("Current timer %1i", current_game_tick);
 }
 
 static void open_form(const char* id, bool open_only_in_game = false) {
@@ -119,7 +121,7 @@ BSDATA(draw::command) = {
 	{"GameOptions", game_options, KeyEscape},
 	{"GameSpells", game_spells, 'S'},
 	{"LevelUp", level_up, 0, allow_level_up},
-	{"MakeScrap", make_scrap, Ctrl + 'D'},
+	{"DebugTest", debug_test, Ctrl + 'D'},
 	{"ShowItemList", show_item_list, Ctrl + 'I'},
 };
 BSDATAF(draw::command)

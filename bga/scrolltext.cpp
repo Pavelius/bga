@@ -40,6 +40,8 @@ void scrolltext::correct() {
 }
 
 void scrolltext::paint(const char* format) {
+	if(!format)
+		return;
 	auto push_clipping = clipping;
 	setclipall();
 	if(cashe_string == -1) {
