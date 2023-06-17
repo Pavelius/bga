@@ -216,7 +216,7 @@ static void painting_equipment(item equipment, int ws, int frame, unsigned flags
 		image(gres(res::token(tb + ws)), frame, flags, pallette);
 }
 
-static void paperdoll(const coloration& colors, race_s race, gender_s gender, class_s type, int animation, int orientation, const item& armor, const item& weapon, const item& offhand, const item& helm) {
+static void paperdoll(const coloration& colors, race_s race, gender_s gender, class_s type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
 	sprite* source;
 	unsigned flags;
 	int ws;
@@ -231,7 +231,7 @@ static void paperdoll(const coloration& colors, race_s race, gender_s gender, cl
 	} else
 		flags = 0;
 	color pallette[256]; colors.setpallette(pallette);
-	auto frame = source->ganim(animation * directions + o, current_tick / 100);
+	auto frame = source->ganim(animation * directions + o, frame_tick);
 	image(source, frame, flags, pallette);
 	painting_equipment(weapon, ws, frame, flags, pallette);
 	painting_equipment(helm, ws, frame, flags, pallette);
@@ -244,7 +244,7 @@ static void paperdoll() {
 	caret.x += width / 2;
 	caret.y += height / 2 + 20;
 	paperdoll(*player,
-		player->race, player->gender, player->getmainclass(), 1, orientation,
+		player->race, player->gender, player->getmainclass(), 1, orientation, current_tick / 100,
 		player->wears[Body], player->getweapon(), player->getoffhand(), player->wears[Head]);
 	caret = push_caret;
 	switch(hot.key) {
