@@ -9,6 +9,8 @@ const char* chra = "art/characters";
 const char* mons = "art/monsters";
 const char* proj = "art/projectiles";
 
+static array dynamic_headers(sizeof(residi));
+
 BSDATA(residi) = {
 	{"NONE"},
 	{"STONEBIG", font}, {"REALMS", font}, {"NORMAL", font}, {"TOOLFONT", font},
@@ -66,6 +68,10 @@ BSDATA(residi) = {
 };
 assert_enum(residi, res::MSKAA)
 
+void residi::clear() {
+	memset(this, 0, sizeof(*this));
+}
+
 sprite* residi::get() {
 	if(data)
 		return data;
@@ -87,5 +93,16 @@ sprite* gres(const char* id) {
 	auto p = bsdata<residi>::find(id);
 	if(!p)
 		return 0;
+	return p->get();
+}
+
+sprite* gres(const char* id, const char* folder) {
+	auto p = (residi*)dynamic_headers.findv(id, 0);
+	if(!p) {
+		p = (residi*)dynamic_headers.add();
+		p->clear();
+		p->id = szdup(id);
+		p->folder = szdup(folder);
+	}
 	return p->get();
 }

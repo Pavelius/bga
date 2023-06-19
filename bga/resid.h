@@ -67,7 +67,9 @@ struct residi {
 	const char*		folder;
 	sprite*			data;
 	bool			error;
+	void			clear();
 	sprite*			get();
 };
 sprite* gres(res::token i);
 sprite* gres(const char* id);
+sprite* gres(const char* id, const char* folder);

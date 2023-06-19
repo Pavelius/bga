@@ -1,4 +1,5 @@
 #include "area.h"
+#include "animation.h"
 #include "bsreq.h"
 #include "class.h"
 #include "creature.h"
@@ -670,6 +671,11 @@ static void prepare_objects() {
 			continue;
 		objects.add(&e);
 	}
+	for(auto& e : bsdata<animation>()) {
+		if(!e.position.in(last_area))
+			continue;
+		objects.add(&e);
+	}
 	update_floattext_tail();
 }
 
@@ -702,6 +708,23 @@ static void polygon_red(const sliceu<point>& source) {
 	fore = push_fore;
 }
 
+static unsigned get_game_tick() {
+	return current_tick / 100;
+}
+
+void creature::paint() const {
+	paperdoll(*this,
+		race, gender, getmainclass(), 1, 0, get_game_tick(),
+		wears[Body], getweapon(), getoffhand(), wears[Head]);
+}
+
+void animation::paint() const {
+	auto pr = gres(this->rsname, "art/animations");
+	if(!pr)
+		return;
+	image(pr, pr->ganim(frame, get_game_tick()), 0);
+}
+
 static void paint_object(drawable* object) {
 	if(bsdata<door>::have(object)) {
 		auto p = (door*)object;
@@ -725,6 +748,12 @@ static void paint_object(drawable* object) {
 		}
 	} else if(bsdata<floattext>::have(object)) {
 		auto p = (floattext*)object;
+		p->paint();
+	} else if(bsdata<creature>::have(object)) {
+		auto p = (creature*)object;
+		p->paint();
+	} else if(bsdata<animation>::have(object)) {
+		auto p = (animation*)object;
 		p->paint();
 	}
 }

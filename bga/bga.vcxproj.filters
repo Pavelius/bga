@@ -233,9 +233,6 @@
     <ClCompile Include="draw_gui.cpp">
       <Filter>interface</Filter>
     </ClCompile>
-    <ClCompile Include="widget.cpp">
-      <Filter>interface</Filter>
-    </ClCompile>
     <ClCompile Include="draw_control.cpp">
       <Filter>interface</Filter>
     </ClCompile>
@@ -318,6 +315,9 @@
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="widget.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -424,9 +424,6 @@
     <ClInclude Include="draw_control.h">
       <Filter>interface</Filter>
     </ClInclude>
-    <ClInclude Include="widget.h">
-      <Filter>interface</Filter>
-    </ClInclude>
     <ClInclude Include="resid.h">
       <Filter>interface</Filter>
     </ClInclude>
@@ -515,6 +512,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="widget.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
