@@ -28,6 +28,6 @@ struct creature : drawable, actable, wearable, classa, avatarable, coloration, s
 	void		update();
 	void		update_abilities();
 };
-extern creature* player;
-extern creature* party[6];
+extern creature*			player;
+extern creature*			party[6];
 extern collection<creature> selected_creatures;

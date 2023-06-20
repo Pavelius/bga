@@ -1,5 +1,7 @@
 #include "area.h"
+#include "archive.h"
 #include "console.h"
+#include "creature.h"
 #include "door.h"
 #include "entrance.h"
 #include "draw_control.h"
@@ -31,4 +33,20 @@ void enter(const char* id, const char* location) {
 	if(pn)
 		setcamera(pn->position);
 	draw::form::nextscene("GGAME");
+}
+
+static bool archive_sav(const char* url, bool write_mode) {
+	io::file file(url, write_mode ? StreamWrite : StreamRead);
+	if(!file)
+		return false;
+	archive a(file, write_mode);
+	a.set(bsdata<variable>::source);
+	a.set(bsdata<creature>::source);
+	return true;
+}
+
+static bool archive_game(const char* name, bool write_mode) {
+	char temp[260]; stringbuilder sb(temp);
+	sb.add("save/%1.sav", name);
+	return archive_sav(temp, write_mode);
 }
