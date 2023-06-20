@@ -25,6 +25,9 @@
     <Filter Include="forms">
       <UniqueIdentifier>{071b14e1-b9f1-44ae-a499-6520f346576d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="locale\ru">
+      <UniqueIdentifier>{905bf6e5-309c-406e-b42c-869fe85b7f77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\rules\Colors.txt">
@@ -85,25 +88,25 @@
       <Filter>rules</Filter>
     </Text>
     <Text Include="..\locale\ru\core\AlignmentNames.txt">
-      <Filter>locale</Filter>
+      <Filter>locale\ru</Filter>
     </Text>
     <Text Include="..\locale\ru\core\FeatNames.txt">
-      <Filter>locale</Filter>
+      <Filter>locale\ru</Filter>
     </Text>
     <Text Include="..\locale\ru\core\ItemDescriptions.txt">
-      <Filter>locale</Filter>
+      <Filter>locale\ru</Filter>
     </Text>
     <Text Include="..\locale\ru\core\ItemNames.txt">
-      <Filter>locale</Filter>
+      <Filter>locale\ru</Filter>
     </Text>
     <Text Include="..\locale\ru\core\Names.txt">
-      <Filter>locale</Filter>
+      <Filter>locale\ru</Filter>
     </Text>
     <Text Include="..\locale\ru\core\NamesNewbe.txt">
-      <Filter>locale</Filter>
+      <Filter>locale\ru</Filter>
     </Text>
     <Text Include="..\locale\ru\core\SkillNames.txt">
-      <Filter>locale</Filter>
+      <Filter>locale\ru</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +323,15 @@
     <ClCompile Include="widget.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="dice.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="animation.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="objectid.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -515,6 +527,12 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="widget.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="dice.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="objectid.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

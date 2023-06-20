@@ -1,6 +1,7 @@
 #include "ability.h"
 #include "advance.h"
 #include "animation.h"
+#include "area.h"
 #include "bsreq.h"
 #include "color.h"
 #include "crt.h"
@@ -29,6 +30,7 @@ BSMETA(varianti) = {BSREQ(id), {}};
 
 BSDATAC(advancei, 512)
 BSDATAC(animation, 128)
+BSDATAC(areai, 512)
 BSDATAC(colorgrad, 32)
 BSDATAC(control, 1024)
 BSDATAC(container, 128)

@@ -674,6 +674,8 @@ static void prepare_objects() {
 	for(auto& e : bsdata<animation>()) {
 		if(!e.position.in(last_area))
 			continue;
+		if(!e.isvisible())
+			continue;
 		objects.add(&e);
 	}
 	update_floattext_tail();
@@ -722,6 +724,7 @@ void animation::paint() const {
 	auto pr = gres(this->rsname, "art/animations");
 	if(!pr)
 		return;
+	auto hour = getgamehour();
 	image(pr, pr->ganim(frame, get_game_tick()), 0);
 }
 

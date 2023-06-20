@@ -49,6 +49,7 @@
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
     <ClCompile Include="alignment.cpp" />
+    <ClCompile Include="animation.cpp" />
     <ClCompile Include="answers.cpp" />
     <ClCompile Include="archive.cpp" />
     <ClCompile Include="area.cpp" />
@@ -65,6 +66,7 @@
     <ClCompile Include="crt.cpp" />
     <ClCompile Include="crt_translate.cpp" />
     <ClCompile Include="damage.cpp" />
+    <ClCompile Include="dice.cpp" />
     <ClCompile Include="door.cpp" />
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="draw_answers.cpp" />
@@ -93,6 +95,7 @@
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="nameable.cpp" />
+    <ClCompile Include="objectid.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="portrait.cpp" />
     <ClCompile Include="race.cpp" />
@@ -133,6 +136,7 @@
     <ClInclude Include="console.h" />
     <ClInclude Include="container.h" />
     <ClInclude Include="damage.h" />
+    <ClInclude Include="dice.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="entrance.h" />
@@ -141,6 +145,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />
+    <ClInclude Include="objectid.h" />
     <ClInclude Include="portrait.h" />
     <ClInclude Include="region.h" />
     <ClInclude Include="resinfo.h" />

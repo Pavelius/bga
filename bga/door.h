@@ -1,4 +1,5 @@
 #include "drawable.h"
+#include "objectid.h"
 #include "point.h"
 
 #pragma once
@@ -28,4 +29,7 @@ struct door : drawable {
 	bool				isopen() const { return opened; }
 	bool				isvisibleactive() const { return true; }
 	void				use(bool open);
+};
+struct doori : objectid {
+	bool				opened, locked;
 };

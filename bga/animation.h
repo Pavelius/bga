@@ -20,5 +20,6 @@ struct animation : drawable {
 	unsigned char		transparency;
 	unsigned char		chance_loop;
 	unsigned char		skip_cycles;
+	bool				isvisible() const;
 	void				paint() const;
 };

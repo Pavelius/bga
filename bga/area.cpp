@@ -23,6 +23,7 @@ unsigned char map::statemap[256 * 256];
 unsigned char map::lightmap[256 * 256];
 unsigned short map::tilemap[64 * 64];
 char map::areaname[12];
+unsigned short current_area;
 static color lightpal[256];
 
 static const unsigned char orientations_5b5[25] = {
@@ -41,6 +42,28 @@ static const unsigned char orientations_7b7[49] = {
 	3, 2, 1, 0, 15, 14, 13,
 	2, 1, 1, 0, 15, 15, 14,
 };
+
+int	areai::compare(const void* v1, const void* v2) {
+	return strcmp(((areai*)v1)->name, ((areai*)v2)->name);
+}
+
+areai* areai::add(const char* name, const char* folder) {
+	auto p = find(name, folder);
+	if(!p) {
+		p = bsdata<areai>::add();
+		stringbuilder s1(p->name); s1.add(szdup(name));
+		stringbuilder s2(p->folder); s2.add(szdup(folder));
+	}
+	return p;
+}
+
+areai* areai::find(const char* name, const char* folder) {
+	for(auto& e : bsdata<areai>()) {
+		if(strcmp(e.name, name) == 0 && strcmp(e.folder, folder) == 0)
+			return &e;
+	}
+	return 0;
+}
 
 int map::getday(unsigned value) {
 	return value / (24 * 60);
