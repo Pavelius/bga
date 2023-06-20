@@ -1,10 +1,11 @@
 #include "drawable.h"
+#include "variable.h"
 
 #pragma once
 
 struct sprite;
 
-struct animation : drawable {
+struct animation : drawable, variableid {
 	struct info {
 		const sprite*	source;
 		int				frame;

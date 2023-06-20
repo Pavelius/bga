@@ -2,14 +2,16 @@
 #include "color.h"
 #include "point.h"
 #include "stringbuilder.h"
+#include "variable.h"
 
 #pragma once
 
 struct sprite;
 
 struct areai {
-	char		name[12];
-	char		folder[4];
+	char			name[12];
+	char			folder[4];
+	slice<variable>	variables;
 	static areai* add(const char* name, const char* folder);
 	static int	compare(const void* v1, const void* v2);
 	static areai* find(const char* name, const char* folder);

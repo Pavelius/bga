@@ -53,6 +53,10 @@ areai* areai::add(const char* name, const char* folder) {
 		p = bsdata<areai>::add();
 		stringbuilder s1(p->name); s1.add(szdup(name));
 		stringbuilder s2(p->folder); s2.add(szdup(folder));
+		auto pb = bsdata<variable>::end();
+		bsdata<variable>::source.count += variable_count;
+		auto pe = bsdata<variable>::end();
+		p->variables = slice<variable>(pb, pe);
 	}
 	return p;
 }
@@ -109,7 +113,6 @@ void map::clear() {
 	bsdata<doortile>::source.clear();
 	bsdata<entrance>::source.clear();
 	bsdata<itemground>::source.clear();
-	//bsdata<itemcont>::source.clear();
 	bsdata<region>::source.clear();
 	bsdata<point>::source.clear();
 	bsdata<floattext>::source.clear();
@@ -183,6 +186,7 @@ bool archive_ard(io::stream& file, bool writemode) {
 	ar.set(map::width);
 	ar.set(map::height); map::height_tiles = (map::height * 12 + 15) / 16;
 	ar.set(map::areaname, 8);
+	ar.set(variable_count);
 	// Карты тайлов
 	archive_bitmap(ar, (unsigned char*)map::tilemap, 16, 64 * sizeof(map::tilemap[0]), map::width / 4, map::height_tiles / 4, 0);
 	archive_bitmap(ar, map::lightmap, 8, 256, map::width, map::height, lightpal);
@@ -223,11 +227,6 @@ static bool load_ard_file(const char* name) {
 	return archive_ard(file, false);
 }
 
-static void use_all_doors() {
-	for(auto& e : bsdata<door>())
-		e.use(e.opened);
-}
-
 void map::read(const char* name) {
 	//res::cleanup();
 	if(!load_ard_file(name))
@@ -236,7 +235,6 @@ void map::read(const char* name) {
 		return;
 	if(!load_mmp_file(areaname))
 		return;
-	use_all_doors();
 	//worldmap::set(worldmap::getarea(name));
 }
 

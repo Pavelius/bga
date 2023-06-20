@@ -329,7 +329,10 @@
     <ClCompile Include="animation.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="objectid.cpp">
+    <ClCompile Include="tag.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="variable.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -532,7 +535,10 @@
     <ClInclude Include="dice.h">
       <Filter>support</Filter>
     </ClInclude>
-    <ClInclude Include="objectid.h">
+    <ClInclude Include="variable.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="tag.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

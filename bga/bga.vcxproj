@@ -95,7 +95,6 @@
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="nameable.cpp" />
-    <ClCompile Include="objectid.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="portrait.cpp" />
     <ClCompile Include="race.cpp" />
@@ -112,7 +111,9 @@
     <ClCompile Include="stringbuilder.cpp" />
     <ClCompile Include="surface_serial.cpp" />
     <ClCompile Include="szdup.cpp" />
+    <ClCompile Include="tag.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="variable.cpp" />
     <ClCompile Include="variant.cpp" />
     <ClCompile Include="wear.cpp" />
     <ClCompile Include="wearable.cpp" />
@@ -145,7 +146,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />
-    <ClInclude Include="objectid.h" />
+    <ClInclude Include="variable.h" />
     <ClInclude Include="portrait.h" />
     <ClInclude Include="region.h" />
     <ClInclude Include="resinfo.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="sprite_util.h" />
     <ClInclude Include="stringact.h" />
     <ClInclude Include="stringbuilder.h" />
+    <ClInclude Include="tag.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="variant.h" />
     <ClInclude Include="wear.h" />

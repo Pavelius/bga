@@ -1,12 +1,13 @@
 #include "drawable.h"
 #include "rect.h"
+#include "variable.h"
 
 #pragma once
 
 enum region_type_s {
 	RegionTriger, RegionInfo, RegionTravel
 };
-struct region : drawable {
+struct region : drawable, variableid {
 	region_type_s	type;
 	point			launch;
 	point			use;

@@ -45,6 +45,7 @@ BSDATAC(form, 128)
 BSDATAC(point, 256*256)
 BSDATAC(region, 128)
 BSDATAD(variant)
+BSDATAC(variable, 1024)
 
 NOBSDATA(color)
 NOBSDATA(dice)

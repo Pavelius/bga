@@ -1,8 +1,9 @@
 #include "drawable.h"
+#include "variable.h"
 
 #pragma once
 
-struct container : drawable {
+struct container : drawable, variableid {
 	enum type_s : unsigned char {
 		None,
 		Bag, Chest, Drawer, Pile, Table, Shelf, Altar, Nonvisible,

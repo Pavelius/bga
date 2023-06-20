@@ -810,10 +810,7 @@ static void apply_hilite_command() {
 				enter(p->move_to_area, p->move_to_entrance);
 		} else if(bsdata<door>::have(hilite_drawable)) {
 			auto p = (door*)hilite_drawable;
-			if(p->opened)
-				p->use(false);
-			else
-				p->use(true);
+			p->use(!p->isopen());
 		} else if(bsdata<container>::have(hilite_drawable)) {
 			auto p = (container*)hilite_drawable;
 			logm("This is %1", p->name);
