@@ -1,4 +1,5 @@
 #include "advance.h"
+#include "area.h"
 #include "creature.h"
 #include "modifier.h"
 #include "pushvalue.h"
@@ -82,6 +83,7 @@ static void apply_advance(variant v, int level) {
 
 void creature::clear() {
 	memset(this, 0, sizeof(*this));
+	area_index = 0xFFFF;
 }
 
 static short unsigned random_portrait_no_party(gender_s gender) {
@@ -177,6 +179,7 @@ static int get_skill_points(class_s v) {
 void creature::create(race_s race, gender_s gender, class_s classv, unsigned short portrait) {
 	pushvalue push_player(player, this);
 	clear();
+	this->area_index = current_area;
 	this->gender = gender;
 	this->portrait = portrait;
 	this->race = race;

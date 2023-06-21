@@ -79,6 +79,7 @@
     <ClCompile Include="entrance.cpp" />
     <ClCompile Include="feat.cpp" />
     <ClCompile Include="floattext.cpp" />
+    <ClCompile Include="formation.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gender.cpp" />
     <ClCompile Include="information.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="entrance.h" />
     <ClInclude Include="feat.h" />
     <ClInclude Include="floattext.h" />
+    <ClInclude Include="formation.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />

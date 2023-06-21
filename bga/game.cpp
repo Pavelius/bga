@@ -15,6 +15,7 @@ unsigned getgamehour() {
 
 static void read_area(const char* id, const char* folder) {
 	auto p = areai::add(id, folder);
+	current_area = getbsi(p);
 	current_variable_base = p->variables.begin();
 }
 

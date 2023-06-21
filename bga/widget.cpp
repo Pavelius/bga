@@ -217,7 +217,10 @@ static void painting_equipment(item equipment, int ws, int frame, unsigned flags
 		image(gres(res::token(tb + ws)), frame, flags, pallette);
 }
 
-static void paperdoll(const coloration& colors, race_s race, gender_s gender, class_s type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
+static void shade_pallette(color* pallette, color fore) {
+}
+
+static void paperdoll(color* pallette, race_s race, gender_s gender, class_s type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
 	sprite* source;
 	unsigned flags;
 	int ws;
@@ -231,12 +234,16 @@ static void paperdoll(const coloration& colors, race_s race, gender_s gender, cl
 		o = (9 - 1) * 2 - o;
 	} else
 		flags = 0;
-	color pallette[256]; colors.setpallette(pallette);
 	auto frame = source->ganim(animation * directions + o, frame_tick);
 	image(source, frame, flags, pallette);
 	painting_equipment(weapon, ws, frame, flags, pallette);
 	painting_equipment(helm, ws, frame, flags, pallette);
 	painting_equipment(offhand, ws, frame, flags, pallette);
+}
+
+static void paperdoll(const coloration& colors, race_s race, gender_s gender, class_s type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
+	color pallette[256]; colors.setpallette(pallette);
+	paperdoll(pallette, race, gender, type, animation, orientation, frame_tick, armor, weapon, offhand, helm);
 }
 
 static void paperdoll() {
@@ -641,25 +648,17 @@ static void update_floattext_tail() {
 	}
 }
 
-static void prepare_objects() {
-	objects.clear();
-	for(auto& e : bsdata<door>()) {
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-	for(auto& e : bsdata<region>()) {
-		if(e.type == RegionTriger)
+static void prepare_creatures() {
+	for(auto& e : bsdata<creature>()) {
+		if(!e.area_index != current_area)
 			continue;
 		if(!e.position.in(last_area))
 			continue;
 		objects.add(&e);
 	}
-	for(auto& e : bsdata<container>()) {
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
+}
+
+static void prepare_floattext() {
 	for(auto& e : bsdata<floattext>()) {
 		if(!e)
 			continue;
@@ -671,6 +670,9 @@ static void prepare_objects() {
 			continue;
 		objects.add(&e);
 	}
+}
+
+static void prepare_animation() {
 	for(auto& e : bsdata<animation>()) {
 		if(!e.position.in(last_area))
 			continue;
@@ -678,6 +680,42 @@ static void prepare_objects() {
 			continue;
 		objects.add(&e);
 	}
+}
+
+static void prepare_containers() {
+	for(auto& e : bsdata<container>()) {
+		if(!e.position.in(last_area))
+			continue;
+		objects.add(&e);
+	}
+}
+
+static void prepare_regions() {
+	for(auto& e : bsdata<region>()) {
+		if(e.type == RegionTriger)
+			continue;
+		if(!e.position.in(last_area))
+			continue;
+		objects.add(&e);
+	}
+}
+
+static void prepare_doors() {
+	for(auto& e : bsdata<door>()) {
+		if(!e.position.in(last_area))
+			continue;
+		objects.add(&e);
+	}
+}
+
+static void prepare_objects() {
+	objects.clear();
+	prepare_animation();
+	prepare_containers();
+	prepare_creatures();
+	prepare_doors();
+	prepare_floattext();
+	prepare_regions();
 	update_floattext_tail();
 }
 
@@ -715,7 +753,8 @@ static unsigned get_game_tick() {
 }
 
 void creature::paint() const {
-	paperdoll(*this,
+	color pallette[256]; setpallette(pallette);
+	paperdoll(pallette,
 		race, gender, getmainclass(), 1, 0, get_game_tick(),
 		wears[Body], getweapon(), getoffhand(), wears[Head]);
 }
