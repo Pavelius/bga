@@ -43,6 +43,10 @@ static scrolltext area_description, area_console;
 static resinfo default_cursor;
 stringbuilder description(description_text);
 
+static unsigned get_game_tick() {
+	return current_tick / 64;
+}
+
 static void update_creature() {
 	if(player)
 		player->update();
@@ -217,7 +221,13 @@ static void painting_equipment(item equipment, int ws, int frame, unsigned flags
 		image(gres(res::token(tb + ws)), frame, flags, pallette);
 }
 
-static void shade_pallette(color* pallette, color fore) {
+static void actor_marker(int size, bool flicking, bool double_border) {
+	auto r = (size + 1) * 6;
+	if(flicking)
+		r += iabs(int(get_game_tick() % 6) - 3) - 1;
+	circle(r);
+	if(double_border)
+		circle(r + 1);
 }
 
 static void paperdoll(color* pallette, race_s race, gender_s gender, class_s type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
@@ -748,20 +758,25 @@ static void polygon_red(const sliceu<point>& source) {
 	fore = push_fore;
 }
 
-static unsigned get_game_tick() {
-	return current_tick / 100;
-}
-
 static void apply_shadow(color* pallette, color fore) {
 	for(auto i = 0; i < 256; i++)
 		pallette[i] = pallette[i] * fore;
 }
 
+static void paint_markers(const creature* p) {
+	auto push_fore = fore;
+	fore = colors::green;
+	if(selected_creatures.is((void*)p))
+		actor_marker(1, false, player == p);
+	fore = push_fore;
+}
+
 void creature::paint() const {
+	paint_markers(this);
 	color pallette[256]; setpallette(pallette);
 	apply_shadow(pallette, map::getshadow(position));
 	paperdoll(pallette,
-		race, gender, getmainclass(), 1, 0, get_game_tick(),
+		race, gender, getmainclass(), 1, orientation, get_game_tick(),
 		wears[Body], getweapon(), getoffhand(), wears[Head]);
 }
 
@@ -863,6 +878,17 @@ static void apply_hilite_command() {
 	}
 }
 
+static void jump_party() {
+	setparty(hotspot);
+}
+
+static void apply_command() {
+	if(hilite_drawable)
+		return;
+	if(hot.key == MouseLeft && hot.pressed && hot.mouse.in(last_screen))
+		execute(jump_party);
+}
+
 static void area_map() {
 	update_game_tick();
 	apply_shifer();
@@ -872,6 +898,7 @@ static void area_map() {
 	sort_objects();
 	paint_objects();
 	apply_hilite_command();
+	apply_command();
 }
 
 static void paint_item(const item* pi) {

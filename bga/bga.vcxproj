@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
+    <ClCompile Include="actor.cpp" />
     <ClCompile Include="alignment.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="answers.cpp" />
@@ -127,6 +128,7 @@
   <ItemGroup>
     <ClInclude Include="ability.h" />
     <ClInclude Include="actable.h" />
+    <ClInclude Include="actor.h" />
     <ClInclude Include="advance.h" />
     <ClInclude Include="alignment.h" />
     <ClInclude Include="animation.h" />

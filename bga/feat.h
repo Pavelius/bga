@@ -27,7 +27,8 @@ enum feat_s : unsigned char {
 	FastMovement, Illiteracy,
 	HateGoblinoids, Infravision, ImmunityToSleepSpell, FindSecretDoors, Lucky, PreciseThrower,
 	SaveBonusVsEnchantment, SaveBonusVsFear, SaveBonusVsIllusion, SaveBonusVsPoison, SaveBonusVsSpell, Stability, Stonecunning,
+	ReadyToBattle,
 };
 struct feati : nameable {
 };
-typedef flagable<(Stonecunning + 7) / 8> featf;
+typedef flagable<(ReadyToBattle + 7) / 8> featf;

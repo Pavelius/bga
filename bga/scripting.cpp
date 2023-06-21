@@ -20,8 +20,15 @@ static void heal(int bonus) {
 	player->hp = n;
 }
 
+static void select_all(int bonus) {
+	selected_creatures.clear();
+	for(auto p : party)
+		selected_creatures.add(p);
+}
+
 BSDATA(script) = {
 	{"Heal", heal},
+	{"SelectAll", select_all},
 };
 BSDATAF(script)
 

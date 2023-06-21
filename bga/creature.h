@@ -1,18 +1,11 @@
-#include "ability.h"
+#include "actor.h"
 #include "actable.h"
 #include "collection.h"
-#include "coloration.h"
-#include "class.h"
-#include "drawable.h"
 #include "portrait.h"
-#include "race.h"
-#include "wearable.h"
 
 #pragma once
 
-struct creature : drawable, actable, wearable, classa, avatarable, coloration, statable {
-	short unsigned	area_index;
-	race_s			race;
+struct creature : actor, avatarable {
 	statable		basic;
 	unsigned char	alignment;
 	short			hp, hp_max;
@@ -24,7 +17,6 @@ struct creature : drawable, actable, wearable, classa, avatarable, coloration, s
 	bool			isusable(const item& it) const;
 	void			getinfo(stringbuilder& sb) const;
 	void			getskillsinfo(stringbuilder& sb) const;
-	int				getskillpoints() const;
 	void			paint() const;
 	void			update();
 	void			update_abilities();
