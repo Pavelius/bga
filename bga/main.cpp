@@ -33,7 +33,6 @@ static item& citem(const char* id) {
 static void create_party() {
 	logm("Create party...");
 	for(auto i = 0; i < 6; i++) {
-		player = bsdata<creature>::add();
 		player->create(Male);
 		player->update();
 		party[i] = player;
@@ -41,8 +40,8 @@ static void create_party() {
 }
 
 static void start_main() {
-	enter("AR1000", "FR1001");
 	create_party();
+	enter("AR1000", "FR1001");
 	player->additem(citem("BattleAxe"));
 	player->additem(citem("BattleAxeP1"));
 	player->additem(citem("LeatherArmor"));

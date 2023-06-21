@@ -177,12 +177,12 @@ static int get_skill_points(class_s v) {
 }
 
 void creature::create(race_s race, gender_s gender, class_s classv, unsigned short portrait) {
-	pushvalue push_player(player, this);
-	clear();
-	this->area_index = current_area;
-	this->gender = gender;
-	this->portrait = portrait;
-	this->race = race;
+	player = bsdata<creature>::add();
+	player->clear();
+	player->area_index = current_area;
+	player->gender = gender;
+	player->portrait = portrait;
+	player->race = race;
 	random_ability();
 	apply_portraits();
 	raise_class(classv);

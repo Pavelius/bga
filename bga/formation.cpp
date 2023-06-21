@@ -9,6 +9,8 @@ extern "C" double atan(double x);
 extern "C" double cos(double x);
 extern "C" double sin(double x);
 
+formation_s current_formation = FormationProtect;
+
 static point formations[10][20] = {
 	{{0, 0}, {0, 36}, {0, 72}, {0, 108}, {0, 144}, {0, 180}, {0, 216}, {0, 252}, {0, 288}, {0, 324}, {0, 360}, {0, 396}, {0, 432}, {0, 468}, {0, 504}, {0, 540}, {0, 576}, {0, 612}, {0, 648}, {0, 684}}, // Follow
 	{{0, 0}, {48, 0}, {-48, 0}, {0, 48}, {0, 84}, {0, 120}, {0, 156}, {0, 192}, {0, 228}, {0, 264}, {0, 300}, {0, 336}, {0, 372}, {0, 408}, {0, 444}, {0, 480}, {0, 516}, {0, 552}, {0, 588}, {0, 624}}, // T
@@ -18,7 +20,7 @@ static point formations[10][20] = {
 	{{0, 0}, {0, -36}, {-64, 0}, {64, 0}, {-32, 48}, {32, 48}, {0, 24}, {0, 48}, {0, 72}, {0, 96}, {0, 120}, {0, 144}, {0, 168}, {0, 192}, {0, 216}, {0, 240}, {0, 264}, {0, 288}, {0, 312}, {0, 336}}, // Protect
 };
 
-point getformation(point src, point dst, formation_s formation, int pos) {
+point getformation(point dst, point src, formation_s formation, int pos) {
 	if(formation >= sizeof(formations) / sizeof(formations[0]))
 		return src;
 	pos = imin(pos, (int)(sizeof(formations[0]) / sizeof(formations[0][0])));

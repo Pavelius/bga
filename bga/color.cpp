@@ -9,6 +9,13 @@ color colors::red(255, 0, 0);
 color colors::yellow(255, 244, 32);
 color colors::white(255, 255, 255);
 
+color operator*(color c1, color c2) {
+	c1.r = (c1.r * c2.r) >> 8;
+	c1.g = (c1.g * c2.g) >> 8;
+	c1.b = (c1.b * c2.b) >> 8;
+	return c1;
+}
+
 color color::gray() const {
 	unsigned char level = (r + g + b) / 3;
 	return{level, level, level, 0};

@@ -650,7 +650,7 @@ static void update_floattext_tail() {
 
 static void prepare_creatures() {
 	for(auto& e : bsdata<creature>()) {
-		if(!e.area_index != current_area)
+		if(e.area_index != current_area)
 			continue;
 		if(!e.position.in(last_area))
 			continue;
@@ -752,8 +752,14 @@ static unsigned get_game_tick() {
 	return current_tick / 100;
 }
 
+static void apply_shadow(color* pallette, color fore) {
+	for(auto i = 0; i < 256; i++)
+		pallette[i] = pallette[i] * fore;
+}
+
 void creature::paint() const {
 	color pallette[256]; setpallette(pallette);
+	apply_shadow(pallette, map::getshadow(position));
 	paperdoll(pallette,
 		race, gender, getmainclass(), 1, 0, get_game_tick(),
 		wears[Body], getweapon(), getoffhand(), wears[Head]);

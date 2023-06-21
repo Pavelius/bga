@@ -28,6 +28,7 @@ struct color {
 	static int				scanline(int width, int bpp);
 	void					write(void* scanline, int x, int bpp, const void* pallette = 0, int color_count = 0) const;
 };
+color operator*(color c1, color c2);
 namespace colors {
 extern color				black;
 extern color				blue;

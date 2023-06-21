@@ -108,7 +108,6 @@ void map::clear() {
 	memset(lightpal, 0, sizeof(lightpal));
 	bsdata<animation>::source.clear();
 	bsdata<container>::source.clear();
-	bsdata<creature>::source.clear();
 	bsdata<door>::source.clear();
 	bsdata<doortile>::source.clear();
 	bsdata<entrance>::source.clear();

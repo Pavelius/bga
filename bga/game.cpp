@@ -3,8 +3,9 @@
 #include "console.h"
 #include "creature.h"
 #include "door.h"
-#include "entrance.h"
 #include "draw_control.h"
+#include "entrance.h"
+#include "formation.h"
 #include "game.h"
 #include "timer.h"
 
@@ -24,6 +25,14 @@ static void use_all_doors() {
 		e.use(e.isopen());
 }
 
+void setpartyposition(point dst, point view) {
+	auto index = 0;
+	for(auto p : party) {
+		p->area_index = current_area;
+		p->position = getformation(dst, view, FormationProtect, index++);
+	}
+}
+
 void enter(const char* id, const char* location) {
 	char temp[32]; stringbuilder sb(temp); sb.add(location);
 	logm("Enter area [%1] at location [%2]", id, location);
@@ -31,8 +40,10 @@ void enter(const char* id, const char* location) {
 	read_area(id, "ID2");
 	use_all_doors();
 	auto pn = entrance::find(temp);
-	if(pn)
+	if(pn) {
 		setcamera(pn->position);
+		setpartyposition(pn->position, {100, 100});
+	}
 	draw::form::nextscene("GGAME");
 }
 
