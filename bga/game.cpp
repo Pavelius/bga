@@ -25,21 +25,14 @@ static void use_all_doors() {
 		e.use(e.isopen());
 }
 
-void setparty(point dst, point view) {
+void setparty(point dst) {
 	auto index = 0;
-	for(auto p : party) {
-		auto new_position = getformation(dst, view, FormationProtect, index++);
+	for(auto p : selected_creatures) {
+		auto new_position = getformation(dst, p->position, FormationProtect, index++);
 		p->area_index = current_area;
 		p->lookat(new_position);
 		p->position = new_position;
 	}
-}
-
-void setparty(point dst) {
-	if(!party)
-		return;
-	auto previous = party[0]->position;
-	setparty(dst, previous);
 }
 
 void enter(const char* id, const char* location) {
@@ -51,7 +44,7 @@ void enter(const char* id, const char* location) {
 	auto pn = entrance::find(temp);
 	if(pn) {
 		setcamera(pn->position);
-		setparty(pn->position, {100, 100});
+		setparty(pn->position);
 	}
 	draw::form::nextscene("GGAME");
 }

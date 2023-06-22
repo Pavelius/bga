@@ -12,6 +12,7 @@
 #include "game.h"
 #include "log.h"
 #include "resid.h"
+#include "script.h"
 
 using namespace draw;
 
@@ -37,6 +38,7 @@ static void create_party() {
 		player->update();
 		party[i] = player;
 	}
+	script::run("SelectAll", 0);
 }
 
 static void start_main() {
