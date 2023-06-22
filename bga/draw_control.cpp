@@ -4,6 +4,7 @@
 #include "draw_gui.h"
 #include "log.h"
 #include "screenshoot.h"
+#include "script.h"
 
 using namespace draw;
 
@@ -68,6 +69,13 @@ static unsigned parse_hotkey(const char* p) {
 	return r;
 }
 
+static void form_script(const char* id) {
+	auto ps = bsdata<script>::find(str("%1%2", last_form->id, id));
+	if(!ps)
+		return;
+	ps->proc(0);
+}
+
 void form::read(const char* url) {
 	auto control_start = bsdata<control>::source.getcount();
 	bsreq::read(url);
@@ -128,44 +136,43 @@ static void form_paint() {
 	last_form->paint();
 }
 
-long form::open() const {
+long form::open(bool modal) const {
+	form_script("Opening");
 	if(opening)
 		opening();
-	//if(last_form->iswindowed())
-	//	screenshoot::open(form_paint, true);
-	draw::scene(form_paint);
+	if(modal)
+		screenshoot::open(form_paint, true);
+	else
+		draw::scene(form_paint);
 	if(closing)
 		closing();
+	form_script("Closing");
 	return getresult();
 }
 
 static void form_scene() {
 	last_form = next_last_form;
-	if(form::opening)
-		form::opening();
-	draw::scene(form_paint);
-	if(form::closing)
-		form::closing();
+	if(last_form)
+		last_form->open(false);
+}
+
+void form::nextscene() {
+	next_last_form = this;
+	setnext(form_scene);
 }
 
 void form::nextscene(const char* id) {
-	next_last_form = bsdata<form>::find(id);
-	setnext(form_scene);
+	auto p = bsdata<form>::find(id);
+	if(p)
+		p->nextscene();
 }
 
 long form::open(const char* id, bool modal) {
 	auto push_form = last_form;
 	last_form = bsdata<form>::find(id);
-	if(last_form) {
-		if(opening)
-			opening();
-		if(modal)
-			screenshoot::open(form_paint, true);
-		else
-			draw::scene(form_paint);
-		if(closing)
-			closing();
-	}
+	long result = 0;
+	if(last_form)
+		result = last_form->open(modal);
 	last_form = push_form;
-	return getresult();
+	return result;
 }

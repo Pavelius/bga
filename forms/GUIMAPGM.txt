@@ -4,6 +4,7 @@ Background GUIMAP 0 0 278 264 value(1)
 Button GBTNMED 61 157 156 24 frames(1 2 3 0) 
 Button GBTNMED 61 187 156 24 frames(1 2 2 0) value(2)
 Button GBTNMED 61 217 156 24 frames(1 2 3 0) value(3)
+
 // Unknown None 20 20 238 103 
 Button FLAG1 21 127 26 25 frames(0 2 1 0) value(4)
 Button FLAG1 51 127 26 25 frames(0 2 1 0) value(5)

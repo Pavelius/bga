@@ -287,30 +287,6 @@ static const char* getname() {
 	return pn;
 }
 
-static void form_paint() {
-	last_form->paint();
-}
-
-static void run_script(const char* id) {
-	auto ps = bsdata<script>::find(str("%1%2", last_form->id, id));
-	if(!ps)
-		return;
-	ps->proc(0);
-}
-
-static void form_scene() {
-	last_form = next_last_form;
-	run_script("Opening");
-	if(form::opening)
-		form::opening();
-	if(!last_form)
-		return;
-	draw::scene(form_paint);
-	if(form::closing)
-		form::closing();
-	run_script("Closing");
-}
-
 static void execute_script() {
 	auto p = (script*)hot.object;
 	p->proc(hot.param);
@@ -318,11 +294,11 @@ static void execute_script() {
 
 static void open_form() {
 	auto p = (form*)hot.object;
-	if(hot.param) {
-		next_last_form = p;
-		setnext(form_scene);
-	} else
-		p->open();
+	switch(hot.param) {
+	case 1: p->nextscene(); break;
+	case 2: p->open(true); break;
+	default: p->open(false); break;
+	}
 }
 
 static void open_widget() {

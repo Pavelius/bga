@@ -30,3 +30,4 @@ ButtonNT GCOMMBTN 757 1 26 45 frames(18 19 0 0) value(14) // AI on/off
 
 // For debugging purposes
 HotKey NONE 0 0 0 0 data(DebugTest) hotkey("Ctrl+D")
+HotKey NONE 0 0 0 0 data(ItemList) hotkey("Ctrl+I")
