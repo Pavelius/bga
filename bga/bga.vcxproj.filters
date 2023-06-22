@@ -236,7 +236,7 @@
     <ClCompile Include="draw_gui.cpp">
       <Filter>interface</Filter>
     </ClCompile>
-    <ClCompile Include="draw_control.cpp">
+    <ClCompile Include="draw_form.cpp">
       <Filter>interface</Filter>
     </ClCompile>
     <ClCompile Include="resid.cpp">
@@ -439,7 +439,7 @@
     <ClInclude Include="draw_gui.h">
       <Filter>interface</Filter>
     </ClInclude>
-    <ClInclude Include="draw_control.h">
+    <ClInclude Include="draw_form.h">
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="resid.h">

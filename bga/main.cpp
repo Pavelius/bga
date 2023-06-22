@@ -8,7 +8,7 @@
 #include "door.h"
 #include "draw.h"
 #include "draw_gui.h"
-#include "draw_control.h"
+#include "draw_form.h"
 #include "game.h"
 #include "log.h"
 #include "resid.h"

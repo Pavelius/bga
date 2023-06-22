@@ -1,6 +1,6 @@
 #include "bsreq.h"
 #include "draw.h"
-#include "draw_control.h"
+#include "draw_form.h"
 #include "draw_gui.h"
 #include "log.h"
 #include "screenshoot.h"
@@ -8,8 +8,8 @@
 
 using namespace draw;
 
-form* draw::last_form;
-static form* next_last_form;
+const form* draw::last_form;
+static const form* next_last_form;
 fnevent form::prepare, form::opening, form::closing;
 
 struct form_parse_key {
@@ -69,13 +69,6 @@ static unsigned parse_hotkey(const char* p) {
 	return r;
 }
 
-static void form_script(const char* id) {
-	auto ps = bsdata<script>::find(str("%1%2", last_form->id, id));
-	if(!ps)
-		return;
-	ps->proc(0);
-}
-
 void form::read(const char* url) {
 	auto control_start = bsdata<control>::source.getcount();
 	bsreq::read(url);
@@ -94,11 +87,12 @@ void form::read(const char* url) {
 }
 
 void form::paint() const {
+	static widget* background_widget = bsdata<widget>::find("Background");
 	rectpush push;
 	auto push_caret = caret;
 	auto push_gui = gui;
 	for(auto& e : controls) {
-		if(equal(e.visual->id, "Background")) {
+		if(e.visual == background_widget) {
 			if(e.width || e.height) {
 				push_caret.x = (getwidth() - e.width) / 2;
 				push_caret.y = (getheight() - e.height) / 4;
@@ -132,6 +126,13 @@ void form::paint() const {
 	gui = push_gui;
 }
 
+static void form_script(const char* id) {
+	auto ps = bsdata<script>::find(str("%1%2", last_form->id, id));
+	if(!ps)
+		return;
+	ps->proc(0);
+}
+
 static void form_paint() {
 	last_form->paint();
 }
@@ -150,23 +151,6 @@ long form::open(bool modal) const {
 	return getresult();
 }
 
-static void form_scene() {
-	last_form = next_last_form;
-	if(last_form)
-		last_form->open(false);
-}
-
-void form::nextscene() {
-	next_last_form = this;
-	setnext(form_scene);
-}
-
-void form::nextscene(const char* id) {
-	auto p = bsdata<form>::find(id);
-	if(p)
-		p->nextscene();
-}
-
 long form::open(const char* id, bool modal) {
 	auto push_form = last_form;
 	last_form = bsdata<form>::find(id);
@@ -175,4 +159,21 @@ long form::open(const char* id, bool modal) {
 		result = last_form->open(modal);
 	last_form = push_form;
 	return result;
+}
+
+static void form_scene() {
+	last_form = next_last_form;
+	if(last_form)
+		last_form->open(false);
+}
+
+void form::nextscene() const {
+	next_last_form = this;
+	setnext(form_scene);
+}
+
+void form::nextscene(const char* id) {
+	auto p = bsdata<form>::find(id);
+	if(p)
+		p->nextscene();
 }

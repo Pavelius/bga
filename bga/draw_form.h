@@ -25,11 +25,11 @@ struct form {
 	sliceu<control>	controls;
 	static fnevent	prepare, opening, closing;
 	static void		nextscene(const char* id);
-	void			nextscene();
+	void			nextscene() const;
 	long			open(bool modal) const;
 	static long		open(const char* id, bool modal);
 	void			paint() const;
 	static void		read(const char* url);
 };
-extern form* last_form;
+extern const form* last_form;
 }

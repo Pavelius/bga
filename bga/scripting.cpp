@@ -2,7 +2,7 @@
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
-#include "draw_control.h"
+#include "draw_form.h"
 #include "script.h"
 #include "timer.h"
 

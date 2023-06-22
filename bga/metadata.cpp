@@ -8,7 +8,7 @@
 #include "container.h"
 #include "creature.h"
 #include "door.h"
-#include "draw_control.h"
+#include "draw_form.h"
 #include "entrance.h"
 #include "floattext.h"
 #include "gender.h"

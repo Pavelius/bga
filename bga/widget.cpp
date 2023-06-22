@@ -9,7 +9,7 @@
 #include "crt.h"
 #include "door.h"
 #include "draw.h"
-#include "draw_control.h"
+#include "draw_form.h"
 #include "draw_gui.h"
 #include "drawable.h"
 #include "floattext.h"
