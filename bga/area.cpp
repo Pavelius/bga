@@ -51,8 +51,8 @@ areai* areai::add(const char* name, const char* folder) {
 	auto p = find(name, folder);
 	if(!p) {
 		p = bsdata<areai>::add();
-		stringbuilder s1(p->name); s1.add(szdup(name));
-		stringbuilder s2(p->folder); s2.add(szdup(folder));
+		stringbuilder s1(p->name); s1.add(name); szupper(p->name);
+		stringbuilder s2(p->folder); s2.add(folder); szupper(p->folder);
 		auto pb = bsdata<variable>::end();
 		bsdata<variable>::source.count += variable_count;
 		auto pe = bsdata<variable>::end();

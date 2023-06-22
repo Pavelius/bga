@@ -38,7 +38,7 @@ void setparty(point dst) {
 		auto new_position = getformationfree(dst, start_position, FormationProtect, index++);
 		p->area_index = current_area;
 		p->lookat(new_position);
-		p->position = new_position;
+		p->setposition(new_position);
 	}
 }
 

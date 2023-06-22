@@ -30,6 +30,7 @@ struct form {
 	static long		open(const char* id, bool modal);
 	void			paint() const;
 	static void		read(const char* url);
+	static void		readhead(const char* url);
 };
 extern const form* last_form;
 }

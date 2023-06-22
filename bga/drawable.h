@@ -12,6 +12,7 @@ struct drawable {
 	static int		compare(const void* v1, const void* v2);
 	int				getpriority() const;
 	bool			ishilite() const { return this == hilite_drawable; };
+	void			setposition(point v) { position = v; }
 };
 extern collection<drawable> objects;
 bool inside(point t, point* points, int count);

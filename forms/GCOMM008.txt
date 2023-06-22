@@ -1,13 +1,4 @@
-﻿#Form
-
-GUIINV08
-GUIJRNL
-GUIMAPAB
-STONEOPT
-GUISPL08
-GUIREC08
-
-#Control
+﻿#Control
 
 Background GCOMM 0 0 0 0
 TextConsole NORMAL 8 7 534 92 fore(200 200 200)

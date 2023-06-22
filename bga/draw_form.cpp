@@ -69,6 +69,15 @@ static unsigned parse_hotkey(const char* p) {
 	return r;
 }
 
+void form::readhead(const char* url) {
+	char temp[260]; szfnamewe(temp, url); szupper(temp);
+	auto id = szdup(temp);
+	auto p = bsdata<form>::find(id);
+	if(!p)
+		p = bsdata<form>::add();
+	p->id = id;
+}
+
 void form::read(const char* url) {
 	auto control_start = bsdata<control>::source.getcount();
 	bsreq::read(url);
