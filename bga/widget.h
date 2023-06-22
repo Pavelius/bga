@@ -7,6 +7,6 @@ struct widget {
 	fnevent			proc;
 	explicit operator bool() const { return id != 0; }
 	static void		initialize();
-	static void		open(const char* id);
+	void			open() const;
 };
 extern const widget* lastwidget;

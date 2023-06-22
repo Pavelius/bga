@@ -100,4 +100,5 @@ Button GBTNSPB3 705 19 17 26 frames(0 1 0 0) value(93)
 Label NORMAL 742 20 39 38 id("SpellLevel")
 
 ActionPanelNA NONE 0 433 0 0
+HotKey NONE 0 0 0 0 data(GGAME) value(1) hotkey("Escape")
 Form NONE 0 493 0 0 data(GCOMM008)

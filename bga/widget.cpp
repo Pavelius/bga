@@ -36,10 +36,11 @@ static item drag_item;
 static item *drag_item_source, *drag_item_dest;
 static int current_info_tab;
 static fnevent update_proc;
-static bool need_update;
+static bool need_update, button_run;
 static char description_text[4096];
 static scrolltext area_description, area_console;
 static resinfo default_cursor;
+static form* next_last_form;
 stringbuilder description(description_text);
 
 static unsigned get_game_tick() {
@@ -75,13 +76,11 @@ static void invalidate_description() {
 
 static void form_opening() {
 	invalidate_description();
-	//if(equal(last_form->id, "GGAME"))
-		default_cursor = cursor;
+	default_cursor = cursor;
 }
 
 static void form_closing() {
-	//if(equal(last_form->id, "GGAME"))
-		cursor = default_cursor;
+	cursor = default_cursor;
 }
 
 static void set_value_and_update() {
@@ -146,11 +145,8 @@ void widget::initialize() {
 	draw::syscursor(false);
 }
 
-void widget::open(const char* id) {
-	auto p = bsdata<widget>::find(id);
-	if(!p)
-		return;
-	scene(p->proc);
+void widget::open() const {
+	scene(proc);
 }
 
 static res::token getanimation(race_s race, gender_s gender, class_s type, int ai, int& ws) {
@@ -291,27 +287,68 @@ static const char* getname() {
 	return pn;
 }
 
+static void form_paint() {
+	last_form->paint();
+}
+
+static void run_script(const char* id) {
+	auto ps = bsdata<script>::find(str("%1%2", last_form->id, id));
+	if(!ps)
+		return;
+	ps->proc(0);
+}
+
+static void form_scene() {
+	last_form = next_last_form;
+	run_script("Opening");
+	if(form::opening)
+		form::opening();
+	if(!last_form)
+		return;
+	draw::scene(form_paint);
+	if(form::closing)
+		form::closing();
+	run_script("Closing");
+}
+
 static void execute_script() {
 	auto p = (script*)hot.object;
 	p->proc(hot.param);
 }
 
-static void interactive_execute() {
+static void open_form() {
+	auto p = (form*)hot.object;
+	if(hot.param) {
+		next_last_form = p;
+		setnext(form_scene);
+	} else
+		p->open();
+}
+
+static void open_widget() {
+	auto p = (widget*)hot.object;
+	p->open();
+}
+
+static void execute_action(variant v, int value) {
+	if(v.iskind<form>())
+		execute(open_form, value, 0, bsdata<form>::elements + v.value);
+	else if(v.iskind<widget>())
+		execute(open_widget, value, 0, bsdata<widget>::elements + v.value);
+	else if(v.iskind<script>())
+		execute(execute_script, value, 0, bsdata<script>::elements + v.value);
+}
+
+static void button_input() {
+	button_run = false;
 	if(gui.disabled)
 		return;
-	auto run = false;
-	if(gui.key) {
-		auto key = gui.key & CommandMask;
-		if(key == MouseLeft || key == MouseRight || key == MouseLeftDBL)
-			run = !hot.pressed && gui.hilited;
-		else
-			run = hot.key == gui.key;
-	}
-	if(gui.data.iskind<script>()) {
-		auto p = bsdata<script>::elements + gui.data.value;
-		if(run)
-			execute(execute_script, gui.value, 0, p);
-	}
+	if(gui.key && hot.key==gui.key)
+		button_run = true;
+	if(gui.hilited && hot.key==MouseLeft && !hot.pressed)
+		button_run = true;
+	if(button_run)
+		execute_action(gui.data, gui.value);
 }
 
 static void button(const sprite* p, unsigned short fiu, unsigned short fip) {
@@ -356,14 +393,14 @@ static void pressed_text() {
 static void button() {
 	allow_disable_button();
 	pressed_button();
-	interactive_execute();
+	button_input();
 	pressed_text();
 }
 
 static void button_no_text() {
 	allow_disable_button();
 	pressed_button();
-	interactive_execute();
+	button_input();
 }
 
 static void textarea() {
@@ -401,7 +438,7 @@ static void color_picker() {
 	if(color_index == -1)
 		return;
 	pressed_colorgrad(color_index, 0);
-	interactive_execute();
+	button_input();
 }
 
 static void creature_color() {
@@ -410,7 +447,7 @@ static void creature_color() {
 	if(color_index == -1)
 		return;
 	pressed_colorgrad(color_index, 1);
-	interactive_execute();
+	button_input();
 }
 
 static void scroll() {
@@ -505,7 +542,7 @@ static void item_information() {
 	auto push_last = last_item;
 	last_item = (item*)hot.object;
 	update_item_description();
-	form::open("GIITMH08");
+	form::open("GIITMH08", true);
 	last_item = push_last;
 }
 
@@ -1238,7 +1275,7 @@ BSDATA(widget) = {
 	{"ItemAvatar", item_avatar},
 	{"ItemName", item_name},
 	{"GearButton", gear_button},
-	{"HotKey", interactive_execute},
+	{"HotKey", button_input},
 	{"Label", label},
 	{"Paperdoll", paperdoll},
 	{"PortraitLarge", portrait_large},

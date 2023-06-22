@@ -1,19 +1,32 @@
-﻿#Control
+﻿#Form
+
+GUIINV08
+GUIJRNL
+GUIMAPAB
+STONEOPT
+GUISPL08
+GUIREC08
+
+#Control
 
 Background GCOMM 0 0 0 0
-TextConsole NORMAL 8 7 534 92 fore(200 200 200) // Messages
-Scroll GCOMMSB 554 4 12 95 frames(1 0 3 2 4 5) 
-ButtonNT GCOMMBTN 600 22 40 30 frames(4 5 5 0) value(0) data(GameCharsheet)
-ButtonNT GCOMMBTN 630 17 48 33 frames(6 7 7 0) value(1) data(GameInventory)
-ButtonNT GCOMMBTN 668 21 45 32 frames(8 9 9 0) value(2) data(GameSpells)
-ButtonNT GCOMMBTN 600 57 39 32 frames(14 15 15 0) value(3) data(GameAreaMap)
-ButtonNT GCOMMBTN 628 60 52 36 frames(12 13 13 0) value(4) data(GameJournal)
-ButtonNT GCOMMBTN 670 57 41 33 frames(10 11 11 0) value(5) data(GameOptions)
-Button CGEAR 736 43 64 64 frames(0 1 0 0) value(10)
-//Unlnown None 6 77 539 25 
-Button GCOMMBTN 576 3 30 36 frames(0 1 0 0) value(11) // Select all
-Button GCOMMBTN 703 2 31 35 frames(2 3 0 0) value(12) // Rest party
-Button GCOMMBTN 575 72 31 35 frames(16 17 0 0) value(13) // Party information
-Button GCOMMBTN 757 1 26 45 frames(18 19 0 0) value(14) // AI on/off
+TextConsole NORMAL 8 7 534 92 fore(200 200 200)
 
-HotKey NONE 0 0 0 0 data(DebugTest)
+Scroll GCOMMSB 554 4 12 95 frames(1 0 3 2 4 5)
+
+ButtonNT GCOMMBTN 600 22 40 30 frames(4 5 5 0) value(1) data(GUIREC08) hotkey("C")
+ButtonNT GCOMMBTN 630 17 48 33 frames(6 7 7 0) value(1) data(GUIINV08) hotkey("I")
+ButtonNT GCOMMBTN 668 21 45 32 frames(8 9 9 0) value(1) data(GUISPL08) hotkey("S")
+ButtonNT GCOMMBTN 600 57 39 32 frames(14 15 15 0) value(1) data(GUIMAPAB) hotkey("M")
+ButtonNT GCOMMBTN 628 60 52 36 frames(12 13 13 0) value(1) data(GUIJRNL) hotkey("J")
+ButtonNT GCOMMBTN 670 57 41 33 frames(10 11 11 0) value(1) data(STONEOPT) hotkey("Escape")
+Button CGEAR 736 43 64 64 frames(0 1 0 0) value(10)
+
+// Unlnown None 6 77 539 25 
+ButtonNT GCOMMBTN 576 3 30 36 frames(0 1 0 0) data(SelectAll) hotkey("*")
+ButtonNT GCOMMBTN 703 2 31 35 frames(2 3 0 0) value(12) // Rest party
+ButtonNT GCOMMBTN 575 72 31 35 frames(16 17 0 0) value(13) // Party information
+ButtonNT GCOMMBTN 757 1 26 45 frames(18 19 0 0) value(14) // AI on/off
+
+// For debugging purposes
+HotKey NONE 0 0 0 0 data(DebugTest) hotkey("Ctrl+D")

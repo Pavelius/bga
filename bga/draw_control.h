@@ -24,9 +24,9 @@ struct form {
 	const char*		id;
 	sliceu<control>	controls;
 	static fnevent	prepare, opening, closing;
-	bool			iswindowed() const;
 	static void		nextscene(const char* id);
-	static long		open(const char* id);
+	long			open() const;
+	static long		open(const char* id, bool modal);
 	void			paint() const;
 	static void		read(const char* url);
 };

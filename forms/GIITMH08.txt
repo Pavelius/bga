@@ -8,6 +8,6 @@ Scroll GBTNSCRL 480 109 12 311 frames(1 0 3 2 4 5)
 
 ItemActionButton GBTNMED 20 432 156 24 frames(1 2 3 0)
 ItemActionButton GBTNMED 179 432 156 24 frames(1 2 3 0)
-Button GBTNMED 338 432 156 24 frames(1 2 3 0) data(Close)
+Button GBTNMED 338 432 156 24 frames(1 2 3 0) data(Close) hotkey(Escape)
 
 // Label NORMAL 314 111 152 18 id("Test")

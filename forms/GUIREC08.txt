@@ -49,4 +49,5 @@ ButtonInfoTab GBTNRECB 594 22 75 30 frames(6 7 8 0) value(2)
 ButtonInfoTab GBTNRECB 676 22 75 30 frames(9 10 11 0) value(3)
 
 ActionPanelNA NONE 0 433 0 0
+HotKey NONE 0 0 0 0 data(GGAME) value(1) hotkey("Escape")
 Form NONE 0 493 0 0 data(GCOMM008)

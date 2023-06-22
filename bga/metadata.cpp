@@ -72,6 +72,7 @@ BSMETA(control) = {
 	BSREQ(visual), BSREQ(resource), BSREQ(x), BSREQ(y), BSREQ(width), BSREQ(height),
 	BSREQ(value), BSREQ(frames), BSREQ(fore),
 	BSREQ(id), BSREQ(data),
+	BSREQ(hotkey),
 	{}};
 BSMETA(damagei) = {
 	BSREQ(id),

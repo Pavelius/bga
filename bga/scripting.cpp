@@ -49,53 +49,15 @@ static void choose_creature_color(int bonus) {
 	default: set_color("HairNormal"); break;
 	}
 	default_color = pi->colors[bonus];
-	player->colors[bonus] = (unsigned char)form::open("COLOR");
+	player->colors[bonus] = (unsigned char)form::open("COLOR", true);
 	default_color = push_default;
 }
 
 static void show_item_list(int bonus) {
-	widget::open("ItemList");
 }
 
 static void debug_test(int bonus) {
 	logm("Current timer %1i", current_game_tick);
-}
-
-static void open_form(const char* id, bool open_only_in_game = false) {
-	if(open_only_in_game) {
-		if(last_form == bsdata<form>::find("GGAME"))
-			form::nextscene(id);
-		else
-			form::nextscene("GGAME");
-	} else {
-		if(last_form == bsdata<form>::find(id))
-			id = "GGAME";
-		form::nextscene(id);
-	}
-}
-
-static void game_inventory(int bonus) {
-	open_form("GUIINV08");
-}
-
-static void game_journal(int bonus) {
-	open_form("GUIJRNL");
-}
-
-static void game_area_map(int bonus) {
-	open_form("GUIMAPAB");
-}
-
-static void game_options(int bonus) {
-	open_form("STONEOPT", true);
-}
-
-static void game_spells(int bonus) {
-	open_form("GUISPL");
-}
-
-static void game_charsheet(int bonus) {
-	open_form("GUIREC");
 }
 
 static void level_up(int bonus) {
@@ -118,12 +80,6 @@ BSDATA(script) = {
 	{"DebugTest", debug_test},
 	{"DefaultColor", default_color_pick},
 	{"Done", button_cancel},
-	{"GameAreaMap", game_area_map},
-	{"GameCharsheet", game_charsheet},
-	{"GameInventory", game_inventory},
-	{"GameJournal", game_journal},
-	{"GameOptions", game_options},
-	{"GameSpells", game_spells},
 	{"Heal", heal},
 	{"LevelUp", level_up, allow_level_up},
 	{"ShowItemList", show_item_list},

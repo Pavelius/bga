@@ -10,4 +10,5 @@ Button GBTNJBTN 525 18 47 39 frames(5 6 7 8)
 Label NORMAL 66 67 170 20 fore(0 200 200)
 
 ActionPanelNA NONE 0 433 0 0
+HotKey NONE 0 0 0 0 data(GGAME) value(1) hotkey("Escape")
 Form NONE 0 493 0 0 data(GCOMM008)

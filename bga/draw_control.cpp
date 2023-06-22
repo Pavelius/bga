@@ -68,18 +68,17 @@ static unsigned parse_hotkey(const char* p) {
 	return r;
 }
 
-bool form::iswindowed() const {
-	return controls && controls.begin()[0].height != 0;
-}
-
 void form::read(const char* url) {
 	auto control_start = bsdata<control>::source.getcount();
 	bsreq::read(url);
 	if(log::geterrors() > 0)
 		return;
-	char temp[260]; szfnamewe(temp, url);
-	auto p = bsdata<form>::add();
-	p->id = szdup(temp);
+	char temp[260]; szfnamewe(temp, url); szupper(temp);
+	auto id = szdup(temp);
+	auto p = bsdata<form>::find(id);
+	if(!p)
+		p = bsdata<form>::add();
+	p->id = id;
 	auto control_end = bsdata<control>::source.getcount();
 	p->controls = sliceu<control>(control_start, control_end - control_start);
 	for(auto& e : p->controls)
@@ -109,6 +108,7 @@ void form::paint() const {
 		gui.id = e.id;
 		gui.value = e.value;
 		gui.data = e.data;
+		gui.key = e.key;
 		if(e.resource)
 			gui.res = e.resource->get();
 		memcpy(gui.frames, e.frames, sizeof(gui.frames));
@@ -124,37 +124,48 @@ void form::paint() const {
 	gui = push_gui;
 }
 
-static void paintscene() {
+static void form_paint() {
 	last_form->paint();
 }
 
-long form::open(const char* id) {
-	auto push_form = last_form;
-	last_form = bsdata<form>::find(id);
-	if(last_form) {
-		if(opening)
-			opening();
-		if(last_form->iswindowed())
-			screenshoot::open(paintscene, true);
-		else
-			draw::scene(paintscene);
-		if(closing)
-			closing();
-	}
-	last_form = push_form;
+long form::open() const {
+	if(opening)
+		opening();
+	//if(last_form->iswindowed())
+	//	screenshoot::open(form_paint, true);
+	draw::scene(form_paint);
+	if(closing)
+		closing();
 	return getresult();
 }
 
-static void runscene() {
+static void form_scene() {
 	last_form = next_last_form;
 	if(form::opening)
 		form::opening();
-	draw::scene(paintscene);
+	draw::scene(form_paint);
 	if(form::closing)
 		form::closing();
 }
 
 void form::nextscene(const char* id) {
 	next_last_form = bsdata<form>::find(id);
-	setnext(runscene);
+	setnext(form_scene);
+}
+
+long form::open(const char* id, bool modal) {
+	auto push_form = last_form;
+	last_form = bsdata<form>::find(id);
+	if(last_form) {
+		if(opening)
+			opening();
+		if(modal)
+			screenshoot::open(form_paint, true);
+		else
+			draw::scene(form_paint);
+		if(closing)
+			closing();
+	}
+	last_form = push_form;
+	return getresult();
 }
