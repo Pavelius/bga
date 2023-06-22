@@ -147,6 +147,7 @@
     <ClInclude Include="floattext.h" />
     <ClInclude Include="formation.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="itemground.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="variable.h" />

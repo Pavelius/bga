@@ -7,11 +7,12 @@ void wearable::addcoins(unsigned v) {
 }
 
 void wearable::additem(item& v) {
-	//if(v.is(Coins)) {
-	//	addcoins(v.getcostall());
-	//	v.clear();
-	//	return;
-	//}
+	// Try add coins
+	if(v.is(Coins)) {
+		addcoins(v.getcostall());
+		v.clear();
+		return;
+	}
 	// Try stack existing item
 	for(auto& e : backpack()) {
 		if(!v)

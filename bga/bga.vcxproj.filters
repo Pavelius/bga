@@ -547,5 +547,8 @@
     <ClInclude Include="actor.h">
       <Filter>logic</Filter>
     </ClInclude>
+    <ClInclude Include="itemground.h">
+      <Filter>logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 #include "ability.h"
 #include "crt.h"
 #include "dice.h"
-#include "drawable.h"
 #include "magic.h"
 #include "range.h"
 #include "resid.h"
@@ -16,6 +15,7 @@ enum itemf_s : unsigned char {
 	FlamingBurst, Frost, GhostTouch, Holy, IcyBurst,
 	Keen, Seeking, Shock, ShockingBurst, Speed,
 	Unholy, Vicious, Vorpal, Wounding,
+	Coins,
 };
 struct itemfi {
 	const char*		id;
@@ -62,13 +62,12 @@ struct item {
 	void			add(item& v);
 	bool			canequip(wear_s v) const;
 	void			clear() { type = 0; count = 0; data = 0; }
+	bool			is(itemf_s v) const { return geti().is(v); }
 	int				getcost() const { return geti().cost; }
 	int				getcostall() const;
 	const itemi&	geti() const { return bsdata<itemi>::elements[type]; }
 	void			getinfo(stringbuilder& sb) const;
 	const char*		getname() const;
 	int				getweight() const { return count * geti().weight; }
-};
-struct itemground : drawable, item {
 };
 extern item* last_item;

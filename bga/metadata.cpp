@@ -12,7 +12,7 @@
 #include "entrance.h"
 #include "floattext.h"
 #include "gender.h"
-#include "item.h"
+#include "itemground.h"
 #include "modifier.h"
 #include "portrait.h"
 #include "race.h"

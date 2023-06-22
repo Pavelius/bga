@@ -24,8 +24,9 @@ BSDATA(itemfi) = {
 	{"Vicious"},
 	{"Vorpal"},
 	{"Wounding"},
+	{"Coins"},
 };
-assert_enum(itemfi, Wounding)
+assert_enum(itemfi, Coins)
 
 item* last_item;
 

@@ -8,7 +8,7 @@
 #include "entrance.h"
 #include "floattext.h"
 #include "io_stream.h"
-#include "item.h"
+#include "itemground.h"
 #include "map.h"
 #include "region.h"
 
