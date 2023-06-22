@@ -16,7 +16,7 @@ void					createwave(indext start, int size);
 void					createwave(indext start, int size, short unsigned max_cost);
 unsigned short			getcost(indext index);
 unsigned short			getdistance(indext start, indext goal);
-int						getfree(indext index, int radius, int size);
+indext					getfree(indext index, int radius, int size);
 int						getrange(indext i0, indext i1);
 inline unsigned short	getindex(int x, int y) { return y * 256 + x; }
 indext					getminimalcost(indext start, int maximum_range = 5, bool need_line_of_sight = false);

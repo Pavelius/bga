@@ -25,10 +25,17 @@ static void use_all_doors() {
 		e.use(e.isopen());
 }
 
+point getformationfree(point dst, point src, formation_s formation, int index) {
+	return map::getfree(getformation(dst, src, formation, index), 1);
+}
+
 void setparty(point dst) {
 	auto index = 0;
+	if(!selected_creatures)
+		return;
+	auto start_position = selected_creatures[0]->position;
 	for(auto p : selected_creatures) {
-		auto new_position = getformation(dst, p->position, FormationProtect, index++);
+		auto new_position = getformationfree(dst, start_position, FormationProtect, index++);
 		p->area_index = current_area;
 		p->lookat(new_position);
 		p->position = new_position;

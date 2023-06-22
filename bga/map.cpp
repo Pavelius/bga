@@ -416,21 +416,23 @@ indext map::getminimalcost(indext start, int maximum_range, bool need_line_of_si
 	return result;
 }
 
-int map::getfree(indext index, int radius, int size) {
-	int maxr = map::width / 2;
-	if(maxr > map::height)
-		maxr = map::height;
-	for(; radius < maxr; radius++) {
-		if(rand() & 1) {
-			if(get_free_space_x(index, radius, size))
-				break;
-			if(get_free_space_y(index, radius, size))
-				break;
-		} else {
-			if(get_free_space_y(index, radius, size))
-				break;
-			if(get_free_space_x(index, radius, size))
-				break;
+indext map::getfree(indext index, int radius, int size) {
+	if(isblock(index, size)) {
+		int maxr = map::width / 2;
+		if(maxr > map::height)
+			maxr = map::height;
+		for(; radius < maxr; radius++) {
+			if(rand() & 1) {
+				if(get_free_space_x(index, radius, size))
+					break;
+				if(get_free_space_y(index, radius, size))
+					break;
+			} else {
+				if(get_free_space_y(index, radius, size))
+					break;
+				if(get_free_space_x(index, radius, size))
+					break;
+			}
 		}
 	}
 	return index;
