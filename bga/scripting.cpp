@@ -2,7 +2,6 @@
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
-#include "draw_command.h"
 #include "draw_control.h"
 #include "script.h"
 #include "timer.h"
@@ -26,46 +25,39 @@ static void select_all(int bonus) {
 		selected_creatures.add(p);
 }
 
-BSDATA(script) = {
-	{"Heal", heal},
-	{"SelectAll", select_all},
-};
-BSDATAF(script)
-
-static void color_pick() {
+static void color_pick(int bonus) {
 	auto color_index = color_indecies[hot.param];
 	if(color_index == -1)
 		return;
 	breakmodal(color_index);
 }
 
-static void default_color_pick() {
+static void default_color_pick(int bonus) {
 	breakmodal(default_color);
 }
 
-static void check_quick_weapon() {
+static void check_quick_weapon(int bonus) {
 	player->weapon_index = (unsigned char)hot.param;
 }
 
-static void choose_creature_color() {
+static void choose_creature_color(int bonus) {
 	auto push_default = default_color;
-	auto index = hot.param;
 	auto pi = bsdata<portraiti>::elements + player->portrait;
-	switch(index) {
+	switch(bonus) {
 	case 0: set_color("SkinNormal"); break;
 	case 1: set_color("HairNormal"); break;
 	default: set_color("HairNormal"); break;
 	}
-	default_color = pi->colors[index];
-	player->colors[index] = (unsigned char)form::open("COLOR");
+	default_color = pi->colors[bonus];
+	player->colors[bonus] = (unsigned char)form::open("COLOR");
 	default_color = push_default;
 }
 
-static void show_item_list() {
+static void show_item_list(int bonus) {
 	widget::open("ItemList");
 }
 
-static void debug_test() {
+static void debug_test(int bonus) {
 	logm("Current timer %1i", current_game_tick);
 }
 
@@ -82,53 +74,59 @@ static void open_form(const char* id, bool open_only_in_game = false) {
 	}
 }
 
-static void game_inventory() {
+static void game_inventory(int bonus) {
 	open_form("GUIINV08");
 }
 
-static void game_journal() {
+static void game_journal(int bonus) {
 	open_form("GUIJRNL");
 }
 
-static void game_area_map() {
+static void game_area_map(int bonus) {
 	open_form("GUIMAPAB");
 }
 
-static void game_options() {
+static void game_options(int bonus) {
 	open_form("STONEOPT", true);
 }
 
-static void game_spells() {
+static void game_spells(int bonus) {
 	open_form("GUISPL");
 }
 
-static void game_charsheet() {
+static void game_charsheet(int bonus) {
 	open_form("GUIREC");
 }
 
-static void level_up() {
+static void level_up(int bonus) {
 }
 
-static bool allow_level_up() {
+static bool allow_level_up(int bonus) {
 	return player->experience >= player->getnextlevel();
 }
 
-BSDATA(draw::command) = {
-	{"Cancel", draw::buttoncancel, KeyEscape},
+static void button_cancel(int bonus) {
+	draw::breakmodal(bonus);
+}
+
+BSDATA(script) = {
+	{"Cancel", button_cancel},
 	{"CheckQuickWeapon", check_quick_weapon},
 	{"ChooseCreatureColor", choose_creature_color},
-	{"Close", draw::buttoncancel, KeyEscape},
+	{"Close", button_cancel},
 	{"ColorPick", color_pick},
-	{"DefaultColor", default_color_pick, KeyEscape},
-	{"Done", draw::buttonok, KeyEnter},
-	{"GameAreaMap", game_area_map, 'M'},
-	{"GameCharsheet", game_charsheet, 'C'},
-	{"GameInventory", game_inventory, 'I'},
-	{"GameJournal", game_journal, 'J'},
-	{"GameOptions", game_options, KeyEscape},
-	{"GameSpells", game_spells, 'S'},
-	{"LevelUp", level_up, 0, allow_level_up},
-	{"DebugTest", debug_test, Ctrl + 'D'},
-	{"ShowItemList", show_item_list, Ctrl + 'I'},
+	{"DebugTest", debug_test},
+	{"DefaultColor", default_color_pick},
+	{"Done", button_cancel},
+	{"GameAreaMap", game_area_map},
+	{"GameCharsheet", game_charsheet},
+	{"GameInventory", game_inventory},
+	{"GameJournal", game_journal},
+	{"GameOptions", game_options},
+	{"GameSpells", game_spells},
+	{"Heal", heal},
+	{"LevelUp", level_up, allow_level_up},
+	{"ShowItemList", show_item_list},
+	{"SelectAll", select_all},
 };
-BSDATAF(draw::command)
+BSDATAF(script)

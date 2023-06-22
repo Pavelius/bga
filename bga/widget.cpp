@@ -9,7 +9,6 @@
 #include "crt.h"
 #include "door.h"
 #include "draw.h"
-#include "draw_command.h"
 #include "draw_control.h"
 #include "draw_gui.h"
 #include "drawable.h"
@@ -292,16 +291,26 @@ static const char* getname() {
 	return pn;
 }
 
+static void execute_script() {
+	auto p = (script*)hot.object;
+	p->proc(hot.param);
+}
+
 static void interactive_execute() {
 	if(gui.disabled)
 		return;
-	if(gui.data.iskind<command>()) {
-		auto p = bsdata<command>::elements + gui.data.value;
-		auto run = (hot.key == MouseLeft && !hot.pressed && gui.hilited);
-		if(p->key && hot.key == p->key)
-			run = true;
+	auto run = false;
+	if(gui.key) {
+		auto key = gui.key & CommandMask;
+		if(key == MouseLeft || key == MouseRight || key == MouseLeftDBL)
+			run = !hot.pressed && gui.hilited;
+		else
+			run = hot.key == gui.key;
+	}
+	if(gui.data.iskind<script>()) {
+		auto p = bsdata<script>::elements + gui.data.value;
 		if(run)
-			execute(p->proc, gui.value);
+			execute(execute_script, gui.value, 0, p);
 	}
 }
 
@@ -319,11 +328,10 @@ static void button(const sprite* p, unsigned short fiu, unsigned short fip) {
 static void allow_disable_button() {
 	if(gui.disabled)
 		return;
-	if(gui.data.iskind<command>()) {
-		if(bsdata<command>::elements[gui.data.value].allow) {
-			if(!bsdata<command>::elements[gui.data.value].allow())
-				gui.disabled = true;
-		}
+	if(gui.data.iskind<script>()) {
+		auto p = bsdata<script>::elements + gui.data.value;
+		if(p->test && !p->test(gui.value))
+			gui.disabled = true;
 	}
 }
 
@@ -1172,14 +1180,6 @@ static void paint_form() {
 	bsdata<form>::elements[gui.data.value].paint();
 }
 
-static void hot_key() {
-	auto ps = (command*)gui.data;
-	if(!ps || !ps->key)
-		return;
-	if(hot.key == ps->key)
-		execute(ps->proc, gui.value, 0, 0);
-}
-
 static void button_check(int& value) {
 	gui.checked = (value == gui.value);
 	pressed_button();
@@ -1238,7 +1238,7 @@ BSDATA(widget) = {
 	{"ItemAvatar", item_avatar},
 	{"ItemName", item_name},
 	{"GearButton", gear_button},
-	{"HotKey", hot_key},
+	{"HotKey", interactive_execute},
 	{"Label", label},
 	{"Paperdoll", paperdoll},
 	{"PortraitLarge", portrait_large},

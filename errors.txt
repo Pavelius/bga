@@ -1,2 +1,70 @@
-﻿In file `forms/GUIINV08.txt`:
- Line 97: Can't find variant `MakeScrap`
+﻿In file `forms/COLOR.txt`:
+ Line 4: Can't find variant `ColorPick`
+ Line 5: Can't find variant `ColorPick`
+ Line 6: Can't find variant `ColorPick`
+ Line 7: Can't find variant `ColorPick`
+ Line 8: Can't find variant `ColorPick`
+ Line 9: Can't find variant `ColorPick`
+ Line 10: Can't find variant `ColorPick`
+ Line 11: Can't find variant `ColorPick`
+ Line 12: Can't find variant `ColorPick`
+ Line 13: Can't find variant `ColorPick`
+ Line 14: Can't find variant `ColorPick`
+ Line 15: Can't find variant `ColorPick`
+ Line 16: Can't find variant `ColorPick`
+ Line 17: Can't find variant `ColorPick`
+ Line 18: Can't find variant `ColorPick`
+ Line 19: Can't find variant `ColorPick`
+ Line 20: Can't find variant `ColorPick`
+ Line 21: Can't find variant `ColorPick`
+ Line 22: Can't find variant `ColorPick`
+ Line 23: Can't find variant `ColorPick`
+ Line 24: Can't find variant `ColorPick`
+ Line 25: Can't find variant `ColorPick`
+ Line 26: Can't find variant `ColorPick`
+ Line 27: Can't find variant `ColorPick`
+ Line 28: Can't find variant `ColorPick`
+ Line 29: Can't find variant `ColorPick`
+ Line 30: Can't find variant `ColorPick`
+ Line 31: Can't find variant `ColorPick`
+ Line 32: Can't find variant `ColorPick`
+ Line 33: Can't find variant `ColorPick`
+ Line 34: Can't find variant `ColorPick`
+ Line 35: Can't find variant `ColorPick`
+ Line 36: Can't find variant `ColorPick`
+ Line 37: Can't find variant `ColorPick`
+ Line 39: Can't find variant `DefaultColor`
+In file `forms/GCOMM008.txt`:
+ Line 6: Can't find variant `GameCharsheet`
+ Line 7: Can't find variant `GameInventory`
+ Line 8: Can't find variant `GameSpells`
+ Line 9: Can't find variant `GameAreaMap`
+ Line 10: Can't find variant `GameJournal`
+ Line 11: Can't find variant `GameOptions`
+ Line 19: Can't find variant `DebugTest`
+In file `forms/GGAME.txt`:
+ Line 5: Can't find variant `GCOMM008`
+In file `forms/GIITMH08.txt`:
+ Line 11: Can't find variant `Close`
+In file `forms/GUIINV08.txt`:
+ Line 57: Can't find variant `ChooseCreatureColor`
+ Line 58: Can't find variant `ChooseCreatureColor`
+ Line 59: Can't find variant `ChooseCreatureColor`
+ Line 60: Can't find variant `ChooseCreatureColor`
+ Line 63: Can't find variant `CheckQuickWeapon`
+ Line 66: Can't find variant `CheckQuickWeapon`
+ Line 69: Can't find variant `CheckQuickWeapon`
+ Line 72: Can't find variant `CheckQuickWeapon`
+ Line 96: Can't find variant `ShowItemList`
+ Line 99: Can't find variant `GCOMM008`
+In file `forms/GUIJRNL.txt`:
+ Line 13: Can't find variant `GCOMM008`
+In file `forms/GUIMAPAB.txt`:
+ Line 14: Can't find variant `GCOMM008`
+In file `forms/GUIREC08.txt`:
+ Line 11: Can't find variant `LevelUp`
+ Line 52: Can't find variant `GCOMM008`
+In file `forms/GUISPL08.txt`:
+ Line 103: Can't find variant `GCOMM008`
+In file `forms/STONEOPT.txt`:
+ Line 14: Can't find variant `GCOMM008`

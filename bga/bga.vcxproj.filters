@@ -242,9 +242,6 @@
     <ClCompile Include="resid.cpp">
       <Filter>interface</Filter>
     </ClCompile>
-    <ClCompile Include="draw_command.cpp">
-      <Filter>interface</Filter>
-    </ClCompile>
     <ClCompile Include="colorgrad.cpp">
       <Filter>interface</Filter>
     </ClCompile>
@@ -446,9 +443,6 @@
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="resid.h">
-      <Filter>interface</Filter>
-    </ClInclude>
-    <ClInclude Include="draw_command.h">
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="colorgrad.h">

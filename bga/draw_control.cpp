@@ -11,6 +11,63 @@ form* draw::last_form;
 static form* next_last_form;
 fnevent form::prepare, form::opening, form::closing;
 
+struct form_parse_key {
+	const char*	name;
+	unsigned	key;
+};
+static form_parse_key key_mapping[] = {
+	{"Ctrl", Ctrl},
+	{"Alt", Alt},
+	{"Shift", Shift},
+	{"Escape", KeyEscape},
+	{"Enter", KeyEnter},
+	{"Up", KeyUp},
+	{"Down", KeyDown},
+	{"Right", KeyRight},
+	{"Left", KeyLeft},
+	{"F1", F1},
+	{"F2", F2},
+	{"F3", F3},
+	{"F4", F4},
+	{"F5", F5},
+	{"F6", F6},
+	{"F7", F7},
+	{"F8", F8},
+	{"F9", F9},
+	{"F10", F10},
+	{"F11", F11},
+	{"F12", F12},
+};
+
+static unsigned parse_hotkey(const char* p) {
+	if(!p || p[0] == 0)
+		return 0;
+	unsigned r = 0;
+	auto original_name = p;
+	auto need_parse = true;
+	while(need_parse) {
+		need_parse = false;
+		for(auto& e : key_mapping) {
+			if(szstart(p, e.name)) {
+				p += zlen(e.name);
+				if(p[0] == '+')
+					p++;
+				r |= e.key;
+				need_parse = true;
+				break;
+			}
+		}
+	}
+	auto n = zlen(p);
+	if(n == 1) {
+		r |= p[0];
+		p++;
+	}
+	if(!r)
+		log::error(0, "Can't parse key name `%1`", original_name);
+	return r;
+}
+
 bool form::iswindowed() const {
 	return controls && controls.begin()[0].height != 0;
 }
@@ -25,6 +82,8 @@ void form::read(const char* url) {
 	p->id = szdup(temp);
 	auto control_end = bsdata<control>::source.getcount();
 	p->controls = sliceu<control>(control_start, control_end - control_start);
+	for(auto& e : p->controls)
+		e.key = parse_hotkey(e.hotkey);
 }
 
 void form::paint() const {

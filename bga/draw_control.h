@@ -17,6 +17,8 @@ struct control : point {
 	color			fore;
 	int				value;
 	variant			data;
+	const char*		hotkey;
+	unsigned		key; // Parsed value from hotkey
 };
 struct form {
 	const char*		id;

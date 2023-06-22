@@ -13,6 +13,7 @@ struct guii {
 	const sprite*	res;
 	unsigned short	frames[6];
 	bool			hilited, checked, disabled;
+	unsigned		key;
 	variant			data;
 	void			clear();
 };

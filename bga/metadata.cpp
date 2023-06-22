@@ -8,7 +8,6 @@
 #include "container.h"
 #include "creature.h"
 #include "door.h"
-#include "draw_command.h"
 #include "draw_control.h"
 #include "entrance.h"
 #include "floattext.h"
@@ -74,9 +73,6 @@ BSMETA(control) = {
 	BSREQ(value), BSREQ(frames), BSREQ(fore),
 	BSREQ(id), BSREQ(data),
 	{}};
-BSMETA(command) = {
-	BSREQ(id),
-	{}};
 BSMETA(damagei) = {
 	BSREQ(id),
 	{}};
@@ -128,6 +124,9 @@ BSMETA(rangei) = {
 BSMETA(residi) = {
 	BSREQ(id),
 	{}};
+BSMETA(script) = {
+	BSREQ(id),
+	{}};
 BSMETA(skilli) = {
 	BSREQ(id),
 	BSENM(ability, abilityi),
@@ -151,7 +150,6 @@ BSDATA(varianti) = {
 	{"Advance", VAR(advancei, 3)},
 	{"Class", VAR(classi, 1)},
 	{"Control", VAR(control, 6)},
-	{"Command", VAR(command, 1)},
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"Feat", VAR(feati, 1), 0, 0, fnscript<feati>},
 	{"Form", VAR(form, 1)},
@@ -161,6 +159,7 @@ BSDATA(varianti) = {
 	{"Race", VAR(racei, 1)},
 	{"Rate", VAR(magici, 1)},
 	{"Resource", VAR(residi, 1)},
+	{"Script", VAR(script, 1)},
 	{"Skill", VAR(skilli, 1)},
 	{"Widget", VAR(widget, 1)},
 };
