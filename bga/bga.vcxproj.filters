@@ -338,6 +338,9 @@
     <ClCompile Include="actor.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="itema.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -548,6 +551,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="itemground.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="itema.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

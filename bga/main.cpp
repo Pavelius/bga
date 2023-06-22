@@ -11,6 +11,7 @@
 #include "draw_form.h"
 #include "game.h"
 #include "log.h"
+#include "itema.h"
 #include "resid.h"
 #include "script.h"
 
@@ -39,6 +40,10 @@ static void create_party() {
 		party[i] = player;
 	}
 	script::run("SelectAll", 0);
+}
+
+static void add_item() {
+	items.add();
 }
 
 static void start_main() {

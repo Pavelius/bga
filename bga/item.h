@@ -52,7 +52,7 @@ struct item {
 		struct {
 			unsigned char identified : 1;
 			unsigned char personal : 1;
-			unsigned char charges : 6;
+			unsigned char charges : 5;
 		};
 		unsigned char data;
 	};
