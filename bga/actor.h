@@ -29,6 +29,7 @@ struct actor : drawable, actable, coloration, statable, classa, wearable {
 	unsigned		duration;
 	race_s			race;
 	void			clearpath();
+	bool			ispresent() const;
 	void			lookat(point destination);
 	void			setorientation(unsigned char v) { orientation = v; }
 	void			stop();

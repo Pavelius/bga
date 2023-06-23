@@ -6,6 +6,10 @@
 
 #pragma once
 
+enum areaf_s : unsigned char {
+	CreatureBlock,
+};
+
 struct sprite;
 
 struct areai {
@@ -39,9 +43,9 @@ unsigned short getindex(point pos, int size);
 point getfree(point position, int size);
 point getposition(short unsigned index, int size);
 
-void enter(const char* area, const char* entrance);
 void getpassedtime(stringbuilder& sb, unsigned value);
 void read(const char* name);
+void set(unsigned short index, areaf_s v);
 void settile(short unsigned index, short unsigned tile);
 
 color getshadow(point s);
@@ -49,6 +53,8 @@ color* getpallette();
 
 const sprite* getminimap();
 const sprite* getareasprite();
+
+bool is(unsigned short index, areaf_s v);
 
 }
 

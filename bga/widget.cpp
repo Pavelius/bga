@@ -590,14 +590,15 @@ static void paint_minimap() {
 	height = cameral.y - caret.y;
 	rectb();
 	// Party position
+	auto push_fore = fore;
+	fore = colors::green;
 	for(auto p : party) {
-		if(!p)
+		if(!p->ispresent())
 			continue;
-		//	auto position = p->getposition();
-		//	auto x1 = x2m(position.x);
-		//	auto y1 = y2m(position.y);
-		//	circle(x1, y1, 2, colors::green);
+		caret = m2mm(p->position);
+		circle(2);
 	}
+	fore = push_fore;
 }
 
 static void paint_tiles() {

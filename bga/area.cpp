@@ -130,7 +130,7 @@ unsigned char map::getorientation(point s, point d) {
 		return 0;
 	int ax = dx / st;
 	int ay = dy / st;
-	return orientations_7b7[(ay + (osize / 2))*osize + ax + (osize / 2)];
+	return orientations_7b7[(ay + (osize / 2)) * osize + ax + (osize / 2)];
 }
 
 unsigned short map::getindex(point pos) {
@@ -168,7 +168,7 @@ static const char* gmurl(char* temp, const char* name, const char* ext = 0, cons
 
 static void archive_bitmap(archive& e, unsigned char* output, int output_bpp, int scan_line, int width, int height, color* pal) {
 	for(int i = 0; i < height; i++) {
-		e.set(output, width*(output_bpp / 8));
+		e.set(output, width * (output_bpp / 8));
 		output += scan_line;
 	}
 	if(pal)
@@ -237,6 +237,14 @@ void map::read(const char* name) {
 	//worldmap::set(worldmap::getarea(name));
 }
 
+bool map::is(unsigned short index, areaf_s v) {
+	return (statemap[index] & (0x80 >> v)) != 0;
+}
+
+void map::set(unsigned short index, areaf_s v) {
+	statemap[index] |= (0x80 >> v);
+}
+
 bool map::isblock(short unsigned index) {
 	//0 - Obstacle - impassable, light blocking (черный)
 	//1 - Sand ? (burgandy)
@@ -254,6 +262,8 @@ bool map::isblock(short unsigned index) {
 	//13 - Roof - impassable (pink)
 	//14 - Worldmap exit (светло-синий)
 	//15 - Grass (белый)
+	if(is(index, CreatureBlock))
+		return true;
 	unsigned char a = statemap[index] & 0x0F;
 	return a == 0 || a == 8 || a == 10 || a == 12 || a == 13;
 }

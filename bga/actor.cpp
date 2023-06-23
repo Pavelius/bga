@@ -40,6 +40,10 @@ BSDATA(animatei) = {
 };
 assert_enum(animatei, AnimateCastFourRelease)
 
+bool actor::ispresent() const {
+	return area_index == current_area;
+}
+
 void actor::clearpath() {
 }
 
