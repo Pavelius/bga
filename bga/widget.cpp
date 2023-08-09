@@ -43,7 +43,7 @@ static char description_text[4096];
 static scrolltext area_description, area_console;
 static resinfo default_cursor;
 static form* next_last_form;
-static int zoom_factor = 1;
+static int zoom_factor = 2;
 stringbuilder description(description_text);
 
 static unsigned get_game_tick() {
@@ -933,7 +933,7 @@ static void paint_area_map_zoomed(int zoom) {
 	paint_area_map();
 	canvas = push_canvas;
 	if(zoom == 2) {
-		scale2x(canvas->ptr(caret.x, caret.y), canvas->scanline,
+		scale2x(canvas->ptr(push.caret.x, push.caret.y), canvas->scanline,
 			temporary_canvas.ptr(0, 0), temporary_canvas.scanline,
 			width, height);
 	}
