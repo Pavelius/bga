@@ -103,6 +103,7 @@
     <ClCompile Include="range.cpp" />
     <ClCompile Include="resid.cpp" />
     <ClCompile Include="resinfo.cpp" />
+    <ClCompile Include="scale2x.cpp" />
     <ClCompile Include="screenshoot.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="scripting.cpp" />

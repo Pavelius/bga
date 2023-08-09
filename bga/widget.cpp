@@ -26,6 +26,8 @@
 using namespace draw;
 using namespace res;
 
+void scale2x(void* void_dst, unsigned dst_slice, const void* void_src, unsigned src_slice, unsigned width, unsigned height);
+
 const char* getkg(int weight);
 extern array console_data;
 
@@ -41,6 +43,7 @@ static char description_text[4096];
 static scrolltext area_description, area_console;
 static resinfo default_cursor;
 static form* next_last_form;
+static int zoom_factor = 1;
 stringbuilder description(description_text);
 
 static unsigned get_game_tick() {
@@ -911,14 +914,45 @@ static void apply_command() {
 		execute(jump_party);
 }
 
-static void area_map() {
-	update_game_tick();
-	apply_shifer();
+static void paint_area_map() {
 	setup_visible_area();
 	paint_tiles();
 	prepare_objects();
 	sort_objects();
 	paint_objects();
+}
+
+static void paint_area_map_zoomed(int zoom) {
+	static surface temporary_canvas;
+	auto push_clipping = clipping;
+	auto push_mouse = hot.mouse; hot.mouse.x /= zoom; hot.mouse.y /= zoom;
+	rectpush push; width /= zoom; height /= zoom;
+	temporary_canvas.resize(width, height, 32, true);
+	auto push_canvas = canvas;
+	canvas = &temporary_canvas; setclip();
+	paint_area_map();
+	canvas = push_canvas;
+	if(zoom == 2) {
+		scale2x(canvas->ptr(caret.x, caret.y), canvas->scanline,
+			temporary_canvas.ptr(0, 0), temporary_canvas.scanline,
+			width, height);
+	}
+	hot.mouse = push_mouse;
+	clipping = push_clipping;
+}
+
+static void paint_area_map_zoomed() {
+	switch(zoom_factor) {
+	case 2: paint_area_map_zoomed(2); break;
+	case 3: paint_area_map_zoomed(3); break;
+	default: paint_area_map(); break;
+	}
+}
+
+static void area_map() {
+	update_game_tick();
+	apply_shifer();
+	paint_area_map_zoomed();
 	apply_hilite_command();
 	apply_command();
 }

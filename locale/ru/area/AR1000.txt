@@ -5,7 +5,7 @@ This mighty wooden crane looks like it was designed to haul lumber up the cliff 
 Inscribed on the side of this ship is the name, "The Wicked Wench."
 
 #AR1000Info806_1282
-This ship looks like it was recently shored and pieces of the hull were removed. 
+Этот корабль недавно был вытащен из воды и часть обшивки была снята.
 
 #AR1000Info2656_1053
 One of the smaller fishing boats used by the crew of the Wicked Wench on Maer Dualdon.  You considered using it as a life boat several times during the journey.

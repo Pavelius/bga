@@ -341,6 +341,9 @@
     <ClCompile Include="itema.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="scale2x.cpp">
+      <Filter>interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
