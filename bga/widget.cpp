@@ -642,13 +642,16 @@ static void paint_tiles() {
 	}
 }
 
-static void apply_shifer() {
-	rect screen = {0, 0, getwidth(), getheight()};
-	int index = -1;
+static void set_standart_cursor() {
 	if(!hot.mouse.in(last_screen))
 		cursor.set(CURSORS, 0);
 	else
 		cursor.set(CURSORS, 4);
+}
+
+static void apply_shifer() {
+	rect screen = {0, 0, getwidth(), getheight()};
+	int index = -1;
 	const int sz = 4;
 	auto d = hot.mouse;
 	if(d.x <= screen.x1)
@@ -930,18 +933,20 @@ static void apply_command() {
 
 static void paint_area_map() {
 	setup_visible_area();
+	set_standart_cursor();
 	paint_tiles();
 	prepare_objects();
 	sort_objects();
 	paint_objects();
+	apply_hilite_command();
+	apply_command();
 }
 
 static void paint_area_map_zoom_factor() {
-	static surface temporary_canvas;
 	auto push_clipping = clipping;
 	auto push_mouse = hot.mouse; hot.mouse.x /= zoom_factor; hot.mouse.y /= zoom_factor;
 	rectpush push; width /= zoom_factor; height /= zoom_factor;
-	temporary_canvas.resize(width, height, 32, true);
+	static surface temporary_canvas; temporary_canvas.resize(width, height, 32, true);
 	auto push_canvas = canvas;
 	canvas = &temporary_canvas; setclip();
 	paint_area_map();
@@ -964,10 +969,8 @@ static void paint_area_map_zoomed() {
 
 static void area_map() {
 	update_game_tick();
-	apply_shifer();
 	paint_area_map_zoomed();
-	apply_hilite_command();
-	apply_command();
+	apply_shifer();
 }
 
 static void paint_item(const item* pi) {

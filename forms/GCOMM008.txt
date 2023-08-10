@@ -11,7 +11,6 @@ ButtonNT GCOMMBTN 668 21 45 32 frames(8 9 9 0) value(1) data(GUISPL08) hotkey("S
 ButtonNT GCOMMBTN 600 57 39 32 frames(14 15 15 0) value(1) data(GUIMAPAB) hotkey("M")
 ButtonNT GCOMMBTN 628 60 52 36 frames(12 13 13 0) value(1) data(GUIJRNL) hotkey("J")
 ButtonNT GCOMMBTN 670 57 41 33 frames(10 11 11 0) value(1) data(STONEOPT) hotkey("Escape")
-HotKey NONE 0 0 0 0 data(ChangeZoomFactor) hotkey("Z")
 Button CGEAR 736 43 64 64 frames(0 1 0 0) value(10)
 
 // Unlnown None 6 77 539 25 
@@ -19,6 +18,9 @@ ButtonNT GCOMMBTN 576 3 30 36 frames(0 1 0 0) data(SelectAll) hotkey("*")
 ButtonNT GCOMMBTN 703 2 31 35 frames(2 3 0 0) value(12) // Rest party
 ButtonNT GCOMMBTN 575 72 31 35 frames(16 17 0 0) value(13) // Party information
 ButtonNT GCOMMBTN 757 1 26 45 frames(18 19 0 0) value(14) // AI on/off
+
+// Pure hotkeys
+HotKey NONE 0 0 0 0 data(ChangeZoomFactor) hotkey("Z")
 
 // For debugging purposes
 HotKey NONE 0 0 0 0 data(DebugTest) hotkey("Ctrl+D")
