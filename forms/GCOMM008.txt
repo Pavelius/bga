@@ -11,6 +11,7 @@ ButtonNT GCOMMBTN 668 21 45 32 frames(8 9 9 0) value(1) data(GUISPL08) hotkey("S
 ButtonNT GCOMMBTN 600 57 39 32 frames(14 15 15 0) value(1) data(GUIMAPAB) hotkey("M")
 ButtonNT GCOMMBTN 628 60 52 36 frames(12 13 13 0) value(1) data(GUIJRNL) hotkey("J")
 ButtonNT GCOMMBTN 670 57 41 33 frames(10 11 11 0) value(1) data(STONEOPT) hotkey("Escape")
+HotKey NONE 0 0 0 0 data(ChangeZoomFactor) hotkey("Z")
 Button CGEAR 736 43 64 64 frames(0 1 0 0) value(10)
 
 // Unlnown None 6 77 539 25 

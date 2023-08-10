@@ -43,8 +43,12 @@ static char description_text[4096];
 static scrolltext area_description, area_console;
 static resinfo default_cursor;
 static form* next_last_form;
-static int zoom_factor = 2;
+static int zoom_factor = 1;
 stringbuilder description(description_text);
+
+static point camera_center() {
+	return center(last_area);
+}
 
 static unsigned get_game_tick() {
 	return current_tick / 64;
@@ -559,6 +563,16 @@ static void set_camera() {
 	setcamera({(short)hot.param, (short)hot.param2});
 }
 
+void change_zoom_factor(int bonus) {
+	auto pt = camera_center();
+	auto v1 = zoom_factor;
+	zoom_factor = (zoom_factor != 2) ? 2 : 1;
+	auto v2 = zoom_factor;
+	last_screen.x2 = last_screen.x1 + last_screen.width() * v1 / v2;
+	last_screen.y2 = last_screen.y1 + last_screen.height() * v1 / v2;
+	setcamera(pt);
+}
+
 static void paint_minimap() {
 	if(last_screen.x2 == 0) {
 		last_screen.x2 = 800;
@@ -922,17 +936,17 @@ static void paint_area_map() {
 	paint_objects();
 }
 
-static void paint_area_map_zoomed(int zoom) {
+static void paint_area_map_zoom_factor() {
 	static surface temporary_canvas;
 	auto push_clipping = clipping;
-	auto push_mouse = hot.mouse; hot.mouse.x /= zoom; hot.mouse.y /= zoom;
-	rectpush push; width /= zoom; height /= zoom;
+	auto push_mouse = hot.mouse; hot.mouse.x /= zoom_factor; hot.mouse.y /= zoom_factor;
+	rectpush push; width /= zoom_factor; height /= zoom_factor;
 	temporary_canvas.resize(width, height, 32, true);
 	auto push_canvas = canvas;
 	canvas = &temporary_canvas; setclip();
 	paint_area_map();
 	canvas = push_canvas;
-	if(zoom == 2) {
+	if(zoom_factor == 2) {
 		scale2x(canvas->ptr(push.caret.x, push.caret.y), canvas->scanline,
 			temporary_canvas.ptr(0, 0), temporary_canvas.scanline,
 			width, height);
@@ -942,11 +956,10 @@ static void paint_area_map_zoomed(int zoom) {
 }
 
 static void paint_area_map_zoomed() {
-	switch(zoom_factor) {
-	case 2: paint_area_map_zoomed(2); break;
-	case 3: paint_area_map_zoomed(3); break;
-	default: paint_area_map(); break;
-	}
+	if(zoom_factor<=1)
+		paint_area_map();
+	else
+		paint_area_map_zoom_factor();
 }
 
 static void area_map() {

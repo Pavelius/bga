@@ -10,6 +10,8 @@ using namespace draw;
 
 extern stringbuilder sb;
 
+void change_zoom_factor(int bonus);
+
 static void heal(int bonus) {
 	auto n = player->hp + bonus;
 	if(n < 0)
@@ -73,6 +75,7 @@ static void button_cancel(int bonus) {
 
 BSDATA(script) = {
 	{"Cancel", button_cancel},
+	{"ChangeZoomFactor", change_zoom_factor},
 	{"CheckQuickWeapon", check_quick_weapon},
 	{"ChooseCreatureColor", choose_creature_color},
 	{"Close", button_cancel},
