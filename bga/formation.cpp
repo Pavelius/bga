@@ -2,8 +2,8 @@
 #include "formation.h"
 #include "map.h"
 
-#define M_PI_2	1.57079632679489661923   // pi/2
-#define M_PI	3.14159265358979323846   // pi
+#define M_PI_2 1.57079632679489661923 // pi/2
+#define M_PI 3.14159265358979323846 // pi
 
 extern "C" double atan(double x);
 extern "C" double cos(double x);

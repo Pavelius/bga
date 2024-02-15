@@ -2,21 +2,25 @@
 #include "area.h"
 #include "crt.h"
 
+enum animatef : unsigned char {
+	DisableOverlay, ReadyStance
+};
+
 struct animatei : nameable {
-	bool		disable_overlay;
-	bool		ready;
+	unsigned	flags;
+	bool		is(animatef v) const { return FGT(flags, v); }
 };
 BSDATA(animatei) = {
 	{"AnimateMove"},
-	{"AnimateStand", false, true},
-	{"AnimateStandRelax", false, true},
-	{"AnimateStandLook", false, true},
-	{"AnimateCombatStance", false, true},
-	{"AnimateCombatStanceTwoHanded", false, true},
+	{"AnimateStand", FG(ReadyStance)},
+	{"AnimateStandRelax", FG(ReadyStance)},
+	{"AnimateStandLook", FG(ReadyStance)},
+	{"AnimateCombatStance", FG(ReadyStance)},
+	{"AnimateCombatStanceTwoHanded", FG(ReadyStance)},
 	{"AnimateGetHit"},
 	{"AnimateGetHitAndDrop"},
-	{"AnimateAgony", false, true},
-	{"AnimateGetUp", false},
+	{"AnimateAgony", FG(ReadyStance)},
+	{"AnimateGetUp"},
 	{"AnimateMeleeOneHanded"},
 	{"AnimateMeleeOneHandedSwing"},
 	{"AnimateMeleeOneHandedThrust"},
@@ -29,14 +33,14 @@ BSDATA(animatei) = {
 	{"AnimateShootBow"},
 	{"AnimateShootSling"},
 	{"AnimateShootXBow"},
-	{"AnimateCastBig", true},
-	{"AnimateCastBigRelease", true},
-	{"AnimateCast", true},
-	{"AnimateCastRelease", true},
-	{"AnimateCastThird", true},
-	{"AnimateCastThirdRelease", true},
-	{"AnimateCastFour", true},
-	{"AnimateCastFourRelease", true},
+	{"AnimateCastBig", FG(DisableOverlay)},
+	{"AnimateCastBigRelease", FG(DisableOverlay)},
+	{"AnimateCast", FG(DisableOverlay)},
+	{"AnimateCastRelease", FG(DisableOverlay)},
+	{"AnimateCastThird", FG(DisableOverlay)},
+	{"AnimateCastThirdRelease", FG(DisableOverlay)},
+	{"AnimateCastFour", FG(DisableOverlay)},
+	{"AnimateCastFourRelease", FG(DisableOverlay)},
 };
 assert_enum(animatei, AnimateCastFourRelease)
 

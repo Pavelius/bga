@@ -19,7 +19,10 @@ enum animate_s : unsigned char {
 	AnimateMeleeTwoHanded, AnimateMeleeTwoHandedSwing, AnimateMeleeTwoHandedThrust,
 	AnimateMeleeTwoWeapon, AnimateMeleeTwoWeaponSwing, AnimateMeleeTwoWeaponThrust,
 	AnimateShootBow, AnimateShootSling, AnimateShootXBow,
-	AnimateCastBig, AnimateCastBigRelease, AnimateCast, AnimateCastRelease, AnimateCastThird, AnimateCastThirdRelease, AnimateCastFour, AnimateCastFourRelease
+	AnimateCastBig, AnimateCastBigRelease,
+	AnimateCast, AnimateCastRelease,
+	AnimateCastThird, AnimateCastThirdRelease,
+	AnimateCastFour, AnimateCastFourRelease
 };
 struct actor : drawable, actable, coloration, statable, classa, wearable {
 	animate_s		action;

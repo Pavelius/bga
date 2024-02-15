@@ -12,10 +12,6 @@
 #include "map.h"
 #include "region.h"
 
-enum map_states {
-	StateExplored = 0x80
-};
-
 static sprite* sprites;
 static sprite* sprites_minimap;
 unsigned char map::heightmap[256 * 256];

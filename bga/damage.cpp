@@ -1,5 +1,5 @@
+#include "crt.h"
 #include "damage.h"
-#include "race.h"
 
 BSDATA(damagei) = {
 	{"Bludgeon"},

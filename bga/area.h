@@ -7,7 +7,7 @@
 #pragma once
 
 enum areaf_s : unsigned char {
-	CreatureBlock,
+	StateExplored, CreatureBlock,
 };
 
 struct sprite;
