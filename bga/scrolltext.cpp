@@ -3,6 +3,8 @@
 
 using namespace draw;
 
+scrolltext* last_scrolltext;
+
 static void set_origin_value() {
 	auto p = (scrolltext*)hot.object;
 	p->setorigin(hot.param);
@@ -58,4 +60,12 @@ void scrolltext::paint(const char* format) {
 	} else
 		textf(format, cashe_origin, cashe_string);
 	clipping = push_clipping;
+	last_scrolltext = this;
+}
+
+int scrolltext::proportial(int max_height) const {
+	auto max = maximum - perscreen;
+	if(!max_height || max <= 0)
+		return 0;
+	return origin * max_height / max;
 }

@@ -22,11 +22,11 @@
     <Filter Include="utils">
       <UniqueIdentifier>{bf637da8-ca55-44db-a400-4c1ad2c2d468}</UniqueIdentifier>
     </Filter>
-    <Filter Include="forms">
-      <UniqueIdentifier>{071b14e1-b9f1-44ae-a499-6520f346576d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="locale\ru">
       <UniqueIdentifier>{905bf6e5-309c-406e-b42c-869fe85b7f77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="forms">
+      <UniqueIdentifier>{071b14e1-b9f1-44ae-a499-6520f346576d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -563,6 +563,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="my_initialize_list.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="ftflag.h">
       <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>

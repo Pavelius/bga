@@ -149,6 +149,7 @@
     <ClInclude Include="feat.h" />
     <ClInclude Include="floattext.h" />
     <ClInclude Include="formation.h" />
+    <ClInclude Include="ftflag.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="itema.h" />
     <ClInclude Include="itemground.h" />

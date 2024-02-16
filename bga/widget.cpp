@@ -445,8 +445,12 @@ static void scroll() {
 	caret.y = push_caret.y + height - h;
 	button(gui.res, gui.frames[3], gui.frames[2]);
 	caret.y = push_caret.y + h;
-	//auto dy = height - h * 2 - sh;
-	button(gui.res, gui.frames[4], gui.frames[5]);
+	if(last_scrolltext) {
+		auto height_max = height - h*2 - sh * 2;
+		auto current_position = last_scrolltext->proportial(height_max);
+		caret.y += current_position;
+		button(gui.res, gui.frames[4], gui.frames[5]);
+	}
 	caret = push_caret;
 }
 
