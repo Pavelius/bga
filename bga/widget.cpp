@@ -300,12 +300,14 @@ static void execute_script() {
 }
 
 static void open_form() {
-	auto p = (form*)hot.object;
+	auto push_form = last_form;
+	last_form = (form*)hot.object;
 	switch(hot.param) {
-	case 1: p->nextscene(); break;
-	case 2: p->open(true); break;
-	default: p->open(false); break;
+	case 1: last_form->nextscene(); break;
+	case 2: last_form->open(true); break;
+	default: last_form->open(false); break;
 	}
+	last_form = push_form;
 }
 
 static void open_widget() {
@@ -322,14 +324,18 @@ static void execute_action(variant v, int value) {
 		execute(execute_script, value, 0, bsdata<script>::elements + v.value);
 }
 
-static void button_input() {
+static void button_run_input() {
 	button_run = false;
 	if(gui.disabled)
 		return;
-	if(gui.key && hot.key==gui.key)
+	if(gui.key && hot.key == gui.key)
 		button_run = true;
-	if(gui.hilited && hot.key==MouseLeft && !hot.pressed)
+	if(gui.hilited && hot.key == MouseLeft && !hot.pressed)
 		button_run = true;
+}
+
+static void button_input() {
+	button_run_input();
 	if(button_run)
 		execute_action(gui.data, gui.value);
 }
@@ -434,23 +440,31 @@ static void creature_color() {
 }
 
 static void scroll() {
-	if(!gui.res)
+	if(!gui.res || !last_scrolltext)
 		return;
+	auto push_hilited = gui.hilited;
 	auto& f = gui.res->get(gui.frames[1]);
 	auto w = f.sx;
 	auto h = f.sy;
 	auto sh = gui.res->get(gui.frames[4]).sy;
 	auto push_caret = caret;
+	gui.hilited = ishilite({caret.x, caret.y, caret.x + w, caret.y + h});
 	button(gui.res, gui.frames[1], gui.frames[0]);
+	button_run_input();
+	if(button_run)
+		last_scrolltext->move_up();
 	caret.y = push_caret.y + height - h;
+	gui.hilited = ishilite({caret.x, caret.y, caret.x + w, caret.y + h});
 	button(gui.res, gui.frames[3], gui.frames[2]);
+	button_run_input();
+	if(button_run)
+		last_scrolltext->move_down();
 	caret.y = push_caret.y + h;
-	if(last_scrolltext) {
-		auto height_max = height - h*2 - sh * 2;
-		auto current_position = last_scrolltext->proportial(height_max);
-		caret.y += current_position;
-		button(gui.res, gui.frames[4], gui.frames[5]);
-	}
+	auto height_max = height - h*2 - sh * 2;
+	auto current_position = last_scrolltext->proportial(height_max);
+	caret.y += current_position;
+	button(gui.res, gui.frames[4], gui.frames[5]);
+	button_run_input();
 	caret = push_caret;
 }
 

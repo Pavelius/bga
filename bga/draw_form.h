@@ -26,7 +26,7 @@ struct form {
 	static fnevent	prepare, opening, closing;
 	static void		nextscene(const char* id);
 	void			nextscene() const;
-	long			open(bool modal) const;
+	static long		open(bool modal);
 	static long		open(const char* id, bool modal);
 	void			paint() const;
 	static void		read(const char* url);

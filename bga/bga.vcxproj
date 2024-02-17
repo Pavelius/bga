@@ -25,6 +25,7 @@
     <Text Include="..\forms\GGAME.txt" />
     <Text Include="..\forms\GIITMH08.txt" />
     <Text Include="..\forms\GUICHP0B.txt" />
+    <Text Include="..\forms\GUIHELP.txt" />
     <Text Include="..\forms\GUIINV08.txt" />
     <Text Include="..\forms\GUIINVAB.txt" />
     <Text Include="..\forms\GUIJRNL.txt" />

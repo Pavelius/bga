@@ -146,7 +146,7 @@ static void form_paint() {
 	last_form->paint();
 }
 
-long form::open(bool modal) const {
+long form::open(bool modal) {
 	form_script("Opening");
 	if(opening)
 		opening();

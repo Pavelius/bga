@@ -108,6 +108,9 @@
     <Text Include="..\locale\ru\core\SkillNames.txt">
       <Filter>locale\ru</Filter>
     </Text>
+    <Text Include="..\forms\GUIHELP.txt">
+      <Filter>forms</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

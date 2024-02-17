@@ -1,0 +1,3 @@
+﻿#Control
+
+Background GUIHELP 0 0 0 0

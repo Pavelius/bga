@@ -38,7 +38,7 @@ CreatureAbility REALMS 585 399 54 16 id("HP")
 TextDescription NORMAL 406 64 349 288 fore(250 250 250)
 Scroll GBTNSCRL 768 64 12 294 frames(1 0 3 2 4 5) 
 
-Button GBTNSTD 256 307 117 25 frames(1 2 3 0) id("Information")
+Button GBTNSTD 256 307 117 25 frames(1 2 3 0) id("Information") data(GUIHELP)
 Button GBTNSTD 256 334 117 25 frames(1 2 3 0) id("Biography")
 Button GBTNSTD 256 361 117 25 frames(1 2 3 0) id("Export")
 Button GBTNSTD 256 388 117 25 frames(1 2 3 0) id("Customize")

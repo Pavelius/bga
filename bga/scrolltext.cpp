@@ -28,8 +28,8 @@ void scrolltext::invalidate() {
 
 void scrolltext::input() {
 	switch(hot.key) {
-	case MouseWheelDown: execute(set_origin_value, origin + texth(), 0, this); break;
-	case MouseWheelUp: execute(set_origin_value, origin - texth(), 0, this); break;
+	case MouseWheelDown: execute(set_origin_value, origin + text_height, 0, this); break;
+	case MouseWheelUp: execute(set_origin_value, origin - text_height, 0, this); break;
 	default: break;
 	}
 }
@@ -41,7 +41,14 @@ void scrolltext::correct() {
 		origin = 0;
 }
 
+void scrolltext::setcommand(int v) {
+	draw::execute(cbsetint, v, 0, &origin);
+	invalidate();
+}
+
 void scrolltext::paint(const char* format) {
+	text_height = texth();
+	last_scrolltext = this;
 	if(!format)
 		return;
 	auto push_clipping = clipping;
@@ -60,7 +67,6 @@ void scrolltext::paint(const char* format) {
 	} else
 		textf(format, cashe_origin, cashe_string);
 	clipping = push_clipping;
-	last_scrolltext = this;
 }
 
 int scrolltext::proportial(int max_height) const {
