@@ -14,6 +14,7 @@
 #include "drawable.h"
 #include "floattext.h"
 #include "game.h"
+#include "list.h"
 #include "map.h"
 #include "race.h"
 #include "region.h"
@@ -1296,6 +1297,17 @@ static void text_console() {
 	font = push_font;
 }
 
+static void list_elements() {
+	if(!gui.data.iskind<listi>())
+		return;
+	auto ps = bsdata<listi>::elements + gui.data.value;
+	if(!ps->elements.size())
+		return;
+	for(auto v : ps->elements) {
+
+	}
+}
+
 void util_items_list();
 
 BSDATA(widget) = {
@@ -1322,6 +1334,7 @@ BSDATA(widget) = {
 	{"GearButton", gear_button},
 	{"HotKey", button_input},
 	{"Label", label},
+	{"ListElements", list_elements},
 	{"Paperdoll", paperdoll},
 	{"PortraitLarge", portrait_large},
 	{"QuickItemButton", quick_item_button},

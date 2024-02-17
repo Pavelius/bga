@@ -111,6 +111,9 @@
     <Text Include="..\forms\GUIHELP.txt">
       <Filter>forms</Filter>
     </Text>
+    <Text Include="..\rules\Basic.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

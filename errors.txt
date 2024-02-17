@@ -1,2 +1,1 @@
-﻿In file `forms/GUIREC08.txt`:
- Line 41: Can't find variant `GUIHE1LP`
+﻿Can't find file 'rules/Interface.txt'

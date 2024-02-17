@@ -13,6 +13,7 @@
 #include "floattext.h"
 #include "gender.h"
 #include "itemground.h"
+#include "list.h"
 #include "modifier.h"
 #include "portrait.h"
 #include "race.h"
@@ -155,6 +156,7 @@ BSDATA(varianti) = {
 	{"Feat", VAR(feati, 1), 0, 0, fnscript<feati>},
 	{"Form", VAR(form, 1)},
 	{"Item", VAR(itemi, 1)},
+	{"List", VAR(listi, 1)},
 	{"Modifier", VAR(modifieri, 1), 0, 0, fnscript<modifieri>},
 	{"Portrait", VAR(portraiti, 1)},
 	{"Race", VAR(racei, 1)},
@@ -162,6 +164,7 @@ BSDATA(varianti) = {
 	{"Resource", VAR(residi, 1)},
 	{"Script", VAR(script, 1)},
 	{"Skill", VAR(skilli, 1)},
+	{"Type", VAR(varianti, 1)},
 	{"Widget", VAR(widget, 1)},
 };
 BSDATAF(varianti)

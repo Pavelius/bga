@@ -73,13 +73,25 @@ static void button_cancel(int bonus) {
 	draw::breakmodal(bonus);
 }
 
+static void attack_change(int bonus) {
+	fnscript<abilityi>(AttackMelee, bonus);
+	fnscript<abilityi>(AttackRanged, bonus);
+}
+
+static void damage_change(int bonus) {
+	fnscript<abilityi>(DamageMelee, bonus);
+	fnscript<abilityi>(DamageRanged, bonus);
+}
+
 BSDATA(script) = {
+	{"Attack", attack_change},
 	{"Cancel", button_cancel},
 	{"ChangeZoomFactor", change_zoom_factor},
 	{"CheckQuickWeapon", check_quick_weapon},
 	{"ChooseCreatureColor", choose_creature_color},
 	{"Close", button_cancel},
 	{"ColorPick", color_pick},
+	{"Damage", damage_change},
 	{"DebugTest", debug_test},
 	{"DefaultColor", default_color_pick},
 	{"Done", button_cancel},
