@@ -1,27 +1,27 @@
-﻿#AR6051Info2214_2638
+﻿#AR6051Info2186_2604
 This huge pot contains some foul-looking stew.  Within you can see body parts of animals and humans floating in the muck.
 
-#AR6051Info2266_2578
+#AR6051Info2237_2543
 This huge pot contains some foul-looking stew.  Within you can see body parts of animals and humans floating in the muck.
 
-#AR6051Info2503_695
+#AR6051Info2447_656
 This appears to be a statue of a great winged serpent with a malevolent gaze.  Its wings are outstretched as if to embrace the world. 
 
-#AR6051Info2627_762
+#AR6051Info2579_713
 This appears to be a statue of a great winged serpent with a malevolent gaze.  Its wings are outstretched as if to embrace the world. 
 
-#AR6051Info1110_2153
+#AR6051Info1078_2095
 This board is covered with arcane spell runes and icons, of various colors but all no larger than the size of one's hand. 
 
-#AR6051Info612_2041
+#AR6051Info605_2020
 This training dummy looks to have seen a lot of use.  The number of stab wounds along the back is particularly unnerving.
 
-#AR6051Info645_2007
+#AR6051Info638_1986
 This training dummy looks to have seen a lot of use.  The number of stab wounds along the back is particularly unnerving.
 
-#AR6051Info462_1331
+#AR6051Info444_1311
 The message chiseled upon this wall is written in curving runes - you have no idea what they mean, but they seem to be some sort of warning. 
 
-#AR6051Info2643_2528
+#AR6051Info2602_2482
 The stench of burning flesh comes from this stove, and you can see many charred human and animal bones inside. 
 

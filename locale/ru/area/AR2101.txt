@@ -1,15 +1,15 @@
-﻿#AR2101Info1720_1465
+﻿#AR2101Info1696_1430
 This poor peasant is beyond any help.
 
-#AR2101Info1253_1542
+#AR2101Info1227_1506
 This poor peasant is beyond any help.
 
-#AR2101Info1502_1240
+#AR2101Info1471_1205
 This poor peasant is beyond any help.
 
-#AR2101Info1145_956
+#AR2101Info1123_922
 This poor peasant is beyond any help.
 
-#AR2101Info1418_925
+#AR2101Info1389_893
 This poor peasant is beyond any help.
 

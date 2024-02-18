@@ -1,24 +1,24 @@
-﻿#AR3101Info672_1220
+﻿#AR3101Info659_1185
 An unfortunate victim of the marauding horde.  The corpse appears to have been hung on the wall either as a trophy or perhaps a warning.
 
-#AR3101Info394_1099
+#AR3101Info381_1067
 An unfortunate victim of the marauding horde.  The corpse appears to have been hung on the wall either as a trophy or perhaps a warning.
 
-#AR3101Info352_1089
+#AR3101Info341_1054
 An unfortunate victim of the marauding horde.  The corpse appears to have been hung on the wall either as a trophy or perhaps a warning.
 
-#AR3101Info253_1139
+#AR3101Info243_1103
 An unfortunate victim of the marauding horde.  The corpse appears to have been hung on the wall either as a trophy or perhaps a warning.
 
-#AR3101Info168_1237
+#AR3101Info159_1205
 An unfortunate victim of the marauding horde.  The corpse appears to have been hung on the wall either as a trophy or perhaps a warning.
 
-#AR3101Info2278_757
+#AR3101Info2196_700
 Stores of various hard rations.
 
-#AR3101Info1846_1430
+#AR3101Info1825_1410
 This emaciated humanoid prisoner probably starved to death.  By the smell you would guess it has been at least several days since his passing.
 
-#AR3101Info1967_1458
+#AR3101Info1942_1432
 This emaciated humanoid prisoner probably starved to death.  By the smell you would guess it has been at least several days since his passing.
 

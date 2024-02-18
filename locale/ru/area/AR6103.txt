@@ -1,18 +1,18 @@
-﻿#AR6103Info1684_1778
+﻿#AR6103Info1613_1718
 This raised drawbridge, covered with candle wax and suspended over a bottomless chasm, connects to the room beyond.
 
-#AR6103Info2120_2652
+#AR6103Info1951_2498
 There's a tunnel here that's built for a snake to slither through, but it looks traversable if one person at a time squeezed through.
 
-#AR6103Info3186_2217
+#AR6103Info3136_2167
 There's a tunnel here that's built for a snake to slither through, but it looks traversable if one person at a time squeezed through.
 
-#AR6103Info1797_630
+#AR6103Info1735_577
 Written in calligraphy on this archway is the phrase:  "Pass ye under Sseth's Eye only whom thou art yuan-ti to cleanse thyself with meditation and quiet prayer."
 
-#AR6103Info891_1747
+#AR6103Info727_1547
 The opening mechanism to this large metal door operates on a timer, but you feel it could be bypassed with the proper tools and expertise.
 
-#AR6103Info1704_1374
+#AR6103Info1666_1340
 This statue depicts a horrific scene of snakes devouring a human alive.
 

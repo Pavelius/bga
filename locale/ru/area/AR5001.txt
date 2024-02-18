@@ -1,9 +1,9 @@
-﻿#AR5001Info2640_637
+﻿#AR5001Info2478_481
 The air around this large tent of oddly colored hides smells faintly of clovers.
 
-#AR5001Info2763_685
+#AR5001Info2589_518
 The air around this large tent of oddly colored hides smells faintly of clovers.
 
-#AR5001Info593_599
+#AR5001Info561_567
 An unidentifiable corpse is buried here in the frozen earth.
 

@@ -45,6 +45,7 @@ static scrolltext area_description, area_console;
 static resinfo default_cursor;
 static form* next_last_form;
 static int zoom_factor = 1;
+static void *current_topic, *current_focus;
 stringbuilder description(description_text);
 
 static point camera_center() {
@@ -403,10 +404,14 @@ static void textarea() {
 
 static void label() {
 	auto push_font = font;
+	auto push_fore = fore;
 	if(gui.res)
 		font = gui.res;
+	if(gui.checked)
+		fore = colors::special;
 	texta(getname(), AlignCenterCenter);
 	font = push_font;
+	fore = push_fore;
 }
 
 static void pressed_colorgrad(int index, int size) {
@@ -846,7 +851,14 @@ void animation::paint() const {
 	if(!pr)
 		return;
 	auto hour = getgamehour();
-	image(pr, pr->ganim(frame, get_game_tick()), 0);
+	if(is(RenderBlackAsTransparent)) {
+		//image_tint(caret.x, caret.y, pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
+		auto push_alpha = alpha;
+		alpha = alpha >> 2;
+		image(pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
+		alpha = push_alpha;
+	} else
+		image(pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
 }
 
 static void paint_object(drawable* object) {
@@ -1297,15 +1309,59 @@ static void text_console() {
 	font = push_font;
 }
 
-static void list_elements() {
+static void list_elements(void** current_focus) {
 	if(!gui.data.iskind<listi>())
 		return;
 	auto ps = bsdata<listi>::elements + gui.data.value;
 	if(!ps->elements.size())
 		return;
+	if(!(*current_focus))
+		*current_focus = ps->elements.begin()->getpointer();
+	auto max_height = caret.y + draw::height;
+	draw::height = texth() + 2;
 	for(auto v : ps->elements) {
-
+		if(caret.y >= max_height)
+			break;
+		gui.text = v.getname();
+		gui.checked = (v.getpointer() == *current_focus);
+		label();
+		caret.y += draw::height;
 	}
+}
+
+static void list_elements(void** current_focus, const array& source) {
+	if(!(*current_focus))
+		*current_focus = source.begin();
+	auto push_clip = clipping;
+	setclipall();
+	auto size = source.size;
+	auto pe = source.end();
+	auto max_height = caret.y + draw::height;
+	draw::height = texth() + 2;
+	for(auto p = source.begin(); p < pe; p += size) {
+		if(caret.y >= max_height)
+			break;
+		gui.text = ((nameable*)p)->getname();
+		gui.checked = (p == *current_focus);
+		gui.hilited = ishilite();
+		label();
+		button_run_input();
+		if(button_run)
+			execute(cbsetptr, (long)p, 0, current_focus);
+		caret.y += draw::height;
+	}
+	clipping = push_clip;
+}
+
+static void topic_list() {
+	list_elements(&current_topic);
+}
+
+static void content_list() {
+	auto p = (varianti*)current_topic;
+	if(!p)
+		return;
+	list_elements(&current_focus, *p->source);
 }
 
 void util_items_list();
@@ -1320,6 +1376,7 @@ BSDATA(widget) = {
 	{"ButtonInfoTab", button_info_tab},
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},
+	{"ContentList", content_list},
 	{"CreatureAbility", creature_ability},
 	{"CreatureAbilityBonus", creature_ability_bonus},
 	{"CreatureColor", creature_color},
@@ -1334,7 +1391,6 @@ BSDATA(widget) = {
 	{"GearButton", gear_button},
 	{"HotKey", button_input},
 	{"Label", label},
-	{"ListElements", list_elements},
 	{"Paperdoll", paperdoll},
 	{"PortraitLarge", portrait_large},
 	{"QuickItemButton", quick_item_button},
@@ -1343,6 +1399,7 @@ BSDATA(widget) = {
 	{"QuickOffhandItem", quick_offhand_item},
 	{"QuiverButton", quiver_button},
 	{"Scroll", scroll},
+	{"TopicList", topic_list},
 	{"UpdateCreatureInfo", update_creature_info},
 #ifdef _DEBUG
 	{"ItemList", util_items_list},

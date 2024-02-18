@@ -1,6 +1,6 @@
-﻿#AR1007Info1403_363
+﻿#AR1007Info1236_266
 This cave-in looks like it happened recently.  This may have been the passage the goblin sappers came from.
 
-#AR1007Info482_738
+#AR1007Info360_693
 This cave-in looks like it happened some time ago.  It looks like someone has been working at it with tools, but without much success.
 

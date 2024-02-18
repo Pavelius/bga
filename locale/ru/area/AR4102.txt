@@ -1,159 +1,159 @@
-﻿#AR4102Info2758_1834
+﻿#AR4102Info2725_1791
 This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4102Info2735_2103
+#AR4102Info2702_2061
 This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4102Info1185_706
+#AR4102Info1153_676
 This intricately-carved altar is made entirely of ice, but pulsates as if driven by a heartbeat.
 
-#AR4102Info846_734
+#AR4102Info833_692
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4102Info933_641
+#AR4102Info922_598
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4102Info983_640
+#AR4102Info971_593
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4102Info1310_779
+#AR4102Info1299_733
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4102Info1326_798
+#AR4102Info1317_760
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4102Info1240_902
+#AR4102Info1227_859
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4102Info2654_1966
+#AR4102Info2584_1911
 This appears to be one of the components belonging to the strange device that dominates this room.  It looks to be the victim of a recent, violent explosion.
 
-#AR4102Info2846_1918
+#AR4102Info2812_1868
 This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4102Info2941_1954
+#AR4102Info2899_1918
 This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4102Info2789_1976
+#AR4102Info2748_1945
 This platform appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4102Info2829_2080
+#AR4102Info2788_2050
 This platform appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4102Info1241_283
+#AR4102Info1212_251
 This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
 
-#AR4102Info1426_244
+#AR4102Info1391_218
 This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
 
-#AR4102Info1562_249
+#AR4102Info1527_221
 This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
 
-#AR4102Info1854_354
+#AR4102Info1815_317
 This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
 
-#AR4102Info853_2541
+#AR4102Info799_2500
 This empty coffin belongs to High Priestess Cathin.
 
-#AR4102Info913_2574
+#AR4102Info873_2530
 This empty coffin belongs to High Priestess Lysara.
 
-#AR4102Info983_2603
+#AR4102Info945_2561
 This empty coffin belongs to High Priestess Oria.
 
-#AR4102Info2521_1013
+#AR4102Info2490_946
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info2145_1547
+#AR4102Info2047_1456
 A finely crafted prism, sitting at the center of this large device, catches the ray of intense light coming from above.  The symbol of a lightning bolt has been carved into the base of the device.
 
-#AR4102Info767_1688
+#AR4102Info505_1542
 This crystal mirror contains what appear to be individuals trapped within several extradimensional compartments.
 
-#AR4102Info1665_2727
+#AR4102Info1642_2708
 This switch is labeled 'Mode Activator'.
 
-#AR4102Info1732_2690
+#AR4102Info1708_2671
 This switch is labeled 'Mode Selector 1'.
 
-#AR4102Info1785_2629
+#AR4102Info1761_2611
 This switch is labeled 'Mode Selector 2'.
 
-#AR4102Info1920_2438
+#AR4102Info1896_2420
 This switch is labeled 'Rank Selector 1'.
 
-#AR4102Info1979_2372
+#AR4102Info1955_2353
 This switch is labeled 'Rank Selector 2'.
 
-#AR4102Info2034_2313
+#AR4102Info2011_2295
 This switch is labeled 'Rank Selector 3'.
 
-#AR4102Info2094_2311
+#AR4102Info2073_2291
 This switch is labeled 'Rank Selector 4'.
 
-#AR4102Info2158_2332
+#AR4102Info2137_2313
 This switch is labeled ''Rank Selector 5'.
 
-#AR4102Info2229_2362
+#AR4102Info2207_2343
 This switch is labeled ''Rank Selector 6'.
 
-#AR4102Info2509_1006
+#AR4102Info2486_950
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info3715_1498
+#AR4102Info3700_1459
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info2886_2448
+#AR4102Info2867_2417
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info115_1253
+#AR4102Info102_1211
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info919_299
+#AR4102Info902_269
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info2365_1478
+#AR4102Info2357_1438
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info2224_1681
+#AR4102Info2206_1640
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info1748_1458
+#AR4102Info1737_1422
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info1652_1290
+#AR4102Info1638_1250
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info1921_1275
+#AR4102Info1903_1242
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info450_812
+#AR4102Info442_763
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info175_1536
+#AR4102Info159_1500
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info1175_1975
+#AR4102Info1166_1935
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info809_2438
+#AR4102Info792_2405
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info1079_2552
+#AR4102Info1064_2524
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info1542_2130
+#AR4102Info1526_2092
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4102Info2410_2445
+#AR4102Info2389_2426
 This switch is labeled ''Rank Selector 7'.
 
-#AR4102Info2475_2474
+#AR4102Info2454_2454
 This switch is labeled ''Rank Selector 8'.
 
-#AR4102Info2545_2505
+#AR4102Info2524_2485
 This switch is labeled ''Rank Selector 9'.
 
-#AR4102Info2609_2532
+#AR4102Info2588_2512
 This switch is labeled ''Rank Selector 10'.
 

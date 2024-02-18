@@ -1,30 +1,30 @@
-﻿#AR4101Info1758_1558
+﻿#AR4101Info1697_1496
 Light from a small hole in the ceiling directly above is hitting this bulb, and the crystals contained within are magnifying it to a greater intensity before passing it into the room below.
 
-#AR4101Info1769_1745
+#AR4101Info1732_1689
 This statue is of a lithe, furious female with blue skin, long, free-flowing, white hair, wearing a fine gown of white lawn thickly furred with frost swirls about her.  The base reads "Auril."
 
-#AR4101Info1634_1870
+#AR4101Info1618_1829
 This statue is of a human female wearing an ice-white ceremonial robe with blue piping.  The robe is cinched at the waist by a very wide silver belt, with straps holding various religious paraphernalia.  Atop her head sits a silver circlet.  Her head and arms are raised in the air, as if praying to the heavens.  The base reads "Lysara."
 
-#AR4101Info1630_1974
+#AR4101Info1610_1936
 This statue is of a human female with leather armor covering a blue dress with olive trim.  She wields a glowing mace.  The base reads "Lysan."
 
-#AR4101Info1492_2024
+#AR4101Info1475_1985
 This statue is of a human female wearing a blue mage's robe with incongruous streaks of white trim, looking as if a thin blanket of ice were wrapped around her, then stylishly shattered.  She rests her weight on a serpent-shaped staff held in her left hand, and has her right arm wrapped around her back.  The base reads "Oria."
 
-#AR4101Info1515_1917
+#AR4101Info1489_1880
 This statue is of a human female wearing light armor, a silver belt containing an assortment of weapons, and a silver circlet on her head.  She wields a glowing axe in each hand, and has a shield draped across her back.  The base reads "Cathin."
 
-#AR4101Info1701_1803
+#AR4101Info1667_1774
 This altar is made entirely of ice.
 
-#AR4101Info3286_1308
+#AR4101Info3247_1276
 This is an oil painting depicting a frozen Kuldahar with its snow-covered Great Tree withering.
 
-#AR4101Info1186_893
+#AR4101Info1133_864
 This rotating dais contains tight streaks of blood fashioned in such a way as to suggest its flow traveled downward at a rapid rate of speed.
 
-#AR4101Info1184_871
+#AR4101Info1135_838
 This rotating dais contains tight streaks of blood fashioned in such a way as to suggest its flow traveled downward at a rapid rate of speed.
 

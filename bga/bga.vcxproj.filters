@@ -114,6 +114,9 @@
     <Text Include="..\rules\Basic.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\rules\Feats.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

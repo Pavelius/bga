@@ -1,12 +1,12 @@
-﻿#AR1104Info552_187
+﻿#AR1104Info540_176
 You did notice there weren't any cows in town.  Horrifying.
 
-#AR1104Info590_126
+#AR1104Info576_105
 You did notice there weren't any cows in town.  Horrifying.
 
-#AR1104Info615_176
+#AR1104Info597_153
 You did notice there weren't any cows in town.  Horrifying.
 
-#AR1104Info718_311
+#AR1104Info660_247
 A well-stocked bar.  You see Cormyrian Brandy and Knee-Cracker Cider amongst the bottles. 
 

@@ -1,12 +1,12 @@
-﻿#AR6201Info582_853
+﻿#AR6201Info553_833
 This burned out fire pit looks only a few days old.
 
-#AR6201Info580_748
+#AR6201Info557_725
 This dead barbarian is well frozen over. However, it is well exposed and intact, leading you to believe that this corpse is only a few days old.
 
-#AR6201Info667_757
+#AR6201Info641_733
 This dead barbarian is well frozen over. However, it is well exposed and intact, leading you to believe that this corpse is only a few days old.
 
-#AR6201Info1170_973
+#AR6201Info937_841
 An immense boulder that must have fallen from one of the surrounding mountainsides.
 

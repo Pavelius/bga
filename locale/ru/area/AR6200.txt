@@ -1,54 +1,54 @@
-﻿#AR6200Info400_412
+﻿#AR6200Info371_366
 This haphazardly constructed wooden apparatus seems to have been used to tie up individuals, similar to a crucifixion.  Judging from the amount of blood on the object, it is safe to assume that sacrifices were performed here as well. 
 
-#AR6200Info605_474
+#AR6200Info501_402
 In all appearances, this looks to be a blood covered, makeshift altar made from found scrap wood, stones and even bones. 
 
-#AR6200Info2661_918
+#AR6200Info2521_838
 A large remnant of an ancient catapult that looks like it's been through hundreds of years of fierce weather. 
 
-#AR6200Info2722_1073
+#AR6200Info2586_1012
 A large remnant of an ancient catapult that looks like it's been through hundreds of years of fierce weather. 
 
-#AR6200Info2135_2152
+#AR6200Info2016_2050
 These elven scout tents more closely resemble small, decrepit tombs.
 
-#AR6200Info943_699
+#AR6200Info781_584
 Despite the fact that the canvases of the orc tents are torn, weather beaten and essentially useless, the ropes that hold them up are remarkably sturdy and not damaged what-so-ever.
 
 
-#AR6200Info1105_874
+#AR6200Info950_765
 Despite the fact that the canvases of the orc tents are torn, weather beaten and essentially useless, the ropes that hold them up are remarkably sturdy and not damaged what-so-ever.
 
 
-#AR6200Info1267_335
+#AR6200Info1096_218
 Despite the fact that the canvases of the orc tents are torn, weather beaten and essentially useless, the ropes that hold them up are remarkably sturdy and not damaged what-so-ever.
 
 
-#AR6200Info1652_1742
+#AR6200Info1453_1583
 A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
 
-#AR6200Info2994_1196
+#AR6200Info2732_792
 A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
 
-#AR6200Info2058_1546
+#AR6200Info1828_1334
 A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
 
-#AR6200Info2220_1593
+#AR6200Info1929_1359
 A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
 
-#AR6200Info2791_1742
+#AR6200Info2492_1407
 A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
 
-#AR6200Info2849_2120
+#AR6200Info2438_1885
 A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
 
-#AR6200Info3001_1813
+#AR6200Info2792_1483
 A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
 
-#AR6200Info3259_1171
+#AR6200Info3095_975
 A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
 
-#AR6200Info3770_1624
+#AR6200Info3628_1443
 This waterfall is partially frozen.  However, the water that is falling churns and cracks the broken ice in its basin.  When you listen carefully, you can hear what sounds like a large stream flowing from the falls, to under the ground, and towards the fields.
 

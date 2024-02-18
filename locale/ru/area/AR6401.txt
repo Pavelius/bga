@@ -1,12 +1,12 @@
-﻿#AR6401Info482_925
+﻿#AR6401Info345_827
 The floor here has been crudely patched with wooden planks.  Looking through a crack between the boards, you can see the ruined portion of the tower below.
 
-#AR6401Info350_461
+#AR6401Info330_446
 This is a small writing desk.
 
-#AR6401Info901_308
+#AR6401Info854_283
 A strange growth seems to be claiming this table and anything on it.
 
-#AR6401Info1030_498
+#AR6401Info955_458
 This table is filled with alchemical equipment.
 

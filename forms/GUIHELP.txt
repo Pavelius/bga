@@ -2,21 +2,13 @@
 
 Background GUIHELP 0 0 0 0
 
-Label STONEBIG 300 23 200 30 // Information
-Button GBTNBFRM 297 373 205 40 frames(1 2 3 0) value(1)
+Label STONEBIG 300 23 200 30 id("Information")
+Button GBTNBFRM 297 373 205 40 frames(1 2 3 0) value(1) data(GGAME) id("Close") hotkey("Escape")
 
-Label NORMAL 432 72 277 286 fore(255 255 246) 
+TopicList NORMAL 74 72 95 286 data(HelpElements) value(11)
+
+// ContentList NORMAL 432 72 277 286 fore(255 255 246) 
+ContentList NORMAL 191 72 203 286 fore(255 255 246) value(11)
+
 Scroll GBTNSCRL 720 70 12 291 frames(1 0 3 2 4 5) 
-Scroll GBTNSCRL 404 70 12 291 frames(1 0 3 2 4 5) 
-
-Label NORMAL 74 72 95 26 
-Label NORMAL 74 98 95 26 
-Label NORMAL 74 124 95 26 
-Label NORMAL 74 150 95 26 
-Label NORMAL 74 176 95 26 
-Label NORMAL 74 202 95 26 
-Label NORMAL 74 228 95 26 
-Label NORMAL 74 254 95 26 
-Label NORMAL 74 280 95 26 
-Label NORMAL 74 306 95 26 
-Label NORMAL 74 332 95 26 
+Scroll GBTNSCRL 404 70 12 291 frames(1 0 3 2 4 5)

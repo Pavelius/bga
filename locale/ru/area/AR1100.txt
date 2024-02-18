@@ -1,52 +1,52 @@
-﻿#AR1100Info932_1706
+﻿#AR1100Info915_1690
 "The Weeping Widow Inn"
 
-#AR1100Info1215_2109
+#AR1100Info1084_1988
 This crane looks like it's designed to haul lumber from the cliffs below.
 
-#AR1100Info2755_298
+#AR1100Info2723_271
 You were WONDERING where that smell was coming from.  Damn, that smells good.
 
-#AR1100Info2245_379
+#AR1100Info2202_344
 There's something suspicious about this cart.  Everytime you turn away, you swear it's looking at you - but when you turn around... nothing.
 
-#AR1100Info600_959
+#AR1100Info573_933
 This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
 
 
-#AR1100Info678_941
+#AR1100Info651_926
 These barrels look like they've been roped off to prevent them from hurting innocent bystanders.  
 
-#AR1100Info95_1645
+#AR1100Info47_1589
 The logs on this cart have merchant marks on them from Lonelywood and Bremen. You notice a few planks and boards lie amongst the logs - that look like they were stripped from a house.
 
-#AR1100Info375_995
+#AR1100Info352_978
 These casks bear the mark of Bremen on them.  They look like they've been tapped recently. 
 
-#AR1100Info149_451
+#AR1100Info113_415
 This cart reminds you of an umber hulk head.  Or an ankheg.  You shiver involuntarily.
 
-#AR1100Info404_532
+#AR1100Info365_496
 This house looks like it was abandoned recently, and it has been boarded up.
 
-#AR1100Info262_1052
+#AR1100Info251_1002
 This house looks like it was abandoned recently, and it has been boarded up.
 
-#AR1100Info134_1445
+#AR1100Info124_1396
 This empty house has been boarded up, and a scratched message on the front of the door reads "Bryn Shander."
 
-#AR1100Info1028_1077
+#AR1100Info1003_1045
 The door to this house has been nailed shut.
 
-#AR1100Info2442_1821
+#AR1100Info2430_1786
 This looks like it might have once been a teamster's house.  The door has been nailed shut, and it will not open.
 
-#AR1100Info1727_1104
+#AR1100Info1703_1073
 The door to this small cottage has been nailed shut, and scratched on the door are the words, "Gone to Bryn Shander."
 
-#AR1100Info1712_810
+#AR1100Info1688_777
 This door is nailed shut, and it will not open.  The house looks like it was abandoned recently. 
 
-#AR1100Info1649_1840
+#AR1100Info1631_1822
 "Gallaway Trade Depot"
 

@@ -1,78 +1,78 @@
-﻿#AR5302Info456_1915
+﻿#AR5302Info419_1898
 A sturdy table covered with smithy's tools.
 
-#AR5302Info740_1547
+#AR5302Info704_1530
 A sturdy table covered with smithy's tools.
 
-#AR5302Info998_1676
+#AR5302Info962_1662
 A sturdy table covered with smithy's tools.
 
-#AR5302Info1355_2540
+#AR5302Info1333_2500
 These arrow slits allow archers to fire upon anyone coming through the citadel's gate.
 
-#AR5302Info1435_2425
+#AR5302Info1412_2383
 These arrow slits allow archers to fire upon anyone coming through the citadel's gate.
 
-#AR5302Info2714_2387
+#AR5302Info2672_2349
 These sacks hold flour, grain, and so on.
 
-#AR5302Info2757_2497
+#AR5302Info2736_2478
 These sacks hold flour, grain, and so on.
 
-#AR5302Info2811_2476
+#AR5302Info2782_2452
 These sacks hold flour, grain, and so on.
 
-#AR5302Info3202_2274
+#AR5302Info3160_2244
 These sacks hold flour, grain, and so on.
 
-#AR5302Info3268_2219
+#AR5302Info3228_2190
 These sacks hold flour, grain, and so on.
 
-#AR5302Info3376_2160
+#AR5302Info3333_2122
 These sacks hold flour, grain, and so on.
 
-#AR5302Info2871_2511
+#AR5302Info2805_2476
 While these barrels don't contain anything useful, at least you won't have to waste any time smashing them.
 
-#AR5302Info3183_2504
+#AR5302Info3136_2468
 While these barrels don't contain anything useful, at least you won't have to waste any time smashing them.
 
-#AR5302Info3108_1771
+#AR5302Info3067_1719
 These steaming basins are the source of the room's humidity.
 
-#AR5302Info3166_1621
+#AR5302Info3122_1566
 These steaming basins are the source of the room's humidity.
 
-#AR5302Info2749_1723
+#AR5302Info2739_1699
 This painting depicts an underground landscape.  The cavern ceiling "sky" is ablaze with the golden light of bioluminescent algae.
 
-#AR5302Info2925_1356
+#AR5302Info2902_1343
 This painting depicts a bleak, hilly landscape.  The sky is utterly black, without stars or moon - it's possible that the scene represents a vast subterranean cavern.
 
-#AR5302Info3054_1340
+#AR5302Info3032_1327
 This strange painting appears to be swirls of color arranged to be aesthetically pleasing but without resembling any actual scene or object.
 
-#AR5302Info3424_1144
+#AR5302Info3402_1127
 This painting depicts an intricate arc-like structure rising from and reflected in the surface of some underground body of water.  The cavern walls glow with an eerie green light.
 
-#AR5302Info3605_1101
+#AR5302Info3583_1084
 This painting depicts an underground landscape.  The cavern ceiling "sky" is ablaze with the golden light of bioluminescent algae.
 
-#AR5302Info702_1021
+#AR5302Info681_1005
 This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
 
-#AR5302Info1103_1200
+#AR5302Info1093_1186
 This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
 
-#AR5302Info1275_2029
+#AR5302Info1261_2011
 This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
 
-#AR5302Info2706_2141
+#AR5302Info2688_2124
 This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
 
-#AR5302Info2545_1467
+#AR5302Info2528_1452
 This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
 
-#AR5302Info2907_948
+#AR5302Info2890_931
 This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
 

@@ -1,153 +1,153 @@
-﻿#AR4103Info2758_1834
+﻿#AR4103Info2725_1791
 This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4103Info2735_2103
+#AR4103Info2702_2061
 This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4103Info846_734
+#AR4103Info833_692
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4103Info933_641
+#AR4103Info922_598
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4103Info983_640
+#AR4103Info971_593
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4103Info1310_779
+#AR4103Info1299_733
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4103Info1326_798
+#AR4103Info1317_760
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4103Info1240_902
+#AR4103Info1227_859
 This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
 
-#AR4103Info2654_1966
+#AR4103Info2584_1911
 This appears to be one of the components belonging to the strange device that dominates this room.  It looks to be the victim of a recent, violent explosion.
 
-#AR4103Info2846_1918
+#AR4103Info2812_1868
 This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4103Info2941_1954
+#AR4103Info2899_1918
 This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4103Info2789_1976
+#AR4103Info2748_1945
 This platform appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4103Info2829_2080
+#AR4103Info2788_2050
 This platform appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
 
-#AR4103Info1241_283
+#AR4103Info1212_251
 This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
 
-#AR4103Info1426_244
+#AR4103Info1391_218
 This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
 
-#AR4103Info1562_249
+#AR4103Info1527_221
 This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
 
-#AR4103Info1854_354
+#AR4103Info1815_317
 This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
 
-#AR4103Info853_2541
+#AR4103Info799_2500
 This empty coffin belongs to High Priestess Cathin.
 
-#AR4103Info913_2574
+#AR4103Info873_2530
 This empty coffin belongs to High Priestess Lysara.
 
-#AR4103Info983_2603
+#AR4103Info945_2561
 This empty coffin belongs to High Priestess Oria.
 
-#AR4103Info2521_1013
+#AR4103Info2490_946
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info2145_1547
+#AR4103Info2047_1456
 A finely crafted prism, sitting at the center of this large device, catches the ray of intense light coming from above.  The symbol of a lightning bolt has been carved into the base of the device.
 
-#AR4103Info1665_2727
+#AR4103Info1642_2708
 This switch is labeled 'Mode Activator'.
 
-#AR4103Info1732_2690
+#AR4103Info1708_2671
 This switch is labeled 'Mode Selector 1'.
 
-#AR4103Info1785_2629
+#AR4103Info1761_2611
 This switch is labeled 'Mode Selector 2'.
 
-#AR4103Info1920_2438
+#AR4103Info1896_2420
 This switch is labeled 'Rank Selector 1'.
 
-#AR4103Info1979_2372
+#AR4103Info1955_2353
 This switch is labeled 'Rank Selector 2'.
 
-#AR4103Info2034_2313
+#AR4103Info2011_2295
 This switch is labeled 'Rank Selector 3'.
 
-#AR4103Info2094_2311
+#AR4103Info2073_2291
 This switch is labeled 'Rank Selector 4'.
 
-#AR4103Info2158_2332
+#AR4103Info2137_2313
 This switch is labeled ''Rank Selector 5'.
 
-#AR4103Info2229_2362
+#AR4103Info2207_2343
 This switch is labeled ''Rank Selector 6'.
 
-#AR4103Info2509_1006
+#AR4103Info2486_950
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info3715_1498
+#AR4103Info3700_1459
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info2886_2448
+#AR4103Info2867_2417
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info115_1253
+#AR4103Info102_1211
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info919_299
+#AR4103Info902_269
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info2365_1478
+#AR4103Info2357_1438
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info2224_1681
+#AR4103Info2206_1640
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info1748_1458
+#AR4103Info1737_1422
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info1652_1290
+#AR4103Info1638_1250
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info1921_1275
+#AR4103Info1903_1242
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info450_812
+#AR4103Info442_763
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info175_1536
+#AR4103Info159_1500
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info1175_1975
+#AR4103Info1166_1935
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info809_2438
+#AR4103Info792_2405
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info1079_2552
+#AR4103Info1064_2524
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info1542_2130
+#AR4103Info1526_2092
 This charred mirror seems to have repeatedly been struck by lightning.
 
-#AR4103Info2410_2445
+#AR4103Info2389_2426
 This switch is labeled ''Rank Selector 7'.
 
-#AR4103Info2475_2474
+#AR4103Info2454_2454
 This switch is labeled ''Rank Selector 8'.
 
-#AR4103Info2545_2505
+#AR4103Info2524_2485
 This switch is labeled ''Rank Selector 9'.
 
-#AR4103Info2609_2532
+#AR4103Info2588_2512
 This switch is labeled ''Rank Selector 10'.
 

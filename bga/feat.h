@@ -1,5 +1,6 @@
 #include "flagable.h"
 #include "nameable.h"
+#include "variant.h"
 
 #pragma once
 
@@ -30,5 +31,6 @@ enum feat_s : unsigned char {
 	ReadyToBattle,
 };
 struct feati : nameable {
+	variants		required;
 };
 typedef flagable<(ReadyToBattle + 7) / 8> featf;

@@ -1,30 +1,30 @@
-﻿#AR5002Info356_340
+﻿#AR5002Info323_310
 Despite their frightening appearance, the contents of this bubbling cauldron smell of clover and other sweet spices.
 
-#AR5002Info325_122
+#AR5002Info279_102
 Salted rabbits and game birds hang here.
 
-#AR5002Info503_166
+#AR5002Info491_149
 Salted rabbits and game birds hang here.
 
-#AR5002Info342_221
+#AR5002Info295_194
 This shallow pit is probably used to hold refuse.
 
-#AR5002Info500_222
+#AR5002Info484_202
 This barrel holds a variety of hand weapons, all of them broken or rusted beyond usefulness.
 
-#AR5002Info460_221
+#AR5002Info403_177
 These pots and urns contain a wide variety of crushed, powdered, minced or liquefied herbs, minerals, and sundry other substances.
 
-#AR5002Info571_389
+#AR5002Info541_358
 These pots and urns contain a wide variety of crushed, powdered, minced or liquefied herbs, minerals, and sundry other substances.
 
-#AR5002Info366_531
+#AR5002Info278_484
 These pots and urns contain a wide variety of crushed, powdered, minced or liquefied herbs, minerals, and sundry other substances.
 
-#AR5002Info425_516
+#AR5002Info393_486
 These pots and urns contain a wide variety of crushed, powdered, minced or liquefied herbs, minerals, and sundry other substances.
 
-#AR5002Info229_359
+#AR5002Info140_252
 These pots and urns contain a wide variety of crushed, powdered, minced or liquefied herbs, minerals, and sundry other substances.
 

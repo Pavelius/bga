@@ -1,33 +1,33 @@
-﻿#AR6050Info1200_219
+﻿#AR6050Info1170_185
 This weathered stone monument looks ancient, perhaps hundreds of years old.  It seems to lead into a small alcove-area, but there is no sign of an altar or worship statue. 
 
-#AR6050Info929_284
+#AR6050Info903_254
 This six-armed female figure has the tail of a serpent and a menacing gaze.
 
-#AR6050Info731_1059
+#AR6050Info707_1025
 This six-armed female figure has the tail of a serpent and a menacing gaze.
 
-#AR6050Info2242_1028
+#AR6050Info2217_997
 This six-armed female figure has the tail of a serpent and a menacing gaze.
 
-#AR6050Info2008_1015
+#AR6050Info1970_984
 This ancient stone altar looks to be hundreds of years old.  It seems to have been used recently, but you don't see any offerings upon the altar.
 
-#AR6050Info2117_1517
+#AR6050Info2090_1487
 This six-armed female figure has the tail of a serpent and a menacing gaze.
 
-#AR6050Info1445_1654
+#AR6050Info1422_1623
 This six-armed female figure has the tail of a serpent and a menacing gaze.
 
-#AR6050Info636_299
+#AR6050Info607_256
 This stele is carved with ancient runes, but time and storms have worn them away so as to be almost unreadable.
 
-#AR6050Info1704_524
+#AR6050Info1674_482
 This stele is carved with ancient runes, but time and storms have worn them away so as to be almost unreadable.
 
-#AR6050Info314_704
+#AR6050Info298_614
 This structure appears hundreds of years old, but there is no moss or vines growing on it.  The entire structure has a malevolence about it, and just looking at it makes you uneasy.
 
-#AR6050Info676_1639
+#AR6050Info645_1599
 This stele appears rooted in place, and it resembles many of the stele you have seen scattered throughout the jungle.  The various stele seem almost interchangable.
 

@@ -1,60 +1,60 @@
-﻿#AR4100Info1371_1596
+﻿#AR4100Info1337_1553
 This appears to be a Neverwinter soldier, literally frozen to death in his tracks.
 
-#AR4100Info1425_1698
+#AR4100Info1393_1649
 This appears to be a Neverwinter soldier, literally frozen to death in his tracks.
 
-#AR4100Info1498_1748
+#AR4100Info1464_1702
 This appears to be a Neverwinter soldier, literally frozen to death in his tracks.
 
-#AR4100Info1584_1700
+#AR4100Info1555_1653
 This appears to be the leader of this group of Neverwinter soldiers, literally frozen to death in his tracks like his companions.  Clutched in his hand is what faintly looks to be a medallion.
 
-#AR4100Info566_1106
+#AR4100Info544_1077
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info608_1109
+#AR4100Info587_1083
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info662_1673
+#AR4100Info642_1652
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info702_1669
+#AR4100Info682_1651
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info1178_1976
+#AR4100Info1153_1952
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info1216_1974
+#AR4100Info1197_1953
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info1837_699
+#AR4100Info1811_668
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info1872_689
+#AR4100Info1854_665
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info1793_1911
+#AR4100Info1767_1892
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info1831_1909
+#AR4100Info1811_1893
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info1796_2322
+#AR4100Info1769_2290
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info1831_2313
+#AR4100Info1811_2288
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info2629_2068
+#AR4100Info2607_2037
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info2671_2069
+#AR4100Info2650_2044
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info2826_2262
+#AR4100Info2800_2232
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 
-#AR4100Info2859_2258
+#AR4100Info2841_2231
 This is a small shrine to Auril, the Frostmaiden, the fickle, vain, and evil Goddess of Cold.  Disturbing the shrine - or the offerings to her it contains - may very well rouse her anger.
 

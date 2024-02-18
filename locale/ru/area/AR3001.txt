@@ -1,9 +1,9 @@
-﻿#AR3001Info2121_2482
+﻿#AR3001Info2093_2471
 This poor hound looks to have been dead only a short period of time.  It is partially cooked, partially raw, and mostly eaten.  Unfortunately, it is completely beyond recovery.
 
-#AR3001Info1885_2714
+#AR3001Info1870_2690
 This poor hound looks to have been dead only a short period of time.  It is partially cooked, partially raw, and mostly eaten.  Unfortunately, it is completely beyond recovery.
 
-#AR3001Info1848_2500
+#AR3001Info1831_2491
 This poor hound looks to have been dead only a short period of time.  It is partially cooked, partially raw, and mostly eaten.  Unfortunately, it is completely beyond recovery.
 

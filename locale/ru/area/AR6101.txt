@@ -1,39 +1,39 @@
-﻿#AR6101Info3612_2280
+﻿#AR6101Info3490_2162
 It looks like this passageway once turned into a ramp leading down to the next level, but it's long since collapsed.
 
-#AR6101Info2900_1530
+#AR6101Info2845_1486
 From its appearance to the stench pouring out of this rack, it's obvious that it has seen recent and frequent use.
 
-#AR6101Info2920_1480
+#AR6101Info2909_1468
 When turned this knob will inflict pain upon any person correctly positioned on the rack by stretching them.
 
-#AR6101Info2895_721
+#AR6101Info2874_695
 Unlike the other braziers, the pan on this particular one has been modified to hold a single, gem-sized item.
 
-#AR6101Info2732_517
+#AR6101Info2712_487
 Unlike the other braziers, the pan on this particular one has been modified to hold a single, gem-sized item.
 
-#AR6101Info3000_408
+#AR6101Info2983_384
 Unlike the other braziers, the pan on this particular one has been modified to hold a single, gem-sized item.
 
-#AR6101Info3254_508
+#AR6101Info3235_482
 Unlike the other braziers, the pan on this particular one has been modified to hold a single, gem-sized item.
 
-#AR6101Info3371_968
+#AR6101Info3352_941
 Unlike the other braziers, the pan on this particular one has been modified to hold a single, gem-sized item.
 
-#AR6101Info3003_1451
+#AR6101Info2961_1425
 This iron maiden has seen occasional use.  Pieces of rotting flesh still cling to its spikes.
 
-#AR6101Info3096_1445
+#AR6101Info3053_1417
 This iron maiden has seen occasional use.  Pieces of rotting flesh still cling to its spikes.
 
-#AR6101Info3215_1537
+#AR6101Info3163_1480
 This torture device has not been used recently and is covered with dried bloodstains.
 
-#AR6101Info3122_1734
+#AR6101Info3058_1685
 This torture device has not been used recently and is covered with dried bloodstains.
 
-#AR6101Info3181_520
+#AR6101Info3090_409
 Though finely detailed, this large statue of Sseth is nondescript except for unusual scuff marks at its base.
 

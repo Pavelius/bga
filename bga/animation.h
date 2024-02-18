@@ -5,6 +5,13 @@
 
 struct sprite;
 
+enum animatef_s : unsigned char {
+	AnimationEnabled, RenderBlackAsTransparent, NonSelfIllumination, PartialAnimation,
+	SynchronizedDraw, UseRandomStartFrame, WallDoesntHideAnimation, DisableOnSlowMachines,
+	NotCover, PlayAllFrames, UsePalatteBitmap, Mirrored,
+	ShowInCombat
+};
+
 struct animation : drawable, variableid {
 	struct info {
 		const sprite*	source;
@@ -23,4 +30,5 @@ struct animation : drawable, variableid {
 	unsigned char		skip_cycles;
 	bool				isvisible() const;
 	void				paint() const;
+	bool				is(animatef_s v) const { return (flags & (1 << v)) != 0; }
 };

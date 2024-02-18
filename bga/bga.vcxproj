@@ -45,6 +45,7 @@
     <Text Include="..\rules\Classes.txt" />
     <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Basic.txt" />
+    <Text Include="..\rules\Feats.txt" />
     <Text Include="..\rules\Items.txt" />
     <Text Include="..\rules\Races.txt" />
   </ItemGroup>

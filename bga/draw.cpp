@@ -761,7 +761,6 @@ static void alc32(unsigned char* d, int d_scan, const unsigned char* s, int heig
 }
 
 static unsigned char* skip_v3(unsigned char* s, int h) {
-	const int cbs = 1;
 	if(!s || !h)
 		return s;
 	while(true) {
@@ -769,19 +768,10 @@ static unsigned char* skip_v3(unsigned char* s, int h) {
 		if(c == 0) {
 			if(--h == 0)
 				return s;
-		} else if(c <= 0x9F) {
-			if(c <= 0x7F)
-				s += c * cbs;
-			else {
-				if(c == 0x80)
-					c = *s++;
-				else
-					c -= 0x80;
-				s++;
-				s += c * cbs;
-			}
-		} else if(c == 0xA0)
-			s++;
+		} else if(c <= 0x7F)
+			s += c;
+		if(c == 0x80 || c==0xA0)
+			s++; // Shadow index or Transparent index count in source
 	}
 }
 

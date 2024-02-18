@@ -1,6 +1,6 @@
-﻿#AR6010Info415_197
+﻿#AR6010Info385_154
 This stove is burning away, but you didn't notice any smoke coming from the outside of the building.  Perhaps it is being shunted somewhere else.
 
-#AR6010Info121_340
+#AR6010Info77_317
 This cot looks like it hasn't been slept in in some time.
 

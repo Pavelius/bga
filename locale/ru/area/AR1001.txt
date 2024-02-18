@@ -1,24 +1,24 @@
-﻿#AR1001Info1002_379
+﻿#AR1001Info925_309
 You wouldn't mind splitting one of these kegs open and sampling some of the stock.
 
-#AR1001Info815_981
+#AR1001Info734_901
 You wouldn't mind splitting one of these kegs open and sampling some of the stock.
 
-#AR1001Info306_833
+#AR1001Info227_755
 You wouldn't mind splitting one of these kegs open and sampling some of the stock.
 
-#AR1001Info1252_412
+#AR1001Info1192_384
 A number of these crates are marked with the Gallaway Trading Coster Insignia.
 
-#AR1001Info1047_768
+#AR1001Info976_731
 These crates appear to contain iron rations, ten foot poles, and fifty foot coils of rope.
 
-#AR1001Info375_572
+#AR1001Info289_535
 These solid wooden crates look like they are stuffed with furs and pelts from Lonelywood.
 
-#AR1001Info606_226
+#AR1001Info515_184
 This row of crates look like they have been sitting here for some time.  They bear the mark of Bremen, one of the Ten-Towns.
 
-#AR1001Info393_372
+#AR1001Info355_295
 A number of these crates are marked with the Gallaway Trading Coster Insignia.
 

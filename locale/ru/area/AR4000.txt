@@ -1,18 +1,18 @@
-﻿#AR4000Info564_627
+﻿#AR4000Info476_569
 This large wolves' den appears to have been used recently.
 
-#AR4000Info546_1911
+#AR4000Info426_1837
 This boring beetle nest was unearthed when Oswald's airship shattered the tree above it upon impact.  It appears to be on the verge of collapse.
 
-#AR4000Info2543_895
+#AR4000Info2399_715
 Chiseled into this stone archway is the barely visible word, "ANDORA."
 
-#AR4000Info2565_478
+#AR4000Info2543_448
 You glance inside but see nothing of interest.
 
-#AR4000Info2760_622
+#AR4000Info2736_594
 You glance inside but see nothing of interest.
 
-#AR4000Info3105_539
+#AR4000Info3083_518
 You glance inside but see nothing of interest.
 

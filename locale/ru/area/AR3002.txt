@@ -1,18 +1,18 @@
-﻿#AR3002Info2493_402
+﻿#AR3002Info2427_305
 This wooden archway has one foreboding, glowing ward rune on each side of it.
 
-#AR3002Info2508_337
+#AR3002Info2497_267
 This wooden archway has one foreboding, glowing ward rune on each side of it.
 
-#AR3002Info1503_2048
+#AR3002Info1428_1973
 The ability to discern what this long dead carcass once was is impossible.  The skeletal remains have been picked clean and the bones themselves are twisted and disintegrating.
 
-#AR3002Info2638_517
+#AR3002Info2488_419
 This archway seems to be protected by magical wards that cannot be disarmed by conventional means. 
 
-#AR3002Info2318_395
+#AR3002Info2275_353
 This primitive etching resembles a ward stone, and is similar, but with subtle differences, to the ward stone etching on the opposite side of the archway.
 
-#AR3002Info2625_297
+#AR3002Info2578_253
 This primitive etching resembles a ward stone, and is similar, but with subtle differences, to the ward stone etching on the opposite side of the archway.
 

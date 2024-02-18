@@ -1,12 +1,12 @@
-﻿#AR6007Info426_207
+﻿#AR6007Info396_171
 This small, stumpy bed looks recently made, and the sheets are neatly turned at the top.  
 
-#AR6007Info348_118
+#AR6007Info309_89
 The flasks and beakers on these shelves look like they survived the bumpy ride to Kuldahar intact. 
 
-#AR6007Info471_149
+#AR6007Info418_112
 These books looks like they weathered the bumpy ride from the Underdark plateau pretty well. 
 
-#AR6007Info575_176
+#AR6007Info527_139
 These books looks like they weathered the bumpy ride from the Underdark plateau pretty well. 
 

@@ -1,15 +1,15 @@
-﻿#AR6303Info1862_1695
+﻿#AR6303Info1784_1653
 These stairs are a shattered ruin.  Only the first few steps remain, hanging in the open air.
 
-#AR6303Info2173_1815
+#AR6303Info2124_1779
 This is a small reflecting pool.  The waters are quiet, but a disturbing green in color.
 
-#AR6303Info1778_300
+#AR6303Info1680_216
 This is a large window sealed by a retractable metalic iris.  However, you cannot find the mechanism to open the iris...  Perhaps there isn't one.
 
-#AR6303Info2228_1079
+#AR6303Info2180_1039
 This is a small reflecting pool.  The waters are quiet, but a disturbing green in color.
 
-#AR6303Info2623_950
+#AR6303Info2584_907
 A radiant pool, unsettlingly vibrant with magical power.
 

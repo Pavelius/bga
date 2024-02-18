@@ -24,6 +24,7 @@ struct statable : skilla {
 	char		abilitites[Stamina + 1];
 	damagea		resist;
 	featf		feats;
+	void		clear();
 	int			get(ability_s v) const { return abilitites[v]; }
 	int			get(damage_s v) const { return resist[v]; }
 	int			get(skill_s v) const { return skills[v]; }

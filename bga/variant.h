@@ -24,6 +24,7 @@ struct varianti {
 	fngetinfo		pgetproperty;
 	fnscript		pscript;
 	fntest			ptest;
+	void*			custom; // User defined data. Can be initialized when program start.
 	static const varianti* find(const void* object);
 	void			set(void* object, const char* id, void* value) const;
 	void			set(void* object, const char* id, int value) const;

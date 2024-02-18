@@ -1,92 +1,92 @@
-﻿#AR1200Info2951_2700
+﻿#AR1200Info2928_2673
 This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
 
 
-#AR1200Info3178_2630
+#AR1200Info3146_2582
 This appears to be a gallows for untapped wine casks.  Their crime must be the fact they are untapped.
 
-#AR1200Info3534_1920
+#AR1200Info3504_1889
 This group of barrels has been roped off to keep them from making a break for it.  They look at you hauntingly.
 
-#AR1200Info3237_1787
+#AR1200Info3223_1767
 It looks like someone has been working on this shield. 
 
-#AR1200Info3520_1289
+#AR1200Info3497_1262
 This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
 
 
-#AR1200Info3697_222
+#AR1200Info3675_201
 Yes, it is possible a goblin could sneak in through here, so watch yourself.  These are dangerous times.
 
-#AR1200Info3014_1249
+#AR1200Info2938_1161
 This small catapult looks like it was taken from one of the ships in the harbor.
 
-#AR1200Info2407_1994
+#AR1200Info2386_1967
 This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
 
 
-#AR1200Info1744_1753
+#AR1200Info1716_1732
 These barrels looks like they once held pitch or oil, but they are now empty.
 
-#AR1200Info2130_898
+#AR1200Info2020_799
 This catapult looks like it was built from wood taken from buildings in Targos - it is cleverly put together, which suggests there was a dwarf's hand involved in its construction.
 
-#AR1200Info1794_586
+#AR1200Info1770_561
 This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
 
 
-#AR1200Info1129_1624
+#AR1200Info998_1529
 This catapult looks like it was taken off one of the ships in the harbor.
 
-#AR1200Info828_2747
+#AR1200Info701_2657
 This small catapult looks like it was taken from one of the ships in the harbor.
 
-#AR1200Info1675_2674
+#AR1200Info1641_2628
 This house has been boarded up.  From what you can see of the interior, it looks like it was gutted by flames; there is nothing inside.
 
-#AR1200Info1798_2725
+#AR1200Info1774_2697
 This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
 
 
-#AR1200Info2024_2745
+#AR1200Info2008_2709
 This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
 
 
-#AR1200Info3312_1396
+#AR1200Info3288_1373
 You know, you haven't seen many dogs in town.
 
-#AR1200Info3288_1591
+#AR1200Info3262_1564
 This cauldron looks like it's being tortured for information.
 
-#AR1200Info1247_2388
+#AR1200Info1242_2382
 Do not pull this rope, or the whole wall could come tumbling down.
 
-#AR1200Info226_642
+#AR1200Info221_635
 This tree trunk looks suspiciously like the top of a gnome hat.  If so, there could be dozens of gnomes buried beneath the snows. 
 
-#AR1200Info772_1255
+#AR1200Info749_1232
 These barrels look like they contain oil.
 
-#AR1200Info992_1233
+#AR1200Info962_1210
 These barrels look like they contain oil.
 
-#AR1200Info634_1529
+#AR1200Info621_1499
 This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
 
 
-#AR1200Info1220_1869
+#AR1200Info1196_1847
 This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
 
 
-#AR1200Info647_1851
+#AR1200Info617_1826
 These barrels look like they contain oil.
 
-#AR1200Info607_1998
+#AR1200Info587_1976
 These barrels look like they contain oil.
 
-#AR1200Info636_2420
+#AR1200Info607_2401
 These barrels look like they contain oil.
 
-#AR1200Info1846_1952
+#AR1200Info1817_1928
 These barrels look like they contain oil.
 
