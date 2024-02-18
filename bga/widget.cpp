@@ -78,6 +78,15 @@ static void update_creature_info() {
 	}
 }
 
+static void update_help_info() {
+	if(!need_update)
+		return;
+	need_update = false;
+	variant v = current_focus;
+	description.clear();
+	v.getinfo(description);
+}
+
 static void invalidate_description() {
 	need_update = true;
 	area_description.invalidate();
@@ -410,6 +419,19 @@ static void label() {
 	if(gui.checked)
 		fore = colors::special;
 	texta(getname(), AlignCenterCenter);
+	font = push_font;
+	fore = push_fore;
+}
+
+static void label_left() {
+	auto push_font = font;
+	auto push_fore = fore;
+	if(gui.res)
+		font = gui.res;
+	if(gui.checked)
+		fore = colors::special;
+	caret.y += (height - texth()) / 2;
+	text(getname());
 	font = push_font;
 	fore = push_fore;
 }
@@ -1324,9 +1346,14 @@ static void list_elements(void** current_focus) {
 			break;
 		gui.text = v.getname();
 		gui.checked = (v.getpointer() == *current_focus);
-		label();
+		label_left();
 		caret.y += draw::height;
 	}
+}
+
+static void set_ptr_and_invalidate() {
+	cbsetptr();
+	invalidate_description();
 }
 
 static void list_elements(void** current_focus, const array& source) {
@@ -1344,10 +1371,10 @@ static void list_elements(void** current_focus, const array& source) {
 		gui.text = ((nameable*)p)->getname();
 		gui.checked = (p == *current_focus);
 		gui.hilited = ishilite();
-		label();
+		label_left();
 		button_run_input();
 		if(button_run)
-			execute(cbsetptr, (long)p, 0, current_focus);
+			execute(set_ptr_and_invalidate, (long)p, 0, current_focus);
 		caret.y += draw::height;
 	}
 	clipping = push_clip;
@@ -1401,6 +1428,7 @@ BSDATA(widget) = {
 	{"Scroll", scroll},
 	{"TopicList", topic_list},
 	{"UpdateCreatureInfo", update_creature_info},
+	{"UpdateHelpInfo", update_help_info},
 #ifdef _DEBUG
 	{"ItemList", util_items_list},
 #endif // _DEBUG

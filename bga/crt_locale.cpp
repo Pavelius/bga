@@ -51,26 +51,6 @@ static const char* read_string_v1(const char* p, char* ps, const char* pe) {
 	return p;
 }
 
-static const char* read_string_v2(const char* p, char* ps, const char* pe) {
-	char sym;
-	auto pb = ps;
-	while(*p && *p != '#') {
-		sym = *p++;
-		switch(sym) {
-		case -72: sym = 'å'; break;
-		case -105: case 17: sym = '-'; break;
-		case '\n': case '\r': sym = '\n'; p = skipspcr(p); break;
-		}
-		if(ps < pe)
-			*ps++ = sym;
-	}
-	*ps = 0;
-	while(ps > pb && (ps[-1] == '\n' || ps[-1] == '\r')) {
-		ps--; ps[0] = 0;
-	}
-	return p;
-}
-
 static const char* read_identifier(const char* p, char* ps, const char* pe) {
 	while(*p && (ischa(*p) || isnum(*p) || *p == '_' || *p == ' ')) {
 		if(ps < pe)
@@ -92,38 +72,20 @@ static void apply_value(array& source, const char* id, const char* name) {
 	p->name = name;
 }
 
-static void readl_extend(const char* p, array& source, int& records_read) {
-	char name[128], value[8192];
-	while(*p && log::allowparse) {
-		p = log::skipwscr(p);
-		if(p[0] == '#')
-			p = read_identifier(p + 1, name, name + sizeof(name) - 1);
-		p = log::skipwscr(p);
-		p = read_string_v2(p, value, value + sizeof(value) - 1);
-		apply_value(source, name, value);
-		records_read++;
-	}
-}
-
 static void readl(const char* url, array& source, bool required) {
 	auto p = log::read(url, required);
 	if(!p)
 		return;
 	char name[128], value[8192];
 	auto records_read = 0;
-	p = log::skipwscr(p);
-	if(p[0] == '#')
-		readl_extend(p, source, records_read);
-	else {
-		while(*p) {
-			p = read_identifier(p, name, name + sizeof(name) - 1);
-			if(p[0] != ':')
-				break;
-			p = skipsp(p + 1);
-			p = read_string_v1(p, value, value + sizeof(value) - 1);
-			apply_value(source, name, value);
-			records_read++;
-		}
+	while(*p) {
+		p = read_identifier(p, name, name + sizeof(name) - 1);
+		if(p[0] != ':')
+			break;
+		p = skipsp(p + 1);
+		p = read_string_v1(p, value, value + sizeof(value) - 1);
+		apply_value(source, name, value);
+		records_read++;
 	}
 	log::close();
 	update_elements(source);
@@ -146,22 +108,20 @@ static void savel(const char* url, array& source, bool only_empthy) {
 	}
 }
 
-static void setfile(array& source, const char* id, const char* locale, bool write_mode, bool required, bool only_empthy) {
+static void setfile(array& source, const char* folder, const char* id, const char* locale, bool write_mode, bool required, bool only_empthy) {
 	char temp[260]; stringbuilder sb(temp);
-	sb.clear(); sb.addlocalefile(id);
+	sb.clear(); sb.addlocaleurl(); sb.add("/%1/%2.txt", folder, id, 0);
 	if(write_mode)
 		savel(temp, source, only_empthy);
 	else
 		readl(temp, source, required);
 }
 
-static void setlist(array& source, const char* id, const char* locale, const char* folder = 0) {
+static void setlist(array& source, const char* folder, const char* locale) {
 	char temp[260]; stringbuilder sb(temp);
-	sb.clear(); sb.addlocaleurl();
-	if(folder)
-		sb.add("/%1", folder);
+	sb.clear(); sb.addlocaleurl(); sb.add("/%1/", folder);
 	char filter[260]; stringbuilder sf(filter);
-	sf.add("*%1.txt", id);
+	sf.add("*.txt");
 	for(io::file::find find(temp); find; find.next()) {
 		auto pn = find.name();
 		if(pn[0] == '.')
@@ -173,8 +133,12 @@ static void setlist(array& source, const char* id, const char* locale, const cha
 	}
 }
 
+void read_descriptions(const char* folder) {
+	setlist(source_text, "tips", main_locale);
+}
+
 static void deinitialize() {
-	setfile(source_name, "NamesNewbe", main_locale, true, false, true);
+	setfile(source_name, "names", "NamesNewbe", main_locale, true, false, true);
 }
 
 static void check(array& source, const char* locale, const char* url) {
@@ -195,16 +159,16 @@ static void copy_locale(const char* locale) {
 	sb.add(locale);
 }
 
-void read_descriptions(const char* folder) {
-	setlist(source_text, 0, main_locale, folder);
+const char* getcurrentlocale() {
+	return main_locale;
 }
 
 void initialize_translation(const char* locale) {
 	if(main_locale[0])
 		return;
 	copy_locale(locale);
-	setlist(source_name, "Names", main_locale, "core");
-	setlist(source_text, "Descriptions", main_locale, "core");
+	setlist(source_name, "names", main_locale);
+	setlist(source_text, "tips", main_locale);
 	atexit(deinitialize);
 }
 

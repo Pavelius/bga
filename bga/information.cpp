@@ -24,10 +24,10 @@ static void addb(stringbuilder& sb, ability_s i, int value, bool skip_zero = tru
 void status_info() {
 }
 
-static void add_description(stringbuilder& sb, const char* id, const itemi* basic = 0) {
+static void add_description(stringbuilder& sb, const char* id, const char* id_basic = 0) {
 	auto pn = getdescription(id);
-	if(!pn && basic)
-		pn = getdescription(basic->id);
+	if(!pn && id_basic)
+		pn = getdescription(id_basic);
 	if(!pn)
 		pn = getdescription("NoItem");
 	if(!pn)
@@ -101,7 +101,7 @@ static const char* getfeatname(variant v) {
 
 void item::getinfo(stringbuilder& sb) const {
 	auto& ei = geti();
-	add_description(sb, ei.id, ei.basic);
+	add_description(sb, ei.id, ei.basic ? ei.basic->id : 0);
 	addb(sb, "MagicBonus", ei.magic, "%+1i");
 	if(ei.wear == QuickWeapon) {
 		addb(sb, "AttackBonus", ei.weapon.bonus, "%+1i");
@@ -185,4 +185,11 @@ void creature::getskillsinfo(stringbuilder& sb) const {
 			sb.addn(bsdata<feati>::elements[i].getname());
 	}
 	addend(sb);
+}
+
+void skilli::getinfo(stringbuilder& sb) const {
+	// addh(sb, "%1 (%2)", getname(), bsdata<abilityi>::elements[ability].getname());
+	add_description(sb, id);
+	//sb.add("\n\n");
+	sb.add("%BasicAbility: %1", bsdata<abilityi>::elements[ability].getname());
 }

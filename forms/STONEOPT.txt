@@ -9,11 +9,11 @@ Label STONEBIG 279 23 242 30 id("Options")
 Button GBTNLRG2 497 98 232 28 frames(1 2 3 0) value(8)
 Button GBTNLRG2 497 68 232 28 frames(1 2 3 0) value(7)
 Button GBTNLRG2 497 128 232 28 frames(1 2 3 0) value(9)
-Button GBTNSTD 555 338 117 25 frames(1 2 3 0) value(11)
 Label NORMAL 353 386 95 16 id("Version")
-Button GBTNLRG2 497 198 232 28 frames(1 2 3 0) value(13)
 Button GBTNLRG2 497 168 232 28 frames(1 2 3 0) value(14)
+Button GBTNLRG2 497 198 232 28 frames(1 2 3 0) value(13)
+
+Button GBTNSTD 555 338 117 25 frames(1 2 3 0) data(GGAME) value(1) id("Close") hotkey("Escape")
 
 ActionPanelNA NONE 0 433 0 0
-HotKey NONE 0 0 0 0 data(GGAME) value(1) hotkey("Escape")
 Form NONE 0 493 0 0 data(GCOMM008)

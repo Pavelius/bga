@@ -28,6 +28,12 @@
     <Filter Include="forms">
       <UniqueIdentifier>{071b14e1-b9f1-44ae-a499-6520f346576d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="locale\ru\names">
+      <UniqueIdentifier>{49c4d416-4a18-47b2-9bdf-601054307a4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="locale\ru\tips">
+      <UniqueIdentifier>{2825403b-fec2-4bb7-8b4b-a8dd8689ca91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\rules\Colors.txt">
@@ -87,27 +93,6 @@
     <Text Include="..\rules\Classes.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\locale\ru\core\AlignmentNames.txt">
-      <Filter>locale\ru</Filter>
-    </Text>
-    <Text Include="..\locale\ru\core\FeatNames.txt">
-      <Filter>locale\ru</Filter>
-    </Text>
-    <Text Include="..\locale\ru\core\ItemDescriptions.txt">
-      <Filter>locale\ru</Filter>
-    </Text>
-    <Text Include="..\locale\ru\core\ItemNames.txt">
-      <Filter>locale\ru</Filter>
-    </Text>
-    <Text Include="..\locale\ru\core\Names.txt">
-      <Filter>locale\ru</Filter>
-    </Text>
-    <Text Include="..\locale\ru\core\NamesNewbe.txt">
-      <Filter>locale\ru</Filter>
-    </Text>
-    <Text Include="..\locale\ru\core\SkillNames.txt">
-      <Filter>locale\ru</Filter>
-    </Text>
     <Text Include="..\forms\GUIHELP.txt">
       <Filter>forms</Filter>
     </Text>
@@ -116,6 +101,36 @@
     </Text>
     <Text Include="..\rules\Feats.txt">
       <Filter>rules</Filter>
+    </Text>
+    <Text Include="..\locale\ru\descriptions\Item.txt">
+      <Filter>locale\ru\names</Filter>
+    </Text>
+    <Text Include="..\locale\ru\names\Alignments.txt">
+      <Filter>locale\ru\names</Filter>
+    </Text>
+    <Text Include="..\locale\ru\names\Feats.txt">
+      <Filter>locale\ru\names</Filter>
+    </Text>
+    <Text Include="..\locale\ru\names\Items.txt">
+      <Filter>locale\ru\names</Filter>
+    </Text>
+    <Text Include="..\locale\ru\names\Names.txt">
+      <Filter>locale\ru\names</Filter>
+    </Text>
+    <Text Include="..\locale\ru\names\NamesNewbe.txt">
+      <Filter>locale\ru\names</Filter>
+    </Text>
+    <Text Include="..\locale\ru\names\Skills.txt">
+      <Filter>locale\ru\names</Filter>
+    </Text>
+    <Text Include="..\locale\ru\tips\Item.txt">
+      <Filter>locale\ru\tips</Filter>
+    </Text>
+    <Text Include="..\locale\ru\tips\Skills.txt">
+      <Filter>locale\ru\tips</Filter>
+    </Text>
+    <Text Include="..\locale\ru\names\Abilities.txt">
+      <Filter>locale\ru\names</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -214,9 +229,6 @@
     </ClCompile>
     <ClCompile Include="gender.cpp">
       <Filter>logic</Filter>
-    </ClCompile>
-    <ClCompile Include="crt_translate.cpp">
-      <Filter>support</Filter>
     </ClCompile>
     <ClCompile Include="draw_text.cpp">
       <Filter>interface</Filter>
@@ -352,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="scale2x.cpp">
       <Filter>interface</Filter>
+    </ClCompile>
+    <ClCompile Include="crt_locale.cpp">
+      <Filter>support</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -575,6 +590,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="ftflag.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="ftgetinfo.h">
       <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>

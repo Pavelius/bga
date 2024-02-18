@@ -1,9 +1,11 @@
 And: И
 AbilityStatistic: Статистика по атрибутам
 AppTitle: Врата Балдура
+AreaMap: Карта местности
 ArmorBonus: Бонус брони
 ArmorCheckPenalty: Штраф брони на проверки
 AttackBonus: Бонус к атаке
+BasicAbility: Базовая способность
 Biography: Биография
 CharacterLevel: Класс персонажа (%1i уровень)
 CharacterRace: Раса персонажа
@@ -28,6 +30,7 @@ MagicBonus: Магический бонус
 MaxDexterityBonus: Максимальный бонус ловкости
 Name: Наименование
 NextLevel: Следующий уровень
+Options: Опции
 Proficiency: Владение
 QuickItem: Предметы
 QuickWeapon: Оружие
@@ -37,6 +40,7 @@ Required: Требования
 SavingThrows: Броски спасения
 Skills: Навыки
 SpellFailure: Неудача при создании заклинания
+Version: Версия
 Weight: Вес
 WeightAllowance: Максимальный переносимый вес
 
@@ -65,10 +69,3 @@ Wizard: Волшебник
 Fortitude: Стойкость
 Reflexes: Рефлексы
 Will: Воля
-
-Str: Сил
-Dex: Лов
-Con: Тел
-Int: Инт
-Wis: Муд
-Cha: Хар

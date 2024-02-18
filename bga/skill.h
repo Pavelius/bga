@@ -1,4 +1,5 @@
 #include "nameable.h"
+#include "stringbuilder.h"
 
 #pragma once
 
@@ -12,6 +13,7 @@ enum skill_s : unsigned char {
 };
 struct skilli : nameable {
 	ability_s	ability;
+	void		getinfo(stringbuilder& sb) const;
 };
 struct skilla {
 	char		skills[WildernessLore + 1];

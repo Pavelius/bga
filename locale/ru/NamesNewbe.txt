@@ -1,1 +1,3 @@
-﻿
+﻿Initiative: 
+Intellegence: 
+Skill: 

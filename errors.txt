@@ -1,1 +1,4 @@
-﻿Can't find file 'rules/Interface.txt'
+﻿In file `Names.txt`:
+Initiative: Define translate
+Intellegence: Define translate
+Skill: Define translate

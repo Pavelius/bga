@@ -11,6 +11,7 @@
 #include "draw_form.h"
 #include "entrance.h"
 #include "floattext.h"
+#include "ftgetinfo.h"
 #include "gender.h"
 #include "itemground.h"
 #include "list.h"
@@ -163,7 +164,7 @@ BSDATA(varianti) = {
 	{"Rate", VAR(magici, 1)},
 	{"Resource", VAR(residi, 1)},
 	{"Script", VAR(script, 1)},
-	{"Skill", VAR(skilli, 1)},
+	{"Skill", VAR(skilli, 1), ftgetinfo<skilli>},
 	{"Type", VAR(varianti, 1)},
 	{"Widget", VAR(widget, 1)},
 };

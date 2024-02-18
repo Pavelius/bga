@@ -1,10 +1,13 @@
+Skill: Навыки
+
 Alchemy: Алхимия
-AnimalEmpathy: Общение с животными
+AnimalEmpathy: Обращение с животными
 Bluff: Обман
 Concentration: Концентрация
 Diplomacy: Дипломатия
 DisableDevice: Обезвредить устройство
 Hide: Прятаться
+Initiative: Инициатива
 Intimidate: Запугивание
 KnowledgeArcana: Знания тайного
 MoveSilently: Двигаться тихо
