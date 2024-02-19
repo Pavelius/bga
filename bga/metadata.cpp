@@ -13,6 +13,7 @@
 #include "floattext.h"
 #include "ftgetinfo.h"
 #include "gender.h"
+#include "geography.h"
 #include "itemground.h"
 #include "list.h"
 #include "modifier.h"
@@ -48,7 +49,9 @@ BSDATAC(point, 256*256)
 BSDATAC(region, 128)
 BSDATAD(variant)
 BSDATAC(variable, 1024)
-BSDATAC(worldmapi, 128)
+BSDATAC(worldmapi, 8)
+BSDATAC(worldmapi::area, 128)
+BSDATAC(worldmapi::link, 512)
 
 NOBSDATA(color)
 NOBSDATA(dice)
@@ -90,6 +93,9 @@ BSMETA(feati) = {
 BSMETA(form) = {
 	BSREQ(id),
 	BSREQ(controls),
+	{}};
+BSMETA(geographyi) = {
+	BSREQ(id),
 	{}};
 BSMETA(itemi) = {
 	BSREQ(id),
@@ -153,8 +159,19 @@ BSMETA(widget) = {
 	{}};
 BSMETA(worldmapi) = {
 	BSREQ(id),
+	BSREQ(icons),
+	{}};
+BSMETA(worldmapi::area) = {
+	BSREQ(id),
 	BSREQ(position),
 	BSREQ(avatar),
+	BSREQ(realm),
+	{}};
+BSMETA(worldmapi::link) = {
+	BSREQ(from), BSREQ(to),
+	BSREQ(entry),
+	BSENM(side, geographyi),
+	BSREQ(time), BSREQ(encounter_chance),
 	{}};
 
 BSDATA(varianti) = {
@@ -177,6 +194,8 @@ BSDATA(varianti) = {
 	{"Skill", VAR(skilli, 1), ftgetinfo<skilli>},
 	{"Type", VAR(varianti, 1)},
 	{"Widget", VAR(widget, 1)},
-	{"Worldmap", VAR(worldmapi, 1)},
+	{"WorldArea", VAR(worldmapi::area, 1)},
+	{"WorldLink", VAR(worldmapi::link, 3)},
+	{"WorldRealm", VAR(worldmapi, 1)},
 };
 BSDATAF(varianti)

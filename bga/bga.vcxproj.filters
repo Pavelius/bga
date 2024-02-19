@@ -374,6 +374,9 @@
     <ClCompile Include="worldmap.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="geography.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -602,6 +605,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="worldmap.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="geography.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

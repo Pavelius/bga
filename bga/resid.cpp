@@ -3,11 +3,12 @@
 
 using namespace res;
 
-const char* font = "art/fonts";
-const char* root = "art/pma";
-const char* chra = "art/characters";
-const char* mons = "art/monsters";
-const char* proj = "art/projectiles";
+static const char* font = "art/fonts";
+static const char* root = "art/pma";
+static const char* chra = "art/characters";
+static const char* mons = "art/monsters";
+static const char* proj = "art/projectiles";
+static const char* wrld = "art/projectiles";
 
 static array dynamic_headers(sizeof(residi));
 
@@ -35,8 +36,10 @@ BSDATA(residi) = {
 	{"GUIJRNL", root}, {"GOPT", root}, {"GUIMOVB", root}, {"STONEOPT", root}, {"GUISRSVB", root}, {"GUISRRQB", root},
 	{"CGEAR", root},
 	{"LOAD", root}, {"LOCATER", root},
+	{"MAPICONS", wrld},
 	{"PORTL", root}, {"PORTS", root},
-	{"SPELLS", root}, {"SPLBUT", root}, {"START", root}, {"STON", root}, {"STONSLOT", root}, {"WMAP", root},
+	{"SPELLS", root}, {"SPLBUT", root}, {"START", root}, {"STON", root}, {"STONSLOT", root},
+	{"WMAP1", wrld}, {"WMAP2", wrld}, {"WMAP3", wrld},
 	{"WQSAX", chra}, {"WQNAX", chra}, {"WQMAX", chra}, {"WQLAX", chra},
 	{"WQSBW", chra}, {"WQNBW", chra}, {"WQMBW", chra}, {"WQLBW", chra},
 	{"WQSCB", chra}, {"WQNCB", chra}, {"WQMCB", chra}, {"WQLCB", chra},

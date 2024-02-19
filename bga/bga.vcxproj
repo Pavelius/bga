@@ -89,6 +89,7 @@
     <ClCompile Include="formation.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gender.cpp" />
+    <ClCompile Include="geography.cpp" />
     <ClCompile Include="information.cpp" />
     <ClCompile Include="io_bsreq.cpp" />
     <ClCompile Include="io_stream.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="ftflag.h" />
     <ClInclude Include="ftgetinfo.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="geography.h" />
     <ClInclude Include="itema.h" />
     <ClInclude Include="itemground.h" />
     <ClInclude Include="map.h" />

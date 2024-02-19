@@ -1,3 +1,2 @@
-﻿In file `rules/Worldmap.txt`:
- Line 3: Expected token `)`
- Line 3: Expected line feed
+﻿In file `Names.txt`:
+Ranger: Define translate

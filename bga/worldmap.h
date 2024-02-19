@@ -1,29 +1,32 @@
 #pragma once
 
-#include "nameable.h"
+#include "geography.h"
 #include "point.h"
 
-enum geography_s : unsigned char {
-	North, East, South, West
-};
+struct residi;
+
 enum worldf_s {
 	AreaVisible = 1,
 	AreaVisibleFromAdjanced = 2,
 	AreaReachable = 4,
 	AlreadyVisited = 8,
 };
-
 struct worldmapi : nameable {
+	struct area : nameable {
+		point			position;
+		worldmapi*		realm;
+		int				avatar;
+		unsigned		flags;
+	};
 	struct link {
-		geography_s		side;
-		unsigned char	index;
+		worldmapi::area* from;
+		worldmapi::area* to;
 		const char*		entry;
-		unsigned		time;
+		geography_s		side;
+		unsigned		time; // Travel hours = time * 4
 		unsigned char	encounter_chance;
 		unsigned		flags;
 	};
-	const char*		realm;
-	point			position;
-	int				avatar;
-	unsigned		flags;
+	residi*				icons;
 };
+extern worldmapi*		current_world;
