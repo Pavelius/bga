@@ -480,13 +480,13 @@ static void scroll() {
 	button(gui.res, gui.frames[1], gui.frames[0]);
 	button_run_input();
 	if(button_run)
-		last_scrolltext->move_up();
+		last_scrolltext->view_up();
 	caret.y = push_caret.y + height - h;
 	gui.hilited = ishilite({caret.x, caret.y, caret.x + w, caret.y + h});
 	button(gui.res, gui.frames[3], gui.frames[2]);
 	button_run_input();
 	if(button_run)
-		last_scrolltext->move_down();
+		last_scrolltext->view_down();
 	caret.y = push_caret.y + h;
 	auto height_max = height - h*2 - sh * 2;
 	auto current_position = last_scrolltext->proportial(height_max);

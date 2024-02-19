@@ -51,6 +51,7 @@
     <Text Include="..\rules\Feats.txt" />
     <Text Include="..\rules\Items.txt" />
     <Text Include="..\rules\Races.txt" />
+    <Text Include="..\rules\Worldmap.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="win_draw.cpp" />
     <ClCompile Include="win_io_file.cpp" />
     <ClCompile Include="win_time.cpp" />
+    <ClCompile Include="worldmap.cpp" />
     <ClCompile Include="zip_util.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +210,7 @@
     <ClInclude Include="wearable.h" />
     <ClInclude Include="widget.h" />
     <ClInclude Include="win.h" />
+    <ClInclude Include="worldmap.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

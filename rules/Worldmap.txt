@@ -1,0 +1,6 @@
+#Worldmap
+
+AR4000 position(135 55) avatar(6)
+AR4100 position(147 93) avatar(7)
+AR5000 position(255 121) avatar(8)
+AR5004 position(409 133) avatar(10)

@@ -132,6 +132,9 @@
     <Text Include="..\locale\ru\names\Abilities.txt">
       <Filter>locale\ru\names</Filter>
     </Text>
+    <Text Include="..\rules\Worldmap.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -368,6 +371,9 @@
     <ClCompile Include="crt_locale.cpp">
       <Filter>support</Filter>
     </ClCompile>
+    <ClCompile Include="worldmap.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -594,6 +600,9 @@
     </ClInclude>
     <ClInclude Include="ftgetinfo.h">
       <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="worldmap.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

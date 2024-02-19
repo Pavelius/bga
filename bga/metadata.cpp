@@ -23,6 +23,7 @@
 #include "skill.h"
 #include "variant.h"
 #include "widget.h"
+#include "worldmap.h"
 
 using namespace draw;
 
@@ -47,6 +48,7 @@ BSDATAC(point, 256*256)
 BSDATAC(region, 128)
 BSDATAD(variant)
 BSDATAC(variable, 1024)
+BSDATAC(worldmapi, 128)
 
 NOBSDATA(color)
 NOBSDATA(dice)
@@ -110,6 +112,9 @@ BSMETA(magici) = {
 BSMETA(modifieri) = {
 	BSREQ(id),
 	{}};
+BSMETA(point) = {
+	BSREQ(x), BSREQ(y),
+	{}};
 BSMETA(portraiti) = {
 	BSREQ(id),
 	BSREQ(colors),
@@ -146,6 +151,11 @@ BSMETA(weari) = {
 BSMETA(widget) = {
 	BSREQ(id),
 	{}};
+BSMETA(worldmapi) = {
+	BSREQ(id),
+	BSREQ(position),
+	BSREQ(avatar),
+	{}};
 
 BSDATA(varianti) = {
 	{"NoVariant"},
@@ -167,5 +177,6 @@ BSDATA(varianti) = {
 	{"Skill", VAR(skilli, 1), ftgetinfo<skilli>},
 	{"Type", VAR(varianti, 1)},
 	{"Widget", VAR(widget, 1)},
+	{"Worldmap", VAR(worldmapi, 1)},
 };
 BSDATAF(varianti)

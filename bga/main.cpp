@@ -71,6 +71,7 @@ static void read_rules() {
 	bsreq::read("rules/Items.txt");
 	bsreq::read("rules/Advance.txt");
 	bsreq::read("rules/Basic.txt");
+	bsreq::read("rules/Worldmap.txt");
 	log::readdir("forms", "*.txt", form::readhead);
 	log::readdir("forms", "*.txt", form::read);
 }
