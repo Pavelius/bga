@@ -1,2 +1,0 @@
-﻿In file `Names.txt`:
-Ranger: Define translate

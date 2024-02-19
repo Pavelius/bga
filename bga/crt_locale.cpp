@@ -79,11 +79,17 @@ static void readl(const char* url, array& source, bool required) {
 	char name[128], value[8192];
 	auto records_read = 0;
 	while(*p) {
-		p = read_identifier(p, name, name + sizeof(name) - 1);
-		if(p[0] != ':')
-			break;
-		p = skipsp(p + 1);
-		p = read_string_v1(p, value, value + sizeof(value) - 1);
+		if(p[0] == '#') {
+			p = read_identifier(p + 1, name, name + sizeof(name) - 1);
+			p = skipspcr(p);
+			p = read_string_v1(p, value, value + sizeof(value) - 1);
+		} else {
+			p = read_identifier(p, name, name + sizeof(name) - 1);
+			if(p[0] != ':')
+				break;
+			p = skipsp(p + 1);
+			p = read_string_v1(p, value, value + sizeof(value) - 1);
+		}
 		apply_value(source, name, value);
 		records_read++;
 	}
@@ -134,7 +140,7 @@ static void setlist(array& source, const char* folder, const char* locale) {
 }
 
 void read_descriptions(const char* folder) {
-	setlist(source_text, "tips", main_locale);
+	setlist(source_text, folder, main_locale);
 }
 
 static void deinitialize() {
