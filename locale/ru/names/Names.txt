@@ -69,3 +69,6 @@ Wizard: Волшебник
 Fortitude: Стойкость
 Reflexes: Рефлексы
 Will: Воля
+
+AreaNotes: Пометки
+WorldMap: Карта мира

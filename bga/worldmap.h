@@ -17,6 +17,7 @@ struct worldmapi : nameable {
 		worldmapi*		realm;
 		int				avatar;
 		unsigned		flags;
+		bool			isinteract() const { return avatar != -1; }
 	};
 	struct link {
 		worldmapi::area* from;
@@ -27,6 +28,7 @@ struct worldmapi : nameable {
 		unsigned char	encounter_chance;
 		unsigned		flags;
 	};
+	residi*				background;
 	residi*				icons;
 };
 extern worldmapi*		current_world;

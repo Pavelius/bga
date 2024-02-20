@@ -135,6 +135,12 @@
     <Text Include="..\rules\Worldmap.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\forms\GUIWMAP.txt">
+      <Filter>forms</Filter>
+    </Text>
+    <Text Include="..\locale\ru\names\Area.txt">
+      <Filter>locale\ru\names</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

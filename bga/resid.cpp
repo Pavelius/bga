@@ -8,7 +8,7 @@ static const char* root = "art/pma";
 static const char* chra = "art/characters";
 static const char* mons = "art/monsters";
 static const char* proj = "art/projectiles";
-static const char* wrld = "art/projectiles";
+static const char* wrld = "art/worldmap";
 
 static array dynamic_headers(sizeof(residi));
 

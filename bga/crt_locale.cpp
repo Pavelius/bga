@@ -62,7 +62,7 @@ static const char* read_identifier(const char* p, char* ps, const char* pe) {
 	return p;
 }
 
-static void apply_value(array& source, const char* id, const char* name) {
+static void apply_value(array& source, const char* id, const char* name, bool required_value) {
 	id = szdup(id);
 	name = szdup(name);
 	if(source.find(id, 0) != -1)
@@ -70,9 +70,22 @@ static void apply_value(array& source, const char* id, const char* name) {
 	auto p = (translate*)source.add();
 	p->id = id;
 	p->name = name;
+	if(required_value) {
+		if(!name || name[0]==0)
+			log::error(0, "%1: Define translate", id);
+	}
 }
 
-static void readl(const char* url, array& source, bool required) {
+//static void check(array& source, const char* locale, const char* url) {
+//	log::seturl(url);
+//	for(auto& e : source.records<translate>()) {
+//		if(e.name && e.name[0])
+//			continue;
+//		log::error(0, "%1: Define translate", e.id);
+//	}
+//}
+
+static void readl(const char* url, array& source, bool required, bool required_value) {
 	auto p = log::read(url, required);
 	if(!p)
 		return;
@@ -90,7 +103,7 @@ static void readl(const char* url, array& source, bool required) {
 			p = skipsp(p + 1);
 			p = read_string_v1(p, value, value + sizeof(value) - 1);
 		}
-		apply_value(source, name, value);
+		apply_value(source, name, value, required_value);
 		records_read++;
 	}
 	log::close();
@@ -120,10 +133,10 @@ static void setfile(array& source, const char* folder, const char* id, const cha
 	if(write_mode)
 		savel(temp, source, only_empthy);
 	else
-		readl(temp, source, required);
+		readl(temp, source, required, false);
 }
 
-static void setlist(array& source, const char* folder, const char* locale) {
+static void setlist(array& source, const char* folder, const char* locale, bool required_value) {
 	char temp[260]; stringbuilder sb(temp);
 	sb.clear(); sb.addlocaleurl(); sb.add("/%1/", folder);
 	char filter[260]; stringbuilder sf(filter);
@@ -135,29 +148,16 @@ static void setlist(array& source, const char* folder, const char* locale) {
 		if(!szpmatch(pn, filter))
 			continue;
 		char file[512];
-		readl(find.fullname(file), source, false);
+		readl(find.fullname(file), source, false, required_value);
 	}
 }
 
 void read_descriptions(const char* folder) {
-	setlist(source_text, folder, main_locale);
+	setlist(source_text, folder, main_locale, false);
 }
 
 static void deinitialize() {
 	setfile(source_name, "names", "NamesNewbe", main_locale, true, false, true);
-}
-
-static void check(array& source, const char* locale, const char* url) {
-	log::seturl(url);
-	for(auto& e : source.records<translate>()) {
-		if(e.name && e.name[0])
-			continue;
-		log::error(0, "%1: Define translate", e.id);
-	}
-}
-
-void check_translation() {
-	check(source_name, main_locale, "Names.txt");
 }
 
 static void copy_locale(const char* locale) {
@@ -169,13 +169,16 @@ const char* getcurrentlocale() {
 	return main_locale;
 }
 
-void initialize_translation(const char* locale) {
+bool initialize_translation(const char* locale) {
 	if(main_locale[0])
-		return;
+		return false;
 	copy_locale(locale);
-	setlist(source_name, "names", main_locale);
-	setlist(source_text, "tips", main_locale);
+	setlist(source_name, "names", main_locale, true);
+	setlist(source_text, "tips", main_locale, false);
+	if(log::geterrors())
+		return false;
 	atexit(deinitialize);
+	return true;
 }
 
 const char* getnm(const char* id) {

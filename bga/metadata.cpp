@@ -159,6 +159,7 @@ BSMETA(widget) = {
 	{}};
 BSMETA(worldmapi) = {
 	BSREQ(id),
+	BSREQ(background),
 	BSREQ(icons),
 	{}};
 BSMETA(worldmapi::area) = {

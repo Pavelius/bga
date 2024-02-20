@@ -33,10 +33,12 @@
     <Text Include="..\forms\GUIMAPGM.txt" />
     <Text Include="..\forms\GUIREC08.txt" />
     <Text Include="..\forms\GUISPL08.txt" />
+    <Text Include="..\forms\GUIWMAP.txt" />
     <Text Include="..\forms\STONEOPT.txt" />
     <Text Include="..\locale\ru\descriptions\Item.txt" />
     <Text Include="..\locale\ru\names\Abilities.txt" />
     <Text Include="..\locale\ru\names\Alignments.txt" />
+    <Text Include="..\locale\ru\names\Area.txt" />
     <Text Include="..\locale\ru\names\Feats.txt" />
     <Text Include="..\locale\ru\names\Items.txt" />
     <Text Include="..\locale\ru\names\Names.txt" />

@@ -1,0 +1,7 @@
+﻿#Control
+
+Background GUIMAP 0 0 0 0 value(2)
+ButtonNT GUIMAPWC 680 288 84 111 frames(0 1 0 0) data(GGAME)
+Label NORMAL 666 18 113 22 id("WorldMap")
+
+Worldmap WMAP1 23 20 630 392

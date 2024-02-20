@@ -1,0 +1,2 @@
+﻿In file `forms/GUIMAPAB.txt`:
+ Line 5: Not found requisit `sdata`

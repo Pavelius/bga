@@ -14,11 +14,11 @@
 #include "itema.h"
 #include "resid.h"
 #include "script.h"
+#include "worldmap.h"
 
 using namespace draw;
 
-void check_translation();
-void initialize_translation(const char* locale);
+bool initialize_translation(const char* locale);
 void read_descriptions(const char* folder);
 void util_main();
 
@@ -62,6 +62,7 @@ static void start_main() {
 	player->additem(citem("LargeShield"));
 	player->additem(citem("TwoHandedSword"));
 	player->update();
+	current_world = bsdata<worldmapi>::elements;
 }
 
 static void read_rules() {
@@ -82,9 +83,9 @@ int main(int argc, char* argv[]) {
 #ifdef _DEBUG
 	util_main();
 #endif // _DEBUG
-	initialize_translation("ru");
+	if(!initialize_translation("ru"))
+		return -1;
 	read_descriptions("area");
-	check_translation();
 	colorgrad::initialize();
 	widget::initialize();
 	if(log::geterrors())

@@ -23,6 +23,7 @@
 #include "scrolltext.h"
 #include "timer.h"
 #include "widget.h"
+#include "worldmap.h"
 
 using namespace draw;
 using namespace res;
@@ -46,6 +47,7 @@ static resinfo default_cursor;
 static form* next_last_form;
 static int zoom_factor = 1;
 static void *current_topic, *current_focus;
+static worldmapi::area* current_world_area_hilite;
 stringbuilder description(description_text);
 
 static point camera_center() {
@@ -127,7 +129,7 @@ static void paint_cursor() {
 		if(pressed)
 			cicle += 1;
 		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
-	} else if(cursor.id==res::CURSARW) {
+	} else if(cursor.id == res::CURSARW) {
 		auto ti = pi->ganim(cursor.cicle, current_tick / 32);
 		image(hot.mouse.x, hot.mouse.y, pi, ti, 0);
 	} else
@@ -488,7 +490,7 @@ static void scroll() {
 	if(button_run)
 		last_scrolltext->view_down();
 	caret.y = push_caret.y + h;
-	auto height_max = height - h*2 - sh * 2;
+	auto height_max = height - h * 2 - sh * 2;
 	auto current_position = last_scrolltext->proportial(height_max);
 	caret.y += current_position;
 	button(gui.res, gui.frames[4], gui.frames[5]);
@@ -925,7 +927,7 @@ static bool ishilite(const drawable* object) {
 		}
 	} else if(bsdata<region>::have(object)) {
 		auto p = (region*)object;
-		if(hotspot.in(p->box)) 
+		if(hotspot.in(p->box))
 			return inside(hotspot, p->points.begin(), p->points.size());
 	} else if(bsdata<container>::have(object)) {
 		auto p = (container*)object;
@@ -1014,7 +1016,7 @@ static void paint_area_map_zoom_factor() {
 }
 
 static void paint_area_map_zoomed() {
-	if(zoom_factor<=1)
+	if(zoom_factor <= 1)
 		paint_area_map();
 	else
 		paint_area_map_zoom_factor();
@@ -1391,6 +1393,48 @@ static void content_list() {
 	list_elements(&current_focus, *p->source);
 }
 
+static void paint_worldmap() {
+	current_world_area_hilite = 0;
+	if(!current_world)
+		return;
+	auto push_clip = clipping; setclipall();
+	auto back = current_world->background->get();
+	image(caret.x, caret.y, back, 0, 0);
+	auto icons = current_world->icons->get();
+	if(!icons)
+		return;
+	//rect rc = {x1, y1, x1 + back->get(0).sx, y1 + back->get(0).sy};
+	//if(hot.mouse.in(rc))
+	//	cur.setblock();
+	auto push_caret = caret;
+	worldmapi::area* party_position = 0;
+	for(auto& e : bsdata<worldmapi::area>()) {
+		if(e.realm != current_world)
+			continue;
+		//if(!e.is(AreaVisible))
+		//	continue;
+		caret = push_caret + e.position;
+		image(icons, e.avatar, 0);
+		fore = colors::white;
+		if(e.isinteract()) {
+			if(hot.mouse.in({caret.x - 2, caret.y - 2, caret.x + 16 + 2, caret.y + 16 + texth()  + 2}))
+				current_world_area_hilite = &e;
+		} else
+			fore = fore.mix(colors::black, 128);
+		if(current_world_area_hilite == &e)
+			fore = colors::yellow;
+		auto name = e.getname();
+		auto w = textw(name);
+		caret.x -= w / 2 - 8;
+		caret.y += 16;
+		text(name, -1, TextStroke);
+		if(party_position == &e)
+			image(icons, 22, 0);
+	}
+	caret = push_caret;
+	clipping = push_clip;
+}
+
 void util_items_list();
 
 BSDATA(widget) = {
@@ -1425,10 +1469,12 @@ BSDATA(widget) = {
 	{"QuickWeaponItem", quick_weapon_item},
 	{"QuickOffhandItem", quick_offhand_item},
 	{"QuiverButton", quiver_button},
+	{"Rectangle", rectb},
 	{"Scroll", scroll},
 	{"TopicList", topic_list},
 	{"UpdateCreatureInfo", update_creature_info},
 	{"UpdateHelpInfo", update_help_info},
+	{"Worldmap", paint_worldmap},
 #ifdef _DEBUG
 	{"ItemList", util_items_list},
 #endif // _DEBUG
