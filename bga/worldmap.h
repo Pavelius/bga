@@ -32,3 +32,4 @@ struct worldmapi : nameable {
 	residi*				icons;
 };
 extern worldmapi*		current_world;
+worldmapi::area*		get_party_world_area();

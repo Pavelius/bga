@@ -1393,6 +1393,12 @@ static void content_list() {
 	list_elements(&current_focus, *p->source);
 }
 
+static void enter_current_world_area() {
+	auto p = (worldmapi::area*)hot.object;
+	if(p)
+		enter(p->id, 0);
+}
+
 static void paint_worldmap() {
 	current_world_area_hilite = 0;
 	if(!current_world)
@@ -1403,33 +1409,40 @@ static void paint_worldmap() {
 	auto icons = current_world->icons->get();
 	if(!icons)
 		return;
-	//rect rc = {x1, y1, x1 + back->get(0).sx, y1 + back->get(0).sy};
-	//if(hot.mouse.in(rc))
-	//	cur.setblock();
+	cursor = default_cursor;
+	if(gui.hilited)
+		cursor.cicle = 44;
 	auto push_caret = caret;
-	worldmapi::area* party_position = 0;
+	auto current_party_area = get_party_world_area();
 	for(auto& e : bsdata<worldmapi::area>()) {
 		if(e.realm != current_world)
 			continue;
 		//if(!e.is(AreaVisible))
 		//	continue;
 		caret = push_caret + e.position;
+		auto& f = icons->get(e.avatar);
+		caret.x -= f.sx / 2;
+		caret.y -= f.sy / 2;
 		image(icons, e.avatar, 0);
+		if(current_party_area == &e)
+			image(icons, 22, 0);
 		fore = colors::white;
 		if(e.isinteract()) {
-			if(hot.mouse.in({caret.x - 2, caret.y - 2, caret.x + 16 + 2, caret.y + 16 + texth()  + 2}))
+			if(hot.mouse.in({caret.x - 2, caret.y - 2, caret.x + f.sx + 2, caret.y + f.sy + texth() + 2}))
 				current_world_area_hilite = &e;
 		} else
 			fore = fore.mix(colors::black, 128);
-		if(current_world_area_hilite == &e)
+		if(current_world_area_hilite == &e) {
+			cursor.cicle = 34;
 			fore = colors::yellow;
+			if(hot.key == MouseLeft && !hot.pressed)
+				execute(enter_current_world_area, 0, 0, current_world_area_hilite);
+		}
 		auto name = e.getname();
 		auto w = textw(name);
-		caret.x -= w / 2 - 8;
-		caret.y += 16;
+		caret.x -= (w - f.sx) / 2;
+		caret.y += f.sy;
 		text(name, -1, TextStroke);
-		if(party_position == &e)
-			image(icons, 22, 0);
 	}
 	caret = push_caret;
 	clipping = push_clip;
