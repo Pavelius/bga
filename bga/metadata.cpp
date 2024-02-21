@@ -2,6 +2,7 @@
 #include "advance.h"
 #include "animation.h"
 #include "area.h"
+#include "calendar.h"
 #include "bsreq.h"
 #include "color.h"
 #include "crt.h"
@@ -34,6 +35,7 @@ BSMETA(varianti) = {BSREQ(id), {}};
 BSDATAC(advancei, 512)
 BSDATAC(animation, 128)
 BSDATAC(areai, 512)
+BSDATAC(calendari, 128)
 BSDATAC(colorgrad, 32)
 BSDATAC(control, 1024)
 BSDATAC(container, 128)
@@ -63,6 +65,10 @@ BSMETA(abilityi) = {
 BSMETA(advancei) = {
 	BSREQ(parent), BSREQ(level), BSREQ(id),
 	BSREQ(elements),
+	{}};
+BSMETA(calendari) = {
+	BSENM(period, periodi),
+	BSREQ(duration),
 	{}};
 BSMETA(classi) = {
 	BSREQ(id),
@@ -116,6 +122,9 @@ BSMETA(magici) = {
 	BSREQ(id),
 	{}};
 BSMETA(modifieri) = {
+	BSREQ(id),
+	{}};
+BSMETA(periodi) = {
 	BSREQ(id),
 	{}};
 BSMETA(point) = {
@@ -179,9 +188,11 @@ BSDATA(varianti) = {
 	{"NoVariant"},
 	{"Ability", VAR(abilityi, 1), 0, 0, fnscript<abilityi>},
 	{"Advance", VAR(advancei, 3)},
+	{"Calendar", VAR(calendari, 1)},
 	{"Class", VAR(classi, 1)},
 	{"Control", VAR(control, 6)},
 	{"ColorGrad", VAR(colorgrad, 1)},
+	{"DayPart", VAR(periodi, 1)},
 	{"Feat", VAR(feati, 1), 0, 0, fnscript<feati>},
 	{"Form", VAR(form, 1)},
 	{"Item", VAR(itemi, 1)},

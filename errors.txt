@@ -1,2 +1,16 @@
-﻿In file `forms/GUIMAPAB.txt`:
- Line 5: Not found requisit `sdata`
+﻿In file `rules/Calendar.txt`:
+ Line 3: Not found identifier `Night`
+ Line 1: Not found requisit `period`
+ Line 4: Not found identifier `Dawn`
+ Line 8: Not found identifier `January`
+ Line 9: Not found identifier `February`
+ Line 10: Not found identifier `March`
+ Line 11: Not found identifier `April`
+ Line 12: Not found identifier `May`
+ Line 13: Not found identifier `June`
+ Line 14: Not found identifier `July`
+ Line 15: Not found identifier `August`
+ Line 16: Not found identifier `September`
+ Line 17: Not found identifier `October`
+ Line 18: Not found identifier `November`
+ Line 19: Not found identifier `December`

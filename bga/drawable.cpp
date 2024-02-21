@@ -1,3 +1,4 @@
+#include "animation.h"
 #include "drawable.h"
 #include "door.h"
 #include "region.h"
@@ -14,6 +15,12 @@ void drawable::clear() {
 int drawable::getpriority() const {
 	if(bsdata<door>::have(this))
 		return 3 * 5;
+	else if(bsdata<animation>::have(this)) {
+		auto p = (animation*)this;
+		if(p->is(NotCover))
+			return 5 * 5;
+		return 3 * 5 + 1;
+	}
 	else if(bsdata<region>::have(this))
 		return 2 * 5;
 	return 5 * 5;

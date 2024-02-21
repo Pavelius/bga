@@ -141,6 +141,9 @@
     <Text Include="..\locale\ru\names\Area.txt">
       <Filter>locale\ru\names</Filter>
     </Text>
+    <Text Include="..\rules\Calendar.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -383,6 +386,9 @@
     <ClCompile Include="geography.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="calendar.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -614,6 +620,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="geography.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="calendar.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

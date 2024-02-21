@@ -1,0 +1,19 @@
+#Calendar period(DayPart)
+
+Night duration(4)
+Dawn duration(4)
+
+#Calendar period(Month)
+
+January duration(30)
+February duration(30)
+March duration(30)
+April duration(30)
+May duration(30)
+June duration(30)
+July duration(30)
+August duration(30)
+September duration(30)
+October duration(30)
+November duration(30)
+December duration(30)
