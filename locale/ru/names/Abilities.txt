@@ -1,3 +1,6 @@
+Ability: Способность
+Abilities: Способности
+
 Str: Сил
 Dex: Лов
 Con: Тел
@@ -11,3 +14,21 @@ Constitution: Телосложение
 Intellegence: Интеллект
 Wisdow: Мудрость
 Charisma: Харизма
+
+AC: КБ
+AttackMelee: Рукопашная
+AttackRanged: Стрельба
+
+ArmorProficiency: Владение доспехами
+DamageMelee: Урон ближнего боя
+DamageRanged: Урон стрелкового боя
+DodgeBonus: Бонус уклонения
+HitPoints: Очки хитов
+SneakAttack: Скрытная атака
+Stamina: Выносливость
+
+SpellLevel: Уровень заклинания
+SpellSlotsAvailable: Доступно уровней заклинаний
+KnownSpells: Известные заклинания
+MemorizedSpells: Подготовленные заклинания
+Slots: Слоты

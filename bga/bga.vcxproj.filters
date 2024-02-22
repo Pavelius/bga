@@ -389,6 +389,9 @@
     <ClCompile Include="calendar.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="draw_focus.cpp">
+      <Filter>interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -624,6 +627,9 @@
     </ClInclude>
     <ClInclude Include="calendar.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="draw_focus.h">
+      <Filter>interface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,1 +1,7 @@
-﻿
+﻿Class: 
+Fighter: 
+Fortitude: 
+Male: 
+Race: 
+Reflexes: 
+Will: 

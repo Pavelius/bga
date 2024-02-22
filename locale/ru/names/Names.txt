@@ -54,16 +54,20 @@ FireDamage: огненного урона
 Human: Человек
 Dwarf: Карлик
 Elf: Эльф
+Gnome: Гном
 Halfling: Полурослик
 HalfElf: Полуэльф
-HalfOrk: Полуорк
+HalfOrс: Полуорк
 
 Female: Женщина
 Male: Мужчина
 
+Commoner: Крестьянин
 Cleric: Клерик
 Fighter: Боец
+Ranger: Следопыт
 Rogue: Бродяга
+Sorcerer: Колдун
 Wizard: Волшебник
 
 Fortitude: Стойкость
@@ -72,3 +76,6 @@ Will: Воля
 
 AreaNotes: Пометки
 WorldMap: Карта мира
+
+Class: Класс 
+Race: Раса

@@ -9,6 +9,7 @@
 #include "crt.h"
 #include "door.h"
 #include "draw.h"
+#include "draw_focus.h"
 #include "draw_form.h"
 #include "draw_gui.h"
 #include "drawable.h"
@@ -46,7 +47,7 @@ static scrolltext area_description, area_console;
 static resinfo default_cursor;
 static form* next_last_form;
 static int zoom_factor = 1;
-static void *current_topic, *current_focus;
+static void *current_topic;
 static worldmapi::area* current_world_area_hilite;
 stringbuilder description(description_text);
 
@@ -470,7 +471,7 @@ static void creature_color() {
 }
 
 static void scroll() {
-	if(!gui.res || !last_scrolltext)
+	if(!gui.res || !last_scroll)
 		return;
 	auto push_hilited = gui.hilited;
 	auto& f = gui.res->get(gui.frames[1]);
@@ -482,16 +483,16 @@ static void scroll() {
 	button(gui.res, gui.frames[1], gui.frames[0]);
 	button_run_input();
 	if(button_run)
-		last_scrolltext->view_up();
+		last_scroll->view_up();
 	caret.y = push_caret.y + height - h;
 	gui.hilited = ishilite({caret.x, caret.y, caret.x + w, caret.y + h});
 	button(gui.res, gui.frames[3], gui.frames[2]);
 	button_run_input();
 	if(button_run)
-		last_scrolltext->view_down();
+		last_scroll->view_down();
 	caret.y = push_caret.y + h;
 	auto height_max = height - h * 2 - sh * 2;
-	auto current_position = last_scrolltext->proportial(height_max);
+	auto current_position = last_scroll->proportial(height_max);
 	caret.y += current_position;
 	button(gui.res, gui.frames[4], gui.frames[5]);
 	button_run_input();
@@ -1333,6 +1334,12 @@ static void text_console() {
 	font = push_font;
 }
 
+static void set_ptr_and_invalidate() {
+	cbsetptr();
+	invalidate_description();
+}
+
+
 static void list_elements(void** current_focus) {
 	if(!gui.data.iskind<listi>())
 		return;
@@ -1346,28 +1353,36 @@ static void list_elements(void** current_focus) {
 	for(auto v : ps->elements) {
 		if(caret.y >= max_height)
 			break;
+		auto p = v.getpointer();
 		gui.text = v.getname();
-		gui.checked = (v.getpointer() == *current_focus);
+		gui.checked = (p == *current_focus);
+		gui.hilited = ishilite();
 		label_left();
+		button_run_input();
+		if(button_run)
+			execute(set_ptr_and_invalidate, (long)p, 0, current_focus);
 		caret.y += draw::height;
 	}
 }
 
-static void set_ptr_and_invalidate() {
-	cbsetptr();
-	invalidate_description();
-}
-
 static void list_elements(void** current_focus, const array& source) {
+	if(!last_scroll)
+		return;
+	last_scroll->perscreen = height;
+	last_scroll->perline = texth() + 2;
+	last_scroll->maximum = (source.getcount() + 1) * last_scroll->perline + 1;
+	if(gui.hilited)
+		last_scroll->input();
 	if(!(*current_focus))
 		*current_focus = source.begin();
 	auto push_clip = clipping;
 	setclipall();
 	auto size = source.size;
+	auto p = source.begin() + size * (last_scroll->origin / last_scroll->perline);
 	auto pe = source.end();
 	auto max_height = caret.y + draw::height;
-	draw::height = texth() + 2;
-	for(auto p = source.begin(); p < pe; p += size) {
+	draw::height = last_scroll->perline;
+	while(p < pe) {
 		if(caret.y >= max_height)
 			break;
 		gui.text = ((nameable*)p)->getname();
@@ -1377,12 +1392,14 @@ static void list_elements(void** current_focus, const array& source) {
 		button_run_input();
 		if(button_run)
 			execute(set_ptr_and_invalidate, (long)p, 0, current_focus);
-		caret.y += draw::height;
+		caret.y += last_scroll->perline;
+		p += size;
 	}
 	clipping = push_clip;
 }
 
 static void topic_list() {
+	static scrolllist scroll; last_scroll = &scroll;
 	list_elements(&current_topic);
 }
 
@@ -1390,6 +1407,7 @@ static void content_list() {
 	auto p = (varianti*)current_topic;
 	if(!p)
 		return;
+	static scrolllist scroll; last_scroll = &scroll;
 	list_elements(&current_focus, *p->source);
 }
 

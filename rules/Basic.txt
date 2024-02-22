@@ -1,4 +1,4 @@
 #List
 
 HelpElements
- elements Skill
+ elements Ability Race Class Skill

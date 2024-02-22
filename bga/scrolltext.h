@@ -1,7 +1,8 @@
 #pragma once
 
 struct scrollable {
-	int		origin, current, maximum, perscreen, perline;
+	int		origin, maximum, perscreen, perline;
+	scrollable() : origin(0), maximum(0), perscreen(0), perline(0) {}
 	void	clear();
 	void	correct();
 	void	input();
@@ -23,4 +24,4 @@ class scrolllist : public scrollable {
 public:
 	void	invalidate() {}
 };
-extern scrollable* last_scrolltext;
+extern scrollable* last_scroll;

@@ -3,7 +3,7 @@
 
 using namespace draw;
 
-scrollable* last_scrolltext;
+scrollable* last_scroll;
 
 static void set_origin_value() {
 	auto p = (scrollable*)hot.object;
@@ -13,7 +13,6 @@ static void set_origin_value() {
 void scrollable::clear() {
 	invalidate();
 	origin = 0;
-	current = 0;
 	maximum = 0;
 	perscreen = 0;
 	perline = 0;
@@ -69,7 +68,7 @@ void scrolltext::invalidate() {
 }
 
 void scrolltext::paint(const char* format) {
-	last_scrolltext = this;
+	last_scroll = this;
 	perline = texth();
 	if(!format)
 		return;
