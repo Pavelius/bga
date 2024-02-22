@@ -57,7 +57,7 @@ Elf: Эльф
 Gnome: Гном
 Halfling: Полурослик
 HalfElf: Полуэльф
-HalfOrс: Полуорк
+HalfOrc: Полуорк
 
 Female: Женщина
 Male: Мужчина

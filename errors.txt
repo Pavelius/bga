@@ -1,14 +1,8 @@
 ﻿In file `locale/ru/names//NamesNewbe.txt`:
 Class: Define translate
-Cleric: Define translate
-Commoner: Define translate
 Fighter: Define translate
 Fortitude: Define translate
 Male: Define translate
 Race: Define translate
-Ranger: Define translate
 Reflexes: Define translate
-Rogue: Define translate
-Sorcerer: Define translate
 Will: Define translate
-Wizard: Define translate

@@ -86,6 +86,7 @@ int main(int argc, char* argv[]) {
 #endif // _DEBUG
 	if(!initialize_translation("ru"))
 		return -1;
+	auto name = getnm("Race");
 	read_descriptions("area");
 	colorgrad::initialize();
 	widget::initialize();

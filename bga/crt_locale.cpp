@@ -51,6 +51,35 @@ static const char* read_string_v1(const char* p, char* ps, const char* pe) {
 	return p;
 }
 
+static const char* read_string_v2(const char* p, char* ps, const char* pe) {
+	char sym;
+	while(*p) {
+		if((p[0] == '\n' || p[0] == '\r') && p[1] == '#') {
+			p++;
+			break;
+		}
+		if(p[0] == '\\' && p[1] == 'n') {
+			sym = '\n';
+			p += 2;
+		} else {
+			sym = *p;
+			p++;
+		}
+		switch(sym) {
+		case -72: sym = 'å'; break;
+		case -105: case 17: sym = '-'; break;
+		}
+		if(ps < pe)
+			*ps++ = sym;
+	}
+	*ps = 0;
+	while(*p == '\n' || *p == '\r') {
+		p = skipcr(p);
+		p = skipsp(p);
+	}
+	return p;
+}
+
 static const char* read_identifier(const char* p, char* ps, const char* pe) {
 	while(*p && (ischa(*p) || isnum(*p) || *p == '_' || *p == ' ')) {
 		if(ps < pe)
@@ -71,7 +100,7 @@ static void apply_value(array& source, const char* id, const char* name, bool re
 	p->id = id;
 	p->name = name;
 	if(required_value) {
-		if(!name || name[0]==0)
+		if(!name || name[0] == 0)
 			log::error(0, "%1: Define translate", id);
 	}
 }
@@ -91,20 +120,27 @@ static void readl(const char* url, array& source, bool required, bool required_v
 		return;
 	char name[128], value[8192];
 	auto records_read = 0;
-	while(*p) {
-		if(p[0] == '#') {
+	p = skipspcr(p);
+	if(p[0] == '#') {
+		while(*p) {
+			if(p[0] != '#')
+				break;
 			p = read_identifier(p + 1, name, name + sizeof(name) - 1);
 			p = skipspcr(p);
-			p = read_string_v1(p, value, value + sizeof(value) - 1);
-		} else {
+			p = read_string_v2(p, value, value + sizeof(value) - 1);
+			apply_value(source, name, value, required_value);
+			records_read++;
+		}
+	} else {
+		while(*p) {
 			p = read_identifier(p, name, name + sizeof(name) - 1);
 			if(p[0] != ':')
 				break;
 			p = skipsp(p + 1);
 			p = read_string_v1(p, value, value + sizeof(value) - 1);
+			apply_value(source, name, value, required_value);
+			records_read++;
 		}
-		apply_value(source, name, value, required_value);
-		records_read++;
 	}
 	log::close();
 	update_elements(source);
