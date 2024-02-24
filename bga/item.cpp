@@ -29,6 +29,8 @@ BSDATA(itemfi) = {
 assert_enum(itemfi, Coins)
 
 item* last_item;
+item* sell_item;
+item* buy_item;
 
 void weaponi::clear() {
 	memset(this, 0, sizeof(*this));

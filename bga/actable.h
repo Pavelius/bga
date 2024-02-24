@@ -9,4 +9,5 @@ struct actable {
 	static void		actv(stringbuilder& sb, const char* format, const char* format_param, const char* name, gender_s gender);
 	void			act(const char* format, ...);
 	void			say(const char* format, ...);
+	const char*		getname() const { return "Pavelius"; }
 };

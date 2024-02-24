@@ -12,5 +12,6 @@ ScaleMail: Чешуйчатый доспех
 StuddedLeatherArmor: Клепанная кожанная броня
 LargeShield: Большой щит
 
+Helm: Шлем
 HelmFull: Закрытый шлем
 

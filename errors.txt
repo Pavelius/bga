@@ -1,2 +1,2 @@
-﻿In file `rules/Calendar.txt`:
- Line 3: Not found identifier `Night`
+﻿In file `locale/ru/names//NamesNewbe.txt`:
+Colors: Define translate

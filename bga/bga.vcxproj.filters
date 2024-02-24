@@ -102,9 +102,6 @@
     <Text Include="..\rules\Feats.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\locale\ru\descriptions\Item.txt">
-      <Filter>locale\ru\names</Filter>
-    </Text>
     <Text Include="..\locale\ru\names\Alignments.txt">
       <Filter>locale\ru\names</Filter>
     </Text>
@@ -145,6 +142,15 @@
       <Filter>rules</Filter>
     </Text>
     <Text Include="..\forms\GUIWBTP.txt">
+      <Filter>forms</Filter>
+    </Text>
+    <Text Include="..\forms\GUISTIDB.txt">
+      <Filter>forms</Filter>
+    </Text>
+    <Text Include="..\rules\Store.txt">
+      <Filter>rules</Filter>
+    </Text>
+    <Text Include="..\forms\GUISTBSB.txt">
       <Filter>forms</Filter>
     </Text>
   </ItemGroup>
@@ -395,6 +401,9 @@
     <ClCompile Include="draw_focus.cpp">
       <Filter>interface</Filter>
     </ClCompile>
+    <ClCompile Include="store.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -633,6 +642,9 @@
     </ClInclude>
     <ClInclude Include="draw_focus.h">
       <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="store.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

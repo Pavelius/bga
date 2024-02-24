@@ -146,6 +146,14 @@ static varianti* find_type(const char* id) {
 	return 0;
 }
 
+static varianti* find_metadata(const bsreq* type) {
+	for(auto& e : bsdata<varianti>()) {
+		if(e.metadata==type)
+			return &e;
+	}
+	return 0;
+}
+
 static const bsreq* find_requisit(const bsreq* type, const char* id) {
 	if(!type)
 		return 0;
@@ -376,6 +384,13 @@ static void* read_object(const bsreq* type, array* source, int key_count, int le
 		object = find_object(source, type, keys, key_count);
 	}
 	if(!object) {
+		if(!source->isgrowable() && source->getcount() == source->getmaximum()) {
+			if(type->is(KindText)) {
+				auto pv = find_metadata(type);
+				if(pv)
+					log::error(p, "Not found %-1 with %2 `%3`", pv->id, type->id, keys[0].text);
+			}
+		}
 		object = source->add();
 		clear_object(object, type);
 		fill_object(object, type, keys, key_count);

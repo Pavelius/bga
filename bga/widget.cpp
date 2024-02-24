@@ -22,6 +22,7 @@
 #include "resinfo.h"
 #include "script.h"
 #include "scrolltext.h"
+#include "store.h"
 #include "timer.h"
 #include "widget.h"
 #include "worldmap.h"
@@ -421,7 +422,11 @@ static void label() {
 		font = gui.res;
 	if(gui.checked)
 		fore = colors::special;
-	texta(getname(), AlignCenterCenter);
+	switch(gui.frames[1]) {
+	case 1: texta(getname(), AlignLeftCenter); break;
+	case 2: texta(getname(), AlignRightCenter); break;
+	default: texta(getname(), AlignCenterCenter); break;
+	}
 	font = push_font;
 	fore = push_fore;
 }
@@ -1063,6 +1068,12 @@ static void backpack_button() {
 		paint_item_dragable(pi);
 }
 
+static void backpack_image() {
+	auto push_caret = caret;
+	caret.x += 24;
+	image(gui.res, gui.frames[0], 0);
+}
+
 static void paint_drop_target(item* pi, wear_s slot) {
 	if(drag_item_source && drag_item.canequip(slot)) {
 		if(player->isusable(drag_item)) {
@@ -1296,6 +1307,26 @@ static void player_coins() {
 	format_label("%1i", player->coins);
 }
 
+static void player_name() {
+	if(!player)
+		return;
+	gui.text = player->getname();
+	label();
+}
+
+static void store_name() {
+	if(!last_store)
+		return;
+	gui.text = last_store->getname();
+	label();
+}
+
+static void list_item_cost() {
+}
+
+static void list_item_price() {
+}
+
 static void creature_weight() {
 	char temp[260]; stringbuilder sb(temp);
 	sb.add(getkg(player->weight));
@@ -1316,11 +1347,31 @@ static void item_avatar() {
 	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
 }
 
+static void buy_item_cost() {
+	if(!buy_item)
+		return;
+	format_label("%1i", buy_item->getcost());
+}
+
+static void sell_item_cost() {
+	if(!sell_item)
+		return;
+	format_label("%1i", sell_item->getcost());
+}
+
 static void item_action_button() {
 }
 
 static void paint_form() {
-	bsdata<form>::elements[gui.data.value].paint();
+	if(gui.data.iskind<form>())
+		bsdata<form>::elements[gui.data.value].paint();
+	else if(gui.data.iskind<script>())
+		bsdata<script>::elements[gui.data.value].proc(gui.data.value);
+}
+
+static void run_script() {
+	if(gui.data.iskind<script>())
+		bsdata<script>::elements[gui.data.value].proc(gui.data.value);
 }
 
 static void button_check(int& value) {
@@ -1497,6 +1548,7 @@ BSDATA(widget) = {
 	{"AreaMap", area_map},
 	{"Background", background},
 	{"BackpackButton", backpack_button},
+	{"BackpackImage", backpack_image},
 	{"Button", button},
 	{"ButtonInfoTab", button_info_tab},
 	{"ButtonNT", button_no_text},
@@ -1513,12 +1565,16 @@ BSDATA(widget) = {
 	{"ItemActionButton", item_action_button},
 	{"ItemAvatar", item_avatar},
 	{"ItemName", item_name},
+	{"BuyItemCost", buy_item_cost},
 	{"GearButton", gear_button},
 	{"HotKey", button_input},
 	{"Label", label},
+	{"ListItemCost", list_item_cost},
+	{"ListItemPrice", list_item_price},
 	{"Paperdoll", paperdoll},
 	{"PlayerAvatar", player_avatar},
 	{"PlayerCoins", player_coins},
+	{"PlayerName", player_name},
 	{"PortraitLarge", portrait_large},
 	{"QuickItemButton", quick_item_button},
 	{"QuickWeaponButton", quick_weapon_button},
@@ -1526,7 +1582,10 @@ BSDATA(widget) = {
 	{"QuickOffhandItem", quick_offhand_item},
 	{"QuiverButton", quiver_button},
 	{"Rectangle", rectb},
+	{"RunScript", run_script},
 	{"Scroll", scroll},
+	{"SellItemCost", sell_item_cost},
+	{"StoreName", store_name},
 	{"TopicList", topic_list},
 	{"UpdateCreatureInfo", update_creature_info},
 	{"UpdateHelpInfo", update_help_info},

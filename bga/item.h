@@ -70,4 +70,6 @@ struct item {
 	const char*		getname() const;
 	int				getweight() const { return count * geti().weight; }
 };
+extern item* buy_item;
 extern item* last_item;
+extern item* sell_item;

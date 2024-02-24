@@ -6,6 +6,7 @@ Bluff: Обман
 Concentration: Концентрация
 Diplomacy: Дипломатия
 DisableDevice: Обезвредить устройство
+Healing: Лечение
 Hide: Прятаться
 Initiative: Инициатива
 Intimidate: Запугивание

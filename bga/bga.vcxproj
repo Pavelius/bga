@@ -33,10 +33,11 @@
     <Text Include="..\forms\GUIMAPGM.txt" />
     <Text Include="..\forms\GUIREC08.txt" />
     <Text Include="..\forms\GUISPL08.txt" />
+    <Text Include="..\forms\GUISTBSB.txt" />
+    <Text Include="..\forms\GUISTIDB.txt" />
     <Text Include="..\forms\GUIWBTP.txt" />
     <Text Include="..\forms\GUIWMAP.txt" />
     <Text Include="..\forms\STONEOPT.txt" />
-    <Text Include="..\locale\ru\descriptions\Item.txt" />
     <Text Include="..\locale\ru\names\Abilities.txt" />
     <Text Include="..\locale\ru\names\Alignments.txt" />
     <Text Include="..\locale\ru\names\Area.txt" />
@@ -55,6 +56,7 @@
     <Text Include="..\rules\Feats.txt" />
     <Text Include="..\rules\Items.txt" />
     <Text Include="..\rules\Races.txt" />
+    <Text Include="..\rules\Store.txt" />
     <Text Include="..\rules\Worldmap.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +126,7 @@
     <ClCompile Include="scrolltext.cpp" />
     <ClCompile Include="skill.cpp" />
     <ClCompile Include="sprite_util.cpp" />
+    <ClCompile Include="store.cpp" />
     <ClCompile Include="stringact.cpp" />
     <ClCompile Include="stringbuilder.cpp" />
     <ClCompile Include="surface_serial.cpp" />
@@ -175,6 +178,7 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="my_initialize_list.h" />
+    <ClInclude Include="store.h" />
     <ClInclude Include="variable.h" />
     <ClInclude Include="portrait.h" />
     <ClInclude Include="region.h" />

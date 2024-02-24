@@ -1,4 +1,16 @@
 #Feat
 
 Cleave
- require Str+13 PowerAttack
+ require Strenght+13 PowerAttack
+CombatExpertise
+ require Intellegence+13
+Dodge
+ require Dexterity+13
+FarShoot
+ require PointBlankShoot
+ImprovedDisarm
+ require Intellegence+13 CombatExpertise
+ImprovedFeint
+ require Intellegence+13 CombatExpertise
+ImprovedSunder
+ require Strenght+13 PowerAttack

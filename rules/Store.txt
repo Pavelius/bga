@@ -1,0 +1,4 @@
+#Store
+
+HelgateStreetMerchant type(ShopStore)
+ flags UserAllowBuy UserAllowSell

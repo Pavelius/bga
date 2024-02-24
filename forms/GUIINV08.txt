@@ -4,7 +4,7 @@ Background GUIINV 0 0 0 0
 
 // Right panel
 PortraitLarge GBTNSTD 20 79 210 330
-Label REALMS 22 23 206 28 id("Name")
+PlayerName REALMS 22 23 206 28
 
 // Backpack slots
 BackpackButton STONSLOT 251 299 36 36 value(0)

@@ -73,8 +73,10 @@ static void read_rules() {
 	bsreq::read("rules/Items.txt");
 	bsreq::read("rules/Advance.txt");
 	bsreq::read("rules/Basic.txt");
+	bsreq::read("rules/Store.txt");
 	bsreq::read("rules/Worldmap.txt");
 	bsreq::read("rules/Calendar.txt");
+	bsreq::read("rules/Feats.txt");
 	log::readdir("forms", "*.txt", form::readhead);
 	log::readdir("forms", "*.txt", form::read);
 }
@@ -87,7 +89,6 @@ int main(int argc, char* argv[]) {
 #endif // _DEBUG
 	if(!initialize_translation("ru"))
 		return -1;
-	auto name = getnm("Race");
 	read_descriptions("area");
 	colorgrad::initialize();
 	widget::initialize();
