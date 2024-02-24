@@ -1,5 +1,7 @@
 #include "wearable.h"
 
+unsigned wearable::coins;
+
 void wearable::addcoins(unsigned v) {
 	if(!v)
 		return;

@@ -59,6 +59,7 @@ static void show_item_list(int bonus) {
 }
 
 static void debug_test(int bonus) {
+	form::open("GUIWBTP", false);
 	logm("Current timer %1i", current_game_tick);
 }
 

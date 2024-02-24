@@ -10,6 +10,7 @@ Biography: Биография
 CharacterLevel: Класс персонажа (%1i уровень)
 CharacterRace: Раса персонажа
 Close: Закрыть
+Coins: Золото
 CriticalHitLine: Критический удар: при результате %1i-20 урон x%2i
 CriticalHitLine20: Критический удар: при результате 20 урон x%2i
 Current: Текущий

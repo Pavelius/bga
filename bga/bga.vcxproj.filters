@@ -144,6 +144,9 @@
     <Text Include="..\rules\Calendar.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\forms\GUIWBTP.txt">
+      <Filter>forms</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

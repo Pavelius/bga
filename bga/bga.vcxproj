@@ -33,6 +33,7 @@
     <Text Include="..\forms\GUIMAPGM.txt" />
     <Text Include="..\forms\GUIREC08.txt" />
     <Text Include="..\forms\GUISPL08.txt" />
+    <Text Include="..\forms\GUIWBTP.txt" />
     <Text Include="..\forms\GUIWMAP.txt" />
     <Text Include="..\forms\STONEOPT.txt" />
     <Text Include="..\locale\ru\descriptions\Item.txt" />

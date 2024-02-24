@@ -1165,6 +1165,12 @@ static void portrait_small(creature* pc) {
 	}
 }
 
+static void player_avatar() {
+	if(!player)
+		return;
+	image(gres(PORTS), player->portrait, 0);
+}
+
 static void choose_creature() {
 	player = (creature*)hot.object;
 	if(!hot.param)
@@ -1271,6 +1277,23 @@ static void apply_weight_color() {
 	case 1: fore = colors::yellow; break;
 	default: break;
 	}
+}
+
+static void format_labelv(const char* format, const char* format_param) {
+	char temp[260]; stringbuilder sb(temp);
+	sb.addv(format, format_param);
+	gui.text = temp;
+	label();
+}
+
+static void format_label(const char* format, ...) {
+	format_labelv(format, xva_start(format));
+}
+
+static void player_coins() {
+	if(!player)
+		return;
+	format_label("%1i", player->coins);
 }
 
 static void creature_weight() {
@@ -1494,6 +1517,8 @@ BSDATA(widget) = {
 	{"HotKey", button_input},
 	{"Label", label},
 	{"Paperdoll", paperdoll},
+	{"PlayerAvatar", player_avatar},
+	{"PlayerCoins", player_coins},
 	{"PortraitLarge", portrait_large},
 	{"QuickItemButton", quick_item_button},
 	{"QuickWeaponButton", quick_weapon_button},

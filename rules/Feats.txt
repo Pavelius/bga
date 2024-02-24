@@ -1,1 +1,4 @@
 #Feat
+
+Cleave
+ require Str+13 PowerAttack

@@ -3,7 +3,7 @@
 #pragma once
 
 struct wearable {
-	unsigned	coins;
+	static unsigned	coins;
 	unsigned char weapon_index;
 	int			weight, allowed_weight;
 	item		wears[LastQuickItem + 1];

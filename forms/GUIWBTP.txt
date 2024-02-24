@@ -1,0 +1,10 @@
+﻿#Control
+
+AreaMap NONE 0 0 800 316
+Background GUWBTP 0 316 0 0 value(2)
+//Button GUIWCTLC 710 214 22 22 frames(0 1 0 0) 
+TextConsole NORMAL 109 11 534 221 fore(200 200 200) 
+Scroll GBTNSCRL 677 9 12 225 frames(1 0 3 2 4 5) 
+PlayerCoins NORMAL 711 35 70 20 
+PlayerAvatar NONE 31 25 42 42 frames(0 1 0 0) value(11)
+// Unlnown None 77 215 468 15

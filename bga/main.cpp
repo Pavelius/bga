@@ -37,6 +37,7 @@ static void create_party() {
 	for(auto i = 0; i < 6; i++) {
 		player->create(Male);
 		player->update();
+		player->addcoins(xrand(3, 18));
 		party[i] = player;
 	}
 	script::run("SelectAll", 0);
@@ -73,7 +74,7 @@ static void read_rules() {
 	bsreq::read("rules/Advance.txt");
 	bsreq::read("rules/Basic.txt");
 	bsreq::read("rules/Worldmap.txt");
-	//bsreq::read("rules/Calendar.txt");
+	bsreq::read("rules/Calendar.txt");
 	log::readdir("forms", "*.txt", form::readhead);
 	log::readdir("forms", "*.txt", form::read);
 }

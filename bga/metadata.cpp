@@ -67,6 +67,7 @@ BSMETA(advancei) = {
 	BSREQ(elements),
 	{}};
 BSMETA(calendari) = {
+	BSREQ(id),
 	BSENM(period, periodi),
 	BSREQ(duration),
 	{}};
