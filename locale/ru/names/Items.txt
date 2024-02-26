@@ -1,3 +1,5 @@
+GP: зм
+
 BattleAxe: Боевой топор
 BattleAxeP1: Боевой топор +1
 HalfPlate: Полу-латы

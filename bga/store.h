@@ -1,6 +1,8 @@
 #pragma once
 
+#include "item.h"
 #include "nameable.h"
+#include "variant.h"
 
 enum storef_s : unsigned char {
 	UserAllowBuy, UserAllowSell, UserAllowIdentify, UserAllowSteal,
@@ -20,6 +22,7 @@ struct storei : nameable {
 	int				buy_percent, sell_percent;
 	int				chance_steal;
 	int				room_prices[4];
+	variants		items;
 	bool			is(storef_s v) const { return (flags & (1 << v)) != 0; }
 };
 extern storei* last_store;

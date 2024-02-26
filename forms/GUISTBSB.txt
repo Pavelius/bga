@@ -1,7 +1,6 @@
 ﻿#Control
 
 Background GUISTDRB 0 0 0 0
-RunScript NONE 0 0 0 0 data(ClearSellBuyItems)
 
 Label STONEBIG 134 23 238 28 id("BuyAndSell")
 Label NORMAL 141 83 225 18 id("Store")
@@ -16,34 +15,37 @@ Button GBTNSTD 663 249 117 25 frames(1 2 0 3) data(UseSteal)
 
 StoreName STONEBIG 400 23 238 28
 
+StoreList NONE 135 113 312 262 value(6)
 Scroll GBTNSCRL 359 114 12 260 frames(1 0 3 2 4 5) 
+
+StoreItemAvatar NONE 135 113 36 36 frames(1 2 3 0) value(0)
+StoreItemAvatar NONE 135 158 36 36 frames(1 2 3 0) value(1)
+StoreItemAvatar NONE 135 203 36 36 frames(1 2 3 0) value(2)
+StoreItemAvatar NONE 135 249 36 36 frames(1 2 3 0) value(3)
+StoreItemAvatar NONE 135 294 36 36 frames(1 2 3 0) value(4)
+StoreItemAvatar NONE 135 339 36 36 frames(1 2 3 0) value(5)
+StoreItemInfo NORMAL 184 116 164 30 value(0)
+StoreItemInfo NORMAL 184 161 164 30 value(1)
+StoreItemInfo NORMAL 184 206 164 30 value(2)
+StoreItemInfo NORMAL 184 252 164 30 value(3)
+StoreItemInfo NORMAL 184 297 164 30 value(4)
+StoreItemInfo NORMAL 184 342 164 30 value(5)
+
+PlayerItemList NONE 401 113 312 262 value(6)
 Scroll GBTNSCRL 626 114 12 260 frames(1 0 3 2 4 5) 
 
-// Button GUISTMSC 135 113 36 36 frames(1 2 3 0) value(0)
-// Button GUISTMSC 135 158 36 36 frames(1 2 3 0) value(1)
-// Button GUISTMSC 135 203 36 36 frames(1 2 3 0) value(2)
-// Button GUISTMSC 135 249 36 36 frames(1 2 3 0) value(3)
-// Button GUISTMSC 135 294 36 36 frames(1 2 3 0) value(4)
-// Button GUISTMSC 135 339 36 36 frames(1 2 3 0) value(5)
-Label NORMAL 184 116 164 30 value(0)
-Label NORMAL 184 161 164 30 value(1)
-Label NORMAL 184 206 164 30 value(2)
-Label NORMAL 184 252 164 30 value(3)
-Label NORMAL 184 297 164 30 value(4)
-Label NORMAL 184 342 164 30 value(5)
-
-// Button GUISTMSC 401 113 36 36 frames(1 2 3 0) value(0)
-// Button GUISTMSC 401 158 36 36 frames(1 2 3 0) value(1)
-// Button GUISTMSC 401 203 36 36 frames(1 2 3 0) value(2)
-// Button GUISTMSC 401 249 36 36 frames(1 2 3 0) value(3)
-// Button GUISTMSC 401 294 36 36 frames(1 2 3 0) value(4)
-// Button GUISTMSC 401 339 36 36 frames(1 2 3 0) value(5)
-Label NORMAL 450 116 164 30 value(0)
-Label NORMAL 450 161 164 30 value(1)
-Label NORMAL 450 206 164 30 value(2)
-Label NORMAL 450 252 164 30 value(3)
-Label NORMAL 450 297 164 30 value(4)
-Label NORMAL 450 342 164 30 value(5)
+StoreItemAvatar NONE 401 113 36 36 frames(1 2 3 0) value(0)
+StoreItemAvatar NONE 401 158 36 36 frames(1 2 3 0) value(1)
+StoreItemAvatar NONE 401 203 36 36 frames(1 2 3 0) value(2)
+StoreItemAvatar NONE 401 249 36 36 frames(1 2 3 0) value(3)
+StoreItemAvatar NONE 401 294 36 36 frames(1 2 3 0) value(4)
+StoreItemAvatar NONE 401 339 36 36 frames(1 2 3 0) value(5)
+StoreItemInfo NORMAL 450 116 164 30 value(0)
+StoreItemInfo NORMAL 450 161 164 30 value(1)
+StoreItemInfo NORMAL 450 206 164 30 value(2)
+StoreItemInfo NORMAL 450 252 164 30 value(3)
+StoreItemInfo NORMAL 450 297 164 30 value(4)
+StoreItemInfo NORMAL 450 342 164 30 value(5)
 
 Label NORMAL 138 387 125 20 frames(0 2) id("Cost")
 BuyItemCost NORMAL 285 387 80 20

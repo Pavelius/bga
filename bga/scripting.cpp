@@ -90,13 +90,8 @@ static void damage_change(int bonus) {
 	fnscript<abilityi>(DamageRanged, bonus);
 }
 
-static void clear_sell_buy_item(int bonus) {
-	buy_item = 0;
-	sell_item = 0;
-}
-
 static bool allow_buy_item(int bonus) {
-	if(!buy_item)
+	if(!store_item)
 		return false;
 	return true;
 }
@@ -104,7 +99,7 @@ static void buy_item_script(int bonus) {
 }
 
 static bool allow_sell_item(int bonus) {
-	if(!sell_item)
+	if(!party_item)
 		return false;
 	return true;
 }
@@ -112,7 +107,7 @@ static void sell_item_script(int bonus) {
 }
 
 static bool allow_use_steal(int bonus) {
-	if(!buy_item)
+	if(!store_item)
 		return false;
 	return true;
 }
@@ -126,7 +121,6 @@ BSDATA(script) = {
 	{"ChangeZoomFactor", change_zoom_factor},
 	{"CheckQuickWeapon", check_quick_weapon},
 	{"ChooseCreatureColor", choose_creature_color},
-	{"ClearSellBuyItems", clear_sell_buy_item},
 	{"Close", button_cancel},
 	{"ColorPick", color_pick},
 	{"Damage", damage_change},

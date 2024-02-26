@@ -103,6 +103,8 @@
     <ClCompile Include="io_stream.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="itema.cpp" />
+    <ClCompile Include="itemcont.cpp" />
+    <ClCompile Include="itemlist.cpp" />
     <ClCompile Include="list.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="logparse.cpp" />
@@ -175,6 +177,8 @@
     <ClInclude Include="geography.h" />
     <ClInclude Include="itema.h" />
     <ClInclude Include="itemground.h" />
+    <ClInclude Include="itemcont.h" />
+    <ClInclude Include="itemlist.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="my_initialize_list.h" />

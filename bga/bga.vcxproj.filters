@@ -404,6 +404,12 @@
     <ClCompile Include="store.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="itemcont.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="itemlist.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -644,6 +650,12 @@
       <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="store.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="itemcont.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="itemlist.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

@@ -69,7 +69,8 @@ struct item {
 	void			getinfo(stringbuilder& sb) const;
 	const char*		getname() const;
 	int				getweight() const { return count * geti().weight; }
+	void			setcount(int value) { count = value - 1; }
 };
-extern item* buy_item;
 extern item* last_item;
-extern item* sell_item;
+extern item* party_item;
+extern item* store_item;

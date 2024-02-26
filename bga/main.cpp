@@ -19,6 +19,7 @@
 using namespace draw;
 
 bool initialize_translation(const char* locale);
+void initialize_store();
 void read_descriptions(const char* folder);
 void util_main();
 
@@ -89,6 +90,7 @@ int main(int argc, char* argv[]) {
 #endif // _DEBUG
 	if(!initialize_translation("ru"))
 		return -1;
+	initialize_store();
 	read_descriptions("area");
 	colorgrad::initialize();
 	widget::initialize();

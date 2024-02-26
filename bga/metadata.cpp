@@ -163,6 +163,7 @@ BSMETA(storei) = {
 	BSFLG(flags, storefi),
 	BSREQ(buy_percent), BSREQ(sell_percent), BSREQ(chance_steal),
 	BSREQ(room_prices),
+	BSREQ(items),
 	{}};
 BSMETA(storefi) = {
 	BSREQ(id),

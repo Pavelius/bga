@@ -15,6 +15,8 @@
 #include "drawable.h"
 #include "floattext.h"
 #include "game.h"
+#include "itemcont.h"
+#include "itemlist.h"
 #include "list.h"
 #include "map.h"
 #include "race.h"
@@ -50,6 +52,9 @@ static form* next_last_form;
 static int zoom_factor = 1;
 static void *current_topic;
 static worldmapi::area* current_world_area_hilite;
+// static collectiona list_items;
+static partyitemlist party_items;
+static partyitemlist store_items;
 stringbuilder description(description_text);
 
 static point camera_center() {
@@ -1348,15 +1353,15 @@ static void item_avatar() {
 }
 
 static void buy_item_cost() {
-	if(!buy_item)
+	if(!store_item)
 		return;
-	format_label("%1i", buy_item->getcost());
+	format_label("%1i", store_item->getcost());
 }
 
 static void sell_item_cost() {
-	if(!sell_item)
+	if(!party_item)
 		return;
-	format_label("%1i", sell_item->getcost());
+	format_label("%1i", party_item->getcost());
 }
 
 static void item_action_button() {
@@ -1472,6 +1477,64 @@ static void list_elements(void** current_focus, const array& source) {
 	clipping = push_clip;
 }
 
+static void list_collection(void** current_focus, const collectiona& source, scrollable& scroll) {
+	last_scroll = &scroll;
+	last_scroll->perline = 1;
+	last_scroll->perscreen = gui.value;
+	last_scroll->maximum = source.getcount();
+	if(gui.hilited)
+		last_scroll->input();
+	if(!(*current_focus))
+		*current_focus = source[0];
+}
+
+static void store_list() {
+	last_scroll = 0;
+	//static scrolllist scroll;
+	//list_items.clear();
+	//load_items(list_items, last_store);
+	//list_collection((void**)&store_item, list_items, scroll);
+}
+
+static void player_items() {
+	if(!party_items.is_updated) {
+		party_items.update();
+		party_items.is_updated = true;
+	}
+	if(gui.hilited)
+		party_items.input();
+	last_scroll = &party_items;
+}
+
+static itemlist::element* get_element() {
+	if(!last_scroll)
+		return 0;
+	auto n = gui.value + last_scroll->origin;
+	if(n >= last_scroll->maximum)
+		return 0;
+	itemlist* pn = static_cast<itemlist*>(last_scroll);
+	return pn->data + n;
+}
+
+static void store_item_avatar() {
+	auto pi = get_element();
+	if(!pi)
+		return;
+	auto index = gui.value % 8;
+	if(index >= 4)
+		index += 4;
+	image(gui.res, index, 0);
+	if(*pi->data)
+		paint_item(pi->data);
+}
+
+static void store_item_info() {
+	auto pi = get_element();
+	if(!pi)
+		return;
+	format_label("%1 - %2i%3", pi->data->getname(), pi->data->getcost(), getnm("GP"));
+}
+
 static void topic_list() {
 	static scrolllist scroll; last_scroll = &scroll;
 	list_elements(&current_topic);
@@ -1575,6 +1638,7 @@ BSDATA(widget) = {
 	{"PlayerAvatar", player_avatar},
 	{"PlayerCoins", player_coins},
 	{"PlayerName", player_name},
+	{"PlayerItemList", player_items},
 	{"PortraitLarge", portrait_large},
 	{"QuickItemButton", quick_item_button},
 	{"QuickWeaponButton", quick_weapon_button},
@@ -1585,6 +1649,9 @@ BSDATA(widget) = {
 	{"RunScript", run_script},
 	{"Scroll", scroll},
 	{"SellItemCost", sell_item_cost},
+	{"StoreItemAvatar", store_item_avatar},
+	{"StoreItemInfo", store_item_info},
+	{"StoreList", store_list},
 	{"StoreName", store_name},
 	{"TopicList", topic_list},
 	{"UpdateCreatureInfo", update_creature_info},
