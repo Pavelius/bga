@@ -4,7 +4,7 @@
 #include "variant.h"
 
 struct collectiona;
-struct itemcont : item {
+struct iteminside : item {
 	variant	parent;
 	void	clear();
 };

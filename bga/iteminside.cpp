@@ -1,11 +1,11 @@
 #include "collection.h"
 #include "crt.h"
-#include "itemcont.h"
+#include "iteminside.h"
 #include "creature.h"
 
-BSDATAC(itemcont, 8192)
+BSDATAC(iteminside, 8192)
 
-void itemcont::clear() {
+void iteminside::clear() {
 	memset(this, 0, sizeof(*this));
 }
 
@@ -14,14 +14,14 @@ static void copy_object(item& t1, const item& t2) {
 }
 
 void add_item(variant parent, item& it) {
-	for(auto& v : bsdata<itemcont>()) {
+	for(auto& v : bsdata<iteminside>()) {
 		if(v.parent != parent)
 			continue;
 		v.add(it);
 		if(!it)
 			return;
 	}
-	for(auto& v : bsdata<itemcont>()) {
+	for(auto& v : bsdata<iteminside>()) {
 		if(v)
 			continue;
 		v.parent = parent;
@@ -30,7 +30,7 @@ void add_item(variant parent, item& it) {
 		last_item = &v;
 		return;
 	}
-	auto p = bsdata<itemcont>::add();
+	auto p = bsdata<iteminside>::add();
 	copy_object(*p, it);
 	p->parent = parent;
 	last_item = p;
@@ -39,7 +39,7 @@ void add_item(variant parent, item& it) {
 
 void load_items(collectiona& source, variant parent) {
 	source.clear();
-	for(auto& e : bsdata<itemcont>()) {
+	for(auto& e : bsdata<iteminside>()) {
 		if(e.parent == parent)
 			source.add(&e);
 	}

@@ -13,3 +13,8 @@ struct calendari : nameable {
 struct periodi : nameable {
 	unsigned		measure, range;
 };
+
+int getday();
+int getday(unsigned passed);
+int gethour();
+int gethour(unsigned passed);

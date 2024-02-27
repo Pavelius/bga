@@ -1,6 +1,7 @@
 #include "area.h"
 #include "animation.h"
 #include "bsreq.h"
+#include "calendar.h"
 #include "class.h"
 #include "creature.h"
 #include "colorgrad.h"
@@ -15,7 +16,7 @@
 #include "drawable.h"
 #include "floattext.h"
 #include "game.h"
-#include "itemcont.h"
+#include "iteminside.h"
 #include "itemlist.h"
 #include "list.h"
 #include "map.h"
@@ -410,6 +411,12 @@ static void button_no_text() {
 	allow_disable_button();
 	pressed_button();
 	button_input();
+}
+
+static void button_animated() {
+	gui.frames[0] = (unsigned)((current_game_tick/120) % gui.res->count);
+	gui.frames[1] = gui.frames[0];
+	button();
 }
 
 static void textarea() {
@@ -885,7 +892,7 @@ void animation::paint() const {
 	auto pr = gres(this->rsname, "art/animations");
 	if(!pr)
 		return;
-	auto hour = getgamehour();
+	auto hour = gethour();
 	if(is(RenderBlackAsTransparent)) {
 		//image_tint(caret.x, caret.y, pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
 		auto push_alpha = alpha;
@@ -1629,6 +1636,7 @@ BSDATA(widget) = {
 	{"BackpackButton", backpack_button},
 	{"BackpackImage", backpack_image},
 	{"Button", button},
+	{"ButtonAM", button_animated},
 	{"ButtonInfoTab", button_info_tab},
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},

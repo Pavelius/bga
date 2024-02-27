@@ -404,7 +404,7 @@
     <ClCompile Include="store.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="itemcont.cpp">
+    <ClCompile Include="iteminside.cpp">
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="itemlist.cpp">
@@ -652,7 +652,7 @@
     <ClInclude Include="store.h">
       <Filter>logic</Filter>
     </ClInclude>
-    <ClInclude Include="itemcont.h">
+    <ClInclude Include="iteminside.h">
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="itemlist.h">

@@ -1,5 +1,5 @@
 #include "crt.h"
-#include "itemcont.h"
+#include "iteminside.h"
 #include "store.h"
 
 BSDATAC(storei, 256);

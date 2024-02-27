@@ -65,23 +65,6 @@ areai* areai::find(const char* name, const char* folder) {
 	return 0;
 }
 
-int map::getday(unsigned value) {
-	return value / (24 * 60);
-}
-
-int map::gethour(unsigned value) {
-	return (value / 60) % 24;
-}
-
-void map::getpassedtime(stringbuilder& sb, unsigned value) {
-	auto h = gethour(value);
-	auto d = getday(value);
-	if(d)
-		sb.add("%1i %2", d, (d == 1) ? "day" : "days");
-	if(h)
-		sb.add("%1i %2", h, (h == 1) ? "hour" : "hours");
-}
-
 color* map::getpallette() {
 	return lightpal;
 }

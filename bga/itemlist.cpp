@@ -1,6 +1,6 @@
 #include "creature.h"
 #include "itemlist.h"
-#include "itemcont.h"
+#include "iteminside.h"
 #include "store.h"
 
 // itemlist* last_itemstore;
@@ -19,7 +19,7 @@ void itemlist::clear() {
 
 void storeitemlist::update() {
 	variant parent = last_store;
-	for(auto& e : bsdata<itemcont>()) {
+	for(auto& e : bsdata<iteminside>()) {
 		if(e.parent == parent)
 			add(&e);
 	}

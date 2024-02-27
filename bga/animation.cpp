@@ -1,8 +1,8 @@
 #include "animation.h"
-#include "game.h"
+#include "calendar.h"
 
 bool animation::isvisible() const {
-	auto hour = getgamehour();
+	auto hour = gethour();
 	if(schedule) {
 		if((schedule & (1 << hour)) == 0)
 			return false;
