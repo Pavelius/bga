@@ -23,7 +23,7 @@
 #include "region.h"
 #include "resinfo.h"
 #include "script.h"
-#include "scrolltext.h"
+#include "scrollable.h"
 #include "store.h"
 #include "timer.h"
 #include "widget.h"
@@ -1450,6 +1450,7 @@ static void list_elements(void** current_focus, const array& source) {
 	last_scroll->perscreen = height;
 	last_scroll->perline = texth() + 2;
 	last_scroll->maximum = (source.getcount() + 1) * last_scroll->perline + 1;
+	last_scroll->correct();
 	if(gui.hilited)
 		last_scroll->input();
 	if(!(*current_focus))
@@ -1497,13 +1498,12 @@ static void store_list() {
 }
 
 static void player_items() {
-	if(!party_items.is_updated) {
-		party_items.update();
-		party_items.is_updated = true;
+	static creature* current_player;
+	if(current_player != player) {
+		current_player = player;
+		party_items.invalidate();
 	}
-	if(gui.hilited)
-		party_items.input();
-	last_scroll = &party_items;
+	party_items.paint();
 }
 
 static itemlist::element* get_element() {
@@ -1526,6 +1526,22 @@ static void store_item_avatar() {
 	image(gui.res, index, 0);
 	if(*pi->data)
 		paint_item(pi->data);
+	if(pi->count > 0)
+		image(gui.res, 25, 0);
+	if(gui.hilited) {
+		switch(hot.key) {
+		case MouseLeft:
+			if(hot.pressed)
+				execute(cbsetint, pi->count + 1, 0, &pi->count);
+			break;
+		case MouseLeftDBL:
+			break;
+		case MouseRight:
+			if(pi->count > 0 && hot.pressed)
+				execute(cbsetint, pi->count - 1, 0, &pi->count);
+			break;
+		}
+	}
 }
 
 static void store_item_info() {

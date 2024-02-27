@@ -17,10 +17,6 @@ void itemlist::clear() {
 	maximum = 0;
 }
 
-void itemlist::invalidate() {
-	is_updated = false;
-}
-
 void storeitemlist::update() {
 	variant parent = last_store;
 	for(auto& e : bsdata<itemcont>()) {
@@ -30,6 +26,7 @@ void storeitemlist::update() {
 }
 
 void partyitemlist::update() {
+	clear();
 	for(auto& e : player->backpack()) {
 		if(e)
 			add(&e);

@@ -1,5 +1,6 @@
 #include "draw.h"
-#include "scrolltext.h"
+#include "draw_gui.h"
+#include "scrollable.h"
 
 using namespace draw;
 
@@ -28,7 +29,6 @@ void scrollable::correct() {
 void scrollable::setorigin(int v) {
 	origin = v;
 	correct();
-	invalidate();
 }
 
 void scrollable::keyinput() {
@@ -51,6 +51,14 @@ void scrollable::input() {
 	}
 }
 
+void scrollable::paint() {
+	if(isinvalidated())
+		update();
+	if(gui.hilited)
+		input();
+	last_scroll = this;
+}
+
 void scrollable::setcommand(int v) {
 	draw::execute(set_origin_value, v, 0, this);
 }
@@ -63,7 +71,7 @@ int scrollable::proportial(int max_height) const {
 }
 
 void scrolltext::invalidate() {
-	cashe_content = -1;
+	scrollable::invalidate();
 	cashe_origin = 0;
 }
 
@@ -74,7 +82,7 @@ void scrolltext::paint(const char* format) {
 		return;
 	auto push_clipping = clipping;
 	setclipall();
-	if(cashe_content == -1) {
+	if(isinvalidated() || current_origin != origin) {
 		auto push_height = height;
 		auto push_width = width;
 		textfs(format);
@@ -84,6 +92,8 @@ void scrolltext::paint(const char* format) {
 		perscreen = height;
 		correct();
 		caret.y -= origin;
+		cashe_content = -1;
+		current_origin = origin;
 		textf(format, cashe_origin, cashe_content);
 	} else
 		textf(format, cashe_origin, cashe_content);

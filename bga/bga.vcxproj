@@ -125,7 +125,7 @@
     <ClCompile Include="screenshoot.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="scripting.cpp" />
-    <ClCompile Include="scrolltext.cpp" />
+    <ClCompile Include="scrollable.cpp" />
     <ClCompile Include="skill.cpp" />
     <ClCompile Include="sprite_util.cpp" />
     <ClCompile Include="store.cpp" />
@@ -216,7 +216,7 @@
     <ClInclude Include="resid.h" />
     <ClInclude Include="screenshoot.h" />
     <ClInclude Include="script.h" />
-    <ClInclude Include="scrolltext.h" />
+    <ClInclude Include="scrollable.h" />
     <ClInclude Include="skill.h" />
     <ClInclude Include="sprite_util.h" />
     <ClInclude Include="stringact.h" />

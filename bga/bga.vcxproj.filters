@@ -335,7 +335,7 @@
     <ClCompile Include="console.cpp">
       <Filter>support</Filter>
     </ClCompile>
-    <ClCompile Include="scrolltext.cpp">
+    <ClCompile Include="scrollable.cpp">
       <Filter>support</Filter>
     </ClCompile>
     <ClCompile Include="drawable.cpp">
@@ -571,7 +571,7 @@
     <ClInclude Include="alignment.h">
       <Filter>logic</Filter>
     </ClInclude>
-    <ClInclude Include="scrolltext.h">
+    <ClInclude Include="scrollable.h">
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="drawable.h">
