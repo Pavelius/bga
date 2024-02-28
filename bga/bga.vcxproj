@@ -115,6 +115,7 @@
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="nameable.cpp" />
+    <ClCompile Include="order.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="portrait.cpp" />
     <ClCompile Include="race.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="my_initialize_list.h" />
+    <ClInclude Include="order.h" />
     <ClInclude Include="store.h" />
     <ClInclude Include="variable.h" />
     <ClInclude Include="portrait.h" />

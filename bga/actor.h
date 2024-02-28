@@ -34,6 +34,7 @@ struct actor : drawable, actable, coloration, statable, classa, wearable {
 	void			clearpath();
 	bool			ispresent() const;
 	void			lookat(point destination);
+	void			moveto(point destination);
 	void			setorientation(unsigned char v) { orientation = v; }
 	void			stop();
 };

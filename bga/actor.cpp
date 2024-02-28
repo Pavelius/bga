@@ -69,3 +69,12 @@ void actor::stop() {
 void actor::lookat(point destination) {
 	setorientation(map::getorientation(position, destination));
 }
+
+void actor::moveto(point destination) {
+	if(destination == position)
+		return;
+	auto new_position = map::getfree(destination, 1);
+	area_index = current_area;
+	lookat(new_position);
+	setposition(new_position);
+}

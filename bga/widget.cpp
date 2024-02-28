@@ -44,7 +44,6 @@ static point hotspot;
 static item drag_item;
 static item *drag_item_source, *drag_item_dest;
 static int current_info_tab;
-static fnevent update_proc;
 static bool need_update, button_run;
 static char description_text[4096];
 static scrolltext area_description, area_console;
@@ -53,7 +52,6 @@ static form* next_last_form;
 static int zoom_factor = 1;
 static void *current_topic;
 static worldmapi::area* current_world_area_hilite;
-// static collectiona list_items;
 static partyitemlist party_items;
 static partyitemlist store_items;
 stringbuilder description(description_text);
@@ -989,6 +987,7 @@ static void apply_hilite_command() {
 		} else if(bsdata<container>::have(hilite_drawable)) {
 			auto p = (container*)hilite_drawable;
 			logm("This is %1", p->name);
+			player->moveto(p->launch);
 		}
 	}
 }

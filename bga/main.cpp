@@ -106,7 +106,7 @@ int main(int argc, char* argv[]) {
 	colors::h3 = color(244, 214, 66);
 	colors::special = color(244, 214, 66);
 	initialize(getnm("AppTitle"));
-	settimer(100);
+	settimer(60);
 	setnext(start_main);
 	start();
 	return 0;

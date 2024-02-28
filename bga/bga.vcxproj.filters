@@ -410,6 +410,9 @@
     <ClCompile Include="itemlist.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="order.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -656,6 +659,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="itemlist.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="order.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

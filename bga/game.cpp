@@ -3,6 +3,7 @@
 #include "console.h"
 #include "creature.h"
 #include "door.h"
+#include "draw.h"
 #include "draw_form.h"
 #include "entrance.h"
 #include "formation.h"
@@ -55,6 +56,7 @@ void enter(const char* id, const char* location) {
 
 static void serial_common(archive& a) {
 	a.set(map::areaname);
+	a.set(draw::camera);
 	a.set(current_game_tick);
 	//a.set(player);
 	a.set(wearable::coins);
