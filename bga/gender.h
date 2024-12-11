@@ -1,8 +1,8 @@
 #pragma once
 
-enum gender_s : unsigned char {
+enum gendern : unsigned char {
 	NoGender, Male, Female
 };
 struct genderi {
-	const char*			id;
+	const char* id;
 };

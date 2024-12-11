@@ -11,8 +11,8 @@ struct creature : actor, avatarable {
 	short			hp, hp_max;
 	unsigned		experience;
 	void			clear();
-	static void		create(gender_s gender);
-	static void		create(race_s race, gender_s gender, class_s classv, unsigned short portrait);
+	static void		create(gendern gender);
+	static void		create(racen race, gendern gender, classn classv, unsigned short portrait);
 	bool			isclass(skill_s v) const;
 	bool			isusable(const item& it) const;
 	void			getinfo(stringbuilder& sb) const;

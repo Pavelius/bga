@@ -175,7 +175,7 @@ void widget::open() const {
 	scene(proc);
 }
 
-static res::token getanimation(race_s race, gender_s gender, class_s type, int ai, int& ws) {
+static res::token getanimation(racen race, gendern gender, classn type, int ai, int& ws) {
 	res::token icn;
 	switch(race) {
 	case Dwarf:
@@ -251,7 +251,7 @@ static void actor_marker(int size, bool flicking, bool double_border) {
 		circle(r + 1);
 }
 
-static void paperdoll(color* pallette, race_s race, gender_s gender, class_s type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
+static void paperdoll(color* pallette, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
 	sprite* source;
 	unsigned flags;
 	int ws;
@@ -272,7 +272,7 @@ static void paperdoll(color* pallette, race_s race, gender_s gender, class_s typ
 	painting_equipment(offhand, ws, frame, flags, pallette);
 }
 
-static void paperdoll(const coloration& colors, race_s race, gender_s gender, class_s type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
+static void paperdoll(const coloration& colors, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
 	color pallette[256]; colors.setpallette(pallette);
 	paperdoll(pallette, race, gender, type, animation, orientation, frame_tick, armor, weapon, offhand, helm);
 }

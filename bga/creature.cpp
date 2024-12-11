@@ -86,7 +86,7 @@ void creature::clear() {
 	area_index = 0xFFFF;
 }
 
-static short unsigned random_portrait_no_party(gender_s gender) {
+static short unsigned random_portrait_no_party(gendern gender) {
 	portraiti* exist[sizeof(party) / sizeof(party[0]) + 1];
 	auto ps = exist;
 	for(auto p : party) {
@@ -96,14 +96,14 @@ static short unsigned random_portrait_no_party(gender_s gender) {
 	return random_portrait(gender, exist);
 }
 
-static void raise_hit_points(class_s v) {
+static void raise_hit_points(classn v) {
 	if(player->getlevel() == 1 && ischaracter(v))
 		player->basic.abilitites[HitPoints] += bsdata<classi>::elements[v].hit_points;
 	else
 		player->basic.abilitites[HitPoints] += xrand(1, bsdata<classi>::elements[v].hit_points);
 }
 
-static void raise_class(class_s classv) {
+static void raise_class(classn classv) {
 	variant v = bsdata<classi>::elements + classv;
 	player->classes[classv] = player->classes[classv] + 1;
 	apply_advance(v, player->classes[classv]);
@@ -166,7 +166,7 @@ static void random_ability() {
 		player->basic.abilitites[i] = roll_4d6();
 }
 
-static int get_skill_points(class_s v) {
+static int get_skill_points(classn v) {
 	auto n = bsdata<classi>::elements[v].skill_points;
 	n += player->basic.getbonus(Intelligence);
 	if(n < 1)
@@ -176,7 +176,7 @@ static int get_skill_points(class_s v) {
 	return n;
 }
 
-void creature::create(race_s race, gender_s gender, class_s classv, unsigned short portrait) {
+void creature::create(racen race, gendern gender, classn classv, unsigned short portrait) {
 	player = bsdata<creature>::add();
 	player->clear();
 	player->area_index = current_area;
@@ -191,14 +191,14 @@ void creature::create(race_s race, gender_s gender, class_s classv, unsigned sho
 	finish();
 }
 
-void creature::create(gender_s gender) {
+void creature::create(gendern gender) {
 	auto pi = random_portrait_no_party(gender);
 	auto p = bsdata<portraiti>::elements + pi;
 	create(p->race, p->gender, p->classv, pi);
 }
 
 bool creature::isclass(skill_s v) const {
-	for(auto i = (class_s)0; i <= Wizard; i = (class_s)(i + 1)) {
+	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1)) {
 		if(classes[i]) {
 			if(FGT(bsdata<classi>::elements[i].skills, v))
 				return true;

@@ -140,7 +140,7 @@ static void addclasses(stringbuilder& sb, const classa& source) {
 	if(!level)
 		return;
 	addh(sb, getnm("CharacterLevel"), level);
-	for(auto i = (class_s)0; i <= Wizard; i = (class_s)(i + 1))
+	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1))
 		addb(sb, bsdata<classi>::elements[i].id, source.classes[i]);
 	addend(sb);
 }

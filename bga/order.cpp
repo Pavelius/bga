@@ -18,9 +18,10 @@ static void remove_link_to_this(short unsigned link) {
 	}
 }
 
-static void remove_link(short unsigned link) {
-	if(link!=0xFFFF)
-		bsdata<orderi>::elements[link].remove();
+void addorder(variant parent, variant action) {
+	auto p = add_new();
+	p->action = action;
+	p->parent = parent;
 }
 
 void orderi::clear() {

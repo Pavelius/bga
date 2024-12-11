@@ -3,11 +3,11 @@
 
 #pragma once
 
-enum race_s : unsigned char {
+enum racen : unsigned char {
 	Human, Dwarf, Elf, Gnome, HalfElf, Halfling, HalfOrc,
 };
 
 struct racei : nameable {
-	colorgrad*	hairs;
-	colorgrad*	skin;
+	colorgrad* hairs;
+	colorgrad* skin;
 };

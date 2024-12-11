@@ -2,17 +2,17 @@
 
 #pragma once
 
-enum class_s : unsigned char;
-enum race_s : unsigned char;
+enum classn : unsigned char;
+enum racen : unsigned char;
 
 struct portraiti {
 	const char*		id;
 	unsigned char	colors[4];
-	gender_s		gender;
-	race_s			race;
-	class_s			classv;
+	gendern		gender;
+	racen			race;
+	classn			classv;
 };
 struct avatarable {
 	short unsigned	portrait;
 };
-short unsigned		random_portrait(gender_s gender, portraiti** exclude = 0);
+short unsigned		random_portrait(gendern gender, portraiti** exclude = 0);

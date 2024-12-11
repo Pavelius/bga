@@ -12,10 +12,10 @@ BSDATA(classi) = {
 };
 assert_enum(classi, Wizard)
 
-class_s	classa::getmainclass() const {
+classn	classa::getmainclass() const {
 	auto result = Commoner;
 	auto value = 0;
-	for(auto i = Commoner; i <= Wizard; i = (class_s)(i + 1)) {
+	for(auto i = Commoner; i <= Wizard; i = (classn)(i + 1)) {
 		if(classes[i] > value) {
 			value = classes[i];
 			result = i;
@@ -36,7 +36,7 @@ unsigned classa::getnextlevel() const {
 	return new_level * (new_level - 1) * 500;
 }
 
-bool ischaracter(class_s v) {
+bool ischaracter(classn v) {
 	switch(v) {
 	case Cleric: case Fighter: case Ranger: case Rogue: case Sorcerer: case Wizard:
 		return true;

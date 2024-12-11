@@ -93,10 +93,10 @@ BSDATA(portraiti) = {
 BSDATAF(portraiti)
 
 static bool filter_gender(const void* object, int param) {
-	return ((portraiti*)object)->gender == (gender_s)param;
+	return ((portraiti*)object)->gender == (gendern)param;
 }
 
-short unsigned random_portrait(gender_s gender, portraiti** exclude) {
+short unsigned random_portrait(gendern gender, portraiti** exclude) {
 	collection<portraiti> source;
 	source.select();
 	source.match(filter_gender, gender, true);

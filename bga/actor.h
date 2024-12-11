@@ -8,7 +8,7 @@
 
 #pragma once
 
-enum animate_s : unsigned char {
+enum animaten : unsigned char {
 	AnimateMove,
 	AnimateStand, AnimateStandRelax, AnimateStandLook,
 	AnimateCombatStance, AnimateCombatStanceTwoHanded,
@@ -25,12 +25,14 @@ enum animate_s : unsigned char {
 	AnimateCastFour, AnimateCastFourRelease
 };
 struct actor : drawable, actable, coloration, statable, classa, wearable {
-	animate_s		action;
+	point			move_postiion;
+	animaten		action;
 	short unsigned	area_index;
 	short unsigned	frame;
 	unsigned char	orientation;
 	unsigned		duration;
-	race_s			race;
+	unsigned short	order;
+	racen			race;
 	void			clearpath();
 	bool			ispresent() const;
 	void			lookat(point destination);
