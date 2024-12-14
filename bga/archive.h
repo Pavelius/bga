@@ -1,4 +1,5 @@
-#include "crt.h"
+#include "adat.h"
+#include "array.h"
 #include "io_stream.h"
 
 #pragma once
@@ -6,12 +7,13 @@
 // Fast and simple driver for streaming binary data.
 // Allow arrays and simple collections.
 struct archive {
-	io::stream&			source;
-	bool				writemode;
+	io::stream&	source;
+	bool		writemode;
 	constexpr archive(io::stream& source, bool writemode) : source(source), writemode(writemode) {}
-	bool				signature(const char* id);
-	bool				version(short major, short minor);
-	void				set(void* value, unsigned size);
+	bool		signature(const char* id);
+	bool		signature(unsigned long value);
+	bool		version(short major, short minor);
+	void		set(void* value, unsigned size);
 	// Array with fixed count
 	template<typename T, size_t N> void set(T(&value)[N]) {
 		for(int i = 0; i < N; i++)

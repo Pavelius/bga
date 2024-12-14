@@ -1,5 +1,6 @@
-#include "crt.h"
 #include "map.h"
+#include "math.h"
+#include "rand.h"
 
 using namespace map;
 

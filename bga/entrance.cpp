@@ -1,4 +1,5 @@
 #include "entrance.h"
+#include "stringbuilder.h"
 
 entrance* entrance::find(const char* id) {
 	for(auto& e : bsdata<entrance>()) {

@@ -1,6 +1,6 @@
-#include "crt.h"
 #include "draw.h"
 #include "win.h"
+#include "slice.h"
 
 using namespace draw;
 

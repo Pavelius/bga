@@ -1,10 +1,11 @@
 #include "answers.h"
 #include "pushvalue.h"
+#include "rand.h"
 
-answers* answers::last;
 const char* answers::header;
 const char* answers::prompt;
 const char* answers::prompa;
+const char* answers::prompi;
 const char* answers::resid;
 bool answers::show_tips = true;
 bool answers::interactive = true;
@@ -13,6 +14,8 @@ stringbuilder* answers::console;
 fnevent answers::beforepaint;
 fnevent answers::afterpaint;
 answers::fnpaint answers::paintcell;
+answers* answers::last;
+
 char answers::hotkeys[20] = {
 	'1', '2', '3', '4', '5', '6', '7', '8', '9', 'A',
 	'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'
@@ -21,7 +24,7 @@ char answers::hotkeys[20] = {
 answers an;
 
 int answers::compare(const void* v1, const void* v2) {
-	return strcmp(((answers::element*)v1)->text, ((answers::element*)v2)->text);
+	return szcmp(((answers::element*)v1)->text, ((answers::element*)v2)->text);
 }
 
 void answers::addv(const void* value, const char* text, const char* format) {
@@ -61,11 +64,11 @@ void answers::clear() {
 	sc.clear();
 }
 
-void draw::pause() {
+void pause() {
 	pause(getnm("Continue"));
 }
 
-void draw::pause(const char* title, ...) {
+void pause(const char* title, ...) {
 	if(answers::console) {
 		if(!(*answers::console))
 			return;
@@ -77,15 +80,15 @@ void draw::pause(const char* title, ...) {
 		answers::console->clear();
 }
 
-void draw::pausenc(const char* title, ...) {
+void pausenc(const char* title, ...) {
 	char temp[260]; stringbuilder sb(temp);
 	answers an; sb.addv(title, xva_start(title));
 	an.choose(0, temp, true);
 }
 
-bool draw::yesno(const char* title, ...) {
+bool yesnov(const char* title, const char* title_param) {
 	char temp[260]; stringbuilder sb(temp);
-	sb.addv(title, xva_start(title));
+	sb.addv(title, title_param);
 	answers an;
 	an.add((void*)1, getnm("Yes"));
 	an.add((void*)0, getnm("No"));
@@ -93,26 +96,8 @@ bool draw::yesno(const char* title, ...) {
 	return an.choose(temp);
 }
 
-void draw::information(const char* format, ...) {
-	if(!answers::console)
-		return;
-	answers::console->addn("[+");
-	answers::console->addv(format, xva_start(format));
-	answers::console->add("]");
-}
-
-void draw::warning(const char* format, ...) {
-	if(!answers::console)
-		return;
-	answers::console->addn("[-");
-	answers::console->addv(format, xva_start(format));
-	answers::console->add("]");
-}
-
-void draw::output(const char* format, ...) {
-	if(!answers::console)
-		return;
-	answers::console->addx("\n", format, xva_start(format));
+bool yesno(const char* title, ...) {
+	return yesnov(title, xva_start(title));
 }
 
 static const char* find_separator(const char* pb) {
@@ -125,7 +110,7 @@ static const char* find_separator(const char* pb) {
 	return 0;
 }
 
-void draw::message(const char* format, const char* header) {
+void message(const char* format, const char* header) {
 	if(!format)
 		return;
 	answers an;

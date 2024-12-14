@@ -1,6 +1,6 @@
+#include "bsdata.h"
 #include "collection.h"
 #include "class.h"
-#include "crt.h"
 #include "portrait.h"
 #include "race.h"
 

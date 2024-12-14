@@ -2,6 +2,7 @@
 #include "alignment.h"
 #include "creature.h"
 #include "item.h"
+#include "math.h"
 #include "stringbuilder.h"
 
 static void addv(stringbuilder& sb, const char* id, const char* value) {
@@ -25,11 +26,11 @@ void status_info() {
 }
 
 static void add_description(stringbuilder& sb, const char* id, const char* id_basic = 0) {
-	auto pn = getdescription(id);
+	auto pn = getnme(ids(id, "Info"));
 	if(!pn && id_basic)
-		pn = getdescription(id_basic);
+		pn = getnme(ids(id_basic, "Info"));
 	if(!pn)
-		pn = getdescription("NoItem");
+		pn = getnme("NoItemInfo");
 	if(!pn)
 		return;
 	sb.addn(pn);

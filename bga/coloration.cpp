@@ -1,5 +1,6 @@
 #include "colorgrad.h"
 #include "coloration.h"
+#include "slice.h"
 
 void coloration::setpallette(color* col) const {
 	set_color(col, 0x04, colors[MetalColor]); //metal

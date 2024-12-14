@@ -1,5 +1,5 @@
+#include "bsdata.h"
 #include "class.h"
-#include "crt.h"
 
 BSDATA(classi) = {
 	{"Commoner", 4, 2},

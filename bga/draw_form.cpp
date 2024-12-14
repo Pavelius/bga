@@ -2,6 +2,7 @@
 #include "draw.h"
 #include "draw_form.h"
 #include "draw_gui.h"
+#include "io_stream.h"
 #include "log.h"
 #include "screenshoot.h"
 #include "script.h"
@@ -65,7 +66,7 @@ static unsigned parse_hotkey(const char* p) {
 		p++;
 	}
 	if(!r)
-		log::error(0, "Can't parse key name `%1`", original_name);
+		log::errorp(0, "Can't parse key name `%1`", original_name);
 	return r;
 }
 
@@ -81,7 +82,7 @@ void form::readhead(const char* url) {
 void form::read(const char* url) {
 	auto control_start = bsdata<control>::source.getcount();
 	bsreq::read(url);
-	if(log::geterrors() > 0)
+	if(log::errors > 0)
 		return;
 	char temp[260]; szfnamewe(temp, url); szupper(temp);
 	auto id = szdup(temp);

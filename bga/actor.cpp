@@ -1,6 +1,6 @@
 #include "actor.h"
 #include "area.h"
-#include "crt.h"
+#include "bsdata.h"
 #include "ftflag.h"
 
 enum animatef : unsigned char {

@@ -1,4 +1,3 @@
-#include "crt.h"
 #include "tag.h"
 
 #pragma once

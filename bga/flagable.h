@@ -1,6 +1,7 @@
 #pragma once
 
 #define FG(V) (1<<V)
+#define FGT(N, V) ((N&FG(V))!=0)
 
 // Abstract flag set
 template<unsigned N, typename T = unsigned char>

@@ -1,5 +1,7 @@
-#include "crt.h"
+#include "bsdata.h"
+#include "io_stream.h"
 #include "resid.h"
+#include "stringbuilder.h"
 
 using namespace res;
 

@@ -10,6 +10,7 @@
 #include "io_stream.h"
 #include "itemground.h"
 #include "map.h"
+#include "math.h"
 #include "region.h"
 
 static sprite* sprites;
@@ -40,15 +41,15 @@ static const unsigned char orientations_7b7[49] = {
 };
 
 int	areai::compare(const void* v1, const void* v2) {
-	return strcmp(((areai*)v1)->name, ((areai*)v2)->name);
+	return szcmp(((areai*)v1)->name, ((areai*)v2)->name);
 }
 
 areai* areai::add(const char* name, const char* folder) {
 	auto p = find(name, folder);
 	if(!p) {
 		p = bsdata<areai>::add();
-		stringbuilder s1(p->name); s1.add(name); szupper(p->name);
-		stringbuilder s2(p->folder); s2.add(folder); szupper(p->folder);
+		stringbuilder s1(p->name); s1.add(name); s1.upper();
+		stringbuilder s2(p->folder); s2.add(folder); s2.upper();
 		auto pb = bsdata<variable>::end();
 		bsdata<variable>::source.count += variable_count;
 		auto pe = bsdata<variable>::end();
@@ -59,7 +60,7 @@ areai* areai::add(const char* name, const char* folder) {
 
 areai* areai::find(const char* name, const char* folder) {
 	for(auto& e : bsdata<areai>()) {
-		if(strcmp(e.name, name) == 0 && strcmp(e.folder, folder) == 0)
+		if(equal(e.name, name) && equal(e.folder, folder))
 			return &e;
 	}
 	return 0;

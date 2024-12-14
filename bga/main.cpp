@@ -1,7 +1,6 @@
 #include "ability.h"
 #include "area.h"
 #include "bsreq.h"
-#include "crt.h"
 #include "colorgrad.h"
 #include "console.h"
 #include "creature.h"
@@ -12,15 +11,16 @@
 #include "game.h"
 #include "log.h"
 #include "itema.h"
+#include "rand.h"
 #include "resid.h"
 #include "script.h"
+#include "timer.h"
 #include "worldmap.h"
 
 using namespace draw;
 
-bool initialize_translation(const char* locale);
+void initialize_translation();
 void initialize_store();
-void read_descriptions(const char* folder);
 void util_main();
 
 static item& citem(const char* id) {
@@ -42,10 +42,6 @@ static void create_party() {
 		party[i] = player;
 	}
 	script::run("SelectAll", 0);
-}
-
-static void add_item() {
-	items.add();
 }
 
 static void start_main() {
@@ -78,8 +74,8 @@ static void read_rules() {
 	bsreq::read("rules/Worldmap.txt");
 	bsreq::read("rules/Calendar.txt");
 	bsreq::read("rules/Feats.txt");
-	log::readdir("forms", "*.txt", form::readhead);
-	log::readdir("forms", "*.txt", form::read);
+	log::readf(form::readhead, "forms", "*.txt");
+	log::readf(form::read, "forms", "*.txt");
 }
 
 int main(int argc, char* argv[]) {
@@ -88,13 +84,11 @@ int main(int argc, char* argv[]) {
 #ifdef _DEBUG
 	util_main();
 #endif // _DEBUG
-	if(!initialize_translation("ru"))
-		return -1;
+	initialize_translation();
 	initialize_store();
-	read_descriptions("area");
 	colorgrad::initialize();
 	widget::initialize();
-	if(log::geterrors())
+	if(log::errors)
 		return -1;
 	metrics::font = gres(res::NORMAL);
 	metrics::h1 = gres(res::STONEBIG);

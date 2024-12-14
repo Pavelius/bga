@@ -1,12 +1,12 @@
 #include "area.h"
-#include "crt.h"
+#include "bsdata.h"
 #include "worldmap.h"
 
 worldmapi* current_world;
 
 static areai* find_area(const char* id) {
 	for(auto& e : bsdata<areai>()) {
-		if(strcmp(e.name, id) == 0)
+		if(equal(e.name, id) == 0)
 			return &e;
 	}
 	return 0;

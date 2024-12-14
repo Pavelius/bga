@@ -1,5 +1,4 @@
 #include "ability.h"
-#include "crt.h"
 #include "dice.h"
 #include "magic.h"
 #include "range.h"

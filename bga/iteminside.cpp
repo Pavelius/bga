@@ -1,5 +1,5 @@
+#include "bsdata.h"
 #include "collection.h"
-#include "crt.h"
 #include "iteminside.h"
 #include "creature.h"
 

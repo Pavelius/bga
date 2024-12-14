@@ -1,4 +1,4 @@
-#include "crt.h"
+#include "adat.h"
 #include "stringbuilder.h"
 
 #pragma once
@@ -13,7 +13,6 @@ class answers {
 	adat<element, 32>	elements;
 public:
 	typedef void(*fnpaint)(int index, const void* value, const char* text, fnevent press_event);
-	static answers*		last;
 	static fnevent		afterpaint;
 	static fnevent		beforepaint;
 	static fnpaint		paintcell;
@@ -24,8 +23,10 @@ public:
 	static char			hotkeys[20];
 	static const char*	prompt;
 	static const char*	prompa;
+	static const char*	prompi;
 	static const char*	resid;
 	static bool			show_tips;
+	static answers*		last;
 	answers() : sc(buffer) {}
 	constexpr operator bool() const { return elements.count != 0; }
 	void				add(const void* value, const char* name, ...) { addv(value, name, xva_start(name)); }
@@ -46,13 +47,10 @@ public:
 	void				sort();
 };
 extern answers an;
-namespace draw {
-void information(const char* format, ...);
+
 void message(const char* format, const char* header = 0);
-void output(const char* format, ...);
 void pause();
 void pause(const char* title, ...);
 void pausenc(const char* title, ...);
 bool yesno(const char* title, ...);
-void warning(const char* format, ...);
-}
+bool yesnov(const char* title, const char* title_param);

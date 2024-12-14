@@ -1,4 +1,3 @@
-#include "crt.h"
 #include "color.h"
 #include "point.h"
 #include "resid.h"

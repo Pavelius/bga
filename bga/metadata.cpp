@@ -5,7 +5,6 @@
 #include "calendar.h"
 #include "bsreq.h"
 #include "color.h"
-#include "crt.h"
 #include "container.h"
 #include "creature.h"
 #include "door.h"

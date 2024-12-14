@@ -6,6 +6,7 @@ enum stream_flags {
 	StreamWrite = 2,
 	StreamText = 4,
 };
+enum class codepage { No, W1251, UTF8, U16BE, U16LE };
 
 namespace io {
 // Abstract bi-stream interface
@@ -18,22 +19,8 @@ struct stream {
 	virtual int			read(void* result, int count) = 0;
 	template<class T> void read(T& object) { read(&object, sizeof(object)); }
 	virtual int			seek(int count, int rel = SeekCur) { return 0; };
-	bool				version(const char* signature, int major, int minor, bool write_mode);
 	virtual int			write(const void* result, int count) = 0;
 	template<class T> void write(const T& e) { write(&e, sizeof(e)); }
-};
-struct sequence : stream {
-	int					read(void* result, int count) override;
-	int					write(const void* result, int count) override;
-	int					seek(int count, int rel = SeekCur) override;
-	bool				match(const char* value);
-	sequence(io::stream& parent);
-private:
-	char				cashed[64];
-	int					cashed_count;
-	io::stream&			parent;
-	//
-	void				makecashe(int count);
 };
 struct file : stream {
 	struct find {
@@ -49,11 +36,11 @@ struct file : stream {
 		void*			handle;
 	};
 	file();
-	file(const char* url, unsigned flags = StreamRead);
+	file(const char* url, unsigned feats = StreamRead);
 	~file();
 	operator bool() const { return handle != 0; }
 	void				close();
-	bool				create(const char* url, unsigned flags);
+	bool				create(const char* url, unsigned feats);
 	static bool			exist(const char* url);
 	static char*		getdir(char* url, int size);
 	static char*		getmodule(char* url, int size);
@@ -67,14 +54,17 @@ struct file : stream {
 private:
 	void*				handle;
 };
-struct memory : public stream {
-	memory(void* data, int size);
-	int					read(void* result, int count) override;
-	int					seek(int count, int rel) override;
-	int					write(const void* result, int count) override;
-private:
-	unsigned char*		data;
-	int					pos;
-	int					size;
-};
 }
+
+unsigned szget(const char** input, codepage code = codepage::W1251);
+
+char* szput(char* output, unsigned value, codepage code = codepage::W1251);
+char* loadt(const char* url, int* size = 0); // Load text file and decode it to system codepage.
+
+void* loadb(const char* url, int* size = 0, int additional_bytes_alloated = 0); // Load binary file.
+void szencode(char* output, int output_count, codepage output_code, const char* input, int input_count, codepage input_code);
+
+const char* szext(const char* path);
+const char* szfname(const char* path);
+char* szfnamewe(char* result, const char* name);
+char* szurl(char* result, const char* path, const char* name, const char* ext = 0, const char* suffix = 0);

@@ -1,5 +1,5 @@
 #include "ability.h"
-#include "crt.h"
+#include "bsdata.h"
 
 static const char* format_percent = "%1i%%";
 static const char* format_bonus = "%+1i";

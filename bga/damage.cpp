@@ -1,4 +1,4 @@
-#include "crt.h"
+#include "bsdata.h"
 #include "damage.h"
 
 BSDATA(damagei) = {

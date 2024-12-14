@@ -1,7 +1,7 @@
-#include "crt.h"
 #include "color.h"
 #include "point.h"
 #include "stringbuilder.h"
+#include "slice.h"
 #include "variable.h"
 
 #pragma once

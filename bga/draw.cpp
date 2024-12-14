@@ -1,11 +1,15 @@
 #include "color.h"
-#include "crt.h"
 #include "draw.h"
+#include "io_stream.h"
+#include "math.h"
+#include "seqlink.h"
+#include "slice.h"
 
 #ifndef __GNUC__
 #pragma optimize("t", on)
 #endif
 
+extern "C" void exit(int code);
 extern "C" void* malloc(unsigned long size);
 extern "C" void* realloc(void *ptr, unsigned long size);
 extern "C" void	free(void* pointer);
@@ -2221,7 +2225,7 @@ const char* pma::getstring(int id) const {
 
 int pma::find(const char* name) const {
 	for(int i = 1; i <= count; i++) {
-		if(strcmp(getstring(i), name) == 0)
+		if(equal(getstring(i), name))
 			return i;
 	}
 	return 0;
@@ -2405,7 +2409,7 @@ void draw::key2str(stringbuilder& sb, int key) {
 	case KeyEscape: sb.add("Esc"); break;
 	default:
 		if(key >= 0x20) {
-			char temp[2] = {(char)szupper(key), 0};
+			char temp[2] = {(char)upper_symbol(key), 0};
 			sb.add(temp);
 		}
 		break;

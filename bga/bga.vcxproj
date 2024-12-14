@@ -67,6 +67,7 @@
     <ClCompile Include="answers.cpp" />
     <ClCompile Include="archive.cpp" />
     <ClCompile Include="area.cpp" />
+    <ClCompile Include="array.cpp" />
     <ClCompile Include="attack.cpp" />
     <ClCompile Include="bsreq.cpp" />
     <ClCompile Include="bstream.cpp" />
@@ -78,8 +79,6 @@
     <ClCompile Include="colorgrad.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="creature.cpp" />
-    <ClCompile Include="crt.cpp" />
-    <ClCompile Include="crt_locale.cpp" />
     <ClCompile Include="damage.cpp" />
     <ClCompile Include="dice.cpp" />
     <ClCompile Include="door.cpp" />
@@ -106,12 +105,13 @@
     <ClCompile Include="iteminside.cpp" />
     <ClCompile Include="itemlist.cpp" />
     <ClCompile Include="list.cpp" />
+    <ClCompile Include="locale.cpp" />
     <ClCompile Include="log.cpp" />
-    <ClCompile Include="logparse.cpp" />
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_util.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="math.cpp" />
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="nameable.cpp" />
@@ -130,7 +130,7 @@
     <ClCompile Include="skill.cpp" />
     <ClCompile Include="sprite_util.cpp" />
     <ClCompile Include="store.cpp" />
-    <ClCompile Include="stringact.cpp" />
+    <ClCompile Include="actable.cpp" />
     <ClCompile Include="stringbuilder.cpp" />
     <ClCompile Include="surface_serial.cpp" />
     <ClCompile Include="szdup.cpp" />
@@ -156,6 +156,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="archive.h" />
     <ClInclude Include="area.h" />
+    <ClInclude Include="array.h" />
     <ClInclude Include="attack.h" />
     <ClInclude Include="calendar.h" />
     <ClInclude Include="cflags.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="draw_focus.h" />
     <ClInclude Include="entrance.h" />
     <ClInclude Include="feat.h" />
+    <ClInclude Include="flagable.h" />
     <ClInclude Include="floattext.h" />
     <ClInclude Include="formation.h" />
     <ClInclude Include="ftflag.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="modifier.h" />
     <ClInclude Include="my_initialize_list.h" />
     <ClInclude Include="order.h" />
+    <ClInclude Include="seqlink.h" />
     <ClInclude Include="store.h" />
     <ClInclude Include="variable.h" />
     <ClInclude Include="portrait.h" />
@@ -196,7 +199,6 @@
     <ClInclude Include="coloration.h" />
     <ClInclude Include="colorgrad.h" />
     <ClInclude Include="creature.h" />
-    <ClInclude Include="crt.h" />
     <ClInclude Include="draw.h" />
     <ClInclude Include="draw_form.h" />
     <ClInclude Include="draw_gui.h" />
@@ -205,7 +207,6 @@
     <ClInclude Include="item.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="log.h" />
-    <ClInclude Include="logparse.h" />
     <ClInclude Include="magic.h" />
     <ClInclude Include="main_util.h" />
     <ClInclude Include="nameable.h" />
@@ -221,7 +222,6 @@
     <ClInclude Include="scrollable.h" />
     <ClInclude Include="skill.h" />
     <ClInclude Include="sprite_util.h" />
-    <ClInclude Include="stringact.h" />
     <ClInclude Include="stringbuilder.h" />
     <ClInclude Include="tag.h" />
     <ClInclude Include="timer.h" />

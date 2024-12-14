@@ -182,9 +182,6 @@
     <ClCompile Include="wearable.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="crt.cpp">
-      <Filter>support</Filter>
-    </ClCompile>
     <ClCompile Include="nameable.cpp">
       <Filter>support</Filter>
     </ClCompile>
@@ -210,9 +207,6 @@
       <Filter>support</Filter>
     </ClCompile>
     <ClCompile Include="log.cpp">
-      <Filter>support</Filter>
-    </ClCompile>
-    <ClCompile Include="logparse.cpp">
       <Filter>support</Filter>
     </ClCompile>
     <ClCompile Include="draw.cpp">
@@ -244,9 +238,6 @@
     </ClCompile>
     <ClCompile Include="scripting.cpp">
       <Filter>logic</Filter>
-    </ClCompile>
-    <ClCompile Include="stringact.cpp">
-      <Filter>support</Filter>
     </ClCompile>
     <ClCompile Include="gender.cpp">
       <Filter>logic</Filter>
@@ -386,9 +377,6 @@
     <ClCompile Include="scale2x.cpp">
       <Filter>interface</Filter>
     </ClCompile>
-    <ClCompile Include="crt_locale.cpp">
-      <Filter>support</Filter>
-    </ClCompile>
     <ClCompile Include="worldmap.cpp">
       <Filter>logic</Filter>
     </ClCompile>
@@ -413,6 +401,18 @@
     <ClCompile Include="order.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="locale.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="actable.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="array.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="math.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -435,9 +435,6 @@
     </ClInclude>
     <ClInclude Include="wearable.h">
       <Filter>logic</Filter>
-    </ClInclude>
-    <ClInclude Include="crt.h">
-      <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="nameable.h">
       <Filter>support</Filter>
@@ -463,9 +460,6 @@
     <ClInclude Include="log.h">
       <Filter>support</Filter>
     </ClInclude>
-    <ClInclude Include="logparse.h">
-      <Filter>support</Filter>
-    </ClInclude>
     <ClInclude Include="draw.h">
       <Filter>interface</Filter>
     </ClInclude>
@@ -489,9 +483,6 @@
     </ClInclude>
     <ClInclude Include="win.h">
       <Filter>platform</Filter>
-    </ClInclude>
-    <ClInclude Include="stringact.h">
-      <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="gender.h">
       <Filter>logic</Filter>
@@ -663,6 +654,15 @@
     </ClInclude>
     <ClInclude Include="order.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="flagable.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="seqlink.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="array.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

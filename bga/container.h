@@ -1,5 +1,6 @@
 #include "drawable.h"
 #include "variable.h"
+#include "sliceu.h"
 
 #pragma once
 

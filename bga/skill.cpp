@@ -1,5 +1,5 @@
-#include "crt.h"
 #include "ability.h"
+#include "bsdata.h"
 
 BSDATA(skilli) = {
 	{"Alchemy", Intelligence},

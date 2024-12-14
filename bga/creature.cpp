@@ -1,8 +1,10 @@
 #include "advance.h"
 #include "area.h"
 #include "creature.h"
+#include "math.h"
 #include "modifier.h"
 #include "pushvalue.h"
+#include "rand.h"
 #include "script.h"
 
 creature* party[6];

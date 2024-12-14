@@ -1,8 +1,31 @@
-#include "crt.h"
 #include "stringbuilder.h"
+#include "slice.h"
 
-static char current_locale[4] = {"ru"};
+char current_locale[4] = {"ru"};
 static const char spaces[] = " \n\t\r.,!?;:";
+
+stringbuilder::fncustom stringbuilder::custom = default_string;
+
+struct stringbuilder::grammar {
+	const char*		name;
+	const char*		change;
+	unsigned		name_size;
+	unsigned		change_size;
+	constexpr grammar() : name(0), change(0), name_size(0), change_size(0) {}
+	constexpr grammar(const char* name, const char* change) :
+		name(name), change(change), name_size(zlen(name)), change_size(zlen(change)) {
+	}
+	operator bool() const { return name != 0; }
+};
+
+struct stringbuilder::genderi {
+	const char*		name;
+	int				value;
+	unsigned		name_size;
+	constexpr genderi() : name(0), value(0), name_size(0) {}
+	constexpr genderi(const char* name, int value) : name(name), value(value), name_size(zlen(name)) {}
+	operator bool() const { return name != 0; }
+};
 
 static const char* psnum16(const char* p, long& value) {
 	int result = 0;
@@ -42,18 +65,26 @@ static const char* psnum10(const char* p, long& value) {
 	return p;
 }
 
-// Parse string to number
-const char* stringbuilder::read(const char* p, long& value) {
+bool equal(const char* p, const char* s) {
+	if(!p || !s)
+		return false;
+	while(*s && *p)
+		if(*p++ != *s++)
+			return false;
+	return *s == *p;
+}
+
+const char* psnum(const char* p, long& value) {
 	value = 0;
 	if(!p)
 		return 0;
 	bool sign = false;
-	// Установка знака
+	// Sign setup
 	if(*p == '-') {
 		sign = true;
 		p++;
 	}
-	// Перегрузка числовой системы
+	// Choose digit radix
 	if(p[0] == '0' && p[1] == 'x') {
 		p += 2;
 		p = psnum16(p, value);
@@ -64,18 +95,33 @@ const char* stringbuilder::read(const char* p, long& value) {
 	return p;
 }
 
-const char* stringbuilder::read(const char* p, int& value) {
+const char* psnum(const char* p, int& value) {
 	long temp;
-	auto result = read(p, temp);
+	auto result = psnum(p, temp);
 	value = temp;
 	return result;
 }
 
-const char* stringbuilder::read(const char* p, short& value) {
+const char* psnum(const char* p, short& value) {
 	long temp;
-	auto result = read(p, temp);
+	auto result = psnum(p, temp);
 	value = (short)temp;
 	return result;
+}
+
+const char* psbon(const char* p, int& bonus) {
+	if(*p == '-')
+		p = psnum(p, bonus);
+	else if(*p == '+')
+		p = psnum(p + 1, bonus);
+	else
+		bonus = 0;
+	return p;
+}
+
+const char*	psidf(const char* p, stringbuilder& result) {
+	result.clear();
+	return result.psidf(p);
 }
 
 static const char* word_end(const char* ps) {
@@ -100,7 +146,7 @@ static const char* skip_space(const char* ps) {
 	return ps;
 }
 
-static inline bool is_space(char sym) {
+static bool is_space(char sym) {
 	for(auto e : spaces) {
 		if(sym == e)
 			return true;
@@ -121,6 +167,35 @@ const char* skipcr(const char* p) {
 	return p;
 }
 
+const char* skipsp(const char* p) {
+	while(*p == ' ' || *p == '\t')
+		p++;
+	return p;
+}
+
+const char* skipspcr(const char* p) {
+	while(*p == ' ' || *p == '\t' || *p == '\n' || *p == '\r')
+		p++;
+	return p;
+}
+
+const char* skipline(const char* p) {
+	while(*p && !(*p == 10 || *p == 13))
+		p++;
+	return p;
+}
+
+int get_line_number(const char* start, const char* position) {
+	auto p = start;
+	auto r = 0;
+	while(*p && p < position) {
+		p = skipline(p);
+		p = skipcr(p);
+		r++;
+	}
+	return r;
+}
+
 bool szstart(const char* text, const char* name) {
 	while(*name) {
 		if(*name++ != *text++)
@@ -139,101 +214,74 @@ bool szmatch(const char* text, const char* name) {
 	return true;
 }
 
-static const char* skipspecial(const char* p) {
-	while(*p && *p != '*' && *p != '?' && *p != ',')
-		p++;
-	return p;
-}
-
-static const char* find_part(const char* ps, const char* p, unsigned s) {
-	while(*ps) {
-		if(memcmp(ps, p, s) == 0)
-			return ps;
-		ps++;
-	}
-	return 0;
-}
-
-static bool pszmatch(const char* ps, const char* p) {
-	while(*p == '*') {
-		p++;
-		auto b = p;
-		while(*p && *p != ',' && *p != '*')
+bool szpmatch(const char* string, const char* pattern) {
+	auto p = string;
+	while(*p) {
+		auto symbol = *pattern++;
+		switch(symbol) {
+		case 0:
+			return false;
+		case '*':
+			while(*p && *p != *pattern)
+				p++;
+			continue;
+		case '?':
 			p++;
-		auto s = p - b;
-		if(!s)
-			return true;
-		ps = find_part(ps, b, s);
-		if(!ps)
-			return false;
-		ps += s;
-	}
-}
-
-static bool szpmatch(const char* text, const char* s, const char* s2) {
-	while(true) {
-		const char* d = text;
-		while(s < s2) {
-			if(*d == 0)
-				return false;
-			unsigned char c = *s;
-			if(c == '?') {
-				s++;
-				d++;
-			} else if(c == '*') {
-				s++;
-				if(s == s2)
-					return true;
-				while(*d) {
-					if(*d == *s)
-						break;
-					d++;
-				}
-			} else {
-				if(*d++ != *s++)
-					return false;
-			}
+			continue;
 		}
-		return true;
-	}
-}
-
-bool szpmatch(const char* text, const char* pattern) {
-	const char* p = pattern;
-	while(true) {
-		const char* p2 = zchr(p, ',');
-		if(!p2)
-			p2 = zend(p);
-		if(szpmatch(text, p, p2))
-			return true;
-		if(*p2 == 0)
+		if(*p != symbol) {
+			while(symbol && symbol != ',')
+				symbol = *pattern++;
+			if(symbol == ',') {
+				p = string;
+				pattern = skipsp(pattern);
+				continue;
+			}
 			return false;
-		p = skipsp(p2 + 1);
+		}
+		p++;
+	}
+	return (*pattern == 0) || (*pattern == ',');
+}
+
+unsigned char upper_symbol(unsigned char u) {
+	if(u >= 0x61 && u <= 0x7A)
+		return u - 0x61 + 0x41;
+	else if(u >= 0xE0)
+		return u - 0xE0 + 0xC0;
+	return u;
+}
+
+unsigned char lower_symbol(unsigned char u) {
+	if(u >= 0x41 && u <= 0x5A)
+		return u - 0x41 + 0x61;
+	else if(u >= 0xC0 && u <= 0xDF)
+		return u - 0xC0 + 0xE0;
+	return u;
+}
+
+void szupper(char* result) {
+	while(*result) {
+		*result = upper_symbol(*result);
+		result++;
 	}
 }
 
-void stringbuilder::setlocale(const char* id) {
-	if(!id || !id[0])
-		return;
-	stringbuilder sb(current_locale);
-	sb.add(id);
+int szcmpi(const char* p1, const char* p2) {
+	while(true) {
+		auto s1 = upper_symbol(*p1++);
+		auto s2 = upper_symbol(*p2++);
+		if(!s1 || !s2 || s1 != s2)
+			return s1 - s2;
+	}
 }
 
-void stringbuilder::addlocaleurl() {
-	add("locale/%1", current_locale);
-}
-
-void stringbuilder::addlocalefile(const char* name, const char* ext) {
-	if(!ext)
-		ext = "txt";
-	add("locale/%1/%2.%3", current_locale, name, ext);
-}
-
-const char* stringbuilder::getbycount(const char* id, int count) {
-	switch(count) {
-	case 0: case 1: return getnm(id);
-		//case 2: case 3: case 4: return getnmof(id);
-	default: return getnm(id);
+int szcmp(const char* p1, const char* p2) {
+	while(true) {
+		auto s1 = *p1++;
+		auto s2 = *p2++;
+		if(!s1 || !s2 || s1 != s2)
+			return s1 - s2;
 	}
 }
 
@@ -245,74 +293,43 @@ static void add_by_count(stringbuilder& sb, const char* name, int count) {
 	}
 }
 
-void stringbuilder::addcount(const char* id, int count, const char* format) {
-	if(!format)
-		format = "%1i %2";
-	add(format, count, getbycount(id, count));
-}
-
-struct stringbuilder::grammar {
-	const char*		name;
-	const char*		change;
-	unsigned		name_size;
-	unsigned		change_size;
-	constexpr grammar() : name(0), change(0), name_size(0), change_size(0) {}
-	constexpr grammar(const char* name, const char* change) :
-		name(name), change(change), name_size(zlen(name)), change_size(zlen(change)) {
+const char* str_count(const char* id, int count) {
+	static char temp[64]; stringbuilder sb(temp);
+	switch(count) {
+	case 0: case 1: return id;
+	case 2: case 3: case 4:
+		sb.addv(id, 0);
+		sb.addv("Of", 0);
+		break;
+	default:
+		sb.addv(id, 0);
+		sb.addv("Pl", 0);
+		break;
 	}
-	operator bool() const { return name != 0; }
-};
-
-struct stringbuilder::genderi {
-	const char*		name;
-	int				value;
-	unsigned		name_size;
-	constexpr genderi() : name(0), value(0), name_size(0) {}
-	constexpr genderi(const char* name, int value) : name(name), value(value), name_size(zlen(name)) {}
-	operator bool() const { return name != 0; }
-};
-
-unsigned char stringbuilder::upper(unsigned char u) {
-	if(u >= 0x61 && u <= 0x7A)
-		return u - 0x61 + 0x41;
-	else if(u >= 0xE0)
-		return u - 0xE0 + 0xC0;
-	return u;
+	return temp;
 }
 
-unsigned char stringbuilder::lower(unsigned char u) {
-	if(u >= 0x41 && u <= 0x5A)
-		return u - 0x41 + 0x61;
-	else if(u >= 0xC0 && u <= 0xDF)
-		return u - 0xC0 + 0xE0;
-	return u;
+void default_string(stringbuilder& sb, const char* id) {
+	sb.addv("[-", 0);
+	sb.addv(id, 0);
+	sb.addv("]", 0);
 }
 
 void stringbuilder::lower() {
 	for(auto p = pb; *p; p++)
-		*p = lower(*p);
+		*p = lower_symbol(*p);
 }
 
 void stringbuilder::upper() {
 	for(auto p = pb; *p; p++)
-		*p = upper(*p);
-}
-
-void stringbuilder::addidentifier(const char* identifier) {
-	auto p = getnme(identifier);
-	if(p)
-		addv(p, 0);
-	else {
-		addv("[-", 0);
-		addv(identifier, 0);
-		addv("]", 0);
-	}
+		*p = upper_symbol(*p);
 }
 
 const char* stringbuilder::readvariable(const char* p) {
 	char temp[260]; stringbuilder s1(temp);
 	p = s1.psidf(p);
-	addidentifier(temp);
+	if(custom)
+		custom(*this, temp);
 	return p;
 }
 
@@ -396,7 +413,6 @@ const char* stringbuilder::readformat(const char* src, const char* vl) {
 				case '$': addof(p1); break;
 				case '@': addto(p1); break;
 				case '~': addby(p1); break;
-				case '*': add_by_count(*this, p1, ((int*)vl)[pn - 2]); break;
 				default:
 					while(*p1 && p < pe)
 						*p++ = *p1++;
@@ -406,12 +422,20 @@ const char* stringbuilder::readformat(const char* src, const char* vl) {
 				}
 			}
 		}
-	} else
+	} else {
+		char temp[260]; stringbuilder sb(temp);
 		src = readvariable(src);
+		switch(padeg) {
+		case '$': sb.copy(p0); p = p0; addof(temp); break;
+		case '@': sb.copy(p0); p = p0; addto(temp); break;
+		case '~': sb.copy(p0); p = p0; addby(temp); break;
+		default: break;
+		}
+	}
 	if(p0 && p0 != p) {
 		switch(prefix) {
-		case '-': *p0 = lower(*p0); break;
-		case '+': *p0 = upper(*p0); break;
+		case '-': *p0 = lower_symbol(*p0); break;
+		case '+': *p0 = upper_symbol(*p0); break;
 		default: break;
 		}
 	}
@@ -445,7 +469,7 @@ void stringbuilder::addv(const char* src, const char* vl) {
 }
 
 void stringbuilder::addsep(char separator) {
-	if(p <= pb || p >= pe)
+	if(p <= pb || p >= pe || !separator)
 		return;
 	if(p[-1] == separator)
 		return;
@@ -477,13 +501,6 @@ void stringbuilder::addx(const char* separator, const char* format, const char* 
 	addv(format, format_param);
 }
 
-void stringbuilder::addicon(const char* id, int value) {
-	if(value < 0)
-		adds(":%1:[-%2i]", id, -value);
-	else
-		adds(":%1:%2i", id, value);
-}
-
 void stringbuilder::change(char s1, char s2) {
 	for(auto p = pb; p < pe; p++) {
 		if(*p == 0)
@@ -500,7 +517,7 @@ void stringbuilder::copy(const char* v) {
 }
 
 const char*	szfind(const char* source, const char* value) {
-	if(!value || !source)
+	if(!value || !source || !value[0])
 		return 0;
 	auto s = value[0];
 	for(auto p = source; *p; p++) {
@@ -572,19 +589,7 @@ void stringbuilder::add(const char* s, const grammar* source, const char* def) {
 		addv(def, 0);
 }
 
-void stringbuilder::addsym(int sym) {
-	char temp[16];
-	auto p1 = temp;
-	szput(&p1, sym);
-	auto sz = p1 - temp;
-	if(p + sz < pe) {
-		memcpy(p, temp, sz);
-		p += sz;
-		p[0] = 0;
-	}
-}
-
-int stringbuilder::getnum(const char* value) {
+int get_number(const char* value) {
 	if(equal(value, "true"))
 		return 1;
 	if(equal(value, "false"))
@@ -592,7 +597,7 @@ int stringbuilder::getnum(const char* value) {
 	if(equal(value, "null"))
 		return 0;
 	long int_value = 0;
-	read(value, int_value);
+	psnum(value, int_value);
 	return int_value;
 }
 
@@ -618,20 +623,6 @@ const char* stringbuilder::psidf(const char* pb) {
 	return pb;
 }
 
-const char* stringbuilder::psline(const char* pb) {
-	while(*pb) {
-		if(pb[0] == '}' && pb[1] == '$') {
-			pb = skipsp(pb + 2);
-			break;
-		}
-		if(p < pe)
-			*p++ = *pb;
-		pb++;
-	}
-	*p = 0;
-	return pb;
-}
-
 void stringbuilder::addch(char sym) {
 	switch(sym) {
 	case -85: case -69: add('\"'); break;
@@ -646,8 +637,16 @@ const char* stringbuilder::psstrlf(const char* p) {
 	while(*p) {
 		if(*p == '\n' || *p == '\r')
 			break;
-		else
-			addch(*p++);
+		addch(*p++);
+	}
+	return p;
+}
+
+const char* stringbuilder::psparam(const char* p) {
+	while(*p) {
+		if(*p == '\n' || *p == '\r' || *p == ',')
+			break;
+		addch(*p++);
 	}
 	return p;
 }
@@ -667,7 +666,6 @@ const char* stringbuilder::psstr(const char* pb, char end_symbol) {
 			continue;
 		}
 		pb++;
-		long value;
 		switch(*pb) {
 		case 'n':
 			if(p < pe)
@@ -699,24 +697,11 @@ const char* stringbuilder::psstr(const char* pb, char end_symbol) {
 				*p++ = '\v';
 			pb++;
 			break;
-			// Число в кодировке UNICODE
-		case '0': case '1': case '2': case '3': case '4':
-		case '5': case '6': case '7': case '8': case '9':
-			pb = psnum10(pb, value);
-			p = szput(p, value);
-			break;
-			// Число в кодировке UNICODE (16-ричная система)
-		case 'x': case 'u':
-			pb = psnum16(pb + 1, value);
-			p = szput(p, value);
-			break;
 		case '\n': case '\r':
-			// Перевод строки в конце
 			while(*pb == '\n' || *p == '\r')
 				pb = skipcr(pb);
 			break;
 		default:
-			// Любой символ, который будет экранирован ( \', \", \\)
 			if(p < pe)
 				*p++ = *pb;
 			pb++;
@@ -753,7 +738,26 @@ void stringbuilder::addof(const char* s) {
 void stringbuilder::addnounf(const char* s) {
 	static grammar map[] = {
 		{"ий", "ая"},
+		{"ой", "ая"},
 		{"ый", "ая"},
+		{}};
+	add(s, map, "");
+}
+
+void stringbuilder::addnouni(const char* s) {
+	static grammar map[] = {
+		{"ний", "нее"},
+		{"ий", "ое"},
+		{"ой", "ое"},
+		{"ый", "ое"},
+		{}};
+	add(s, map, "");
+}
+
+void stringbuilder::addnounx(const char* s) {
+	static grammar map[] = {
+		{"ий", "ие"},
+		{"ый", "ые"},
 		{}};
 	add(s, map, "");
 }
@@ -810,8 +814,39 @@ int stringbuilder::getgender(const char* s) {
 	return 0;
 }
 
+void stringbuilder::adjective(const char* name, int m) {
+	switch(m) {
+	case 1: addnounf(name); break;
+	case 2: addnouni(name); break;
+	case 3: addnounx(name); break;
+	default: add(name); break;
+	}
+}
+
+void stringbuilder::trimr() {
+	while(p > pb && (p[-1] == ' ' || p[-1] == '\t' || p[-1] == '\n')) {
+		p[-1] = 0;
+		p--;
+	}
+}
+
 const char* str(const char* format, ...) {
-	static char temp[512]; stringbuilder sb(temp);
+	static char temp[1024]; stringbuilder sb(temp);
 	sb.addv(format, xva_start(format));
+	return temp;
+}
+
+const char* ids(const char* p1, const char* p2) {
+	static char temp[64]; stringbuilder sb(temp);
+	sb.addv(p1, 0);
+	sb.addv(p2, 0);
+	return temp;
+}
+
+const char* ids(const char* p1, const char* p2, const char* p3) {
+	static char temp[64]; stringbuilder sb(temp);
+	sb.addv(p1, 0);
+	sb.addv(p2, 0);
+	sb.addv(p3, 0);
 	return temp;
 }

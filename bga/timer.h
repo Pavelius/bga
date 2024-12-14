@@ -5,3 +5,4 @@ extern unsigned long current_game_tick;
 
 void update_tick();
 void update_game_tick();
+unsigned long getcputime();

@@ -7,7 +7,6 @@
 #include "colorgrad.h"
 #include "console.h"
 #include "container.h"
-#include "crt.h"
 #include "door.h"
 #include "draw.h"
 #include "draw_focus.h"
@@ -20,6 +19,7 @@
 #include "itemlist.h"
 #include "list.h"
 #include "map.h"
+#include "math.h"
 #include "race.h"
 #include "region.h"
 #include "resinfo.h"
@@ -92,7 +92,7 @@ static void update_help_info() {
 	need_update = false;
 	variant v = current_focus;
 	description.clear();
-	v.getinfo(description);
+	auto pn = getnme(ids(v.getid(), "Info"));
 }
 
 static void invalidate_description() {
@@ -872,7 +872,7 @@ static void apply_shadow(color* pallette, color fore) {
 static void paint_markers(const creature* p) {
 	auto push_fore = fore;
 	fore = colors::green;
-	if(selected_creatures.is((void*)p))
+	if(selected_creatures.have((void*)p))
 		actor_marker(1, false, player == p);
 	fore = push_fore;
 }
@@ -974,7 +974,7 @@ static void apply_hilite_command() {
 		if(bsdata<region>::have(hilite_drawable)) {
 			auto p = (region*)hilite_drawable;
 			if(p->type == RegionInfo) {
-				auto pn = getdescription(gettipsname(p->position));
+				auto pn = getnme(gettipsname(p->position));
 				if(pn) {
 					add_float_text(hotspot, pn, 320, 1000 * 5, p);
 					logm("[+%1]", pn);
@@ -1177,7 +1177,7 @@ static void hilight_drag_protrait() {
 
 static void portrait_small(creature* pc) {
 	rectpush push;
-	if(selected_creatures.is(pc))
+	if(selected_creatures.have(pc))
 		hilight_protrait();
 	setoffset(2, 2);
 	image(gres(PORTS), pc->portrait, 0);
@@ -1463,7 +1463,7 @@ static void list_elements(void** current_focus, const array& source) {
 		*current_focus = source.begin();
 	auto push_clip = clipping;
 	setclipall();
-	auto size = source.size;
+	auto size = source.element_size;
 	auto p = source.begin() + size * (last_scroll->origin / last_scroll->perline);
 	auto pe = source.end();
 	auto max_height = caret.y + draw::height;

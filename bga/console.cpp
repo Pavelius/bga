@@ -1,5 +1,6 @@
+#include "array.h"
 #include "console.h"
-#include "crt.h"
+#include "slice.h"
 
 array console_data(1);
 

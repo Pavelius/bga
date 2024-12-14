@@ -1,3 +1,4 @@
+#include "flagable.h"
 #include "item.h"
 
 BSDATA(itemfi) = {
