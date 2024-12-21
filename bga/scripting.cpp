@@ -6,6 +6,7 @@
 #include "game.h"
 #include "script.h"
 #include "store.h"
+#include "stringvar.h"
 #include "timer.h"
 
 using namespace draw;
@@ -119,6 +120,12 @@ static void quicksave(int bonus) {
 	gamesave("autosave");
 }
 
+void item_list_total(stringbuilder& sb);
+
+BSDATA(stringvari) = {
+	{"ItemListTotal", item_list_total}
+};
+BSDATAF(stringvari)
 BSDATA(script) = {
 	{"Attack", attack_change},
 	{"BuyItem", buy_item_script, allow_buy_item},

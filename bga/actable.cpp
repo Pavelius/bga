@@ -1,6 +1,9 @@
 #include "actable.h"
 #include "bsdata.h"
+#include "console.h"
+#include "gender.h"
 #include "stringbuilder.h"
+#include "stringvar.h"
 
 namespace {
 struct gender_change_string {
@@ -29,37 +32,44 @@ static gender_change_string player_gender[] = {
 
 static const actable* actor;
 
-void act_identifier(stringbuilder& sb, const char* identifier) {
-	if(actor) {
-		if((equal(identifier, "герой") || equal(identifier, "name"))) {
-			sb.add(actor->getname());
-			return;
-		} else if(equal(identifier, "героя")) {
-			sb.addof(actor->getname());
-			return;
-		}
-		else if(equal(identifier, "герою")) {
-			sb.addto(actor->getname());
-			return;
-		} else {
-			for(auto& e : player_gender) {
-				if(equal(e.female, identifier) != 0)
-					continue;
-				if(actor->gender == NoGender)
-					sb.add(e.multiply);
-				else if(actor->gender == Female)
-					sb.add(e.female);
-				else
-					sb.add(e.male);
-				return;
-			}
+static bool actor_identifier(stringbuilder& sb, const char* identifier) {
+	if(!actor)
+		return false;
+	if((equal(identifier, "герой") || equal(identifier, "name"))) {
+		sb.add(actor->getname());
+		return true;
+	} else if(equal(identifier, "героя")) {
+		sb.addof(actor->getname());
+		return true;
+	} else if(equal(identifier, "герою")) {
+		sb.addto(actor->getname());
+		return true;
+	} else {
+		for(auto& e : player_gender) {
+			if(equal(e.female, identifier) != 0)
+				continue;
+			if(actor->gender == NoGender)
+				sb.add(e.multiply);
+			else if(actor->gender == Female)
+				sb.add(e.female);
+			else
+				sb.add(e.male);
+			return true;
 		}
 	}
+	return false;
+}
+
+void act_identifier(stringbuilder& sb, const char* identifier) {
+	if(actor_identifier(sb, identifier))
+		return;
+	if(stringvar_identifier(sb, identifier))
+		return;
 	default_string(sb, identifier);
 }
 
-void actable::actv(stringbuilder& sb, const char* format, const char* format_param, char separator) const {
+void actable::actv(const char* format, const char* format_param, const char* line_feed) const {
 	auto push_actor = actor; actor = this;
-	sb.addv(format, format_param);
+	logm_v(format, format_param, line_feed);
 	actor = push_actor;
 }

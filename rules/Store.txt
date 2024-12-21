@@ -2,4 +2,4 @@
 
 HelgateStreetMerchant type(ShopStore)
  flags UserAllowBuy UserAllowSell
- items LongSword PotionOfHealing+10 LeatherArmor StuddedLeatherArmor ScaleMail HalfPlate LargeShield
+ items LongSword PotionOfHealing+10 LeatherArmor StuddedLeatherArmor ScaleMail+1 HalfPlate+1 LargeShield

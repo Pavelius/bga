@@ -48,9 +48,9 @@ StoreItemInfo NORMAL 450 297 164 30 value(4)
 StoreItemInfo NORMAL 450 342 164 30 value(5)
 
 Label NORMAL 138 387 125 20 frames(0 2) id("Cost")
-BuyItemCost NORMAL 285 387 80 20
+Label NORMAL 285 387 80 20 id(BuyItemsTotal)
 Label NORMAL 403 387 125 20 frames(0 2) id("Price")
-SellItemCost NORMAL 551 387 80 20
+Label NORMAL 551 387 80 20 id(SellItemsTotal)
 
 ActionPanelNA NONE 0 433 0 0
 HotKey NONE 0 0 0 0 data(GGAME) value(1) hotkey("Escape")

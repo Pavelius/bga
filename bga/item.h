@@ -24,8 +24,9 @@ struct itemresi {
 struct weaponi {
 	damage_s		type;
 	dice			damage;
-	range_s			range;
+	rangen			range;
 	char			bonus;
+	explicit operator bool() const { return damage.c != 0; }
 	void			clear();
 };
 struct itemi : nameable {
@@ -62,6 +63,7 @@ struct item {
 	bool			canequip(wear_s v) const;
 	void			clear() { type = 0; count = 0; data = 0; }
 	bool			is(itemf_s v) const { return geti().is(v); }
+	bool			isweapon() const { return geti().weapon.operator bool(); }
 	int				getcost() const { return geti().cost; }
 	int				getcostall() const;
 	const itemi&	geti() const { return bsdata<itemi>::elements[type]; }

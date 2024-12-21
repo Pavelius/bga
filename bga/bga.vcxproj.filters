@@ -22,17 +22,8 @@
     <Filter Include="utils">
       <UniqueIdentifier>{bf637da8-ca55-44db-a400-4c1ad2c2d468}</UniqueIdentifier>
     </Filter>
-    <Filter Include="locale\ru">
-      <UniqueIdentifier>{905bf6e5-309c-406e-b42c-869fe85b7f77}</UniqueIdentifier>
-    </Filter>
     <Filter Include="forms">
       <UniqueIdentifier>{071b14e1-b9f1-44ae-a499-6520f346576d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="locale\ru\names">
-      <UniqueIdentifier>{49c4d416-4a18-47b2-9bdf-601054307a4d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="locale\ru\tips">
-      <UniqueIdentifier>{2825403b-fec2-4bb7-8b4b-a8dd8689ca91}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,41 +93,11 @@
     <Text Include="..\rules\Feats.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\locale\ru\names\Alignments.txt">
-      <Filter>locale\ru\names</Filter>
-    </Text>
-    <Text Include="..\locale\ru\names\Feats.txt">
-      <Filter>locale\ru\names</Filter>
-    </Text>
-    <Text Include="..\locale\ru\names\Items.txt">
-      <Filter>locale\ru\names</Filter>
-    </Text>
-    <Text Include="..\locale\ru\names\Names.txt">
-      <Filter>locale\ru\names</Filter>
-    </Text>
-    <Text Include="..\locale\ru\names\NamesNewbe.txt">
-      <Filter>locale\ru\names</Filter>
-    </Text>
-    <Text Include="..\locale\ru\names\Skills.txt">
-      <Filter>locale\ru\names</Filter>
-    </Text>
-    <Text Include="..\locale\ru\tips\Item.txt">
-      <Filter>locale\ru\tips</Filter>
-    </Text>
-    <Text Include="..\locale\ru\tips\Skills.txt">
-      <Filter>locale\ru\tips</Filter>
-    </Text>
-    <Text Include="..\locale\ru\names\Abilities.txt">
-      <Filter>locale\ru\names</Filter>
-    </Text>
     <Text Include="..\rules\Worldmap.txt">
       <Filter>rules</Filter>
     </Text>
     <Text Include="..\forms\GUIWMAP.txt">
       <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\locale\ru\names\Area.txt">
-      <Filter>locale\ru\names</Filter>
     </Text>
     <Text Include="..\rules\Calendar.txt">
       <Filter>rules</Filter>
@@ -152,6 +113,33 @@
     </Text>
     <Text Include="..\forms\GUISTBSB.txt">
       <Filter>forms</Filter>
+    </Text>
+    <Text Include="..\locale\ru\Abilities.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\Alignments.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\Area.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\Feats.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\Items.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\Names.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\NamesNewbe.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\Skills.txt">
+      <Filter>locale</Filter>
+    </Text>
+    <Text Include="..\locale\ru\UnknownNames.txt">
+      <Filter>locale</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -413,6 +401,9 @@
     <ClCompile Include="math.cpp">
       <Filter>support</Filter>
     </ClCompile>
+    <ClCompile Include="stringvar.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -662,6 +653,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="array.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="stringvar.h">
       <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>

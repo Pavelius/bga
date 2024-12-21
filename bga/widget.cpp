@@ -26,6 +26,7 @@
 #include "script.h"
 #include "scrollable.h"
 #include "store.h"
+#include "stringvar.h"
 #include "timer.h"
 #include "widget.h"
 #include "worldmap.h"
@@ -300,12 +301,18 @@ static void background() {
 	image(gui.res, gui.value, 0);
 }
 
+static const char* format_string(const char* format) {
+	static char temp[512]; stringbuilder sb(temp);
+	sb.add(format);
+	return temp;
+}
+
 static const char* getname() {
 	const char* pn = 0;
 	if(gui.text)
 		pn = gui.text;
 	if(!pn && gui.id)
-		pn = getnm(gui.id);
+		pn = format_string(getnm(gui.id));
 	if(!pn && gui.data)
 		pn = gui.data.getname();
 	if(!pn)
@@ -1045,6 +1052,13 @@ static void area_map() {
 	apply_shifer();
 }
 
+static void input_item_info(const item* pi) {
+	if(!drag_item_source) {
+		if(gui.hilited && hot.key == MouseRight && hot.pressed)
+			execute(item_information, 0, 0, pi);
+	}
+}
+
 static void paint_item(const item* pi) {
 	if(!pi)
 		return;
@@ -1054,10 +1068,7 @@ static void paint_item(const item* pi) {
 		layer(colors::red);
 	image(gres(ITEMS), pi->geti().avatar * 2, 0);
 	caret = push_caret;
-	if(!drag_item_source) {
-		if(gui.hilited && hot.key == MouseRight && hot.pressed)
-			execute(item_information, 0, 0, pi);
-	}
+	input_item_info(pi);
 }
 
 static void paint_item_dragable(item* pi) {
@@ -1512,6 +1523,12 @@ static void player_items() {
 	party_items.paint();
 }
 
+static itemlist* get_item_list() {
+	if(!last_scroll)
+		return 0;
+	return static_cast<itemlist*>(last_scroll);
+}
+
 static itemlist::element* get_element() {
 	if(!last_scroll)
 		return 0;
@@ -1530,10 +1547,6 @@ static void store_item_avatar() {
 	if(index >= 4)
 		index += 4;
 	image(gui.res, index, 0);
-	if(*pi->data)
-		paint_item(pi->data);
-	if(pi->count > 0)
-		image(gui.res, 25, 0);
 	if(gui.hilited) {
 		switch(hot.key) {
 		case MouseLeft:
@@ -1548,6 +1561,10 @@ static void store_item_avatar() {
 			break;
 		}
 	}
+	if(*pi->data)
+		paint_item(pi->data);
+	if(pi->count > 0)
+		image(gui.res, 25, 0);
 }
 
 static void store_item_info() {
@@ -1555,6 +1572,7 @@ static void store_item_info() {
 	if(!pi)
 		return;
 	format_label("%1 - %2i%3", pi->data->getname(), pi->data->getcost(), getnm("GP"));
+	input_item_info(pi->data);
 }
 
 static void topic_list() {
@@ -1626,6 +1644,13 @@ static void paint_worldmap() {
 }
 
 void util_items_list();
+
+void item_list_total(stringbuilder& sb) {
+	auto p = get_item_list();
+	if(!p)
+		return;
+	sb.add("%1i", p->maximum);
+}
 
 BSDATA(widget) = {
 	{"ActionPanelNA", action_panel_na},

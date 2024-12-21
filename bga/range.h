@@ -2,7 +2,7 @@
 
 #pragma once
 
-enum range_s : unsigned char {
+enum rangen : unsigned char {
 	Touch, Reach,
 	Range10,
 	Range20,

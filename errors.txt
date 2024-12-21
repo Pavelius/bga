@@ -1,2 +1,2 @@
-﻿In file `locale/ru/names//NamesNewbe.txt`:
-NoItem: Define translate
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `ItemListTotal`

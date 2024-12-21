@@ -19,6 +19,7 @@
 
 using namespace draw;
 
+void act_identifier(stringbuilder& sb, const char* identifier);
 void initialize_translation();
 void initialize_store();
 void util_main();
@@ -80,6 +81,7 @@ static void read_rules() {
 
 int main(int argc, char* argv[]) {
 	srand(getcputime());
+	stringbuilder::custom = act_identifier;
 	read_rules();
 #ifdef _DEBUG
 	util_main();

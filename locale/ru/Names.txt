@@ -91,3 +91,6 @@ SellItem: Продать
 UseSteal: Украсть
 
 HelgateStreetMerchant: Купец
+
+BuyItemsTotal: %ItemListTotal зм
+SellItemsTotal: %ItemListTotal зм

@@ -1,13 +1,10 @@
-#include "gender.h"
-#include "stringbuilder.h"
-
 #pragma once
+
+enum gendern : unsigned char;
 
 struct actable {
 	gendern			gender;
 	short unsigned	name;
-	void			actv(stringbuilder& sb, const char* format, const char* format_param, char separator) const;
-	void			act(const char* format, ...);
-	void			say(const char* format, ...);
+	void			actv(const char* format, const char* format_param, const char* line_feed) const;
 	const char*		getname() const { return "Pavelius"; }
 };

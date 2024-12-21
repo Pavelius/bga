@@ -23,6 +23,7 @@
 #include "script.h"
 #include "skill.h"
 #include "store.h"
+#include "stringvar.h"
 #include "variant.h"
 #include "widget.h"
 #include "worldmap.h"
@@ -170,6 +171,9 @@ BSMETA(storefi) = {
 BSMETA(storeti) = {
 	BSREQ(id),
 	{}};
+BSMETA(stringvari) = {
+	BSREQ(id),
+	{}};
 BSMETA(weaponi) = {
 	BSREQ(bonus),
 	BSENM(type, damagei),
@@ -221,6 +225,7 @@ BSDATA(varianti) = {
 	{"Script", VAR(script, 1)},
 	{"Skill", VAR(skilli, 1), ftgetinfo<skilli>},
 	{"Store", VAR(storei, 1)},
+	{"StringVar", VAR(stringvari, 1)},
 	{"Type", VAR(varianti, 1)},
 	{"Widget", VAR(widget, 1)},
 	{"WorldArea", VAR(worldmapi::area, 1)},
