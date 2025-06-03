@@ -1,8 +1,8 @@
 #pragma once
 
 struct rects {
-	short		x1, y1;
-	short		x2, y2;
+	short x1, y1;
+	short x2, y2;
 	//
 	explicit operator bool() const { return x1 || x2 || y1 || y2; }
 	bool operator!=(const rects& rc) const { return rc.x1 != x1 || rc.x2 != x2 || rc.y1 != y1 || rc.y2 != y2; }

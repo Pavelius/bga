@@ -7,11 +7,11 @@ enum periodn : unsigned char {
 };
 
 struct calendari : nameable {
-	periodn		period;
-	unsigned	duration;
+	periodn	period;
+	unsigned duration;
 };
 struct periodi : nameable {
-	unsigned	measure, range;
+	unsigned measure, range;
 };
 
 int getday();

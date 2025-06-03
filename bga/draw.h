@@ -172,11 +172,17 @@ extern color*			palt;
 extern int				tab_pixels;
 extern fnevent          pbackground, ptips, pfinish, pinput;
 extern fnevent          pbeforemodal, pleavemodal, psetfocus;
-struct rectpush {
-	point				caret;
-	int					width, height;
-	constexpr rectpush() : caret(draw::caret), width(draw::width), height(draw::height) {}
-	~rectpush() { draw::caret = caret; draw::width = width; draw::height = height; }
+struct pushrect {
+	point caret;
+	int	width, height;
+	constexpr pushrect() : caret(draw::caret), width(draw::width), height(draw::height) {}
+	~pushrect() { draw::caret = caret; draw::width = width; draw::height = height; }
+};
+struct pushfore {
+	color fore;
+	constexpr pushfore() : fore(draw::fore) {}
+	constexpr pushfore(color v) : fore(draw::fore) { draw::fore = v; }
+	~pushfore() { draw::fore = fore; }
 };
 int						aligned(int x, int width, unsigned state, int string_width);
 int						alignedh(const rect& rc, const char* string, unsigned state);
@@ -229,6 +235,7 @@ void					rectx();
 void					rectfocus();
 void					set(int x, int y);
 void					setcaption(const char* string);
+void					setcaret(int x, int y);
 void					setclip(rect rc);
 inline void				setclip() { clipping.set(0, 0, getwidth(), getheight()); }
 inline void				setclipall() { setclip({caret.x, caret.y, caret.x + width, caret.y + height}); }

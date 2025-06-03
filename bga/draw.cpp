@@ -1139,7 +1139,7 @@ void draw::rectb3d() {
 }
 
 void draw::rectf() {
-	rectpush push;
+	pushrect push;
 	int x1 = caret.x, y1 = caret.y, x2 = caret.x + width, y2 = caret.y + height;
 	if(correct(x1, y1, x2, y2, clipping))
 		set32x(ptr(x1, y1), canvas->scanline, x2 - x1, y2 - y1);
@@ -1203,7 +1203,7 @@ void draw::rectx() {
 }
 
 void draw::rectfocus() {
-	rectpush push;
+	pushrect push;
 	setoffset(1, 1);
 	rectx();
 }
@@ -1989,7 +1989,7 @@ void draw::image(const sprite* e, int id, int flags, color* pal) {
 }
 
 static void rectfall() {
-	rectpush push;
+	pushrect push;
 	caret.x = caret.y = 0;
 	width = getwidth();
 	height = getheight();
@@ -2519,7 +2519,7 @@ void draw::fillwindow() {
 }
 
 void draw::strokeout(fnevent proc, int dx) {
-	rectpush push;
+	pushrect push;
 	if(!dx)
 		dx = metrics::border;
 	caret.x -= dx;
@@ -2544,7 +2544,7 @@ void draw::strokeactive() {
 }
 
 void draw::strokeline() {
-	rectpush push;
+	pushrect push;
 	auto push_fore = fore;
 	fore = colors::border;
 	line(caret.x + width, caret.y);
@@ -2666,7 +2666,7 @@ void draw::tipspos() {
 
 void draw::dropshadow() {
 	int size = 4;
-	rectpush push;
+	pushrect push;
 	auto push_fore = fore;
 	auto push_alpha = alpha;
 	fore = colors::form;
@@ -2682,6 +2682,11 @@ void draw::dropshadow() {
 void draw::set(int x, int y) {
 	caret.x = x - camera.x;
 	caret.y = y - camera.y;
+}
+
+void draw::setcaret(int x, int y) {
+	caret.x = x;
+	caret.y = y;
 }
 
 bool draw::isclipped(int size) {

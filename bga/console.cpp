@@ -4,7 +4,7 @@
 
 array console_data(1);
 
-void logm_raw(const char* format) {
+void printcnv(const char* format) {
 	auto i = zlen(format);
 	console_data.reserve(console_data.getcount() + i + 1);
 	auto m = console_data.getcount();
@@ -17,16 +17,16 @@ void logm_raw(const char* format) {
 	}
 }
 
-void logm_raw(const char* format, const char* line_feed) {
-	if(line_feed && console_data.count)
-		logm_raw(line_feed);
-	logm_raw(format);
-}
-
-void logm_v(const char* format, const char* format_param, const char* line_feed) {
+void printcnv(const char* format, const char* format_param, const char* line_feed) {
 	if(!format)
 		return;
+	if(line_feed && console_data.count)
+		printcnv(line_feed);
 	char temp[4096]; stringbuilder sb(temp);
 	sb.addv(format, format_param);
-	logm_raw(temp, line_feed);
+	printcnv(temp);
+}
+
+void print(const char* format, ...) {
+	printcnv(format, xva_start(format), "\n");
 }

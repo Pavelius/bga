@@ -42,7 +42,7 @@ void setparty(point dst) {
 
 void enter(const char* id, const char* location) {
 	char temp[32]; stringbuilder sb(temp); sb.add(location);
-	logm("Enter area [%1] at location [%2]", id, location);
+	print("Enter area [%1] at location [%2]", id, location);
 	map::read(id);
 	read_area(id, "ID2");
 	use_all_doors();
@@ -54,20 +54,16 @@ void enter(const char* id, const char* location) {
 	draw::form::nextscene("GGAME");
 }
 
-static void serial_common(archive& a) {
-	a.set(map::areaname);
-	a.set(draw::camera);
-	a.set(current_game_tick);
-	//a.set(player);
-	a.set(wearable::coins);
-}
-
 static bool archive_sav(const char* url, bool write_mode) {
 	io::file file(url, write_mode ? StreamWrite : StreamRead);
 	if(!file)
 		return false;
 	archive a(file, write_mode);
-	serial_common(a);
+	a.set(map::areaname);
+	a.set(draw::camera);
+	a.set(current_game_tick);
+	//a.set(player);
+	a.set(wearable::coins);
 	a.set(bsdata<areai>::source);
 	a.set(bsdata<variable>::source);
 	a.set(bsdata<creature>::source);

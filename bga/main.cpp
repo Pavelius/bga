@@ -35,7 +35,7 @@ static item& citem(const char* id) {
 }
 
 static void create_party() {
-	logm("Create party...");
+	print("Create random party...");
 	for(auto i = 0; i < 6; i++) {
 		player->create(Male);
 		player->update();
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]) {
 	colors::h3 = color(244, 214, 66);
 	colors::special = color(244, 214, 66);
 	initialize(getnm("AppTitle"));
-	settimer(60);
+	settimer(64);
 	setnext(start_main);
 	start();
 	return 0;

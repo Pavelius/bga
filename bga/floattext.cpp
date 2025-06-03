@@ -7,7 +7,7 @@ void floattext::clear() {
 }
 
 void floattext::paint() const {
-	draw::rectpush push;
+	draw::pushrect push;
 	auto push_fore = draw::fore;
 	auto push_alpha = draw::alpha;
 	draw::width = box.width();

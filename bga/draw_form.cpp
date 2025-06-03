@@ -98,7 +98,7 @@ void form::read(const char* url) {
 
 void form::paint() const {
 	static widget* background_widget = bsdata<widget>::find("Background");
-	rectpush push;
+	pushrect push;
 	auto push_caret = caret;
 	auto push_gui = gui;
 	for(auto& e : controls) {

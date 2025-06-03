@@ -14,7 +14,7 @@ screenshoot::screenshoot(rect rc, bool fade) : surface(rc.width(), rc.height(), 
 			auto push_alpha = alpha;
 			auto push_fore = fore;
 			auto push_caret = caret;
-			caret.clear();
+			caret = point(0, 0);
 			canvas = this;
 			setclip();
 			alpha = 128;

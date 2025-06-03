@@ -28,41 +28,30 @@
 #include "store.h"
 #include "stringvar.h"
 #include "timer.h"
+#include "view.h"
 #include "widget.h"
 #include "worldmap.h"
 
 using namespace draw;
-
-void scale2x(void* void_dst, unsigned dst_slice, const void* void_src, unsigned src_slice, unsigned width, unsigned height);
 
 const char* getkg(int weight);
 extern array console_data;
 
 const int tile_size = 64;
 
-static point hotspot;
 static item drag_item;
-static item *drag_item_source, *drag_item_dest;
+item *drag_item_source, *drag_item_dest;
 static int current_info_tab;
 static bool need_update, button_run;
 static char description_text[4096];
 static scrolltext area_description, area_console;
 static resinfo default_cursor;
 static form* next_last_form;
-static int zoom_factor = 1;
 static void *current_topic;
 static worldmapi::area* current_world_area_hilite;
 static partyitemlist party_items;
 static partyitemlist store_items;
 stringbuilder description(description_text);
-
-static point camera_center() {
-	return center(last_area);
-}
-
-static unsigned get_game_tick() {
-	return current_tick / 64;
-}
 
 static void update_creature() {
 	if(player)
@@ -95,7 +84,7 @@ static void update_help_info() {
 	auto pn = getnme(ids(v.getid(), "Info"));
 }
 
-static void invalidate_description() {
+void invalidate_description() {
 	need_update = true;
 	area_description.invalidate();
 }
@@ -112,17 +101,6 @@ static void form_closing() {
 static void set_value_and_update() {
 	cbsetint();
 	invalidate_description();
-}
-
-static void correct_camera() {
-	if(camera.x + last_screen.width() > map::width * 16)
-		camera.x = map::width * 16 - last_screen.width();
-	if(camera.x < 0)
-		camera.x = 0;
-	if(camera.y + last_screen.height() > map::height_tiles * 16)
-		camera.y = map::height_tiles * 16 - last_screen.height();
-	if(camera.y < 0)
-		camera.y = 0;
 }
 
 static void paint_cursor() {
@@ -149,7 +127,7 @@ static void paint_background() {
 static void paint_logs(const char* format, int& origin, int& format_origin, int& maximum) {
 	if(!format)
 		return;
-	rectpush push;
+	pushrect push;
 	if(format_origin == -1) {
 		textfs(format);
 		maximum = height;
@@ -242,16 +220,7 @@ static void painting_equipment(item equipment, int ws, int frame, unsigned flags
 		image(gres(resn(tb + ws)), frame, flags, pallette);
 }
 
-static void actor_marker(int size, bool flicking, bool double_border) {
-	auto r = (size + 1) * 6;
-	if(flicking)
-		r += iabs(int(get_game_tick() % 6) - 3) - 1;
-	circle(r);
-	if(double_border)
-		circle(r + 1);
-}
-
-static void paperdoll(color* pallette, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
+void paperdoll(color* pallette, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
 	sprite* source;
 	unsigned flags;
 	int ws;
@@ -366,7 +335,7 @@ static void button_input() {
 }
 
 static void button(const sprite* p, unsigned short fiu, unsigned short fip) {
-	rectpush push;
+	pushrect push;
 	auto& f = p->get(fiu);
 	width = f.sx;
 	height = f.sy;
@@ -622,25 +591,8 @@ static point mm2m(point m) {
 	return m;
 }
 
-void setcamera(point v) {
-	v.x -= last_screen.width() / 2;
-	v.y -= last_screen.height() / 2;
-	camera = v;
-	correct_camera();
-}
-
 static void set_camera() {
 	setcamera({(short)hot.param, (short)hot.param2});
-}
-
-void change_zoom_factor(int bonus) {
-	auto pt = camera_center();
-	auto v1 = zoom_factor;
-	zoom_factor = (zoom_factor != 2) ? 2 : 1;
-	auto v2 = zoom_factor;
-	last_screen.x2 = last_screen.x1 + last_screen.width() * v1 / v2;
-	last_screen.y2 = last_screen.y1 + last_screen.height() * v1 / v2;
-	setcamera(pt);
 }
 
 static void paint_minimap() {
@@ -648,7 +600,7 @@ static void paint_minimap() {
 		last_screen.x2 = 800;
 		last_screen.y2 = 433;
 	}
-	rectpush push;
+	pushrect push;
 	// Minimap image
 	auto mm = map::getminimap();
 	auto& sf = mm->get(0);
@@ -686,369 +638,6 @@ static void paint_minimap() {
 		circle(2);
 	}
 	fore = push_fore;
-}
-
-static void paint_tiles() {
-	auto sp = map::getareasprite();
-	if(!sp)
-		return;
-	int tx0 = camera.x / tile_size, ty0 = camera.y / tile_size;
-	int dx = width / tile_size + 1, dy = height / tile_size + 1;
-	int tx1 = tx0 + dx, ty1 = ty0 + dy;
-	if(tx1 > map::width / 4 - 1)
-		tx1 = map::width / 4 - 1;
-	if(ty1 > map::height_tiles / 4 - 1)
-		ty1 = map::height_tiles / 4 - 1;
-	int ty = ty0;
-	while(ty <= ty1) {
-		int tx = tx0;
-		while(tx <= tx1) {
-			auto x = tx * tile_size - camera.x;
-			auto y = ty * tile_size - camera.y;
-			draw::image(x, y, sp, map::gettile(ty * 64 + tx), 0);
-			tx++;
-		}
-		ty++;
-	}
-}
-
-static void set_standart_cursor() {
-	if(!hot.mouse.in(last_screen))
-		cursor.set(CURSORS, 0);
-	else
-		cursor.set(CURSORS, 4);
-}
-
-static void apply_shifer() {
-	rect screen = {0, 0, getwidth(), getheight()};
-	int index = -1;
-	const int sz = 4;
-	auto d = hot.mouse;
-	if(d.x <= screen.x1)
-		d.x = screen.x1;
-	else if(d.x >= screen.x2 - 1)
-		d.x = screen.x2 - 1;
-	if(d.y <= screen.y1)
-		d.y = screen.y1;
-	else if(d.y >= screen.y2 - 1)
-		d.y = screen.y2 - 1;
-	if(d.x <= screen.x1 + sz)
-		index = (d.y <= screen.y1 + sz) ? 3 : (d.y < screen.x2 - sz) ? 4 : 5;
-	else if(d.x >= screen.x2 - sz)
-		index = (d.y <= screen.y1 + sz) ? 7 : (d.y <= screen.y2 - sz) ? 0 : 1;
-	else
-		index = (d.y <= screen.x1 + sz) ? 2 : (d.y <= screen.y2 - sz) ? -1 : 6;
-	if(index == -1)
-		return;
-	const int camera_step = 16;
-	cursor.set(CURSARW, index);
-	switch(index) {
-	case 0: camera.x += camera_step; break;
-	case 2: camera.y -= camera_step; break;
-	case 4: camera.x -= camera_step; break;
-	case 6: camera.y += camera_step; break;
-	}
-	correct_camera();
-}
-
-static void setup_visible_area() {
-	last_screen.set(caret.x, caret.y, caret.x + width, caret.y + height);
-	last_area = last_screen; last_area.move(camera.x, camera.y);
-	last_area.offset(-128, -128);
-	hotspot = camera + hot.mouse;
-	hilite_drawable = 0;
-}
-
-static void update_floattext_tail() {
-	auto pb = bsdata<floattext>::begin();
-	auto pe = bsdata<floattext>::end();
-	while(pe > pb) {
-		pe--;
-		if(*(pe))
-			break;
-		bsdata<floattext>::source.count--;
-	}
-}
-
-static void prepare_creatures() {
-	for(auto& e : bsdata<creature>()) {
-		if(e.area_index != current_area)
-			continue;
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_floattext() {
-	for(auto& e : bsdata<floattext>()) {
-		if(!e)
-			continue;
-		if(e.stop_visible < current_game_tick) {
-			e.clear();
-			continue;
-		}
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_animation() {
-	for(auto& e : bsdata<animation>()) {
-		if(!e.position.in(last_area))
-			continue;
-		if(!e.isvisible())
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_containers() {
-	for(auto& e : bsdata<container>()) {
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_regions() {
-	for(auto& e : bsdata<region>()) {
-		if(e.type == RegionTriger)
-			continue;
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_doors() {
-	for(auto& e : bsdata<door>()) {
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_objects() {
-	objects.clear();
-	prepare_animation();
-	prepare_containers();
-	prepare_creatures();
-	prepare_doors();
-	prepare_floattext();
-	prepare_regions();
-	update_floattext_tail();
-}
-
-static void sort_objects() {
-	objects.sort(drawable::compare);
-}
-
-static void polygon(const sliceu<point>& source) {
-	auto pb = source.begin();
-	auto pe = source.end();
-	if(pb >= pe)
-		return;
-	caret = pb[0] - camera;
-	for(auto p = pb + 1; p < pe; p++)
-		line(p->x - camera.x, p->y - camera.y);
-	line(pb->x - camera.x, pb->y - camera.y);
-}
-
-static void polygon_green(const sliceu<point>& source) {
-	auto push_fore = fore;
-	fore = colors::green;
-	polygon(source);
-	fore = push_fore;
-}
-
-static void polygon_red(const sliceu<point>& source) {
-	auto push_fore = fore;
-	fore = colors::red;
-	polygon(source);
-	fore = push_fore;
-}
-
-static void apply_shadow(color* pallette, color fore) {
-	for(auto i = 0; i < 256; i++)
-		pallette[i] = pallette[i] * fore;
-}
-
-static void paint_markers(const creature* p) {
-	auto push_fore = fore;
-	fore = colors::green;
-	if(selected_creatures.have((void*)p))
-		actor_marker(1, false, player == p);
-	fore = push_fore;
-}
-
-void creature::paint() const {
-	paint_markers(this);
-	color pallette[256]; setpallette(pallette);
-	apply_shadow(pallette, map::getshadow(position));
-	paperdoll(pallette,
-		race, gender, getmainclass(), 1, orientation, get_game_tick(),
-		wears[Body], getweapon(), getoffhand(), wears[Head]);
-}
-
-void animation::paint() const {
-	auto pr = gres(this->rsname, "art/animations");
-	if(!pr)
-		return;
-	auto hour = gethour();
-	if(is(RenderBlackAsTransparent)) {
-		//image_tint(caret.x, caret.y, pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
-		auto push_alpha = alpha;
-		alpha = alpha >> 2;
-		image(pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
-		alpha = push_alpha;
-	} else
-		image(pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
-}
-
-static void paint_object(drawable* object) {
-	if(bsdata<door>::have(object)) {
-		auto p = (door*)object;
-		if(p->ishilite()) {
-			polygon_green(p->getpoints());
-			cursor.cicle = p->cursor;
-		}
-	} else if(bsdata<region>::have(object)) {
-		auto p = (region*)object;
-		if(p->ishilite()) {
-			switch(p->type) {
-			case RegionInfo: cursor.cicle = 22; break;
-			case RegionTravel: cursor.cicle = 34; break;
-			}
-		}
-	} else if(bsdata<container>::have(object)) {
-		auto p = (container*)object;
-		if(p->ishilite()) {
-			polygon_green(p->points);
-			cursor.cicle = 2;
-		}
-	} else if(bsdata<floattext>::have(object)) {
-		auto p = (floattext*)object;
-		p->paint();
-	} else if(bsdata<creature>::have(object)) {
-		auto p = (creature*)object;
-		p->paint();
-	} else if(bsdata<animation>::have(object)) {
-		auto p = (animation*)object;
-		p->paint();
-	}
-}
-
-static bool ishilite(const drawable* object) {
-	if(bsdata<door>::have(object)) {
-		auto p = (door*)object;
-		if(hotspot.in(p->box)) {
-			auto n = p->getpoints();
-			return inside(hotspot, n.begin(), n.size());
-		}
-	} else if(bsdata<region>::have(object)) {
-		auto p = (region*)object;
-		if(hotspot.in(p->box))
-			return inside(hotspot, p->points.begin(), p->points.size());
-	} else if(bsdata<container>::have(object)) {
-		auto p = (container*)object;
-		if(hotspot.in(p->box))
-			return inside(hotspot, p->points.begin(), p->points.size());
-	}
-	return false;
-}
-
-static void paint_objects() {
-	auto push_caret = caret;
-	for(auto p : objects) {
-		caret = p->position - camera;
-		if(ishilite(p))
-			hilite_drawable = p;
-		paint_object(p);
-	}
-}
-
-static const char* gettipsname(point position) {
-	return str("%3Info%1i_%2i", position.x, position.y, map::areaname);
-}
-
-static void apply_hilite_command() {
-	if(!hilite_drawable)
-		return;
-	if(hot.key == MouseLeft && hot.pressed) {
-		if(bsdata<region>::have(hilite_drawable)) {
-			auto p = (region*)hilite_drawable;
-			if(p->type == RegionInfo) {
-				auto pn = getnme(gettipsname(p->position));
-				if(pn) {
-					add_float_text(hotspot, pn, 320, 1000 * 5, p);
-					logm("[+%1]", pn);
-				}
-			} else if(p->type == RegionTravel)
-				enter(p->move_to_area, p->move_to_entrance);
-		} else if(bsdata<door>::have(hilite_drawable)) {
-			auto p = (door*)hilite_drawable;
-			p->use(!p->isopen());
-		} else if(bsdata<container>::have(hilite_drawable)) {
-			auto p = (container*)hilite_drawable;
-			logm("This is %1", p->name);
-			player->moveto(p->launch);
-		}
-	}
-}
-
-static void jump_party() {
-	setparty(hotspot);
-}
-
-static void apply_command() {
-	if(hilite_drawable)
-		return;
-	if(hot.key == MouseLeft && hot.pressed && hot.mouse.in(last_screen))
-		execute(jump_party);
-}
-
-static void paint_area_map() {
-	setup_visible_area();
-	set_standart_cursor();
-	paint_tiles();
-	prepare_objects();
-	sort_objects();
-	paint_objects();
-	apply_hilite_command();
-	apply_command();
-}
-
-static void paint_area_map_zoom_factor() {
-	auto push_clipping = clipping;
-	auto push_mouse = hot.mouse; hot.mouse.x /= zoom_factor; hot.mouse.y /= zoom_factor;
-	rectpush push; width /= zoom_factor; height /= zoom_factor;
-	static surface temporary_canvas; temporary_canvas.resize(width, height, 32, true);
-	auto push_canvas = canvas;
-	canvas = &temporary_canvas; setclip();
-	paint_area_map();
-	canvas = push_canvas;
-	if(zoom_factor == 2) {
-		scale2x(canvas->ptr(push.caret.x, push.caret.y), canvas->scanline,
-			temporary_canvas.ptr(0, 0), temporary_canvas.scanline,
-			width, height);
-	}
-	hot.mouse = push_mouse;
-	clipping = push_clipping;
-}
-
-static void paint_area_map_zoomed() {
-	if(zoom_factor <= 1)
-		paint_area_map();
-	else
-		paint_area_map_zoom_factor();
-}
-
-static void area_map() {
-	update_game_tick();
-	paint_area_map_zoomed();
-	apply_shifer();
 }
 
 static void input_item_info(const item* pi) {
@@ -1169,93 +758,6 @@ static void quick_offhand_item() {
 
 static void portrait_large() {
 	image(gres(PORTL), player->portrait, 0);
-}
-
-static void hilight_protrait() {
-	auto push_fore = fore;
-	fore = colors::green;
-	strokeout(rectb, -1);
-	fore = push_fore;
-}
-
-static void hilight_drag_protrait() {
-	auto push_fore = fore;
-	fore = colors::red;
-	strokeout(rectb, -1);
-	fore = push_fore;
-}
-
-static void portrait_small(creature* pc) {
-	rectpush push;
-	if(selected_creatures.have(pc))
-		hilight_protrait();
-	setoffset(2, 2);
-	image(gres(PORTS), pc->portrait, 0);
-	if(drag_item_source && player != pc && draw::ishilite()) {
-		drag_item_dest = pc->wears;
-		hilight_drag_protrait();
-	}
-}
-
-static void player_avatar() {
-	if(!player)
-		return;
-	image(gres(PORTS), player->portrait, 0);
-}
-
-static void choose_creature() {
-	player = (creature*)hot.object;
-	if(!hot.param)
-		selected_creatures.clear();
-	selected_creatures.add(player);
-	invalidate_description();
-}
-
-static void hits_bar(int current, int maximum) {
-	if(!maximum)
-		return;
-	auto nw = 45 * current / maximum;
-	if(!nw)
-		return;
-	auto index = 4;
-	if(current == maximum)
-		index = 0;
-	else if(current >= maximum * 4 / 5)
-		index = 1;
-	else if(current >= maximum * 3 / 5)
-		index = 2;
-	else if(current >= maximum * 2 / 5)
-		index = 3;
-	auto push_clipping = clipping;
-	setclip({caret.x, caret.y, caret.x + nw, caret.y + height});
-	image(gres(GUIHITPT), index, 0);
-	clipping = push_clipping;
-}
-
-static void creature_hits(const creature* pc) {
-	auto push_caret = caret;
-	caret.x += 1; caret.y += 48;
-	hits_bar(pc->hp, pc->hp_max);
-	caret = push_caret;
-}
-
-static void portrait_bar() {
-	rectpush push;
-	caret.x += 505; caret.y += 4;
-	width = height = 46;
-	for(auto i = 0; i < 6; i++) {
-		portrait_small(party[i]);
-		creature_hits(party[i]);
-		auto key = hot.key & CommandMask;
-		if(ishilite() && key == MouseLeft && hot.pressed)
-			execute(choose_creature, (hot.key & Shift) != 0, 0, party[i]);
-		caret.x += 49;
-	}
-}
-
-static void action_panel_na() {
-	image(gres(GACTN), 1, 0);
-	portrait_bar();
 }
 
 static void number() {
@@ -1652,9 +1154,9 @@ void item_list_total(stringbuilder& sb) {
 }
 
 BSDATA(widget) = {
-	{"ActionPanelNA", action_panel_na},
+	{"ActionPanelNA", paint_action_panel},
 	{"AreaMinimap", paint_minimap},
-	{"AreaMap", area_map},
+	{"AreaMap", paint_area},
 	{"Background", background},
 	{"BackpackButton", backpack_button},
 	{"BackpackImage", backpack_image},
@@ -1682,7 +1184,6 @@ BSDATA(widget) = {
 	{"ListItemCost", list_item_cost},
 	{"ListItemPrice", list_item_price},
 	{"Paperdoll", paperdoll},
-	{"PlayerAvatar", player_avatar},
 	{"PlayerCoins", player_coins},
 	{"PlayerName", player_name},
 	{"PlayerItemList", player_items},

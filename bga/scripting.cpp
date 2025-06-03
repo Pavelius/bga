@@ -61,8 +61,9 @@ static void open_store(int bonus) {
 }
 
 static void debug_test(int bonus) {
-	logm("Current timer %1i", current_game_tick);
-	open_store(bonus);
+	print("Current timer %1i", current_game_tick);
+	open_game();
+	// open_store(bonus);
 }
 
 static void level_up(int bonus) {

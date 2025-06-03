@@ -7,3 +7,7 @@ bool point::in(const point p1, const point p2, const point p3) const {
 	return (a >= 0 && b >= 0 && c >= 0)
 		|| (a < 0 && b < 0 && c < 0);
 }
+
+point center(const rect& rc) {
+	return point((rc.x1 + rc.width()) / 2, (rc.y1 + rc.height()) / 2);
+}

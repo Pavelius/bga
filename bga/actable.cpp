@@ -70,6 +70,6 @@ void act_identifier(stringbuilder& sb, const char* identifier) {
 
 void actable::actv(const char* format, const char* format_param, const char* line_feed) const {
 	auto push_actor = actor; actor = this;
-	logm_v(format, format_param, line_feed);
+	printcnv(format, format_param, line_feed);
 	actor = push_actor;
 }
