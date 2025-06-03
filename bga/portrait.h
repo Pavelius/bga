@@ -8,7 +8,7 @@ enum racen : unsigned char;
 struct portraiti {
 	const char*		id;
 	unsigned char	colors[4];
-	gendern		gender;
+	gendern			gender;
 	racen			race;
 	classn			classv;
 };

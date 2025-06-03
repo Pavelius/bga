@@ -92,10 +92,10 @@ int main(int argc, char* argv[]) {
 	widget::initialize();
 	if(log::errors)
 		return -1;
-	metrics::font = gres(res::NORMAL);
-	metrics::h1 = gres(res::STONEBIG);
-	metrics::h2 = gres(res::REALMS);
-	metrics::h3 = gres(res::NORMAL);
+	metrics::font = gres(NORMAL);
+	metrics::h1 = gres(STONEBIG);
+	metrics::h2 = gres(REALMS);
+	metrics::h3 = gres(NORMAL);
 	colors::text = color(255, 255, 255);
 	colors::h1 = colors::text.mix(colors::button, 64);
 	colors::h2 = colors::text.mix(colors::button, 96);

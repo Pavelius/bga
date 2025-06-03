@@ -2,8 +2,7 @@
 
 struct sprite;
 
-namespace res {
-enum token : unsigned short {
+enum resn : unsigned short {
 	NONE,
 	STONEBIG, REALMS, NORMAL, TOOLFONT,
 	CURSORS, CURSARW, COLGRAD, COLOR,
@@ -62,17 +61,14 @@ enum token : unsigned short {
 	WQSWH, WQNWH, WQMWH, WQLWH,
 	ARARROW, // Shoot and thrown
 	MGO1, MSKA, MSKAA, // Monsters
-	Count
 };
-}
 struct residi {
-	const char*		id;
-	const char*		folder;
-	sprite*			data;
-	bool			error;
-	void			clear();
-	sprite*			get();
+	const char*	id;
+	const char*	folder;
+	sprite*		data;
+	bool		error;
+	void		clear();
+	sprite*		get();
 };
-sprite* gres(res::token i);
-sprite* gres(const char* id);
+sprite* gres(resn i);
 sprite* gres(const char* id, const char* folder);

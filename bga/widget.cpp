@@ -32,7 +32,6 @@
 #include "worldmap.h"
 
 using namespace draw;
-using namespace res;
 
 void scale2x(void* void_dst, unsigned dst_slice, const void* void_src, unsigned src_slice, unsigned width, unsigned height);
 
@@ -131,12 +130,12 @@ static void paint_cursor() {
 	if(!pi)
 		return;
 	auto cicle = cursor.cicle;
-	if(cursor.id == res::CURSORS) {
+	if(cursor.id == CURSORS) {
 		auto pressed = hot.pressed;
 		if(pressed)
 			cicle += 1;
 		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
-	} else if(cursor.id == res::CURSARW) {
+	} else if(cursor.id == CURSARW) {
 		auto ti = pi->ganim(cursor.cicle, current_tick / 32);
 		image(hot.mouse.x, hot.mouse.y, pi, ti, 0);
 	} else
@@ -168,7 +167,7 @@ void widget::initialize() {
 	ptips = paint_cursor;
 	form::opening = form_opening;
 	form::closing = form_closing;
-	cursor.set(res::CURSORS, 0);
+	cursor.set(CURSORS, 0);
 	draw::syscursor(false);
 }
 
@@ -176,27 +175,27 @@ void widget::open() const {
 	scene(proc);
 }
 
-static res::token getanimation(racen race, gendern gender, classn type, int ai, int& ws) {
-	res::token icn;
+static resn getanimation(racen race, gendern gender, classn type, int ai, int& ws) {
+	resn icn;
 	switch(race) {
 	case Dwarf:
 	case Gnome:
-		icn = res::CDMB1;
+		icn = CDMB1;
 		ws = 0;
 		break;
 	case Elf:
 	case HalfElf:
 		if(gender == Female)
-			icn = res::CEFB1;
+			icn = CEFB1;
 		else
-			icn = res::CEMB1;
+			icn = CEMB1;
 		ws = 2;
 		break;
 	case Halfling:
 		if(gender == Female)
-			icn = res::CIFB1;
+			icn = CIFB1;
 		else
-			icn = res::CIMB1;
+			icn = CIMB1;
 		if(type == Wizard || type == Sorcerer)
 			type = Rogue;
 		if(ai > 1)
@@ -206,24 +205,24 @@ static res::token getanimation(racen race, gendern gender, classn type, int ai, 
 	default:
 		if(gender == Female) {
 			ws = 1;
-			icn = res::CHFB1;
+			icn = CHFB1;
 		} else {
 			ws = 3;
-			icn = res::CHMB1;
+			icn = CHMB1;
 		}
 		break;
 	}
 	if(type == Wizard || type == Sorcerer)
-		icn = (res::token)(icn + (res::CDMW1 - res::CDMB1) + ai);
+		icn = (resn)(icn + (CDMW1 - CDMB1) + ai);
 	else if(type == Cleric)
-		icn = (res::token)(icn + ai);
+		icn = (resn)(icn + ai);
 	else if(type == Rogue && ai)
-		icn = (res::token)(icn + (res::CDMT1 - res::CDMB1));
+		icn = (resn)(icn + (CDMT1 - CDMB1));
 	else {
 		if(ai == 3)
-			icn = (res::token)(icn + 4);
+			icn = (resn)(icn + 4);
 		else
-			icn = (res::token)(icn + ai);
+			icn = (resn)(icn + ai);
 	}
 	return icn;
 }
@@ -240,7 +239,7 @@ static void painting_equipment(item equipment, int ws, int frame, unsigned flags
 		return;
 	auto tb = equipment.geti().equiped;
 	if(tb)
-		image(gres(res::token(tb + ws)), frame, flags, pallette);
+		image(gres(resn(tb + ws)), frame, flags, pallette);
 }
 
 static void actor_marker(int size, bool flicking, bool double_border) {
@@ -469,7 +468,7 @@ static void pressed_colorgrad(int index, int size) {
 	}
 	auto push_palt = palt; palt = pallette;
 	set_color(pallette, 4, index);
-	image(gres(res::COLGRAD), size, ImagePallette);
+	image(gres(COLGRAD), size, ImagePallette);
 	palt = push_palt;
 	caret = push_caret;
 }

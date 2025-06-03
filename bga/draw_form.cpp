@@ -152,7 +152,7 @@ long form::open(bool modal) {
 	if(opening)
 		opening();
 	if(modal)
-		screenshoot::open(form_paint, true);
+		open_dialog(form_paint, true);
 	else
 		draw::scene(form_paint);
 	if(closing)

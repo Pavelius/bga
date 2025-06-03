@@ -22,7 +22,7 @@ struct itemfi {
 struct itemresi {
 };
 struct weaponi {
-	damage_s		type;
+	damagen		type;
 	dice			damage;
 	rangen			range;
 	char			bonus;
@@ -32,7 +32,7 @@ struct weaponi {
 struct itemi : nameable {
 	unsigned		count, weight, cost;
 	short			avatar, ground;
-	res::token		equiped, thrown;
+	resn			equiped, thrown;
 	weaponi			weapon;
 	unsigned		flags;
 	wear_s			wear;

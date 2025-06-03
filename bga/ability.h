@@ -26,7 +26,7 @@ struct statable : skilla {
 	featf		feats;
 	void		clear();
 	int			get(ability_s v) const { return abilitites[v]; }
-	int			get(damage_s v) const { return resist[v]; }
+	int			get(damagen v) const { return resist[v]; }
 	int			get(skill_s v) const { return skills[v]; }
 	bool		is(feat_s v) const { return feats.is(v); }
 	int			getbonus(ability_s v) const { return abilitites[v] / 2 - 5; }

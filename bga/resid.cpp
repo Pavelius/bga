@@ -3,8 +3,6 @@
 #include "resid.h"
 #include "stringbuilder.h"
 
-using namespace res;
-
 static const char* font = "art/fonts";
 static const char* root = "art/pma";
 static const char* chra = "art/characters";
@@ -72,7 +70,7 @@ BSDATA(residi) = {
 	{"ARARROW", proj},
 	{"MGO1", mons}, {"MSKA", mons}, {"MSKAA", mons},
 };
-assert_enum(residi, res::MSKAA)
+assert_enum(residi, MSKAA)
 
 void residi::clear() {
 	memset(this, 0, sizeof(*this));
@@ -89,17 +87,10 @@ sprite* residi::get() {
 	return data;
 }
 
-sprite* gres(res::token i) {
+sprite* gres(resn i) {
 	if(i == NONE)
 		return 0;
 	return bsdata<residi>::elements[i].get();
-}
-
-sprite* gres(const char* id) {
-	auto p = bsdata<residi>::find(id);
-	if(!p)
-		return 0;
-	return p->get();
 }
 
 sprite* gres(const char* id, const char* folder) {

@@ -8,6 +8,7 @@
 #include "store.h"
 #include "stringvar.h"
 #include "timer.h"
+#include "view.h"
 
 using namespace draw;
 
@@ -37,25 +38,18 @@ static void color_pick(int bonus) {
 	breakmodal(color_index);
 }
 
-static void default_color_pick(int bonus) {
-	breakmodal(default_color);
-}
-
 static void check_quick_weapon(int bonus) {
 	player->weapon_index = (unsigned char)hot.param;
 }
 
 static void choose_creature_color(int bonus) {
-	auto push_default = default_color;
 	auto pi = bsdata<portraiti>::elements + player->portrait;
 	switch(bonus) {
 	case 0: set_color("SkinNormal"); break;
 	case 1: set_color("HairNormal"); break;
 	default: set_color("HairNormal"); break;
 	}
-	default_color = pi->colors[bonus];
-	player->colors[bonus] = (unsigned char)form::open("COLOR", true);
-	default_color = push_default;
+	player->colors[bonus] = open_color_pick(player->colors[bonus], pi->colors[bonus]);
 }
 
 static void show_item_list(int bonus) {
@@ -137,7 +131,6 @@ BSDATA(script) = {
 	{"ColorPick", color_pick},
 	{"Damage", damage_change},
 	{"DebugTest", debug_test},
-	{"DefaultColor", default_color_pick},
 	{"Done", button_cancel},
 	{"Heal", heal},
 	{"LevelUp", level_up, allow_level_up},

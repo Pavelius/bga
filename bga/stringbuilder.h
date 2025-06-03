@@ -48,7 +48,7 @@ public:
 	const char*		end() const { return pe; }
 	char*			get() const { return p; }
 	static int		getgender(const char* s);
-	unsigned		getmaximum() const { return pe - pb - 1; }
+	size_t			getmaximum() const { return pe - pb - 1; }
 	bool			isempthy() const { return !pb || pb[0] == 0; }
 	bool			isfull() const { return p >= pe; }
 	bool			ispos(const char* v) const { return p == v; }

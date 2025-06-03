@@ -41,7 +41,7 @@ void screenshoot::restore() {
 		blit(*draw::canvas, x, y, width, height, 0, *this, 0, 0);
 }
 
-long screenshoot::open(fnevent proc, bool faded) {
+long open_dialog(fnevent proc, bool faded) {
 	screenshoot push(faded);
 	while(ismodal()) {
 		push.restore();

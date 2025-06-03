@@ -39,9 +39,6 @@
     <Text Include="..\forms\GUICHP0B.txt">
       <Filter>forms</Filter>
     </Text>
-    <Text Include="..\forms\COLOR.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\forms\GUIINVAB.txt">
       <Filter>forms</Filter>
     </Text>
@@ -404,6 +401,9 @@
     <ClCompile Include="stringvar.cpp">
       <Filter>support</Filter>
     </ClCompile>
+    <ClCompile Include="view_dialog.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -657,6 +657,9 @@
     </ClInclude>
     <ClInclude Include="stringvar.h">
       <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="view.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ struct colorgrad {
 };
 
 extern color pallette[256];
-extern short color_indecies[34], default_color;
+extern short color_indecies[34]; // default_color;
 
 void clear_indecies();
 void set_color(color* pallette, int start, int index, int count = 12);

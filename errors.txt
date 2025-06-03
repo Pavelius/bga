@@ -1,2 +1,2 @@
-﻿Error in file `UnknownNames.txt`:
- Define translation for `ItemListTotal`
+﻿Error in file `forms/COLOR.txt`:
+ Line 39: Can't find variant `DefaultColor`

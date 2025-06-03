@@ -2,16 +2,16 @@
 
 #include "nameable.h"
 
-enum period_s : unsigned char {
+enum periodn : unsigned char {
 	Month, DayPart,
 };
 
 struct calendari : nameable {
-	period_s		period;
-	unsigned		duration;
+	periodn		period;
+	unsigned	duration;
 };
 struct periodi : nameable {
-	unsigned		measure, range;
+	unsigned	measure, range;
 };
 
 int getday();

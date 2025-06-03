@@ -2,7 +2,7 @@
 
 #include "nameable.h"
 
-enum damage_s : unsigned char {
+enum damagen : unsigned char {
 	Bludgeon, Slashing, Pierce,
 	Acid, Cold, Fire, Sonic,
 };

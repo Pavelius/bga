@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\errors.txt" />
-    <Text Include="..\forms\COLOR.txt" />
     <Text Include="..\forms\GCOMM008.txt" />
     <Text Include="..\forms\GGAME.txt" />
     <Text Include="..\forms\GIITMH08.txt" />
@@ -138,6 +137,7 @@
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="variable.cpp" />
     <ClCompile Include="variant.cpp" />
+    <ClCompile Include="view_dialog.cpp" />
     <ClCompile Include="wear.cpp" />
     <ClCompile Include="wearable.cpp" />
     <ClCompile Include="widget.cpp" />
@@ -227,6 +227,7 @@
     <ClInclude Include="tag.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="variant.h" />
+    <ClInclude Include="view.h" />
     <ClInclude Include="wear.h" />
     <ClInclude Include="wearable.h" />
     <ClInclude Include="widget.h" />

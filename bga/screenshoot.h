@@ -3,12 +3,10 @@
 
 #pragma once
 
-namespace draw {
-struct screenshoot : public point, public surface {
+struct screenshoot : public point, public draw::surface {
 	screenshoot(bool fade = false);
 	screenshoot(rect rc, bool fade = false);
 	~screenshoot();
-	static long			open(fnevent proc, bool faded);
-	void				restore();
+	void restore();
 };
-}
+long open_dialog(fnevent proc, bool faded);

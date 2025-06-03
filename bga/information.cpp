@@ -65,14 +65,14 @@ static void addd(stringbuilder& sb, const char* id, const dice& value) {
 		sb.add("%+1i", value.b);
 }
 
-static void addv(stringbuilder& sb, const dice& value, damage_s type) {
+static void addv(stringbuilder& sb, const dice& value, damagen type) {
 	sb.adds("%1id%2i", value.c, value.d);
 	if(value.b)
 		sb.add("%+1i", value.b);
 	sb.adds(getnm(str("%1Damage", bsdata<damagei>::elements[type].id)));
 }
 
-static void addd(stringbuilder& sb, const char* id, const dice& value, damage_s type) {
+static void addd(stringbuilder& sb, const char* id, const dice& value, damagen type) {
 	if(!value)
 		return;
 	sb.addn("%1:", getnm(id));
@@ -189,8 +189,6 @@ void creature::getskillsinfo(stringbuilder& sb) const {
 }
 
 void skilli::getinfo(stringbuilder& sb) const {
-	// addh(sb, "%1 (%2)", getname(), bsdata<abilityi>::elements[ability].getname());
 	add_description(sb, id);
-	//sb.add("\n\n");
 	sb.add("%BasicAbility: %1", bsdata<abilityi>::elements[ability].getname());
 }
