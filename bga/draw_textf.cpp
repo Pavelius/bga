@@ -443,8 +443,7 @@ void draw::textfs(const char* string) {
 	auto push_caret = caret;
 	auto push_clipping = clipping;
 	auto push_maxcaret = maxcaret;
-	auto push_force = force_full_render;
-	force_full_render = true;
+	auto push_force = force_full_render; force_full_render = true;
 	clipping.clear(); caret = {};
 	textf(string);
 	force_full_render = push_force;

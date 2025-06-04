@@ -29,7 +29,7 @@ public:
 	static answers*		last;
 	answers() : sc(buffer) {}
 	constexpr operator bool() const { return elements.count != 0; }
-	void				add(const void* value, const char* name, ...) { addv(value, name, xva_start(name)); }
+	void				add(const void* value, const char* name, ...);
 	void				addv(const void* value, const char* name, const char* format);
 	const element*		begin() const { return elements.data; }
 	element*			begin() { return elements.data; }

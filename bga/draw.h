@@ -184,6 +184,12 @@ struct pushfore {
 	constexpr pushfore(color v) : fore(draw::fore) { draw::fore = v; }
 	~pushfore() { draw::fore = fore; }
 };
+struct pushfont {
+	const sprite* font;
+	constexpr pushfont() : font(draw::font) {}
+	constexpr pushfont(const sprite* v) : font(draw::font) { draw::font = v; }
+	~pushfont() { draw::font = font; }
+};
 int						aligned(int x, int width, unsigned state, int string_width);
 int						alignedh(const rect& rc, const char* string, unsigned state);
 void					blit(surface& dest, int x, int y, int width, int height, unsigned flags, const surface& source, int x_source, int y_source);
@@ -194,7 +200,6 @@ void					create(int x, int y, int width, int height, unsigned flags, int bpp);
 bool					dragactive(const void* p);
 bool					dragactive();
 void					dragbegin(const void* p);
-void					dropshadow();
 void					execute(fnevent proc, long value = 0, long value2 = 0, const void* object = 0);
 void					fhexagon();
 void					fillform();
@@ -236,6 +241,7 @@ void					rectfocus();
 void					set(int x, int y);
 void					setcaption(const char* string);
 void					setcaret(int x, int y);
+void					setcaret(int x, int y, int w, int h);
 void					setclip(rect rc);
 inline void				setclip() { clipping.set(0, 0, getwidth(), getheight()); }
 inline void				setclipall() { setclip({caret.x, caret.y, caret.x + width, caret.y + height}); }
@@ -267,7 +273,6 @@ int						textw(const char* string, int count = -1);
 int						textw(rect& rc, const char* string);
 int						textw(const sprite* font);
 void					tipspos();
-inline void				tooltips(const char* format, ...) { tips_sb.addv(format, xva_start(format)); }
 void					updatewindow();
 void					write(const char* url, unsigned char* bits, int width, int height, int bpp, int scanline, color* pallette);
 void					vertical(fnevent proc);
@@ -307,7 +312,4 @@ void scene();
 void setneedupdate();
 void setnext(fnevent v);
 void start();
-}
-namespace draw {
-bool isclipped(int size);
 }

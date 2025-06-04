@@ -48,9 +48,6 @@
     <Text Include="..\rules\Races.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\forms\GIITMH08.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\forms\GCOMM008.txt">
       <Filter>forms</Filter>
     </Text>
@@ -410,6 +407,9 @@
     <ClCompile Include="view_creature.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="view_list.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -625,9 +625,6 @@
     <ClInclude Include="ftflag.h">
       <Filter>support</Filter>
     </ClInclude>
-    <ClInclude Include="ftgetinfo.h">
-      <Filter>support</Filter>
-    </ClInclude>
     <ClInclude Include="worldmap.h">
       <Filter>logic</Filter>
     </ClInclude>
@@ -665,6 +662,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="view.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="view_list.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

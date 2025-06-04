@@ -17,6 +17,11 @@ void hotkey(unsigned key, fnevent proc, int param = 0);
 void invalidate_description();
 void paint_action_panel();
 void paint_area();
+void paint_dialog(resn v);
+void paperdoll();
+long open_dialog(fnevent proc, bool faded);
+void open_item_description();
 void open_game();
+void update_creature();
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color);

@@ -7,6 +7,7 @@
 #include "screenshoot.h"
 #include "timer.h"
 #include "view.h"
+#include "view_list.h"
 
 using namespace draw;
 
@@ -16,9 +17,24 @@ static point dialog_start;
 static bool button_pressed, button_executed, button_hilited, input_disabled;
 static bool game_pause;
 
+static char description_text[4096];
+static size_t description_cash_size;
+stringbuilder description(description_text);
+
+static void textah(const char* string, unsigned flags) {
+	pushfont push(metrics::h1);
+	texta(string, flags);
+}
+
 static void update_frames() {
 	update_tick();
 	update_game_tick();
+}
+
+static void update_description(const char* format) {
+	description.clear();
+	description.add(format);
+	description_cash_size = -1;
 }
 
 static void setdialog(int x, int y) {
@@ -31,7 +47,7 @@ static void setdialog(int x, int y, int w, int h) {
 	height = h;
 }
 
-static void paint_dialog(resn v) {
+void paint_dialog(resn v) {
 	auto p = gres(v);
 	auto& f = p->get(0);
 	dialog_start.x = (getwidth() - f.sx) / 2;
@@ -131,21 +147,66 @@ static void color_picker_line(int index, int count, int dx) {
 	caret = push_caret;
 }
 
-static void scroll(resn res, int fu, int fd, int bar) {
-
+static void scroll(resn res, int fu, int fd, int bar, int& origin, int maximum, int per_page, int per_row) {
+	if(!maximum)
+		return;
+	auto pr = gres(res);
+	auto& f = pr->get(fu);
+	auto w = f.sx;
+	auto h = f.sy;
+	auto sh = pr->get(bar).sy;
+	pushrect push;
+	button(res, fu, fu + 1);
+	fire(cbsetint, origin - per_row, 0, &origin);
+	caret.y = push.caret.y + push.height - h;
+	button(res, fd, fd + 1);
+	fire(cbsetint, origin + per_row, 0, &origin);
+	auto height_max = push.height - h * 2 - sh * 2;
+	auto current_position = origin * height_max / maximum;
+	caret.y = push.caret.y + h + current_position;
+	button(res, bar, bar);
+	//button_run_input();
 }
 
 static void paint_console() {
-	static int console_cash_origin, cash_string;
+	static int origin, maximum;
+	static int console_cash_origin, cash_string, cash_origin;
 	static size_t cash_size;
 	if(!console_data.data)
 		return;
+	pushrect push;
+	const int per_row = texth();
+	const int per_page = height;
 	if(console_data.count != cash_size) {
-		console_cash_origin = -1;
-		console_data.count = cash_size;
+		pushrect push;
+		cash_string = -1;
+		cash_size = console_data.count;
+		textfs((char*)console_data.data);
+		maximum = height;
 	}
-	pushfore push({200, 200, 200});
+	correct_table(origin, maximum, per_page);
+	if(cash_origin != origin) {
+		cash_origin = origin;
+		cash_string = -1;
+	}
+	pushfore push_fore({200, 200, 200});
+	auto push_clip = clipping; setclipall();
+	if(cash_string == -1)
+		caret.y -= origin;
 	textf((char*)console_data.data, console_cash_origin, cash_string);
+	clipping = push_clip; caret = push.caret;
+	caret.x += width + 16; caret.y -= 4; width = 12; height += 3;
+	scroll(GCOMMSB, 0, 2, 4, origin, maximum, per_page, per_row);
+}
+
+static void paint_description() {
+	static int cash_origin, cash_string;
+	if(description.size() != description_cash_size) {
+		cash_string = -1;
+		description_cash_size = description.size();
+	}
+	pushfore push({240, 240, 240});
+	textf(description, cash_origin, cash_string);
 }
 
 static void hilight_protrait() {
@@ -243,11 +304,9 @@ static void paint_color_pick() {
 }
 
 static void paint_game_panel() {
-	// update_frames();
 	dialog_start = caret; image(gres(GCOMM), 0, 0);
 	setdialog(736, 43); image(gres(CGEAR), (current_game_tick / 128) % 32, 0); // Rolling world
-	setdialog(8, 8, 534, 92); paint_console();
-	setdialog(554, 4, 12, 95); scroll(GCOMMSB, 0, 2, 4);
+	setdialog(12, 8, 526, 92); paint_console();
 	setdialog(600, 22); button(GCOMMBTN, 4, 5, 'C');
 	setdialog(630, 17); button(GCOMMBTN, 6, 7, 'I');
 	setdialog(668, 21); button(GCOMMBTN, 8, 9, 'S');
@@ -259,7 +318,6 @@ static void paint_game_panel() {
 	setdialog(575, 72); button(GCOMMBTN, 16, 17);
 	setdialog(757, 1); button(GCOMMBTN, 18, 19);
 	hotkey('Z', change_zoom_factor);
-	// HotKey NONE 0 0 0 0 data(QuickSave) hotkey("Ctrl+Q")
 	// HotKey NONE 0 0 0 0 data(DebugTest) hotkey("Ctrl+D")
 	// HotKey NONE 0 0 0 0 data(ItemList) hotkey("Ctrl+I")
 }
@@ -267,8 +325,40 @@ static void paint_game_panel() {
 void paint_game() {
 	if(!game_pause)
 		update_frames();
+	setcaret(0, 0, 800, 433); paint_area();
 	setcaret(0, 433); paint_action_panel();
 	setcaret(0, 493); paint_game_panel();
+}
+
+static void paint_item_avatar() {
+	auto i = last_item->geti().avatar * 2;
+	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
+}
+
+static void identify_item() {
+	last_item->identify(1);
+	update_description("%ItemInformation");
+}
+
+static void paint_item_description() {
+	paint_dialog(GIITMH08);
+	setdialog(36, 37, 357, 30); textah(str("%ItemName"), AlignCenterCenter);
+	setdialog(430, 20, 64, 64); paint_item_avatar();
+	setdialog(20, 432); button(GBTNMED, 1, 2, 'I', "Identify"); fire(identify_item);
+	setdialog(179, 432); button(GBTNMED, 1, 2, 'U', "UseItem");
+	setdialog(338, 432); button(GBTNMED, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
+	setdialog(28, 115, 435, 299); paint_description();
+	//TextDescription NORMAL 23 111 445 307 fore(250 250 250) id("Text")
+	//Scroll GBTNSCRL 480 109 12 311 frames(1 0 3 2 4 5)
+	// Label NORMAL 314 111 152 18 id("Test")
+}
+
+void open_item_description() {
+	auto push_last = last_item;
+	last_item = (item*)hot.object;
+	update_description("%ItemInformation");
+	open_dialog(paint_item_description, true);
+	last_item = push_last;
 }
 
 void open_game() {

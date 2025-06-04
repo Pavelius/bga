@@ -4,6 +4,7 @@
 #include "item.h"
 #include "math.h"
 #include "stringbuilder.h"
+#include "stringvar.h"
 
 static void addv(stringbuilder& sb, const char* id, const char* value) {
 	sb.addn("%1: %2", getnm(id), value);
@@ -100,8 +101,77 @@ static const char* getfeatname(variant v) {
 		return v.getname();
 }
 
-void item::getinfo(stringbuilder& sb) const {
-	auto& ei = geti();
+static void addh(stringbuilder& sb, const char* format, ...) {
+	if(!format)
+		return;
+	XVA_FORMAT(format);
+	sb.addn("**[");
+	sb.addv(format, format_param);
+	sb.add("]**");
+}
+
+static void addend(stringbuilder& sb) {
+	sb.addn("\n");
+}
+
+static void addclasses(stringbuilder& sb, const classa& source) {
+	auto level = source.getlevel();
+	if(!level)
+		return;
+	addh(sb, getnm("CharacterLevel"), level);
+	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1))
+		addb(sb, bsdata<classi>::elements[i].id, source.classes[i]);
+	addend(sb);
+}
+
+static void player_information(stringbuilder& sb) {
+	addclasses(sb, *player);
+	addh(sb, getnm("CharacterRace"));
+	sb.addn("%1 %2", bsdata<racei>::elements[player->race].getname(), getnm(bsdata<genderi>::elements[player->gender].id));
+	addend(sb);
+	addh(sb, getnm("Alignment"));
+	sb.addn(bsdata<alignmenti>::elements[player->alignment].getname());
+	addend(sb);
+	addh(sb, getnm("Experience"));
+	addb(sb, "Current", player->experience, 0, false);
+	addb(sb, "NextLevel", player->getnextlevel(), 0, false);
+	addend(sb);
+	addh(sb, getnm("SavingThrows"));
+	for(auto i = Fortitude; i <= Will; i = (ability_s)(i + 1))
+		addb(sb, i, player->get(i), false);
+	addend(sb);
+	addh(sb, getnm("AbilityStatistic"));
+	addv(sb, "WeightAllowance", getkg(player->allowed_weight));
+}
+
+static void player_skill_information(stringbuilder& sb) {
+	addh(sb, getnm("Skills"));
+	for(auto i = (skill_s)0; i <= WildernessLore; i = (skill_s)(i + 1)) {
+		auto raw_level = player->basic.get(i);
+		auto level = player->get(i);
+		if(raw_level > 0)
+			sb.addn("%1%+2i", bsdata<skilli>::elements[i].getname(), level);
+	}
+	addend(sb);
+	addh(sb, getnm("Feats"));
+	for(auto i = ArmorProficiency; i <= MartialWeaponPolearm; i = (ability_s)(i + 1)) {
+		auto level = player->get(i);
+		if(level)
+			sb.addn(getfeatname(i, level));
+	}
+	for(auto i = Alertness; i <= WhirlwindAttack; i = (feat_s)(i + 1)) {
+		if(player->is(i))
+			sb.addn(bsdata<feati>::elements[i].getname());
+	}
+	addend(sb);
+}
+
+static void item_name(stringbuilder& sb) {
+	sb.add(last_item->getname());
+}
+
+static void item_information(stringbuilder& sb) {
+	auto& ei = last_item->geti();
 	add_description(sb, ei.id, ei.basic ? ei.basic->id : 0);
 	addb(sb, "MagicBonus", ei.magic, "%+1i");
 	if(ei.wear == QuickWeapon) {
@@ -124,71 +194,16 @@ void item::getinfo(stringbuilder& sb) const {
 	addv(sb, "Weight", getkg(ei.weight));
 }
 
-static void addh(stringbuilder& sb, const char* format, ...) {
-	if(!format)
-		return;
-	sb.addn("**[");
-	sb.addv(format, xva_start(format));
-	sb.add("]**");
+template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
+	auto p = (skilli*)object;
+	add_description(sb, p->id);
+	sb.add("%BasicAbility: %1", bsdata<abilityi>::elements[p->ability].getname());
 }
 
-static void addend(stringbuilder& sb) {
-	sb.addn("\n");
-}
-
-static void addclasses(stringbuilder& sb, const classa& source) {
-	auto level = source.getlevel();
-	if(!level)
-		return;
-	addh(sb, getnm("CharacterLevel"), level);
-	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1))
-		addb(sb, bsdata<classi>::elements[i].id, source.classes[i]);
-	addend(sb);
-}
-
-void creature::getinfo(stringbuilder& sb) const {
-	addclasses(sb, *this);
-	addh(sb, getnm("CharacterRace"));
-	sb.addn("%1 %2", bsdata<racei>::elements[race].getname(), getnm(bsdata<genderi>::elements[gender].id));
-	addend(sb);
-	addh(sb, getnm("Alignment"));
-	sb.addn(bsdata<alignmenti>::elements[alignment].getname());
-	addend(sb);
-	addh(sb, getnm("Experience"));
-	addb(sb, "Current", experience, 0, false);
-	addb(sb, "NextLevel", getnextlevel(), 0, false);
-	addend(sb);
-	addh(sb, getnm("SavingThrows"));
-	for(auto i = Fortitude; i <= Will; i = (ability_s)(i + 1))
-		addb(sb, i, get(i), false);
-	addend(sb);
-	addh(sb, getnm("AbilityStatistic"));
-	addv(sb, "WeightAllowance", getkg(allowed_weight));
-}
-
-void creature::getskillsinfo(stringbuilder& sb) const {
-	addh(sb, getnm("Skills"));
-	for(auto i = (skill_s)0; i <= WildernessLore; i = (skill_s)(i + 1)) {
-		auto raw_level = basic.get(i);
-		auto level = get(i);
-		if(raw_level > 0)
-			sb.addn("%1%+2i", bsdata<skilli>::elements[i].getname(), level);
-	}
-	addend(sb);
-	addh(sb, getnm("Feats"));
-	for(auto i = ArmorProficiency; i <= MartialWeaponPolearm; i = (ability_s)(i + 1)) {
-		auto level = get(i);
-		if(level)
-			sb.addn(getfeatname(i, level));
-	}
-	for(auto i = Alertness; i <= WhirlwindAttack; i = (feat_s)(i + 1)) {
-		if(is(i))
-			sb.addn(bsdata<feati>::elements[i].getname());
-	}
-	addend(sb);
-}
-
-void skilli::getinfo(stringbuilder& sb) const {
-	add_description(sb, id);
-	sb.add("%BasicAbility: %1", bsdata<abilityi>::elements[ability].getname());
-}
+BSDATA(stringvari) = {
+	{"ItemInformation", item_information},
+	{"ItemName", item_name},
+	{"PlayerInformation", player_information},
+	{"PlayerSkillInformation", player_skill_information},
+};
+BSDATAF(stringvari)

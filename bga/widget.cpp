@@ -43,7 +43,6 @@ static item drag_item;
 item *drag_item_source, *drag_item_dest;
 static int current_info_tab;
 static bool need_update, button_run;
-static char description_text[4096];
 static scrolltext area_description, area_console;
 static resinfo default_cursor;
 static form* next_last_form;
@@ -51,43 +50,6 @@ static void *current_topic;
 static worldmapi::area* current_world_area_hilite;
 static partyitemlist party_items;
 static partyitemlist store_items;
-stringbuilder description(description_text);
-
-static void update_creature() {
-	if(player)
-		player->update();
-}
-
-static void update_item_description() {
-	description.clear();
-	last_item->getinfo(description);
-}
-
-static void update_creature_info() {
-	if(!need_update)
-		return;
-	need_update = false;
-	description.clear();
-	switch(current_info_tab) {
-	case 0: player->getinfo(description); break;
-	case 2: player->getskillsinfo(description); break;
-	default: break;
-	}
-}
-
-static void update_help_info() {
-	if(!need_update)
-		return;
-	need_update = false;
-	variant v = current_focus;
-	description.clear();
-	auto pn = getnme(ids(v.getid(), "Info"));
-}
-
-void invalidate_description() {
-	need_update = true;
-	area_description.invalidate();
-}
 
 static void form_opening() {
 	invalidate_description();
@@ -151,118 +113,6 @@ void widget::initialize() {
 
 void widget::open() const {
 	scene(proc);
-}
-
-static resn getanimation(racen race, gendern gender, classn type, int ai, int& ws) {
-	resn icn;
-	switch(race) {
-	case Dwarf:
-	case Gnome:
-		icn = CDMB1;
-		ws = 0;
-		break;
-	case Elf:
-	case HalfElf:
-		if(gender == Female)
-			icn = CEFB1;
-		else
-			icn = CEMB1;
-		ws = 2;
-		break;
-	case Halfling:
-		if(gender == Female)
-			icn = CIFB1;
-		else
-			icn = CIMB1;
-		if(type == Wizard || type == Sorcerer)
-			type = Rogue;
-		if(ai > 1)
-			ai = 1;
-		ws = 0;
-		break;
-	default:
-		if(gender == Female) {
-			ws = 1;
-			icn = CHFB1;
-		} else {
-			ws = 3;
-			icn = CHMB1;
-		}
-		break;
-	}
-	if(type == Wizard || type == Sorcerer)
-		icn = (resn)(icn + (CDMW1 - CDMB1) + ai);
-	else if(type == Cleric)
-		icn = (resn)(icn + ai);
-	else if(type == Rogue && ai)
-		icn = (resn)(icn + (CDMT1 - CDMB1));
-	else {
-		if(ai == 3)
-			icn = (resn)(icn + 4);
-		else
-			icn = (resn)(icn + ai);
-	}
-	return icn;
-}
-
-static int getarmorindex(const item& e) {
-	auto v = e.geti().required;
-	if(v.iskind<abilityi>() && v.value == ArmorProficiency)
-		return v.counter;
-	return 0;
-}
-
-static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {
-	if(!equipment)
-		return;
-	auto tb = equipment.geti().equiped;
-	if(tb)
-		image(gres(resn(tb + ws)), frame, flags, pallette);
-}
-
-void paperdoll(color* pallette, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
-	sprite* source;
-	unsigned flags;
-	int ws;
-	source = gres(getanimation(race, gender, type, getarmorindex(armor), ws));
-	if(!source)
-		return;
-	const int directions = 9;
-	int o = orientation;
-	if(o >= directions) {
-		flags = ImageMirrorH;
-		o = (9 - 1) * 2 - o;
-	} else
-		flags = 0;
-	auto frame = source->ganim(animation * directions + o, frame_tick);
-	image(source, frame, flags, pallette);
-	painting_equipment(weapon, ws, frame, flags, pallette);
-	painting_equipment(helm, ws, frame, flags, pallette);
-	painting_equipment(offhand, ws, frame, flags, pallette);
-}
-
-static void paperdoll(const coloration& colors, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
-	color pallette[256]; colors.setpallette(pallette);
-	paperdoll(pallette, race, gender, type, animation, orientation, frame_tick, armor, weapon, offhand, helm);
-}
-
-static void paperdoll() {
-	static int orientation = 1;
-	auto push_caret = caret;
-	caret.x += width / 2;
-	caret.y += height / 2 + 20;
-	paperdoll(*player,
-		player->race, player->gender, player->getmainclass(), 1, orientation, current_tick / 100,
-		player->wears[Body], player->getweapon(), player->getoffhand(), player->wears[Head]);
-	caret = push_caret;
-	switch(hot.key) {
-	case KeyLeft:
-		execute(cbsetint, (orientation >= 15) ? 0 : orientation + 1, 0, &orientation);
-		break;
-	case KeyRight:
-		execute(cbsetint, (orientation <= 0) ? 15 : orientation - 1, 0, &orientation);
-		break;
-	}
 }
 
 static void background() {
@@ -560,14 +410,6 @@ static void allow_drop_target(item* pi, wear_s slot) {
 	}
 }
 
-static void item_information() {
-	auto push_last = last_item;
-	last_item = (item*)hot.object;
-	update_item_description();
-	form::open("GIITMH08", true);
-	last_item = push_last;
-}
-
 static void layer(color v) {
 	auto push_alpha = alpha; alpha = 26;
 	auto push_fore = fore; fore = v;
@@ -643,7 +485,7 @@ static void paint_minimap() {
 static void input_item_info(const item* pi) {
 	if(!drag_item_source) {
 		if(gui.hilited && hot.key == MouseRight && hot.pressed)
-			execute(item_information, 0, 0, pi);
+			execute(open_item_description, 0, 0, pi);
 	}
 }
 
@@ -821,7 +663,8 @@ static void format_labelv(const char* format, const char* format_param) {
 }
 
 static void format_label(const char* format, ...) {
-	format_labelv(format, xva_start(format));
+	XVA_FORMAT(format);
+	format_labelv(format, format_param);
 }
 
 static void player_coins() {
@@ -865,11 +708,6 @@ static void item_name() {
 	label();
 }
 
-static void item_avatar() {
-	auto i = last_item->geti().avatar * 2;
-	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
-}
-
 static void buy_item_cost() {
 	if(!store_item)
 		return;
@@ -880,9 +718,6 @@ static void sell_item_cost() {
 	if(!party_item)
 		return;
 	format_label("%1i", party_item->getcost());
-}
-
-static void item_action_button() {
 }
 
 static void paint_form() {
@@ -911,15 +746,15 @@ static void button_info_tab() {
 	button_check(current_info_tab);
 }
 
-static void text_description() {
-	auto push_font = font;
-	if(gui.res)
-		font = gui.res;
-	area_description.paint(description_text);
-	if(gui.hilited)
-		area_description.input();
-	font = push_font;
-}
+//static void text_description() {
+//	auto push_font = font;
+//	if(gui.res)
+//		font = gui.res;
+//	area_description.paint(description_text);
+//	if(gui.hilited)
+//		area_description.input();
+//	font = push_font;
+//}
 
 static void text_console() {
 	auto push_font = font;
@@ -1172,11 +1007,7 @@ BSDATA(widget) = {
 	{"CreatureRace", creature_race},
 	{"CreatureWeight", creature_weight},
 	{"TextConsole", text_console},
-	{"TextDescription", text_description},
 	{"Form", paint_form},
-	{"ItemActionButton", item_action_button},
-	{"ItemAvatar", item_avatar},
-	{"ItemName", item_name},
 	{"BuyItemCost", buy_item_cost},
 	{"GearButton", gear_button},
 	{"HotKey", button_input},
@@ -1202,8 +1033,6 @@ BSDATA(widget) = {
 	{"StoreList", store_list},
 	{"StoreName", store_name},
 	{"TopicList", topic_list},
-	{"UpdateCreatureInfo", update_creature_info},
-	{"UpdateHelpInfo", update_help_info},
 	{"Worldmap", paint_worldmap},
 #ifdef _DEBUG
 	{"ItemList", util_items_list},

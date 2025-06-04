@@ -22,7 +22,6 @@
     <Text Include="..\errors.txt" />
     <Text Include="..\forms\GCOMM008.txt" />
     <Text Include="..\forms\GGAME.txt" />
-    <Text Include="..\forms\GIITMH08.txt" />
     <Text Include="..\forms\GUICHP0B.txt" />
     <Text Include="..\forms\GUIHELP.txt" />
     <Text Include="..\forms\GUIINV08.txt" />
@@ -140,6 +139,7 @@
     <ClCompile Include="view_area.cpp" />
     <ClCompile Include="view_creature.cpp" />
     <ClCompile Include="view_dialog.cpp" />
+    <ClCompile Include="view_list.cpp" />
     <ClCompile Include="wear.cpp" />
     <ClCompile Include="wearable.cpp" />
     <ClCompile Include="widget.cpp" />
@@ -177,7 +177,6 @@
     <ClInclude Include="floattext.h" />
     <ClInclude Include="formation.h" />
     <ClInclude Include="ftflag.h" />
-    <ClInclude Include="ftgetinfo.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="geography.h" />
     <ClInclude Include="itema.h" />
@@ -230,6 +229,7 @@
     <ClInclude Include="timer.h" />
     <ClInclude Include="variant.h" />
     <ClInclude Include="view.h" />
+    <ClInclude Include="view_list.h" />
     <ClInclude Include="wear.h" />
     <ClInclude Include="wearable.h" />
     <ClInclude Include="widget.h" />

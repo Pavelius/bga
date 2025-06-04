@@ -28,5 +28,6 @@ void printcnv(const char* format, const char* format_param, const char* line_fee
 }
 
 void print(const char* format, ...) {
-	printcnv(format, xva_start(format), "\n");
+	XVA_FORMAT(format);
+	printcnv(format, format_param, "\n");
 }

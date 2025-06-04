@@ -101,6 +101,10 @@ int main(int argc, char* argv[]) {
 	colors::h2 = colors::text.mix(colors::button, 96);
 	colors::h3 = color(244, 214, 66);
 	colors::special = color(244, 214, 66);
+	print("Size of creature %1i bytes", sizeof(creature));
+	print("Size of door %1i bytes", sizeof(door));
+	print("Count of doors %1i", bsdata<door>::source.getcount());
+	print("Count of creatures %1i", bsdata<creature>::source.getcount());
 	initialize(getnm("AppTitle"));
 	settimer(64);
 	setnext(start_main);

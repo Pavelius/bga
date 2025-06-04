@@ -27,6 +27,11 @@ int answers::compare(const void* v1, const void* v2) {
 	return szcmp(((answers::element*)v1)->text, ((answers::element*)v2)->text);
 }
 
+void answers::add(const void* value, const char* name, ...) {
+	XVA_FORMAT(name);
+	addv(value, name, format_param);
+}
+
 void answers::addv(const void* value, const char* text, const char* format) {
 	auto p = elements.add();
 	p->value = value;
@@ -64,28 +69,6 @@ void answers::clear() {
 	sc.clear();
 }
 
-void pause() {
-	pause(getnm("Continue"));
-}
-
-void pause(const char* title, ...) {
-	if(answers::console) {
-		if(!(*answers::console))
-			return;
-	}
-	char temp[260]; stringbuilder sb(temp);
-	answers an; sb.addv(title, xva_start(title));
-	an.choose(0, temp, true);
-	if(answers::console)
-		answers::console->clear();
-}
-
-void pausenc(const char* title, ...) {
-	char temp[260]; stringbuilder sb(temp);
-	answers an; sb.addv(title, xva_start(title));
-	an.choose(0, temp, true);
-}
-
 bool yesnov(const char* title, const char* title_param) {
 	char temp[260]; stringbuilder sb(temp);
 	sb.addv(title, title_param);
@@ -94,10 +77,6 @@ bool yesnov(const char* title, const char* title_param) {
 	an.add((void*)0, getnm("No"));
 	pushvalue push(answers::column_count, 2);
 	return an.choose(temp);
-}
-
-bool yesno(const char* title, ...) {
-	return yesnov(title, xva_start(title));
 }
 
 static const char* find_separator(const char* pb) {

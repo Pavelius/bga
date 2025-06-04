@@ -1,2 +1,2 @@
-﻿Error in file `forms/GUIWBTP.txt`:
- Line 9: Not found Widget identifier `PlayerAvatar`
+﻿Error in file `forms/GIITMH08.txt`:
+ Line 4: Not found Widget identifier `ItemName`

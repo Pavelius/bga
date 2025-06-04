@@ -2664,21 +2664,6 @@ void draw::tipspos() {
 	}
 }
 
-void draw::dropshadow() {
-	int size = 4;
-	pushrect push;
-	auto push_fore = fore;
-	auto push_alpha = alpha;
-	fore = colors::form;
-	alpha = 32;
-	setpos(push.caret.x + push.width + 1, push.caret.y + size, size, push.height);
-	rectf();
-	setpos(push.caret.x + size, push.caret.y + push.height + 1, push.width - size, size);
-	rectf();
-	alpha = push_alpha;
-	fore = push_fore;
-}
-
 void draw::set(int x, int y) {
 	caret.x = x - camera.x;
 	caret.y = y - camera.y;
@@ -2689,7 +2674,9 @@ void draw::setcaret(int x, int y) {
 	caret.y = y;
 }
 
-bool draw::isclipped(int size) {
-	rect rc = {caret.x - size, caret.y - size, caret.x + size, caret.y + size};
-	return !rc.intersect(clipping);
+void draw::setcaret(int x, int y, int w, int h) {
+	caret.x = x;
+	caret.y = y;
+	width = w;
+	height = h;
 }

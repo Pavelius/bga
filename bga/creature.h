@@ -15,8 +15,6 @@ struct creature : actor, avatarable {
 	static void		create(racen race, gendern gender, classn classv, unsigned short portrait);
 	bool			isclass(skill_s v) const;
 	bool			isusable(const item& it) const;
-	void			getinfo(stringbuilder& sb) const;
-	void			getskillsinfo(stringbuilder& sb) const;
 	void			paint() const;
 	void			update();
 	void			update_abilities();

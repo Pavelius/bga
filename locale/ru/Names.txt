@@ -7,6 +7,7 @@ ArmorCheckPenalty: Штраф брони на проверки
 AttackBonus: Бонус к атаке
 BasicAbility: Базовая способность
 Biography: Биография
+Cancel: Отмена
 CharacterLevel: Класс персонажа (%1i уровень)
 CharacterRace: Раса персонажа
 Close: Закрыть
@@ -26,6 +27,7 @@ Feats: Особенности
 From: из
 Ground: На земле
 Information: Информация
+Identify: Опознать
 Kg: кг.
 LevelUp: Развитие
 MagicBonus: Магический бонус
@@ -88,6 +90,7 @@ Cost: Стоимость
 Price: Цена
 Store: Магазин
 SellItem: Продать
+UseItem: Использовать
 UseSteal: Украсть
 
 HelgateStreetMerchant: Купец

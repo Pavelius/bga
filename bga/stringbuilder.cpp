@@ -1,3 +1,19 @@
+/////////////////////////////////////////////////////////////////////////
+//
+// Copyright 2024 Pavel Chistyakov
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http ://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #include "stringbuilder.h"
 #include "slice.h"
 
@@ -7,10 +23,10 @@ static const char spaces[] = " \n\t\r.,!?;:";
 stringbuilder::fncustom stringbuilder::custom = default_string;
 
 struct stringbuilder::grammar {
-	const char*		name;
-	const char*		change;
-	unsigned		name_size;
-	unsigned		change_size;
+	const char* name;
+	const char* change;
+	unsigned name_size;
+	unsigned change_size;
 	constexpr grammar() : name(0), change(0), name_size(0), change_size(0) {}
 	constexpr grammar(const char* name, const char* change) :
 		name(name), change(change), name_size(zlen(name)), change_size(zlen(change)) {
@@ -18,14 +34,16 @@ struct stringbuilder::grammar {
 	operator bool() const { return name != 0; }
 };
 
-struct stringbuilder::genderi {
-	const char*		name;
-	int				value;
-	unsigned		name_size;
+namespace {
+struct genderi {
+	const char* name;
+	int value;
+	unsigned name_size;
 	constexpr genderi() : name(0), value(0), name_size(0) {}
 	constexpr genderi(const char* name, int value) : name(name), value(value), name_size(zlen(name)) {}
 	operator bool() const { return name != 0; }
 };
+}
 
 static const char* psnum16(const char* p, long& value) {
 	int result = 0;
@@ -260,13 +278,6 @@ unsigned char lower_symbol(unsigned char u) {
 	return u;
 }
 
-void szupper(char* result) {
-	while(*result) {
-		*result = upper_symbol(*result);
-		result++;
-	}
-}
-
 int szcmpi(const char* p1, const char* p2) {
 	while(true) {
 		auto s1 = upper_symbol(*p1++);
@@ -282,14 +293,6 @@ int szcmp(const char* p1, const char* p2) {
 		auto s2 = *p2++;
 		if(!s1 || !s2 || s1 != s2)
 			return s1 - s2;
-	}
-}
-
-static void add_by_count(stringbuilder& sb, const char* name, int count) {
-	switch(count) {
-	case 0: case 1: sb.add(name); break;
-	case 2: case 3: case 4: sb.addof(name); break;
-	default: sb.add(name); break;
 	}
 }
 
@@ -310,9 +313,7 @@ const char* str_count(const char* id, int count) {
 }
 
 void default_string(stringbuilder& sb, const char* id) {
-	sb.addv("[-", 0);
-	sb.addv(id, 0);
-	sb.addv("]", 0);
+	sb.addv(getnm(id), 0);
 }
 
 void stringbuilder::lower() {
@@ -374,7 +375,12 @@ void stringbuilder::addnz(const char* format, unsigned count) {
 }
 
 const char* stringbuilder::readformat(const char* src, const char* vl) {
-	if(*src == '%') {
+	if(*src == ',' || *src == '.' || *src == ' ' || *src == 10 || *src == 13 || *src == 9) {
+		if(p < pe)
+			*p++ = '%';
+		*p = 0;
+		return src;
+	} else if(*src == '%') {
 		src++;
 		if(p < pe)
 			*p++ = '%';
@@ -406,6 +412,12 @@ const char* stringbuilder::readformat(const char* src, const char* vl) {
 		} else if(*src == 'h') {
 			src++;
 			adduint((unsigned)(((long*)vl)[pn - 1]), pnp, 16);
+		} else if(*src == 'c') {
+			src++;
+			if(p < pe)
+				*p++ = (((char*)vl)[pn - 1]);
+			if(p < pe)
+				*p = 0;
 		} else {
 			if(((char**)vl)[pn - 1]) {
 				auto p1 = ((char**)vl)[pn - 1];
@@ -449,6 +461,11 @@ void stringbuilder::add(char sym) {
 	}
 }
 
+void stringbuilder::add(const char* format, ...) {
+	XVA_FORMAT(format);
+	addv(format, format_param);
+}
+
 void stringbuilder::addv(const char* src, const char* vl) {
 	if(!p)
 		return;
@@ -469,7 +486,7 @@ void stringbuilder::addv(const char* src, const char* vl) {
 }
 
 void stringbuilder::addsep(char separator) {
-	if(p <= pb || p >= pe || !separator)
+	if(p <= pb || p >= pe)
 		return;
 	if(p[-1] == separator)
 		return;
@@ -635,7 +652,11 @@ void stringbuilder::addch(char sym) {
 
 const char* stringbuilder::psstrlf(const char* p) {
 	while(*p) {
-		if(*p == '\n' || *p == '\r')
+		if(p[0] == '\\' && p[1] == 'n') {
+			add('\n');
+			p += 2;
+			continue;
+		} else if(*p == '\n' || *p == '\r')
 			break;
 		addch(*p++);
 	}
@@ -793,7 +814,7 @@ void stringbuilder::addto(const char* s) {
 	add(s, map, "ó");
 }
 
-int stringbuilder::getgender(const char* s) {
+int gender_by_name(const char* s) {
 	static genderi source[] = {
 		{"à", 1},
 		{"î", 2},
@@ -832,7 +853,8 @@ void stringbuilder::trimr() {
 
 const char* str(const char* format, ...) {
 	static char temp[1024]; stringbuilder sb(temp);
-	sb.addv(format, xva_start(format));
+	XVA_FORMAT(format);
+	sb.addv(format, format_param);
 	return temp;
 }
 
@@ -849,4 +871,11 @@ const char* ids(const char* p1, const char* p2, const char* p3) {
 	sb.addv(p2, 0);
 	sb.addv(p3, 0);
 	return temp;
+}
+
+void szupper(char* p) {
+	while(*p) {
+		*p = upper_symbol(*p);
+		p++;
+	}
 }

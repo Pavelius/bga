@@ -398,6 +398,7 @@ static void apply_command() {
 }
 
 static void paint_area_map() {
+	auto push_clip = clipping; setclipall();
 	setup_visible_area();
 	set_standart_cursor();
 	paint_tiles();
@@ -406,6 +407,7 @@ static void paint_area_map() {
 	paint_objects();
 	apply_hilite_command();
 	apply_command();
+	clipping = push_clip;
 }
 
 static void paint_area_map_zoom_factor() {
