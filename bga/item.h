@@ -35,7 +35,7 @@ struct itemi : nameable {
 	resn			equiped, thrown;
 	weaponi			weapon;
 	unsigned		flags;
-	wear_s			wear;
+	wearn			wear;
 	char			magic;
 	variants		use, wearing;
 	itemi*			basic;
@@ -60,11 +60,11 @@ struct item {
 	item(unsigned short type) : type(type), count(geti().count ? geti().count - 1 : 0), data(0) {}
 	constexpr explicit operator bool() const { return type != 0; }
 	void			add(item& v);
-	bool			canequip(wear_s v) const;
+	bool			canequip(wearn v) const;
 	void			clear() { type = 0; count = 0; data = 0; }
 	void			identify(int v) { identified = v; }
 	bool			is(itemf_s v) const { return geti().is(v); }
-	bool			is(wear_s v) const;
+	bool			is(wearn v) const;
 	bool			isweapon() const { return geti().weapon.operator bool(); }
 	int				getcost() const { return geti().cost; }
 	int				getcostall() const;

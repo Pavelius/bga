@@ -521,11 +521,19 @@ static void begin_drag_item() {
 	drag_item.clear();
 }
 
-static void paint_drag_target(item* pi, wear_s slot) {
+static void paint_drag_target(item* pi, wearn slot) {
 	if(drag_item_source) {
 		if(button_hilited) {
 			drag_item_dest = pi;
 			image(gres(STONSLOT), 25, 0);
+		} else {
+			auto p = get_creature(pi);
+			if(p) {
+				if(slot != Backpack && p->isusable(drag_item)) {
+					if(drag_item.is(slot))
+						image(gres(STONSLOT), 16, 0);
+				}
+			}
 		}
 	}
 }
@@ -540,7 +548,7 @@ static void paint_item_dragable(item* pi) {
 	}
 }
 
-static void inventory(wear_s slot, int index, int empthy_frame, bool show_back = true) {
+static void inventory(wearn slot, int index, int empthy_frame, bool show_back = true) {
 	auto pi = player->wears + slot + index;
 	if(show_back) {
 		auto index_frame = index % 8;
@@ -549,6 +557,7 @@ static void inventory(wear_s slot, int index, int empthy_frame, bool show_back =
 		image(gres(STONSLOT), index_frame, 0);
 	}
 	button_check(0);
+	paint_drag_target(pi, slot);
 	if(*pi)
 		paint_item_dragable(pi);
 	else if(empthy_frame != -1) {
@@ -557,10 +566,9 @@ static void inventory(wear_s slot, int index, int empthy_frame, bool show_back =
 		else
 			image(caret.x + 2, caret.y + 2, gres(STON), empthy_frame, 0);
 	}
-	paint_drag_target(pi, slot);
 }
 
-static void inventory(wear_s slot, int index) {
+static void inventory(wearn slot, int index) {
 	inventory(slot, index, -1, true);
 }
 

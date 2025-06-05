@@ -2,7 +2,7 @@
 
 #pragma once
 
-enum wear_s : unsigned char {
+enum wearn : unsigned char {
 	Backpack, LastBackpack = Backpack + 23,
 	Head, Neck, Body, Rear, LeftFinger, RightFinger, Hands, Gridle, Legs,
 	QuickWeapon, QuickOffhand, LastQuickWeapon = QuickWeapon + 4 * 2 - 1,
@@ -12,3 +12,4 @@ enum wear_s : unsigned char {
 struct weari : nameable {
 	int		avatar;
 };
+wearn get_slot(wearn v);

@@ -51,3 +51,25 @@ BSDATA(weari) = {
 	{"QuickItem3"},
 };
 BSDATAF(weari)
+
+wearn get_slot(wearn v) {
+	if(v >= Backpack && v <= LastBackpack)
+		return Backpack;
+	else if(v >= Quiver && v <= LastQuiver)
+		return Quiver;
+	else if(v >= QuickItem && v <= LastQuickItem)
+		return QuickItem;
+	else if(v == LeftFinger || v == RightFinger)
+		return LeftFinger;
+	else if(v == QuickWeapon
+		|| v == QuickWeapon + 2
+		|| v == QuickWeapon + 4
+		|| v == QuickWeapon + 6)
+		return QuickWeapon;
+	else if(v == QuickOffhand
+		|| v == QuickOffhand + 2
+		|| v == QuickOffhand + 4
+		|| v == QuickOffhand + 6)
+		return QuickOffhand;
+	return v;
+}

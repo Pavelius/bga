@@ -39,7 +39,7 @@ void wearable::additem(item& v) {
 }
 
 void wearable::equip(item& v) {
-	for(auto i = Head; i <= LastQuickItem; i = (wear_s)(i + 1)) {
+	for(auto i = Head; i <= LastQuickItem; i = (wearn)(i + 1)) {
 		if(wears[i])
 			continue;
 		if(!v.canequip(i))
@@ -82,8 +82,8 @@ int	wearable::getencumbrance() const {
 	return 0;
 }
 
-wear_s wearable::getslot(const void* p) const {
+wearn wearable::getslot(const void* p) const {
 	if(p >= wears && p < wears + lenghtof(wears))
-		return (wear_s)((const item*)p - wears);
+		return (wearn)((const item*)p - wears);
 	return Backpack;
 }

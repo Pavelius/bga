@@ -59,8 +59,9 @@ int itemi::getmultiplier() const {
 	return v;
 }
 
-bool item::is(wear_s v) const {
-	if(v >= Backpack && v <= LastBackpack)
+bool item::is(wearn v) const {
+	v = get_slot(v);
+	if(v == Backpack)
 		return true;
 	auto ew = geti().wear;
 	switch(ew) {
@@ -95,7 +96,7 @@ void item::add(item& v) {
 	}
 }
 
-bool item::canequip(wear_s v) const {
+bool item::canequip(wearn v) const {
 	switch(v) {
 	case QuickWeapon + 2 * 0:
 	case QuickWeapon + 2 * 1:
