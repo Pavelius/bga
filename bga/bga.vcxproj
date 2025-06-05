@@ -23,7 +23,6 @@
     <Text Include="..\forms\GUICHP0B.txt" />
     <Text Include="..\forms\GUIHELP.txt" />
     <Text Include="..\forms\GUIINVAB.txt" />
-    <Text Include="..\forms\GUIMAPAB.txt" />
     <Text Include="..\forms\GUIMAPGM.txt" />
     <Text Include="..\forms\GUISPL08.txt" />
     <Text Include="..\forms\GUISTBSB.txt" />
@@ -133,6 +132,7 @@
     <ClCompile Include="view_creature.cpp" />
     <ClCompile Include="view_dialog.cpp" />
     <ClCompile Include="view_list.cpp" />
+    <ClCompile Include="view_tool.cpp" />
     <ClCompile Include="wear.cpp" />
     <ClCompile Include="wearable.cpp" />
     <ClCompile Include="widget.cpp" />

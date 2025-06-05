@@ -1,2 +1,2 @@
-﻿Error in file `forms/GUIWMAP.txt`:
- Line 7: Not found Widget identifier `Worldmap`
+﻿Error in file `forms/GUIWBTP.txt`:
+ Line 3: Not found Widget identifier `AreaMap`

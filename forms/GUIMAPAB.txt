@@ -1,7 +1,0 @@
-﻿#Control
-
-Background GUIMAP 0 0 0 0
-
-ActionPanelNA NONE 0 433 0 0
-//HotKey NONE 0 0 0 0 data(GGAME) value(1) hotkey("Escape")
-//Form NONE 0 493 0 0 data(GCOMM008)

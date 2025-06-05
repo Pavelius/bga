@@ -52,7 +52,7 @@ void enter(const char* id, const char* location) {
 		setcamera(pn->position);
 		setparty(pn->position);
 	}
-	setnext(open_game);
+	next_scene(open_game, 1);
 }
 
 static bool archive_sav(const char* url, bool write_mode) {

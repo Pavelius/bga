@@ -45,9 +45,6 @@
     <Text Include="..\rules\Races.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\forms\GUIMAPAB.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\forms\GUIMAPGM.txt">
       <Filter>forms</Filter>
     </Text>
@@ -387,6 +384,9 @@
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="view_list.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="view_tool.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>

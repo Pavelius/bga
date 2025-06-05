@@ -6,8 +6,6 @@
 #include "creature.h"
 #include "door.h"
 #include "draw.h"
-#include "draw_gui.h"
-#include "draw_form.h"
 #include "game.h"
 #include "log.h"
 #include "itema.h"
@@ -15,6 +13,7 @@
 #include "resid.h"
 #include "script.h"
 #include "timer.h"
+#include "widget.h"
 #include "worldmap.h"
 
 using namespace draw;
@@ -75,8 +74,6 @@ static void read_rules() {
 	bsreq::read("rules/Worldmap.txt");
 	bsreq::read("rules/Calendar.txt");
 	bsreq::read("rules/Feats.txt");
-	log::readf(form::readhead, "forms", "*.txt");
-	log::readf(form::read, "forms", "*.txt");
 }
 
 int main(int argc, char* argv[]) {

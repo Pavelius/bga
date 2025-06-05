@@ -68,9 +68,15 @@ static void setgameproc() {
 	setgameproc(p, m);
 }
 
-static void next_game_stage() {
-	auto p = (fnevent)hot.object;
-	setnext(p);
+void next_scene(fnevent proc, int mode) {
+	switch(mode) {
+	case 1: setnext(proc); break;
+	default: scene(proc); break;
+	}
+}
+
+void next_scene() {
+	next_scene((fnevent)hot.object, hot.param);
 }
 
 void paint_dialog(resn v) {
@@ -308,9 +314,12 @@ static void portrait_large() {
 	image(gres(PORTL), player->portrait, 0);
 }
 
-static void portrait_small(creature* pc) {
+static void portrait_small(creature* pc, bool player_hilite) {
 	pushrect push;
-	if(selected_creatures.have(pc))
+	if(player_hilite) {
+		if(pc == player)
+			hilight_protrait();
+	} else if(selected_creatures.have(pc))
 		hilight_protrait();
 	setoffset(2, 2);
 	image(gres(PORTS), pc->portrait, 0);
@@ -361,18 +370,34 @@ static void creature_hits(const creature* pc) {
 	caret = push_caret;
 }
 
-static void portrait_bar() {
+static void portrait_bar(bool player_hilite) {
 	pushrect push;
 	caret.x += 505; caret.y += 4;
 	width = height = 46;
 	for(auto i = 0; i < 6; i++) {
-		portrait_small(party[i]);
+		portrait_small(party[i], player_hilite);
 		creature_hits(party[i]);
 		auto key = hot.key & CommandMask;
 		if(ishilite() && key == MouseLeft && hot.pressed)
 			execute(choose_creature, (hot.key & Shift) != 0, 0, party[i]);
 		caret.x += 49;
 	}
+}
+
+static void paint_action_panel() {
+	setcaret(0, 433);
+	image(gres(GACTN), 1, 0);
+	portrait_bar(false);
+}
+
+static void paint_action_panel_player() {
+	setcaret(0, 433);
+	image(gres(GACTN), 1, 0);
+	portrait_bar(true);
+}
+
+static void paint_action_panel_na() {
+	paint_action_panel();
 }
 
 static void layer(color v) {
@@ -444,6 +469,7 @@ static void inventory_line(int index) {
 static void paint_game_player() {
 	setdialog(20, 79, 210, 330); portrait_large();
 	setdialog(22, 23, 206, 28); texta(REALMS, player->getname(), AlignCenterCenter);
+	paint_action_panel_player();
 }
 
 static void apply_weight_color() {
@@ -532,11 +558,6 @@ static void paint_game_inventory() {
 	setdialog(341, 281, 117, 14); paint_weight();
 }
 
-void paint_action_panel() {
-	image(gres(GACTN), 1, 0);
-	portrait_bar();
-}
-
 static void paint_color_pick() {
 	paint_dialog(COLOR);
 	setdialog(23, 23, 158, 21); texta(getnm("Colors"), AlignCenter);
@@ -552,6 +573,7 @@ static void paint_color_pick() {
 
 static void paint_game_options() {
 	paint_game_dialog(STONEOPT);
+	paint_action_panel_na();
 	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("Options"), AlignCenterCenter);
 	setdialog(497, 68); button(GBTNLRG2, 1, 2);
 	setdialog(497, 98); button(GBTNLRG2, 1, 2);
@@ -570,6 +592,7 @@ static void paint_game_journal() {
 	setdialog(460, 18); button(GBTNJBTN, 1, 2);
 	setdialog(525, 18); button(GBTNJBTN, 5, 6);
 	setdialog(66, 67, 170, 20); texta("Test text 2", AlignLeft); // fore(0 200 200)
+	paint_action_panel_na();
 }
 
 static void ability(ability_s v) {
@@ -580,6 +603,10 @@ static void ability(ability_s v) {
 	caret.x += 41;
 	auto n = player->getbonus(v);
 	texta(str("%+1i", n), AlignCenterCenter);
+}
+
+static void paint_help() {
+	paint_game_dialog(GUIHELP);
 }
 
 static void paint_game_character() {
@@ -612,15 +639,16 @@ static void paint_game_character() {
 static void paint_worldmap() {
 	paint_game_dialog(GUIMAP);
 	setdialog(666, 18, 113, 22); texta(getnm("WorldMap"), AlignCenterCenter);
-	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_game_stage, 0, 0, open_game);
+	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 1, 0, open_game);
 	setdialog(23, 20, 630, 392); paint_worldmap_area();
 	//Worldmap WMAP1 23 20 630 392
 }
 
 static void paint_game_automap() {
 	paint_game_dialog(GUIMAP);
+	paint_action_panel_na();
 	setdialog(696, 56, 82, 20); texta(getnm("AreaNotes"), AlignCenterCenter);
-	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_game_stage, 0, 0, open_worldmap);
+	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 1, 0, open_worldmap);
 	setdialog(664, 54); button(GBTNOPT1, 1, 2);
 	setdialog(666, 18, 113, 22); texta(getnm("AreaMap"), AlignCenterCenter);
 	setdialog(98, 36, 480, 360); paint_minimap();
@@ -746,10 +774,12 @@ void paint_game() {
 	setcaret(0, 0, 800, 433);
 	if(game_proc)
 		game_proc();
-	else
+	else {
 		paint_area();
-	setcaret(0, 433); paint_action_panel();
+		paint_action_panel();
+	}
 	setcaret(0, 493); paint_game_panel();
+	input_debug();
 }
 
 static void identify_item() {

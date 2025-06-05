@@ -700,8 +700,6 @@ static void content_list() {
 	list_elements(&current_focus, *p->source);
 }
 
-void util_items_list();
-
 void item_list_total(stringbuilder& sb) {
 	auto p = get_item_list();
 	if(!p)
@@ -710,9 +708,6 @@ void item_list_total(stringbuilder& sb) {
 }
 
 BSDATA(widget) = {
-	{"ActionPanelNA", paint_action_panel},
-	{"AreaMinimap", paint_minimap},
-	{"AreaMap", paint_area},
 	{"Background", background},
 	{"Button", button},
 	{"ButtonAM", button_animated},
@@ -742,8 +737,5 @@ BSDATA(widget) = {
 	{"StoreList", store_list},
 	{"StoreName", store_name},
 	{"TopicList", topic_list},
-#ifdef _DEBUG
-	{"ItemList", util_items_list},
-#endif // _DEBUG
 };
 BSDATAF(widget)
