@@ -2,7 +2,6 @@
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
-#include "draw_form.h"
 #include "game.h"
 #include "script.h"
 #include "store.h"
@@ -57,12 +56,11 @@ static void show_item_list(int bonus) {
 
 static void open_store(int bonus) {
 	last_store = bsdata<storei>::elements;
-	form::nextscene("GUISTBSB");
+	// nextscene("GUISTBSB");
 }
 
 static void debug_test(int bonus) {
 	print("Current timer %1i", current_game_tick);
-	open_game();
 	// open_store(bonus);
 }
 
@@ -115,12 +113,6 @@ static void quicksave(int bonus) {
 	gamesave("autosave");
 }
 
-void item_list_total(stringbuilder& sb);
-
-BSDATA(stringvari) = {
-	{"ItemListTotal", item_list_total}
-};
-BSDATAF(stringvari)
 BSDATA(script) = {
 	{"Attack", attack_change},
 	{"BuyItem", buy_item_script, allow_buy_item},

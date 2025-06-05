@@ -224,12 +224,6 @@
     <ClCompile Include="zip_util.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="draw_gui.cpp">
-      <Filter>interface</Filter>
-    </ClCompile>
-    <ClCompile Include="draw_form.cpp">
-      <Filter>interface</Filter>
-    </ClCompile>
     <ClCompile Include="resid.cpp">
       <Filter>interface</Filter>
     </ClCompile>
@@ -389,6 +383,9 @@
     <ClCompile Include="view_tool.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="help.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -477,12 +474,6 @@
     </ClInclude>
     <ClInclude Include="bstream.h">
       <Filter>support</Filter>
-    </ClInclude>
-    <ClInclude Include="draw_gui.h">
-      <Filter>interface</Filter>
-    </ClInclude>
-    <ClInclude Include="draw_form.h">
-      <Filter>interface</Filter>
     </ClInclude>
     <ClInclude Include="resid.h">
       <Filter>interface</Filter>
@@ -644,6 +635,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="view_list.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="help.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

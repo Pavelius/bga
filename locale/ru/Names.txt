@@ -68,6 +68,7 @@ HalfOrc: Полуорк
 Female: Женщина
 Male: Мужчина
 
+Classes: Классы
 Commoner: Крестьянин
 Cleric: Клерик
 Fighter: Боец

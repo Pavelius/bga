@@ -8,7 +8,7 @@
 #include "container.h"
 #include "creature.h"
 #include "door.h"
-#include "draw_form.h"
+#include "draw.h"
 #include "entrance.h"
 #include "floattext.h"
 #include "gender.h"
@@ -24,7 +24,6 @@
 #include "store.h"
 #include "stringvar.h"
 #include "variant.h"
-#include "widget.h"
 #include "worldmap.h"
 
 using namespace draw;
@@ -37,7 +36,6 @@ BSDATAC(animation, 128)
 BSDATAC(areai, 512)
 BSDATAC(calendari, 128)
 BSDATAC(colorgrad, 32)
-BSDATAC(control, 1024)
 BSDATAC(container, 128)
 BSDATAC(creature, 256)
 BSDATAC(door, 64)
@@ -46,7 +44,6 @@ BSDATAC(entrance, 64)
 BSDATAC(floattext, 64)
 BSDATAC(itemi, 512)
 BSDATAC(itemground, 512)
-BSDATAC(form, 128)
 BSDATAC(point, 256*256)
 BSDATAC(region, 128)
 BSDATAD(variant)
@@ -82,12 +79,6 @@ BSMETA(color) = {
 BSMETA(colorgrad) = {
 	BSREQ(id), BSREQ(indecies),
 	{}};
-BSMETA(control) = {
-	BSREQ(visual), BSREQ(resource), BSREQ(x), BSREQ(y), BSREQ(width), BSREQ(height),
-	BSREQ(value), BSREQ(frames), BSREQ(fore),
-	BSREQ(id), BSREQ(data),
-	BSREQ(hotkey),
-	{}};
 BSMETA(damagei) = {
 	BSREQ(id),
 	{}};
@@ -97,10 +88,6 @@ BSMETA(dice) = {
 BSMETA(feati) = {
 	BSREQ(id),
 	BSREQ(require),
-	{}};
-BSMETA(form) = {
-	BSREQ(id),
-	BSREQ(controls),
 	{}};
 BSMETA(geographyi) = {
 	BSREQ(id),
@@ -182,9 +169,6 @@ BSMETA(weaponi) = {
 BSMETA(weari) = {
 	BSREQ(id),
 	{}};
-BSMETA(widget) = {
-	BSREQ(id),
-	{}};
 BSMETA(worldmapi) = {
 	BSREQ(id),
 	BSREQ(background),
@@ -209,11 +193,9 @@ BSDATA(varianti) = {
 	{"Advance", VAR(advancei, 3)},
 	{"Calendar", VAR(calendari, 1)},
 	{"Class", VAR(classi, 1)},
-	{"Control", VAR(control, 6)},
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"DayPart", VAR(periodi, 1)},
 	{"Feat", VAR(feati, 1), 0, 0, fnscript<feati>},
-	{"Form", VAR(form, 1)},
 	{"Item", VAR(itemi, 1)},
 	{"List", VAR(listi, 1)},
 	{"Modifier", VAR(modifieri, 1), 0, 0, fnscript<modifieri>},
@@ -226,7 +208,6 @@ BSDATA(varianti) = {
 	{"Store", VAR(storei, 1)},
 	{"StringVar", VAR(stringvari, 1)},
 	{"Type", VAR(varianti, 1)},
-	{"Widget", VAR(widget, 1)},
 	{"WorldArea", VAR(worldmapi::area, 1)},
 	{"WorldLink", VAR(worldmapi::link, 3)},
 	{"WorldRealm", VAR(worldmapi, 1)},

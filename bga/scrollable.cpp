@@ -1,5 +1,4 @@
 #include "draw.h"
-#include "draw_gui.h"
 #include "scrollable.h"
 
 using namespace draw;
@@ -54,8 +53,8 @@ void scrollable::input() {
 void scrollable::paint() {
 	if(isinvalidated())
 		update();
-	if(gui.hilited)
-		input();
+	//if(gui.hilited)
+	//	input();
 	last_scroll = this;
 }
 

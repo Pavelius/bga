@@ -308,9 +308,8 @@ bool isnext();
 void initialize(const char* title);
 bool ismodal();
 void* scene(fnevent proc);
-void scene();
 void setneedupdate();
 }
 
-void setnext(fnevent v);
-void start();
+void next_scene(fnevent v);
+void start_scene();

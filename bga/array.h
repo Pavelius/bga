@@ -40,6 +40,7 @@ struct array {
 	void shift(int i1, int i2, size_t c1, size_t c2);
 	void setcount(unsigned value) { count = value; }
 	void setup(size_t size);
+	void sort(fncompare proc) { qsort(data, count, element_size, proc); }
 	void swap(int i1, int i2);
 	void reserve(unsigned count);
 	void repack(unsigned& start, unsigned count);

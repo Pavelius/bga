@@ -2607,10 +2607,6 @@ void* draw::scene(fnevent proc) {
 	return (void*)getresult();
 }
 
-void draw::scene() {
-	scene(0);
-}
-
 void draw::fire(bool run, fnevent proc, long value, long value2, const void* object) {
 	if(!proc)
 		return;
@@ -2656,11 +2652,11 @@ void draw::setcaret(int x, int y, int w, int h) {
 	height = h;
 }
 
-void setnext(fnevent v) {
+void next_scene(fnevent v) {
 	next_proc = v;
 }
 
-void start() {
+void start_scene() {
 	while(next_proc) {
 		auto p = next_proc;
 		next_proc = 0; p();

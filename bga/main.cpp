@@ -104,8 +104,8 @@ int main(int argc, char* argv[]) {
 	print("Count of creatures %1i", bsdata<creature>::source.getcount());
 	initialize(getnm("AppTitle"));
 	settimer(64);
-	setnext(start_main);
-	start();
+	next_scene(start_main);
+	start_scene();
 	return 0;
 }
 

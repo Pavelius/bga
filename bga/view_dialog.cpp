@@ -2,11 +2,15 @@
 #include "colorgrad.h"
 #include "creature.h"
 #include "draw.h"
+#include "help.h"
 #include "pushvalue.h"
 #include "resid.h"
 #include "resinfo.h"
 #include "screenshoot.h"
 #include "timer.h"
+#include "list.h"
+#include "variant.h"
+#include "vector.h"
 #include "view.h"
 #include "view_list.h"
 
@@ -22,7 +26,12 @@ static fnevent game_proc;
 static char description_text[4096];
 static size_t description_cash_size;
 static int character_info_mode;
+static int current_topic_list;
+static int current_content_list;
+static vector<nameable*> content;
 stringbuilder description(description_text);
+
+static void paint_game_panel(bool allow_input);
 
 static const char* getnms(ability_s v) {
 	return getnm(ids(bsdata<abilityi>::elements[v].id, "Short"));
@@ -68,15 +77,12 @@ static void setgameproc() {
 	setgameproc(p, m);
 }
 
-void next_scene(fnevent proc, int mode) {
-	switch(mode) {
-	case 1: setnext(proc); break;
-	default: scene(proc); break;
-	}
+void next_scene() {
+	next_scene((fnevent)hot.object);
 }
 
-void next_scene() {
-	next_scene((fnevent)hot.object, hot.param);
+void open_scene() {
+	scene((fnevent)hot.object);
 }
 
 void paint_dialog(resn v) {
@@ -238,6 +244,14 @@ static void scroll(resn res, int fu, int fd, int bar, int& origin, int maximum, 
 	button(res, bar, bar);
 }
 
+static void paint_game_panel() {
+	paint_game_panel(true);
+}
+
+static void paint_game_panel_na() {
+	paint_game_panel(false);
+}
+
 static void paint_console() {
 	static int origin, maximum;
 	static int console_cash_origin, cash_string, cash_origin;
@@ -316,11 +330,13 @@ static void portrait_large() {
 
 static void portrait_small(creature* pc, bool player_hilite) {
 	pushrect push;
-	if(player_hilite) {
-		if(pc == player)
+	if(!input_disabled) {
+		if(player_hilite) {
+			if(pc == player)
+				hilight_protrait();
+		} else if(selected_creatures.have(pc))
 			hilight_protrait();
-	} else if(selected_creatures.have(pc))
-		hilight_protrait();
+	}
 	setoffset(2, 2);
 	image(gres(PORTS), pc->portrait, 0);
 	if(drag_item_source && player != pc && ishilite()) {
@@ -377,9 +393,11 @@ static void portrait_bar(bool player_hilite) {
 	for(auto i = 0; i < 6; i++) {
 		portrait_small(party[i], player_hilite);
 		creature_hits(party[i]);
-		auto key = hot.key & CommandMask;
-		if(ishilite() && key == MouseLeft && hot.pressed)
-			execute(choose_creature, (hot.key & Shift) != 0, 0, party[i]);
+		if(!input_disabled) {
+			auto key = hot.key & CommandMask;
+			if(ishilite() && key == MouseLeft && hot.pressed)
+				execute(choose_creature, (hot.key & Shift) != 0, 0, party[i]);
+		}
 		caret.x += 49;
 	}
 }
@@ -397,7 +415,9 @@ static void paint_action_panel_player() {
 }
 
 static void paint_action_panel_na() {
+	auto push_input = input_disabled; input_disabled = true;
 	paint_action_panel();
+	input_disabled = push_input;
 }
 
 static void layer(color v) {
@@ -605,8 +625,106 @@ static void ability(ability_s v) {
 	texta(str("%+1i", n), AlignCenterCenter);
 }
 
+static void paint_list(void* source, size_t size, int& origin, int& current, int maximum, int per_page, fngetname get_name, unsigned flags) {
+	pushrect push;
+	pushfore push_fore;
+	input_mouse_table(origin, maximum, per_page);
+	caret.y += 1;
+	height = texth() + 2;
+	correct_table(origin, maximum, per_page);
+	if(maximum > origin + per_page)
+		maximum = origin + per_page;
+	for(auto i = origin; i < maximum; i++) {
+		auto p = (char*)source + size * i;
+		fore = (current == i) ? colors::yellow : colors::white;
+		text(get_name(p));
+		button_hilited = ishilite();
+		if(button_hilited) {
+			if(hot.key == MouseLeft && !hot.pressed)
+				execute(cbsetint, i, 0, &current);
+		}
+		caret.y += height;
+	}
+}
+
+static void paint_list(const array& source, int& origin, int& current, int per_page) {
+	pushrect push;
+	pushfore push_fore;
+	auto push_clip = clipping; setclipall();
+	int maximum = source.count;
+	input_mouse_table(origin, maximum, per_page);
+	caret.y += 1;
+	height = texth() + 2;
+	correct_table(origin, maximum, per_page);
+	if(maximum > origin + per_page)
+		maximum = origin + per_page;
+	for(auto i = origin; i < maximum; i++) {
+		auto p = ((nameable**)source.data)[i];
+		fore = (current == i) ? colors::yellow : colors::white;
+		text(p->getname());
+		button_hilited = ishilite();
+		if(button_hilited) {
+			if(hot.key == MouseLeft && !hot.pressed)
+				execute(cbsetint, i, 0, &current);
+		}
+		caret.y += height;
+	}
+	clipping = push_clip;
+}
+
+static void paint_topic_lists() {
+	static int origin;
+	paint_list(bsdata<helpi>::elements, sizeof(bsdata<helpi>::elements[0]),
+		origin, current_topic_list, bsdata<helpi>::source.count, 15, nameable::getname, AlignLeftCenter);
+}
+
+static int compare_nameable(const void* v1, const void* v2) {
+	auto p1 = *((nameable**)v1);
+	auto p2 = *((nameable**)v2);
+	return szcmp(p1->getname(), p2->getname());
+}
+
+static void select_content(int index) {
+	if(current_content_list == index)
+		return;
+	current_content_list = index;
+	content.clear();
+	auto& ei = bsdata<helpi>::elements[index];
+	auto pb = ei.source.begin();
+	auto pe = ei.source.end();
+	auto sz = ei.source.element_size;
+	for(auto ps = pb; ps < pe; ps += sz) {
+		if(ei.filter) {
+			if(!ei.filter(ps))
+				continue;
+		}
+		content.add((nameable*)ps);
+	}
+	content.sort(compare_nameable);
+}
+
+static void paint_content_lists() {
+	static int origin, current;
+	select_content(current_topic_list);
+	paint_list(content, origin, current, 15);
+}
+
 static void paint_help() {
 	paint_game_dialog(GUIHELP);
+	// paint_action_panel_na();
+	// paint_game_panel_na();
+	setdialog(300, 23, 200, 30); texta(STONEBIG, getnm("Information"), AlignCenterCenter);
+	setdialog(297, 373); button(GBTNBFRM, 1, 2, KeyEscape, "Close"); fire(buttoncancel);
+	setdialog(74, 72, 95, 286); paint_topic_lists();
+	setdialog(194, 72, 197, 286); paint_content_lists();
+	//Scroll GBTNSCRL 404 70 12 291 frames(1 0 3 2 4 5)
+	//// TextDescription NORMAL 435 72 271 286 fore(255 255 246)
+	//Scroll GBTNSCRL 720 70 12 291 frames(1 0 3 2 4 5)
+}
+
+static void open_help() {
+	current_content_list = -1;
+	open_dialog(paint_help, true);
 }
 
 static void paint_game_character() {
@@ -622,7 +740,7 @@ static void paint_game_character() {
 	setdialog(463, 381, 32, 30); texta(str("%1i", player->get(AC)), AlignCenterCenter);
 	setdialog(585, 378, 54, 16); texta(str("%1i", player->hp_max), AlignCenterCenter);
 	setdialog(585, 399, 54, 16); texta(str("%1i", player->hp), AlignCenterCenter);
-	setdialog(256, 307); button(GBTNSTD, 1, 2, 0, "Information");
+	setdialog(256, 307); button(GBTNSTD, 1, 2, 0, "Information"); fire(open_help);
 	setdialog(256, 334); button(GBTNSTD, 1, 2, 0, "Biography");
 	setdialog(256, 361); button(GBTNSTD, 1, 2, 0, "Export");
 	setdialog(256, 388); button(GBTNSTD, 1, 2, 0, "Customize");
@@ -639,16 +757,15 @@ static void paint_game_character() {
 static void paint_worldmap() {
 	paint_game_dialog(GUIMAP);
 	setdialog(666, 18, 113, 22); texta(getnm("WorldMap"), AlignCenterCenter);
-	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 1, 0, open_game);
+	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 0, 0, open_game);
 	setdialog(23, 20, 630, 392); paint_worldmap_area();
-	//Worldmap WMAP1 23 20 630 392
 }
 
 static void paint_game_automap() {
 	paint_game_dialog(GUIMAP);
 	paint_action_panel_na();
 	setdialog(696, 56, 82, 20); texta(getnm("AreaNotes"), AlignCenterCenter);
-	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 1, 0, open_worldmap);
+	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 0, 0, open_worldmap);
 	setdialog(664, 54); button(GBTNOPT1, 1, 2);
 	setdialog(666, 18, 113, 22); texta(getnm("AreaMap"), AlignCenterCenter);
 	setdialog(98, 36, 480, 360); paint_minimap();
@@ -750,23 +867,29 @@ static void paint_game_spells() {
 	//Button GBTNSPB3 705 19 17 26 frames(0 1 0 0) value(93)
 }
 
-static void paint_game_panel() {
+static void paint_game_panel(bool allow_input) {
+	pushrect push;
+	auto push_dialog = dialog_start;
+	setcaret(0, 493);
 	dialog_start = caret; image(gres(GCOMM), 0, 0);
-	setdialog(736, 43); image(gres(CGEAR), (current_game_tick / 128) % 32, 0); // Rolling world
 	setdialog(12, 8, 526, 92); paint_console();
-	setdialog(600, 22); button(GCOMMBTN, 4, 5, 'C'); fire(setgameproc, 0, 0, paint_game_character);
-	setdialog(630, 17); button(GCOMMBTN, 6, 7, 'I'); fire(setgameproc, 0, 0, paint_game_inventory);
-	setdialog(668, 21); button(GCOMMBTN, 8, 9, 'S'); fire(setgameproc, 0, 0, paint_game_spells);
-	setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M'); fire(setgameproc, 0, 0, paint_game_automap);
-	setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J'); fire(setgameproc, 0, 0, paint_game_journal);
-	setdialog(670, 57); button(GCOMMBTN, 10, 11, KeyEscape); fire(setgameproc, 1, 0, paint_game_options);
-	setdialog(576, 3); button(GCOMMBTN, 0, 1, '*');
-	setdialog(703, 2); button(GCOMMBTN, 2, 3);
-	setdialog(575, 72); button(GCOMMBTN, 16, 17);
-	setdialog(757, 1); button(GCOMMBTN, 18, 19);
+	if(allow_input) {
+		setdialog(736, 43); image(gres(CGEAR), (current_game_tick / 128) % 32, 0); // Rolling world
+		setdialog(600, 22); button(GCOMMBTN, 4, 5, 'C'); fire(setgameproc, 0, 0, paint_game_character);
+		setdialog(630, 17); button(GCOMMBTN, 6, 7, 'I'); fire(setgameproc, 0, 0, paint_game_inventory);
+		setdialog(668, 21); button(GCOMMBTN, 8, 9, 'S'); fire(setgameproc, 0, 0, paint_game_spells);
+		setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M'); fire(setgameproc, 0, 0, paint_game_automap);
+		setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J'); fire(setgameproc, 0, 0, paint_game_journal);
+		setdialog(670, 57); button(GCOMMBTN, 10, 11, KeyEscape); fire(setgameproc, 1, 0, paint_game_options);
+		setdialog(576, 3); button(GCOMMBTN, 0, 1, '*');
+		setdialog(703, 2); button(GCOMMBTN, 2, 3);
+		setdialog(575, 72); button(GCOMMBTN, 16, 17);
+		setdialog(757, 1); button(GCOMMBTN, 18, 19);
+	}
 	hotkey('Z', change_zoom_factor);
 	// HotKey NONE 0 0 0 0 data(DebugTest) hotkey("Ctrl+D")
 	// HotKey NONE 0 0 0 0 data(ItemList) hotkey("Ctrl+I")
+	dialog_start = push_dialog;
 }
 
 void paint_game() {
@@ -778,7 +901,7 @@ void paint_game() {
 		paint_area();
 		paint_action_panel();
 	}
-	setcaret(0, 493); paint_game_panel();
+	paint_game_panel();
 	input_debug();
 }
 

@@ -1,2 +1,2 @@
-﻿Error in file `forms/GUIWBTP.txt`:
- Line 3: Not found Widget identifier `AreaMap`
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `Classes`

@@ -10,7 +10,7 @@ void util_items_list();
 
 void input_debug() {
 	switch(hot.key) {
-	case Ctrl + 'I': execute(next_scene, 0, 0, util_items_list); break;
+	case Ctrl + 'I': execute(open_scene, 0, 0, util_items_list); break;
 	default: break;
 	}
 }

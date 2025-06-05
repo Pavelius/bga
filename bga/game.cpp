@@ -4,7 +4,6 @@
 #include "creature.h"
 #include "door.h"
 #include "draw.h"
-#include "draw_form.h"
 #include "entrance.h"
 #include "formation.h"
 #include "game.h"
@@ -52,7 +51,7 @@ void enter(const char* id, const char* location) {
 		setcamera(pn->position);
 		setparty(pn->position);
 	}
-	next_scene(open_game, 1);
+	next_scene(open_game);
 }
 
 static bool archive_sav(const char* url, bool write_mode) {

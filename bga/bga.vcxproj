@@ -74,8 +74,6 @@
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="draw_answers.cpp" />
     <ClCompile Include="draw_focus.cpp" />
-    <ClCompile Include="draw_form.cpp" />
-    <ClCompile Include="draw_gui.cpp" />
     <ClCompile Include="drawable.cpp" />
     <ClCompile Include="draw_text.cpp" />
     <ClCompile Include="draw_textf.cpp" />
@@ -86,6 +84,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gender.cpp" />
     <ClCompile Include="geography.cpp" />
+    <ClCompile Include="help.cpp" />
     <ClCompile Include="information.cpp" />
     <ClCompile Include="io_bsreq.cpp" />
     <ClCompile Include="io_stream.cpp" />
@@ -172,6 +171,7 @@
     <ClInclude Include="ftflag.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="geography.h" />
+    <ClInclude Include="help.h" />
     <ClInclude Include="itema.h" />
     <ClInclude Include="itemground.h" />
     <ClInclude Include="iteminside.h" />
@@ -195,8 +195,6 @@
     <ClInclude Include="colorgrad.h" />
     <ClInclude Include="creature.h" />
     <ClInclude Include="draw.h" />
-    <ClInclude Include="draw_form.h" />
-    <ClInclude Include="draw_gui.h" />
     <ClInclude Include="gender.h" />
     <ClInclude Include="io_stream.h" />
     <ClInclude Include="item.h" />
