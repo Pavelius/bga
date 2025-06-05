@@ -9,18 +9,17 @@ screenshoot::screenshoot(rect rc, bool fade) : surface(rc.width(), rc.height(), 
 	if(draw::canvas) {
 		blit(*this, 0, 0, width, height, 0, *draw::canvas, x, y);
 		if(fade) {
+			pushrect push;
 			auto push_canvas = canvas;
 			auto push_clip = clipping;
 			auto push_alpha = alpha;
 			auto push_fore = fore;
-			auto push_caret = caret;
-			caret = point(0, 0);
+			caret = point(0, 0); draw::width = this->width; draw::height = this->height;
 			canvas = this;
 			setclip();
 			alpha = 128;
 			fore = colors::form;
 			rectf();
-			caret = push_caret;
 			fore = push_fore;
 			alpha = push_alpha;
 			clipping = push_clip;

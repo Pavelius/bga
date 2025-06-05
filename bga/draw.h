@@ -294,10 +294,10 @@ void loginitialize();
 }
 namespace draw {
 void breakmodal(long result);
-bool button(const char* title, unsigned key, fnbutton proc, bool vertical = true);
 void buttoncancel();
 void buttonok();
 void buttonparam();
+void cbsetchr();
 void cbsetsht();
 void cbsetint();
 void cbsetptr();

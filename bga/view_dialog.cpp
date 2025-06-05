@@ -4,6 +4,7 @@
 #include "draw.h"
 #include "pushvalue.h"
 #include "resid.h"
+#include "resinfo.h"
 #include "screenshoot.h"
 #include "timer.h"
 #include "view.h"
@@ -16,13 +17,14 @@ extern array console_data;
 static point dialog_start;
 static bool button_pressed, button_executed, button_hilited, input_disabled;
 static bool game_pause;
+static fnevent game_proc;
 
 static char description_text[4096];
 static size_t description_cash_size;
 stringbuilder description(description_text);
 
-static void textah(const char* string, unsigned flags) {
-	pushfont push(metrics::h1);
+static void texta(resn res, const char* string, unsigned flags) {
+	pushfont push(gres(res));
 	texta(string, flags);
 }
 
@@ -37,14 +39,25 @@ static void update_description(const char* format) {
 	description_cash_size = -1;
 }
 
-static void setdialog(int x, int y) {
+void setdialog(int x, int y) {
 	caret = dialog_start + point{(short)x, (short)y};
 }
 
-static void setdialog(int x, int y, int w, int h) {
+void setdialog(int x, int y, int w, int h) {
 	setdialog(x, y);
 	width = w;
 	height = h;
+}
+
+static void setgameproc(fnevent v) {
+	if(game_proc == v)
+		game_proc = 0;
+	else
+		game_proc = v;
+}
+
+static void setgameproc() {
+	setgameproc((fnevent)hot.object);
 }
 
 void paint_dialog(resn v) {
@@ -56,6 +69,13 @@ void paint_dialog(resn v) {
 		dialog_start.y = 64;
 	caret = dialog_start;
 	image(p, 0, 0);
+}
+
+void paint_game_dialog(resn v) {
+	dialog_start.x = 0;
+	dialog_start.y = 0;
+	caret = dialog_start;
+	image(gres(v), 0, 0);
 }
 
 void hotkey(unsigned key, fnevent proc, int param) {
@@ -135,14 +155,37 @@ static void color_picker(int index) {
 		return;
 	}
 	button_colorgrad(color_index, 0);
-	fire(buttonparam, color_index, 0, 0);
+}
+
+static void choose_creature_color() {
+	auto pi = bsdata<portraiti>::elements + player->portrait;
+	auto index = hot.param;
+	switch(index) {
+	case 0: set_color("SkinNormal"); break;
+	case 1: set_color("HairNormal"); break;
+	default: set_color("HairNormal"); break;
+	}
+	player->colors[index] = open_color_pick(player->colors[index], pi->colors[index]);
+}
+
+static void creature_color(int index) {
+	auto color_index = player->colors[index];
+	button(INVBUT2, 0, 1);
+	if(color_index == -1) {
+		button_executed = false;
+		return;
+	}
+	button_colorgrad(color_index, 1);
+	fire(choose_creature_color, index);
 }
 
 static void color_picker_line(int index, int count, int dx) {
 	auto push_caret = caret;
 	for(auto i = 0; i < count; i++) {
-		color_picker(index++);
+		color_picker(index);
+		fire(buttonparam, color_indecies[index], 0, 0);
 		caret.x += dx;
+		index++;
 	}
 	caret = push_caret;
 }
@@ -165,7 +208,6 @@ static void scroll(resn res, int fu, int fd, int bar, int& origin, int maximum, 
 	auto current_position = origin * height_max / maximum;
 	caret.y = push.caret.y + h + current_position;
 	button(res, bar, bar);
-	//button_run_input();
 }
 
 static void paint_console() {
@@ -199,14 +241,31 @@ static void paint_console() {
 	scroll(GCOMMSB, 0, 2, 4, origin, maximum, per_page, per_row);
 }
 
-static void paint_description() {
-	static int cash_origin, cash_string;
+static void paint_description(int xs, int ys, int hs) {
+	static int cash_origin, cash_string, origin, maximum;
+	pushrect push;
+	const int per_row = texth();
+	const int per_page = height;
 	if(description.size() != description_cash_size) {
 		cash_string = -1;
 		description_cash_size = description.size();
+		pushrect push;
+		textfs((char*)console_data.data);
+		maximum = height;
 	}
-	pushfore push({240, 240, 240});
+	correct_table(origin, maximum, per_page);
+	if(cash_origin != origin) {
+		cash_origin = origin;
+		cash_string = -1;
+	}
+	pushfore push_fore({240, 240, 240});
+	auto push_clip = clipping; setclipall();
+	if(cash_string == -1)
+		caret.y -= origin;
 	textf(description, cash_origin, cash_string);
+	clipping = push_clip; caret = push.caret;
+	setdialog(xs, ys, 12, hs);
+	scroll(GBTNSCRL, 0, 2, 4, origin, maximum, per_page, per_row);
 }
 
 static void hilight_protrait() {
@@ -223,6 +282,10 @@ static void hilight_drag_protrait() {
 	fore = push_fore;
 }
 
+static void portrait_large() {
+	image(gres(PORTL), player->portrait, 0);
+}
+
 static void portrait_small(creature* pc) {
 	pushrect push;
 	if(selected_creatures.have(pc))
@@ -233,6 +296,11 @@ static void portrait_small(creature* pc) {
 		drag_item_dest = pc->wears;
 		hilight_drag_protrait();
 	}
+}
+
+static void paint_item_avatar() {
+	auto i = last_item->geti().avatar * 2;
+	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
 }
 
 static void choose_creature() {
@@ -285,6 +353,192 @@ static void portrait_bar() {
 	}
 }
 
+static void layer(color v) {
+	auto push_alpha = alpha; alpha = 26;
+	auto push_fore = fore; fore = v;
+	rectf();
+	alpha = push_alpha;
+	fore = push_fore;
+}
+
+static void input_item_info(const item* pi) {
+	if(button_hilited && hot.key == MouseRight && !hot.pressed)
+		execute(open_item_description, 0, 0, pi);
+}
+
+static void paint_item(const item* pi) {
+	if(!pi)
+		return;
+	pushrect push;
+	button_check(0);
+	setoffset(2, 2);
+	if(!player->isusable(*pi))
+		layer(colors::red);
+	image(gres(ITEMS), pi->geti().avatar * 2, 0);
+	input_item_info(pi);
+}
+
+static void paint_item_dragable(item* pi) {
+	paint_item(pi);
+	if(button_hilited && !drag_item_source) {
+		//	if(hot.key == MouseLeft && hot.pressed)
+		//		execute(begin_drag_item, 0, 0, pi);
+	}
+}
+
+static int get_slot_frame(wear_s n) {
+	switch(n) {
+	case Head: return 0;
+	case Neck: return 1;
+	case Body: return 2;
+	case Rear: return 3;
+	case LeftFinger: return 4;
+	case RightFinger: return 5;
+	case Hands: return 6;
+	case Gridle: return 7;
+	case Legs: return 8;
+	case Quiver: return 11;
+	case QuickWeapon: return 17;
+	default: return -1;
+	}
+}
+
+static bool need_back(wear_s slot) {
+	if(slot >= Head && slot <= Legs)
+		return false;
+	return true;
+}
+
+static void inventory(wear_s slot, int index, int empthy_frame) {
+	auto pi = player->wears + slot + index;
+	auto index_frame = index % 8;
+	if(index_frame >= 4)
+		index_frame += 4;
+	image(gres(STONSLOT), index_frame, 0);
+	//allow_drop_target(pi, Backpack);
+	if(*pi)
+		paint_item_dragable(pi);
+	else if(empthy_frame != -1)
+		image(caret.x + 2, caret.y + 2, gres(STON), empthy_frame, 0);
+}
+
+static void inventory(wear_s slot, int index) {
+	auto pi = player->wears + slot + index;
+	if(need_back(slot)) {
+		auto index_frame = index % 8;
+		if(index_frame >= 4)
+			index_frame += 4;
+		image(gres(STONSLOT), index_frame, 0);
+	}
+	//allow_drop_target(pi, Backpack);
+	if(*pi)
+		paint_item_dragable(pi);
+	else {
+		auto empthy_frame = get_slot_frame(slot);
+		if(empthy_frame != -1)
+			image(caret.x + 2, caret.y + 2, gres(STON), empthy_frame, 0);
+	}
+}
+
+static void inventory_line(int index) {
+	auto push = caret;
+	auto index_end = index + 8;
+	while(index < index_end) {
+		inventory(Backpack, index++);
+		caret.x += 38;
+	}
+	caret = push;
+}
+
+static void paint_game_player() {
+	setdialog(20, 79, 210, 330); portrait_large();
+	setdialog(22, 23, 206, 28); texta(REALMS, player->getname(), AlignCenterCenter);
+}
+
+static void apply_weight_color() {
+	switch(player->getencumbrance()) {
+	case 3: case 2: fore = colors::red; break;
+	case 1: fore = colors::yellow; break;
+	default: break;
+	}
+}
+
+static void paint_weight() {
+	pushfore push_fore;
+	char temp[260]; stringbuilder sb(temp);
+	sb.add(getkg(player->weight));
+	sb.adds("%-1", getnm("From"));
+	sb.adds(getkg(player->allowed_weight));
+	apply_weight_color();
+	texta(TOOLFONT, temp, AlignCenterCenter);
+}
+
+static void quick_weapon(int index) {
+	pushrect push;
+	auto fb = index * 3;
+	if(player->weapon_index == index)
+		button(INVBUT3, fb + 2, fb + 1, '1' + index);
+	else
+		button(INVBUT3, fb + 0, fb + 1, '1' + index);
+	fire(cbsetchr, index, 0, &player->weapon_index);
+	caret.x += 28;
+	inventory(QuickWeapon, index * 2, 17);
+	if(player->weapon_index == index)
+		image(gres(STONSLOT), 34, 0);
+	caret.x += 38;
+	inventory(QuickOffhand, index * 2, 13);
+	if(player->weapon_index == index && player->useoffhand())
+		image(gres(STONSLOT), 34, 0);
+}
+
+static void paint_game_inventory() {
+	paint_game_dialog(GUIINV);
+	paint_game_player();
+	setdialog(339, 86, 126, 160); paperdoll();
+	setdialog(251, 299, 36, 36); inventory_line(0);
+	setdialog(251, 339, 36, 36); inventory_line(8);
+	setdialog(251, 379, 36, 36); inventory_line(16);
+	setdialog(383, 22, 36, 36); inventory(Head, 0);
+	setdialog(446, 22, 36, 36); inventory(Neck, 0);
+	setdialog(255, 22, 36, 36); inventory(Body, 0);
+	setdialog(319, 22, 36, 36); inventory(Rear, 0);
+	setdialog(255, 79, 36, 36); inventory(LeftFinger, 0);
+	setdialog(510, 79, 36, 36); inventory(RightFinger, 0);
+	setdialog(255, 136, 36, 36); inventory(Hands, 0);
+	setdialog(510, 22, 36, 36); inventory(Gridle, 0);
+	setdialog(510, 136, 36, 36); inventory(Legs, 0);
+	setdialog(574, 130, 111, 22); texta(getnm("Quiver"), AlignCenterCenter);
+	setdialog(572, 158, 36, 36); inventory(Quiver, 0);
+	setdialog(611, 158, 36, 36); inventory(Quiver, 1);
+	setdialog(650, 158, 36, 36); inventory(Quiver, 2);
+	setdialog(574, 200, 111, 22); texta(getnm("QuickItem"), AlignCenterCenter);
+	setdialog(572, 228, 36, 36); inventory(QuickItem, 0);
+	setdialog(611, 228, 36, 36); inventory(QuickItem, 1);
+	setdialog(650, 228, 36, 36); inventory(QuickItem, 2);
+	setdialog(574, 270, 111, 22); texta(getnm("Ground"), AlignCenterCenter);
+	setdialog(572, 299, 36, 36); button(STONSLOT, 0, 0, 0);
+	setdialog(572, 339, 36, 36); button(STONSLOT, 0, 0, 0);
+	setdialog(572, 379, 36, 36); button(STONSLOT, 0, 0, 0);
+	setdialog(612, 299, 36, 36); button(STONSLOT, 1, 1, 0);
+	setdialog(612, 339, 36, 36); button(STONSLOT, 1, 1, 0);
+	setdialog(612, 379, 36, 36); button(STONSLOT, 1, 1, 0);
+	//	Scroll GBTNSCRL 655 302 12 112 frames(1 0 3 2 4 5)
+	setdialog(575, 20, 206, 22); texta(getnm("QuickWeapon"), AlignCenterCenter);
+	setdialog(572, 48); quick_weapon(0);
+	setdialog(572, 88); quick_weapon(1);
+	setdialog(679, 48); quick_weapon(2);
+	setdialog(679, 88); quick_weapon(3);
+	setdialog(704, 141, 70, 20); texta(NORMAL, str("%1i", player->coins), AlignCenterCenter);
+	setdialog(704, 243, 70, 32); texta(REALMS, str("%1i", player->get(AC)), AlignCenterCenter);
+	setdialog(710, 353, 54, 16); texta(REALMS, str("%1i", player->hp_max), AlignCenterCenter);
+	setdialog(710, 371, 54, 16); texta(REALMS, str("%1i", player->hp), AlignCenterCenter);
+	setdialog(252, 191, 42, 42); creature_color(1);
+	setdialog(252, 231, 42, 42); creature_color(0);
+	setdialog(507, 191, 42, 42); creature_color(2);
+	setdialog(507, 231, 42, 42); creature_color(3);
+	setdialog(341, 281, 117, 14); paint_weight();
+}
+
 void paint_action_panel() {
 	image(gres(GACTN), 1, 0);
 	portrait_bar();
@@ -308,7 +562,7 @@ static void paint_game_panel() {
 	setdialog(736, 43); image(gres(CGEAR), (current_game_tick / 128) % 32, 0); // Rolling world
 	setdialog(12, 8, 526, 92); paint_console();
 	setdialog(600, 22); button(GCOMMBTN, 4, 5, 'C');
-	setdialog(630, 17); button(GCOMMBTN, 6, 7, 'I');
+	setdialog(630, 17); button(GCOMMBTN, 6, 7, 'I'); fire(setgameproc, 0, 0, paint_game_inventory);
 	setdialog(668, 21); button(GCOMMBTN, 8, 9, 'S');
 	setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M');
 	setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J');
@@ -325,14 +579,14 @@ static void paint_game_panel() {
 void paint_game() {
 	if(!game_pause)
 		update_frames();
-	setcaret(0, 0, 800, 433); paint_area();
+	cursor.set(CURSORS, 0);
+	setcaret(0, 0, 800, 433);
+	if(game_proc)
+		game_proc();
+	else
+		paint_area();
 	setcaret(0, 433); paint_action_panel();
 	setcaret(0, 493); paint_game_panel();
-}
-
-static void paint_item_avatar() {
-	auto i = last_item->geti().avatar * 2;
-	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
 }
 
 static void identify_item() {
@@ -342,15 +596,12 @@ static void identify_item() {
 
 static void paint_item_description() {
 	paint_dialog(GIITMH08);
-	setdialog(36, 37, 357, 30); textah(str("%ItemName"), AlignCenterCenter);
+	setdialog(36, 37, 357, 30); texta(STONEBIG, str("%ItemName"), AlignCenterCenter);
 	setdialog(430, 20, 64, 64); paint_item_avatar();
 	setdialog(20, 432); button(GBTNMED, 1, 2, 'I', "Identify"); fire(identify_item);
 	setdialog(179, 432); button(GBTNMED, 1, 2, 'U', "UseItem");
 	setdialog(338, 432); button(GBTNMED, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
-	setdialog(28, 115, 435, 299); paint_description();
-	//TextDescription NORMAL 23 111 445 307 fore(250 250 250) id("Text")
-	//Scroll GBTNSCRL 480 109 12 311 frames(1 0 3 2 4 5)
-	// Label NORMAL 314 111 152 18 id("Test")
+	setdialog(28, 115, 435, 299); paint_description(480, 109, 311);
 }
 
 void open_item_description() {

@@ -2499,6 +2499,11 @@ void draw::cbsetsht() {
 	*p = (short)hot.param;
 }
 
+void draw::cbsetchr() {
+	auto p = (char*)hot.object;
+	*p = (char)hot.param;
+}
+
 void draw::cbsetptr() {
 	auto p = (void**)hot.object;
 	*p = (void*)hot.param;
@@ -2615,25 +2620,6 @@ void* draw::scene(fnevent proc) {
 
 void draw::scene() {
 	scene(0);
-}
-
-bool draw::button(const char* title, unsigned key, fnbutton proc, bool vertical) {
-	auto push_width = width;
-	auto push_height = height;
-	control_hilited = proc(title);
-	if(vertical) {
-		width = push_width;
-		if(!height)
-			return false;
-		caret.y += height + metrics::padding;
-	} else {
-		height = push_height;
-		if(!width)
-			return false;
-		caret.x += width + metrics::padding;
-	}
-	return (key && hot.key == key)
-		|| (hot.key == MouseLeft && control_hilited && !hot.pressed);
 }
 
 void draw::fire(bool run, fnevent proc, long value, long value2, const void* object) {
