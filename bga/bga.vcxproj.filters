@@ -72,9 +72,6 @@
     <Text Include="..\rules\Worldmap.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\forms\GUIWMAP.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\rules\Calendar.txt">
       <Filter>rules</Filter>
     </Text>

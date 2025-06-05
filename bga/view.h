@@ -24,6 +24,7 @@ void paint_dialog(resn v);
 void paint_game_dialog(resn v);
 void paint_game_inventory();
 void paint_minimap();
+void paint_worldmap_area();
 void paperdoll();
 long open_dialog(fnevent proc, bool faded);
 void open_item_description();

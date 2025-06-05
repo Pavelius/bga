@@ -74,6 +74,7 @@ static void next_game_stage() {
 }
 
 void paint_dialog(resn v) {
+	cursor.set(CURSORS, 0);
 	auto p = gres(v);
 	auto& f = p->get(0);
 	dialog_start.x = (getwidth() - f.sx) / 2;
@@ -85,6 +86,7 @@ void paint_dialog(resn v) {
 }
 
 void paint_game_dialog(resn v) {
+	cursor.set(CURSORS, 0);
 	dialog_start.x = 0;
 	dialog_start.y = 0;
 	caret = dialog_start;
@@ -608,11 +610,11 @@ static void paint_game_character() {
 }
 
 static void paint_worldmap() {
-	//ButtonNT GUIMAPWC 680 288 84 111 frames(0 1 0 0) value(2) data(GUIWMAP)
-	//AreaMinimap GUIMAP 98 36 480 360
-	//Button GBTNOPT1 664 54 23 24 frames(1 2 3 0) value(3)
-	//Label NORMAL 668 92 109 165
-	//Label NORMAL 696 56 82 20 id("AreaNotes") // Area Notes
+	paint_game_dialog(GUIMAP);
+	setdialog(666, 18, 113, 22); texta(getnm("WorldMap"), AlignCenterCenter);
+	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_game_stage, 0, 0, open_game);
+	setdialog(23, 20, 630, 392); paint_worldmap_area();
+	//Worldmap WMAP1 23 20 630 392
 }
 
 static void paint_game_automap() {
@@ -625,13 +627,108 @@ static void paint_game_automap() {
 	setdialog(668, 92, 109, 165); // Map notes text
 }
 
+static void spell_level_filter() {
+	for(auto i = 0; i < 9; i++) {
+		button(GBTNSPB2, i * 3 + 1, i * 3 + 2, 0);
+		caret.y += 39;
+	}
+}
+
+static void paint_game_spells() {
+	paint_game_dialog(GUISPL);
+	paint_game_player();
+	setdialog(253, 50, 228, 19); texta(getnm("MemorizedSpells"), AlignCenterCenter);
+	setdialog(492, 50, 228, 19); texta(getnm("KnownSpells"), AlignCenterCenter);
+	setdialog(253, 391, 187, 19); texta(getnm("SpellSlotsAvailable"), AlignCenterCenter);
+	setdialog(449, 390, 32, 20); texta(getnm("Slots"), AlignCenterCenter);
+	setdialog(742, 20, 39, 38); texta(getnm("SpellLevelShort"), AlignCenterCenter);
+	setdialog(740, 62, 42, 38); spell_level_filter();
+
+	//Button GBTNSTD 291 78 32 32 frames(0 1 0 0) value(0)
+	//Button GBTNSTD 291 117 32 32 frames(0 1 0 0) value(1)
+	//Button GBTNSTD 291 156 32 32 frames(0 1 0 0) value(2)
+	//Button GBTNSTD 291 195 32 32 frames(0 1 0 0) value(3)
+	//Button GBTNSTD 291 234 32 32 frames(0 1 0 0) value(4)
+	//Button GBTNSTD 291 273 32 32 frames(0 1 0 0) value(5)
+	//Button GBTNSTD 291 312 32 32 frames(0 1 0 0) value(6)
+	//Button GBTNSTD 291 351 32 32 frames(0 1 0 0) value(7)
+
+	//Button GBTNSTD 370 78 32 32 frames(0 1 0 0) value(0)
+	//Button GBTNSTD 370 117 32 32 frames(0 1 0 0) value(1)
+	//Button GBTNSTD 370 156 32 32 frames(0 1 0 0) value(2)
+	//Button GBTNSTD 370 195 32 32 frames(0 1 0 0) value(3)
+	//Button GBTNSTD 370 234 32 32 frames(0 1 0 0) value(4)
+	//Button GBTNSTD 370 273 32 32 frames(0 1 0 0) value(5)
+	//Button GBTNSTD 370 312 32 32 frames(0 1 0 0) value(6)
+	//Button GBTNSTD 370 351 32 32 frames(0 1 0 0) value(7)
+
+	//Button GBTNSTD 449 78 32 32 frames(0 1 0 0) value(0)
+	//Button GBTNSTD 449 117 32 32 frames(0 1 0 0) value(1)
+	//Button GBTNSTD 449 156 32 32 frames(0 1 0 0) value(2)
+	//Button GBTNSTD 449 195 32 32 frames(0 1 0 0) value(3)
+	//Button GBTNSTD 449 234 32 32 frames(0 1 0 0) value(4)
+	//Button GBTNSTD 449 273 32 32 frames(0 1 0 0) value(5)
+	//Button GBTNSTD 449 312 32 32 frames(0 1 0 0) value(6)
+	//Button GBTNSTD 449 351 32 32 frames(0 1 0 0) value(7)
+
+	//Button GBTNSTD 494 80 32 32 frames(0 1 0 0) value(0)
+	//Button GBTNSTD 494 122 32 32 frames(0 1 0 0) value(1)
+	//Button GBTNSTD 494 164 32 32 frames(0 1 0 0) value(2)
+	//Button GBTNSTD 494 206 32 32 frames(0 1 0 0) value(3)
+	//Button GBTNSTD 494 250 32 32 frames(0 1 0 0) value(4)
+	//Button GBTNSTD 494 292 32 32 frames(0 1 0 0) value(5)
+	//Button GBTNSTD 494 334 32 32 frames(0 1 0 0) value(6)
+	//Button GBTNSTD 494 376 32 32 frames(0 1 0 0) value(7)
+
+	//Label NORMAL 531 78 169 35 value(0)
+	//Label NORMAL 531 120 169 35 value(1)
+	//Label NORMAL 531 162 169 35 value(2)
+	//Label NORMAL 531 204 169 35 value(3)
+	//Label NORMAL 531 248 169 35 value(4)
+	//Label NORMAL 531 290 169 35 value(5)
+	//Label NORMAL 531 333 169 35 value(6)
+	//Label NORMAL 531 374 169 35 value(7)
+	//Scroll GBTNSCRL 708 79 12 330 frames(1 0 3 2 4 5)
+
+	//Label TOOLFONT 254 85 29 18
+	//Label TOOLFONT 333 85 29 18
+	//Label TOOLFONT 412 85 29 18
+	//Label TOOLFONT 254 124 29 18
+	//Label TOOLFONT 333 124 29 18
+	//Label TOOLFONT 412 124 29 18
+	//Label TOOLFONT 254 163 29 18
+	//Label TOOLFONT 333 163 29 18
+	//Label TOOLFONT 412 163 29 18
+	//Label TOOLFONT 254 202 29 18
+	//Label TOOLFONT 333 202 29 18
+	//Label TOOLFONT 412 202 29 18
+	//Label TOOLFONT 254 241 29 18
+	//Label TOOLFONT 333 241 29 18
+	//Label TOOLFONT 412 241 29 18
+	//Label TOOLFONT 254 280 29 18
+	//Label TOOLFONT 333 280 29 18
+	//Label TOOLFONT 412 280 29 18
+	//Label TOOLFONT 254 319 29 18
+	//Label TOOLFONT 333 319 29 18
+	//Label TOOLFONT 412 319 29 18
+	//Label TOOLFONT 254 358 29 18
+	//Label TOOLFONT 333 358 29 18
+	//Label TOOLFONT 412 358 29 18
+	//Button GBTNSPB1 273 19 102 24 frames(1 2 3 0) value(88)
+	//Button GBTNSPB1 381 19 102 24 frames(1 2 3 0) value(89)
+	//Button GBTNSPB1 489 19 102 24 frames(1 2 3 0) value(90)
+	//Button GBTNSPB1 597 19 102 24 frames(1 2 3 0) value(91)
+	//Button GBTNSPB3 252 19 17 26 frames(0 1 0 0) value(92)
+	//Button GBTNSPB3 705 19 17 26 frames(0 1 0 0) value(93)
+}
+
 static void paint_game_panel() {
 	dialog_start = caret; image(gres(GCOMM), 0, 0);
 	setdialog(736, 43); image(gres(CGEAR), (current_game_tick / 128) % 32, 0); // Rolling world
 	setdialog(12, 8, 526, 92); paint_console();
 	setdialog(600, 22); button(GCOMMBTN, 4, 5, 'C'); fire(setgameproc, 0, 0, paint_game_character);
 	setdialog(630, 17); button(GCOMMBTN, 6, 7, 'I'); fire(setgameproc, 0, 0, paint_game_inventory);
-	setdialog(668, 21); button(GCOMMBTN, 8, 9, 'S');
+	setdialog(668, 21); button(GCOMMBTN, 8, 9, 'S'); fire(setgameproc, 0, 0, paint_game_spells);
 	setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M'); fire(setgameproc, 0, 0, paint_game_automap);
 	setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J'); fire(setgameproc, 0, 0, paint_game_journal);
 	setdialog(670, 57); button(GCOMMBTN, 10, 11, KeyEscape); fire(setgameproc, 1, 0, paint_game_options);
@@ -645,7 +742,6 @@ static void paint_game_panel() {
 }
 
 void paint_game() {
-	cursor.set(CURSORS, 0);
 	update_frames();
 	setcaret(0, 0, 800, 433);
 	if(game_proc)
@@ -680,6 +776,7 @@ void open_item_description() {
 }
 
 void open_game() {
+	game_proc = 0;
 	scene(paint_game);
 }
 

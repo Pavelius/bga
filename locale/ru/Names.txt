@@ -45,6 +45,7 @@ Required: Требования
 SavingThrows: Броски спасения
 Skills: Навыки
 SpellFailure: Неудача при создании заклинания
+SpellLevelShort: Уров.
 Version: Версия
 Weight: Вес
 WeightAllowance: Максимальный переносимый вес

@@ -700,61 +700,6 @@ static void content_list() {
 	list_elements(&current_focus, *p->source);
 }
 
-static void enter_current_world_area() {
-	auto p = (worldmapi::area*)hot.object;
-	if(p)
-		enter(p->id, 0);
-}
-
-static void paint_worldmap() {
-	current_world_area_hilite = 0;
-	if(!current_world)
-		return;
-	auto push_clip = clipping; setclipall();
-	auto back = current_world->background->get();
-	image(caret.x, caret.y, back, 0, 0);
-	auto icons = current_world->icons->get();
-	if(!icons)
-		return;
-	cursor = default_cursor;
-	if(gui.hilited)
-		cursor.cicle = 44;
-	auto push_caret = caret;
-	auto current_party_area = get_party_world_area();
-	for(auto& e : bsdata<worldmapi::area>()) {
-		if(e.realm != current_world)
-			continue;
-		//if(!e.is(AreaVisible))
-		//	continue;
-		caret = push_caret + e.position;
-		auto& f = icons->get(e.avatar);
-		caret.x -= f.sx / 2;
-		caret.y -= f.sy / 2;
-		image(icons, e.avatar, 0);
-		if(current_party_area == &e)
-			image(icons, 22, 0);
-		fore = colors::white;
-		if(e.isinteract()) {
-			if(hot.mouse.in({caret.x - 2, caret.y - 2, caret.x + f.sx + 2, caret.y + f.sy + texth() + 2}))
-				current_world_area_hilite = &e;
-		} else
-			fore = fore.mix(colors::black, 128);
-		if(current_world_area_hilite == &e) {
-			cursor.cicle = 34;
-			fore = colors::yellow;
-			if(hot.key == MouseLeft && !hot.pressed)
-				execute(enter_current_world_area, 0, 0, current_world_area_hilite);
-		}
-		auto name = e.getname();
-		auto w = textw(name);
-		caret.x -= (w - f.sx) / 2;
-		caret.y += f.sy;
-		text(name, -1, TextStroke);
-	}
-	caret = push_caret;
-	clipping = push_clip;
-}
-
 void util_items_list();
 
 void item_list_total(stringbuilder& sb) {
@@ -797,7 +742,6 @@ BSDATA(widget) = {
 	{"StoreList", store_list},
 	{"StoreName", store_name},
 	{"TopicList", topic_list},
-	{"Worldmap", paint_worldmap},
 #ifdef _DEBUG
 	{"ItemList", util_items_list},
 #endif // _DEBUG

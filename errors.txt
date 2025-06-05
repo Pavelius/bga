@@ -1,2 +1,2 @@
-﻿Error in file `forms/GUISTBSB.txt`:
- Line 11: Not found Widget identifier `BackpackImage`
+﻿Error in file `forms/GUIWMAP.txt`:
+ Line 7: Not found Widget identifier `Worldmap`
