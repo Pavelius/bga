@@ -13,6 +13,7 @@ struct wearable {
 	void		equip(item& v);
 	slice<item>	equipment() { return slice<item>(wears + Head, wears + LastQuickWeapon + 1); }
 	int			getencumbrance() const;
+	wear_s		getslot(const void* p) const;
 	item&		getweapon() { return wears[QuickWeapon + weapon_index * 2]; }
 	const item&	getweapon() const { return wears[QuickWeapon + weapon_index * 2]; }
 	item&		getoffhand() { return wears[QuickOffhand + weapon_index * 2]; }

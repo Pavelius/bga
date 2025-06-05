@@ -59,6 +59,20 @@ int itemi::getmultiplier() const {
 	return v;
 }
 
+bool item::is(wear_s v) const {
+	if(v >= Backpack && v <= LastBackpack)
+		return true;
+	auto ew = geti().wear;
+	switch(ew) {
+	case LeftFinger:
+		return v == LeftFinger || v == RightFinger;
+	case Backpack:
+		return true;
+	default:
+		return ew == v;
+	}
+}
+
 int	item::getcostall() const {
 	auto& ei = geti();
 	auto cost = ei.cost * count;

@@ -98,8 +98,8 @@ static int handle(MSG& msg) {
 	case WM_LBUTTONUP:
 		if(msg.hwnd != hwnd)
 			break;
-		if(!hot.pressed)
-			break;
+		//if(!hot.pressed)
+		//	break;
 		hot.pressed = false;
 		return MouseLeft;
 	case WM_RBUTTONDOWN:

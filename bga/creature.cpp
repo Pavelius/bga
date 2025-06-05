@@ -282,3 +282,10 @@ static bool isallow(const statable& source, variant v) {
 bool creature::isusable(const item& it) const {
 	return isallow(*this, it.geti().required);
 }
+
+creature* get_creature(const void* object) {
+	auto i = bsdata<creature>::source.indexof(object);
+	if(i != -1)
+		return bsdata<creature>::elements + i;
+	return 0;
+}

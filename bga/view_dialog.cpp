@@ -9,6 +9,7 @@
 #include "screenshoot.h"
 #include "timer.h"
 #include "list.h"
+#include "math.h"
 #include "variant.h"
 #include "vector.h"
 #include "view.h"
@@ -23,6 +24,7 @@ static bool button_pressed, button_executed, button_hilited, input_disabled;
 static bool game_pause;
 static fnevent game_proc;
 static item *drag_item_source, *drag_item_dest;
+static item drag_item;
 
 static char description_text[4096];
 static size_t description_cash_size;
@@ -32,6 +34,7 @@ static vector<nameable*> content;
 static stringbuilder description(description_text);
 
 static void paint_game_panel(bool allow_input);
+static void paint_game_inventory();
 
 static void set_cursor() {
 	cursor.set(CURSORS, 0);
@@ -250,6 +253,29 @@ static void scroll(resn res, int fu, int fd, int bar, int& origin, int maximum, 
 	}
 }
 
+static bool dragging(fnevent paint) {
+	pushrect push;
+	hot.pressed = false;
+	while(ismodal()) {
+		paint();
+		switch(hot.key) {
+		case MouseLeft:
+			if(!hot.pressed)
+				execute(buttonok);
+			break;
+		case MouseRight:
+			if(!hot.pressed)
+				execute(buttoncancel);
+			break;
+		case KeyEscape:
+			execute(buttoncancel);
+			break;
+		}
+		domodal();
+	}
+	return getresult();
+}
+
 static void paint_game_panel() {
 	paint_game_panel(true);
 }
@@ -445,7 +471,6 @@ static void paint_item(const item* pi) {
 	if(!pi)
 		return;
 	pushrect push;
-	button_check(0);
 	setoffset(2, 2);
 	if(!player->isusable(*pi))
 		layer(colors::red);
@@ -453,11 +478,65 @@ static void paint_item(const item* pi) {
 	input_item_info(pi);
 }
 
+static void set_drag_item_cursor() {
+	cursor.id = ITEMS;
+	cursor.cicle = drag_item.geti().avatar * 2 + 1;
+}
+
+static void paint_inventory_dragging() {
+	drag_item_dest = 0;
+	update_frames();
+	setcaret(0, 0, 800, 433);
+	paint_game_inventory();
+	paint_action_panel_player();
+	set_drag_item_cursor();
+}
+
+static bool allow_use(const item& di, const item& v) {
+	if(!v)
+		return true;
+	auto p = get_creature(&di);
+	if(!p)
+		return true;
+	if(!p->isusable(v))
+		return false;
+	auto slot = p->getslot(&di);
+	return v.is(slot);
+}
+
+static void begin_drag_item() {
+	drag_item_source = (item*)hot.object;
+	drag_item = *drag_item_source;
+	drag_item_source->clear();
+	if(dragging(paint_inventory_dragging)
+		&& drag_item_dest
+		&& allow_use(*drag_item_dest, drag_item)
+		&& allow_use(*drag_item_source, *drag_item_dest)) {
+		*drag_item_source = *drag_item_dest;
+		*drag_item_dest = drag_item;
+	} else if(drag_item_source)
+		*drag_item_source = drag_item;
+	drag_item_source = 0;
+	drag_item_dest = 0;
+	drag_item.clear();
+}
+
+static void paint_drag_target(item* pi, wear_s slot) {
+	if(drag_item_source) {
+		if(button_hilited) {
+			drag_item_dest = pi;
+			image(gres(STONSLOT), 25, 0);
+		}
+	}
+}
+
 static void paint_item_dragable(item* pi) {
 	paint_item(pi);
-	if(button_hilited && !drag_item_source) {
-		//	if(hot.key == MouseLeft && hot.pressed)
-		//		execute(begin_drag_item, 0, 0, pi);
+	if(button_hilited) {
+		if(!drag_item_source) {
+			if(hot.key == MouseLeft && hot.pressed)
+				execute(begin_drag_item, 0, 0, pi);
+		}
 	}
 }
 
@@ -469,7 +548,7 @@ static void inventory(wear_s slot, int index, int empthy_frame, bool show_back =
 			index_frame += 4;
 		image(gres(STONSLOT), index_frame, 0);
 	}
-	//allow_drop_target(pi, Backpack);
+	button_check(0);
 	if(*pi)
 		paint_item_dragable(pi);
 	else if(empthy_frame != -1) {
@@ -478,6 +557,7 @@ static void inventory(wear_s slot, int index, int empthy_frame, bool show_back =
 		else
 			image(caret.x + 2, caret.y + 2, gres(STON), empthy_frame, 0);
 	}
+	paint_drag_target(pi, slot);
 }
 
 static void inventory(wear_s slot, int index) {

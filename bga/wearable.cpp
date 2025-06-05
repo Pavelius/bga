@@ -81,3 +81,9 @@ int	wearable::getencumbrance() const {
 		return 1;
 	return 0;
 }
+
+wear_s wearable::getslot(const void* p) const {
+	if(p >= wears && p < wears + lenghtof(wears))
+		return (wear_s)((const item*)p - wears);
+	return Backpack;
+}

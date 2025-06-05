@@ -39,15 +39,6 @@
 //	update_creature();
 //}
 
-//static void allow_drop_target(item* pi, wear_s slot) {
-	//if(drag_item_source) {
-	//	if(gui.hilited) {
-	//		drag_item_dest = pi;
-	//		image(gui.res, 25, 0);
-	//	}
-	//}
-//}
-
 //static void paint_drop_target(item* pi, wear_s slot) {
 //	if(drag_item_source && drag_item.canequip(slot)) {
 //		if(player->isusable(drag_item)) {

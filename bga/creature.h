@@ -22,3 +22,5 @@ struct creature : actor, avatarable {
 extern creature* player;
 extern creature* party[6];
 extern collection<creature> selected_creatures;
+
+creature* get_creature(const void* object);
