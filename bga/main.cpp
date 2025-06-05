@@ -4,7 +4,6 @@
 #include "colorgrad.h"
 #include "console.h"
 #include "creature.h"
-#include "door.h"
 #include "draw.h"
 #include "game.h"
 #include "log.h"
@@ -45,6 +44,7 @@ static void create_party() {
 }
 
 static void start_main() {
+	last_screen.set(0, 0, 800, 433);
 	create_party();
 	enter("AR1000", "FR1001");
 	player->additem(citem("BattleAxe"));
@@ -98,10 +98,6 @@ int main(int argc, char* argv[]) {
 	colors::h2 = colors::text.mix(colors::button, 96);
 	colors::h3 = color(244, 214, 66);
 	colors::special = color(244, 214, 66);
-	print("Size of creature %1i bytes", sizeof(creature));
-	print("Size of door %1i bytes", sizeof(door));
-	print("Count of doors %1i", bsdata<door>::source.getcount());
-	print("Count of creatures %1i", bsdata<creature>::source.getcount());
 	initialize(getnm("AppTitle"));
 	settimer(64);
 	next_scene(start_main);

@@ -9,5 +9,5 @@ bool point::in(const point p1, const point p2, const point p3) const {
 }
 
 point center(const rect& rc) {
-	return point((rc.x1 + rc.width()) / 2, (rc.y1 + rc.height()) / 2);
+	return point(rc.x1 + rc.width() / 2, rc.y1 + rc.height() / 2);
 }

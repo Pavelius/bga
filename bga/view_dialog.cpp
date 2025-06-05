@@ -29,7 +29,7 @@ static size_t description_cash_size;
 static int character_info_mode;
 static int current_topic_list, cash_topic_list, current_content_list;
 static vector<nameable*> content;
-stringbuilder description(description_text);
+static stringbuilder description(description_text);
 
 static void paint_game_panel(bool allow_input);
 

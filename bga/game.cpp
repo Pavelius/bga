@@ -9,6 +9,7 @@
 #include "game.h"
 #include "itemground.h"
 #include "iteminside.h"
+#include "region.h"
 #include "timer.h"
 #include "view.h"
 
@@ -45,6 +46,11 @@ void enter(const char* id, const char* location) {
 	print("Enter area [%1] at location [%2]", id, location);
 	map::read(id);
 	read_area(id, "ID2");
+#ifdef _DEBUG
+	print("Count of points %1i", bsdata<point>::source.count);
+	print("Count of doors %1i", bsdata<door>::source.count);
+	print("Count of regions %1i", bsdata<region>::source.count);
+#endif
 	use_all_doors();
 	auto pn = entrance::find(temp);
 	if(pn) {

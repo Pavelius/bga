@@ -471,6 +471,8 @@ void paint_minimap() {
 	pushrect push;
 	// Minimap image
 	auto mm = map::getminimap();
+	if(!mm)
+		return;
 	auto& sf = mm->get(0);
 	caret.x += (width - sf.sx) / 2;
 	caret.y += (height - sf.sy) / 2;
