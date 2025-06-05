@@ -310,6 +310,7 @@ bool ismodal();
 void* scene(fnevent proc);
 void scene();
 void setneedupdate();
+}
+
 void setnext(fnevent v);
 void start();
-}

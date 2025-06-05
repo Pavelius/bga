@@ -2572,17 +2572,6 @@ bool draw::isnext() {
 	return next_proc != 0;
 }
 
-void draw::setnext(fnevent v) {
-	next_proc = v;
-}
-
-void draw::start() {
-	while(next_proc) {
-		auto p = next_proc;
-		next_proc = 0; p();
-	}
-}
-
 void draw::setneedupdate() {
 	hot.key = InputNeedUpdate;
 }
@@ -2665,4 +2654,15 @@ void draw::setcaret(int x, int y, int w, int h) {
 	caret.y = y;
 	width = w;
 	height = h;
+}
+
+void setnext(fnevent v) {
+	next_proc = v;
+}
+
+void start() {
+	while(next_proc) {
+		auto p = next_proc;
+		next_proc = 0; p();
+	}
 }

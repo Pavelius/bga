@@ -1,5 +1,0 @@
-﻿#Control
-
-AreaMap NONE 0 0 800 433
-ActionPanelNA NONE 0 433 0 0
-Form NONE 0 493 0 0 data(GCOMM008)

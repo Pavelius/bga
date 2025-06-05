@@ -28,6 +28,7 @@ From: из
 Ground: На земле
 Information: Информация
 Identify: Опознать
+Journal: Журнал
 Kg: кг.
 LevelUp: Развитие
 MagicBonus: Магический бонус

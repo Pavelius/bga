@@ -1,15 +1,7 @@
 ﻿#Control
 
 Background GUIMAP 0 0 0 0
-Label NORMAL 666 18 113 22 id("AreaMap")// Area Map
-ButtonNT GUIMAPWC 680 288 84 111 frames(0 1 0 0) value(2) data(GUIWMAP)
-
-AreaMinimap GUIMAP 98 36 480 360
-
-Button GBTNOPT1 664 54 23 24 frames(1 2 3 0) value(3)
-Label NORMAL 668 92 109 165 
-Label NORMAL 696 56 82 20 id("AreaNotes") // Area Notes
 
 ActionPanelNA NONE 0 433 0 0
-HotKey NONE 0 0 0 0 data(GGAME) value(1) hotkey("Escape")
-Form NONE 0 493 0 0 data(GCOMM008)
+//HotKey NONE 0 0 0 0 data(GGAME) value(1) hotkey("Escape")
+//Form NONE 0 493 0 0 data(GCOMM008)

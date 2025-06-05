@@ -339,26 +339,6 @@ static void scroll() {
 	caret = push_caret;
 }
 
-static void paint_empthy_weapon() {
-	if(gui.value == player->weapon_index)
-		image(gres(ITEMS), 0, 0);
-	else
-		image(gres(STON), 17, 0);
-}
-
-static void paint_empthy_offhand() {
-	image(gres(STON), 13, 0);
-}
-
-static void paint_empthy_gear() {
-	image(gres(STON), gui.value, 0);
-}
-
-static void quick_weapon_button() {
-	gui.checked = (gui.value == player->weapon_index);
-	button_no_text();
-}
-
 static void paint_draggable() {
 	if(drag_item_source) {
 		if(hot.key == MouseRight
@@ -410,78 +390,6 @@ static void allow_drop_target(item* pi, wear_s slot) {
 	}
 }
 
-static void layer(color v) {
-	auto push_alpha = alpha; alpha = 26;
-	auto push_fore = fore; fore = v;
-	rectf();
-	alpha = push_alpha;
-	fore = push_fore;
-}
-
-static point minimap_origin, minimap_size;
-
-static point m2mm(point mm) {
-	mm.x = mm.x / 8;
-	mm.y = mm.y / 8;
-	return minimap_origin + mm;
-}
-
-static point mm2m(point m) {
-	m = m - minimap_origin;
-	m.x *= 8;
-	m.y *= 8;
-	return m;
-}
-
-static void set_camera() {
-	setcamera({(short)hot.param, (short)hot.param2});
-}
-
-static void paint_minimap() {
-	if(last_screen.x2 == 0) {
-		last_screen.x2 = 800;
-		last_screen.y2 = 433;
-	}
-	pushrect push;
-	// Minimap image
-	auto mm = map::getminimap();
-	auto& sf = mm->get(0);
-	caret.x += (width - sf.sx) / 2;
-	caret.y += (height - sf.sy) / 2;
-	width = sf.sx; height = sf.sy;
-	minimap_origin = caret;
-	minimap_size.x = sf.sx;
-	minimap_size.y = sf.sy;
-	image(mm, 0, 0);
-	cursor = default_cursor;
-	if(ishilite()) {
-		cursor.cicle = 44;
-		if(hot.key == MouseLeft && hot.pressed) {
-			auto np = mm2m(hot.mouse);
-			execute(set_camera, np.x, np.y, 0);
-		}
-	}
-	// Screen rect
-	caret = m2mm(camera);
-	point cameral = camera;
-	cameral.x += last_screen.width();
-	cameral.y += last_screen.height();
-	cameral = m2mm(cameral);
-	width = cameral.x - caret.x;
-	height = cameral.y - caret.y;
-	rectb();
-	// Party position
-	auto push_fore = fore;
-	fore = colors::green;
-	for(auto p : party) {
-		if(!p->ispresent())
-			continue;
-		caret = m2mm(p->position);
-		circle(2);
-	}
-	fore = push_fore;
-}
-
 static void input_item_info(const item* pi) {
 	if(!drag_item_source) {
 		if(gui.hilited && hot.key == MouseRight && hot.pressed)
@@ -489,114 +397,17 @@ static void input_item_info(const item* pi) {
 	}
 }
 
-static void paint_item(const item* pi) {
-	if(!pi)
-		return;
-	auto push_caret = caret;
-	setoffset(2, 2);
-	if(!player->isusable(*pi))
-		layer(colors::red);
-	image(gres(ITEMS), pi->geti().avatar * 2, 0);
-	caret = push_caret;
-	input_item_info(pi);
-}
-
-static void paint_item_dragable(item* pi) {
-	paint_item(pi);
-	if(gui.hilited && !drag_item_source) {
-		if(hot.key == MouseLeft && hot.pressed)
-			execute(begin_drag_item, 0, 0, pi);
-	}
-}
-
-static void backpack_button() {
-	auto pi = player->wears + Backpack + gui.value;
-	auto index = gui.value % 8;
-	if(index >= 4)
-		index += 4;
-	image(gui.res, index, 0);
-	allow_drop_target(pi, Backpack);
-	if(*pi)
-		paint_item_dragable(pi);
-}
-
-static void backpack_image() {
-	auto push_caret = caret;
-	caret.x += 24;
-	image(gui.res, gui.frames[0], 0);
-}
-
-static void paint_drop_target(item* pi, wear_s slot) {
-	if(drag_item_source && drag_item.canequip(slot)) {
-		if(player->isusable(drag_item)) {
-			if(gui.hilited) {
-				image(gui.res, 25, 0);
-				drag_item_dest = pi;
-			} else
-				image(gui.res, 16, 0);
-		}
-	}
-}
-
-static void gear_button() {
-	auto type = (wear_s)(Head + gui.value);
-	auto pi = player->wears + type;
-	paint_drop_target(pi, type);
-	if(*pi)
-		paint_item_dragable(pi);
-	else
-		strokeout(paint_empthy_gear, -2);
-}
-
-static void paint_empthy_quiver() {
-	image(gres(STON), 11, 0);
-}
-
-static void quiver_button() {
-	auto pi = player->wears + Quiver + gui.value;
-	image(gui.res, gui.value, 0);
-	paint_drop_target(pi, Quiver);
-	if(*pi)
-		paint_item_dragable(pi);
-	else
-		strokeout(paint_empthy_quiver, -2);
-}
-
-static void quick_item_button() {
-	auto pi = player->wears + QuickItem + gui.value;
-	image(gui.res, gui.value, 0);
-	paint_drop_target(pi, QuickItem);
-	if(*pi)
-		paint_item_dragable(pi);
-}
-
-static void quick_weapon_item() {
-	auto pi = player->wears + (QuickWeapon + gui.value * 2);
-	image(gui.res, gui.value, 0);
-	paint_drop_target(pi, QuickWeapon);
-	if(!(*pi))
-		strokeout(paint_empthy_weapon, -2);
-	else
-		paint_item_dragable(pi);
-	if(!drag_item_source) {
-		if(gui.value == player->weapon_index)
-			image(gres(STONSLOT), 34, 0);
-	}
-}
-
-static void quick_offhand_item() {
-	auto pi = player->wears + (QuickOffhand + gui.value * 2);
-	image(gui.res, 8 + gui.value, 0);
-	paint_drop_target(pi, QuickOffhand);
-	if(!(*pi))
-		strokeout(paint_empthy_offhand, -2);
-	else
-		paint_item_dragable(pi);
-	if(!drag_item_source && pi && *pi && player->useoffhand()) {
-		if(gui.value == player->weapon_index)
-			image(gres(STONSLOT), 34, 0);
-	}
-}
+//static void paint_drop_target(item* pi, wear_s slot) {
+//	if(drag_item_source && drag_item.canequip(slot)) {
+//		if(player->isusable(drag_item)) {
+//			if(gui.hilited) {
+//				image(gui.res, 25, 0);
+//				drag_item_dest = pi;
+//			} else
+//				image(gui.res, 16, 0);
+//		}
+//	}
+//}
 
 static void portrait_large() {
 	image(gres(PORTL), player->portrait, 0);
@@ -612,48 +423,23 @@ static void number() {
 	font = push_font;
 }
 
-static void creature_ability() {
-	if(gui.data.iskind<abilityi>())
-		gui.value = player->get((ability_s)gui.data.value);
-	else if(equal(gui.id, "HPMax"))
-		gui.value = player->hp_max;
-	else if(equal(gui.id, "HP"))
-		gui.value = player->hp;
-	else if(equal(gui.id, "Coins"))
-		gui.value = player->coins;
-	number();
-}
-
-static void creature_ability_bonus() {
-	if(gui.data.iskind<abilityi>())
-		gui.value = player->getbonus((ability_s)gui.data.value);
-	char temp[32]; stringbuilder sb(temp);
-	auto push_fore = fore;
-	if(gui.value > 0) {
-		sb.add("%+1i", gui.value);
-		fore = colors::green;
-	} else if(gui.value < 0) {
-		fore = colors::red;
-		sb.add("%+1i", gui.value);
-	} else
-		sb.add("%+1i", gui.value);
-	gui.text = temp;
-	label();
-	fore = push_fore;
-}
-
-static void creature_race() {
-	gui.text = bsdata<racei>::elements[player->race].getname();
-	label();
-}
-
-static void apply_weight_color() {
-	switch(player->getencumbrance()) {
-	case 3: case 2: fore = colors::red; break;
-	case 1: fore = colors::yellow; break;
-	default: break;
-	}
-}
+//static void creature_ability_bonus() {
+//	if(gui.data.iskind<abilityi>())
+//		gui.value = player->getbonus((ability_s)gui.data.value);
+//	char temp[32]; stringbuilder sb(temp);
+//	auto push_fore = fore;
+//	if(gui.value > 0) {
+//		sb.add("%+1i", gui.value);
+//		fore = colors::green;
+//	} else if(gui.value < 0) {
+//		fore = colors::red;
+//		sb.add("%+1i", gui.value);
+//	} else
+//		sb.add("%+1i", gui.value);
+//	gui.text = temp;
+//	label();
+//	fore = push_fore;
+//}
 
 static void format_labelv(const char* format, const char* format_param) {
 	char temp[260]; stringbuilder sb(temp);
@@ -691,16 +477,6 @@ static void list_item_cost() {
 }
 
 static void list_item_price() {
-}
-
-static void creature_weight() {
-	char temp[260]; stringbuilder sb(temp);
-	sb.add(getkg(player->weight));
-	sb.adds("%-1", getnm("From"));
-	sb.adds(getkg(player->allowed_weight));
-	gui.text = temp;
-	apply_weight_color();
-	label();
 }
 
 static void item_name() {
@@ -897,8 +673,8 @@ static void store_item_avatar() {
 			break;
 		}
 	}
-	if(*pi->data)
-		paint_item(pi->data);
+	//if(*pi->data)
+	//	paint_item(pi->data);
 	if(pi->count > 0)
 		image(gui.res, 25, 0);
 }
@@ -993,23 +769,16 @@ BSDATA(widget) = {
 	{"AreaMinimap", paint_minimap},
 	{"AreaMap", paint_area},
 	{"Background", background},
-	{"BackpackButton", backpack_button},
-	{"BackpackImage", backpack_image},
 	{"Button", button},
 	{"ButtonAM", button_animated},
 	{"ButtonInfoTab", button_info_tab},
 	{"ButtonNT", button_no_text},
 	{"ColorPicker", color_picker},
 	{"ContentList", content_list},
-	{"CreatureAbility", creature_ability},
-	{"CreatureAbilityBonus", creature_ability_bonus},
 	{"CreatureColor", creature_color},
-	{"CreatureRace", creature_race},
-	{"CreatureWeight", creature_weight},
 	{"TextConsole", text_console},
 	{"Form", paint_form},
 	{"BuyItemCost", buy_item_cost},
-	{"GearButton", gear_button},
 	{"HotKey", button_input},
 	{"Label", label},
 	{"ListItemCost", list_item_cost},
@@ -1019,11 +788,6 @@ BSDATA(widget) = {
 	{"PlayerName", player_name},
 	{"PlayerItemList", player_items},
 	{"PortraitLarge", portrait_large},
-	{"QuickItemButton", quick_item_button},
-	{"QuickWeaponButton", quick_weapon_button},
-	{"QuickWeaponItem", quick_weapon_item},
-	{"QuickOffhandItem", quick_offhand_item},
-	{"QuiverButton", quiver_button},
 	{"Rectangle", rectb},
 	{"RunScript", run_script},
 	{"Scroll", scroll},

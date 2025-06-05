@@ -23,12 +23,16 @@ void paint_area();
 void paint_dialog(resn v);
 void paint_game_dialog(resn v);
 void paint_game_inventory();
+void paint_minimap();
 void paperdoll();
 long open_dialog(fnevent proc, bool faded);
 void open_item_description();
 void open_game();
+void open_worldmap();
 void setdialog(int x, int y);
 void setdialog(int x, int y, int w, int h);
+void setnext(fnevent v);
+void start();
 void update_creature();
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color);

@@ -1,12 +1,12 @@
 Ability: Способность
 Abilities: Способности
 
-Str: Сил
-Dex: Лов
-Con: Тел
-Int: Инт
-Wis: Муд
-Cha: Хар
+StrenghtShort: Сил
+DexterityShort: Лов
+ConstitutionShort: Тел
+IntellegenceShort: Инт
+WisdowShort: Муд
+CharismaShort: Хар
 
 Strenght: Сила
 Dexterity: Ловкость

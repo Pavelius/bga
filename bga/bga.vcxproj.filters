@@ -42,17 +42,8 @@
     <Text Include="..\forms\GUIINVAB.txt">
       <Filter>forms</Filter>
     </Text>
-    <Text Include="..\forms\GUIINV08.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\rules\Races.txt">
       <Filter>rules</Filter>
-    </Text>
-    <Text Include="..\forms\GCOMM008.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUIJRNL.txt">
-      <Filter>forms</Filter>
     </Text>
     <Text Include="..\forms\GUIMAPAB.txt">
       <Filter>forms</Filter>
@@ -60,20 +51,11 @@
     <Text Include="..\forms\GUIMAPGM.txt">
       <Filter>forms</Filter>
     </Text>
-    <Text Include="..\forms\STONEOPT.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\forms\GUISPL08.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUIREC08.txt">
       <Filter>forms</Filter>
     </Text>
     <Text Include="..\rules\Advance.txt">
       <Filter>rules</Filter>
-    </Text>
-    <Text Include="..\forms\GGAME.txt">
-      <Filter>forms</Filter>
     </Text>
     <Text Include="..\rules\Classes.txt">
       <Filter>rules</Filter>

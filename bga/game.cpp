@@ -11,6 +11,7 @@
 #include "itemground.h"
 #include "iteminside.h"
 #include "timer.h"
+#include "view.h"
 
 static void read_area(const char* id, const char* folder) {
 	auto p = areai::add(id, folder);
@@ -51,7 +52,7 @@ void enter(const char* id, const char* location) {
 		setcamera(pn->position);
 		setparty(pn->position);
 	}
-	draw::form::nextscene("GGAME");
+	setnext(open_game);
 }
 
 static bool archive_sav(const char* url, bool write_mode) {

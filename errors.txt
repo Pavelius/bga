@@ -1,2 +1,2 @@
-﻿Error in file `forms/GIITMH08.txt`:
- Line 4: Not found Widget identifier `ItemName`
+﻿Error in file `forms/GUISTBSB.txt`:
+ Line 11: Not found Widget identifier `BackpackImage`

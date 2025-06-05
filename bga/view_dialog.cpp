@@ -21,7 +21,12 @@ static fnevent game_proc;
 
 static char description_text[4096];
 static size_t description_cash_size;
+static int character_info_mode;
 stringbuilder description(description_text);
+
+static const char* getnms(ability_s v) {
+	return getnm(ids(bsdata<abilityi>::elements[v].id, "Short"));
+}
 
 static void texta(resn res, const char* string, unsigned flags) {
 	pushfont push(gres(res));
@@ -30,7 +35,8 @@ static void texta(resn res, const char* string, unsigned flags) {
 
 static void update_frames() {
 	update_tick();
-	update_game_tick();
+	if(!game_pause)
+		update_game_tick();
 }
 
 static void update_description(const char* format) {
@@ -49,15 +55,22 @@ void setdialog(int x, int y, int w, int h) {
 	height = h;
 }
 
-static void setgameproc(fnevent v) {
-	if(game_proc == v)
+static void setgameproc(fnevent v, bool cancel_mode) {
+	if(game_proc == v || (cancel_mode && game_proc))
 		game_proc = 0;
 	else
 		game_proc = v;
 }
 
 static void setgameproc() {
-	setgameproc((fnevent)hot.object);
+	auto p = (fnevent)hot.object;
+	auto m = (bool)hot.param;
+	setgameproc(p, m);
+}
+
+static void next_game_stage() {
+	auto p = (fnevent)hot.object;
+	setnext(p);
 }
 
 void paint_dialog(resn v) {
@@ -133,6 +146,13 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const 
 	}
 	texta(str(getnm(id)), AlignCenterCenter);
 	caret = push_caret;
+}
+
+static void checkbox(int& source, int value, resn res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key) {
+	if(source == value)
+		f1 = fc;
+	button(res, f1, f2, key);
+	fire(cbsetint, value, 0, &source);
 }
 
 static void button_colorgrad(int index, int size) {
@@ -354,7 +374,7 @@ static void portrait_bar() {
 }
 
 static void layer(color v) {
-	auto push_alpha = alpha; alpha = 26;
+	auto push_alpha = alpha; alpha = 32;
 	auto push_fore = fore; fore = v;
 	rectf();
 	alpha = push_alpha;
@@ -386,45 +406,9 @@ static void paint_item_dragable(item* pi) {
 	}
 }
 
-static int get_slot_frame(wear_s n) {
-	switch(n) {
-	case Head: return 0;
-	case Neck: return 1;
-	case Body: return 2;
-	case Rear: return 3;
-	case LeftFinger: return 4;
-	case RightFinger: return 5;
-	case Hands: return 6;
-	case Gridle: return 7;
-	case Legs: return 8;
-	case Quiver: return 11;
-	case QuickWeapon: return 17;
-	default: return -1;
-	}
-}
-
-static bool need_back(wear_s slot) {
-	if(slot >= Head && slot <= Legs)
-		return false;
-	return true;
-}
-
-static void inventory(wear_s slot, int index, int empthy_frame) {
+static void inventory(wear_s slot, int index, int empthy_frame, bool show_back = true) {
 	auto pi = player->wears + slot + index;
-	auto index_frame = index % 8;
-	if(index_frame >= 4)
-		index_frame += 4;
-	image(gres(STONSLOT), index_frame, 0);
-	//allow_drop_target(pi, Backpack);
-	if(*pi)
-		paint_item_dragable(pi);
-	else if(empthy_frame != -1)
-		image(caret.x + 2, caret.y + 2, gres(STON), empthy_frame, 0);
-}
-
-static void inventory(wear_s slot, int index) {
-	auto pi = player->wears + slot + index;
-	if(need_back(slot)) {
+	if(show_back) {
 		auto index_frame = index % 8;
 		if(index_frame >= 4)
 			index_frame += 4;
@@ -433,18 +417,23 @@ static void inventory(wear_s slot, int index) {
 	//allow_drop_target(pi, Backpack);
 	if(*pi)
 		paint_item_dragable(pi);
-	else {
-		auto empthy_frame = get_slot_frame(slot);
-		if(empthy_frame != -1)
+	else if(empthy_frame != -1) {
+		if(empthy_frame >= 100) // Item frame
+			image(caret.x + 2, caret.y + 2, gres(ITEMS), empthy_frame - 100, 0);
+		else
 			image(caret.x + 2, caret.y + 2, gres(STON), empthy_frame, 0);
 	}
+}
+
+static void inventory(wear_s slot, int index) {
+	inventory(slot, index, -1, true);
 }
 
 static void inventory_line(int index) {
 	auto push = caret;
 	auto index_end = index + 8;
 	while(index < index_end) {
-		inventory(Backpack, index++);
+		inventory(Backpack, index++, -1, true);
 		caret.x += 38;
 	}
 	caret = push;
@@ -482,9 +471,11 @@ static void quick_weapon(int index) {
 		button(INVBUT3, fb + 0, fb + 1, '1' + index);
 	fire(cbsetchr, index, 0, &player->weapon_index);
 	caret.x += 28;
-	inventory(QuickWeapon, index * 2, 17);
-	if(player->weapon_index == index)
+	if(player->weapon_index == index) {
+		inventory(QuickWeapon, index * 2, 100);
 		image(gres(STONSLOT), 34, 0);
+	} else
+		inventory(QuickWeapon, index * 2, 17);
 	caret.x += 38;
 	inventory(QuickOffhand, index * 2, 13);
 	if(player->weapon_index == index && player->useoffhand())
@@ -498,15 +489,15 @@ static void paint_game_inventory() {
 	setdialog(251, 299, 36, 36); inventory_line(0);
 	setdialog(251, 339, 36, 36); inventory_line(8);
 	setdialog(251, 379, 36, 36); inventory_line(16);
-	setdialog(383, 22, 36, 36); inventory(Head, 0);
-	setdialog(446, 22, 36, 36); inventory(Neck, 0);
-	setdialog(255, 22, 36, 36); inventory(Body, 0);
-	setdialog(319, 22, 36, 36); inventory(Rear, 0);
-	setdialog(255, 79, 36, 36); inventory(LeftFinger, 0);
-	setdialog(510, 79, 36, 36); inventory(RightFinger, 0);
-	setdialog(255, 136, 36, 36); inventory(Hands, 0);
-	setdialog(510, 22, 36, 36); inventory(Gridle, 0);
-	setdialog(510, 136, 36, 36); inventory(Legs, 0);
+	setdialog(383, 22, 36, 36); inventory(Head, 0, 0, false);
+	setdialog(446, 22, 36, 36); inventory(Neck, 0, 1, false);
+	setdialog(255, 22, 36, 36); inventory(Body, 0, 2, false);
+	setdialog(319, 22, 36, 36); inventory(Rear, 0, 3, false);
+	setdialog(255, 79, 36, 36); inventory(LeftFinger, 0, 4, false);
+	setdialog(510, 79, 36, 36); inventory(RightFinger, 0, 5, false);
+	setdialog(255, 136, 36, 36); inventory(Hands, 0, 6, false);
+	setdialog(510, 22, 36, 36); inventory(Gridle, 0, 7, false);
+	setdialog(510, 136, 36, 36); inventory(Legs, 0, 8, false);
 	setdialog(574, 130, 111, 22); texta(getnm("Quiver"), AlignCenterCenter);
 	setdialog(572, 158, 36, 36); inventory(Quiver, 0);
 	setdialog(611, 158, 36, 36); inventory(Quiver, 1);
@@ -557,16 +548,93 @@ static void paint_color_pick() {
 	hotkey(KeyEscape, buttonparam, -2);
 }
 
+static void paint_game_options() {
+	paint_game_dialog(STONEOPT);
+	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("Options"), AlignCenterCenter);
+	setdialog(497, 68); button(GBTNLRG2, 1, 2);
+	setdialog(497, 98); button(GBTNLRG2, 1, 2);
+	setdialog(497, 128); button(GBTNLRG2, 1, 2);
+	setdialog(353, 386, 95, 16); texta(getnm("Version"), AlignCenterCenter);
+	setdialog(497, 168); button(GBTNLRG2, 1, 2);
+	setdialog(497, 198); button(GBTNLRG2, 1, 2);
+	setdialog(555, 338); button(GBTNSTD, 1, 2, KeyEscape, "Close"); fire(setgameproc, 1, 0, paint_game_options);
+}
+
+static void paint_game_journal() {
+	paint_game_dialog(GUIJRLN);
+	setdialog(234, 24, 205, 28); texta(STONEBIG, getnm("Journal"), AlignCenterCenter);
+	setdialog(66, 90, 651, 275); texta("Test text 1", AlignLeft); // fore(255 255 246)
+	//Scroll GBTNSCRL 727 64 12 304 frames(1 0 3 2 4 5)
+	setdialog(460, 18); button(GBTNJBTN, 1, 2);
+	setdialog(525, 18); button(GBTNJBTN, 5, 6);
+	setdialog(66, 67, 170, 20); texta("Test text 2", AlignLeft); // fore(0 200 200)
+}
+
+static void ability(ability_s v) {
+	pushfore push_fore;
+	texta(getnms(v), AlignCenterCenter);
+	caret.x += 51; width = 32;
+	texta(str("%1i", player->abilitites[v]), AlignCenterCenter);
+	caret.x += 41;
+	auto n = player->getbonus(v);
+	texta(str("%+1i", n), AlignCenterCenter);
+}
+
+static void paint_game_character() {
+	paint_game_dialog(GUIREC);
+	paint_game_player();
+	setdialog(258, 23, 115, 28); texta(bsdata<racei>::elements[player->race].getname(), AlignCenterCenter);
+	setdialog(253, 78, 45, 30); ability(Strenght);
+	setdialog(253, 116, 45, 30); ability(Dexterity);
+	setdialog(253, 155, 45, 30); ability(Constitution);
+	setdialog(253, 193, 45, 30); ability(Intelligence);
+	setdialog(253, 233, 45, 30); ability(Wisdow);
+	setdialog(253, 271, 45, 30); ability(Charisma);
+	setdialog(463, 381, 32, 30); texta(str("%1i", player->get(AC)), AlignCenterCenter);
+	setdialog(585, 378, 54, 16); texta(str("%1i", player->hp_max), AlignCenterCenter);
+	setdialog(585, 399, 54, 16); texta(str("%1i", player->hp), AlignCenterCenter);
+	setdialog(256, 307); button(GBTNSTD, 1, 2, 0, "Information");
+	setdialog(256, 334); button(GBTNSTD, 1, 2, 0, "Biography");
+	setdialog(256, 361); button(GBTNSTD, 1, 2, 0, "Export");
+	setdialog(256, 388); button(GBTNSTD, 1, 2, 0, "Customize");
+	setdialog(430, 22); checkbox(character_info_mode, 0, GBTNRECB, 0, 1, 2, 0);
+	setdialog(512, 22); checkbox(character_info_mode, 1, GBTNRECB, 3, 4, 5, 0);
+	setdialog(594, 22); checkbox(character_info_mode, 2, GBTNRECB, 6, 7, 8, 0);
+	setdialog(676, 22); checkbox(character_info_mode, 3, GBTNRECB, 9, 10, 11, 0);
+	setdialog(655, 379); button(GBTNSTD, 1, 2, 'L', "LevelUp");
+	//UpdateCreatureInfo NONE 0 0 0 0
+	//TextDescription NORMAL 406 64 349 288 fore(250 250 250)
+	//Scroll GBTNSCRL 768 64 12 294 frames(1 0 3 2 4 5)
+}
+
+static void paint_worldmap() {
+	//ButtonNT GUIMAPWC 680 288 84 111 frames(0 1 0 0) value(2) data(GUIWMAP)
+	//AreaMinimap GUIMAP 98 36 480 360
+	//Button GBTNOPT1 664 54 23 24 frames(1 2 3 0) value(3)
+	//Label NORMAL 668 92 109 165
+	//Label NORMAL 696 56 82 20 id("AreaNotes") // Area Notes
+}
+
+static void paint_game_automap() {
+	paint_game_dialog(GUIMAP);
+	setdialog(696, 56, 82, 20); texta(getnm("AreaNotes"), AlignCenterCenter);
+	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_game_stage, 0, 0, open_worldmap);
+	setdialog(664, 54); button(GBTNOPT1, 1, 2);
+	setdialog(666, 18, 113, 22); texta(getnm("AreaMap"), AlignCenterCenter);
+	setdialog(98, 36, 480, 360); paint_minimap();
+	setdialog(668, 92, 109, 165); // Map notes text
+}
+
 static void paint_game_panel() {
 	dialog_start = caret; image(gres(GCOMM), 0, 0);
 	setdialog(736, 43); image(gres(CGEAR), (current_game_tick / 128) % 32, 0); // Rolling world
 	setdialog(12, 8, 526, 92); paint_console();
-	setdialog(600, 22); button(GCOMMBTN, 4, 5, 'C');
+	setdialog(600, 22); button(GCOMMBTN, 4, 5, 'C'); fire(setgameproc, 0, 0, paint_game_character);
 	setdialog(630, 17); button(GCOMMBTN, 6, 7, 'I'); fire(setgameproc, 0, 0, paint_game_inventory);
 	setdialog(668, 21); button(GCOMMBTN, 8, 9, 'S');
-	setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M');
-	setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J');
-	setdialog(670, 57); button(GCOMMBTN, 10, 11, KeyEscape);
+	setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M'); fire(setgameproc, 0, 0, paint_game_automap);
+	setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J'); fire(setgameproc, 0, 0, paint_game_journal);
+	setdialog(670, 57); button(GCOMMBTN, 10, 11, KeyEscape); fire(setgameproc, 1, 0, paint_game_options);
 	setdialog(576, 3); button(GCOMMBTN, 0, 1, '*');
 	setdialog(703, 2); button(GCOMMBTN, 2, 3);
 	setdialog(575, 72); button(GCOMMBTN, 16, 17);
@@ -577,9 +645,8 @@ static void paint_game_panel() {
 }
 
 void paint_game() {
-	if(!game_pause)
-		update_frames();
 	cursor.set(CURSORS, 0);
+	update_frames();
 	setcaret(0, 0, 800, 433);
 	if(game_proc)
 		game_proc();
@@ -614,6 +681,10 @@ void open_item_description() {
 
 void open_game() {
 	scene(paint_game);
+}
+
+void open_worldmap() {
+	scene(paint_worldmap);
 }
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color) {
