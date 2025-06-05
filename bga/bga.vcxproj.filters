@@ -562,9 +562,6 @@
     <ClInclude Include="game.h">
       <Filter>logic</Filter>
     </ClInclude>
-    <ClInclude Include="widget.h">
-      <Filter>logic</Filter>
-    </ClInclude>
     <ClInclude Include="dice.h">
       <Filter>support</Filter>
     </ClInclude>

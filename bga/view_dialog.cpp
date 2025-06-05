@@ -22,16 +22,20 @@ static point dialog_start;
 static bool button_pressed, button_executed, button_hilited, input_disabled;
 static bool game_pause;
 static fnevent game_proc;
+static item *drag_item_source, *drag_item_dest;
 
 static char description_text[4096];
 static size_t description_cash_size;
 static int character_info_mode;
-static int current_topic_list;
-static int current_content_list;
+static int current_topic_list, cash_topic_list, current_content_list;
 static vector<nameable*> content;
 stringbuilder description(description_text);
 
 static void paint_game_panel(bool allow_input);
+
+static void set_cursor() {
+	cursor.set(CURSORS, 0);
+}
 
 static const char* getnms(ability_s v) {
 	return getnm(ids(bsdata<abilityi>::elements[v].id, "Short"));
@@ -86,7 +90,7 @@ void open_scene() {
 }
 
 void paint_dialog(resn v) {
-	cursor.set(CURSORS, 0);
+	set_cursor();
 	auto p = gres(v);
 	auto& f = p->get(0);
 	dialog_start.x = (getwidth() - f.sx) / 2;
@@ -98,7 +102,7 @@ void paint_dialog(resn v) {
 }
 
 void paint_game_dialog(resn v) {
-	cursor.set(CURSORS, 0);
+	set_cursor();
 	dialog_start.x = 0;
 	dialog_start.y = 0;
 	caret = dialog_start;
@@ -238,10 +242,12 @@ static void scroll(resn res, int fu, int fd, int bar, int& origin, int maximum, 
 	caret.y = push.caret.y + push.height - h;
 	button(res, fd, fd + 1);
 	fire(cbsetint, origin + per_row, 0, &origin);
-	auto height_max = push.height - h * 2 - sh * 2;
-	auto current_position = origin * height_max / maximum;
-	caret.y = push.caret.y + h + current_position;
-	button(res, bar, bar);
+	if(maximum > per_page) {
+		auto height_max = push.height - h * 2 - sh * 2;
+		auto current_position = origin * height_max / (maximum - per_page);
+		caret.y = push.caret.y + h + current_position;
+		button(res, bar, bar);
+	}
 }
 
 static void paint_game_panel() {
@@ -306,7 +312,9 @@ static void paint_description(int xs, int ys, int hs) {
 		caret.y -= origin;
 	textf(description, cash_origin, cash_string);
 	clipping = push_clip; caret = push.caret;
-	setdialog(xs, ys, 12, hs);
+	caret.x += push.width + xs;
+	caret.y += ys;
+	width = 12; height = hs;
 	scroll(GBTNSCRL, 0, 2, 4, origin, maximum, per_page, per_row);
 }
 
@@ -656,9 +664,10 @@ static void paint_list(const array& source, int& origin, int& current, int per_p
 	caret.y += 1;
 	height = texth() + 2;
 	correct_table(origin, maximum, per_page);
-	if(maximum > origin + per_page)
-		maximum = origin + per_page;
-	for(auto i = origin; i < maximum; i++) {
+	auto im = maximum;
+	if(im > origin + per_page)
+		im = origin + per_page;
+	for(auto i = origin; i < im; i++) {
 		auto p = ((nameable**)source.data)[i];
 		fore = (current == i) ? colors::yellow : colors::white;
 		text(p->getname());
@@ -670,6 +679,10 @@ static void paint_list(const array& source, int& origin, int& current, int per_p
 		caret.y += height;
 	}
 	clipping = push_clip;
+	caret.x += push.width + 13;
+	caret.y = push.caret.y - 2;
+	height = push.height + 5; width = 12;
+	scroll(GBTNSCRL, 0, 2, 4, origin, maximum, per_page, 1);
 }
 
 static void paint_topic_lists() {
@@ -685,9 +698,9 @@ static int compare_nameable(const void* v1, const void* v2) {
 }
 
 static void select_content(int index) {
-	if(current_content_list == index)
+	if(cash_topic_list == index)
 		return;
-	current_content_list = index;
+	cash_topic_list = index;
 	content.clear();
 	auto& ei = bsdata<helpi>::elements[index];
 	auto pb = ei.source.begin();
@@ -704,9 +717,9 @@ static void select_content(int index) {
 }
 
 static void paint_content_lists() {
-	static int origin, current;
+	static int origin;
 	select_content(current_topic_list);
-	paint_list(content, origin, current, 15);
+	paint_list(content, origin, current_content_list, 15);
 }
 
 static void paint_help() {
@@ -717,13 +730,22 @@ static void paint_help() {
 	setdialog(297, 373); button(GBTNBFRM, 1, 2, KeyEscape, "Close"); fire(buttoncancel);
 	setdialog(74, 72, 95, 286); paint_topic_lists();
 	setdialog(194, 72, 197, 286); paint_content_lists();
-	//Scroll GBTNSCRL 404 70 12 291 frames(1 0 3 2 4 5)
-	//// TextDescription NORMAL 435 72 271 286 fore(255 255 246)
-	//Scroll GBTNSCRL 720 70 12 291 frames(1 0 3 2 4 5)
+	description.clear();
+	if(content && content.count > (size_t)current_content_list) {
+		auto p = content[current_content_list];
+		if(p) {
+			auto pv = find_variant(p);
+			if(pv && pv->pstatus)
+				pv->pstatus(p, description);
+			else
+				description.add(getnme(ids(p->id, "Info")));
+		}
+	}
+	setdialog(435, 72, 271, 286); paint_description(14, -2, 291);
 }
 
 static void open_help() {
-	current_content_list = -1;
+	cash_topic_list = -1;
 	open_dialog(paint_help, true);
 }
 
@@ -917,7 +939,24 @@ static void paint_item_description() {
 	setdialog(20, 432); button(GBTNMED, 1, 2, 'I', "Identify"); fire(identify_item);
 	setdialog(179, 432); button(GBTNMED, 1, 2, 'U', "UseItem");
 	setdialog(338, 432); button(GBTNMED, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
-	setdialog(28, 115, 435, 299); paint_description(480, 109, 311);
+	setdialog(28, 115, 435, 299); paint_description(17, -6, 311);
+}
+
+static void paint_cursor() {
+	auto pi = gres(cursor.id);
+	if(!pi)
+		return;
+	auto cicle = cursor.cicle;
+	if(cursor.id == CURSORS) {
+		auto pressed = hot.pressed;
+		if(pressed)
+			cicle += 1;
+		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
+	} else if(cursor.id == CURSARW) {
+		auto ti = pi->ganim(cursor.cicle, current_tick / 32);
+		image(hot.mouse.x, hot.mouse.y, pi, ti, 0);
+	} else
+		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
 }
 
 void open_item_description() {
@@ -945,4 +984,10 @@ unsigned char open_color_pick(unsigned char current_color, unsigned char default
 		return current_color;
 	else
 		return (unsigned char)result;
+}
+
+void initialize_ui() {
+	set_cursor();
+	ptips = paint_cursor;
+	draw::syscursor(false);
 }

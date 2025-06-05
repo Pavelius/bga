@@ -134,7 +134,9 @@
     <ClCompile Include="view_tool.cpp" />
     <ClCompile Include="wear.cpp" />
     <ClCompile Include="wearable.cpp" />
-    <ClCompile Include="widget.cpp" />
+    <ClCompile Include="widget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="win_draw.cpp" />
     <ClCompile Include="win_io_file.cpp" />
     <ClCompile Include="win_time.cpp" />
@@ -223,7 +225,6 @@
     <ClInclude Include="view_list.h" />
     <ClInclude Include="wear.h" />
     <ClInclude Include="wearable.h" />
-    <ClInclude Include="widget.h" />
     <ClInclude Include="win.h" />
     <ClInclude Include="worldmap.h" />
   </ItemGroup>

@@ -18,6 +18,7 @@ enum ability_s : unsigned char {
 	HitPoints, Stamina,
 };
 struct abilityi : nameable {
+	int			player;
 	const char*	format;
 };
 struct statable : skilla {

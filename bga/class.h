@@ -6,6 +6,7 @@ enum classn : unsigned char {
 };
 struct classi {
 	const char*	id;
+	int			player;
 	int			hit_points, skill_points;
 	unsigned	skills;
 };

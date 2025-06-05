@@ -15,7 +15,6 @@ void set_color(color* pallette, int start, int index, int count) {
 void clear_indecies() {
 	for(auto& i : color_indecies)
 		i = -1;
-	// default_color = -1;
 }
 
 void set_color(const char* id) {
@@ -28,6 +27,6 @@ void set_color(const char* id) {
 		color_indecies[index++] = i;
 }
 
-void colorgrad::initialize() {
+void initialize_colorgrad() {
 	pallette_bitmap.read("art/bmp/MPALETTE.bmp");
 }

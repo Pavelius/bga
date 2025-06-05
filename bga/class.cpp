@@ -2,13 +2,13 @@
 #include "class.h"
 
 BSDATA(classi) = {
-	{"Commoner", 4, 2},
-	{"Fighter", 10, 2},
-	{"Cleric", 8, 2},
-	{"Ranger", 8, 6},
-	{"Rogue", 6, 8},
-	{"Sorcerer", 4, 2},
-	{"Wizard", 4, 2},
+	{"Commoner", 0, 4, 2},
+	{"Fighter", 1, 10, 2},
+	{"Cleric", 1, 8, 2},
+	{"Ranger", 1, 8, 6},
+	{"Rogue", 1, 6, 8},
+	{"Sorcerer", 1, 4, 2},
+	{"Wizard", 1, 4, 2},
 };
 assert_enum(classi, Wizard)
 

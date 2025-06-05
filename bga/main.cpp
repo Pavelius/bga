@@ -13,7 +13,7 @@
 #include "resid.h"
 #include "script.h"
 #include "timer.h"
-#include "widget.h"
+#include "view.h"
 #include "worldmap.h"
 
 using namespace draw;
@@ -85,8 +85,8 @@ int main(int argc, char* argv[]) {
 #endif // _DEBUG
 	initialize_translation();
 	initialize_store();
-	colorgrad::initialize();
-	widget::initialize();
+	initialize_colorgrad();
+	initialize_ui();
 	if(log::errors)
 		return -1;
 	metrics::font = gres(NORMAL);
