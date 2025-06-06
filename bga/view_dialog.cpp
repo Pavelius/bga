@@ -55,9 +55,9 @@ static void update_frames() {
 		update_game_tick();
 }
 
-static void update_description(const char* format) {
+static void set_description(const char* id) {
 	description.clear();
-	description.add(format);
+	description.add(id);
 	description_cash_size = -1;
 }
 
@@ -324,9 +324,10 @@ static void paint_description(int xs, int ys, int hs) {
 		cash_string = -1;
 		description_cash_size = description.size();
 		pushrect push;
-		textfs((char*)console_data.data);
+		textfs((char*)description);
 		maximum = height;
 	}
+	input_mouse_table(origin, maximum, per_page, per_row);
 	correct_table(origin, maximum, per_page);
 	if(cash_origin != origin) {
 		cash_origin = origin;
@@ -724,7 +725,7 @@ static void ability(ability_s v) {
 static void paint_list(void* source, size_t size, int& origin, int& current, int maximum, int per_page, fngetname get_name, unsigned flags) {
 	pushrect push;
 	pushfore push_fore;
-	input_mouse_table(origin, maximum, per_page);
+	input_mouse_table(origin, maximum, per_page, 1);
 	caret.y += 1;
 	height = texth() + 2;
 	correct_table(origin, maximum, per_page);
@@ -748,7 +749,7 @@ static void paint_list(const array& source, int& origin, int& current, int per_p
 	pushfore push_fore;
 	auto push_clip = clipping; setclipall();
 	int maximum = source.count;
-	input_mouse_table(origin, maximum, per_page);
+	input_mouse_table(origin, maximum, per_page, 1);
 	caret.y += 1;
 	height = texth() + 2;
 	correct_table(origin, maximum, per_page);
@@ -837,6 +838,19 @@ static void open_help() {
 	open_dialog(paint_help, true);
 }
 
+static void update_character() {
+	static creature* cash_player;
+	static int cash_info_mode;
+	if(cash_player == player && cash_info_mode == character_info_mode)
+		return;
+	cash_info_mode = character_info_mode;
+	cash_player = player;
+	switch(character_info_mode) {
+	case 0: set_description("%PlayerInformation"); break;
+	case 1: set_description("%PlayerSkillInformation"); break;
+	}
+}
+
 static void paint_game_character() {
 	paint_game_dialog(GUIREC);
 	paint_game_player();
@@ -859,8 +873,9 @@ static void paint_game_character() {
 	setdialog(594, 22); checkbox(character_info_mode, 2, GBTNRECB, 6, 7, 8, 0);
 	setdialog(676, 22); checkbox(character_info_mode, 3, GBTNRECB, 9, 10, 11, 0);
 	setdialog(655, 379); button(GBTNSTD, 1, 2, 'L', "LevelUp");
+	update_character();
+	setdialog(406, 64, 349, 288); paint_description(13, 0, 294);
 	//UpdateCreatureInfo NONE 0 0 0 0
-	//TextDescription NORMAL 406 64 349 288 fore(250 250 250)
 	//Scroll GBTNSCRL 768 64 12 294 frames(1 0 3 2 4 5)
 }
 
@@ -1017,7 +1032,7 @@ void paint_game() {
 
 static void identify_item() {
 	last_item->identify(1);
-	update_description("%ItemInformation");
+	set_description("%ItemInformation");
 }
 
 static void paint_item_description() {
@@ -1050,7 +1065,7 @@ static void paint_cursor() {
 void open_item_description() {
 	auto push_last = last_item;
 	last_item = (item*)hot.object;
-	update_description("%ItemInformation");
+	set_description("%ItemInformation");
 	open_dialog(paint_item_description, true);
 	last_item = push_last;
 }

@@ -111,6 +111,9 @@
     <Text Include="..\locale\ru\UnknownNames.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\rules\Spells.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -386,6 +389,9 @@
     <ClCompile Include="help.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="spell.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -635,6 +641,12 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="help.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="spell.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="school.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

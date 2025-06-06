@@ -21,6 +21,7 @@
 #include "region.h"
 #include "script.h"
 #include "skill.h"
+#include "spell.h"
 #include "store.h"
 #include "stringvar.h"
 #include "variant.h"
@@ -46,6 +47,7 @@ BSDATAC(itemi, 512)
 BSDATAC(itemground, 512)
 BSDATAC(point, 256*256)
 BSDATAC(region, 128)
+BSDATAC(spelli, 256)
 BSDATAD(variant)
 BSDATAC(variable, 1024)
 BSDATAC(worldmapi, 8)
@@ -143,6 +145,12 @@ BSMETA(skilli) = {
 	BSREQ(id),
 	BSENM(ability, abilityi),
 	{}};
+BSMETA(spelli) = {
+	BSREQ(id),
+	BSDST(classes, classi),
+	BSREQ(wearing),
+	BSREQ(instant),
+	{}};
 BSMETA(storei) = {
 	BSREQ(id),
 	BSENM(type, storeti),
@@ -186,7 +194,6 @@ BSMETA(worldmapi::link) = {
 	BSENM(side, geographyi),
 	BSREQ(time), BSREQ(encounter_chance),
 	{}};
-
 BSDATA(varianti) = {
 	{"NoVariant"},
 	{"Ability", VAR(abilityi, 1), 0, 0, fnscript<abilityi>},
@@ -205,6 +212,7 @@ BSDATA(varianti) = {
 	{"Resource", VAR(residi, 1)},
 	{"Script", VAR(script, 1)},
 	{"Skill", VAR(skilli, 1), ftinfo<skilli>},
+	{"Spell", VAR(spelli, 1)},
 	{"Store", VAR(storei, 1)},
 	{"StringVar", VAR(stringvari, 1)},
 	{"Type", VAR(varianti, 1)},

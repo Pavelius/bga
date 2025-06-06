@@ -10,11 +10,11 @@ void correct_table(int& origin, int maximum, int per_page) {
 		origin = 0;
 }
 
-void input_mouse_table(int& origin, int maximum, int per_page) {
+void input_mouse_table(int& origin, int maximum, int per_page, int per_row) {
 	if(!ishilite())
 		return;
 	switch(hot.key) {
-	case MouseWheelUp: execute(cbsetint, origin - 1, 0, &origin); break;
-	case MouseWheelDown: execute(cbsetint, origin + 1, 0, &origin); break;
+	case MouseWheelUp: execute(cbsetint, origin - per_row, 0, &origin); break;
+	case MouseWheelDown: execute(cbsetint, origin + per_row, 0, &origin); break;
 	}
 }

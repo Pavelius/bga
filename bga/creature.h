@@ -2,10 +2,11 @@
 #include "actable.h"
 #include "collection.h"
 #include "portrait.h"
+#include "spell.h"
 
 #pragma once
 
-struct creature : actor, avatarable {
+struct creature : actor, avatarable, spellv {
 	statable		basic;
 	unsigned char	alignment;
 	short			hp, hp_max;

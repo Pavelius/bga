@@ -74,6 +74,7 @@ static void read_rules() {
 	bsreq::read("rules/Worldmap.txt");
 	bsreq::read("rules/Calendar.txt");
 	bsreq::read("rules/Feats.txt");
+	bsreq::read("rules/Spells.txt");
 }
 
 int main(int argc, char* argv[]) {
