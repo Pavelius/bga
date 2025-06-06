@@ -1,2 +1,0 @@
-﻿Error in file `rules/Spells.txt`:
- Line 1: Not find data type for `Spell`
