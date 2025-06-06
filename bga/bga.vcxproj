@@ -71,6 +71,7 @@
     <ClCompile Include="creature.cpp" />
     <ClCompile Include="damage.cpp" />
     <ClCompile Include="dice.cpp" />
+    <ClCompile Include="domain.cpp" />
     <ClCompile Include="door.cpp" />
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="draw_answers.cpp" />
@@ -136,9 +137,6 @@
     <ClCompile Include="view_tool.cpp" />
     <ClCompile Include="wear.cpp" />
     <ClCompile Include="wearable.cpp" />
-    <ClCompile Include="widget.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="win_draw.cpp" />
     <ClCompile Include="win_io_file.cpp" />
     <ClCompile Include="win_time.cpp" />
@@ -164,6 +162,7 @@
     <ClInclude Include="container.h" />
     <ClInclude Include="damage.h" />
     <ClInclude Include="dice.h" />
+    <ClInclude Include="domain.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="draw_focus.h" />

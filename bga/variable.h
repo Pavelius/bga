@@ -5,9 +5,9 @@
 struct variable {
 	char		lock_difficult, trap_difficult;
 	unsigned	flags;
-	bool		is(tag_s v) const { return (flags & (1 << v)) != 0; }
-	void		remove(tag_s v) { flags &= ~(1 << v); }
-	void		set(tag_s v) { flags |= (1 << v); }
+	bool		is(tagn v) const { return (flags & (1 << v)) != 0; }
+	void		remove(tagn v) { flags &= ~(1 << v); }
+	void		set(tagn v) { flags |= (1 << v); }
 };
 extern variable* current_variable_base;
 extern unsigned variable_count;

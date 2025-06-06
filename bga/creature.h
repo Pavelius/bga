@@ -14,7 +14,7 @@ struct creature : actor, avatarable, spellv {
 	void			clear();
 	static void		create(gendern gender);
 	static void		create(racen race, gendern gender, classn classv, unsigned short portrait);
-	bool			isclass(skill_s v) const;
+	bool			isclass(skilln v) const;
 	bool			isusable(const item& it) const;
 	void			paint() const;
 	void			update();

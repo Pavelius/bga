@@ -305,9 +305,6 @@
     <ClCompile Include="game.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="widget.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="dice.cpp">
       <Filter>support</Filter>
     </ClCompile>
@@ -390,6 +387,9 @@
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="spell.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="domain.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -647,6 +647,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="school.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="domain.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

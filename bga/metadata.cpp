@@ -8,6 +8,7 @@
 #include "container.h"
 #include "creature.h"
 #include "door.h"
+#include "domain.h"
 #include "draw.h"
 #include "entrance.h"
 #include "floattext.h"
@@ -40,6 +41,7 @@ BSDATAC(colorgrad, 32)
 BSDATAC(container, 128)
 BSDATAC(creature, 256)
 BSDATAC(door, 64)
+BSDATAC(domaini, 32)
 BSDATAC(doortile, 256)
 BSDATAC(entrance, 64)
 BSDATAC(floattext, 64)
@@ -48,6 +50,7 @@ BSDATAC(itemground, 512)
 BSDATAC(point, 256*256)
 BSDATAC(region, 128)
 BSDATAC(spelli, 256)
+BSDATAC(spellbook, 32)
 BSDATAD(variant)
 BSDATAC(variable, 1024)
 BSDATAC(worldmapi, 8)
@@ -86,6 +89,16 @@ BSMETA(damagei) = {
 	{}};
 BSMETA(dice) = {
 	BSREQ(c), BSREQ(d), BSREQ(b), BSREQ(m),
+	{}};
+BSMETA(domainfi) = {
+	BSREQ(id),
+	{}};
+BSMETA(domaini) = {
+	BSREQ(id),
+	BSREQ(power),
+	BSREQ(power_use_per_day),
+	BSREQ(spells),
+	BSFLG(tags, domainfi),
 	{}};
 BSMETA(feati) = {
 	BSREQ(id),
@@ -147,6 +160,7 @@ BSMETA(skilli) = {
 	{}};
 BSMETA(spelli) = {
 	BSREQ(id),
+	BSREQ(avatar),
 	BSDST(classes, classi),
 	BSREQ(wearing),
 	BSREQ(instant),
@@ -202,6 +216,7 @@ BSDATA(varianti) = {
 	{"Class", VAR(classi, 1)},
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"DayPart", VAR(periodi, 1)},
+	{"Domain", VAR(domaini, 1)},
 	{"Feat", VAR(feati, 1), 0, 0, fnscript<feati>},
 	{"Item", VAR(itemi, 1)},
 	{"List", VAR(listi, 1)},

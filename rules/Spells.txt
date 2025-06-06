@@ -1,3 +1,10 @@
 #Spell
 
-CureLightWounds
+CureLightWounds avatar(2)
+ classes Cleric(1)
+
+#Domain
+
+HealingDomain
+ tags BonusPower
+ spells CureLightWounds

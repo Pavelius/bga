@@ -119,7 +119,7 @@ static bool is_class_skill(const void* object) {
 	auto n = bsdata<skilli>::source.indexof(object);
 	if(n == -1)
 		return false;
-	return player->isclass((skill_s)n);
+	return player->isclass((skilln)n);
 }
 
 static void raise_random_skills(int points) {
@@ -130,7 +130,7 @@ static void raise_random_skills(int points) {
 	for(auto p : source) {
 		if(points <= 0)
 			break;
-		auto v = (skill_s)bsdata<skilli>::source.indexof(p);
+		auto v = (skilln)bsdata<skilli>::source.indexof(p);
 		if(player->isclass(v)) {
 			auto n = maximum_rang - player->basic.skills[v];
 			if(n >= 0) {
@@ -199,7 +199,7 @@ void creature::create(gendern gender) {
 	create(p->race, p->gender, p->classv, pi);
 }
 
-bool creature::isclass(skill_s v) const {
+bool creature::isclass(skilln v) const {
 	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1)) {
 		if(classes[i]) {
 			if(FGT(bsdata<classi>::elements[i].skills, v))
@@ -238,7 +238,7 @@ static void update_weight() {
 }
 
 static void update_skills() {
-	for(auto i = (skill_s)0; i <= WildernessLore; i = (skill_s)(i + 1))
+	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1))
 		player->skills[i] += player->getbonus(bsdata<skilli>::elements[i].ability);
 }
 

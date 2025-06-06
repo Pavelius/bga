@@ -30,6 +30,7 @@ static char description_text[4096];
 static size_t description_cash_size;
 static int character_info_mode;
 static int current_topic_list, cash_topic_list, current_content_list;
+static int current_spell_level;
 static vector<nameable*> content;
 static stringbuilder description(description_text);
 
@@ -712,6 +713,24 @@ static void paint_game_journal() {
 	paint_action_panel_na();
 }
 
+//static void creature_ability_bonus() {
+//	if(gui.data.iskind<abilityi>())
+//		gui.value = player->getbonus((ability_s)gui.data.value);
+//	char temp[32]; stringbuilder sb(temp);
+//	auto push_fore = fore;
+//	if(gui.value > 0) {
+//		sb.add("%+1i", gui.value);
+//		fore = colors::green;
+//	} else if(gui.value < 0) {
+//		fore = colors::red;
+//		sb.add("%+1i", gui.value);
+//	} else
+//		sb.add("%+1i", gui.value);
+//	gui.text = temp;
+//	label();
+//	fore = push_fore;
+//}
+
 static void ability(ability_s v) {
 	pushfore push_fore;
 	texta(getnms(v), AlignCenterCenter);
@@ -898,9 +917,39 @@ static void paint_game_automap() {
 }
 
 static void spell_level_filter() {
+	setdialog(740, 62, 42, 38);
 	for(auto i = 0; i < 9; i++) {
-		button(GBTNSPB2, i * 3 + 1, i * 3 + 2, 0);
+		auto frame = i * 3 + 1;
+		if(current_spell_level == i)
+			frame = i * 3 + 0;
+		button(GBTNSPB2, frame, i * 3 + 2, 0);
+		fire(cbsetint, i, 0, &current_spell_level);
 		caret.y += 39;
+	}
+}
+
+static void spell_type_filter() {
+	static int origin, current;
+	const auto per_page = 4;
+	auto maximum = 8;
+	correct_table(origin, maximum, per_page);
+	setdialog(252, 19); button(GBTNSPB3, 0, 1); fire(cbsetint, origin - 1, 0, &origin);
+	setdialog(705, 19); button(GBTNSPB3, 2, 3); fire(cbsetint, origin + 1, 0, &origin);
+	setdialog(273, 19);
+	if(maximum > origin + per_page)
+		maximum = origin + per_page;
+	auto index = origin;
+	for(; index < maximum; index++) {
+		auto frame = 1;
+		if(index == current)
+			frame = 0;
+		button(GBTNSPB1, frame, 2);
+		fire(cbsetint, index, 0, &current);
+		caret.x += 108;
+	}
+	for(; index < 4; index++) {
+		button(GBTNSPB1, 3, 3);
+		caret.x += 108;
 	}
 }
 
@@ -912,7 +961,8 @@ static void paint_game_spells() {
 	setdialog(253, 391, 187, 19); texta(getnm("SpellSlotsAvailable"), AlignCenterCenter);
 	setdialog(449, 390, 32, 20); texta(getnm("Slots"), AlignCenterCenter);
 	setdialog(742, 20, 39, 38); texta(getnm("SpellLevelShort"), AlignCenterCenter);
-	setdialog(740, 62, 42, 38); spell_level_filter();
+	spell_level_filter();
+	spell_type_filter();
 
 	//Button GBTNSTD 291 78 32 32 frames(0 1 0 0) value(0)
 	//Button GBTNSTD 291 117 32 32 frames(0 1 0 0) value(1)
@@ -984,12 +1034,6 @@ static void paint_game_spells() {
 	//Label TOOLFONT 254 358 29 18
 	//Label TOOLFONT 333 358 29 18
 	//Label TOOLFONT 412 358 29 18
-	//Button GBTNSPB1 273 19 102 24 frames(1 2 3 0) value(88)
-	//Button GBTNSPB1 381 19 102 24 frames(1 2 3 0) value(89)
-	//Button GBTNSPB1 489 19 102 24 frames(1 2 3 0) value(90)
-	//Button GBTNSPB1 597 19 102 24 frames(1 2 3 0) value(91)
-	//Button GBTNSPB3 252 19 17 26 frames(0 1 0 0) value(92)
-	//Button GBTNSPB3 705 19 17 26 frames(0 1 0 0) value(93)
 }
 
 static void paint_game_panel(bool allow_input) {

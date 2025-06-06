@@ -146,7 +146,7 @@ static void player_information(stringbuilder& sb) {
 
 static void player_skill_information(stringbuilder& sb) {
 	addh(sb, getnm("Skills"));
-	for(auto i = (skill_s)0; i <= WildernessLore; i = (skill_s)(i + 1)) {
+	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1)) {
 		auto raw_level = player->basic.get(i);
 		auto level = player->get(i);
 		if(raw_level > 0)
