@@ -1140,12 +1140,12 @@ void paint_game() {
 
 static void identify_item() {
 	last_item->identify(1);
-	set_description("%ItemInformation");
+	set_description("###%ItemName\n%ItemInformation");
 }
 
 static void paint_item_description() {
 	paint_dialog(GIITMH08);
-	setdialog(36, 37, 357, 30); texta(STONEBIG, str("%ItemName"), AlignCenterCenter);
+	setdialog(36, 37, 357, 30); texta(STONEBIG, getnm("Item"), AlignCenterCenter);
 	setdialog(430, 20, 64, 64); paint_item_avatar();
 	setdialog(20, 432); button(GBTNMED, 1, 2, 'I', "Identify"); fire(identify_item);
 	setdialog(179, 432); button(GBTNMED, 1, 2, 'U', "UseItem");
@@ -1173,7 +1173,7 @@ static void paint_cursor() {
 void open_item_description() {
 	auto push_last = last_item;
 	last_item = (item*)hot.object;
-	set_description("%ItemInformation");
+	set_description("##%ItemName\n%ItemInformation");
 	open_dialog(paint_item_description, true);
 	last_item = push_last;
 }

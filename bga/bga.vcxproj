@@ -43,6 +43,7 @@
     <Text Include="..\rules\Classes.txt" />
     <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Basic.txt" />
+    <Text Include="..\rules\Diety.txt" />
     <Text Include="..\rules\Feats.txt" />
     <Text Include="..\rules\Items.txt" />
     <Text Include="..\rules\Races.txt" />
@@ -72,7 +73,7 @@
     <ClCompile Include="creature.cpp" />
     <ClCompile Include="damage.cpp" />
     <ClCompile Include="dice.cpp" />
-    <ClCompile Include="domain.cpp" />
+    <ClCompile Include="diety.cpp" />
     <ClCompile Include="door.cpp" />
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="draw_answers.cpp" />
@@ -166,7 +167,7 @@
     <ClInclude Include="container.h" />
     <ClInclude Include="damage.h" />
     <ClInclude Include="dice.h" />
-    <ClInclude Include="domain.h" />
+    <ClInclude Include="diety.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="draw_focus.h" />

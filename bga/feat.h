@@ -33,4 +33,4 @@ enum feat_s : unsigned char {
 struct feati : nameable {
 	variants require;
 };
-typedef flagable<(ReadyToBattle + 7) / 8> featf;
+typedef flagable<(ReadyToBattle + 31) / 32, unsigned> featf;

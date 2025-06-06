@@ -77,6 +77,7 @@ static void read_rules() {
 	bsreq::read("rules/Calendar.txt");
 	bsreq::read("rules/Feats.txt");
 	bsreq::read("rules/Spells.txt");
+	bsreq::read("rules/Diety.txt");
 }
 
 int main(int argc, char* argv[]) {
@@ -98,9 +99,9 @@ int main(int argc, char* argv[]) {
 	metrics::h2 = gres(REALMS);
 	metrics::h3 = gres(NORMAL);
 	colors::text = color(255, 255, 255);
-	colors::h1 = colors::text.mix(colors::button, 64);
-	colors::h2 = colors::text.mix(colors::button, 96);
 	colors::h3 = color(244, 214, 66);
+	colors::h1 = colors::text.mix(colors::h3, 64);
+	colors::h2 = colors::text.mix(colors::h3, 96);
 	colors::special = color(244, 214, 66);
 	initialize(getnm("AppTitle"));
 	settimer(64);

@@ -117,6 +117,9 @@
     <Text Include="..\locale\ru\Spells.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\rules\Diety.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -392,11 +395,11 @@
     <ClCompile Include="spell.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="domain.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="logvalue.cpp">
       <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="diety.cpp">
+      <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -655,9 +658,6 @@
     <ClInclude Include="school.h">
       <Filter>logic</Filter>
     </ClInclude>
-    <ClInclude Include="domain.h">
-      <Filter>logic</Filter>
-    </ClInclude>
     <ClInclude Include="slice.h">
       <Filter>support</Filter>
     </ClInclude>
@@ -681,6 +681,9 @@
     </ClInclude>
     <ClInclude Include="rand.h">
       <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="diety.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

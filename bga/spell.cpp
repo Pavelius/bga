@@ -9,10 +9,7 @@ void spellbook::clear() {
 }
 
 const char* spellbook::getid() const {
-	switch(type) {
-	case DomainClass: return "Domain";
-	default: return bsdata<classi>::elements[type].id;
-	}
+	return bsdata<classi>::elements[type].id;
 }
 
 spelln spelli::getindex() const {
@@ -46,13 +43,8 @@ void add_player_spellbooks() {
 		if(!e.cast)
 			continue;
 		auto n = e.getindex();
-		if(!player->classes[n])
-			continue;
-		get_spellbook(player, n);
-		if(n == Cleric) {
-			get_spellbook(player, DomainClass);
-			add_known_spells(n, 1);
-		}
+		if(player->classes[n])
+			get_spellbook(player, n);
 	}
 }
 

@@ -7,8 +7,8 @@
 #include "color.h"
 #include "container.h"
 #include "creature.h"
+#include "diety.h"
 #include "door.h"
-#include "domain.h"
 #include "draw.h"
 #include "entrance.h"
 #include "floattext.h"
@@ -41,7 +41,7 @@ BSDATAC(colorgrad, 32)
 BSDATAC(container, 128)
 BSDATAC(creature, 256)
 BSDATAC(door, 64)
-BSDATAC(domaini, 32)
+BSDATAC(dietyi, 32)
 BSDATAC(doortile, 256)
 BSDATAC(entrance, 64)
 BSDATAC(floattext, 64)
@@ -91,15 +91,11 @@ BSMETA(damagei) = {
 BSMETA(dice) = {
 	BSREQ(c), BSREQ(d), BSREQ(b), BSREQ(m),
 	{}};
-BSMETA(domainfi) = {
+BSMETA(dietyi) = {
 	BSREQ(id),
-	{}};
-BSMETA(domaini) = {
-	BSREQ(id),
-	BSREQ(power),
-	BSREQ(power_use_per_day),
+	BSREQ(powers),
 	BSREQ(spells),
-	BSFLG(tags, domainfi),
+	BSFLG(skills, skilli),
 	{}};
 BSMETA(feati) = {
 	BSREQ(id),
@@ -217,7 +213,7 @@ BSDATA(varianti) = {
 	{"Class", VAR(classi, 1)},
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"DayPart", VAR(periodi, 1)},
-	{"Domain", VAR(domaini, 1)},
+	{"Diety", VAR(dietyi, 1)},
 	{"Feat", VAR(feati, 1), 0, 0, fnscript<feati>},
 	{"Item", VAR(itemi, 1)},
 	{"List", VAR(listi, 1)},

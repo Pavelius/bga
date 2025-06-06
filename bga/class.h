@@ -6,7 +6,6 @@ enum ability_s : unsigned char;
 enum classn : unsigned char {
 	Commoner,
 	Fighter, Cleric, Rogue, Ranger, Sorcerer, Wizard,
-	DomainClass = 64
 };
 struct classi : nameable {
 	int			player;

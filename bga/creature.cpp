@@ -306,8 +306,6 @@ int	creature::getspellslots(classn type, int spell_level) const {
 	auto& ei = bsdata<classi>::elements[type];
 	if(!ei.cast)
 		return 0; // Not caster class
-	if(type == DomainClass)
-		return 1;
 	auto cast_ability = get(ei.cast);
 	if((cast_ability - 10) < spell_level)
 		return 0; // Can't cast, because ability is low.
