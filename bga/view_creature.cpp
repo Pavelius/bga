@@ -13,39 +13,6 @@
 
 using namespace draw;
 
-static int current_info_tab;
-static bool need_update;
-
-void update_creature() {
-	if(player)
-		player->update();
-}
-
-static void update_creature_info() {
-	//if(!need_update)
-	//	return;
-	//need_update = false;
-	//description.clear();
-	//switch(current_info_tab) {
-	//case 0: player->getinfo(description); break;
-	//case 2: player->getskillsinfo(description); break;
-	//default: break;
-	//}
-}
-
-static void update_help_info() {
-	//if(!need_update)
-	//	return;
-	//need_update = false;
-	//variant v = current_focus;
-	//description.clear();
-	//auto pn = getnme(ids(v.getid(), "Info"));
-}
-
-void invalidate_description() {
-	need_update = true;
-}
-
 static resn getanimation(racen race, gendern gender, classn type, int ai, int& ws) {
 	resn icn;
 	switch(race) {

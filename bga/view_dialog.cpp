@@ -23,6 +23,7 @@ static point dialog_start;
 static bool button_pressed, button_executed, button_hilited, input_disabled;
 static bool game_pause;
 static fnevent game_proc;
+static fnoperation drag_drop_proc;
 static item *drag_item_source, *drag_item_dest;
 static item drag_item;
 
@@ -36,6 +37,16 @@ static stringbuilder description(description_text);
 
 static void paint_game_panel(bool allow_input);
 static void paint_game_inventory();
+
+static void invalidate_description() {
+	description_cash_size = -1;
+}
+
+static void cbsetintds() {
+	auto p = (int*)hot.object;
+	*p = hot.param;
+	invalidate_description();
+}
 
 static void set_cursor() {
 	cursor.set(CURSORS, 0);
@@ -77,6 +88,7 @@ static void setgameproc(fnevent v, bool cancel_mode) {
 		game_proc = 0;
 	else
 		game_proc = v;
+	invalidate_description();
 }
 
 static void setgameproc() {
@@ -174,7 +186,7 @@ static void checkbox(int& source, int value, resn res, unsigned short f1, unsign
 	if(source == value)
 		f1 = fc;
 	button(res, f1, f2, key);
-	fire(cbsetint, value, 0, &source);
+	fire(cbsetintds, value, 0, &source);
 }
 
 static void button_colorgrad(int index, int size) {
@@ -258,6 +270,7 @@ static bool dragging(fnevent paint) {
 	pushrect push;
 	hot.pressed = false;
 	while(ismodal()) {
+		drag_drop_proc = 0;
 		paint();
 		switch(hot.key) {
 		case MouseLeft:
@@ -504,6 +517,9 @@ static bool allow_use(const item& di, const item& v) {
 		return false;
 	auto slot = p->getslot(&di);
 	return v.is(slot);
+}
+
+static bool drag_drop_item() {
 }
 
 static void begin_drag_item() {
@@ -858,15 +874,11 @@ static void open_help() {
 }
 
 static void update_character() {
-	static creature* cash_player;
-	static int cash_info_mode;
-	if(cash_player == player && cash_info_mode == character_info_mode)
-		return;
-	cash_info_mode = character_info_mode;
-	cash_player = player;
-	switch(character_info_mode) {
-	case 0: set_description("%PlayerInformation"); break;
-	case 1: set_description("%PlayerSkillInformation"); break;
+	if(description_cash_size == -1) {
+		switch(character_info_mode) {
+		case 0: set_description("%PlayerInformation"); break;
+		case 1: set_description("%PlayerSkillInformation"); break;
+		}
 	}
 }
 
@@ -963,7 +975,6 @@ static void paint_game_spells() {
 	setdialog(742, 20, 39, 38); texta(getnm("SpellLevelShort"), AlignCenterCenter);
 	spell_level_filter();
 	spell_type_filter();
-
 	//Button GBTNSTD 291 78 32 32 frames(0 1 0 0) value(0)
 	//Button GBTNSTD 291 117 32 32 frames(0 1 0 0) value(1)
 	//Button GBTNSTD 291 156 32 32 frames(0 1 0 0) value(2)

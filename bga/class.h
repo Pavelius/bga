@@ -1,11 +1,12 @@
 #pragma once
 
+#include "nameable.h"
+
 enum classn : unsigned char {
 	Commoner,
 	Fighter, Cleric, Rogue, Ranger, Sorcerer, Wizard,
 };
-struct classi {
-	const char*	id;
+struct classi : nameable {
 	int			player;
 	int			hit_points, skill_points;
 	unsigned	skills;

@@ -4,6 +4,7 @@ typedef bool(*fnallow)(const void* object, int index);
 typedef void(*fncommand)(void* object);
 typedef int (*fncompare)(const void*, const void*);
 typedef void(*fnevent)(); // Callback function of any command executing
+typedef bool(*fnoperation)();
 typedef bool(*fnvisible)(const void* object);
 typedef const char*(*fngetname)(const void* object);
 

@@ -97,6 +97,7 @@
     <ClCompile Include="list.cpp" />
     <ClCompile Include="locale.cpp" />
     <ClCompile Include="log.cpp" />
+    <ClCompile Include="logvalue.cpp" />
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_util.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="ability.h" />
     <ClInclude Include="actable.h" />
     <ClInclude Include="actor.h" />
+    <ClInclude Include="adat.h" />
     <ClInclude Include="advance.h" />
     <ClInclude Include="alignment.h" />
     <ClInclude Include="animation.h" />
@@ -154,6 +156,7 @@
     <ClInclude Include="area.h" />
     <ClInclude Include="array.h" />
     <ClInclude Include="attack.h" />
+    <ClInclude Include="bsdata.h" />
     <ClInclude Include="calendar.h" />
     <ClInclude Include="cflags.h" />
     <ClInclude Include="class.h" />
@@ -179,12 +182,17 @@
     <ClInclude Include="itemground.h" />
     <ClInclude Include="iteminside.h" />
     <ClInclude Include="itemlist.h" />
+    <ClInclude Include="logvalue.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="math.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="my_initialize_list.h" />
     <ClInclude Include="order.h" />
+    <ClInclude Include="rand.h" />
     <ClInclude Include="school.h" />
     <ClInclude Include="seqlink.h" />
+    <ClInclude Include="slice.h" />
+    <ClInclude Include="sliceu.h" />
     <ClInclude Include="spell.h" />
     <ClInclude Include="store.h" />
     <ClInclude Include="stringvar.h" />
@@ -224,6 +232,7 @@
     <ClInclude Include="tag.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="variant.h" />
+    <ClInclude Include="vector.h" />
     <ClInclude Include="view.h" />
     <ClInclude Include="view_list.h" />
     <ClInclude Include="wear.h" />
@@ -283,7 +292,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ExternalIncludePath />
+    <IncludePath>$(ProjectDir)</IncludePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>

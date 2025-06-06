@@ -392,6 +392,9 @@
     <ClCompile Include="domain.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="logvalue.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -651,6 +654,30 @@
     </ClInclude>
     <ClInclude Include="domain.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="slice.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="sliceu.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="adat.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="vector.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="bsdata.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="logvalue.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="rand.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

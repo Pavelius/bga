@@ -16,7 +16,6 @@ void fire(fnevent proc, long param = 0, long param2 = 0, const void* object = 0)
 void hotkey(unsigned key, fnevent proc, int param = 0);
 void initialize_ui();
 void input_debug();
-void invalidate_description();
 void next_scene();
 void next_scene(fnevent proc);
 void paint_area();
@@ -33,6 +32,5 @@ void open_scene();
 void open_worldmap();
 void setdialog(int x, int y);
 void setdialog(int x, int y, int w, int h);
-void update_creature();
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color);
