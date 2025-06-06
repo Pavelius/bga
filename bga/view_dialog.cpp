@@ -31,21 +31,30 @@ static char description_text[4096];
 static size_t description_cash_size;
 static int character_info_mode;
 static int current_topic_list, cash_topic_list, current_content_list;
-static int current_spell_level;
+static int current_spell_level, current_spell;
 static vector<nameable*> content;
+static vector<spelli*> spells;
 static stringbuilder description(description_text);
 
 static void paint_game_panel(bool allow_input);
 static void paint_game_inventory();
 
-static void invalidate_description() {
+static adat<spellbook*, 16> spellbooks;
+
+static int compare_nameable(const void* v1, const void* v2) {
+	auto p1 = *((nameable**)v1);
+	auto p2 = *((nameable**)v2);
+	return szcmp(p1->getname(), p2->getname());
+}
+
+static void set_invalidate() {
 	description_cash_size = -1;
 }
 
 static void cbsetintds() {
 	auto p = (int*)hot.object;
 	*p = hot.param;
-	invalidate_description();
+	set_invalidate();
 }
 
 static void set_cursor() {
@@ -83,12 +92,35 @@ void setdialog(int x, int y, int w, int h) {
 	height = h;
 }
 
+static void select_spellbooks() {
+	spellbooks.clear();
+	auto i = player->getindex();
+	for(auto& e : bsdata<spellbook>()) {
+		if(e.owner != i)
+			continue;
+		spellbooks.add(&e);
+	}
+}
+
+static void select_spells() {
+	spells.clear();
+	auto level = current_spell_level + 1;
+	for(auto& e : bsdata<spelli>()) {
+		if(!last_spellbook->is(e.getindex()))
+			continue;
+		if(e.classes[last_spellbook->type] != level)
+			continue;
+		spells.add(&e);
+	}
+	spells.sort(compare_nameable);
+}
+
 static void setgameproc(fnevent v, bool cancel_mode) {
 	if(game_proc == v || (cancel_mode && game_proc))
 		game_proc = 0;
 	else
 		game_proc = v;
-	invalidate_description();
+	set_invalidate();
 }
 
 static void setgameproc() {
@@ -404,7 +436,7 @@ static void choose_creature() {
 	if(!hot.param)
 		selected_creatures.clear();
 	selected_creatures.add(player);
-	invalidate_description();
+	set_invalidate();
 }
 
 static void hits_bar(int current, int maximum) {
@@ -809,16 +841,41 @@ static void paint_list(const array& source, int& origin, int& current, int per_p
 	scroll(GBTNSCRL, 0, 2, 4, origin, maximum, per_page, 1);
 }
 
+static void paint_list(const array& source, int& origin, int& current, int per_page, fncommand proc, int row_height, point scr, int scr_height) {
+	pushrect push;
+	pushfore push_fore;
+	auto push_clip = clipping; setclipall();
+	int maximum = source.count;
+	input_mouse_table(origin, maximum, per_page, 1);
+	caret.y += 1;
+	height = row_height;
+	correct_table(origin, maximum, per_page);
+	auto im = maximum;
+	if(im > origin + per_page)
+		im = origin + per_page;
+	for(auto i = origin; i < im; i++) {
+		auto p = ((void**)source.data)[i];
+		fore = (current == i) ? colors::yellow : colors::white;
+		proc(p);
+		button_hilited = ishilite();
+		if(button_hilited) {
+			if(hot.key == MouseLeft && !hot.pressed)
+				execute(cbsetint, i, 0, &current);
+		}
+		caret.y += height;
+	}
+	clipping = push_clip;
+	caret.x += push.width;
+	caret.y = push.caret.y;
+	caret = caret + scr;
+	height = push.height + scr_height; width = 12;
+	scroll(GBTNSCRL, 0, 2, 4, origin, maximum, per_page, 1);
+}
+
 static void paint_topic_lists() {
 	static int origin;
 	paint_list(bsdata<helpi>::elements, sizeof(bsdata<helpi>::elements[0]),
 		origin, current_topic_list, bsdata<helpi>::source.count, 15, nameable::getname, AlignLeftCenter);
-}
-
-static int compare_nameable(const void* v1, const void* v2) {
-	auto p1 = *((nameable**)v1);
-	auto p2 = *((nameable**)v2);
-	return szcmp(p1->getname(), p2->getname());
 }
 
 static void select_content(int index) {
@@ -943,7 +1000,7 @@ static void spell_level_filter() {
 static void spell_type_filter() {
 	static int origin, current;
 	const auto per_page = 4;
-	auto maximum = 8;
+	int maximum = spellbooks.count;
 	correct_table(origin, maximum, per_page);
 	setdialog(252, 19); button(GBTNSPB3, 0, 1); fire(cbsetint, origin - 1, 0, &origin);
 	setdialog(705, 19); button(GBTNSPB3, 2, 3); fire(cbsetint, origin + 1, 0, &origin);
@@ -955,7 +1012,7 @@ static void spell_type_filter() {
 		auto frame = 1;
 		if(index == current)
 			frame = 0;
-		button(GBTNSPB1, frame, 2);
+		button(GBTNSPB1, frame, 2, 0, spellbooks[index]->getid());
 		fire(cbsetint, index, 0, &current);
 		caret.x += 108;
 	}
@@ -963,6 +1020,15 @@ static void spell_type_filter() {
 		button(GBTNSPB1, 3, 3);
 		caret.x += 108;
 	}
+	last_spellbook = spellbooks[current];
+}
+
+static void paint_spell(void* object) {
+	pushrect push;
+	auto p = (spelli*)object;
+	image(gres(SPELLS), p->avatar, 0);
+	caret.x += 32; width -= 32; height -= 12;
+	texta(p->getname(), AlignCenterCenter);
 }
 
 static void paint_game_spells() {
@@ -971,10 +1037,21 @@ static void paint_game_spells() {
 	setdialog(253, 50, 228, 19); texta(getnm("MemorizedSpells"), AlignCenterCenter);
 	setdialog(492, 50, 228, 19); texta(getnm("KnownSpells"), AlignCenterCenter);
 	setdialog(253, 391, 187, 19); texta(getnm("SpellSlotsAvailable"), AlignCenterCenter);
-	setdialog(449, 390, 32, 20); texta(getnm("Slots"), AlignCenterCenter);
 	setdialog(742, 20, 39, 38); texta(getnm("SpellLevelShort"), AlignCenterCenter);
-	spell_level_filter();
-	spell_type_filter();
+	select_spellbooks();
+	if(spellbooks) {
+		static int origin;
+		spell_type_filter();
+		spell_level_filter();
+		select_spells();
+		setdialog(494, 80, 207, 331); paint_list(spells, origin, current_spell, 8, paint_spell, 42, {7, -1}, -1); //Button GBTNSTD 291 78 32 32 frames(0 1 0 0) value(0)
+		setdialog(449, 390, 32, 20); texta(getnm("Slots"), AlignCenterCenter);
+	} else {
+		pushfore push_fore(colors::black);
+		auto push_alpha = alpha; alpha = 128;
+		setdialog(0, 0, 800, 433); rectf();
+		alpha = push_alpha;
+	}
 	//Button GBTNSTD 291 78 32 32 frames(0 1 0 0) value(0)
 	//Button GBTNSTD 291 117 32 32 frames(0 1 0 0) value(1)
 	//Button GBTNSTD 291 156 32 32 frames(0 1 0 0) value(2)

@@ -279,6 +279,14 @@ static bool isallow(const statable& source, variant v) {
 	return true;
 }
 
+bool creature::isparty() const {
+	for(auto pc : party) {
+		if(pc == this)
+			return true;
+	}
+	return false;
+}
+
 bool creature::isusable(const item& it) const {
 	return isallow(*this, it.geti().required);
 }
@@ -288,4 +296,8 @@ creature* get_creature(const void* object) {
 	if(i != -1)
 		return bsdata<creature>::elements + i;
 	return 0;
+}
+
+short unsigned creature::getindex() const {
+	return this - bsdata<creature>::elements;
 }

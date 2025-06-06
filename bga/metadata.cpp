@@ -76,6 +76,7 @@ BSMETA(calendari) = {
 BSMETA(classi) = {
 	BSREQ(id),
 	BSREQ(hit_points), BSREQ(skill_points),
+	BSENM(cast, abilityi),
 	BSFLG(skills, skilli),
 	{}};
 BSMETA(color) = {

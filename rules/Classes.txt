@@ -1,6 +1,6 @@
 #Class
 
-Cleric
+Cleric cast(Wisdow)
  skills Alchemy Concentration Diplomacy KnowledgeArcana SpellCraft
 Fighter
  skills Intimidate WildernessLore
@@ -8,7 +8,7 @@ Ranger
  skills AnimalEmpathy Concentration Hide MoveSilently Search
 Rogue
  skills Bluff DisableDevice Hide Intimidate MoveSilently OpenLock PickPocket Search UseMagicDevice
-Sorcerer
+Sorcerer cast(Charisma)
  skills Alchemy Concentration KnowledgeArcana SpellCraft
-Wizard
+Wizard cast(Intellegence)
  skills Alchemy Concentration KnowledgeArcana SpellCraft

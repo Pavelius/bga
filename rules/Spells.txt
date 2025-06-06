@@ -1,5 +1,9 @@
 #Spell
 
+Bless avatar(0)
+ classes Cleric(1)
+Bane avatar(1)
+ classes Cleric(1)
 CureLightWounds avatar(2)
  classes Cleric(1)
 

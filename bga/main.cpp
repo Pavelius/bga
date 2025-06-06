@@ -11,6 +11,7 @@
 #include "rand.h"
 #include "resid.h"
 #include "script.h"
+#include "spell.h"
 #include "timer.h"
 #include "view.h"
 #include "worldmap.h"
@@ -39,6 +40,7 @@ static void create_party() {
 		player->update();
 		player->addcoins(xrand(3, 18));
 		party[i] = player;
+		add_player_spellbooks();
 	}
 	script::run("SelectAll", 0);
 }
@@ -78,7 +80,8 @@ static void read_rules() {
 }
 
 int main(int argc, char* argv[]) {
-	srand(getcputime());
+	// srand(getcputime());
+	srand(923811);
 	stringbuilder::custom = act_identifier;
 	read_rules();
 #ifdef _DEBUG

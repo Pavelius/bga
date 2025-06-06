@@ -114,6 +114,9 @@
     <Text Include="..\rules\Spells.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\locale\ru\Spells.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

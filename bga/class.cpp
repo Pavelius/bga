@@ -12,6 +12,10 @@ BSDATA(classi) = {
 };
 assert_enum(classi, Wizard)
 
+classn classi::getindex() const {
+	return (classn)(this - bsdata<classi>::elements);
+}
+
 classn	classa::getmainclass() const {
 	auto result = Commoner;
 	auto value = 0;
