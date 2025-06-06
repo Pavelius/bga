@@ -45,6 +45,7 @@ void add_player_spellbooks() {
 		auto n = e.getindex();
 		if(player->classes[n])
 			get_spellbook(player, n);
+		add_known_spells(n, 1);
 	}
 }
 

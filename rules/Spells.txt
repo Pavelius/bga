@@ -4,5 +4,27 @@ Bless avatar(0)
  classes Cleric(1)
 Bane avatar(10)
  classes Cleric(1)
+CauseFear
+ classes Cleric(1) Wizard(1) Sorcerer(1)
 CureLightWounds avatar(2)
+ classes Cleric(1)
+DivineFavor
+ classes Cleric(1)
+Doom avatar(13)
+ classes Cleric(1)
+EndureFire
+ classes Cleric(1) Wizard(1) Sorcerer(1)
+InflictLightWounds
+ classes Cleric(1)
+MagicStone avatar(5)
+ classes Cleric(1)
+MageArmor avatar()
+ classes Wizard(1) Sorcerer(1)
+MagicWeapon
+ classes Cleric(1)
+Shield
+ classes Wizard(1) Sorcerer(1)
+ShieldOfFaith
+ classes Cleric(1)
+SummonMonsterI
  classes Cleric(1)

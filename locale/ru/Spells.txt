@@ -1,3 +1,14 @@
 Bane: Погибель
 Bless: Благословение
+CauseFear: Вызвать страх
 CureLightWounds: Лечить легкие ранения
+DivineFavor: Святая благодать
+Doom: Страшная судьба
+EndureFire: Сопротивление огню
+InflictLightWounds: Нанести легкую рану
+MageArmor: Волшебная броня
+MagicStone: Воблебный камень
+MagicWeapon: Волшебное оружие
+Shield: Волщебный щит
+ShieldOfFaith: Щит веры
+SummonMonsterI: Призыв монстра I
