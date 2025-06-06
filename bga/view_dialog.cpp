@@ -1038,7 +1038,7 @@ static int spell_slot_used() {
 }
 
 static int spell_slot_maximum() {
-	return 10;
+	return player->getspellslots((classn)(last_spellbook->type), current_spell_level + 1);
 }
 
 static void spell_action() {
@@ -1122,8 +1122,6 @@ static void paint_game_panel(bool allow_input) {
 		setdialog(757, 1); button(GCOMMBTN, 18, 19);
 	}
 	hotkey('Z', change_zoom_factor);
-	// HotKey NONE 0 0 0 0 data(DebugTest) hotkey("Ctrl+D")
-	// HotKey NONE 0 0 0 0 data(ItemList) hotkey("Ctrl+I")
 	dialog_start = push_dialog;
 }
 

@@ -301,3 +301,20 @@ creature* get_creature(const void* object) {
 short unsigned creature::getindex() const {
 	return this - bsdata<creature>::elements;
 }
+
+int	creature::getspellslots(classn type, int spell_level) const {
+	auto& ei = bsdata<classi>::elements[type];
+	if(!ei.cast)
+		return 0; // Not caster class
+	if(type == DomainClass)
+		return 1;
+	auto cast_ability = get(ei.cast);
+	if((cast_ability - 10) < spell_level)
+		return 0; // Can't cast, because ability is low.
+	auto ability_bonus = getbonus(ei.cast);
+	auto bonus_spells = 0;
+	if(ability_bonus > 0)
+		bonus_spells = (ability_bonus + 4 - spell_level) / 4;
+	auto class_level = classes[type];
+	return 1 + bonus_spells;
+}

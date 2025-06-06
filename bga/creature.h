@@ -15,6 +15,7 @@ struct creature : actor, avatarable, spellv {
 	static void		create(gendern gender);
 	static void		create(racen race, gendern gender, classn classv, unsigned short portrait);
 	short unsigned	getindex() const;
+	int				getspellslots(classn type, int spell_level) const;
 	bool			isclass(skilln v) const;
 	bool			isparty() const;
 	bool			isusable(const item& it) const;

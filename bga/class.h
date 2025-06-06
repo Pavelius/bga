@@ -21,5 +21,6 @@ struct classa {
 	classn		getmainclass() const;
 	unsigned	getnextlevel() const;
 };
-bool			ischaracter(classn v);
+
+bool ischaracter(classn v);
 
