@@ -2,7 +2,7 @@
 
 Bless avatar(0)
  classes Cleric(1)
-Bane avatar(1)
+Bane avatar(10)
  classes Cleric(1)
 CureLightWounds avatar(2)
  classes Cleric(1)

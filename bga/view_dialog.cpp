@@ -31,7 +31,7 @@ static char description_text[4096];
 static size_t description_cash_size;
 static int character_info_mode;
 static int current_topic_list, cash_topic_list, current_content_list;
-static int current_spell_level, current_spell;
+static int current_spell_level;
 static vector<nameable*> content;
 static vector<spelli*> spells;
 static stringbuilder description(description_text);
@@ -841,7 +841,7 @@ static void paint_list(const array& source, int& origin, int& current, int per_p
 	scroll(GBTNSCRL, 0, 2, 4, origin, maximum, per_page, 1);
 }
 
-static void paint_list(const array& source, int& origin, int& current, int per_page, fncommand proc, int row_height, point scr, int scr_height) {
+static void paint_list(const array& source, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc) {
 	pushrect push;
 	pushfore push_fore;
 	auto push_clip = clipping; setclipall();
@@ -855,12 +855,11 @@ static void paint_list(const array& source, int& origin, int& current, int per_p
 		im = origin + per_page;
 	for(auto i = origin; i < im; i++) {
 		auto p = ((void**)source.data)[i];
-		fore = (current == i) ? colors::yellow : colors::white;
 		proc(p);
 		button_hilited = ishilite();
 		if(button_hilited) {
 			if(hot.key == MouseLeft && !hot.pressed)
-				execute(cbsetint, i, 0, &current);
+				execute(action_proc, i, 0, p);
 		}
 		caret.y += height;
 	}
@@ -1031,6 +1030,52 @@ static void paint_spell(void* object) {
 	texta(p->getname(), AlignCenterCenter);
 }
 
+static int spell_slot_used() {
+	auto r = 0;
+	for(auto p : spells)
+		r += last_spellbook->powers[p->getindex()];
+	return r;
+}
+
+static int spell_slot_maximum() {
+	return 10;
+}
+
+static void spell_action() {
+	auto p = (spelli*)hot.object;
+	auto m = spell_slot_maximum();
+	auto u = spell_slot_used();
+	if(u < m)
+		last_spellbook->powers[p->getindex()]++;
+}
+
+static void paint_spell_memorized() {
+	adat<spelli*, 32> source;
+	for(auto p : spells) {
+		if(last_spellbook->powers[p->getindex()])
+			source.add(p);
+	}
+	pushrect push;
+	width = 32; height = 32;
+	for(auto y = 0; y < 8; y++) {
+		for(auto x = 0; x < 3; x++) {
+			size_t index = y * 3 + x;
+			if(index >= source.count)
+				return;
+			caret.x = push.caret.x + x * 79;
+			caret.y = push.caret.y + y * 39;
+			auto p = source.data[index];
+			auto pi = last_spellbook->powers + p->getindex();
+			texta(str("%1i", *pi), AlignCenterCenter);
+			image(caret.x + 39, caret.y, gres(SPELLS), p->avatar, 0);
+			if(hot.mouse.in({caret.x, caret.y, caret.x + 79, caret.y + height})) {
+				if(hot.key == MouseLeft && !hot.pressed)
+					execute(cbsetchr, *pi - 1, 0, pi);
+			}
+		}
+	}
+}
+
 static void paint_game_spells() {
 	paint_game_dialog(GUISPL);
 	paint_game_player();
@@ -1044,84 +1089,17 @@ static void paint_game_spells() {
 		spell_type_filter();
 		spell_level_filter();
 		select_spells();
-		setdialog(494, 80, 207, 331); paint_list(spells, origin, current_spell, 8, paint_spell, 42, {7, -1}, -1); //Button GBTNSTD 291 78 32 32 frames(0 1 0 0) value(0)
-		setdialog(449, 390, 32, 20); texta(getnm("Slots"), AlignCenterCenter);
+		setdialog(494, 80, 207, 331); paint_list(spells, origin, 8, paint_spell, 42, {7, -1}, -1, spell_action);
+		setdialog(252, 78); paint_spell_memorized();
+		auto m = spell_slot_maximum();
+		auto u = spell_slot_used();
+		setdialog(449, 390, 32, 20); texta(str("%1i", m - u), AlignCenterCenter);
 	} else {
 		pushfore push_fore(colors::black);
 		auto push_alpha = alpha; alpha = 128;
 		setdialog(0, 0, 800, 433); rectf();
 		alpha = push_alpha;
 	}
-	//Button GBTNSTD 291 78 32 32 frames(0 1 0 0) value(0)
-	//Button GBTNSTD 291 117 32 32 frames(0 1 0 0) value(1)
-	//Button GBTNSTD 291 156 32 32 frames(0 1 0 0) value(2)
-	//Button GBTNSTD 291 195 32 32 frames(0 1 0 0) value(3)
-	//Button GBTNSTD 291 234 32 32 frames(0 1 0 0) value(4)
-	//Button GBTNSTD 291 273 32 32 frames(0 1 0 0) value(5)
-	//Button GBTNSTD 291 312 32 32 frames(0 1 0 0) value(6)
-	//Button GBTNSTD 291 351 32 32 frames(0 1 0 0) value(7)
-
-	//Button GBTNSTD 370 78 32 32 frames(0 1 0 0) value(0)
-	//Button GBTNSTD 370 117 32 32 frames(0 1 0 0) value(1)
-	//Button GBTNSTD 370 156 32 32 frames(0 1 0 0) value(2)
-	//Button GBTNSTD 370 195 32 32 frames(0 1 0 0) value(3)
-	//Button GBTNSTD 370 234 32 32 frames(0 1 0 0) value(4)
-	//Button GBTNSTD 370 273 32 32 frames(0 1 0 0) value(5)
-	//Button GBTNSTD 370 312 32 32 frames(0 1 0 0) value(6)
-	//Button GBTNSTD 370 351 32 32 frames(0 1 0 0) value(7)
-
-	//Button GBTNSTD 449 78 32 32 frames(0 1 0 0) value(0)
-	//Button GBTNSTD 449 117 32 32 frames(0 1 0 0) value(1)
-	//Button GBTNSTD 449 156 32 32 frames(0 1 0 0) value(2)
-	//Button GBTNSTD 449 195 32 32 frames(0 1 0 0) value(3)
-	//Button GBTNSTD 449 234 32 32 frames(0 1 0 0) value(4)
-	//Button GBTNSTD 449 273 32 32 frames(0 1 0 0) value(5)
-	//Button GBTNSTD 449 312 32 32 frames(0 1 0 0) value(6)
-	//Button GBTNSTD 449 351 32 32 frames(0 1 0 0) value(7)
-
-	//Button GBTNSTD 494 80 32 32 frames(0 1 0 0) value(0)
-	//Button GBTNSTD 494 122 32 32 frames(0 1 0 0) value(1)
-	//Button GBTNSTD 494 164 32 32 frames(0 1 0 0) value(2)
-	//Button GBTNSTD 494 206 32 32 frames(0 1 0 0) value(3)
-	//Button GBTNSTD 494 250 32 32 frames(0 1 0 0) value(4)
-	//Button GBTNSTD 494 292 32 32 frames(0 1 0 0) value(5)
-	//Button GBTNSTD 494 334 32 32 frames(0 1 0 0) value(6)
-	//Button GBTNSTD 494 376 32 32 frames(0 1 0 0) value(7)
-
-	//Label NORMAL 531 78 169 35 value(0)
-	//Label NORMAL 531 120 169 35 value(1)
-	//Label NORMAL 531 162 169 35 value(2)
-	//Label NORMAL 531 204 169 35 value(3)
-	//Label NORMAL 531 248 169 35 value(4)
-	//Label NORMAL 531 290 169 35 value(5)
-	//Label NORMAL 531 333 169 35 value(6)
-	//Label NORMAL 531 374 169 35 value(7)
-	//Scroll GBTNSCRL 708 79 12 330 frames(1 0 3 2 4 5)
-
-	//Label TOOLFONT 254 85 29 18
-	//Label TOOLFONT 333 85 29 18
-	//Label TOOLFONT 412 85 29 18
-	//Label TOOLFONT 254 124 29 18
-	//Label TOOLFONT 333 124 29 18
-	//Label TOOLFONT 412 124 29 18
-	//Label TOOLFONT 254 163 29 18
-	//Label TOOLFONT 333 163 29 18
-	//Label TOOLFONT 412 163 29 18
-	//Label TOOLFONT 254 202 29 18
-	//Label TOOLFONT 333 202 29 18
-	//Label TOOLFONT 412 202 29 18
-	//Label TOOLFONT 254 241 29 18
-	//Label TOOLFONT 333 241 29 18
-	//Label TOOLFONT 412 241 29 18
-	//Label TOOLFONT 254 280 29 18
-	//Label TOOLFONT 333 280 29 18
-	//Label TOOLFONT 412 280 29 18
-	//Label TOOLFONT 254 319 29 18
-	//Label TOOLFONT 333 319 29 18
-	//Label TOOLFONT 412 319 29 18
-	//Label TOOLFONT 254 358 29 18
-	//Label TOOLFONT 333 358 29 18
-	//Label TOOLFONT 412 358 29 18
 }
 
 static void paint_game_panel(bool allow_input) {
