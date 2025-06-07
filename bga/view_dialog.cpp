@@ -800,24 +800,6 @@ static void paint_game_journal() {
 	paint_action_panel_na();
 }
 
-//static void creature_ability_bonus() {
-//	if(gui.data.iskind<abilityi>())
-//		gui.value = player->getbonus((ability_s)gui.data.value);
-//	char temp[32]; stringbuilder sb(temp);
-//	auto push_fore = fore;
-//	if(gui.value > 0) {
-//		sb.add("%+1i", gui.value);
-//		fore = colors::green;
-//	} else if(gui.value < 0) {
-//		fore = colors::red;
-//		sb.add("%+1i", gui.value);
-//	} else
-//		sb.add("%+1i", gui.value);
-//	gui.text = temp;
-//	label();
-//	fore = push_fore;
-//}
-
 static void ability(abilityn v) {
 	pushfore push_fore;
 	texta(getnms(v), AlignCenterCenter);
@@ -825,6 +807,10 @@ static void ability(abilityn v) {
 	texta(str("%1i", player->abilitites[v]), AlignCenterCenter);
 	caret.x += 41;
 	auto n = player->getbonus(v);
+	if(n > 0)
+		fore = colors::green;
+	else if(n < 0)
+		fore = colors::red;
 	texta(str("%+1i", n), AlignCenterCenter);
 }
 
