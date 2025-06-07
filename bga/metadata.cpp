@@ -180,7 +180,7 @@ BSMETA(storei) = {
 	BSREQ(id),
 	BSENM(type, storeti),
 	BSFLG(flags, storefi),
-	BSREQ(buy_percent), BSREQ(sell_percent), BSREQ(chance_steal),
+	BSREQ(buy_percent), BSREQ(sell_percent), BSREQ(steal_difficult),
 	BSREQ(room_prices),
 	BSREQ(items),
 	{}};

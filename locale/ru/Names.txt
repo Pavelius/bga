@@ -51,6 +51,7 @@ Sell: Продать
 Skills: Навыки
 SpellFailure: Неудача при создании заклинания
 SpellLevelShort: Уров.
+Steal: Украсть
 Version: Версия
 Weight: Вес
 WeightAllowance: Максимальный переносимый вес
@@ -88,7 +89,7 @@ SellItem: Продать
 UseItem: Использовать
 UseSteal: Украсть
 
-HelgateStreetMerchant: Купец
+HelgateStreetMerchant: Купец из Хеллгейта
 
 BuyItemsTotal: %ItemListTotal зм
 SellItemsTotal: %ItemListTotal зм

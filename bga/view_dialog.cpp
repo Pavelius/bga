@@ -36,7 +36,6 @@ static vector<nameable*> content;
 static vector<spelli*> spells;
 static stringbuilder description(description_text);
 
-static void paint_game_panel(bool allow_input);
 static void paint_game_inventory();
 
 static adat<spellbook*, 16> spellbooks;
@@ -221,17 +220,22 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const 
 	caret = push_caret;
 }
 
+static color get_disable_color(resn res) {
+	return color(90, 97, 83);
+}
+
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed) {
 	if(allowed)
 		button(res, f1, f2, key, id);
 	else {
+		pushfore push_fore(fore.mix(get_disable_color(res), 128));
 		auto push_input = input_disabled; input_disabled = true;
 		button(res, fd, f2, key, id);
 		input_disabled = push_input;
 	}
 }
 
-static void checkbox(int& source, int value, resn res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key) {
+void checkbox(int& source, int value, resn res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key) {
 	if(source == value)
 		f1 = fc;
 	button(res, f1, f2, key);
@@ -1196,7 +1200,7 @@ static void paint_game_spells() {
 	}
 }
 
-static void paint_game_panel(bool allow_input) {
+void paint_game_panel(bool allow_input) {
 	pushrect push;
 	auto push_dialog = dialog_start;
 	setcaret(0, 493);
@@ -1214,8 +1218,8 @@ static void paint_game_panel(bool allow_input) {
 		setdialog(703, 2); button(GCOMMBTN, 2, 3);
 		setdialog(575, 72); button(GCOMMBTN, 16, 17);
 		setdialog(757, 1); button(GCOMMBTN, 18, 19);
+		hotkey('Z', change_zoom_factor);
 	}
-	hotkey('Z', change_zoom_factor);
 	dialog_start = push_dialog;
 }
 

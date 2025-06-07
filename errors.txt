@@ -1,3 +1,2 @@
-﻿Error in file `UnknownNames.txt`:
- Define translation for `Buy`
- Define translation for `Sell`
+﻿Error in file `rules/Store.txt`:
+ Line 4: Not found identifier `UserAllowSteal`

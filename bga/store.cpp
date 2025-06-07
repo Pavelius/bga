@@ -8,7 +8,6 @@ BSDATA(storefi) = {
 	{"UserAllowBuy"},
 	{"UserAllowSell"},
 	{"UserAllowIdentify"},
-	{"UserAllowSteal"},
 	{"UserAllowDonate"},
 	{"UserPurchaseCures"},
 	{"UserPurchaseDrinks"},
@@ -35,7 +34,7 @@ static void store_refresh(variant v) {
 	if(v.iskind<itemi>()) {
 		item it(v.value);
 		if(v.counter)
-			it.setcount(v.counter);
+			it.count = v.counter;
 		add_item(parent, it);
 	}
 }

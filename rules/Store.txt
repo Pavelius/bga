@@ -1,5 +1,5 @@
 #Store
 
-HelgateStreetMerchant type(ShopStore)
- flags UserAllowBuy UserAllowSell
- items LongSword PotionOfHealing+10 LeatherArmor StuddedLeatherArmor ScaleMail+1 HalfPlate+1 LargeShield
+HelgateStreetMerchant type(ShopStore) steal_difficult(15)
+ flags UserAllowBuy UserAllowSell UserPurchaseDrinks UserAllowIdentify AllowRoyalRoom AllowPeasantRoom
+ items LongSword PotionOfHealing+10 LargeShield

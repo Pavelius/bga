@@ -17,6 +17,7 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const 
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed);
 void button_check(unsigned key);
 void change_zoom_factor();
+void checkbox(int& source, int value, resn res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key);
 void fire(fnevent proc, long param = 0, long param2 = 0, const void* object = 0);
 void hotkey(unsigned key, fnevent proc, int param = 0);
 void initialize_ui();
@@ -29,6 +30,7 @@ void paint_area();
 void paint_dialog(resn v, int frame = 0);
 void paint_game_dialog(resn v, int frame = 0);
 void paint_game_inventory();
+void paint_game_panel(bool allow_input);
 void paint_item(const item* pi);
 void paint_list(void* data, size_t size, int maximum, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc);
 void paint_minimap();

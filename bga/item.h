@@ -57,7 +57,7 @@ struct item {
 		unsigned char data;
 	};
 	constexpr item() : type(0), count(1), data(0) {}
-	item(unsigned short type) : type(type), count(geti().count ? geti().count - 1 : 0), data(0) {}
+	item(unsigned short type) : type(type), count(geti().count ? geti().count : 1), data(0) {}
 	constexpr explicit operator bool() const { return type != 0; }
 	void			add(item& v);
 	bool			canequip(wearn v) const;
@@ -72,7 +72,6 @@ struct item {
 	void			getinfo(stringbuilder& sb) const;
 	const char*		getname() const;
 	int				getweight() const { return count * geti().weight; }
-	void			setcount(int value) { count = value - 1; }
 };
 extern item* last_item;
 extern item* party_item;

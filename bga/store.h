@@ -5,7 +5,7 @@
 #include "variant.h"
 
 enum storefn : unsigned char {
-	UserAllowBuy, UserAllowSell, UserAllowIdentify, UserAllowSteal,
+	UserAllowBuy, UserAllowSell, UserAllowIdentify,
 	UserAllowDonate, UserPurchaseCures, UserPurchaseDrinks,
 	AllowPeasantRoom, AllowMerchantRoom, AllowNobleRoom, AllowRoyalRoom,
 };
@@ -20,7 +20,7 @@ struct storei : nameable {
 	storetn		type;
 	unsigned	flags;
 	int			buy_percent, sell_percent;
-	int			chance_steal;
+	int			steal_difficult; // 0 - if steal not availabe. Set default DC 10. Set to 15-20 for hard attemp.
 	int			room_prices[4];
 	variants	items;
 	bool		is(storefn v) const { return (flags & (1 << v)) != 0; }
