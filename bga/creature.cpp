@@ -9,13 +9,31 @@
 
 creature* party[6];
 creature* player;
-collection<creature> selected_creatures;
+creature* party_selected[16];
 
 static int heavy_load[] = {
 	5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
 	115, 130, 150, 175, 200, 230, 260, 300, 350,
 	400, 460, 520, 600, 700, 800, 920, 1040, 1200, 1400
 };
+
+void clear_selection() {
+	memset(party_selected, 0, sizeof(party_selected));
+}
+
+creature* get_selected() {
+	for(auto p : party_selected) {
+		if(p)
+			return p;
+	}
+	return 0;
+}
+
+void select_all_party() {
+	clear_selection();
+	for(auto p : party)
+		p->select();
+}
 
 template<typename T>
 static void copy(T& e1, const T& e2) {
@@ -288,8 +306,27 @@ bool creature::isparty() const {
 	return false;
 }
 
+bool creature::isselected() const {
+	for(auto ps : party_selected) {
+		if(ps == this)
+			return true;
+	}
+	return false;
+}
+
 bool creature::isusable(const item& it) const {
 	return isallow(*this, it.geti().required);
+}
+
+void creature::select() {
+	if(isselected())
+		return;
+	for(auto& e : party_selected) {
+		if(!e) {
+			e = this;
+			break;
+		}
+	}
 }
 
 creature* get_creature(const void* object) {

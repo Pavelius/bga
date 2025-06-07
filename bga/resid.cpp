@@ -33,7 +33,7 @@ BSDATA(residi) = {
 	{"GUICGB", root}, {"GUICHP", root}, {"GUIHELP", root}, {"GUIFEAT", root}, {"GUIINV", root},
 	{"GIITMH08", root}, {"GUIHSB", root}, {"GUICARBB", root}, {"GUISTDRB", root},
 	{"GUIPFC", root}, {"GUIRSPOR", root}, {"GUISEX", root}, {"GUISPL", root}, {"GUICNAME", root}, {"GUIERR", root},
-	{"GUIRLVL", root}, {"GMPMCHRB", root}, {"GCGPARTY", root}, {"GBTNLRG2", root},
+	{"GUIRLVL", root}, {"GMPMCHRB", root}, {"GUISTMSC", root}, {"GCGPARTY", root}, {"GBTNLRG2", root},
 	{"GUIJRNL", root}, {"GOPT", root}, {"GUIMOVB", root}, {"STONEOPT", root}, {"GUISRSVB", root}, {"GUISRRQB", root}, {"GUWBTP", root},
 	{"CGEAR", root},
 	{"LOAD", root}, {"LOCATER", root},

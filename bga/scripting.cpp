@@ -24,12 +24,6 @@ static void heal(int bonus) {
 	player->hp = n;
 }
 
-static void select_all(int bonus) {
-	selected_creatures.clear();
-	for(auto p : party)
-		selected_creatures.add(p);
-}
-
 static void color_pick(int bonus) {
 	auto color_index = color_indecies[hot.param];
 	if(color_index == -1)
@@ -130,7 +124,6 @@ BSDATA(script) = {
 	{"QuickSave", quicksave},
 	{"SellItem", sell_item_script, allow_sell_item},
 	{"ShowItemList", show_item_list},
-	{"SelectAll", select_all},
 	{"UseSteal", use_steal, allow_use_steal},
 };
 BSDATAF(script)

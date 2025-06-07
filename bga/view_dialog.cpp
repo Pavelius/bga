@@ -41,6 +41,8 @@ static void paint_game_inventory();
 
 static adat<spellbook*, 16> spellbooks;
 
+fnevent on_player_change;
+
 static int compare_nameable(const void* v1, const void* v2) {
 	auto p1 = *((nameable**)v1);
 	auto p2 = *((nameable**)v2);
@@ -217,6 +219,16 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const 
 	}
 	texta(str(getnm(id)), AlignCenterCenter);
 	caret = push_caret;
+}
+
+void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed) {
+	if(allowed)
+		button(res, f1, f2, key, id);
+	else {
+		auto push_input = input_disabled; input_disabled = true;
+		button(res, fd, f2, key, id);
+		input_disabled = push_input;
+	}
 }
 
 static void checkbox(int& source, int value, resn res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key) {
@@ -420,7 +432,7 @@ static void portrait_small(creature* pc, bool player_hilite) {
 		if(player_hilite) {
 			if(pc == player)
 				hilight_protrait();
-		} else if(selected_creatures.have(pc))
+		} else if(pc->isselected())
 			hilight_protrait();
 	}
 	setoffset(2, 2);
@@ -439,9 +451,11 @@ static void paint_item_avatar() {
 static void choose_creature() {
 	player = (creature*)hot.object;
 	if(!hot.param)
-		selected_creatures.clear();
-	selected_creatures.add(player);
+		clear_selection();
+	player->select();
 	set_invalidate();
+	if(on_player_change)
+		on_player_change();
 }
 
 static void hits_bar(int current, int maximum) {
@@ -494,7 +508,7 @@ static void paint_action_panel() {
 	portrait_bar(false);
 }
 
-static void paint_action_panel_player() {
+void paint_action_panel_player() {
 	setcaret(0, 433);
 	image(gres(GACTN), 1, 0);
 	portrait_bar(true);
@@ -514,7 +528,7 @@ static void layer(color v) {
 	fore = push_fore;
 }
 
-static void paint_item(const item* pi) {
+void paint_item(const item* pi) {
 	if(!pi)
 		return;
 	pushrect push;
@@ -872,7 +886,6 @@ static void paint_list(const array& source, int& origin, int per_page, fncommand
 	auto push_clip = clipping; setclipall();
 	int maximum = source.count;
 	input_mouse_table(origin, maximum, per_page, 1);
-	caret.y += 1;
 	height = row_height;
 	correct_table(origin, maximum, per_page);
 	auto im = maximum;
@@ -883,10 +896,46 @@ static void paint_list(const array& source, int& origin, int per_page, fncommand
 		proc(p);
 		button_hilited = ishilite();
 		if(button_hilited) {
-			if(hot.key == MouseLeft && !hot.pressed)
-				execute(action_proc, i, 0, p);
-			else if(hot.key == MouseRight && !hot.pressed)
-				execute(info_proc, i, 0, p);
+			if(hot.key == MouseLeft && !hot.pressed) {
+				if(action_proc)
+					execute(action_proc, i, 0, p);
+			} else if(hot.key == MouseRight && !hot.pressed) {
+				if(info_proc)
+					execute(info_proc, i, 0, p);
+			}
+		}
+		caret.y += height;
+	}
+	clipping = push_clip;
+	caret.x += push.width;
+	caret.y = push.caret.y;
+	caret = caret + scr;
+	height = push.height + scr_height; width = 12;
+	scroll(GBTNSCRL, 0, 2, 4, origin, maximum, per_page, 1);
+}
+
+void paint_list(void* data, size_t size, int maximum, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc) {
+	pushrect push;
+	pushfore push_fore;
+	auto push_clip = clipping; setclipall();
+	input_mouse_table(origin, maximum, per_page, 1);
+	height = row_height;
+	correct_table(origin, maximum, per_page);
+	auto im = maximum;
+	if(im > origin + per_page)
+		im = origin + per_page;
+	for(auto i = origin; i < im; i++) {
+		button_hilited = ishilite();
+		auto p = (char*)data + i * size;
+		proc(p);
+		if(button_hilited) {
+			if(hot.key == MouseLeft && !hot.pressed) {
+				if(action_proc)
+					execute(action_proc, i, 0, p);
+			} else if(hot.key == MouseRight && !hot.pressed) {
+				if(info_proc)
+					execute(info_proc, i, 0, p);
+			}
 		}
 		caret.y += height;
 	}
@@ -1161,7 +1210,7 @@ static void paint_game_panel(bool allow_input) {
 		setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M'); fire(setgameproc, 0, 0, paint_game_automap);
 		setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J'); fire(setgameproc, 0, 0, paint_game_journal);
 		setdialog(670, 57); button(GCOMMBTN, 10, 11, KeyEscape); fire(setgameproc, 1, 0, paint_game_options);
-		setdialog(576, 3); button(GCOMMBTN, 0, 1, '*');
+		setdialog(576, 3); button(GCOMMBTN, 0, 1, '*'); fire(select_all_party);
 		setdialog(703, 2); button(GCOMMBTN, 2, 3);
 		setdialog(575, 72); button(GCOMMBTN, 16, 17);
 		setdialog(757, 1); button(GCOMMBTN, 18, 19);

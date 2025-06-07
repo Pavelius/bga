@@ -30,10 +30,13 @@ point getformationfree(point dst, point src, formation_s formation, int index) {
 
 void setparty(point dst) {
 	auto index = 0;
-	if(!selected_creatures)
+	auto p = get_selected();
+	if(!p)
 		return;
-	auto start_position = selected_creatures[0]->position;
-	for(auto p : selected_creatures) {
+	auto start_position = p->position;
+	for(auto p : party_selected) {
+		if(!p)
+			continue;
 		auto new_position = getformationfree(dst, start_position, FormationProtect, index++);
 		p->area_index = current_area;
 		p->lookat(new_position);

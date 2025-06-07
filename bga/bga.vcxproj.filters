@@ -392,6 +392,9 @@
     <ClCompile Include="school.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="view_store.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">

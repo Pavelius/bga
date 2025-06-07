@@ -15,6 +15,7 @@ struct creature : actor, avatarable, spellv {
 	dietyn			diety;
 	short			hp, hp_max;
 	unsigned		experience;
+	void			select();
 	void			clear();
 	static void		create(gendern gender);
 	static void		create(racen race, gendern gender, classn classv, unsigned short portrait);
@@ -22,6 +23,7 @@ struct creature : actor, avatarable, spellv {
 	int				getspellslots(classn type, int spell_level) const;
 	bool			isclass(skilln v) const;
 	bool			isparty() const;
+	bool			isselected() const;
 	bool			isusable(const item& it) const;
 	void			paint() const;
 	void			update();
@@ -29,6 +31,11 @@ struct creature : actor, avatarable, spellv {
 };
 extern creature* player;
 extern creature* party[6];
-extern collection<creature> selected_creatures;
+extern creature* party_selected[16];
 
 creature* get_creature(const void* object);
+creature* get_selected();
+
+void clear_selection();
+bool have_selection();
+void select_all_party();

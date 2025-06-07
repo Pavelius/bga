@@ -1,2 +1,3 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `Range30`
+ Define translation for `Buy`
+ Define translation for `Sell`

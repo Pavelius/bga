@@ -269,7 +269,7 @@ static void apply_shadow(color* pallette, color fore) {
 static void paint_markers(const creature* p) {
 	auto push_fore = fore;
 	fore = colors::green;
-	if(selected_creatures.have((void*)p))
+	if(p->isselected())
 		actor_marker(1, false, player == p);
 	fore = push_fore;
 }

@@ -7,6 +7,7 @@ ArmorCheckPenalty: Штраф брони на проверки
 AttackBonus: Бонус к атаке
 BasicAbility: Базовая способность
 Biography: Биография
+Buy: Купить
 Cancel: Отмена
 CharacterLevel: Класс персонажа (%1i уровень)
 CharacterRace: Раса персонажа
@@ -46,6 +47,7 @@ Range30: 30 футов
 Replay: Заново
 Required: Требования
 SavingThrows: Броски спасения
+Sell: Продать
 Skills: Навыки
 SpellFailure: Неудача при создании заклинания
 SpellLevelShort: Уров.

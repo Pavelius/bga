@@ -134,6 +134,7 @@
     <ClCompile Include="view_creature.cpp" />
     <ClCompile Include="view_dialog.cpp" />
     <ClCompile Include="view_list.cpp" />
+    <ClCompile Include="view_store.cpp" />
     <ClCompile Include="view_tool.cpp" />
     <ClCompile Include="wear.cpp" />
     <ClCompile Include="wearable.cpp" />

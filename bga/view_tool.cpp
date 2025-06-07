@@ -34,7 +34,7 @@ static void paint_word_map() {
 
 void input_debug() {
 	switch(hot.key) {
-	case Ctrl + 'D': execute(open_dialog, 1, 0, paint_word_map); break;
+	case Ctrl + 'D': execute(open_store); break;
 	case Ctrl + 'I': execute(open_scene, 0, 0, util_items_list); break;
 	default: break;
 	}
