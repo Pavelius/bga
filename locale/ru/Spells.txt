@@ -4,29 +4,56 @@ Range: Дистанция
 
 Range100: Предел видимости
 Touch: Касание
+You: Вы
 
 SaveCancel: отменяет эффект
 
 Abjuration: Ограждение
 Conjuration: Призывание
+Divination: Предсказание
 Enchantment: Зачарование
 Evocation: Воплощение
+Illusion: Иллюзия
 Necromancy: Некромантия
 Transmutation: Трансмутация
 Universal: Универсальное
 
+AnimalAffinity: Чуства к животным
+ArmorOfFaith: Доспехи веры
 Bane: Погибель
 Bless: Благословение
+BurningHands: Сжигающие руки
 CauseFear: Вызвать страх
+ChameleonPower: Сила хамелеона
+CharmPerson: Очаровать персону
+ChillTouch: Ледянящее касание
+ChromaticOrb: Хроматическая сфера
+ColorSpray: Цветные брызги
+Command: Команда
 CureLightWounds: Лечить легкие ранения
+DeathRay: Луч смерти
 DivineFavor: Святая благодать
 Doom: Страшная судьба
 EndureFire: Сопротивление огню
+GenericAbjuration: Общая защита
+Grease: Смазка
+IceDagger: Ледяной кинжал
 InflictLightWounds: Нанести легкую рану
+IsairSWoefulDamnation: Жалкое проклятия Изейра
+LarlochSMinorDrain: Пьявка Ларлоха
 MageArmor: Волшебная броня
+MagicMissile: Волшебный снаряд
 MagicStone: Воблебный камень
 MagicWeapon: Волшебное оружие
+MinorMirrorImage: Зеркальное отображение (слабое)
 ProtectionFromEvil: Защита от зла
+ProtectionFromPetrification: Защита от окаменения
+RayOfEnfeeblement: Луч слабости
+RemoveFear: Убрать страх
+Sanctuary: Убежище
+Sleep: Сон
+ShadowPact: Договор с тенями
 Shield: Волщебный щит
 ShieldOfFaith: Щит веры
+ShockingGrasp: Шокирующие руки
 SummonMonsterI: Призыв монстра I

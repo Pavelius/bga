@@ -4,12 +4,12 @@
 BSDATA(schooli) = {
 	{"Universal"},
 	{"Abjuration"},
-	{"Conjuration"},
+	{"Conjuration"}, // 2
 	{"Divination"},
-	{"Enchantment"},
-	{"Evocation"},
+	{"Enchantment"}, // 4
+	{"Evocation"}, // 6
 	{"Illusion"},
-	{"Necromancy"},
+	{"Necromancy"}, // 7
 	{"Transmutation"},
 };
 assert_enum(schooli, Transmutation)

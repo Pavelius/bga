@@ -50,7 +50,7 @@ BSDATAC(itemi, 512)
 BSDATAC(itemground, 512)
 BSDATAC(point, 256*256)
 BSDATAC(region, 128)
-BSDATAC(spelli, 256)
+BSDATAC(spelli, 1024)
 BSDATAC(spellbook, 32)
 BSDATAD(variant)
 BSDATAC(variable, 1024)
@@ -59,6 +59,7 @@ BSDATAC(worldmapi::area, 128)
 BSDATAC(worldmapi::link, 512)
 
 NOBSDATA(color)
+NOBSDATA(durationi)
 NOBSDATA(dice)
 NOBSDATA(weaponi)
 
@@ -88,6 +89,10 @@ BSMETA(colorgrad) = {
 	{}};
 BSMETA(damagei) = {
 	BSREQ(id),
+	{}};
+BSMETA(durationi) = {
+	BSREQ(base),
+	BSREQ(level),
 	{}};
 BSMETA(dice) = {
 	BSREQ(c), BSREQ(d), BSREQ(b), BSREQ(m),
@@ -163,6 +168,7 @@ BSMETA(spelli) = {
 	BSREQ(id),
 	BSREQ(avatar),
 	BSREQ(save_difficult),
+	BSREQ(duration),
 	BSENM(range, rangei),
 	BSENM(save, abilityi),
 	BSENM(school, schooli),

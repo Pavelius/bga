@@ -3,6 +3,7 @@
 #include "class.h"
 #include "coloration.h"
 #include "drawable.h"
+#include "npc.h"
 #include "race.h"
 #include "wearable.h"
 
@@ -32,6 +33,7 @@ struct actor : drawable, actable, coloration, statable, classa, wearable {
 	unsigned char	orientation;
 	unsigned		duration;
 	unsigned short	order;
+	unsigned short	npc;
 	racen			race;
 	void			clearpath();
 	bool			ispresent() const;

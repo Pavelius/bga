@@ -1,7 +1,12 @@
 Classes: Классы
+
 Commoner: Крестьянин
+
+Bard: Бард
 Cleric: Клерик
+Druid: Друид
 Fighter: Боец
+Paladin: Паладин
 Ranger: Следопыт
 Rogue: Бродяга
 Sorcerer: Колдун

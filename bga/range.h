@@ -7,12 +7,15 @@ enum rangen : unsigned char {
 	Range10,
 	Range20,
 	Range30,
+	Range40,
 	Range50,
 	Range60,
 	Range70,
 	Range80,
 	Range100, // SightOfCaster
 	Range120,
+	RangeCloseArea20,
+	RangeCloseArea50,
 };
 struct rangei : nameable {
 };

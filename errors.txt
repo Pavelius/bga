@@ -1,4 +1,2 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `Range`
- Define translation for `Range100`
- Define translation for `Touch`
+ Define translation for `SummonCow`

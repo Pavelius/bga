@@ -5,7 +5,7 @@
 enum abilityn : unsigned char;
 enum classn : unsigned char {
 	Commoner,
-	Fighter, Cleric, Rogue, Ranger, Sorcerer, Wizard,
+	Bard, Fighter, Cleric, Druid, Paladin, Ranger, Rogue, Sorcerer, Wizard,
 };
 struct classi : nameable {
 	int			player;

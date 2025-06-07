@@ -86,6 +86,7 @@ static void apply_advance(variant v, int level) {
 void creature::clear() {
 	memset(this, 0, sizeof(*this));
 	area_index = 0xFFFF;
+	npc = 0xFFFF;
 }
 
 static short unsigned random_portrait_no_party(gendern gender) {

@@ -168,6 +168,7 @@
     <ClInclude Include="door.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="draw_focus.h" />
+    <ClInclude Include="duration.h" />
     <ClInclude Include="entrance.h" />
     <ClInclude Include="feat.h" />
     <ClInclude Include="flagable.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="modifier.h" />
+    <ClInclude Include="npc.h" />
     <ClInclude Include="my_initialize_list.h" />
     <ClInclude Include="order.h" />
     <ClInclude Include="rand.h" />

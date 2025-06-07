@@ -8,11 +8,14 @@ BSDATA(rangei) = {
 	{"Range10"},
 	{"Range20"},
 	{"Range30"},
+	{"Range40"},
 	{"Range50"},
 	{"Range60"},
 	{"Range70"},
 	{"Range80"},
 	{"Range100"},
 	{"Range120"},
+	{"RangeCloseArea20"},
+	{"RangeCloseArea50"},
 };
-assert_enum(rangei, Range120)
+assert_enum(rangei, RangeCloseArea50)

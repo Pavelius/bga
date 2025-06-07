@@ -1,6 +1,7 @@
 #pragma once
 
 #include "class.h"
+#include "duration.h"
 #include "flagable.h"
 #include "nameable.h"
 #include "variant.h"
@@ -13,6 +14,7 @@ enum rangen : unsigned char;
 struct spelli : nameable, classa {
 	int			avatar;
 	schooln		school;
+	durationi	duration;
 	rangen		range;
 	abilityn	save;
 	unsigned char save_difficult; // 1 - for half effect if saved, 0 - for negates effect if save

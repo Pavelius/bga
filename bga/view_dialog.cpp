@@ -995,7 +995,7 @@ static void paint_spell_description() {
 	paint_dialog(GUISPL, 2);
 	setdialog(22, 22, 343, 20); texta(getnm("Spell"), AlignCenterCenter);
 	setdialog(22, 52, 343, 20); texta(NORMAL, colors::yellow, last_spell->getname(), AlignCenterCenter);
-	setdialog(27, 87, 355, 304); paint_description(0, 0, 313);
+	setdialog(27, 87, 355, 304); paint_description(14, -5, 313);
 	setdialog(375, 22); image(gres(SPELLS), last_spell->avatar, 0);
 	//Scroll GBTNSCRL 396 82 12 313 frames(1 0 3 2 4 5)
 	setdialog(135, 402); button(GBTNMED, 1, 2, KeyEscape, "Done"); fire(buttoncancel);

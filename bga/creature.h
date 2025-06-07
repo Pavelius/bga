@@ -6,11 +6,12 @@
 
 #pragma once
 
+enum alignmentn : unsigned char;
 enum dietyn : unsigned char;
 
 struct creature : actor, avatarable, spellv {
 	statable		basic;
-	unsigned char	alignment;
+	alignmentn		alignment;
 	dietyn			diety;
 	short			hp, hp_max;
 	unsigned		experience;

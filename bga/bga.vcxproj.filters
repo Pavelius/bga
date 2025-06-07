@@ -676,5 +676,11 @@
     <ClInclude Include="diety.h">
       <Filter>logic</Filter>
     </ClInclude>
+    <ClInclude Include="npc.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="duration.h">
+      <Filter>logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
