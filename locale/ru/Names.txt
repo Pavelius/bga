@@ -42,6 +42,7 @@ Proficiency: Владение
 QuickItem: Предметы
 QuickWeapon: Оружие
 Quiver: Колчан
+Range30: 30 футов
 Replay: Заново
 Required: Требования
 SavingThrows: Броски спасения

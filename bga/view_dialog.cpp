@@ -514,11 +514,6 @@ static void layer(color v) {
 	fore = push_fore;
 }
 
-static void input_item_info(const item* pi) {
-	if(button_hilited && hot.key == MouseRight && !hot.pressed)
-		execute(open_item_description, 0, 0, pi);
-}
-
 static void paint_item(const item* pi) {
 	if(!pi)
 		return;
@@ -527,7 +522,8 @@ static void paint_item(const item* pi) {
 	if(!player->isusable(*pi))
 		layer(colors::red);
 	image(gres(ITEMS), pi->geti().avatar * 2, 0);
-	input_item_info(pi);
+	if(button_hilited && hot.key == MouseRight && !hot.pressed)
+		execute(open_item_description, 0, 0, pi);
 }
 
 static void set_drag_item_cursor() {
@@ -550,25 +546,53 @@ static bool allow_use(const item& di, const item& v) {
 	auto p = get_creature(&di);
 	if(!p)
 		return true;
-	if(!p->isusable(v))
-		return false;
 	auto slot = p->getslot(&di);
+	if(get_slot(slot) != Backpack) {
+		if(!p->isusable(v))
+			return false;
+	}
 	return v.is(slot);
 }
 
 static bool drag_drop_item() {
+	if(!allow_use(*drag_item_dest, drag_item))
+		return false;
+	if(!allow_use(*drag_item_source, *drag_item_dest))
+		return false;
+	auto p1 = get_creature(drag_item_source);
+	auto p2 = get_creature(drag_item_dest);
+	*drag_item_source = *drag_item_dest;
+	*drag_item_dest = drag_item;
+	p1->update();
+	p2->update();
+	return true;
+}
+
+static bool drag_drop_equip_item() {
+	drag_item_dest = player->wears + drag_item.geti().wear;
+	return drag_drop_item();
 }
 
 static void begin_drag_item() {
 	drag_item_source = (item*)hot.object;
 	drag_item = *drag_item_source;
 	drag_item_source->clear();
+	//if(dragging(paint_inventory_dragging)
+	//	&& drag_item_dest
+	//	&& allow_use(*drag_item_dest, drag_item)
+	//	&& allow_use(*drag_item_source, *drag_item_dest)) {
+	//	auto p1 = get_creature(drag_item_source);
+	//	auto p2 = get_creature(drag_item_dest);
+	//	*drag_item_source = *drag_item_dest;
+	//	*drag_item_dest = drag_item;
+	//	p1->update();
+	//	p2->update();
+	//} else if(drag_item_source)
+	//	*drag_item_source = drag_item;
 	if(dragging(paint_inventory_dragging)
-		&& drag_item_dest
-		&& allow_use(*drag_item_dest, drag_item)
-		&& allow_use(*drag_item_source, *drag_item_dest)) {
-		*drag_item_source = *drag_item_dest;
-		*drag_item_dest = drag_item;
+		&& drag_drop_proc
+		&& drag_drop_proc()) {
+		// All correct
 	} else if(drag_item_source)
 		*drag_item_source = drag_item;
 	drag_item_source = 0;
@@ -580,6 +604,7 @@ static void paint_drag_target(item* pi, wearn slot) {
 	if(drag_item_source) {
 		if(button_hilited) {
 			drag_item_dest = pi;
+			drag_drop_proc = drag_drop_item;
 			image(gres(STONSLOT), 25, 0);
 		} else {
 			auto p = get_creature(pi);
@@ -681,10 +706,19 @@ static void quick_weapon(int index) {
 		image(gres(STONSLOT), 34, 0);
 }
 
+static void paperdoll_dragable() {
+	button_check(0);
+	paperdoll();
+	if(drag_item_source) {
+		if(button_hilited)
+			drag_drop_proc = drag_drop_equip_item;
+	}
+}
+
 static void paint_game_inventory() {
 	paint_game_dialog(GUIINV);
 	paint_game_player();
-	setdialog(339, 86, 126, 160); paperdoll();
+	setdialog(339, 86, 126, 160); paperdoll_dragable();
 	setdialog(251, 299, 36, 36); inventory_line(0);
 	setdialog(251, 339, 36, 36); inventory_line(8);
 	setdialog(251, 379, 36, 36); inventory_line(16);
