@@ -3,7 +3,7 @@
 #pragma once
 
 enum rangen : unsigned char {
-	Touch, Reach,
+	Touch, Reach, You,
 	Range10,
 	Range20,
 	Range30,
@@ -11,7 +11,7 @@ enum rangen : unsigned char {
 	Range60,
 	Range70,
 	Range80,
-	Range100,
+	Range100, // SightOfCaster
 	Range120,
 };
 struct rangei : nameable {

@@ -8,12 +8,14 @@
 enum abilityn : unsigned char;
 enum spelln : unsigned short;
 enum schooln : unsigned char;
+enum rangen : unsigned char;
 
 struct spelli : nameable, classa {
 	int			avatar;
+	schooln		school;
+	rangen		range;
 	abilityn	save;
 	unsigned char save_difficult; // 1 - for half effect if saved, 0 - for negates effect if save
-	schooln		school;
 	variants	wearing, instant;
 	spelln		getindex() const;
 };

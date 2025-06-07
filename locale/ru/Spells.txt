@@ -1,5 +1,11 @@
 Spell: Заклинание
 School: Школа
+Range: Дистанция
+
+Range100: Предел видимости
+Touch: Касание
+
+SaveCancel: отменяет эффект
 
 Abjuration: Ограждение
 Conjuration: Призывание
@@ -7,6 +13,7 @@ Enchantment: Зачарование
 Evocation: Воплощение
 Necromancy: Некромантия
 Transmutation: Трансмутация
+Universal: Универсальное
 
 Bane: Погибель
 Bless: Благословение
@@ -19,6 +26,7 @@ InflictLightWounds: Нанести легкую рану
 MageArmor: Волшебная броня
 MagicStone: Воблебный камень
 MagicWeapon: Волшебное оружие
+ProtectionFromEvil: Защита от зла
 Shield: Волщебный щит
 ShieldOfFaith: Щит веры
 SummonMonsterI: Призыв монстра I

@@ -11,6 +11,10 @@ static void addv(stringbuilder& sb, const char* id, const char* value) {
 	sb.addn("%1: %2", getnm(id), value);
 }
 
+template<class T> void addv(stringbuilder& sb, const char* id, unsigned short v) {
+	sb.addn("%1: %2", getnm(id), bsdata<T>::elements[v].getname());
+}
+
 static void addb(stringbuilder& sb, const char* id, int value, const char* format = 0, bool skip_zero = true) {
 	if(skip_zero && !value)
 		return;
@@ -190,9 +194,7 @@ static void addv(stringbuilder& sb, const classa& v) {
 	}
 }
 
-static void spell_information(stringbuilder& sb) {
-	addv(sb, "School", bsdata<schooli>::elements[last_spell->school].getname());
-	addv(sb, *last_spell);
+static void add_saving_throws(stringbuilder& sb) {
 	if(last_spell->save) {
 		addv(sb, "SavingThrows", bsdata<abilityi>::elements[last_spell->save].getname());
 		switch(last_spell->save_difficult) {
@@ -201,6 +203,13 @@ static void spell_information(stringbuilder& sb) {
 		}
 	} else
 		addv(sb, "SavingThrows", getnm("No"));
+}
+
+static void spell_information(stringbuilder& sb) {
+	addv<schooli>(sb, "School", last_spell->school);
+	addv(sb, *last_spell);
+	addv<rangei>(sb, "Range", last_spell->range);
+	add_saving_throws(sb);
 }
 
 static void item_information(stringbuilder& sb) {

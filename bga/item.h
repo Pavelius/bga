@@ -22,7 +22,7 @@ struct itemfi {
 struct itemresi {
 };
 struct weaponi {
-	damagen		type;
+	damagen			type;
 	dice			damage;
 	rangen			range;
 	char			bonus;

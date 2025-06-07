@@ -4,6 +4,7 @@
 BSDATA(rangei) = {
 	{"Touch"},
 	{"Reach"},
+	{"You"},
 	{"Range10"},
 	{"Range20"},
 	{"Range30"},

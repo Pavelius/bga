@@ -163,6 +163,7 @@ BSMETA(spelli) = {
 	BSREQ(id),
 	BSREQ(avatar),
 	BSREQ(save_difficult),
+	BSENM(range, rangei),
 	BSENM(save, abilityi),
 	BSENM(school, schooli),
 	BSDST(classes, classi),
