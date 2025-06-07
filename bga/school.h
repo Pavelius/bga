@@ -1,5 +1,10 @@
 #pragma once
 
+#include "nameable.h"
+
 enum schooln : unsigned char {
-	Abjuration, Conjuration, Enchantment, Summoning,
+	Universal,
+	Abjuration, Conjuration, Divination, Enchantment, Evocation, Illusion, Necromancy, Transmutation,
+};
+struct schooli : nameable {
 };

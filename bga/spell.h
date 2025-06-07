@@ -5,15 +5,19 @@
 #include "nameable.h"
 #include "variant.h"
 
+enum abilityn : unsigned char;
 enum spelln : unsigned short;
 enum schooln : unsigned char;
 
 struct spelli : nameable, classa {
 	int			avatar;
+	abilityn	save;
+	unsigned char save_difficult; // 1 - for half effect if saved, 0 - for negates effect if save
 	schooln		school;
 	variants	wearing, instant;
 	spelln		getindex() const;
 };
+extern spelli* last_spell;
 struct spellv {
 	char		powers[512];
 };

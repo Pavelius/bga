@@ -1,0 +1,8 @@
+Classes: Классы
+Commoner: Крестьянин
+Cleric: Клерик
+Fighter: Боец
+Ranger: Следопыт
+Rogue: Бродяга
+Sorcerer: Колдун
+Wizard: Маг

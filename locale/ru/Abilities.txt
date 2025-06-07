@@ -27,9 +27,12 @@ HitPoints: Очки хитов
 SneakAttack: Скрытная атака
 Stamina: Выносливость
 
-Domain: Божество
 SpellLevel: Уровень заклинания
 SpellSlotsAvailable: Доступно уровней заклинаний
 KnownSpells: Известные заклинания
 MemorizedSpells: Подготовленные заклинания
 Slots: Слоты
+
+Fortitude: Стойкость
+Reflexes: Рефлексы
+Will: Воля

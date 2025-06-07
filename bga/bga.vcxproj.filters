@@ -36,29 +36,17 @@
     <Text Include="..\errors.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\forms\GUICHP0B.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\forms\GUIINVAB.txt">
       <Filter>forms</Filter>
     </Text>
     <Text Include="..\rules\Races.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\forms\GUIMAPGM.txt">
-      <Filter>forms</Filter>
-    </Text>
-    <Text Include="..\forms\GUISPL08.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\rules\Advance.txt">
       <Filter>rules</Filter>
     </Text>
     <Text Include="..\rules\Classes.txt">
       <Filter>rules</Filter>
-    </Text>
-    <Text Include="..\forms\GUIHELP.txt">
-      <Filter>forms</Filter>
     </Text>
     <Text Include="..\rules\Basic.txt">
       <Filter>rules</Filter>
@@ -71,9 +59,6 @@
     </Text>
     <Text Include="..\rules\Calendar.txt">
       <Filter>rules</Filter>
-    </Text>
-    <Text Include="..\forms\GUIWBTP.txt">
-      <Filter>forms</Filter>
     </Text>
     <Text Include="..\forms\GUISTIDB.txt">
       <Filter>forms</Filter>
@@ -119,6 +104,9 @@
     </Text>
     <Text Include="..\rules\Diety.txt">
       <Filter>rules</Filter>
+    </Text>
+    <Text Include="..\locale\ru\Classes.txt">
+      <Filter>locale</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -399,6 +387,9 @@
       <Filter>support</Filter>
     </ClCompile>
     <ClCompile Include="diety.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="school.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>

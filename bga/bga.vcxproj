@@ -20,17 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\errors.txt" />
-    <Text Include="..\forms\GUICHP0B.txt" />
-    <Text Include="..\forms\GUIHELP.txt" />
     <Text Include="..\forms\GUIINVAB.txt" />
-    <Text Include="..\forms\GUIMAPGM.txt" />
-    <Text Include="..\forms\GUISPL08.txt" />
     <Text Include="..\forms\GUISTBSB.txt" />
     <Text Include="..\forms\GUISTIDB.txt" />
-    <Text Include="..\forms\GUIWBTP.txt" />
     <Text Include="..\locale\ru\Abilities.txt" />
     <Text Include="..\locale\ru\Alignments.txt" />
     <Text Include="..\locale\ru\Area.txt" />
+    <Text Include="..\locale\ru\Classes.txt" />
     <Text Include="..\locale\ru\Feats.txt" />
     <Text Include="..\locale\ru\Items.txt" />
     <Text Include="..\locale\ru\Names.txt" />
@@ -116,6 +112,7 @@
     <ClCompile Include="resid.cpp" />
     <ClCompile Include="resinfo.cpp" />
     <ClCompile Include="scale2x.cpp" />
+    <ClCompile Include="school.cpp" />
     <ClCompile Include="screenshoot.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="scripting.cpp" />

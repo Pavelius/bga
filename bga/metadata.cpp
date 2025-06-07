@@ -20,6 +20,7 @@
 #include "portrait.h"
 #include "race.h"
 #include "region.h"
+#include "school.h"
 #include "script.h"
 #include "skill.h"
 #include "spell.h"
@@ -148,6 +149,9 @@ BSMETA(rangei) = {
 BSMETA(residi) = {
 	BSREQ(id),
 	{}};
+BSMETA(schooli) = {
+	BSREQ(id),
+	{}};
 BSMETA(script) = {
 	BSREQ(id),
 	{}};
@@ -158,6 +162,9 @@ BSMETA(skilli) = {
 BSMETA(spelli) = {
 	BSREQ(id),
 	BSREQ(avatar),
+	BSREQ(save_difficult),
+	BSENM(save, abilityi),
+	BSENM(school, schooli),
 	BSDST(classes, classi),
 	BSREQ(wearing),
 	BSREQ(instant),

@@ -1,3 +1,13 @@
+Spell: Заклинание
+School: Школа
+
+Abjuration: Ограждение
+Conjuration: Призывание
+Enchantment: Зачарование
+Evocation: Воплощение
+Necromancy: Некромантия
+Transmutation: Трансмутация
+
 Bane: Погибель
 Bless: Благословение
 CauseFear: Вызвать страх

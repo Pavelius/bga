@@ -51,3 +51,7 @@ long open_dialog(fnevent proc, bool faded) {
 	}
 	return getresult();
 }
+
+void open_dialog() {
+	open_dialog((fnevent)hot.object, hot.param);
+}

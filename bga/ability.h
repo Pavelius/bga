@@ -4,7 +4,7 @@
 
 #pragma once
 
-enum ability_s : unsigned char {
+enum abilityn : unsigned char {
 	Strenght, Dexterity, Constitution, Intelligence, Wisdow, Charisma,
 	AC, ArmorBonus, DodgeBonus, ArmorCheckPenalty, SpellFailure,
 	AttackMelee, AttackRanged, DamageMelee, DamageRanged,
@@ -26,9 +26,9 @@ struct statable : skilla {
 	damagea		resist;
 	featf		feats;
 	void		clear();
-	int			get(ability_s v) const { return abilitites[v]; }
+	int			get(abilityn v) const { return abilitites[v]; }
 	int			get(damagen v) const { return resist[v]; }
 	int			get(skilln v) const { return skills[v]; }
 	bool		is(feat_s v) const { return feats.is(v); }
-	int			getbonus(ability_s v) const { return abilitites[v] / 2 - 5; }
+	int			getbonus(abilityn v) const { return abilitites[v] / 2 - 5; }
 };

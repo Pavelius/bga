@@ -3,6 +3,7 @@
 #include "creature.h"
 #include "item.h"
 #include "math.h"
+#include "school.h"
 #include "stringbuilder.h"
 #include "stringvar.h"
 
@@ -19,7 +20,7 @@ static void addb(stringbuilder& sb, const char* id, int value, const char* forma
 	sb.adds(format, value);
 }
 
-static void addb(stringbuilder& sb, ability_s i, int value, bool skip_zero = true) {
+static void addb(stringbuilder& sb, abilityn i, int value, bool skip_zero = true) {
 	addb(sb, bsdata<abilityi>::elements[i].id, value, bsdata<abilityi>::elements[i].format, skip_zero);
 }
 
@@ -84,7 +85,7 @@ static void add_critical(stringbuilder& sb, int critical, int multiplier, unsign
 	sb.addn(getnm(critical == 20 ? "CriticalHitLine20" : "CriticalHitLine"), critical, multiplier);
 }
 
-static const char* getfeatname(ability_s i, int level) {
+static const char* getfeatname(abilityn i, int level) {
 	static const char* armor_proficiency[] = {0, "LightArmorProficiency", "MediumArmorProficiency", "HeavyArmorProficiency"};
 	switch(i) {
 	case ArmorProficiency:
@@ -96,7 +97,7 @@ static const char* getfeatname(ability_s i, int level) {
 
 static const char* getfeatname(variant v) {
 	if(v.iskind<abilityi>())
-		return getfeatname((ability_s)v.value, v.counter);
+		return getfeatname((abilityn)v.value, v.counter);
 	else
 		return v.getname();
 }
@@ -137,7 +138,7 @@ static void player_information(stringbuilder& sb) {
 	addb(sb, "NextLevel", player->getnextlevel(), 0, false);
 	addend(sb);
 	addh(sb, getnm("SavingThrows"));
-	for(auto i = Fortitude; i <= Will; i = (ability_s)(i + 1))
+	for(auto i = Fortitude; i <= Will; i = (abilityn)(i + 1))
 		addb(sb, i, player->get(i), false);
 	addend(sb);
 	addh(sb, getnm("AbilityStatistic"));
@@ -154,7 +155,7 @@ static void player_skill_information(stringbuilder& sb) {
 	}
 	addend(sb);
 	addh(sb, getnm("Feats"));
-	for(auto i = ArmorProficiency; i <= MartialWeaponPolearm; i = (ability_s)(i + 1)) {
+	for(auto i = ArmorProficiency; i <= MartialWeaponPolearm; i = (abilityn)(i + 1)) {
 		auto level = player->get(i);
 		if(level)
 			sb.addn(getfeatname(i, level));
@@ -168,6 +169,38 @@ static void player_skill_information(stringbuilder& sb) {
 
 static void item_name(stringbuilder& sb) {
 	sb.add(last_item->getname());
+}
+
+static void addv(stringbuilder& sb, const classa& v) {
+	auto record_count = 0;
+	for(auto& e : bsdata<classi>()) {
+		auto i = e.getindex();
+		if(i == Sorcerer)
+			continue;
+		if(!v.classes[i])
+			continue;
+		if(!record_count) {
+			sb.addn(getnm("Levels"));
+			sb.add(":");
+		} else
+			sb.add(",");
+		sb.adds(e.getshortname());
+		sb.adds("%1i", v.classes[i]);
+		record_count++;
+	}
+}
+
+static void spell_information(stringbuilder& sb) {
+	addv(sb, "School", bsdata<schooli>::elements[last_spell->school].getname());
+	addv(sb, *last_spell);
+	if(last_spell->save) {
+		addv(sb, "SavingThrows", bsdata<abilityi>::elements[last_spell->save].getname());
+		switch(last_spell->save_difficult) {
+		case 1: sb.adds(getnm("SaveHalf")); break;
+		default: sb.adds(getnm("SaveCancel")); break;
+		}
+	} else
+		addv(sb, "SavingThrows", getnm("No"));
 }
 
 static void item_information(stringbuilder& sb) {
@@ -205,5 +238,6 @@ BSDATA(stringvari) = {
 	{"ItemName", item_name},
 	{"PlayerInformation", player_information},
 	{"PlayerSkillInformation", player_skill_information},
+	{"SpellInformation", spell_information},
 };
 BSDATAF(stringvari)

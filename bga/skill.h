@@ -3,7 +3,7 @@
 
 #pragma once
 
-enum ability_s : unsigned char;
+enum abilityn : unsigned char;
 
 enum skilln : unsigned char {
 	Alchemy, AnimalEmpathy, Bluff, Concentration, Diplomacy,
@@ -13,7 +13,7 @@ enum skilln : unsigned char {
 };
 typedef flagable<1, unsigned> skillf;
 struct skilli : nameable {
-	ability_s	ability;
+	abilityn	ability;
 };
 struct skilla {
 	char		skills[WildernessLore + 1];

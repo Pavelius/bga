@@ -61,13 +61,18 @@ static void set_cursor() {
 	cursor.set(CURSORS, 0);
 }
 
-static const char* getnms(ability_s v) {
+static const char* getnms(abilityn v) {
 	return getnm(ids(bsdata<abilityi>::elements[v].id, "Short"));
 }
 
-static void texta(resn res, const char* string, unsigned flags) {
+void texta(resn res, const char* string, unsigned flags) {
 	pushfont push(gres(res));
 	texta(string, flags);
+}
+
+void texta(resn res, color fore, const char* string, unsigned flags) {
+	pushfore push(fore);
+	texta(res, string, flags);
 }
 
 static void update_frames() {
@@ -137,24 +142,24 @@ void open_scene() {
 	scene((fnevent)hot.object);
 }
 
-void paint_dialog(resn v) {
+void paint_dialog(resn v, int frame) {
 	set_cursor();
 	auto p = gres(v);
-	auto& f = p->get(0);
+	auto& f = p->get(frame);
 	dialog_start.x = (getwidth() - f.sx) / 2;
 	dialog_start.y = (getheight() - f.sy) / 2 - 128;
 	if(dialog_start.y < 64)
 		dialog_start.y = 64;
 	caret = dialog_start;
-	image(p, 0, 0);
+	image(p, frame, 0);
 }
 
-void paint_game_dialog(resn v) {
+void paint_game_dialog(resn v, int frame) {
 	set_cursor();
 	dialog_start.x = 0;
 	dialog_start.y = 0;
 	caret = dialog_start;
-	image(gres(v), 0, 0);
+	image(gres(v), frame, 0);
 }
 
 void hotkey(unsigned key, fnevent proc, int param) {
@@ -779,7 +784,7 @@ static void paint_game_journal() {
 //	fore = push_fore;
 //}
 
-static void ability(ability_s v) {
+static void ability(abilityn v) {
 	pushfore push_fore;
 	texta(getnms(v), AlignCenterCenter);
 	caret.x += 51; width = 32;
@@ -841,7 +846,7 @@ static void paint_list(const array& source, int& origin, int& current, int per_p
 	scroll(GBTNSCRL, 0, 2, 4, origin, maximum, per_page, 1);
 }
 
-static void paint_list(const array& source, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc) {
+static void paint_list(const array& source, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc) {
 	pushrect push;
 	pushfore push_fore;
 	auto push_clip = clipping; setclipall();
@@ -860,6 +865,8 @@ static void paint_list(const array& source, int& origin, int per_page, fncommand
 		if(button_hilited) {
 			if(hot.key == MouseLeft && !hot.pressed)
 				execute(action_proc, i, 0, p);
+			else if(hot.key == MouseRight && !hot.pressed)
+				execute(info_proc, i, 0, p);
 		}
 		caret.y += height;
 	}
@@ -967,7 +974,7 @@ static void paint_game_character() {
 }
 
 static void paint_worldmap() {
-	paint_game_dialog(GUIMAP);
+	paint_game_dialog(GUIMAP, 1);
 	setdialog(666, 18, 113, 22); texta(getnm("WorldMap"), AlignCenterCenter);
 	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 0, 0, open_game);
 	setdialog(23, 20, 630, 392); paint_worldmap_area();
@@ -982,6 +989,22 @@ static void paint_game_automap() {
 	setdialog(666, 18, 113, 22); texta(getnm("AreaMap"), AlignCenterCenter);
 	setdialog(98, 36, 480, 360); paint_minimap();
 	setdialog(668, 92, 109, 165); // Map notes text
+}
+
+static void paint_spell_description() {
+	paint_dialog(GUISPL, 2);
+	setdialog(22, 22, 343, 20); texta(getnm("Spell"), AlignCenterCenter);
+	setdialog(22, 52, 343, 20); texta(NORMAL, colors::yellow, last_spell->getname(), AlignCenterCenter);
+	setdialog(27, 87, 355, 304); paint_description(0, 0, 313);
+	setdialog(375, 22); image(gres(SPELLS), last_spell->avatar, 0);
+	//Scroll GBTNSCRL 396 82 12 313 frames(1 0 3 2 4 5)
+	setdialog(135, 402); button(GBTNMED, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
+}
+
+static void open_spell_info() {
+	last_spell = (spelli*)hot.object;
+	set_description("%SpellInformation");
+	open_dialog(paint_spell_description, true);
 }
 
 static void spell_level_filter() {
@@ -1071,6 +1094,8 @@ static void paint_spell_memorized() {
 			if(hot.mouse.in({caret.x, caret.y, caret.x + 79, caret.y + height})) {
 				if(hot.key == MouseLeft && !hot.pressed)
 					execute(cbsetchr, *pi - 1, 0, pi);
+				else if(hot.key == MouseLeft && !hot.pressed)
+					execute(open_spell_info, 0, 0, pi);
 			}
 		}
 	}
@@ -1089,7 +1114,7 @@ static void paint_game_spells() {
 		spell_type_filter();
 		spell_level_filter();
 		select_spells();
-		setdialog(494, 80, 207, 331); paint_list(spells, origin, 8, paint_spell, 42, {7, -1}, -1, spell_action);
+		setdialog(494, 80, 207, 331); paint_list(spells, origin, 8, paint_spell, 42, {7, -1}, -1, spell_action, open_spell_info);
 		setdialog(252, 78); paint_spell_memorized();
 		auto m = spell_slot_maximum();
 		auto u = spell_slot_used();

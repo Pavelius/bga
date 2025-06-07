@@ -1,30 +1,30 @@
 #Spell
 
-Bless avatar(0)
+Bless avatar(0) school(Enchantment)
  classes Cleric(1)
-Bane avatar(10)
+Bane avatar(10) school(Enchantment)
  classes Cleric(1)
-CauseFear
+CauseFear school(Necromancy)
  classes Cleric(1) Wizard(1) Sorcerer(1)
-CureLightWounds avatar(2)
+CureLightWounds avatar(2) school(Conjuration)
  classes Cleric(1)
-DivineFavor
+DivineFavor school(Evocation)
  classes Cleric(1)
-Doom avatar(13)
+Doom avatar(13) school(Enchantment)
  classes Cleric(1)
-EndureFire
+EndureFire school(Abjuration)
  classes Cleric(1) Wizard(1) Sorcerer(1)
-InflictLightWounds
+InflictLightWounds school(Necromancy)
  classes Cleric(1)
-MagicStone avatar(5)
+MagicStone avatar(5) school(Transmutation)
  classes Cleric(1)
 MageArmor avatar()
  classes Wizard(1) Sorcerer(1)
-MagicWeapon
+MagicWeapon school(Transmutation)
  classes Cleric(1)
 Shield
  classes Wizard(1) Sorcerer(1)
-ShieldOfFaith
+ShieldOfFaith school(Abjuration)
  classes Cleric(1)
-SummonMonsterI
+SummonMonsterI school(Conjuration)
  classes Cleric(1)

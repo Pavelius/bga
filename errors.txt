@@ -1,2 +1,3 @@
-﻿Error in file `rules/Spells.txt`:
- Line 10: Not find data type for `Domain`
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `No`
+ Define translation for `Save`

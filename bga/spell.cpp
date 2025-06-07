@@ -3,6 +3,7 @@
 #include "spell.h"
 
 spellbook* last_spellbook;
+spelli* last_spell;
 
 void spellbook::clear() {
 	memset(this, 0, sizeof(*this));

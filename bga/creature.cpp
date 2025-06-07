@@ -164,7 +164,7 @@ static int roll_4d6() {
 }
 
 static void random_ability() {
-	for(auto i = Strenght; i <= Charisma; i = (ability_s)(i + 1))
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
 		player->basic.abilitites[i] = roll_4d6();
 }
 

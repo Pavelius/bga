@@ -30,11 +30,13 @@ Information: Информация
 Identify: Опознать
 Journal: Журнал
 Kg: кг.
+Levels: Уровни
 LevelUp: Развитие
 MagicBonus: Магический бонус
 MaxDexterityBonus: Максимальный бонус ловкости
 Name: Наименование
 NextLevel: Следующий уровень
+No: Нет
 Options: Опции
 Proficiency: Владение
 QuickItem: Предметы
@@ -67,19 +69,6 @@ HalfOrc: Полуорк
 
 Female: Женщина
 Male: Мужчина
-
-Classes: Классы
-Commoner: Крестьянин
-Cleric: Клерик
-Fighter: Боец
-Ranger: Следопыт
-Rogue: Бродяга
-Sorcerer: Колдун
-Wizard: Волшебник
-
-Fortitude: Стойкость
-Reflexes: Рефлексы
-Will: Воля
 
 AreaNotes: Пометки
 WorldMap: Карта мира
