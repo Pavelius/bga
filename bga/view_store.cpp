@@ -189,6 +189,7 @@ static void paint_buy_sell() {
 	setdialog(551, 387, 80, 20); texta(str("%1i", player_total), AlignCenterCenter);
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(690, 123); image(gres(CONTAINER), 1, 0);
+	paint_action_panel_player();
 }
 
 static void checkroom(storefn v, int f1, const char* id) {
@@ -214,6 +215,7 @@ static void paint_inn() {
 	//Scroll GBTNSCRL 625 81 12 327 frames(1 0 3 2 4 5)
 	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
 	setdialog(285, 387, 80, 20); texta("268435469", AlignCenterCenter);
+	paint_action_panel_na();
 }
 
 static void paint_drink() {
@@ -228,6 +230,7 @@ static void paint_drink() {
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(403, 82, 232, 20); texta(getnm("Rumors"), AlignCenterCenter);
 	setdialog(404, 115, 210, 292); paint_description(0, 0, 0);
+	paint_action_panel_na();
 }
 
 static void paint_store() {
@@ -241,7 +244,6 @@ static void paint_store() {
 	default: paint_buy_sell(); break;
 	}
 	setdialog(663, 384); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
-	paint_action_panel_player();
 	paint_game_panel(false);
 }
 

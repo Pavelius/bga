@@ -26,6 +26,7 @@ void next_scene();
 void next_scene(fnevent proc);
 void paint_action_panel();
 void paint_action_panel_player();
+void paint_action_panel_na();
 void paint_area();
 void paint_description(int scr_x, int scr_y, int scr_height);
 void paint_dialog(resn v, int frame = 0);

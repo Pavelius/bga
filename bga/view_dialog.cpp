@@ -526,7 +526,7 @@ void paint_action_panel_player() {
 	portrait_bar(true);
 }
 
-static void paint_action_panel_na() {
+void paint_action_panel_na() {
 	auto push_input = input_disabled; input_disabled = true;
 	paint_action_panel();
 	input_disabled = push_input;
