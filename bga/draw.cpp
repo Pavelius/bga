@@ -1145,6 +1145,12 @@ void draw::rectf() {
 		set32x(ptr(x1, y1), canvas->scanline, x2 - x1, y2 - y1);
 }
 
+void draw::rectfa(unsigned char v) {
+	auto push_alpha = alpha; alpha = v;
+	rectf();
+	alpha = push_alpha;
+}
+
 static void rectfpt(int xc1, int yc1, int xc2, int yc2, int r) {
 	if(xc1 - r >= clipping.x2 || xc2 + r < clipping.x1 || yc1 - r >= clipping.y2 || yc2 + r < clipping.y1)
 		return;

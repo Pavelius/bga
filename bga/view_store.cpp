@@ -242,14 +242,13 @@ static void paint_inn() {
 	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("Rooms"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(141, 83, 225, 18); texta(getnm("RoomQuality"), AlignCenterCenter);
-	setdialog(136, 114); checkroom(AllowPeasantRoom, 3 * 2, "RoomPeasant");
+	setdialog(136, 114); checkroom(AllowPeasantRoom, 0 * 2, "RoomPeasant");
 	setdialog(259, 114); checkroom(AllowMerchantRoom, 1 * 2, "RoomMerchant");
-	setdialog(136, 250); checkroom(AllowNobleRoom, 0 * 2, "RoomNoble");
-	setdialog(259, 250); checkroom(AllowRoyalRoom, 2 * 2, "RoomRoyal");
+	setdialog(136, 250); checkroom(AllowNobleRoom, 2 * 2, "RoomNoble");
+	setdialog(259, 250); checkroom(AllowRoyalRoom, 3 * 2, "RoomRoyal");
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(663, 123); button(GBTNSTD, 1, 2);
-	setdialog(404, 82, 209, 325); paint_description(0, 0, 0);
-	//Scroll GBTNSCRL 625 81 12 327 frames(1 0 3 2 4 5)
+	setdialog(404, 82, 209, 325); paint_description(12, -1, 2);
 	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
 	setdialog(285, 387, 80, 20); texta("268435469", AlignCenterCenter);
 	paint_action_panel_na();
@@ -258,15 +257,13 @@ static void paint_inn() {
 static void paint_drink() {
 	setdialog(140, 117, 40, 20); texta(NORMAL, "100", AlignCenterCenter);
 	setdialog(195, 111); button(GBTNMED2, 1, 2, 0, "Rumors");
-	//Scroll GBTNSCRL 359 114 12 293 frames(1 0 3 2 4 5)
-	//Scroll GBTNSCRL 625 114 12 294 frames(1 0 3 2 4 5)
 	setdialog(199, 82, 170, 20); texta(getnm("Drink"), AlignCenterCenter);
 	setdialog(137, 82, 48, 20); texta(getnm("Price"), AlignCenterCenter);
 	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("Drinks"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(403, 82, 232, 20); texta(getnm("Rumors"), AlignCenterCenter);
-	setdialog(404, 115, 210, 292); paint_description(0, 0, 0);
+	setdialog(404, 115, 210, 292); paint_description(12, -1, 2);
 	paint_action_panel_na();
 }
 
@@ -282,7 +279,6 @@ static void paint_identify() {
 	//Scroll GBTNSCRL 359 114 12 260 frames(1 0 3 2 4 5)
 	setdialog(135, 113, 214, 264); paint_identify_items();
 	setdialog(404, 82, 209, 325); paint_description(12, -1, 2);
-	//Scroll GBTNSCRL 625 81 12 327 frames(1 0 3 2 4 5)
 	paint_action_panel_player();
 }
 

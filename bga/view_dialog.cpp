@@ -538,8 +538,8 @@ void paint_action_panel_na() {
 	input_disabled = push_input;
 }
 
-static void layer(color v) {
-	auto push_alpha = alpha; alpha = 32;
+static void layer(color v, unsigned char a = 32) {
+	auto push_alpha = alpha; alpha = a;
 	auto push_fore = fore; fore = v;
 	rectf();
 	alpha = push_alpha;
@@ -1233,6 +1233,9 @@ void paint_game_panel(bool allow_input) {
 		setdialog(575, 72); button(GCOMMBTN, 16, 17);
 		setdialog(757, 1); button(GCOMMBTN, 18, 19);
 		hotkey('Z', change_zoom_factor);
+	} else {
+		setdialog(575, 2, 225, 105);
+		layer(colors::black, 128);
 	}
 	dialog_start = push_dialog;
 }
