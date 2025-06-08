@@ -1,5 +1,3 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `RoomMerchant`
- Define translation for `RoomNoble`
- Define translation for `RoomPeasant`
- Define translation for `RoomRoyal`
+ Define translation for `Drink`
+ Define translation for `Drinks`

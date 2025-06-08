@@ -88,6 +88,10 @@ static void paint_player_coins() {
 	texta(str("%1i gp", player->coins), AlignRightCenter);
 }
 
+static void paint_store_name() {
+	texta(STONEBIG, last_store->getname(), AlignCenterCenter);
+}
+
 static void paint_good(void* object) {
 	pushrect push;
 	pushfore push_fore;
@@ -146,6 +150,7 @@ static void paint_right_panel() {
 static int get_back_frame() {
 	switch(trade_mode) {
 	case AllowPeasantRoom: return 3;
+	case UserPurchaseDrinks: return 1;
 	default: return 0;
 	}
 }
@@ -168,7 +173,7 @@ static void paint_buy_sell() {
 	auto player_total = player_goods.total();
 	auto shop_total = shop_goods.total();
 	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("BuyAndSell"), AlignCenterCenter);
-	setdialog(400, 23, 238, 28); texta(STONEBIG, last_store->getname(), AlignCenterCenter);
+	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(663, 191); button(GBTNSTD, 1, 2, 0, "Buy", 3, shop_total);
 	setdialog(663, 220); button(GBTNSTD, 1, 2, 0, "Sell", 3, player_total); fire(sell_goods);
 	if(last_store->steal_difficult) {
@@ -197,7 +202,7 @@ static void checkroom(storefn v, int f1, const char* id) {
 
 static void paint_inn() {
 	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("Rooms"), AlignCenterCenter);
-	setdialog(400, 23, 238, 28); texta(STONEBIG, last_store->getname(), AlignCenterCenter);
+	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(141, 83, 225, 18); texta(getnm("RoomQuality"), AlignCenterCenter);
 	setdialog(136, 114); checkroom(AllowPeasantRoom, 3 * 2, "RoomPeasant");
 	setdialog(259, 114); checkroom(AllowMerchantRoom, 1 * 2, "RoomMerchant");
@@ -205,10 +210,24 @@ static void paint_inn() {
 	setdialog(259, 250); checkroom(AllowRoyalRoom, 2 * 2, "RoomRoyal");
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(663, 123); button(GBTNSTD, 1, 2);
-	setdialog(404, 82, 209, 325); texta(NORMAL, "", AlignCenterCenter);
+	setdialog(404, 82, 209, 325); paint_description(0, 0, 0);
 	//Scroll GBTNSCRL 625 81 12 327 frames(1 0 3 2 4 5)
 	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
 	setdialog(285, 387, 80, 20); texta("268435469", AlignCenterCenter);
+}
+
+static void paint_drink() {
+	setdialog(140, 117, 40, 20); texta(NORMAL, "100", AlignCenterCenter);
+	setdialog(195, 111); button(GBTNMED2, 1, 2, 0, "Rumors");
+	//Scroll GBTNSCRL 359 114 12 293 frames(1 0 3 2 4 5)
+	//Scroll GBTNSCRL 625 114 12 294 frames(1 0 3 2 4 5)
+	setdialog(199, 82, 170, 20); texta(getnm("Drink"), AlignCenterCenter);
+	setdialog(137, 82, 48, 20); texta(getnm("Price"), AlignCenterCenter);
+	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("Drinks"), AlignCenterCenter);
+	setdialog(400, 23, 238, 28); paint_store_name();
+	setdialog(692, 90, 80, 20); paint_player_coins();
+	setdialog(403, 82, 232, 20); texta(getnm("Rumors"), AlignCenterCenter);
+	setdialog(404, 115, 210, 292); paint_description(0, 0, 0);
 }
 
 static void paint_store() {
@@ -218,6 +237,7 @@ static void paint_store() {
 	paint_right_panel();
 	switch(trade_mode) {
 	case AllowPeasantRoom: paint_inn(); break;
+	case UserPurchaseDrinks: paint_drink(); break;
 	default: paint_buy_sell(); break;
 	}
 	setdialog(663, 384); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttoncancel);

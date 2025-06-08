@@ -209,13 +209,18 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key) {
 	image(p, button_pressed ? f2 : f1, 0);
 }
 
+static point get_pressed_offset(resn n) {
+	switch(n) {
+	case GBTNMED2: return {1, 2};
+	default: return {1, 1};
+	}
+}
+
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id) {
 	auto push_caret = caret;
 	button(res, f1, f2, key);
-	if(button_pressed) {
-		caret.x++;
-		caret.y++;
-	}
+	if(button_pressed)
+		caret = caret + get_pressed_offset(res);
 	auto push_height = height;
 	height -= 2;
 	texta(str(getnm(id)), AlignCenterCenter);
@@ -385,7 +390,7 @@ static void paint_console() {
 	scroll(GCOMMSB, 0, 2, 4, origin, maximum, per_page, per_row);
 }
 
-static void paint_description(int xs, int ys, int hs) {
+void paint_description(int scr_x, int scr_y, int scr_height) {
 	static int cash_origin, cash_string, origin, maximum;
 	pushrect push;
 	const int per_row = texth();
@@ -409,9 +414,9 @@ static void paint_description(int xs, int ys, int hs) {
 		caret.y -= origin;
 	textf(description, cash_origin, cash_string);
 	clipping = push_clip; caret = push.caret;
-	caret.x += push.width + xs;
-	caret.y += ys;
-	width = 12; height = hs;
+	caret.x += push.width + scr_x;
+	caret.y += scr_y;
+	width = 12; height += scr_height;
 	scroll(GBTNSCRL, 0, 2, 4, origin, maximum, per_page, per_row);
 }
 
@@ -1004,7 +1009,7 @@ static void paint_help() {
 				description.add(getnme(ids(p->id, "Info")));
 		}
 	}
-	setdialog(435, 72, 271, 286); paint_description(14, -2, 291);
+	setdialog(435, 72, 271, 286); paint_description(14, -2, 5);
 }
 
 static void open_help() {
@@ -1044,7 +1049,7 @@ static void paint_game_character() {
 	setdialog(676, 22); checkbox(character_info_mode, 3, GBTNRECB, 9, 10, 11, 0);
 	setdialog(655, 379); button(GBTNSTD, 1, 2, 'L', "LevelUp");
 	update_character();
-	setdialog(406, 64, 349, 288); paint_description(13, 0, 294);
+	setdialog(406, 64, 349, 288); paint_description(13, 0, 6);
 	//UpdateCreatureInfo NONE 0 0 0 0
 	//Scroll GBTNSCRL 768 64 12 294 frames(1 0 3 2 4 5)
 }
@@ -1071,7 +1076,7 @@ static void paint_spell_description() {
 	paint_dialog(GUISPL, 2);
 	setdialog(22, 22, 343, 20); texta(getnm("Spell"), AlignCenterCenter);
 	setdialog(22, 52, 343, 20); texta(NORMAL, colors::yellow, last_spell->getname(), AlignCenterCenter);
-	setdialog(27, 87, 355, 304); paint_description(14, -5, 313);
+	setdialog(27, 87, 355, 304); paint_description(14, -5, 9);
 	setdialog(375, 22); image(gres(SPELLS), last_spell->avatar, 0);
 	//Scroll GBTNSCRL 396 82 12 313 frames(1 0 3 2 4 5)
 	setdialog(135, 402); button(GBTNMED, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
@@ -1251,7 +1256,7 @@ static void paint_item_description() {
 	setdialog(20, 432); button(GBTNMED, 1, 2, 'I', "Identify"); fire(identify_item);
 	setdialog(179, 432); button(GBTNMED, 1, 2, 'U', "UseItem");
 	setdialog(338, 432); button(GBTNMED, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
-	setdialog(28, 115, 435, 299); paint_description(17, -6, 311);
+	setdialog(28, 115, 435, 299); paint_description(17, -6, 12);
 }
 
 static void paint_cursor() {

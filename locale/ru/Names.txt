@@ -22,6 +22,8 @@ Damage: Повреждения
 DefaultColor: По-умолчанию
 Description: Описание
 Done: Завершить
+Drink: Напиток или блюдо
+Drinks: Выпивка и еда
 Experience: Опыт
 Export: Экспорт
 Feats: Особенности
@@ -52,6 +54,7 @@ RoomNoble: Благородная
 RoomPeasant: Крестьянская
 RoomQuality: Качество комнаты
 RoomRoyal: Королевская
+Rumors: Слухи
 SavingThrows: Броски спасения
 Sell: Продать
 Skills: Навыки
