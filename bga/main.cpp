@@ -47,6 +47,7 @@ static void create_party() {
 
 static void start_main() {
 	last_screen.set(0, 0, 800, 433);
+	create_game();
 	create_party();
 	select_all_party();
 	enter("AR1000", "FR1001");

@@ -1,5 +1,6 @@
 #include "creature.h"
 #include "draw.h"
+#include "game.h"
 #include "iteminside.h"
 #include "pushvalue.h"
 #include "resid.h"
@@ -16,6 +17,7 @@ struct tradegood {
 };
 struct tradegooda : vector<tradegood> {
 	int total() const;
+	int checkedcount() const;
 	void add(item& e);
 	bool checked() const;
 };
@@ -27,6 +29,15 @@ int tradegooda::total() const {
 	auto result = 0;
 	for(auto& e : *this)
 		result += e.count * e.source->getcost();
+	return result;
+}
+
+int tradegooda::checkedcount() const {
+	auto result = 0;
+	for(auto& e : *this) {
+		if(e.count)
+			result++;
+	}
 	return result;
 }
 
@@ -79,6 +90,13 @@ static void pick_good() {
 		p->count = 0;
 }
 
+static void pick_identify() {
+	auto p = (tradegood*)hot.object;
+	pushvalue push_item(last_item, p->source);
+	pick_good();
+	set_description("%ItemInformation");
+}
+
 static void remove_good() {
 	auto p = (tradegood*)hot.object;
 	p->count = 0;
@@ -110,16 +128,34 @@ static void paint_good(void* object) {
 	clipping = push_clip;
 }
 
+static void paint_identify_item(void* object) {
+	pushrect push;
+	pushfore push_fore;
+	auto p = (tradegood*)object;
+	height = 34;
+	if(p->count)
+		image(gres(STONSLOT), 25, 0);
+	paint_item(p->source);
+	caret.x += 50; caret.y += 1; width = 160;
+	texta(p->source->getname(), AlignCenterCenter);
+}
+
+static void paint_identify_items() {
+	static int origin;
+	paint_list(player_goods.data, player_goods.element_size, player_goods.count, origin, 6,
+		paint_identify_item, 45, {10, 1}, -4, pick_identify, 0);
+}
+
 static void paint_player_goods() {
 	static int origin;
-	setdialog(401, 113, 214, 264);
-	paint_list(player_goods.data, player_goods.element_size, player_goods.count, origin, 6, paint_good, 45, {10, 1}, -4, pick_good, 0);
+	paint_list(player_goods.data, player_goods.element_size, player_goods.count, origin, 6,
+		paint_good, 45, {10, 1}, -4, pick_good, 0);
 }
 
 static void paint_shop_goods() {
 	static int origin;
-	setdialog(135, 113, 214, 264);
-	paint_list(shop_goods.data, shop_goods.element_size, shop_goods.count, origin, 6, paint_good, 45, {10, 1}, -4, pick_good, 0);
+	paint_list(shop_goods.data, shop_goods.element_size, shop_goods.count, origin, 6,
+		paint_good, 45, {10, 1}, -4, pick_good, 0);
 }
 
 static void paint_right_panel() {
@@ -150,6 +186,7 @@ static void paint_right_panel() {
 static int get_back_frame() {
 	switch(trade_mode) {
 	case AllowPeasantRoom: return 3;
+	case UserAllowIdentify: return 2;
 	case UserPurchaseDrinks: return 1;
 	default: return 0;
 	}
@@ -181,10 +218,10 @@ static void paint_buy_sell() {
 	}
 	setdialog(141, 83, 225, 18); texta(getnm("Store"), AlignCenterCenter);
 	setdialog(407, 83, 225, 18); texta(player->getname(), AlignCenterCenter);
-	paint_shop_goods();
+	setdialog(135, 113, 214, 264); paint_shop_goods();
 	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
 	setdialog(285, 387, 80, 20); texta(str("%1i", shop_total), AlignCenterCenter);
-	paint_player_goods();
+	setdialog(401, 113, 214, 264); paint_player_goods();
 	setdialog(403, 387, 125, 20); texta(getnm("Price"), AlignRightCenter);
 	setdialog(551, 387, 80, 20); texta(str("%1i", player_total), AlignCenterCenter);
 	setdialog(692, 90, 80, 20); paint_player_coins();
@@ -233,6 +270,22 @@ static void paint_drink() {
 	paint_action_panel_na();
 }
 
+static void paint_identify() {
+	auto shop_total = player_goods.checkedcount() * game.get(IdentifyCost);
+	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("Identifying"), AlignCenterCenter);
+	setdialog(400, 23, 238, 28); paint_store_name();
+	setdialog(692, 90, 80, 20); paint_player_coins();
+	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
+	setdialog(285, 387, 80, 20); texta(str("%1i", shop_total), AlignCenterCenter);
+	setdialog(663, 123); button(GBTNSTD, 1, 2, 0, "Identify", 3, shop_total);
+	setdialog(141, 83, 225, 18); texta(getnm("Items"), AlignCenterCenter);
+	//Scroll GBTNSCRL 359 114 12 260 frames(1 0 3 2 4 5)
+	setdialog(135, 113, 214, 264); paint_identify_items();
+	setdialog(404, 82, 209, 325); paint_description(12, -1, 2);
+	//Scroll GBTNSCRL 625 81 12 327 frames(1 0 3 2 4 5)
+	paint_action_panel_player();
+}
+
 static void paint_store() {
 	auto player_total = player_goods.total();
 	auto shop_total = shop_goods.total();
@@ -241,6 +294,7 @@ static void paint_store() {
 	switch(trade_mode) {
 	case AllowPeasantRoom: paint_inn(); break;
 	case UserPurchaseDrinks: paint_drink(); break;
+	case UserAllowIdentify: paint_identify(); break;
 	default: paint_buy_sell(); break;
 	}
 	setdialog(663, 384); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttoncancel);

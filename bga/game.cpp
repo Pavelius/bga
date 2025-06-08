@@ -13,6 +13,8 @@
 #include "timer.h"
 #include "view.h"
 
+gamei game;
+
 static void read_area(const char* id, const char* folder) {
 	auto p = areai::add(id, folder);
 	current_area = getbsi(p);
@@ -89,4 +91,8 @@ static bool archive_game(const char* name, bool write_mode) {
 
 void gamesave(const char* name) {
 	archive_game(name, true);
+}
+
+void create_game() {
+	game.set(IdentifyCost, 100);
 }

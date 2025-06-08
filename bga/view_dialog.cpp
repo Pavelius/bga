@@ -42,6 +42,12 @@ static adat<spellbook*, 16> spellbooks;
 
 fnevent on_player_change;
 
+struct pushdescription {
+	char value[lenghtof(description_text)];
+	pushdescription() { memcpy(value, description_text, sizeof(value)); }
+	~pushdescription() { memcpy(description_text, value, sizeof(value)); }
+};
+
 static int compare_nameable(const void* v1, const void* v2) {
 	auto p1 = *((nameable**)v1);
 	auto p2 = *((nameable**)v2);
@@ -82,7 +88,7 @@ static void update_frames() {
 		update_game_tick();
 }
 
-static void set_description(const char* id) {
+void set_description(const char* id) {
 	description.clear();
 	description.add(id);
 	description_cash_size = -1;
@@ -1277,6 +1283,7 @@ static void paint_cursor() {
 }
 
 void open_item_description() {
+	pushdescription push_info;
 	auto push_last = last_item;
 	last_item = (item*)hot.object;
 	set_description("##%ItemName\n%ItemInformation");
