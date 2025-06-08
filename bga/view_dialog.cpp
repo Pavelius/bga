@@ -216,7 +216,10 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const 
 		caret.x++;
 		caret.y++;
 	}
+	auto push_height = height;
+	height -= 2;
 	texta(str(getnm(id)), AlignCenterCenter);
+	height = push_height;
 	caret = push_caret;
 }
 

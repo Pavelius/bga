@@ -46,6 +46,12 @@ Quiver: Колчан
 Range30: 30 футов
 Replay: Заново
 Required: Требования
+Rooms: Снять комнату
+RoomMerchant: Купеческая
+RoomNoble: Благородная
+RoomPeasant: Крестьянская
+RoomQuality: Качество комнаты
+RoomRoyal: Королевская
 SavingThrows: Броски спасения
 Sell: Продать
 Skills: Навыки

@@ -1,2 +1,5 @@
-﻿Error in file `rules/Store.txt`:
- Line 4: Not found identifier `UserAllowSteal`
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `RoomMerchant`
+ Define translation for `RoomNoble`
+ Define translation for `RoomPeasant`
+ Define translation for `RoomRoyal`

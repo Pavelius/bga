@@ -36,20 +36,3 @@ void add_item(variant parent, item& it) {
 	last_item = p;
 	it.clear();
 }
-
-void load_items(collectiona& source, variant parent) {
-	source.clear();
-	for(auto& e : bsdata<iteminside>()) {
-		if(e.parent == parent)
-			source.add(&e);
-	}
-}
-
-void load_player_items(collectiona& source) {
-	source.clear();
-	for(auto& e : player->backpack()) {
-		if(!e)
-			continue;
-		source.add(&e);
-	}
-}

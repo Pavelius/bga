@@ -84,6 +84,10 @@ static void remove_good() {
 	p->count = 0;
 }
 
+static void paint_player_coins() {
+	texta(str("%1i gp", player->coins), AlignRightCenter);
+}
+
 static void paint_good(void* object) {
 	pushrect push;
 	pushfore push_fore;
@@ -146,13 +150,27 @@ static int get_back_frame() {
 	}
 }
 
+static void sell_goods() {
+	auto total = player_goods.total();
+	for(auto& e : player_goods) {
+		if(!e.count)
+			continue;
+		item it(e.source->type);
+		it.setcount(e.count);
+		e.source->setcount(e.source->count - e.count);
+		add_item(last_store, it);
+	}
+	player->coins += total;
+	update_items();
+}
+
 static void paint_buy_sell() {
 	auto player_total = player_goods.total();
 	auto shop_total = shop_goods.total();
 	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("BuyAndSell"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); texta(STONEBIG, last_store->getname(), AlignCenterCenter);
 	setdialog(663, 191); button(GBTNSTD, 1, 2, 0, "Buy", 3, shop_total);
-	setdialog(663, 220); button(GBTNSTD, 1, 2, 0, "Sell", 3, player_total);
+	setdialog(663, 220); button(GBTNSTD, 1, 2, 0, "Sell", 3, player_total); fire(sell_goods);
 	if(last_store->steal_difficult) {
 		setdialog(663, 249); button(GBTNSTD, 1, 2, 0, "Steal", 3, shop_total);
 	}
@@ -164,29 +182,33 @@ static void paint_buy_sell() {
 	paint_player_goods();
 	setdialog(403, 387, 125, 20); texta(getnm("Price"), AlignRightCenter);
 	setdialog(551, 387, 80, 20); texta(str("%1i", player_total), AlignCenterCenter);
-	setdialog(692, 90, 80, 20); texta(str("%1i gp", player->coins), AlignRightCenter);
+	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(690, 123); image(gres(CONTAINER), 1, 0);
-	setdialog(663, 384); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
+}
+
+static void checkroom(storefn v, int f1, const char* id) {
+	auto allowed = last_store->is(v);
+	if(!allowed)
+		f1++;
+	image(gres(ROOMS), f1, 0);
+	caret.x -= 3; caret.y += 102;
+	button(GBTNSTD, 1, 2, 0, id, 3, allowed);
 }
 
 static void paint_inn() {
-	setdialog(136, 114); image(gres(ROOMS), 3 * 2, 0);
-	setdialog(259, 114); image(gres(ROOMS), 1 * 2, 0);
-	setdialog(136, 250); image(gres(ROOMS), 0 * 2, 0);
-	setdialog(259, 250); image(gres(ROOMS), 2 * 2, 0);
-	setdialog(133, 216); button(GBTNSTD, 1, 2);
-	setdialog(256, 216); button(GBTNSTD, 1, 2);
-	setdialog(133, 352); button(GBTNSTD, 1, 2);
-	setdialog(256, 352); button(GBTNSTD, 1, 2);
-	setdialog(134, 23, 238, 28); texta(STONEBIG, "Rooms", AlignCenterCenter);
-	setdialog(400, 23, 238, 28); texta(STONEBIG, "268435464", AlignCenterCenter);
-	setdialog(692, 90, 80, 20); texta(NORMAL, "268435465", AlignCenterCenter);
+	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("Rooms"), AlignCenterCenter);
+	setdialog(400, 23, 238, 28); texta(STONEBIG, last_store->getname(), AlignCenterCenter);
+	setdialog(141, 83, 225, 18); texta(getnm("RoomQuality"), AlignCenterCenter);
+	setdialog(136, 114); checkroom(AllowPeasantRoom, 3 * 2, "RoomPeasant");
+	setdialog(259, 114); checkroom(AllowMerchantRoom, 1 * 2, "RoomMerchant");
+	setdialog(136, 250); checkroom(AllowNobleRoom, 0 * 2, "RoomNoble");
+	setdialog(259, 250); checkroom(AllowRoyalRoom, 2 * 2, "RoomRoyal");
+	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(663, 123); button(GBTNSTD, 1, 2);
 	setdialog(404, 82, 209, 325); texta(NORMAL, "", AlignCenterCenter);
 	//Scroll GBTNSCRL 625 81 12 327 frames(1 0 3 2 4 5)
-	setdialog(285, 387, 80, 20); texta(NORMAL, "268435469", AlignCenterCenter);
-	setdialog(138, 387, 125, 20); texta(NORMAL, "Cost", AlignCenterCenter);
-	setdialog(141, 83, 225, 18); texta(NORMAL, "Room Quality", AlignCenterCenter);
+	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
+	setdialog(285, 387, 80, 20); texta("268435469", AlignCenterCenter);
 }
 
 static void paint_store() {
@@ -198,6 +220,7 @@ static void paint_store() {
 	case AllowPeasantRoom: paint_inn(); break;
 	default: paint_buy_sell(); break;
 	}
+	setdialog(663, 384); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
 	paint_action_panel_player();
 	paint_game_panel(false);
 }

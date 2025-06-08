@@ -123,3 +123,11 @@ bool item::canequip(wearn v) const {
 		return geti().wear == v;
 	}
 }
+
+void item::setcount(int v) {
+	if(v <= 0)
+		v = 0;
+	count = v;
+	if(!count)
+		clear();
+}

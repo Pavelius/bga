@@ -72,6 +72,7 @@ struct item {
 	void			getinfo(stringbuilder& sb) const;
 	const char*		getname() const;
 	int				getweight() const { return count * geti().weight; }
+	void			setcount(int v);
 };
 extern item* last_item;
 extern item* party_item;
