@@ -14,7 +14,7 @@ static array dynamic_headers(sizeof(residi));
 
 BSDATA(residi) = {
 	{"NONE"},
-	{"STONEBIG", font}, {"REALMS", font}, {"NORMAL", font}, {"TOOLFONT", font},
+	{"STONEBIG", font}, {"REALMS", font}, {"NORMAL", font}, {"TOOLFONT", font}, {"NUMBER", font},
 	{"CURSORS", root}, {"CURSARW", root}, {"COLGRAD", root}, {"COLOR", root},
 	{"GACTN", root},
 	{"GBTNBFRM", root}, {"GBTNJBTN", root}, {"GBTNLRG", root}, {"GBTNMED", root}, {"GBTNMED2", root}, {"GBTNMINS", root}, {"GBTNPLUS", root}, {"GBTNOPT1", root}, {"GBTNOPT2", root},

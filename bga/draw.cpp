@@ -37,7 +37,7 @@ color				draw::fore;
 color				draw::fore_stroke;
 int					draw::width, draw::height, draw::dialog_width = 500;
 extern int			draw::fsize = 32;
-bool				draw::text_clipped, draw::control_hilited;
+bool				draw::control_hilited;
 const sprite*		draw::font;
 double				draw::linw = 1.0;
 color*				draw::palt;
@@ -53,9 +53,6 @@ static draw::surface default_surface;
 draw::surface*		draw::canvas = &default_surface;
 point				draw::caret, draw::camera, draw::tips_caret, draw::tips_size;
 bool			    line_antialiasing = true;
-// Drag
-static const void*	drag_object;
-point				draw::dragmouse;
 // Metrics
 sprite*				metrics::font;
 sprite*				metrics::h1;
@@ -960,28 +957,6 @@ static void cpy32t(unsigned char* d, int d_scan, unsigned char* s, int s_scan, i
 	} while(--height);
 }
 
-void draw::dragbegin(const void* p) {
-	drag_object = p;
-	dragmouse = hot.mouse;
-}
-
-bool draw::dragactive() {
-	return drag_object != 0;
-}
-
-bool draw::dragactive(const void* p) {
-	if(drag_object == p) {
-		if(!hot.pressed || hot.key == KeyEscape) {
-			drag_object = 0;
-			hot.key = InputUpdate;
-			hot.cursor = cursor::Arrow;
-			return false;
-		}
-		return true;
-	}
-	return false;
-}
-
 int draw::getbpp() {
 	return canvas ? canvas->bpp : 1;
 }
@@ -1409,8 +1384,6 @@ bool draw::ishilite(const rect& rc) {
 	if(hot.key == InputNoUpdate)
 		return false;
 	intersect_rect(sys_static_area, rc);
-	if(dragactive())
-		return false;
 	if(!hot.mouse.in(clipping))
 		return false;
 	if(hot.mouse.in(rc)) {
@@ -1578,45 +1551,10 @@ void draw::text(const char* string, int count, unsigned flags) {
 	caret = push_caret;
 }
 
-/*void draw::text(int x, int y, const char* string, int count, unsigned flags, int maximum_width, bool* clipped) {
-	if(clipped)
-		*clipped = false;
-	if(!font)
-		return;
-	auto dy = texth();
-	if(y >= clipping.y2 || y + dy < clipping.y1)
-		return;
-	if(count == -1)
-		count = zlen(string);
-	const char *s1 = string;
-	const char *s2 = string + count;
-	auto x2 = x + maximum_width - textw('.') * 3;
-	while(s1 < s2) {
-		int sm = szget(&s1);
-		auto x1 = x + textw(sm);
-		if(x1 >= x2) {
-			text(x, y, "...", -1, flags);
-			if(clipped)
-				*clipped = true;
-			break;
-		}
-		if(sm >= 0x21)
-			glyph(x, y, sm, flags);
-		x = x1;
-	}
-}*/
-
-void draw::textc(const char* string, int count, unsigned flags) {
-	auto push_clip = clipping;
-	setclip({caret.x, caret.y, caret.x + width, caret.y + texth()});
-	auto w = textw(string, count);
-	text_clipped = w > width;
-	auto push_caret = caret;
-	caret.x = aligned(caret.x, width, flags, w);
-	text(string, count, flags);
-	caret = push_caret;
+void draw::textac(const char* string, unsigned flags) {
+	auto push_clip = clipping; setclipall();
+	texta(string, flags);
 	clipping = push_clip;
-	caret.y += texth();
 }
 
 int draw::textbc(const char* string, int width) {

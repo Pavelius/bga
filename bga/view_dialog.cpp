@@ -546,6 +546,28 @@ static void layer(color v, unsigned char a = 32) {
 	fore = push_fore;
 }
 
+static void paint_number(int v) {
+	unsigned char result[16];
+	auto p = gres(NUMBER);
+	auto m = 0;
+	if(!v)
+		result[0] = 0;
+	else {
+		while(v) {
+			auto n = v % 10;
+			result[m++] = n;
+			v /= 10;
+		}
+	}
+	auto push_caret = caret;
+	for(auto i = m - 1; i >= 0; i--) {
+		auto& f = p->get(result[i]);
+		image(p, result[i], 0);
+		caret.x += f.sx;
+	}
+	caret = push_caret;
+}
+
 void paint_item(const item* pi) {
 	if(!pi)
 		return;
@@ -556,6 +578,10 @@ void paint_item(const item* pi) {
 	image(gres(ITEMS), pi->geti().avatar * 2, 0);
 	if(button_hilited && hot.key == MouseRight && !hot.pressed)
 		execute(open_item_description, 0, 0, pi);
+	if(pi->count > 1) {
+		caret.x += 20; caret.y += 24;
+		paint_number(pi->count);
+	}
 }
 
 static void set_drag_item_cursor() {

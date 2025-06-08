@@ -163,7 +163,7 @@ extern point			hilite_position;
 extern int				hilite_size;
 extern unsigned char    alpha;
 extern int				width, height, fsize, dialog_width;
-extern bool				text_clipped, control_hilited;
+extern bool				control_hilited;
 extern const sprite*	font; // Currently selected font
 extern double			linw;
 extern stringbuilder	tips_sb;
@@ -197,9 +197,6 @@ void					blit(surface& dest, int x, int y, int width, int height, unsigned flags
 void					circle(int size);
 void					circlef(int size);
 void					create(int x, int y, int width, int height, unsigned flags, int bpp);
-bool					dragactive(const void* p);
-bool					dragactive();
-void					dragbegin(const void* p);
 void					execute(fnevent proc, long value = 0, long value2 = 0, const void* object = 0);
 void					fhexagon();
 void					fillform();
@@ -260,8 +257,8 @@ void					syscursor(bool enable);
 void					text(const char* string, int count = -1, unsigned flags = 0);
 int						text(rect rc, const char* string, unsigned state = 0, int* max_width = 0);
 void					texta(const char* string, unsigned state = 0);
+void					textac(const char* string, unsigned state = 0);
 void					textas(const char* string);
-void					textc(const char* string, int count = -1, unsigned flags = 0);
 int						textbc(const char* string, int width);
 int						texte(rect rc, const char* string, unsigned flags, int i1, int i2);
 void					textf(const char* string);

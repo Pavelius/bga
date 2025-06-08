@@ -23,13 +23,13 @@ void initialize_translation();
 void initialize_store();
 void util_main();
 
-static item& citem(const char* id) {
+static item& citem(const char* id, int count = 1) {
 	static item it;
 	it.clear();
 	auto pi = bsdata<itemi>::find(id);
 	if(pi)
 		it.type = pi - bsdata<itemi>::elements;
-	it.count = 1;
+	it.count = count;
 	return it;
 }
 
@@ -58,7 +58,7 @@ static void start_main() {
 	player->additem(citem("ScaleMail"));
 	player->additem(citem("LongSwordFlaming"));
 	player->additem(citem("HalfPlate"));
-	player->additem(citem("PotionOfHealing"));
+	player->additem(citem("PotionOfHealing", 10));
 	player->additem(citem("Helm"));
 	player->additem(citem("HelmFull"));
 	player->additem(citem("LargeShield"));
