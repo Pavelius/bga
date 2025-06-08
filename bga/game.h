@@ -4,7 +4,7 @@
 #include "point.h"
 
 enum gamen : unsigned char {
-	Reputation, Progress, Rounds,
+	Reputation, Progress,
 	IdentifyCost,
 };
 struct gameni : nameable {

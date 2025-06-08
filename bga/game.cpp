@@ -65,15 +65,27 @@ void enter(const char* id, const char* location) {
 	next_scene(open_game);
 }
 
+static unsigned long get_version() {
+	unsigned long i = 0;
+	unsigned long r = sizeof(gamei)*(++i);
+	r += sizeof(areai) * (++i);
+	r += sizeof(creature) * (++i);
+	r += sizeof(itemground) * (++i);
+	r += sizeof(iteminside) * (++i);
+	r += sizeof(variable) * (++i);
+	return r;
+}
+
 static bool archive_sav(const char* url, bool write_mode) {
 	io::file file(url, write_mode ? StreamWrite : StreamRead);
 	if(!file)
 		return false;
 	archive a(file, write_mode);
+	if(!a.signature(get_version()))
+		return false;
 	a.set(map::areaname);
 	a.set(draw::camera);
 	a.set(current_game_tick);
-	//a.set(player);
 	a.set(wearable::coins);
 	a.set(bsdata<areai>::source);
 	a.set(bsdata<variable>::source);

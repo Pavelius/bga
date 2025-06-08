@@ -1268,6 +1268,17 @@ static void paint_item_description() {
 	setdialog(28, 115, 435, 299); paint_description(17, -6, 12);
 }
 
+static void paint_item_count() {
+	paint_dialog(GUIINV, 2);
+	setdialog(22, 22); paint_item(last_item);
+	setdialog(20, 90); button(GBTNSTD, 1, 2, KeyEnter, "Accept"); fire(buttonok);
+	setdialog(142, 90); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+	setdialog(222, 44); button(GBTNPLUS, 0, 1, '+');
+	setdialog(242, 44); button(GBTNMINS, 0, 1, '-');
+	setdialog(71, 22, 186, 18); texta(getnm("ChooseAmount"), AlignCenterCenter);
+	// Unlnown None 176 46 42 15
+}
+
 static void paint_cursor() {
 	auto pi = gres(cursor.id);
 	if(!pi)
@@ -1292,6 +1303,10 @@ void open_item_description() {
 	set_description("##%ItemName\n%ItemInformation");
 	open_dialog(paint_item_description, true);
 	last_item = push_last;
+}
+
+void open_item_count() {
+	open_dialog(paint_item_count, true);
 }
 
 void open_game() {

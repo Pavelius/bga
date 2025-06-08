@@ -40,6 +40,7 @@ void paint_worldmap_area();
 void paperdoll();
 long open_dialog(fnevent proc, bool faded);
 void open_dialog();
+void open_item_count();
 void open_item_description();
 void open_game();
 void open_scene();

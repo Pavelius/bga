@@ -1,5 +1,6 @@
 And: И
 AbilityStatistic: Статистика по атрибутам
+Accept: Принять
 AppTitle: Врата Балдура
 AreaMap: Карта местности
 ArmorBonus: Бонус брони
@@ -11,6 +12,7 @@ Buy: Купить
 Cancel: Отмена
 CharacterLevel: Класс персонажа (%1i уровень)
 CharacterRace: Раса персонажа
+ChooseAmount: Укажите количество
 Close: Закрыть
 Coins: Золото
 Colors: Цвета
