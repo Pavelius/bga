@@ -1,4 +1,5 @@
 #include "draw.h"
+#include "creature.h"
 #include "resid.h"
 #include "view.h"
 
@@ -84,8 +85,18 @@ static void paint_word_map() {
 	setdialog(231, 127); button(FLAG1, 0, 2);
 }
 
+static void test_animation_hit() {
+	player->setanimate(AnimateGetHit);
+}
+
+static void test_animation_hit_drop() {
+	player->setanimate(AnimateGetHitAndDrop);
+}
+
 void input_debug() {
 	switch(hot.key) {
+	case Ctrl + 'A': execute(test_animation_hit); break;
+	case Ctrl + 'Q': execute(test_animation_hit_drop); break;
 	case Ctrl + 'D': execute(open_store); break;
 	case Ctrl + 'C': execute(open_dialog, 1, 0, paint_word_map); break;
 	case Ctrl + 'I': execute(open_scene, 0, 0, util_items_list); break;

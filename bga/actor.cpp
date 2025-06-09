@@ -3,6 +3,7 @@
 #include "bsdata.h"
 #include "draw.h"
 #include "gender.h"
+#include "math.h"
 #include "rand.h"
 #include "timer.h"
 // #include "ftflag.h"
@@ -190,7 +191,13 @@ void actor::moveto(point destination) {
 }
 
 unsigned actor::getwait() const {
-	return 100;
+	return 70;
+}
+
+void actor::setreverse(animaten v) {
+	setanimate(v);
+	iswap(frame_start, frame_stop);
+	frame = frame_start;
 }
 
 void actor::nextaction() {
@@ -200,9 +207,33 @@ void actor::nextaction() {
 		if(chance(10))
 			setanimate(chance(50) ? AnimateStandLook : AnimateStandRelax);
 		break;
+	case AnimateCastFour:
+		setanimate(AnimateCastFourRelease);
+		break;
+	case AnimateCastThird:
+		setanimate(AnimateCastRelease);
+		break;
+	case AnimateCast:
+		setanimate(AnimateCastThirdRelease);
+		break;
+	case AnimateGetHitAndDrop:
+		wait(xrand(300, 1200));
+		setanimate(AnimateAgony);
+		break;
+	case AnimateAgony:
+		if(chance(20))
+			setreverse(AnimateGetUp);
+		else
+			wait(xrand(1000, 10000));
+		break;
+	case AnimateGetUp:
+	case AnimateCastFourRelease:
+	case AnimateCastThirdRelease:
+	case AnimateCastRelease:
 	case AnimateStandLook:
 	case AnimateStandRelax:
-		setanimate(AnimateStand);
+	case AnimateGetHit:
+		stop();
 		break;
 	default:
 		break;
@@ -210,13 +241,15 @@ void actor::nextaction() {
 }
 
 void actor::updateanimate() {
+	if(time_next > current_game_tick)
+		return;
+	wait(getwait());
 	if(frame == frame_stop)
 		nextaction();
 	else if(frame < frame_stop)
 		frame++;
 	else
 		frame--;
-	wait(getwait());
 }
 
 static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {

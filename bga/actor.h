@@ -45,6 +45,7 @@ struct actor : drawable, coloration, statable, classa, wearable {
 	void			moveto(point destination);
 	void			paint() const;
 	void			setanimate(animaten v) { action = v; resetframes(); }
+	void			setreverse(animaten v);
 	void			setorientation(unsigned char v) { orientation = v; }
 	void			stop();
 	void			updateanimate();
