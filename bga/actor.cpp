@@ -148,22 +148,19 @@ static unsigned get_flags(int o) {
 		return 0;
 }
 
-void actor::checkframes() {
+void actor::resetframes() {
 	sprite* ps = getsprite();
 	if(!ps)
 		return;
+	auto ff = get_flags(orientation);
 	auto pc = get_cicle(ps, action, orientation);
-	if(frame >= pc->start && frame < (pc->start + pc->count))
+	if(frame >= pc->start && frame < (pc->start + pc->count) && ff == frame_flags)
 		return;
+	frame_flags = ff;
 	frame_start = pc->start;
 	frame_stop = frame_start + pc->count - 1;
 	frame_flags = get_flags(orientation);
 	frame = frame_start;
-}
-
-void actor::setanimate(animaten v) {
-	action = v;
-	checkframes();
 }
 
 void actor::stop() {
@@ -179,6 +176,7 @@ void actor::stop() {
 
 void actor::lookat(point destination) {
 	setorientation(map::getorientation(position, destination));
+	resetframes();
 }
 
 void actor::moveto(point destination) {
@@ -195,11 +193,26 @@ unsigned actor::getwait() const {
 	return 100;
 }
 
+void actor::nextaction() {
+	resetaction();
+	switch(action) {
+	case AnimateStand:
+		if(chance(10))
+			setanimate(chance(50) ? AnimateStandLook : AnimateStandRelax);
+		break;
+	case AnimateStandLook:
+	case AnimateStandRelax:
+		setanimate(AnimateStand);
+		break;
+	default:
+		break;
+	}
+}
+
 void actor::updateanimate() {
-	if(frame == frame_stop) {
-		// Ciclic animation
-		frame = frame_start;
-	} else if(frame < frame_stop)
+	if(frame == frame_stop)
+		nextaction();
+	else if(frame < frame_stop)
 		frame++;
 	else
 		frame--;
@@ -217,6 +230,32 @@ static void painting_equipment(item equipment, int ws, int frame, unsigned flags
 static void apply_shadow(color* pallette, color fore) {
 	for(auto i = 0; i < 256; i++)
 		pallette[i] = pallette[i] * fore;
+}
+
+void paperdoll(color* pallette, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
+	sprite* source;
+	unsigned flags;
+	int ws;
+	source = gres(get_character_res(race, gender, type, get_armor_index(armor), ws));
+	if(!source)
+		return;
+	const int directions = 9;
+	int o = orientation;
+	if(o >= directions) {
+		flags = ImageMirrorH;
+		o = (9 - 1) * 2 - o;
+	} else
+		flags = 0;
+	auto frame = source->ganim(animation * directions + o, frame_tick);
+	image(source, frame, flags, pallette);
+	painting_equipment(weapon, ws, frame, flags, pallette);
+	painting_equipment(helm, ws, frame, flags, pallette);
+	painting_equipment(offhand, ws, frame, flags, pallette);
+}
+
+void paperdoll(const coloration& colors, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
+	color pallette[256]; colors.setpallette(pallette);
+	paperdoll(pallette, race, gender, type, animation, orientation, frame_tick, armor, weapon, offhand, helm);
 }
 
 void actor::paint() const {

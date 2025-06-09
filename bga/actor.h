@@ -44,15 +44,19 @@ struct actor : drawable, coloration, statable, classa, wearable {
 	void			lookat(point destination);
 	void			moveto(point destination);
 	void			paint() const;
-	void			setanimate(animaten v);
+	void			setanimate(animaten v) { action = v; resetframes(); }
 	void			setorientation(unsigned char v) { orientation = v; }
 	void			stop();
 	void			updateanimate();
 	void			wait(unsigned milliseconds);
 private:
-	void			checkframes();
+	void			nextaction();
+	void			resetaction() { frame = frame_start; }
+	void			resetframes();
 };
 
 int get_armor_index(const item& e);
 
 resn get_character_res(racen race, gendern gender, classn type, int ai, int& ws);
+
+void paperdoll(const coloration& colors, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm);

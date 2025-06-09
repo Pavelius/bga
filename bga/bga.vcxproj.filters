@@ -368,9 +368,6 @@
     <ClCompile Include="view_area.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="view_creature.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="view_list.cpp">
       <Filter>logic</Filter>
     </ClCompile>

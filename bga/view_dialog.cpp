@@ -774,6 +774,25 @@ static void quick_weapon(int index) {
 		image(gres(STONSLOT), 34, 0);
 }
 
+static void paperdoll() {
+	static int orientation = 1;
+	auto push_caret = caret;
+	caret.x += width / 2;
+	caret.y += height / 2 + 20;
+	paperdoll(*player,
+		player->race, player->gender, player->getmainclass(), 1, orientation, current_tick / 100,
+		player->wears[Body], player->getweapon(), player->getoffhand(), player->wears[Head]);
+	caret = push_caret;
+	switch(hot.key) {
+	case KeyLeft:
+		execute(cbsetint, (orientation >= 15) ? 0 : orientation + 1, 0, &orientation);
+		break;
+	case KeyRight:
+		execute(cbsetint, (orientation <= 0) ? 15 : orientation - 1, 0, &orientation);
+		break;
+	}
+}
+
 static void paperdoll_dragable() {
 	button_check(0);
 	paperdoll();

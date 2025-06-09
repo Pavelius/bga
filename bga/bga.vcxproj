@@ -131,7 +131,6 @@
     <ClCompile Include="variable.cpp" />
     <ClCompile Include="variant.cpp" />
     <ClCompile Include="view_area.cpp" />
-    <ClCompile Include="view_creature.cpp" />
     <ClCompile Include="view_dialog.cpp" />
     <ClCompile Include="view_list.cpp" />
     <ClCompile Include="view_store.cpp" />
