@@ -1,10 +1,12 @@
-#include "collection.h"
+#include "adat.h"
 #include "point.h"
 
 #pragma once
 
 extern rect last_screen, last_area;
 extern struct drawable* hilite_drawable;
+
+enum rendern : unsigned char;
 
 struct drawable {
 	point			position;
@@ -14,5 +16,7 @@ struct drawable {
 	bool			ishilite() const { return this == hilite_drawable; };
 	void			setposition(point v) { position = v; }
 };
-extern collection<drawable> objects;
+typedef adat<drawable*, 512> drawablea;
+extern drawablea objects;
+
 bool inside(point t, point* points, int count);

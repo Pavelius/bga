@@ -1,3 +1,4 @@
+#include "bsdata.h"
 #include "draw.h"
 #include "floattext.h"
 #include "timer.h"

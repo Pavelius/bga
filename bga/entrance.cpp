@@ -1,3 +1,4 @@
+#include "bsdata.h"
 #include "entrance.h"
 #include "stringbuilder.h"
 

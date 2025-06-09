@@ -4,7 +4,7 @@
 #include "region.h"
 #include "screenshoot.h"
 
-collection<drawable> objects;
+drawablea objects;
 rect last_screen, last_area;
 drawable* hilite_drawable;
 

@@ -19,6 +19,12 @@
 
 using namespace draw;
 
+struct renderi {
+	const array&	source;
+	int				priority;
+	rendern			getindex() const;
+};
+
 static worldmapi::area* current_world_area_hilite;
 
 void paperdoll(color* pallette, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm);
@@ -28,6 +34,10 @@ const int tile_size = 64;
 
 static point hotspot;
 static int zoom_factor = 1;
+
+rendern	renderi::getindex() const {
+	return (rendern)(this - bsdata<renderi>::elements);
+}
 
 static unsigned get_game_tick() {
 	return current_tick / 64;
@@ -82,6 +92,48 @@ static void paint_tiles() {
 		}
 		ty++;
 	}
+}
+
+static void paint_block_area() {
+	static bool show;
+	if(hot.key == Ctrl + 'B')
+		show = !show;
+	if(!show)
+		return;
+	int tx0 = camera.x / 16, ty0 = camera.y / 12;
+	int tx1 = tx0 + width / 16 + 1, ty1 = ty0 + height / 12 + 1;
+	if(tx1 > area_width - 1)
+		tx1 = area_width - 1;
+	if(ty1 > area_height - 1)
+		ty1 = area_height - 1;
+	
+	width = 16 - 2; height = 12 - 2;
+	pushfore push_fore(colors::black);
+	auto push_alpha = alpha; alpha = 128;
+	for(auto ty = ty0; ty < ty1; ty++) {
+		for(auto tx = tx0; tx < tx1; tx++) {
+			caret.x = tx * 16 - camera.x + 1;
+			caret.y = ty * 12 - camera.y + 1;
+			if(is_block(m2i(tx, ty)))
+				rectf();
+		}
+	}
+	alpha = push_alpha;
+	fore = colors::red;
+	point pt = point(hotspot.x / 16, hotspot.y / 12);
+	caret.x = pt.x * 16 - camera.x;
+	caret.y = pt.y * 12 - camera.y;
+	width++; height++;
+	rectb();
+	fore = colors::white;
+	auto index = m2i(pt.x, pt.y);
+	auto blocked = is_block(index);
+	char temp[512]; stringbuilder sb(temp);
+	sb.add("%1i, %2i index = %3i", pt.x, pt.y, index);
+	sb.adds("(spot %1i, %2i)", hotspot.x, hotspot.y);
+	if(is_block(index))
+		sb.adds("blocked");
+	setcaret(4, 410); text(temp);
 }
 
 static point camera_center() {
@@ -386,14 +438,14 @@ static void apply_hilite_command() {
 }
 
 static void jump_party() {
-	setparty(hotspot);
+	setparty(hot.param);
 }
 
 static void apply_command() {
 	if(hilite_drawable)
 		return;
 	if(hot.key == MouseLeft && hot.pressed && hot.mouse.in(last_screen))
-		execute(jump_party);
+		execute(jump_party, hotspot);
 }
 
 static void paint_area_map() {
@@ -401,6 +453,9 @@ static void paint_area_map() {
 	setup_visible_area();
 	set_standart_cursor();
 	paint_tiles();
+#ifdef _DEBUG
+	paint_block_area();
+#endif // _DEBUG
 	prepare_objects();
 	sort_objects();
 	paint_objects();
@@ -558,3 +613,14 @@ void paint_worldmap_area() {
 	caret = push_caret;
 	clipping = push_clip;
 }
+
+// TODO: Render concept
+BSDATA(renderi) = {
+	{bsdata<animation>::source},
+	{bsdata<creature>::source},
+	{bsdata<door>::source},
+	{bsdata<region>::source},
+	{bsdata<container>::source},
+	{bsdata<floattext>::source},
+};
+BSDATAF(renderi)

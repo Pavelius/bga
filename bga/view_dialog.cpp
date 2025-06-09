@@ -548,7 +548,7 @@ void paint_action_panel_na() {
 	input_disabled = push_input;
 }
 
-static void layer(color v, unsigned char a = 32) {
+void layer(color v, unsigned char a = 32) {
 	auto push_alpha = alpha; alpha = a;
 	auto push_fore = fore; fore = v;
 	rectf();

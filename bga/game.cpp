@@ -26,8 +26,9 @@ static void use_all_doors() {
 		e.use(e.isopen());
 }
 
-point get_free(point dst, point src, formationn formation, int index) {
-	return get_free(get_formation(dst, src, formation, index), 1);
+static point get_free(point dst, point src, formationn formation, int index, int size) {
+	auto v = get_formation(dst, src, formation, index);
+	return get_free(v, size);
 }
 
 void setparty(point dst) {
@@ -39,7 +40,7 @@ void setparty(point dst) {
 	for(auto p : party_selected) {
 		if(!p)
 			continue;
-		auto new_position = get_free(dst, start_position, FormationProtect, index++);
+		auto new_position = get_free(dst, start_position, FormationProtect, index++, p->getsize());
 		p->area_index = current_area;
 		p->lookat(new_position);
 		p->setposition(new_position);

@@ -114,18 +114,6 @@ unsigned char get_look(point s, point d) {
 	return orientations_7b7[(ay + (osize / 2)) * osize + ax + (osize / 2)];
 }
 
-point s2a(point v, int size) {
-	return point(v.y + 6 * size, v.x + 8 * size);
-}
-
-point a2s(point v, int size) {
-	return point(v.y - 6 * size, v.x - 8 * size);
-}
-
-//point map::getposition(short unsigned index, int size) {
-//	return{(short)((index & 0xFF) * 16 + 8), (short)((((unsigned)index) >> 8) * 12 + 6)};
-//}
-
 color get_shadow(point v) {
 	return area_light_pallette[area_light[s2i(v)]];
 }
@@ -254,7 +242,7 @@ const sprite* get_area_sprites() {
 point get_free(point position, int size) {
 	int i = s2i(a2s(position, size));
 	if(!is_block(i, size))
-		return position;
+		return s2a(i2s(i), size);
 	return s2a(i2s(get_free_index(i, 1, size)), size);
 }
 
