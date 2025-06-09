@@ -52,9 +52,9 @@ void setcamera(point v) {
 }
 
 static void actor_marker(int size, bool flicking, bool double_border) {
-	auto r = (size + 1) * 6;
+	auto r = size * 6;
 	if(flicking)
-		r += iabs(int(get_game_tick() % 6) - 3) - 1;
+		r += iabs(int((current_tick / 100) % 6) - 3) - 1;
 	circle(r);
 	if(double_border)
 		circle(r + 1);
@@ -267,20 +267,16 @@ static void apply_shadow(color* pallette, color fore) {
 
 static void paint_markers(const creature* p) {
 	auto push_fore = fore;
-	fore = colors::green;
-	if(p->isselected())
-		actor_marker(1, false, player == p);
+	if(p->isselected()) {
+		fore = colors::green;
+		actor_marker(p->getsize(), false, player == p);
+	}
 	fore = push_fore;
 }
 
 void creature::paint() const {
 	paint_markers(this);
 	actor::paint();
-	//color pallette[256]; setpallette(pallette);
-	//apply_shadow(pallette, map::get_shadow(position));
-	//paperdoll(pallette,
-	//	race, gender, getmainclass(), 1, orientation, get_game_tick(),
-	//	wears[Body], getweapon(), getoffhand(), wears[Head]);
 }
 
 void animation::paint() const {

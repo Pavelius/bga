@@ -39,7 +39,7 @@ struct actor : drawable, coloration, statable, classa, wearable {
 	gendern			gender;
 	void			animateattack(drawable* target);
 	void			animatedamage();
-	int				getsize() const { return 1; }
+	int				getsize() const { return 2; }
 	point			getlu() const;
 	bool			ispresent() const;
 	void			lookat(point destination);
