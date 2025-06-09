@@ -1,5 +1,4 @@
 #include "actor.h"
-#include "actable.h"
 #include "collection.h"
 #include "portrait.h"
 #include "spell.h"
@@ -14,12 +13,14 @@ struct creature : actor, avatarable, spellv {
 	alignmentn		alignment;
 	dietyn			diety;
 	short			hp, hp_max;
+	short unsigned	name;
 	unsigned		experience;
 	void			select();
 	void			clear();
 	static void		create(gendern gender);
 	static void		create(racen race, gendern gender, classn classv, unsigned short portrait);
 	short unsigned	getindex() const;
+	const char*		getname() const { return "Pavelius"; }
 	int				getspellslots(classn type, int spell_level) const;
 	bool			isclass(skilln v) const;
 	bool			isparty() const;

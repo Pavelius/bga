@@ -82,10 +82,20 @@ void texta(resn res, color fore, const char* string, unsigned flags) {
 	texta(res, string, flags);
 }
 
+static void update_actor_animations() {
+	for(auto& e : bsdata<creature>()) {
+		if(!e.ispresent())
+			continue;
+		e.updateanimate();
+	}
+}
+
 static void update_frames() {
 	update_tick();
-	if(!game_pause)
+	if(!game_pause) {
 		update_game_tick();
+		update_actor_animations();
+	}
 }
 
 void set_description(const char* id) {

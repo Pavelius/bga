@@ -48,6 +48,7 @@ static void apply_portraits() {
 static void finish() {
 	player->update();
 	player->hp = player->hp_max;
+	player->stop();
 }
 
 template<> void fnscript<abilityi>(int value, int counter) {

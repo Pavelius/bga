@@ -36,6 +36,7 @@
     <Text Include="..\locale\ru\UnknownNames.txt" />
     <Text Include="..\rules\Advance.txt" />
     <Text Include="..\rules\Calendar.txt" />
+    <Text Include="..\rules\Characters.txt" />
     <Text Include="..\rules\Classes.txt" />
     <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Basic.txt" />
@@ -121,7 +122,6 @@
     <ClCompile Include="spell.cpp" />
     <ClCompile Include="sprite_util.cpp" />
     <ClCompile Include="store.cpp" />
-    <ClCompile Include="actable.cpp" />
     <ClCompile Include="stringbuilder.cpp" />
     <ClCompile Include="stringvar.cpp" />
     <ClCompile Include="surface_serial.cpp" />
@@ -146,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h" />
-    <ClInclude Include="actable.h" />
     <ClInclude Include="actor.h" />
     <ClInclude Include="adat.h" />
     <ClInclude Include="advance.h" />

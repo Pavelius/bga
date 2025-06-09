@@ -9,68 +9,8 @@
 #include "math.h"
 #include "resid.h"
 #include "timer.h"
-#include "view.h"
 
 using namespace draw;
-
-static resn getanimation(racen race, gendern gender, classn type, int ai, int& ws) {
-	resn icn;
-	switch(race) {
-	case Dwarf:
-	case Gnome:
-		icn = CDMB1;
-		ws = 0;
-		break;
-	case Elf:
-	case HalfElf:
-		if(gender == Female)
-			icn = CEFB1;
-		else
-			icn = CEMB1;
-		ws = 2;
-		break;
-	case Halfling:
-		if(gender == Female)
-			icn = CIFB1;
-		else
-			icn = CIMB1;
-		if(type == Wizard || type == Sorcerer)
-			type = Rogue;
-		if(ai > 1)
-			ai = 1;
-		ws = 0;
-		break;
-	default:
-		if(gender == Female) {
-			ws = 1;
-			icn = CHFB1;
-		} else {
-			ws = 3;
-			icn = CHMB1;
-		}
-		break;
-	}
-	if(type == Wizard || type == Sorcerer)
-		icn = (resn)(icn + (CDMW1 - CDMB1) + ai);
-	else if(type == Cleric)
-		icn = (resn)(icn + ai);
-	else if(type == Rogue && ai)
-		icn = (resn)(icn + (CDMT1 - CDMB1));
-	else {
-		if(ai == 3)
-			icn = (resn)(icn + 4);
-		else
-			icn = (resn)(icn + ai);
-	}
-	return icn;
-}
-
-static int getarmorindex(const item& e) {
-	auto v = e.geti().required;
-	if(v.iskind<abilityi>() && v.value == ArmorProficiency)
-		return v.counter;
-	return 0;
-}
 
 static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {
 	if(!equipment)
@@ -84,7 +24,7 @@ void paperdoll(color* pallette, racen race, gendern gender, classn type, int ani
 	sprite* source;
 	unsigned flags;
 	int ws;
-	source = gres(getanimation(race, gender, type, getarmorindex(armor), ws));
+	source = gres(get_character_res(race, gender, type, get_armor_index(armor), ws));
 	if(!source)
 		return;
 	const int directions = 9;

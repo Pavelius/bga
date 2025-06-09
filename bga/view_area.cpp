@@ -163,7 +163,7 @@ static void update_floattext_tail() {
 
 static void prepare_creatures() {
 	for(auto& e : bsdata<creature>()) {
-		if(e.area_index != current_area)
+		if(!e.ispresent())
 			continue;
 		if(!e.position.in(last_area))
 			continue;
@@ -276,11 +276,12 @@ static void paint_markers(const creature* p) {
 
 void creature::paint() const {
 	paint_markers(this);
-	color pallette[256]; setpallette(pallette);
-	apply_shadow(pallette, map::getshadow(position));
-	paperdoll(pallette,
-		race, gender, getmainclass(), 1, orientation, get_game_tick(),
-		wears[Body], getweapon(), getoffhand(), wears[Head]);
+	actor::paint();
+	//color pallette[256]; setpallette(pallette);
+	//apply_shadow(pallette, map::getshadow(position));
+	//paperdoll(pallette,
+	//	race, gender, getmainclass(), 1, orientation, get_game_tick(),
+	//	wears[Body], getweapon(), getoffhand(), wears[Head]);
 }
 
 void animation::paint() const {
@@ -439,7 +440,6 @@ static void paint_area_map_zoomed() {
 }
 
 void paint_area() {
-	update_game_tick();
 	paint_area_map_zoomed();
 	apply_shifer();
 }

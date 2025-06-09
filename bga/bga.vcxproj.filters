@@ -108,6 +108,9 @@
     <Text Include="..\locale\ru\Classes.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\rules\Characters.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -350,9 +353,6 @@
     <ClCompile Include="locale.cpp">
       <Filter>support</Filter>
     </ClCompile>
-    <ClCompile Include="actable.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="array.cpp">
       <Filter>support</Filter>
     </ClCompile>
@@ -501,9 +501,6 @@
     </ClInclude>
     <ClInclude Include="collection.h">
       <Filter>support</Filter>
-    </ClInclude>
-    <ClInclude Include="actable.h">
-      <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="map.h">
       <Filter>logic</Filter>

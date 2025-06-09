@@ -17,6 +17,7 @@
 #include "itemground.h"
 #include "list.h"
 #include "modifier.h"
+#include "npc.h"
 #include "portrait.h"
 #include "race.h"
 #include "region.h"
@@ -129,6 +130,9 @@ BSMETA(magici) = {
 	BSREQ(id),
 	{}};
 BSMETA(modifieri) = {
+	BSREQ(id),
+	{}};
+BSMETA(npci) = {
 	BSREQ(id),
 	{}};
 BSMETA(periodi) = {

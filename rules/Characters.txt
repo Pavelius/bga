@@ -1,0 +1,14 @@
+#NPC
+
+HumanMale
+HumanFemale
+DwarfMale
+DwarfFemale
+ElfMale
+ElfFemale
+HalfElfMale
+HalfElfFemale
+HalfOrcMale
+HalfOrcFemale
+HalflingMale
+HalflingFemale
