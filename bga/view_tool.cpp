@@ -86,11 +86,11 @@ static void paint_word_map() {
 }
 
 static void test_animation_hit() {
-	player->setanimate(AnimateGetHit);
+	player->animateattack();
 }
 
 static void test_animation_hit_drop() {
-	player->setanimate(AnimateGetHitAndDrop);
+	player->animatedamage();
 }
 
 void input_debug() {

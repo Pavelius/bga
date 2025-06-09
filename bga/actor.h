@@ -37,23 +37,25 @@ struct actor : drawable, coloration, statable, classa, wearable {
 	unsigned short	npc;
 	racen			race;
 	gendern			gender;
-	sprite*			getsprite(int& ws) const;
-	sprite*			getsprite() const { int ws; return getsprite(ws); }
-	unsigned		getwait() const;
+	void			animateattack();
+	void			animatedamage();
 	bool			ispresent() const;
 	void			lookat(point destination);
 	void			moveto(point destination);
 	void			paint() const;
-	void			setanimate(animaten v) { action = v; resetframes(); }
-	void			setreverse(animaten v);
 	void			setorientation(unsigned char v) { orientation = v; }
 	void			stop();
 	void			updateanimate();
-	void			wait(unsigned milliseconds);
 private:
+	sprite*			getsprite(int& ws) const;
+	sprite*			getsprite() const { int ws; return getsprite(ws); }
+	unsigned		getwait() const;
 	void			nextaction();
 	void			resetaction() { frame = frame_start; }
 	void			resetframes();
+	void			setanimate(animaten v) { action = v; resetframes(); }
+	void			setreverse(animaten v);
+	void			wait(unsigned milliseconds);
 };
 
 int get_armor_index(const item& e);

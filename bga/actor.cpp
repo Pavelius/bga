@@ -172,7 +172,7 @@ void actor::stop() {
 			setanimate(AnimateCombatStance);
 	} else
 		setanimate(AnimateStand);
-	wait(xrand(0, 500));
+	// wait(xrand(0, 500));
 }
 
 void actor::lookat(point destination) {
@@ -226,6 +226,10 @@ void actor::nextaction() {
 		else
 			wait(xrand(1000, 10000));
 		break;
+	case AnimateMeleeOneHanded: case AnimateMeleeOneHandedSwing: case AnimateMeleeOneHandedThrust:
+	case AnimateMeleeTwoHanded: case AnimateMeleeTwoHandedSwing: case AnimateMeleeTwoHandedThrust:
+	case AnimateMeleeTwoWeapon: case AnimateMeleeTwoWeaponSwing: case AnimateMeleeTwoWeaponThrust:
+	case AnimateShootBow: case AnimateShootSling: case AnimateShootXBow:
 	case AnimateGetUp:
 	case AnimateCastFourRelease:
 	case AnimateCastThirdRelease:
@@ -302,4 +306,19 @@ void actor::paint() const {
 	painting_equipment(getweapon(), ws, frame, frame_flags, pallette);
 	painting_equipment(wears[Head], ws, frame, frame_flags, pallette);
 	painting_equipment(getoffhand(), ws, frame, frame_flags, pallette);
+}
+
+void actor::animateattack() {
+	auto& w = getweapon();
+	auto n = xrand(0, 2);
+	if(getoffhand().isweapon())
+		setanimate((animaten)(AnimateMeleeTwoWeapon + n));
+	else if(w.is(TwoHanded))
+		setanimate((animaten)(AnimateMeleeTwoHanded + n));
+	else
+		setanimate((animaten)(AnimateMeleeOneHanded + n));
+}
+
+void actor::animatedamage() {
+	setanimate(AnimateGetHit);
 }
