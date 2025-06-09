@@ -4,6 +4,7 @@
 #include "draw.h"
 #include "gender.h"
 #include "math.h"
+#include "npc.h"
 #include "rand.h"
 #include "timer.h"
 // #include "ftflag.h"
@@ -120,11 +121,16 @@ static animaten common(animaten v) {
 	}
 }
 
+npci* actor::getnpc() const {
+	return (npc == 0xFFFF) ? 0 : bsdata<npci>::elements + npc;
+}
+
 sprite* actor::getsprite(int& ws) const {
-	if(npc == 0xFFFF)
+	auto npc = getnpc();
+	if(!npc)
 		return gres(get_character_res(race, gender, getmainclass(), get_armor_index(wears[Body]), ws));
 	else
-		return 0;
+		return npc->getres(0);
 }
 
 void actor::wait(unsigned milliseconds) {

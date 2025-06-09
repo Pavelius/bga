@@ -108,7 +108,7 @@
     <Text Include="..\locale\ru\Classes.txt">
       <Filter>locale</Filter>
     </Text>
-    <Text Include="..\rules\Characters.txt">
+    <Text Include="..\rules\Monsters.txt">
       <Filter>rules</Filter>
     </Text>
   </ItemGroup>
@@ -393,6 +393,9 @@
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="direction.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="npc.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>

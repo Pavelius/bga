@@ -1,17 +1,21 @@
 #pragma once
 
+#include "ability.h"
 #include "coloration.h"
 #include "class.h"
 #include "nameable.h"
 
+struct sprite;
+
 enum alignmentn : unsigned char;
 enum gendern : unsigned char;
 enum dietyn : unsigned char;
-enum resn : unsigned short;
 
-struct npci : nameable, classa, coloration {
+struct npci : nameable, classa, coloration, statable {
 	gendern		gender;
 	alignmentn	alignment;
 	dietyn		diety;
-	resn		res[4]; // Resources with overlays
+	const char*	res[3]; // Resources
+	sprite*		sprites[3]; // Loaded resources
+	sprite*		getres(int n);
 };

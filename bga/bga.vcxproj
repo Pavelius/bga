@@ -36,7 +36,7 @@
     <Text Include="..\locale\ru\UnknownNames.txt" />
     <Text Include="..\rules\Advance.txt" />
     <Text Include="..\rules\Calendar.txt" />
-    <Text Include="..\rules\Characters.txt" />
+    <Text Include="..\rules\Monsters.txt" />
     <Text Include="..\rules\Classes.txt" />
     <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Basic.txt" />
@@ -108,6 +108,7 @@
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="nameable.cpp" />
+    <ClCompile Include="npc.cpp" />
     <ClCompile Include="order.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="portrait.cpp" />

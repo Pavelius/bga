@@ -2,13 +2,14 @@
 #include "class.h"
 #include "coloration.h"
 #include "drawable.h"
-#include "npc.h"
+//#include "npc.h"
 #include "race.h"
 #include "wearable.h"
 
 #pragma once
 
 struct sprite;
+struct npci;
 
 enum animaten : unsigned char {
 	AnimateMove,
@@ -26,6 +27,8 @@ enum animaten : unsigned char {
 	AnimateCastThird, AnimateCastThirdRelease,
 	AnimateCastFour, AnimateCastFourRelease
 };
+enum gendern : unsigned char;
+
 struct actor : drawable, coloration, statable, classa, wearable {
 	point			move_postiion;
 	animaten		action;
@@ -41,6 +44,7 @@ struct actor : drawable, coloration, statable, classa, wearable {
 	void			animatedamage();
 	int				getsize() const { return 1; }
 	point			getlu() const;
+	npci*			getnpc() const; // Monster and other template characters.
 	bool			ispresent() const;
 	void			lookat(point destination);
 	void			moveto(point destination);

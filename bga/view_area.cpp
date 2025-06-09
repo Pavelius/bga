@@ -332,7 +332,7 @@ void creature::paint() const {
 }
 
 void animation::paint() const {
-	auto pr = gres(this->rsname, "art/animations");
+	auto pr = gres(rsname, "art/animations");
 	if(!pr)
 		return;
 	auto hour = gethour();
