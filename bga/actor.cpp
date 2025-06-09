@@ -178,7 +178,7 @@ void actor::lookat(point destination) {
 void actor::moveto(point destination) {
 	if(destination == position)
 		return;
-	auto new_position = get_free(destination, 1);
+	auto new_position = get_free(destination, getsize());
 	area_index = current_area;
 	lookat(new_position);
 	setposition(new_position);
@@ -301,13 +301,17 @@ void paperdoll(const coloration& colors, racen race, gendern gender, classn type
 	paperdoll(pallette, race, gender, type, animation, orientation, frame_tick, armor, weapon, offhand, helm);
 }
 
+point actor::getlu() const {
+	return a2s(position, getsize());
+}
+
 void actor::paint() const {
 	int ws;
 	auto ps = getsprite(ws);
 	if(!ps)
 		return;
 	color pallette[256]; setpallette(pallette);
-	apply_shadow(pallette, get_shadow(position));
+	apply_shadow(pallette, get_shadow(getlu()));
 	image(ps, frame, frame_flags, pallette);
 	painting_equipment(getweapon(), ws, frame, frame_flags, pallette);
 	painting_equipment(wears[Head], ws, frame, frame_flags, pallette);

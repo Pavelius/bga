@@ -77,7 +77,7 @@ static void paint_tiles() {
 		while(tx <= tx1) {
 			auto x = tx * tile_size - camera.x;
 			auto y = ty * tile_size - camera.y;
-			draw::image(x, y, sp, map::gettile(ty * 64 + tx), 0);
+			draw::image(x, y, sp, area_tiles[ty * 64 + tx], 0);
 			tx++;
 		}
 		ty++;

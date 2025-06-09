@@ -15,6 +15,7 @@
 #include "region.h"
 
 char area_name[12];
+color area_light_pallette[256];
 unsigned char area_zmap[256 * 256];
 unsigned char area_state[256 * 256];
 unsigned char area_light[256 * 256];
@@ -25,9 +26,8 @@ static unsigned short path_stack[256 * 256];
 
 unsigned short current_area;
 
-static sprite* sprites;
-static sprite* sprites_minimap;
-static color lightpal[256];
+static sprite* area_sprites;
+static sprite* area_minimap_sprites;
 
 static const unsigned char orientations_5b5[25] = {
 	6, 7, 8, 9, 10,
@@ -72,25 +72,21 @@ areai* areai::find(const char* name, const char* folder) {
 	return 0;
 }
 
-color* map::getpallette() {
-	return lightpal;
-}
-
 void clear_area() {
-	if(sprites) {
-		delete sprites;
-		sprites = 0;
+	if(area_sprites) {
+		delete area_sprites;
+		area_sprites = 0;
 	}
-	if(sprites_minimap) {
-		delete sprites_minimap;
-		sprites_minimap = 0;
+	if(area_minimap_sprites) {
+		delete area_minimap_sprites;
+		area_minimap_sprites = 0;
 	}
 	area_height = area_width = area_height_tiles = 0;
 	memset(area_tiles, 0, sizeof(area_tiles));
 	memset(area_zmap, 0, sizeof(area_zmap));
 	memset(area_state, 0, sizeof(area_state));
 	memset(area_light, 0, sizeof(area_light));
-	memset(lightpal, 0, sizeof(lightpal));
+	memset(area_light_pallette, 0, sizeof(area_light_pallette));
 	bsdata<animation>::source.clear();
 	bsdata<container>::source.clear();
 	bsdata<door>::source.clear();
@@ -118,10 +114,6 @@ unsigned char get_look(point s, point d) {
 	return orientations_7b7[(ay + (osize / 2)) * osize + ax + (osize / 2)];
 }
 
-unsigned short s2i(point v) {
-	return (v.y / 12) * 256 + v.x / 16;
-}
-
 point s2a(point v, int size) {
 	return point(v.y + 6 * size, v.x + 8 * size);
 }
@@ -130,20 +122,12 @@ point a2s(point v, int size) {
 	return point(v.y - 6 * size, v.x - 8 * size);
 }
 
-unsigned short s2i(point v, int size) {
-	return (v.y / 12) * 256 + v.x / 16;
-}
-
-point map::getposition(short unsigned index, int size) {
-	return{(short)((index & 0xFF) * 16 + 8), (short)((((unsigned)index) >> 8) * 12 + 6)};
-}
+//point map::getposition(short unsigned index, int size) {
+//	return{(short)((index & 0xFF) * 16 + 8), (short)((((unsigned)index) >> 8) * 12 + 6)};
+//}
 
 color get_shadow(point v) {
-	return lightpal[area_light[s2i(v)]];
-}
-
-unsigned char get_state(short unsigned index) {
-	return area_state[index];
+	return area_light_pallette[area_light[s2i(v)]];
 }
 
 static const char* gmurl(char* temp, const char* name, const char* ext = 0, const char* suffix = 0) {
@@ -181,7 +165,7 @@ bool archive_ard(io::stream& file, bool writemode) {
 	ar.set(variable_count);
 	// Карты тайлов
 	archive_bitmap(ar, (unsigned char*)area_tiles, 16, 64 * sizeof(area_tiles[0]), area_width / 4, area_height_tiles / 4, 0);
-	archive_bitmap(ar, area_light, 8, 256, area_width, area_height, lightpal);
+	archive_bitmap(ar, area_light, 8, 256, area_width, area_height, area_light_pallette);
 	archive_bitmap(ar, area_state, 8, 256, area_width, area_height, 0);
 	// Объекты
 	ar.set(bsdata<point>::source);
@@ -196,18 +180,18 @@ bool archive_ard(io::stream& file, bool writemode) {
 
 static bool load_tls_file(const char* name) {
 	char temp[260];
-	if(sprites)
-		delete sprites;
-	sprites = (sprite*)loadb(gmurl(temp, name, "pma"));
-	return sprites != 0;
+	if(area_sprites)
+		delete area_sprites;
+	area_sprites = (sprite*)loadb(gmurl(temp, name, "pma"));
+	return area_sprites != 0;
 }
 
 static bool load_mmp_file(const char* name) {
 	char temp[260];
-	if(sprites_minimap)
-		delete sprites_minimap;
-	sprites_minimap = (sprite*)loadb(gmurl(temp, name, "pma", "MM"));
-	return sprites_minimap != 0;
+	if(area_minimap_sprites)
+		delete area_minimap_sprites;
+	area_minimap_sprites = (sprite*)loadb(gmurl(temp, name, "pma", "MM"));
+	return area_minimap_sprites != 0;
 }
 
 static bool load_ard_file(const char* name) {
@@ -230,11 +214,11 @@ void read_area(const char* name) {
 	//worldmap::set(worldmap::getarea(name));
 }
 
-bool map::is(unsigned short index, areaf_s v) {
+bool is_state(unsigned short index, areafn v) {
 	return (area_state[index] & (0x80 >> v)) != 0;
 }
 
-void map::set(unsigned short index, areaf_s v) {
+void set_state(unsigned short index, areafn v) {
 	area_state[index] |= (0x80 >> v);
 }
 
@@ -255,29 +239,23 @@ bool is_block(short unsigned index) {
 	//13 - Roof - impassable (pink)
 	//14 - Worldmap exit (светло-синий)
 	//15 - Grass (белый)
-	if((index, CreatureBlock))
-		return true;
 	unsigned char a = area_state[index] & 0x0F;
 	return a == 0 || a == 8 || a == 10 || a == 12 || a == 13;
 }
 
 const sprite* get_minimap() {
-	return sprites_minimap;
+	return area_minimap_sprites;
 }
 
 const sprite* get_area_sprites() {
-	return sprites;
-}
-
-int map::gettile(short unsigned index) {
-	return area_tiles[index];
+	return area_sprites;
 }
 
 point get_free(point position, int size) {
-	int i = s2i(position, size);
+	int i = s2i(a2s(position, size));
 	if(!is_block(i, size))
 		return position;
-	return map::getposition(get_free_index(i, 1, size), size);
+	return s2a(i2s(get_free_index(i, 1, size)), size);
 }
 
 void clear_path_map() {
