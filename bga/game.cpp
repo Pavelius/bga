@@ -26,8 +26,8 @@ static void use_all_doors() {
 		e.use(e.isopen());
 }
 
-point getformationfree(point dst, point src, formation_s formation, int index) {
-	return map::getfree(getformation(dst, src, formation, index), 1);
+point get_free(point dst, point src, formationn formation, int index) {
+	return get_free(get_formation(dst, src, formation, index), 1);
 }
 
 void setparty(point dst) {
@@ -39,7 +39,7 @@ void setparty(point dst) {
 	for(auto p : party_selected) {
 		if(!p)
 			continue;
-		auto new_position = getformationfree(dst, start_position, FormationProtect, index++);
+		auto new_position = get_free(dst, start_position, FormationProtect, index++);
 		p->area_index = current_area;
 		p->lookat(new_position);
 		p->setposition(new_position);
@@ -49,7 +49,7 @@ void setparty(point dst) {
 void enter(const char* id, const char* location) {
 	char temp[32]; stringbuilder sb(temp); sb.add(location);
 	print("Enter area [%1] at location [%2]", id, location);
-	map::read(id);
+	read_area(id);
 	read_area(id, "ID2");
 #ifdef _DEBUG
 	print("Count of points %1i", bsdata<point>::source.count);
@@ -83,7 +83,7 @@ static bool archive_sav(const char* url, bool write_mode) {
 	archive a(file, write_mode);
 	if(!a.signature(get_version()))
 		return false;
-	a.set(map::areaname);
+	a.set(area_name);
 	a.set(draw::camera);
 	a.set(current_game_tick);
 	a.set(wearable::coins);

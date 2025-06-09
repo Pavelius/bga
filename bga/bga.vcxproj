@@ -71,6 +71,7 @@
     <ClCompile Include="damage.cpp" />
     <ClCompile Include="dice.cpp" />
     <ClCompile Include="diety.cpp" />
+    <ClCompile Include="direction.cpp" />
     <ClCompile Include="door.cpp" />
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="draw_answers.cpp" />
@@ -100,7 +101,9 @@
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_util.cpp" />
-    <ClCompile Include="map.cpp" />
+    <ClCompile Include="map.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="math.cpp" />
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="modifier.cpp" />
@@ -164,6 +167,7 @@
     <ClInclude Include="damage.h" />
     <ClInclude Include="dice.h" />
     <ClInclude Include="diety.h" />
+    <ClInclude Include="direction.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="draw_focus.h" />
@@ -182,7 +186,6 @@
     <ClInclude Include="iteminside.h" />
     <ClInclude Include="itemlist.h" />
     <ClInclude Include="logvalue.h" />
-    <ClInclude Include="map.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="npc.h" />

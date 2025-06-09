@@ -1,5 +1,5 @@
+#include "area.h"
 #include "formation.h"
-#include "map.h"
 #include "math.h"
 
 #define M_PI_2 1.57079632679489661923 // pi/2
@@ -9,7 +9,7 @@ extern "C" double atan(double x);
 extern "C" double cos(double x);
 extern "C" double sin(double x);
 
-formation_s current_formation = FormationProtect;
+formationn current_formation = FormationProtect;
 
 static point formations[10][20] = {
 	{{0, 0}, {0, 36}, {0, 72}, {0, 108}, {0, 144}, {0, 180}, {0, 216}, {0, 252}, {0, 288}, {0, 324}, {0, 360}, {0, 396}, {0, 432}, {0, 468}, {0, 504}, {0, 540}, {0, 576}, {0, 612}, {0, 648}, {0, 684}}, // Follow
@@ -20,7 +20,7 @@ static point formations[10][20] = {
 	{{0, 0}, {0, -36}, {-64, 0}, {64, 0}, {-32, 48}, {32, 48}, {0, 24}, {0, 48}, {0, 72}, {0, 96}, {0, 120}, {0, 144}, {0, 168}, {0, 192}, {0, 216}, {0, 240}, {0, 264}, {0, 288}, {0, 312}, {0, 336}}, // Protect
 };
 
-point getformation(point dst, point src, formation_s formation, int pos) {
+point get_formation(point dst, point src, formationn formation, int pos) {
 	if(formation >= sizeof(formations) / sizeof(formations[0]))
 		return src;
 	pos = imin(pos, (int)(sizeof(formations[0]) / sizeof(formations[0][0])));
@@ -41,7 +41,7 @@ point getformation(point dst, point src, formation_s formation, int pos) {
 	// calculate new coordinates by rotating formation around (0,0)
 	double newx = -formations[formation][pos].x * cos(angle) + formations[formation][pos].y * sin(angle);
 	double newy = formations[formation][pos].x * sin(angle) + formations[formation][pos].y * cos(angle);
-	dst.x = imin(imax(dst.x + (short)newx, 8), (short)map::width * 16);
-	dst.y = imin(imax(dst.y + (short)newy, 8), (short)map::height * 12);
+	dst.x = imin(imax(dst.x + (short)newx, 8), (short)area_width * 16);
+	dst.y = imin(imax(dst.y + (short)newy, 8), (short)area_height * 12);
 	return dst;
 }

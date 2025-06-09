@@ -9,7 +9,6 @@
 #include "drawable.h"
 #include "floattext.h"
 #include "game.h"
-#include "map.h"
 #include "math.h"
 #include "region.h"
 #include "resid.h"
@@ -35,12 +34,12 @@ static unsigned get_game_tick() {
 }
 
 static void correct_camera() {
-	if(camera.x + last_screen.width() > map::width * 16)
-		camera.x = map::width * 16 - last_screen.width();
+	if(camera.x + last_screen.width() > area_width * 16)
+		camera.x = area_width * 16 - last_screen.width();
 	if(camera.x < 0)
 		camera.x = 0;
-	if(camera.y + last_screen.height() > map::height_tiles * 16)
-		camera.y = map::height_tiles * 16 - last_screen.height();
+	if(camera.y + last_screen.height() > area_height_tiles * 16)
+		camera.y = area_height_tiles * 16 - last_screen.height();
 	if(camera.y < 0)
 		camera.y = 0;
 }
@@ -62,16 +61,16 @@ static void actor_marker(int size, bool flicking, bool double_border) {
 }
 
 static void paint_tiles() {
-	auto sp = map::getareasprite();
+	auto sp = get_area_sprites();
 	if(!sp)
 		return;
 	int tx0 = camera.x / tile_size, ty0 = camera.y / tile_size;
 	int dx = width / tile_size + 1, dy = height / tile_size + 1;
 	int tx1 = tx0 + dx, ty1 = ty0 + dy;
-	if(tx1 > map::width / 4 - 1)
-		tx1 = map::width / 4 - 1;
-	if(ty1 > map::height_tiles / 4 - 1)
-		ty1 = map::height_tiles / 4 - 1;
+	if(tx1 > area_width / 4 - 1)
+		tx1 = area_width / 4 - 1;
+	if(ty1 > area_height_tiles / 4 - 1)
+		ty1 = area_height_tiles / 4 - 1;
 	int ty = ty0;
 	while(ty <= ty1) {
 		int tx = tx0;
@@ -278,7 +277,7 @@ void creature::paint() const {
 	paint_markers(this);
 	actor::paint();
 	//color pallette[256]; setpallette(pallette);
-	//apply_shadow(pallette, map::getshadow(position));
+	//apply_shadow(pallette, map::get_shadow(position));
 	//paperdoll(pallette,
 	//	race, gender, getmainclass(), 1, orientation, get_game_tick(),
 	//	wears[Body], getweapon(), getoffhand(), wears[Head]);
@@ -362,7 +361,7 @@ static void paint_objects() {
 }
 
 static const char* gettipsname(point position) {
-	return str("%3Info%1i_%2i", position.x, position.y, map::areaname);
+	return str("%3Info%1i_%2i", position.x, position.y, area_name);
 }
 
 static void apply_hilite_command() {
@@ -470,7 +469,7 @@ void paint_minimap() {
 	}
 	pushrect push;
 	// Minimap image
-	auto mm = map::getminimap();
+	auto mm = get_minimap();
 	if(!mm)
 		return;
 	auto& sf = mm->get(0);

@@ -10,23 +10,18 @@
 
 using namespace draw;
 
-enum animatef : unsigned char {
-	DisableOverlay, ReadyStance
-};
 struct animatei : nameable {
-	unsigned	flags;
-	bool		is(animatef v) const { return FGT(flags, v); }
 };
 BSDATA(animatei) = {
-	{"AnimateMove", 0},
-	{"AnimateStand", FG(ReadyStance)},
-	{"AnimateStandRelax", FG(ReadyStance)},
-	{"AnimateStandLook", FG(ReadyStance)},
-	{"AnimateCombatStance", FG(ReadyStance)},
-	{"AnimateCombatStanceTwoHanded", FG(ReadyStance)},
+	{"AnimateMove"},
+	{"AnimateStand"},
+	{"AnimateStandRelax"},
+	{"AnimateStandLook"},
+	{"AnimateCombatStance"},
+	{"AnimateCombatStanceTwoHanded"},
 	{"AnimateGetHit"},
 	{"AnimateGetHitAndDrop"},
-	{"AnimateAgony", FG(ReadyStance)},
+	{"AnimateAgony"},
 	{"AnimateGetUp"},
 	{"AnimateMeleeOneHanded"},
 	{"AnimateMeleeOneHandedSwing"},
@@ -40,14 +35,14 @@ BSDATA(animatei) = {
 	{"AnimateShootBow"},
 	{"AnimateShootSling"},
 	{"AnimateShootXBow"},
-	{"AnimateCastBig", FG(DisableOverlay)},
-	{"AnimateCastBigRelease", FG(DisableOverlay)},
-	{"AnimateCast", FG(DisableOverlay)},
-	{"AnimateCastRelease", FG(DisableOverlay)},
-	{"AnimateCastThird", FG(DisableOverlay)},
-	{"AnimateCastThirdRelease", FG(DisableOverlay)},
-	{"AnimateCastFour", FG(DisableOverlay)},
-	{"AnimateCastFourRelease", FG(DisableOverlay)},
+	{"AnimateCastBig"},
+	{"AnimateCastBigRelease"},
+	{"AnimateCast"},
+	{"AnimateCastRelease"},
+	{"AnimateCastThird"},
+	{"AnimateCastThirdRelease"},
+	{"AnimateCastFour"},
+	{"AnimateCastFourRelease"},
 };
 assert_enum(animatei, AnimateCastFourRelease)
 
@@ -176,14 +171,14 @@ void actor::stop() {
 }
 
 void actor::lookat(point destination) {
-	setorientation(map::getorientation(position, destination));
+	setorientation(get_look(position, destination));
 	resetframes();
 }
 
 void actor::moveto(point destination) {
 	if(destination == position)
 		return;
-	auto new_position = map::getfree(destination, 1);
+	auto new_position = get_free(destination, 1);
 	area_index = current_area;
 	lookat(new_position);
 	setposition(new_position);
@@ -198,6 +193,17 @@ void actor::setreverse(animaten v) {
 	setanimate(v);
 	iswap(frame_start, frame_stop);
 	frame = frame_start;
+}
+
+static bool is_melee_attack(animaten v) {
+	switch(v) {
+	case AnimateMeleeOneHanded: case AnimateMeleeOneHandedSwing: case AnimateMeleeOneHandedThrust:
+	case AnimateMeleeTwoHanded: case AnimateMeleeTwoHandedSwing: case AnimateMeleeTwoHandedThrust:
+	case AnimateMeleeTwoWeapon: case AnimateMeleeTwoWeaponSwing: case AnimateMeleeTwoWeaponThrust:
+		return true;
+	default:
+		return false;
+	}
 }
 
 void actor::nextaction() {
@@ -301,14 +307,20 @@ void actor::paint() const {
 	if(!ps)
 		return;
 	color pallette[256]; setpallette(pallette);
-	apply_shadow(pallette, map::getshadow(position));
+	apply_shadow(pallette, get_shadow(position));
 	image(ps, frame, frame_flags, pallette);
 	painting_equipment(getweapon(), ws, frame, frame_flags, pallette);
 	painting_equipment(wears[Head], ws, frame, frame_flags, pallette);
 	painting_equipment(getoffhand(), ws, frame, frame_flags, pallette);
 }
 
-void actor::animateattack() {
+void actor::readybattle(bool v) {
+	feats.set(ReadyToBattle, v);
+	stop();
+}
+
+void actor::animateattack(drawable* target) {
+	lookat(target->position);
 	auto& w = getweapon();
 	auto n = xrand(0, 2);
 	if(getoffhand().isweapon())

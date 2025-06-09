@@ -3,24 +3,30 @@
 #include "area.h"
 #include "container.h"
 #include "creature.h"
+#include "direction.h"
 #include "door.h"
 #include "draw.h"
 #include "entrance.h"
 #include "floattext.h"
 #include "io_stream.h"
 #include "itemground.h"
-#include "map.h"
 #include "math.h"
+#include "rand.h"
 #include "region.h"
+
+char area_name[12];
+unsigned char area_zmap[256 * 256];
+unsigned char area_state[256 * 256];
+unsigned char area_light[256 * 256];
+unsigned short area_tiles[64 * 64];
+unsigned short area_cost[256 * 256];
+unsigned short area_width, area_height, area_height_tiles;
+static unsigned short path_stack[256 * 256];
+
+unsigned short current_area;
 
 static sprite* sprites;
 static sprite* sprites_minimap;
-unsigned char map::heightmap[256 * 256];
-unsigned char map::statemap[256 * 256];
-unsigned char map::lightmap[256 * 256];
-unsigned short map::tilemap[64 * 64];
-char map::areaname[12];
-unsigned short current_area;
 static color lightpal[256];
 
 static const unsigned char orientations_5b5[25] = {
@@ -70,7 +76,7 @@ color* map::getpallette() {
 	return lightpal;
 }
 
-void map::clear() {
+void clear_area() {
 	if(sprites) {
 		delete sprites;
 		sprites = 0;
@@ -79,12 +85,11 @@ void map::clear() {
 		delete sprites_minimap;
 		sprites_minimap = 0;
 	}
-	initialize();
-	height = width = height_tiles = 0;
-	memset(tilemap, 0, sizeof(tilemap));
-	memset(heightmap, 0, sizeof(heightmap));
-	memset(statemap, 0, sizeof(statemap));
-	memset(lightmap, 0, sizeof(lightmap));
+	area_height = area_width = area_height_tiles = 0;
+	memset(area_tiles, 0, sizeof(area_tiles));
+	memset(area_zmap, 0, sizeof(area_zmap));
+	memset(area_state, 0, sizeof(area_state));
+	memset(area_light, 0, sizeof(area_light));
 	memset(lightpal, 0, sizeof(lightpal));
 	bsdata<animation>::source.clear();
 	bsdata<container>::source.clear();
@@ -97,11 +102,11 @@ void map::clear() {
 	bsdata<floattext>::source.clear();
 }
 
-void map::settile(short unsigned index, short unsigned tile) {
-	tilemap[index] = tile;
+void set_tile(short unsigned index, short unsigned tile) {
+	area_tiles[index] = tile;
 }
 
-unsigned char map::getorientation(point s, point d) {
+unsigned char get_look(point s, point d) {
 	const int osize = 7;
 	int dx = d.x - s.x;
 	int dy = d.y - s.y;
@@ -113,24 +118,32 @@ unsigned char map::getorientation(point s, point d) {
 	return orientations_7b7[(ay + (osize / 2)) * osize + ax + (osize / 2)];
 }
 
-unsigned short map::getindex(point pos) {
-	return (pos.y / 12) * 256 + pos.x / 16;
+unsigned short s2i(point v) {
+	return (v.y / 12) * 256 + v.x / 16;
 }
 
-unsigned short map::getindex(point pos, int size) {
-	return (pos.y / 12) * 256 + pos.x / 16;
+point s2a(point v, int size) {
+	return point(v.y + 6 * size, v.x + 8 * size);
+}
+
+point a2s(point v, int size) {
+	return point(v.y - 6 * size, v.x - 8 * size);
+}
+
+unsigned short s2i(point v, int size) {
+	return (v.y / 12) * 256 + v.x / 16;
 }
 
 point map::getposition(short unsigned index, int size) {
 	return{(short)((index & 0xFF) * 16 + 8), (short)((((unsigned)index) >> 8) * 12 + 6)};
 }
 
-color map::getshadow(point s) {
-	return lightpal[lightmap[getindex(s, 1)]];
+color get_shadow(point v) {
+	return lightpal[area_light[s2i(v)]];
 }
 
-unsigned char map::getstate(short unsigned index) {
-	return statemap[index];
+unsigned char get_state(short unsigned index) {
+	return area_state[index];
 }
 
 static const char* gmurl(char* temp, const char* name, const char* ext = 0, const char* suffix = 0) {
@@ -162,14 +175,14 @@ bool archive_ard(io::stream& file, bool writemode) {
 	if(!ar.version(1, 0))
 		return false;
 	// Заголовок
-	ar.set(map::width);
-	ar.set(map::height); map::height_tiles = (map::height * 12 + 15) / 16;
-	ar.set(map::areaname, 8);
+	ar.set(area_width);
+	ar.set(area_height); area_height_tiles = (area_height * 12 + 15) / 16;
+	ar.set(area_name, 8);
 	ar.set(variable_count);
 	// Карты тайлов
-	archive_bitmap(ar, (unsigned char*)map::tilemap, 16, 64 * sizeof(map::tilemap[0]), map::width / 4, map::height_tiles / 4, 0);
-	archive_bitmap(ar, map::lightmap, 8, 256, map::width, map::height, lightpal);
-	archive_bitmap(ar, map::statemap, 8, 256, map::width, map::height, 0);
+	archive_bitmap(ar, (unsigned char*)area_tiles, 16, 64 * sizeof(area_tiles[0]), area_width / 4, area_height_tiles / 4, 0);
+	archive_bitmap(ar, area_light, 8, 256, area_width, area_height, lightpal);
+	archive_bitmap(ar, area_state, 8, 256, area_width, area_height, 0);
 	// Объекты
 	ar.set(bsdata<point>::source);
 	ar.set(bsdata<doortile>::source);
@@ -202,30 +215,30 @@ static bool load_ard_file(const char* name) {
 	io::file file(gmurl(temp, name));
 	if(!file)
 		return false;
-	map::clear();
+	clear_area();
 	return archive_ard(file, false);
 }
 
-void map::read(const char* name) {
+void read_area(const char* name) {
 	//res::cleanup();
 	if(!load_ard_file(name))
 		return;
-	if(!load_tls_file(areaname))
+	if(!load_tls_file(area_name))
 		return;
-	if(!load_mmp_file(areaname))
+	if(!load_mmp_file(area_name))
 		return;
 	//worldmap::set(worldmap::getarea(name));
 }
 
 bool map::is(unsigned short index, areaf_s v) {
-	return (statemap[index] & (0x80 >> v)) != 0;
+	return (area_state[index] & (0x80 >> v)) != 0;
 }
 
 void map::set(unsigned short index, areaf_s v) {
-	statemap[index] |= (0x80 >> v);
+	area_state[index] |= (0x80 >> v);
 }
 
-bool map::isblock(short unsigned index) {
+bool is_block(short unsigned index) {
 	//0 - Obstacle - impassable, light blocking (черный)
 	//1 - Sand ? (burgandy)
 	//2 - Wood (зеленый)
@@ -242,27 +255,210 @@ bool map::isblock(short unsigned index) {
 	//13 - Roof - impassable (pink)
 	//14 - Worldmap exit (светло-синий)
 	//15 - Grass (белый)
-	if(is(index, CreatureBlock))
+	if((index, CreatureBlock))
 		return true;
-	unsigned char a = statemap[index] & 0x0F;
+	unsigned char a = area_state[index] & 0x0F;
 	return a == 0 || a == 8 || a == 10 || a == 12 || a == 13;
 }
 
-const sprite* map::getminimap() {
+const sprite* get_minimap() {
 	return sprites_minimap;
 }
 
-const sprite* map::getareasprite() {
+const sprite* get_area_sprites() {
 	return sprites;
 }
 
 int map::gettile(short unsigned index) {
-	return tilemap[index];
+	return area_tiles[index];
 }
 
-point map::getfree(point position, int size) {
-	int i = getindex(position, size);
-	if(!isblock(i, size))
+point get_free(point position, int size) {
+	int i = s2i(position, size);
+	if(!is_block(i, size))
 		return position;
-	return map::getposition(getfree(i, 1, size), size);
+	return map::getposition(get_free_index(i, 1, size), size);
+}
+
+void clear_path_map() {
+	memset(area_cost, 0, sizeof(area_cost));
+}
+
+void block_impassable(short unsigned free_state) {
+	for(auto y = 0; y < area_height; y++) {
+		auto i2 = m2i(area_width, y);
+		for(auto i = m2i(0, y); i < i2; i++)
+			area_cost[i] = is_block(i) ? Blocked : free_state;
+	}
+}
+
+short unsigned to(short unsigned index, directionn d) {
+	switch(d) {
+	case Left:
+		if((index & 0xFF) == 0)
+			return Blocked;
+		return index - 1;
+	case LeftUp:
+		if((index & 0xFF) == 0)
+			return Blocked;
+		if((index >> 8) == 0)
+			return Blocked;
+		return index - 1 - 256;
+	case Up:
+		if((index >> 8) == 0)
+			return Blocked;
+		return index - 256;
+	case RightUp:
+		if((index & 0xFF) >= area_width - 1)
+			return Blocked;
+		if((index >> 8) == 0)
+			return Blocked;
+		return index - 256 + 1;
+	case Right:
+		if((index & 0xFF) >= area_width - 1)
+			return Blocked;
+		return index + 1;
+	case RightDown:
+		if((index & 0xFF) >= area_width - 1)
+			return Blocked;
+		if((index >> 8) >= area_height - 1)
+			return Blocked;
+		return index + 256 + 1;
+	case Down:
+		if((index >> 8) >= area_height - 1)
+			return Blocked;
+		return index + 256;
+	case LeftDown:
+		if((index & 0xFF) == 0)
+			return Blocked;
+		if((index >> 8) >= area_height - 1)
+			return Blocked;
+		return index - 1 + 256;
+	default:
+		return Blocked;
+	}
+}
+
+static bool get_free_space_x(short unsigned& index, int radius, int size) {
+	short unsigned px = index & 0xFF;
+	short unsigned py = index >> 8;
+	int minx = imax(px - radius, 0);
+	int maxx = imin(px + radius + 1, (int)area_width);
+	for(short unsigned scanx = minx; scanx < maxx; scanx++) {
+		if(py >= radius) {
+			auto i = m2i(scanx, py - radius);
+			if(!is_block(i, size)) {
+				index = i;
+				return true;
+			}
+		}
+		if(py + radius < area_height) {
+			int i = m2i(scanx, py + radius);
+			if(!is_block(i, size)) {
+				index = i;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+static bool get_free_space_y(short unsigned& index, int radius, int size) {
+	int px = index & 0xFF;
+	int py = index >> 8;
+	int miny = imax(py - radius, 0);
+	int maxy = imin(py + radius + 1, (int)area_height);
+	for(int scany = miny; scany < maxy; scany++) {
+		if(px >= radius) {
+			int i = m2i(px - radius, scany);
+			if(!is_block(i, size)) {
+				index = i;
+				return true;
+			}
+		}
+		if(px + radius < area_width) {
+			int i = m2i(px + radius, scany);
+			if(!is_block(i, size)) {
+				index = i;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+short unsigned get_free_index(short unsigned index, int radius, int size) {
+	if(is_block(index, size)) {
+		int maxr = area_width / 2;
+		if(maxr > area_height)
+			maxr = area_height;
+		for(; radius < maxr; radius++) {
+			if(rand() & 1) {
+				if(get_free_space_x(index, radius, size))
+					break;
+				if(get_free_space_y(index, radius, size))
+					break;
+			} else {
+				if(get_free_space_y(index, radius, size))
+					break;
+				if(get_free_space_x(index, radius, size))
+					break;
+			}
+		}
+	}
+	return index;
+}
+
+bool is_block(short unsigned index, int size) {
+	if(size <= 1)
+		return is_block(index);
+	auto x1 = i2x(index);
+	auto y1 = i2y(index);
+	auto x2 = x1 + size;
+	auto y2 = y1 + size;
+	if(x2 >= area_width || y2 >= area_height)
+		return true;
+	for(auto y = y1; y < y2; y++) {
+		for(auto x = x1; x < x2; x++) {
+			if(is_block(m2i(x, y)))
+				return true;
+		}
+	}
+	return false;
+}
+
+bool is_passable(short unsigned i0, short unsigned i1, int size) {
+	int x0 = i2x(i0), y0 = i2x(i0);
+	int x1 = i2x(i1), y1 = i2x(i1);
+	int dx = iabs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+	int dy = -iabs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+	int err = dx + dy, e2;
+	for(;;) {
+		e2 = 2 * err;
+		if(e2 >= dy) {
+			if(x0 == x1)
+				break;
+			err += dy;
+			if(e2 <= dx) {
+				if(is_block(m2i(x0, y0 + sy), size))
+					return false;
+			}
+			x0 += sx;
+			if(is_block(m2i(x0, y0), size))
+				return false;
+		}
+		if(e2 <= dx) {
+			if(y0 == y1)
+				break;
+			err += dx;
+			if(2 * err >= dy) {
+				if(is_block(m2i(x0 + sx, y0), size))
+					return false;
+			}
+			y0 += sy;
+			if(is_block(m2i(x0, y0), size))
+				return false;
+		}
+	}
+	return true;
 }

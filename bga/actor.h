@@ -34,15 +34,16 @@ struct actor : drawable, coloration, statable, classa, wearable {
 	unsigned		frame_flags;
 	unsigned char	orientation;
 	unsigned long	time_next;
-	unsigned short	npc;
+	unsigned short	npc, enemy_id;
 	racen			race;
 	gendern			gender;
-	void			animateattack();
+	void			animateattack(drawable* target);
 	void			animatedamage();
 	bool			ispresent() const;
 	void			lookat(point destination);
 	void			moveto(point destination);
 	void			paint() const;
+	void			readybattle(bool v);
 	void			setorientation(unsigned char v) { orientation = v; }
 	void			stop();
 	void			updateanimate();
