@@ -7,47 +7,48 @@
 #include "npc.h"
 #include "rand.h"
 #include "timer.h"
-// #include "ftflag.h"
 
 using namespace draw;
 
 struct animatei : nameable {
+	int a1o8;
 };
 BSDATA(animatei) = {
-	{"AnimateMove"},
-	{"AnimateStand"},
-	{"AnimateStandRelax"},
-	{"AnimateStandLook"},
-	{"AnimateCombatStance"},
-	{"AnimateCombatStanceTwoHanded"},
-	{"AnimateGetHit"},
-	{"AnimateGetHitAndDrop"},
-	{"AnimateAgony"},
-	{"AnimateGetUp"},
-	{"AnimateMeleeOneHanded"},
-	{"AnimateMeleeOneHandedSwing"},
-	{"AnimateMeleeOneHandedThrust"},
-	{"AnimateMeleeTwoHanded"},
-	{"AnimateMeleeTwoHandedSwing"},
-	{"AnimateMeleeTwoHandedThrust"},
-	{"AnimateMeleeTwoWeapon"},
-	{"AnimateMeleeTwoWeaponSwing"},
-	{"AnimateMeleeTwoWeaponThrust"},
-	{"AnimateShootBow"},
-	{"AnimateShootSling"},
-	{"AnimateShootXBow"},
-	{"AnimateCastBig"},
-	{"AnimateCastBigRelease"},
-	{"AnimateCast"},
-	{"AnimateCastRelease"},
-	{"AnimateCastThird"},
-	{"AnimateCastThirdRelease"},
-	{"AnimateCastFour"},
-	{"AnimateCastFourRelease"},
+	{"AnimateMove", 9},
+	{"AnimateStand", 0},
+	{"AnimateStandRelax", 0},
+	{"AnimateStandLook", 0},
+	{"AnimateCombatStance", 1},
+	{"AnimateCombatStanceTwoHanded", 1},
+	{"AnimateGetHit", 2},
+	{"AnimateGetHitAndDrop", 3},
+	{"AnimateAgony", 4},
+	{"AnimateGetUp", 5},
+	{"AnimateMeleeOneHanded", 10},
+	{"AnimateMeleeOneHandedSwing", 11},
+	{"AnimateMeleeOneHandedThrust", 12},
+	{"AnimateMeleeTwoHanded", 10},
+	{"AnimateMeleeTwoHandedSwing", 11},
+	{"AnimateMeleeTwoHandedThrust", 12},
+	{"AnimateMeleeTwoWeapon", 10},
+	{"AnimateMeleeTwoWeaponSwing", 11},
+	{"AnimateMeleeTwoWeaponThrust", 12},
+	{"AnimateShootBow", 10},
+	{"AnimateShootSling", 10},
+	{"AnimateShootXBow", 10},
+	{"AnimateCastBig", 6},
+	{"AnimateCastBigRelease", 7},
+	{"AnimateCast", 6},
+	{"AnimateCastRelease", 7},
+	{"AnimateCastThird", 6},
+	{"AnimateCastThirdRelease", 7},
+	{"AnimateCastFour", 6},
+	{"AnimateCastFourRelease", 7},
 };
 assert_enum(animatei, AnimateCastFourRelease)
 
 const int max_sprite_directions = 9;
+const int anm_monsters_a1 = 104;
 
 int get_armor_index(const item& e) {
 	auto v = e.geti().required;
@@ -138,12 +139,19 @@ void actor::wait(unsigned milliseconds) {
 }
 
 static sprite::cicle* get_cicle(sprite* ps, animaten action, int o) {
-	if(o >= max_sprite_directions)
-		o = (max_sprite_directions - 1) * 2 - o;
-	return ps->gcicle(action * max_sprite_directions + o);
+	if(ps->cicles== anm_monsters_a1)
+		return ps->gcicle(bsdata<animatei>::elements[action].a1o8 * 8 + o / 2);
+	else {
+		// Standat character animation
+		if(o >= max_sprite_directions)
+			o = (max_sprite_directions - 1) * 2 - o;
+		return ps->gcicle(action * max_sprite_directions + o);
+	}
 }
 
-static unsigned get_flags(int o) {
+static unsigned get_flags(sprite* ps, int o) {
+	if(ps->cicles == anm_monsters_a1)
+		return 0;
 	if(o >= max_sprite_directions)
 		return ImageMirrorH;
 	else
@@ -154,14 +162,14 @@ void actor::resetframes() {
 	sprite* ps = getsprite();
 	if(!ps)
 		return;
-	auto ff = get_flags(orientation);
+	auto ff = get_flags(ps, orientation);
 	auto pc = get_cicle(ps, action, orientation);
-	if(frame >= pc->start && frame < (pc->start + pc->count) && ff == frame_flags)
+	auto fs = pc->start + pc->count;
+	if(frame >= pc->start && frame < fs && frame_stop == fs && ff == frame_flags)
 		return;
 	frame_flags = ff;
 	frame_start = pc->start;
 	frame_stop = frame_start + pc->count - 1;
-	frame_flags = get_flags(orientation);
 	frame = frame_start;
 }
 
@@ -192,7 +200,7 @@ void actor::moveto(point destination) {
 }
 
 unsigned actor::getwait() const {
-	return 70;
+	return 74;
 }
 
 void actor::setreverse(animaten v) {
@@ -316,12 +324,16 @@ void actor::paint() const {
 	auto ps = getsprite(ws);
 	if(!ps)
 		return;
-	color pallette[256]; setpallette(pallette);
-	apply_shadow(pallette, get_shadow(getlu()));
-	image(ps, frame, frame_flags, pallette);
-	painting_equipment(getweapon(), ws, frame, frame_flags, pallette);
-	painting_equipment(wears[Head], ws, frame, frame_flags, pallette);
-	painting_equipment(getoffhand(), ws, frame, frame_flags, pallette);
+	if(ps->cicles == anm_monsters_a1)
+		image(ps, frame, frame_flags);
+	else {
+		color pallette[256]; setpallette(pallette);
+		apply_shadow(pallette, get_shadow(getlu()));
+		image(ps, frame, frame_flags, pallette);
+		painting_equipment(getweapon(), ws, frame, frame_flags, pallette);
+		painting_equipment(wears[Head], ws, frame, frame_flags, pallette);
+		painting_equipment(getoffhand(), ws, frame, frame_flags, pallette);
+	}
 }
 
 void actor::readybattle(bool v) {

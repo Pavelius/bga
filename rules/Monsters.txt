@@ -1,3 +1,4 @@
 #NPC
 
-GoblinWarrior
+GoblinWarrior res(MGO1)
+ abilities Strenght(8) Dexterity(13) Constitution(11) Intellegence(10) Wisdow(11) Charisma(8)

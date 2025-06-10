@@ -3,6 +3,7 @@
 #include "creature.h"
 #include "math.h"
 #include "modifier.h"
+#include "npc.h"
 #include "pushvalue.h"
 #include "rand.h"
 #include "script.h"
@@ -53,8 +54,8 @@ static void finish() {
 
 template<> void fnscript<abilityi>(int value, int counter) {
 	switch(modifier) {
-	case Permanent: player->basic.abilitites[value] += counter; break;
-	default: player->abilitites[value] += counter; break;
+	case Permanent: player->basic.abilities[value] += counter; break;
+	default: player->abilities[value] += counter; break;
 	}
 }
 
@@ -80,8 +81,8 @@ static void apply_advance(variant v) {
 			auto level = v.counter;
 			if(!level)
 				level = 1;
-			if(player->basic.abilitites[v.value] < level)
-				player->basic.abilitites[v.value] = level;
+			if(player->basic.abilities[v.value] < level)
+				player->basic.abilities[v.value] = level;
 		} else
 			script::run(v);
 	} else
@@ -120,9 +121,9 @@ static short unsigned random_portrait_no_party(gendern gender) {
 
 static void raise_hit_points(classn v) {
 	if(player->getlevel() == 1 && ischaracter(v))
-		player->basic.abilitites[HitPoints] += bsdata<classi>::elements[v].hit_points;
+		player->basic.abilities[HitPoints] += bsdata<classi>::elements[v].hit_points;
 	else
-		player->basic.abilitites[HitPoints] += xrand(1, bsdata<classi>::elements[v].hit_points);
+		player->basic.abilities[HitPoints] += xrand(1, bsdata<classi>::elements[v].hit_points);
 }
 
 static void raise_class(classn classv) {
@@ -185,7 +186,7 @@ static int roll_4d6() {
 
 static void random_ability() {
 	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
-		player->basic.abilitites[i] = roll_4d6();
+		player->basic.abilities[i] = roll_4d6();
 }
 
 static int get_skill_points(classn v) {
@@ -198,7 +199,24 @@ static int get_skill_points(classn v) {
 	return n;
 }
 
-void creature::create(racen race, gendern gender, classn classv, unsigned short portrait) {
+void create_npc(point position, const char* id) {
+	player = 0;
+	auto pn = bsdata<npci>::find(id);
+	if(!pn)
+		return;
+	player = bsdata<creature>::add();
+	player->clear();
+	player->npc = getbsi(pn);
+	player->area_index = current_area;
+	player->gender = pn->gender;
+	player->portrait = 0xFFFF;
+	player->race = Human;
+	copy(player->basic, *((statable*)pn));
+	finish();
+	player->setposition(position);
+}
+
+void create_character(racen race, gendern gender, classn classv, unsigned short portrait) {
 	player = bsdata<creature>::add();
 	player->clear();
 	player->area_index = current_area;
@@ -213,10 +231,10 @@ void creature::create(racen race, gendern gender, classn classv, unsigned short 
 	finish();
 }
 
-void creature::create(gendern gender) {
+void create_character(gendern gender) {
 	auto pi = random_portrait_no_party(gender);
 	auto p = bsdata<portraiti>::elements + pi;
-	create(p->race, p->gender, p->classv, pi);
+	create_character(p->race, p->gender, p->classv, pi);
 }
 
 bool creature::isclass(skilln v) const {
@@ -265,10 +283,10 @@ static void update_skills() {
 void creature::update_abilities() {
 	auto level = getlevel();
 	// Armor class
-	abilitites[DodgeBonus] += get_dex_bonus(getbonus(Dexterity), wears[Body].geti().max_dex_bonus);
-	abilitites[AC] += 10;
-	abilitites[AC] += abilitites[DodgeBonus];
-	abilitites[AC] += abilitites[ArmorBonus];
+	abilities[DodgeBonus] += get_dex_bonus(getbonus(Dexterity), wears[Body].geti().max_dex_bonus);
+	abilities[AC] += 10;
+	abilities[AC] += abilities[DodgeBonus];
+	abilities[AC] += abilities[ArmorBonus];
 	// Hit points
 	hp_max = get(HitPoints) + level * getbonus(Constitution);
 	if(hp_max < level)
@@ -293,7 +311,7 @@ static bool isallow(const statable& source, variant v) {
 	if(!level)
 		level = 1;
 	if(v.iskind<abilityi>())
-		return source.abilitites[v.value] >= level;
+		return source.abilities[v.value] >= level;
 	else if(v.iskind<feati>())
 		return source.feats.is((feat_s)v.value);
 	return true;

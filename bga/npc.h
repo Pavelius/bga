@@ -15,7 +15,8 @@ struct npci : nameable, classa, coloration, statable {
 	gendern		gender;
 	alignmentn	alignment;
 	dietyn		diety;
-	const char*	res[3]; // Resources
-	sprite*		sprites[3]; // Loaded resources
+	const char*	res[2]; // Resources
+	sprite*		sprites[2]; // Loaded resources
 	sprite*		getres(int n);
 };
+void clear_npc_sprites();

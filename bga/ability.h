@@ -22,13 +22,13 @@ struct abilityi : nameable {
 	const char*	format;
 };
 struct statable : skilla {
-	char		abilitites[Stamina + 1];
+	char		abilities[Stamina + 1];
 	damagea		resist;
 	featf		feats;
 	void		clear();
-	int			get(abilityn v) const { return abilitites[v]; }
+	int			get(abilityn v) const { return abilities[v]; }
 	int			get(damagen v) const { return resist[v]; }
 	int			get(skilln v) const { return skills[v]; }
 	bool		is(feat_s v) const { return feats.is(v); }
-	int			getbonus(abilityn v) const { return abilitites[v] / 2 - 5; }
+	int			getbonus(abilityn v) const { return abilities[v] / 2 - 5; }
 };

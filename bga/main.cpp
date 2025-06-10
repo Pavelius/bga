@@ -36,19 +36,25 @@ static item& citem(const char* id, int count = 1) {
 static void create_party() {
 	print("Create random party...");
 	for(auto i = 0; i < 6; i++) {
-		player->create(Male);
+		create_character(Male);
 		player->update();
 		player->addcoins(xrand(3, 18));
 		party[i] = player;
 		add_player_spellbooks();
 	}
-	script::run("SelectAll", 0);
+}
+
+static void add_enemies() {
+	auto push_player = player;
+	create_npc({744, 1049}, "GoblinWarrior");
+	player = push_player;
 }
 
 static void start_main() {
 	last_screen.set(0, 0, 800, 433);
 	create_game();
 	create_party();
+	add_enemies();
 	select_all_party();
 	enter("AR1000", "FR1001");
 	player->additem(citem("BattleAxe"));
@@ -80,6 +86,7 @@ static void read_rules() {
 	bsreq::read("rules/Feats.txt");
 	bsreq::read("rules/Spells.txt");
 	bsreq::read("rules/Diety.txt");
+	bsreq::read("rules/Monsters.txt");
 }
 
 int main(int argc, char* argv[]) {

@@ -891,7 +891,7 @@ static void ability(abilityn v) {
 	pushfore push_fore;
 	texta(getnms(v), AlignCenterCenter);
 	caret.x += 51; width = 32;
-	texta(str("%1i", player->abilitites[v]), AlignCenterCenter);
+	texta(str("%1i", player->abilities[v]), AlignCenterCenter);
 	caret.x += 41;
 	auto n = player->getbonus(v);
 	if(n > 0)

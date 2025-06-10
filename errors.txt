@@ -1,2 +1,2 @@
-﻿Error in file `UnknownNames.txt`:
- Define translation for `Accept`
+﻿Error in file `rules/Monsters.txt`:
+ Line 4: Not found field `Constituation` in dataset `abilities`

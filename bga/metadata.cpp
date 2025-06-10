@@ -135,6 +135,8 @@ BSMETA(modifieri) = {
 	{}};
 BSMETA(npci) = {
 	BSREQ(id),
+	BSREQ(res),
+	BSDST(abilities, abilityi),
 	{}};
 BSMETA(periodi) = {
 	BSREQ(id),
@@ -237,6 +239,7 @@ BSDATA(varianti) = {
 	{"Item", VAR(itemi, 1)},
 	{"List", VAR(listi, 1)},
 	{"Modifier", VAR(modifieri, 1), 0, 0, fnscript<modifieri>},
+	{"NPC", VAR(npci, 1)},
 	{"Portrait", VAR(portraiti, 1)},
 	{"Race", VAR(racei, 1)},
 	{"Rate", VAR(magici, 1)},

@@ -62,7 +62,7 @@ void setcamera(point v) {
 }
 
 static void actor_marker(int size, bool flicking, bool double_border) {
-	auto r = size * 6;
+	auto r = size * 6 + 4;
 	if(flicking)
 		r += iabs(int((current_tick / 100) % 6) - 3) - 1;
 	circle(r);

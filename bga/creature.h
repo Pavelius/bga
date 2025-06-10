@@ -17,8 +17,6 @@ struct creature : actor, avatarable, spellv {
 	unsigned		experience;
 	void			select();
 	void			clear();
-	static void		create(gendern gender);
-	static void		create(racen race, gendern gender, classn classv, unsigned short portrait);
 	short unsigned	getindex() const;
 	const char*		getname() const { return "Pavelius"; }
 	int				getspellslots(classn type, int spell_level) const;
@@ -38,5 +36,8 @@ creature* get_creature(const void* object);
 creature* get_selected();
 
 void clear_selection();
+void create_character(racen race, gendern gender, classn classv, unsigned short portrait);
+void create_character(gendern gender);
+void create_npc(point position, const char* id);
 bool have_selection();
 void select_all_party();
