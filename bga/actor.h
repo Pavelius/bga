@@ -2,7 +2,6 @@
 #include "class.h"
 #include "coloration.h"
 #include "drawable.h"
-//#include "npc.h"
 #include "race.h"
 #include "wearable.h"
 
@@ -43,6 +42,7 @@ struct actor : drawable, coloration, statable, classa, wearable {
 	void			animateattack(drawable* target);
 	void			animatedamage();
 	int				getsize() const { return 1; }
+	rect			getbox() const;
 	point			getlu() const;
 	npci*			getnpc() const; // Monster and other template characters.
 	bool			ispresent() const;

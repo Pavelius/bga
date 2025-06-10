@@ -24,7 +24,6 @@ struct creature : actor, avatarable, spellv {
 	bool			isparty() const;
 	bool			isselected() const;
 	bool			isusable(const item& it) const;
-	void			paint() const;
 	void			update();
 	void			update_abilities();
 };

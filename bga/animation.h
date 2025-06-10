@@ -29,6 +29,5 @@ struct animation : drawable, variableid {
 	unsigned char		chance_loop;
 	unsigned char		skip_cycles;
 	bool				isvisible() const;
-	void				paint() const;
 	bool				is(animatef_s v) const { return (flags & (1 << v)) != 0; }
 };

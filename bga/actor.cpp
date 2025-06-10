@@ -199,6 +199,11 @@ void actor::moveto(point destination) {
 	stop();
 }
 
+rect actor::getbox() const {
+	auto s = getsize();
+	return {position.x - s * 8, position.y - s * 6, position.x + s * 8, position.y + s * 6};
+}
+
 unsigned actor::getwait() const {
 	return 74;
 }

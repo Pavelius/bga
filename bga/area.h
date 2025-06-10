@@ -1,7 +1,7 @@
 #include "color.h"
 #include "point.h"
 #include "stringbuilder.h"
-#include "slice.h"
+#include "sliceu.h"
 #include "variable.h"
 
 #pragma once
@@ -18,7 +18,7 @@ struct sprite;
 struct areai {
 	char			name[12];
 	char			folder[4];
-	slice<variable>	variables;
+	sliceu<variable> variables;
 	static int compare(const void* v1, const void* v2);
 	static areai* add(const char* name, const char* folder);
 	static areai* find(const char* name, const char* folder);

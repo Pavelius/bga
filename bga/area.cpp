@@ -56,10 +56,9 @@ areai* areai::add(const char* name, const char* folder) {
 		p = bsdata<areai>::add();
 		stringbuilder s1(p->name); s1.add(name); s1.upper();
 		stringbuilder s2(p->folder); s2.add(folder); s2.upper();
-		auto pb = bsdata<variable>::end();
+		p->variables.setbegin();
 		bsdata<variable>::source.count += variable_count;
-		auto pe = bsdata<variable>::end();
-		p->variables = slice<variable>(pb, pe);
+		p->variables.setend();
 	}
 	return p;
 }

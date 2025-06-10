@@ -20,7 +20,9 @@
 using namespace draw;
 
 struct renderi {
+	typedef void(*fnpaint)(const drawable* object);
 	const array&	source;
+	fnpaint			proc;
 	int				priority;
 	rendern			getindex() const;
 };
@@ -35,9 +37,9 @@ const int tile_size = 64;
 static point hotspot;
 static int zoom_factor = 1;
 
-rendern	renderi::getindex() const {
-	return (rendern)(this - bsdata<renderi>::elements);
-}
+//rendern	renderi::getindex() const {
+//	return (rendern)(this - bsdata<renderi>::elements);
+//}
 
 static unsigned get_game_tick() {
 	return current_tick / 64;
@@ -109,7 +111,7 @@ static void paint_block_area() {
 	
 	width = 16 - 2; height = 12 - 2;
 	pushfore push_fore(colors::black);
-	auto push_alpha = alpha; alpha = 128;
+	auto push_alpha = alpha; alpha = 64;
 	for(auto ty = ty0; ty < ty1; ty++) {
 		for(auto tx = tx0; tx < tx1; tx++) {
 			caret.x = tx * 16 - camera.x + 1;
@@ -198,7 +200,6 @@ static void setup_visible_area() {
 	last_area = last_screen; last_area.move(camera.x, camera.y);
 	last_area.offset(-128, -128);
 	hotspot = camera + hot.mouse;
-	hilite_drawable = 0;
 }
 
 static void update_floattext_tail() {
@@ -326,60 +327,88 @@ static void paint_markers(const creature* p) {
 	fore = push_fore;
 }
 
-void creature::paint() const {
-	paint_markers(this);
-	actor::paint();
+static void paint_creature(const drawable* object) {
+	auto p = (creature*)object;
+	if(p->ishilite())
+		cursor.cicle = 0;
+	paint_markers(p);
+	p->paint();
 }
 
-void animation::paint() const {
-	auto pr = gres(rsname, "art/animations");
+static void paint_animation(const drawable* object) {
+	auto p = (animation*)object;
+	auto pr = gres(p->rsname, "art/animations");
 	if(!pr)
 		return;
 	auto hour = gethour();
-	if(is(RenderBlackAsTransparent)) {
-		//image_tint(caret.x, caret.y, pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
+	if(p->is(RenderBlackAsTransparent)) {
+		// image_tint(caret.x, caret.y, pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
 		auto push_alpha = alpha;
 		alpha = alpha >> 2;
-		image(pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
+		image(pr, pr->ganim(p->frame, get_game_tick()), p->is(Mirrored) ? ImageMirrorV : 0);
 		alpha = push_alpha;
 	} else
-		image(pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
+		image(pr, pr->ganim(p->frame, get_game_tick()), p->is(Mirrored) ? ImageMirrorV : 0);
 }
 
-static void paint_object(drawable* object) {
-	if(bsdata<door>::have(object)) {
-		auto p = (door*)object;
-		if(p->ishilite()) {
-			polygon_green(p->getpoints());
-			cursor.cicle = p->cursor;
-		}
-	} else if(bsdata<region>::have(object)) {
-		auto p = (region*)object;
-		if(p->ishilite()) {
-			switch(p->type) {
-			case RegionInfo: cursor.cicle = 22; break;
-			case RegionTravel: cursor.cicle = 34; break;
-			}
-		}
-	} else if(bsdata<container>::have(object)) {
-		auto p = (container*)object;
-		if(p->ishilite()) {
-			polygon_green(p->points);
-			cursor.cicle = 2;
-		}
-	} else if(bsdata<floattext>::have(object)) {
-		auto p = (floattext*)object;
-		p->paint();
-	} else if(bsdata<creature>::have(object)) {
-		auto p = (creature*)object;
-		p->paint();
-	} else if(bsdata<animation>::have(object)) {
-		auto p = (animation*)object;
-		p->paint();
+static void paint_float_text(const drawable* object) {
+	draw::pushrect push;
+	auto p = (floattext*)object;
+	auto push_fore = draw::fore;
+	auto push_alpha = draw::alpha;
+	draw::width = p->box.width();
+	draw::height = p->box.height();
+	draw::fore = colors::black;
+	draw::alpha = 128;
+	draw::strokeout(draw::rectf, metrics::border + metrics::padding);
+	draw::alpha = push_alpha;
+	draw::fore = fore;
+	draw::textf(p->format);
+	draw::fore = push_fore;
+}
+
+static void paint_door(const drawable* object) {
+	auto p = (door*)object;
+	if(p->ishilite()) {
+		polygon_green(p->getpoints());
+		cursor.cicle = p->cursor;
 	}
 }
 
-static bool ishilite(const drawable* object) {
+static void paint_region(const drawable* object) {
+	auto p = (region*)object;
+	if(p->ishilite()) {
+		switch(p->type) {
+		case RegionInfo: cursor.cicle = 22; break;
+		case RegionTravel: cursor.cicle = 34; break;
+		}
+	}
+}
+
+static void paint_container(const drawable* object) {
+	auto p = (container*)object;
+	if(p->ishilite()) {
+		polygon_green(p->points);
+		cursor.cicle = 2;
+	}
+}
+
+static void paint_object(drawable* object) {
+	if(bsdata<door>::have(object))
+		paint_door(object);
+	else if(bsdata<region>::have(object))
+		paint_region(object);
+	else if(bsdata<container>::have(object))
+		paint_container(object);
+	else if(bsdata<floattext>::have(object))
+		paint_float_text(object);
+	else if(bsdata<creature>::have(object))
+		paint_creature(object);
+	else if(bsdata<animation>::have(object))
+		paint_animation(object);
+}
+
+static bool is_hilite(const drawable* object) {
 	if(bsdata<door>::have(object)) {
 		auto p = (door*)object;
 		if(hotspot.in(p->box)) {
@@ -394,18 +423,23 @@ static bool ishilite(const drawable* object) {
 		auto p = (container*)object;
 		if(hotspot.in(p->box))
 			return inside(hotspot, p->points.begin(), p->points.size());
+	} else if(bsdata<creature>::have(object)) {
+		auto p = (creature*)object;
+		return hotspot.in(p->getbox());
 	}
 	return false;
 }
 
 static void paint_objects() {
 	auto push_caret = caret;
+	hilite_drawable = 0;
 	for(auto p : objects) {
 		caret = p->position - camera;
-		if(ishilite(p))
+		if(is_hilite(p))
 			hilite_drawable = p;
 		paint_object(p);
 	}
+	caret = push_caret;
 }
 
 static const char* gettipsname(point position) {
@@ -415,7 +449,7 @@ static const char* gettipsname(point position) {
 static void apply_hilite_command() {
 	if(!hilite_drawable)
 		return;
-	if(hot.key == MouseLeft && hot.pressed) {
+	if(hot.key == MouseLeft && !hot.pressed) {
 		if(bsdata<region>::have(hilite_drawable)) {
 			auto p = (region*)hilite_drawable;
 			if(p->type == RegionInfo) {
@@ -433,7 +467,8 @@ static void apply_hilite_command() {
 			auto p = (container*)hilite_drawable;
 			print("This is %1", p->name);
 			player->moveto(p->launch);
-		}
+		} else if(bsdata<creature>::have(hilite_drawable))
+			execute(choose_creature, 0, 0, hilite_drawable);
 	}
 }
 
@@ -444,7 +479,7 @@ static void jump_party() {
 static void apply_command() {
 	if(hilite_drawable)
 		return;
-	if(hot.key == MouseLeft && hot.pressed && hot.mouse.in(last_screen))
+	if(hot.key == MouseLeft && !hot.pressed && hot.mouse.in(last_screen))
 		execute(jump_party, hotspot);
 }
 
@@ -615,12 +650,12 @@ void paint_worldmap_area() {
 }
 
 // TODO: Render concept
-BSDATA(renderi) = {
-	{bsdata<animation>::source},
-	{bsdata<creature>::source},
-	{bsdata<door>::source},
-	{bsdata<region>::source},
-	{bsdata<container>::source},
-	{bsdata<floattext>::source},
-};
-BSDATAF(renderi)
+//BSDATA(renderi) = {
+//	{bsdata<animation>::source, paint_animation},
+//	{bsdata<creature>::source, paint_creature},
+//	{bsdata<door>::source, paint_door},
+//	{bsdata<region>::source, paint_region},
+//	{bsdata<container>::source, paint_container},
+//	{bsdata<floattext>::source, paint_float_text},
+//};
+//BSDATAF(renderi)

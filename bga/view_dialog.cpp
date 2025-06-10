@@ -476,7 +476,7 @@ static void paint_item_avatar() {
 	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
 }
 
-static void choose_creature() {
+void choose_creature() {
 	player = (creature*)hot.object;
 	if(!hot.param)
 		clear_selection();
