@@ -92,6 +92,8 @@ struct sprite : pma {
 	int					glyph(unsigned sym) const;
 	const unsigned char* ptr(unsigned o) const { return (unsigned char*)this + o; }
 };
+extern point left_mouse_press, right_mouse_press; // current mouse pressed coordinates
+
 namespace colors {
 extern color			button, form, window;
 extern color			border, active;

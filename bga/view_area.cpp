@@ -479,8 +479,34 @@ static void jump_party() {
 static void apply_command() {
 	if(hilite_drawable)
 		return;
-	if(hot.key == MouseLeft && !hot.pressed && hot.mouse.in(last_screen))
-		execute(jump_party, hotspot);
+	if(hot.mouse.in(last_screen)) {
+		if(hot.pressed) {
+			auto rc = create_rect(left_mouse_press + camera, hot.mouse + camera);
+			if(rc.size() >= 8) {
+				pushrect push;
+				pushfore push_fore(colors::green);
+				cursor.set(NONE, 0);
+				caret.x = rc.x1 - camera.x;
+				caret.y = rc.y1 - camera.y;
+				width = rc.width();
+				height = rc.height();
+				rectb();
+			}
+		}
+		if(hot.key == MouseLeft && !hot.pressed) {
+			auto rc = create_rect(left_mouse_press + camera, hot.mouse + camera);
+			if(rc.size() >= 8) {
+				clear_selection();
+				for(auto p : party) {
+					if(!p)
+						continue;
+					if(p->position.in(rc))
+						p->select();
+				}
+			} else
+				execute(jump_party, hotspot);
+		}
+	}
 }
 
 static void paint_area_map() {

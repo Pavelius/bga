@@ -21,6 +21,7 @@ struct rect {
 	void	offset(int n) { offset(n, n); }
 	int		right() const { return x1 > x2 ? x1 : x2; }
 	void	set(int px1, int py1, int px2, int py2) { x1 = px1; x2 = px2; y1 = py1; y2 = py2; }
+	int		size() const { return (width() > height()) ? width() : height(); }
 	int		top() const { return y1 < y2 ? y1 : y2; }
 	int		width() const { return x2 - x1; }
 };

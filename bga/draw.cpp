@@ -16,6 +16,8 @@ extern "C" void	free(void* pointer);
 
 using namespace draw;
 
+point left_mouse_press, right_mouse_press;
+
 // Default theme colors
 color				colors::active;
 color				colors::button;

@@ -88,6 +88,7 @@ static int handle(MSG& msg) {
 	case WM_LBUTTONDOWN:
 		if(msg.hwnd != hwnd)
 			break;
+		left_mouse_press = hot.mouse;
 		hot.pressed = true;
 		return MouseLeft;
 	case WM_LBUTTONDBLCLK:
@@ -98,11 +99,10 @@ static int handle(MSG& msg) {
 	case WM_LBUTTONUP:
 		if(msg.hwnd != hwnd)
 			break;
-		//if(!hot.pressed)
-		//	break;
 		hot.pressed = false;
 		return MouseLeft;
 	case WM_RBUTTONDOWN:
+		right_mouse_press = hot.mouse;
 		hot.pressed = true;
 		return MouseRight;
 	case WM_RBUTTONUP:

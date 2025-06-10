@@ -24,3 +24,5 @@ struct point {
 };
 
 point center(const rect& rc);
+
+rect create_rect(point p1, point p2);
