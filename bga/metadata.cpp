@@ -137,6 +137,7 @@ BSMETA(npci) = {
 	BSREQ(id),
 	BSREQ(res),
 	BSDST(abilities, abilityi),
+	BSDST(classes, classi),
 	{}};
 BSMETA(periodi) = {
 	BSREQ(id),

@@ -90,7 +90,7 @@ static void update_actor_animations() {
 	}
 }
 
-static void update_frames() {
+void update_frames() {
 	update_tick();
 	if(!game_pause) {
 		update_game_tick();
@@ -368,11 +368,11 @@ static bool dragging(fnevent paint) {
 }
 
 static void paint_game_panel() {
-	paint_game_panel(true);
+	paint_game_panel(true, false);
 }
 
 static void paint_game_panel_na() {
-	paint_game_panel(false);
+	paint_game_panel(false, false);
 }
 
 static void paint_console() {
@@ -514,14 +514,14 @@ static void creature_hits(const creature* pc) {
 	caret = push_caret;
 }
 
-static void portrait_bar(bool player_hilite) {
+static void portrait_bar(bool player_hilite, bool allow_choose_player) {
 	pushrect push;
 	caret.x += 505; caret.y += 4;
 	width = height = 46;
 	for(auto i = 0; i < 6; i++) {
 		portrait_small(party[i], player_hilite);
 		creature_hits(party[i]);
-		if(!input_disabled) {
+		if(allow_choose_player) {
 			auto key = hot.key & CommandMask;
 			if(ishilite() && key == MouseLeft && hot.pressed)
 				execute(choose_creature, (hot.key & Shift) != 0, 0, party[i]);
@@ -533,13 +533,19 @@ static void portrait_bar(bool player_hilite) {
 static void paint_action_panel() {
 	setcaret(0, 433);
 	image(gres(GACTN), 1, 0);
-	portrait_bar(false);
+	portrait_bar(false, !input_disabled);
 }
 
 void paint_action_panel_player() {
 	setcaret(0, 433);
 	image(gres(GACTN), 1, 0);
-	portrait_bar(true);
+	portrait_bar(true, !input_disabled);
+}
+
+void paint_action_panel_combat() {
+	setcaret(0, 433);
+	image(gres(GACTN), 1, 0);
+	portrait_bar(true, false);
 }
 
 void paint_action_panel_na() {
@@ -1269,7 +1275,7 @@ static void paint_game_spells() {
 	}
 }
 
-void paint_game_panel(bool allow_input) {
+void paint_game_panel(bool allow_input, bool combat_mode) {
 	pushrect push;
 	auto push_dialog = dialog_start;
 	setcaret(0, 493);
@@ -1286,11 +1292,15 @@ void paint_game_panel(bool allow_input) {
 		setdialog(576, 3); button(GCOMMBTN, 0, 1, '*'); fire(select_all_party);
 		setdialog(703, 2); button(GCOMMBTN, 2, 3);
 		setdialog(575, 72); button(GCOMMBTN, 16, 17);
-		setdialog(757, 1); button(GCOMMBTN, 18, 19);
 		hotkey('Z', change_zoom_factor);
 	} else {
 		setdialog(575, 2, 225, 105);
 		layer(colors::black, 128);
+	}
+	if(combat_mode) {
+		setdialog(757, 1);
+		image(gres(GCOMMBTN), 19, 0);
+		//button(GCOMMBTN, 18, 19);
 	}
 	dialog_start = push_dialog;
 }

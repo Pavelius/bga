@@ -1,5 +1,6 @@
 #include "advance.h"
 #include "area.h"
+#include "collection.h"
 #include "creature.h"
 #include "math.h"
 #include "modifier.h"
@@ -7,10 +8,12 @@
 #include "pushvalue.h"
 #include "rand.h"
 #include "script.h"
+#include "view.h"
 
 creature* party[6];
 creature* player;
 creature* party_selected[16];
+collection<creature> combatants;
 
 static int heavy_load[] = {
 	5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
@@ -212,6 +215,14 @@ void create_npc(point position, const char* id) {
 	player->portrait = 0xFFFF;
 	player->race = Human;
 	copy(player->basic, *((statable*)pn));
+	for(auto i = Commoner; i <= Wizard; i = (classn)(i + 1)) {
+		if(!pn->classes[i])
+			continue;
+		for(auto n = 0; n < pn->classes[i]; n++) {
+			raise_class(i);
+			raise_hit_points(i);
+		}
+	}
 	finish();
 	player->setposition(position);
 }
@@ -372,4 +383,67 @@ int	creature::getspellslots(classn type, int spell_level) const {
 		bonus_spells = (ability_bonus + 4 - spell_level) / 4;
 	auto class_level = classes[type];
 	return 1 + bonus_spells;
+}
+
+static bool local_creature(const void* object) {
+	auto p = (creature*)object;
+	if(p->hp <= 0)
+		return false;
+	return p->ispresent();
+}
+
+static bool enemy_combatants_present() {
+	for(auto p : combatants) {
+		if(p->is(Enemy))
+			return true;
+	}
+	return false;
+}
+
+static void check_initiative() {
+	for(auto p : combatants) {
+		if(p->initiative == -100)
+			p->initiative = d20() + p->abilities[Initiative];
+	}
+}
+
+static int compare_initiative(const void* v1, const void* v2) {
+	auto p1 = *((creature**)v1);
+	auto p2 = *((creature**)v2);
+	return p1->initiative - p2->initiative;
+}
+
+static void play_human_action() {
+	auto object = choose_combat_action();
+	if(object >= area_cost && object < area_cost + lenghtof(area_cost)) {
+		auto move_index = (short unsigned*)object - area_cost;
+		auto move_position = s2a(i2s(move_index), player->getsize());
+		player->lookat(move_position);
+		player->setposition(move_position);
+	} else if(bsdata<creature>::have(object)) {
+
+	}
+}
+
+static void play_combat_round() {
+	auto push_player = player;
+	for(auto p : combatants) {
+		player = p;
+		if(player->isparty()) {
+			play_human_action();
+		} else if(player->is(Enemy)) {
+
+		} else {
+			// Neutral do nothing
+		}
+	}
+}
+
+void check_combat() {
+	combatants.select(local_creature);
+	while(enemy_combatants_present()) {
+		check_initiative();
+		combatants.sort(compare_initiative);
+		play_combat_round();
+	}
 }

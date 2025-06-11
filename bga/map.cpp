@@ -11,7 +11,6 @@
 //};
 //}
 //
-//static directionn all_aroud[] = {Left, Right, Up, Down, LeftUp, LeftDown, RightUp, RightDown};
 //static unsigned short path_stack[256 * 256];
 //static unsigned short path_cost[256 * 256];
 //static nodei path_node[1024 * 8];
@@ -79,26 +78,6 @@
 //	return imax(iabs(x0 - x1), iabs(y0 - y1));
 //}
 
-// First, make wave and see what cell on map is passable
-//void map::createwave(indext start, int size) {
-//	short unsigned path_push = 0;
-//	short unsigned path_pop = 0;
-//	path_stack[path_push++] = start;
-//	path_cost[start] = 1;
-//	while(path_push != path_pop) {
-//		auto n = path_stack[path_pop++];
-//		auto w = path_cost[n] + 1;
-//		for(auto d : all_aroud) {
-//			auto i = to(n, d);
-//			if(path_cost[i] == Blocked)
-//				continue;
-//			if(!path_cost[i] || path_cost[i] > w) {
-//				path_cost[i] = w;
-//				path_stack[path_push++] = i;
-//			}
-//		}
-//	}
-//}
 //
 //void map::createwave(indext start, int size, short unsigned max_cost) {
 //	short unsigned path_push = 0;

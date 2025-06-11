@@ -62,5 +62,7 @@ BSDATA(feati) = {
 	{"SaveBonusVsSpell"},
 	{"Stability"},
 	{"Stonecunning"},
+	{"Enemy"},
+	{"ReadyToBattle"},
 };
-assert_enum(feati, Stonecunning)
+assert_enum(feati, ReadyToBattle)

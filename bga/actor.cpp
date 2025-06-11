@@ -164,8 +164,9 @@ void actor::resetframes() {
 		return;
 	auto ff = get_flags(ps, orientation);
 	auto pc = get_cicle(ps, action, orientation);
-	auto fs = pc->start + pc->count;
-	if(frame >= pc->start && frame < fs && frame_stop == fs && ff == frame_flags)
+	auto fb = pc->start;
+	auto fe = pc->start + pc->count;
+	if(frame >= fb && frame < fe && frame_start == fb && frame_stop == fe && ff == frame_flags)
 		return;
 	frame_flags = ff;
 	frame_start = pc->start;
@@ -181,7 +182,6 @@ void actor::stop() {
 			setanimate(AnimateCombatStance);
 	} else
 		setanimate(AnimateStand);
-	// wait(xrand(0, 500));
 }
 
 void actor::lookat(point destination) {
@@ -212,17 +212,6 @@ void actor::setreverse(animaten v) {
 	setanimate(v);
 	iswap(frame_start, frame_stop);
 	frame = frame_start;
-}
-
-static bool is_melee_attack(animaten v) {
-	switch(v) {
-	case AnimateMeleeOneHanded: case AnimateMeleeOneHandedSwing: case AnimateMeleeOneHandedThrust:
-	case AnimateMeleeTwoHanded: case AnimateMeleeTwoHandedSwing: case AnimateMeleeTwoHandedThrust:
-	case AnimateMeleeTwoWeapon: case AnimateMeleeTwoWeaponSwing: case AnimateMeleeTwoWeaponThrust:
-		return true;
-	default:
-		return false;
-	}
 }
 
 void actor::nextaction() {
@@ -360,4 +349,9 @@ void actor::animateattack(drawable* target) {
 
 void actor::animatedamage() {
 	setanimate(AnimateGetHit);
+}
+
+void actor::setposition(point v) {
+	position = v;
+	position_index = s2i(a2s(v, getsize()));
 }

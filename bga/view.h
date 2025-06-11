@@ -12,6 +12,8 @@ extern fnevent on_player_change;
 
 const char* getkg(int weight);
 
+void* choose_combat_action();
+
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key = 0);
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id);
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed);
@@ -26,6 +28,7 @@ void input_debug();
 void next_scene();
 void next_scene(fnevent proc);
 void paint_action_panel();
+void paint_action_panel_combat();
 void paint_action_panel_player();
 void paint_action_panel_na();
 void paint_area();
@@ -33,12 +36,13 @@ void paint_description(int scr_x, int scr_y, int scr_height);
 void paint_dialog(resn v, int frame = 0);
 void paint_game_dialog(resn v, int frame = 0);
 void paint_game_inventory();
-void paint_game_panel(bool allow_input);
+void paint_game_panel(bool allow_input, bool combat_mode);
 void paint_item(const item* pi);
 void paint_list(void* data, size_t size, int maximum, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc);
 void paint_minimap();
 void paint_worldmap_area();
 void paperdoll();
+void open_combat_mode();
 long open_dialog(fnevent proc, bool faded);
 void open_dialog();
 void open_item_count();
@@ -51,5 +55,6 @@ void set_description(const char* id);
 void setdialog(int x, int y);
 void setdialog(int x, int y, int w, int h);
 void texta(resn res, const char* string, unsigned flags);
+void update_frames();
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color);

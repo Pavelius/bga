@@ -14,15 +14,17 @@
 #include "rand.h"
 #include "region.h"
 
+static directionn all_aroud[] = {Left, Right, Up, Down, LeftUp, LeftDown, RightUp, RightDown};
+
 char area_name[12];
 color area_light_pallette[256];
 unsigned char area_zmap[256 * 256];
 unsigned char area_state[256 * 256];
 unsigned char area_light[256 * 256];
 unsigned short area_tiles[64 * 64];
-unsigned short area_cost[256 * 256];
 unsigned short area_width, area_height, area_height_tiles;
-static unsigned short path_stack[256 * 256];
+
+bool combat_mode;
 
 unsigned short current_area;
 
@@ -50,8 +52,8 @@ int	areai::compare(const void* v1, const void* v2) {
 	return szcmp(((areai*)v1)->name, ((areai*)v2)->name);
 }
 
-areai* areai::add(const char* name, const char* folder) {
-	auto p = find(name, folder);
+areai* add_area(const char* name, const char* folder) {
+	auto p = find_area(name, folder);
 	if(!p) {
 		p = bsdata<areai>::add();
 		stringbuilder s1(p->name); s1.add(name); s1.upper();
@@ -63,7 +65,7 @@ areai* areai::add(const char* name, const char* folder) {
 	return p;
 }
 
-areai* areai::find(const char* name, const char* folder) {
+areai* find_area(const char* name, const char* folder) {
 	for(auto& e : bsdata<areai>()) {
 		if(equal(e.name, name) && equal(e.folder, folder))
 			return &e;
@@ -145,16 +147,16 @@ bool archive_ard(io::stream& file, bool writemode) {
 		return false;
 	if(!ar.version(1, 0))
 		return false;
-	// Заголовок
+	// Area header
 	ar.set(area_width);
 	ar.set(area_height); area_height_tiles = (area_height * 12 + 15) / 16;
 	ar.set(area_name, 8);
 	ar.set(variable_count);
-	// Карты тайлов
+	// Tile maps
 	archive_bitmap(ar, (unsigned char*)area_tiles, 16, 64 * sizeof(area_tiles[0]), area_width / 4, area_height_tiles / 4, 0);
 	archive_bitmap(ar, area_light, 8, 256, area_width, area_height, area_light_pallette);
 	archive_bitmap(ar, area_state, 8, 256, area_width, area_height, 0);
-	// Объекты
+	// Objects
 	ar.set(bsdata<point>::source);
 	ar.set(bsdata<doortile>::source);
 	ar.set(bsdata<door>::source);
@@ -198,7 +200,6 @@ void read_area(const char* name) {
 		return;
 	if(!load_mmp_file(area_name))
 		return;
-	//worldmap::set(worldmap::getarea(name));
 }
 
 bool is_state(unsigned short index, areafn v) {
@@ -243,18 +244,6 @@ point get_free(point position, int size) {
 	if(!is_block(i, size))
 		return s2a(i2s(i), size);
 	return s2a(i2s(get_free_index(i, 1, size)), size);
-}
-
-void clear_path_map() {
-	memset(area_cost, 0, sizeof(area_cost));
-}
-
-void block_impassable(short unsigned free_state) {
-	for(auto y = 0; y < area_height; y++) {
-		auto i2 = m2i(area_width, y);
-		for(auto i = m2i(0, y); i < i2; i++)
-			area_cost[i] = is_block(i) ? Blocked : free_state;
-	}
 }
 
 short unsigned to(short unsigned index, directionn d) {
@@ -392,7 +381,7 @@ bool is_block(short unsigned index, int size) {
 	return false;
 }
 
-bool is_passable(short unsigned i0, short unsigned i1, int size) {
+static bool is_passable(short unsigned i0, short unsigned i1, int size) {
 	int x0 = i2x(i0), y0 = i2x(i0);
 	int x1 = i2x(i1), y1 = i2x(i1);
 	int dx = iabs(x1 - x0), sx = x0 < x1 ? 1 : -1;

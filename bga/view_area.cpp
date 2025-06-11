@@ -108,7 +108,6 @@ static void paint_block_area() {
 		tx1 = area_width - 1;
 	if(ty1 > area_height - 1)
 		ty1 = area_height - 1;
-	
 	width = 16 - 2; height = 12 - 2;
 	pushfore push_fore(colors::black);
 	auto push_alpha = alpha; alpha = 64;
@@ -116,8 +115,15 @@ static void paint_block_area() {
 		for(auto tx = tx0; tx < tx1; tx++) {
 			caret.x = tx * 16 - camera.x + 1;
 			caret.y = ty * 12 - camera.y + 1;
-			if(is_block(m2i(tx, ty)))
-				rectf();
+			auto a = area_cost[m2i(tx, ty)];
+			if(a < Blocked)
+				continue;
+			switch(a) {
+			case Blocked: fore = colors::black; break;
+			case BlockedCreature: fore = colors::blue; break;
+			case BlockedLeft: case BlockedUp: fore = colors::yellow; break;
+			}
+			rectf();
 		}
 	}
 	alpha = push_alpha;
@@ -157,10 +163,11 @@ void change_zoom_factor(int bonus) {
 }
 
 static void set_standart_cursor() {
-	if(!hot.mouse.in(last_screen))
-		cursor.set(CURSORS, 0);
-	else
-		cursor.set(CURSORS, 4);
+	cursor.set(CURSORS, 0);
+	if(hot.mouse.in(last_screen)) {
+		if(!combat_mode || area_cost[s2i(hotspot)] < Blocked)
+			cursor.set(CURSORS, 4);
+	}
 }
 
 static void apply_shifer() {
@@ -320,10 +327,11 @@ static void apply_shadow(color* pallette, color fore) {
 
 static void paint_markers(const creature* p) {
 	auto push_fore = fore;
-	if(p->isselected()) {
-		fore = colors::green;
+	fore = p->isparty() ? colors::green : colors::red;
+	if(p->ishilite())
+		actor_marker(p->getsize(), true, player == p);
+	else if(p->isselected())
 		actor_marker(p->getsize(), false, player == p);
-	}
 	fore = push_fore;
 }
 
@@ -467,8 +475,12 @@ static void apply_hilite_command() {
 			auto p = (container*)hilite_drawable;
 			print("This is %1", p->name);
 			player->moveto(p->launch);
-		} else if(bsdata<creature>::have(hilite_drawable))
-			execute(choose_creature, 0, 0, hilite_drawable);
+		} else if(bsdata<creature>::have(hilite_drawable)) {
+			if(combat_mode) {
+
+			} else
+				execute(choose_creature, 0, 0, hilite_drawable);
+		}
 	}
 }
 
@@ -509,11 +521,55 @@ static void apply_command() {
 	}
 }
 
+static void apply_command_combat() {
+	if(hilite_drawable)
+		return;
+	if(!hot.mouse.in(last_screen))
+		return;
+	auto map_index = s2i(hotspot);
+	if(area_cost[map_index] >= Blocked) {
+		cursor.set(CURSORS, 6);
+		return;
+	}
+	if(hot.key == MouseLeft && !hot.pressed)
+		execute(buttonparam, (long)(area_cost + map_index));
+}
+
+static void paint_movement_target() {
+	if(!combat_mode)
+		return;
+	int tx0 = camera.x / 16, ty0 = camera.y / 12;
+	int tx1 = tx0 + width / 16 + 1, ty1 = ty0 + height / 12 + 1;
+	if(tx1 > area_width - 1)
+		tx1 = area_width - 1;
+	if(ty1 > area_height - 1)
+		ty1 = area_height - 1;
+	width = 16 - 2; height = 12 - 2;
+	// width = 16; height = 12;
+	pushfore push_fore;
+	auto push_alpha = alpha; alpha = 64;
+	for(auto ty = ty0; ty < ty1; ty++) {
+		for(auto tx = tx0; tx < tx1; tx++) {
+			caret.x = tx * 16 - camera.x + 1;
+			caret.y = ty * 12 - camera.y + 1;
+			auto a = get_cost(m2i(tx, ty));
+			switch(a) {
+			case Blocked: continue;
+			case BlockedCreature: fore = colors::black; break;
+			default: fore = colors::black; break;
+			}
+			rectf();
+		}
+	}
+	alpha = push_alpha;
+}
+
 static void paint_area_map() {
 	auto push_clip = clipping; setclipall();
 	setup_visible_area();
 	set_standart_cursor();
 	paint_tiles();
+	paint_movement_target();
 #ifdef _DEBUG
 	paint_block_area();
 #endif // _DEBUG
@@ -521,7 +577,10 @@ static void paint_area_map() {
 	sort_objects();
 	paint_objects();
 	apply_hilite_command();
-	apply_command();
+	if(combat_mode)
+		apply_command_combat();
+	else
+		apply_command();
 	clipping = push_clip;
 }
 
@@ -673,6 +732,31 @@ void paint_worldmap_area() {
 	}
 	caret = push_caret;
 	clipping = push_clip;
+}
+
+static void paint_choose_order() {
+	update_frames();
+	setcaret(0, 0, 800, 433);
+	paint_area();
+	paint_action_panel_combat();
+	paint_game_panel(false, true);
+}
+
+void open_combat_mode() {
+	auto push_combat = combat_mode; combat_mode = true;
+	clear_selection();
+	player->select();
+	clear_path_map();
+	block_creatures();
+	create_wave(player->position_index, player->getsize());
+	block_movement(player->getmovement() * 2);
+	scene(paint_choose_order);
+	combat_mode = push_combat;
+}
+
+void* choose_combat_action() {
+	open_combat_mode();
+	return (void*)getresult();
 }
 
 // TODO: Render concept

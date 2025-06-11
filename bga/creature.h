@@ -1,5 +1,4 @@
 #include "actor.h"
-#include "collection.h"
 #include "portrait.h"
 #include "spell.h"
 
@@ -12,9 +11,11 @@ struct creature : actor, avatarable, spellv {
 	statable		basic;
 	alignmentn		alignment;
 	dietyn			diety;
+	char			initiative;
 	short			hp, hp_max;
 	short unsigned	name;
 	unsigned		experience;
+	explicit operator bool() const { return hp > 0; }
 	void			select();
 	void			clear();
 	short unsigned	getindex() const;
@@ -34,6 +35,7 @@ extern creature* party_selected[16];
 creature* get_creature(const void* object);
 creature* get_selected();
 
+void check_combat();
 void clear_selection();
 void create_character(racen race, gendern gender, classn classv, unsigned short portrait);
 void create_character(gendern gender);

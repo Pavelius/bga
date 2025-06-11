@@ -47,6 +47,7 @@ static void create_party() {
 static void add_enemies() {
 	auto push_player = player;
 	create_npc({744, 1049}, "GoblinWarrior");
+	player->feats.set(Enemy);
 	player = push_player;
 }
 
@@ -54,9 +55,9 @@ static void start_main() {
 	last_screen.set(0, 0, 800, 433);
 	create_game();
 	create_party();
-	add_enemies();
 	select_all_party();
 	enter("AR1000", "FR1001");
+	add_enemies();
 	player->additem(citem("BattleAxe"));
 	player->additem(citem("BattleAxeP1"));
 	player->additem(citem("LeatherArmor"));
@@ -71,6 +72,7 @@ static void start_main() {
 	player->additem(citem("TwoHandedSword"));
 	player->update();
 	current_world = bsdata<worldmapi>::elements;
+	next_scene(check_combat);
 }
 
 static void read_rules() {

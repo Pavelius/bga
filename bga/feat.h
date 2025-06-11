@@ -28,7 +28,7 @@ enum feat_s : unsigned char {
 	FastMovement, Illiteracy,
 	HateGoblinoids, Infravision, ImmunityToSleepSpell, FindSecretDoors, Lucky, PreciseThrower,
 	SaveBonusVsEnchantment, SaveBonusVsFear, SaveBonusVsIllusion, SaveBonusVsPoison, SaveBonusVsSpell, Stability, Stonecunning,
-	ReadyToBattle,
+	Enemy, ReadyToBattle,
 };
 struct feati : nameable {
 	variants require;

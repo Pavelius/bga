@@ -56,6 +56,7 @@
     <ClCompile Include="answers.cpp" />
     <ClCompile Include="archive.cpp" />
     <ClCompile Include="area.cpp" />
+    <ClCompile Include="area_path.cpp" />
     <ClCompile Include="array.cpp" />
     <ClCompile Include="attack.cpp" />
     <ClCompile Include="bsreq.cpp" />

@@ -16,7 +16,7 @@
 gamei game;
 
 static void read_area(const char* id, const char* folder) {
-	auto p = areai::add(id, folder);
+	auto p = add_area(id, folder);
 	current_area = getbsi(p);
 	current_variable_base = p->variables.begin();
 }

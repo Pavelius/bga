@@ -29,6 +29,7 @@ enum animaten : unsigned char {
 enum gendern : unsigned char;
 
 struct actor : drawable, coloration, statable, classa, wearable {
+	short unsigned	position_index;
 	point			move_postiion;
 	animaten		action;
 	short unsigned	area_index;
@@ -41,16 +42,18 @@ struct actor : drawable, coloration, statable, classa, wearable {
 	gendern			gender;
 	void			animateattack(drawable* target);
 	void			animatedamage();
-	int				getsize() const { return 1; }
 	rect			getbox() const;
 	point			getlu() const;
+	int				getmovement() const { return 6; }
 	npci*			getnpc() const; // Monster and other template characters.
+	int				getsize() const { return 1; }
 	bool			ispresent() const;
 	void			lookat(point destination);
 	void			moveto(point destination);
 	void			paint() const;
 	void			readybattle(bool v);
 	void			setorientation(unsigned char v) { orientation = v; }
+	void			setposition(point v);
 	void			stop();
 	void			updateanimate();
 private:

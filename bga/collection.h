@@ -13,7 +13,6 @@ struct collectiona : adat<void*, 256> {
 	void	distinct();
 	void	group(fngroup proc);
 	void	insert(int index, void* object);
-	//bool	have(const void* object) { return adat<void*, 256>(have(object); }
 	void	match(fnvisible proc, bool keep);
 	void	match(fnallow proc, int param, bool keep);
 	void	match(const collectiona& source, bool keep);

@@ -398,6 +398,9 @@
     <ClCompile Include="npc.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="area_path.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">

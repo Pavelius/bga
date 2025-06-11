@@ -4,7 +4,7 @@
 
 enum abilityn : unsigned char;
 enum classn : unsigned char {
-	Commoner,
+	Commoner, Warrior,
 	Bard, Fighter, Cleric, Druid, Paladin, Ranger, Rogue, Sorcerer, Wizard,
 };
 struct classi : nameable {

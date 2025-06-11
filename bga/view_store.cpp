@@ -294,7 +294,7 @@ static void paint_store() {
 	default: paint_buy_sell(); break;
 	}
 	setdialog(663, 384); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
-	paint_game_panel(false);
+	paint_game_panel(false, false);
 }
 
 void open_store() {
