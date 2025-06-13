@@ -10,6 +10,7 @@
 #include "itemground.h"
 #include "iteminside.h"
 #include "region.h"
+#include "saveheader.h"
 #include "timer.h"
 #include "view.h"
 
@@ -79,6 +80,14 @@ void enter(const char* id, const char* location) {
 	next_scene(open_game);
 }
 
+static void serial_header(archive& a, saveheaderi& v) {
+	if(a.writemode) {
+		v.create();
+		a.set(v);
+	} else
+		a.set(v);
+}
+
 static unsigned long get_version() {
 	unsigned long i = 0;
 	unsigned long r = sizeof(gamei)*(++i);
@@ -90,13 +99,31 @@ static unsigned long get_version() {
 	return r;
 }
 
+bool saveheaderi::read(const char* url) {
+	io::file file(url, StreamRead);
+	if(!file)
+		return false;
+	archive a(file, false);
+	if(!a.signature("SAV"))
+		return false;
+	if(!a.signature(get_version()))
+		return false;
+	serial_header(a, *this);
+	return true;
+}
+
 static bool archive_sav(const char* url, bool write_mode) {
 	io::file file(url, write_mode ? StreamWrite : StreamRead);
 	if(!file)
 		return false;
 	archive a(file, write_mode);
+	if(!a.signature("SAV"))
+		return false;
 	if(!a.signature(get_version()))
 		return false;
+	saveheaderi* phead = new saveheaderi;
+	serial_header(a, *phead);
+	delete phead;
 	a.set(area_name);
 	a.set(draw::camera);
 	a.set(current_game_tick);

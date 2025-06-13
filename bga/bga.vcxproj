@@ -139,6 +139,7 @@
     <ClCompile Include="view_area.cpp" />
     <ClCompile Include="view_dialog.cpp" />
     <ClCompile Include="view_list.cpp" />
+    <ClCompile Include="view_save_load.cpp" />
     <ClCompile Include="view_store.cpp" />
     <ClCompile Include="view_tool.cpp" />
     <ClCompile Include="wear.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="my_initialize_list.h" />
     <ClInclude Include="order.h" />
     <ClInclude Include="rand.h" />
+    <ClInclude Include="saveheader.h" />
     <ClInclude Include="school.h" />
     <ClInclude Include="seqlink.h" />
     <ClInclude Include="slice.h" />

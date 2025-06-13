@@ -404,6 +404,9 @@
     <ClCompile Include="moveable.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="view_save_load.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -692,6 +695,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="moveable.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="saveheader.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

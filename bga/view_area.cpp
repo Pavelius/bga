@@ -694,7 +694,7 @@ static void paint_area_map_screen() {
 	clipping = push_clip;
 }
 
-static void get_save_screenshoot(surface& sm) {
+void get_save_screenshoot(surface& sm) {
 	auto push_last_scrren = last_screen;
 	paint_area_map_screen();
 	blit(sm, 0, 0, sm.width, sm.height, 0, *canvas, 0, 0, canvas->width, canvas->height);

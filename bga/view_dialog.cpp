@@ -454,6 +454,14 @@ static void portrait_large() {
 	image(gres(PORTL), player->portrait, 0);
 }
 
+void get_player_portrait(surface& sm, int index) {
+	auto push_canvas = canvas;
+	surface sa(42, 42, 32); canvas = &sa;
+	image(0, 0, gres(PORTS), party[index]->portrait, 0);
+	blit(sm, 0, 0, sm.width, sm.height, 0, *canvas, 0, 0, canvas->width, canvas->height);
+	canvas = push_canvas;
+}
+
 static void portrait_small(creature* pc, bool player_hilite) {
 	pushrect push;
 	if(!input_disabled) {
@@ -873,7 +881,7 @@ static void paint_game_options() {
 	paint_game_dialog(STONEOPT);
 	paint_action_panel_na();
 	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("Options"), AlignCenterCenter);
-	setdialog(497, 68); button(GBTNLRG2, 1, 2);
+	setdialog(497, 68); button(GBTNLRG2, 1, 2, '1', "SaveGame"); fire(open_save_game);
 	setdialog(497, 98); button(GBTNLRG2, 1, 2);
 	setdialog(497, 128); button(GBTNLRG2, 1, 2);
 	setdialog(353, 386, 95, 16); texta(getnm("Version"), AlignCenterCenter);

@@ -1,8 +1,0 @@
-﻿#Control
-
-Background GUICHP 0 0 800 600 value(0)
-Button GBTNBFRM 412 529 205 40 frames(1 2 3 0) id("Done") hotkey(Escape)
-Button GBTNBFRM 183 529 205 40 frames(1 2 3 0) id("Replay")
-
-Label STONEBIG 193 35 412 30 id("Header")
-Label NORMAL 421 321 337 153 fore(255 255 255) id("Description")

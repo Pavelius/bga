@@ -58,6 +58,7 @@ RoomPeasant: Крестьянская
 RoomQuality: Качество комнаты
 RoomRoyal: Королевская
 Rumors: Слухи
+SaveGame: Сохранить игру
 SavingThrows: Броски спасения
 Sell: Продать
 Skills: Навыки
