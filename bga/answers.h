@@ -13,8 +13,7 @@ class answers {
 	adat<element, 32>	elements;
 public:
 	typedef void(*fnpaint)(int index, const void* value, const char* text, fnevent press_event);
-	static fnevent		afterpaint;
-	static fnevent		beforepaint;
+	static fnevent		beforepaint, afterpaint;
 	static fnpaint		paintcell;
 	static bool			interactive;
 	static int			column_count;
@@ -37,13 +36,13 @@ public:
 	void				clear();
 	static int			compare(const void* v1, const void* v2);
 	const element*		end() const { return elements.end(); }
-	int					getcount() const { return elements.getcount(); }
 	const char*			getname(void* v);
 	int					indexof(const void* v) const { return elements.indexof(v); }
 	void				modal(const char* title, const char* cancel) const;
 	void				paintanswers(int columns, const char* cancel_text) const;
 	void*				random() const;
 	void				remove(int index) { elements.remove(index, 1); }
+	size_t				size() const { return elements.size(); }
 	void				sort();
 };
 extern answers an;

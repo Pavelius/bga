@@ -19,6 +19,7 @@ extern gamei game;
 void create_game();
 void enter(const char* id, const char* location);
 void gamesave(const char* name);
+void moveparty(point v);
 void setcamera(point v);
 void setparty(point v);
 void setpartyall(point v);

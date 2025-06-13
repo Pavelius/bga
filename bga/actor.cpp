@@ -192,11 +192,13 @@ void actor::lookat(point destination) {
 void actor::moveto(point destination) {
 	if(destination == position)
 		return;
-	auto new_position = get_free(destination, getsize());
 	area_index = current_area;
-	lookat(new_position);
-	setposition(new_position);
-	stop();
+	lookat(destination);
+	//setposition(new_position);
+	//stop();
+	setanimate(AnimateMove);
+	move_start = position;
+	move_stop = destination;
 }
 
 rect actor::getbox() const {
@@ -206,6 +208,7 @@ rect actor::getbox() const {
 
 unsigned actor::getwait() const {
 	return 74;
+	// return 300;
 }
 
 void actor::setreverse(animaten v) {
@@ -268,6 +271,11 @@ void actor::updateanimate() {
 		frame++;
 	else
 		frame--;
+	if(action == AnimateMove) {
+		movestep(7);
+		if(!ismoving())
+			stop();
+	}
 }
 
 static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {

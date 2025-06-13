@@ -12,7 +12,7 @@ static bool allow(const answers& an, size_t max_width) {
 }
 
 static int getcolumns(const answers& an) {
-	auto count = an.getcount();
+	auto count = an.size();
 	if(!count)
 		return 1;
 	auto result = 1;
@@ -53,7 +53,7 @@ void answers::paintanswers(int columns, const char* cancel_text) const {
 	if(cancel_text) {
 		auto push_fore = fore;
 		fore = fore.mix(colors::h3, 128);
-		paintcell(elements.getcount(), 0, cancel_text, buttonparam);
+		paintcell(elements.size(), 0, cancel_text, buttonparam);
 		fore = push_fore;
 	}
 }
@@ -61,7 +61,7 @@ void answers::paintanswers(int columns, const char* cancel_text) const {
 void* answers::choose(const char* title, const char* cancel_text, int cancel_mode) const {
 	if(!interactive)
 		return random();
-	if(cancel_mode == 2 && elements.getcount() == 1)
+	if(cancel_mode == 2 && elements.size() == 1)
 		return (void*)elements.data[0].value;
 	if(!elements) {
 		if(!cancel_mode || (cancel_mode && cancel_text == 0))

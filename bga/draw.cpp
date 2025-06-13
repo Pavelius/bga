@@ -72,12 +72,6 @@ static char			tips_text[4096];
 stringbuilder		draw::tips_sb(tips_text);
 awindowi			draw::awindow = {-1, -1, 800, 600, 160, WFMinmax | WFResize};
 
-long distance(point p1, point p2) {
-	auto dx = p1.x - p2.x;
-	auto dy = p1.y - p2.y;
-	return isqrt(dx * dx + dy * dy);
-}
-
 static void correct(int& x1, int& y1, int& x2, int& y2) {
 	if(x1 > x2)
 		iswap(x1, x2);

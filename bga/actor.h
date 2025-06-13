@@ -1,7 +1,7 @@
 #include "ability.h"
 #include "class.h"
 #include "coloration.h"
-#include "drawable.h"
+#include "moveable.h"
 #include "race.h"
 #include "wearable.h"
 
@@ -28,9 +28,8 @@ enum animaten : unsigned char {
 };
 enum gendern : unsigned char;
 
-struct actor : drawable, coloration, statable, classa, wearable {
+struct actor : moveable, coloration, statable, classa, wearable {
 	short unsigned	position_index;
-	point			move_postiion;
 	animaten		action;
 	short unsigned	area_index;
 	short unsigned	frame, frame_stop, frame_start;

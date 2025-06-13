@@ -31,3 +31,9 @@ rect create_rect(point p1, point p2) {
 	}
 	return r;
 }
+
+int distance(point p1, point p2) {
+	auto dx = p1.x - p2.x;
+	auto dy = p1.y - p2.y;
+	return isqrt(dx * dx + dy * dy);
+}

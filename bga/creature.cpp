@@ -109,6 +109,7 @@ static void apply_advance(variant v, int level) {
 void creature::clear() {
 	memset(this, 0, sizeof(*this));
 	area_index = 0xFFFF;
+	move_order = 0xFFFF;
 	npc = 0xFFFF;
 }
 

@@ -488,6 +488,10 @@ static void jump_party() {
 	setparty(hot.param);
 }
 
+static void move_party() {
+	moveparty(hot.param);
+}
+
 static void apply_command() {
 	if(hilite_drawable)
 		return;
@@ -516,7 +520,7 @@ static void apply_command() {
 						p->select();
 				}
 			} else
-				execute(jump_party, hotspot);
+				execute(move_party, hotspot);
 		}
 	}
 }

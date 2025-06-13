@@ -23,6 +23,8 @@ struct point {
 	bool in(const point p1, const point p2, const point p3) const;
 };
 
+int distance(point p1, point p2);
+
 point center(const rect& rc);
 
 rect create_rect(point p1, point p2);

@@ -22,8 +22,8 @@ struct adat {
 	const T* end() const { return data + count; }
 	const T* endof() const { return data + count_max; }
 	int	find(const T t) const { for(auto& e : *this) if(e == t) return &e - data; return -1; }
-	size_t getcount() const { return count; }
-	size_t getmaximum() const { return count_max; }
+	size_t size() const { return count; }
+	size_t maximum() const { return count_max; }
 	int	indexof(const void* e) const { if(e >= data && e < data + count) return (T*)e - data; return -1; }
 	bool have(const T t) const { for(auto& e : *this) if(e == t) return true; return false; }
 	bool have(const void* element) const { return element >= data && element < (data + count); }

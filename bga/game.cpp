@@ -47,6 +47,19 @@ void setparty(point dst) {
 	}
 }
 
+void moveparty(point dst) {
+	auto index = 0;
+	auto p = get_selected();
+	if(!p)
+		return;
+	auto start_position = p->position;
+	for(auto p : party_selected) {
+		if(!p)
+			continue;
+		p->moveto(get_free(dst, start_position, FormationProtect, index++, p->getsize()));
+	}
+}
+
 void enter(const char* id, const char* location) {
 	char temp[32]; stringbuilder sb(temp); sb.add(location);
 	print("Enter area [%1] at location [%2]", id, location);

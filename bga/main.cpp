@@ -72,7 +72,7 @@ static void start_main() {
 	player->additem(citem("TwoHandedSword"));
 	player->update();
 	current_world = bsdata<worldmapi>::elements;
-	next_scene(check_combat);
+	// next_scene(check_combat);
 }
 
 static void read_rules() {
