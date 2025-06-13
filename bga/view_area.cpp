@@ -685,7 +685,9 @@ void paint_minimap() {
 }
 
 static void paint_area_map_screen() {
-	auto push_clip = clipping; setclipall();
+	pushrect push;
+	setcaret(0, 0, 800, 600);
+	auto push_clip = clipping; setclip();
 	setup_visible_area();
 	paint_tiles();
 	prepare_objects();
@@ -695,10 +697,10 @@ static void paint_area_map_screen() {
 }
 
 void get_save_screenshoot(surface& sm) {
-	auto push_last_scrren = last_screen;
+	auto push_last_screen = last_screen;
 	paint_area_map_screen();
 	blit(sm, 0, 0, sm.width, sm.height, 0, *canvas, 0, 0, canvas->width, canvas->height);
-	last_screen = push_last_scrren;
+	last_screen = push_last_screen;
 }
 
 static void enter_current_world_area() {

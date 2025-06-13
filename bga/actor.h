@@ -45,6 +45,7 @@ struct actor : moveable, coloration, statable, classa, wearable {
 	point			getlu() const;
 	int				getmovement() const { return 6; }
 	npci*			getnpc() const; // Monster and other template characters.
+	int				getspeed() const { return 7; }
 	int				getsize() const { return 1; }
 	bool			ispresent() const;
 	void			lookat(point destination);

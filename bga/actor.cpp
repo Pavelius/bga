@@ -272,7 +272,7 @@ void actor::updateanimate() {
 	else
 		frame--;
 	if(action == AnimateMove) {
-		movestep(7);
+		movestep(getspeed());
 		if(!ismoving())
 			stop();
 	}

@@ -2250,8 +2250,11 @@ unsigned char* surface::allocator(unsigned char* bits, unsigned size) {
 	} else {
 		if(!bits)
 			bits = (unsigned char*)malloc(size);
-		else
-			bits = (unsigned char*)realloc(bits, size);
+		else {
+			auto p = (unsigned char*)realloc(bits, size);
+			if(p)
+				bits = p;
+		}
 	}
 	return bits;
 }

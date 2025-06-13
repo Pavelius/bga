@@ -978,8 +978,10 @@ static void paint_list(const array& source, int& origin, int per_page, fncommand
 	auto im = maximum;
 	if(im > origin + per_page)
 		im = origin + per_page;
+	auto push_dialog = dialog_start;
 	for(auto i = origin; i < im; i++) {
 		auto p = ((void**)source.data)[i];
+		dialog_start = caret;
 		proc(p);
 		button_hilited = ishilite();
 		if(button_hilited) {
@@ -993,6 +995,7 @@ static void paint_list(const array& source, int& origin, int per_page, fncommand
 		}
 		caret.y += height;
 	}
+	dialog_start = push_dialog;
 	clipping = push_clip;
 	caret.x += push.width;
 	caret.y = push.caret.y;
@@ -1011,9 +1014,11 @@ void paint_list(void* data, size_t size, int maximum, int& origin, int per_page,
 	auto im = maximum;
 	if(im > origin + per_page)
 		im = origin + per_page;
+	auto push_dialog = dialog_start; 
 	for(auto i = origin; i < im; i++) {
 		button_hilited = ishilite();
 		auto p = (char*)data + i * size;
+		dialog_start = caret;
 		proc(p);
 		if(button_hilited) {
 			if(hot.key == MouseLeft && !hot.pressed) {
@@ -1026,6 +1031,7 @@ void paint_list(void* data, size_t size, int maximum, int& origin, int per_page,
 		}
 		caret.y += height;
 	}
+	dialog_start = push_dialog;
 	clipping = push_clip;
 	caret.x += push.width;
 	caret.y = push.caret.y;
