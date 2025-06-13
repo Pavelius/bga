@@ -684,6 +684,23 @@ void paint_minimap() {
 	fore = push_fore;
 }
 
+static void paint_area_map_screen() {
+	auto push_clip = clipping; setclipall();
+	setup_visible_area();
+	paint_tiles();
+	prepare_objects();
+	sort_objects();
+	paint_objects();
+	clipping = push_clip;
+}
+
+static void get_save_screenshoot(surface& sm) {
+	auto push_last_scrren = last_screen;
+	paint_area_map_screen();
+	blit(sm, 0, 0, sm.width, sm.height, 0, *canvas, 0, 0, canvas->width, canvas->height);
+	last_screen = push_last_scrren;
+}
+
 static void enter_current_world_area() {
 	auto p = (worldmapi::area*)hot.object;
 	if(p)
