@@ -17,6 +17,7 @@ ChooseAmount: Укажите количество
 Close: Закрыть
 Coins: Золото
 Colors: Цвета
+ConfirmDelete: Вы действительно хотите удалить эту игру?
 CriticalHitLine: Критический удар: при результате %1i-20 урон x%2i
 CriticalHitLine20: Критический удар: при результате 20 урон x%2i
 Current: Текущий
@@ -29,6 +30,7 @@ Done: Завершить
 Drink: Напиток или блюдо
 Drinks: Выпивка и еда
 Empty: Пусто
+EnterSaveGameName: Укажите имя сохраняемой игры
 Experience: Опыт
 Export: Экспорт
 Feats: Особенности
@@ -74,6 +76,7 @@ Steal: Украсть
 Version: Версия
 Weight: Вес
 WeightAllowance: Максимальный переносимый вес
+Yes: Да
 
 BludgeonDamage: урона
 PierceDamage: колющего урона

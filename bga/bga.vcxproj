@@ -26,6 +26,7 @@
     <Text Include="..\locale\ru\Abilities.txt" />
     <Text Include="..\locale\ru\Alignments.txt" />
     <Text Include="..\locale\ru\Area.txt" />
+    <Text Include="..\locale\ru\Calendar.txt" />
     <Text Include="..\locale\ru\Classes.txt" />
     <Text Include="..\locale\ru\Feats.txt" />
     <Text Include="..\locale\ru\Items.txt" />

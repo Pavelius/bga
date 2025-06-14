@@ -111,6 +111,9 @@
     <Text Include="..\rules\Monsters.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\locale\ru\Calendar.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">

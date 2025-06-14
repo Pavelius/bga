@@ -1,0 +1,34 @@
+January: Январь
+February: Февраль
+March: Март
+April: Апрель
+May: Май
+June: Июнь
+July: Июль
+August: Август
+September: Сентябрь
+October: Октябрь
+November: Ноябрь
+December: Декабрь
+
+JanuaryOf: Января
+FebruaryOf: Февраля
+MarchOf: Марта
+AprilOf: Апреля
+MayOf: Мая
+JuneOf: Июня
+JulyOf: Июля
+AugustOf: Августа
+SeptemberOf: Сентября
+OctoberOf: Октября
+NovemberOf: Ноября
+DecemberOf: Декабря
+
+Year: Год
+Week: Неделя
+Day: День
+Hour: Час
+
+Minute: Минута
+MinuteOf: Минут
+MinutePl: Минуты

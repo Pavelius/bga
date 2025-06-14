@@ -34,3 +34,39 @@ int gethour() {
 int getday() {
 	return getday(game.get(Rounds));
 }
+
+const char* get_real_month(int number) {
+	static const char* source[] = {
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December",
+	};
+	return source[number];
+}
+
+const char* get_real_month_of(int number) {
+	static const char* source[] = {
+		"JanuaryOf",
+		"FebruaryOf",
+		"MarchOf",
+		"AprilOf",
+		"MayOf",
+		"JuneOf",
+		"JulyOf",
+		"AugustOf",
+		"SeptemberOf",
+		"OctoberOf",
+		"NovemberOf",
+		"DecemberOf",
+	};
+	return source[number];
+}

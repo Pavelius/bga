@@ -20,3 +20,6 @@ int getminute();
 int getminute(unsigned value);
 int gethour();
 int gethour(unsigned passed);
+
+const char* get_real_month(int number);
+const char* get_real_month_of(int number);

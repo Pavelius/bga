@@ -3,7 +3,9 @@
 #include "calendar.h"
 #include "creature.h"
 #include "item.h"
+#include "io_stream.h"
 #include "math.h"
+#include "saveheader.h"
 #include "school.h"
 #include "stringbuilder.h"
 #include "stringvar.h"
@@ -274,6 +276,17 @@ static void passed_time(stringbuilder& sb) {
 		sb.adds("%1i %2", h, getnm(str_count("Minute", m)));
 }
 
+static void real_time(stringbuilder& sb, const io::file::datei& v) {
+	sb.adds("%1i", v.day);
+	sb.adds("%-1", getnm(get_real_month_of(v.month)));
+	sb.adds("%1i", v.year);
+	sb.add(", %1.2i:%2.2i", v.hour, v.minute);
+}
+
+static void real_time(stringbuilder& sb) {
+	real_time(sb, last_save_header->change);
+}
+
 template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
 	auto p = (skilli*)object;
 	add_description(sb, p->id);
@@ -320,6 +333,7 @@ BSDATA(stringvari) = {
 	{"ItemInformation", item_information},
 	{"ItemName", item_name},
 	{"PassedTime", passed_time},
+	{"RealTime", real_time},
 	{"PlayerInformation", player_information},
 	{"PlayerSkillInformation", player_skill_information},
 	{"SpellInformation", spell_information},

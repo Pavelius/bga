@@ -17,21 +17,6 @@ static vector<rowsaveheaderi> files;
 void get_save_screenshoot(surface& sm);
 void get_player_portrait(surface& sm, int index);
 
-static void check_save_files() {
-	char temp[260];
-	files.clear();
-	for(io::file::find file("save"); file; file.next()) {
-		auto pn = file.name();
-		if(pn[0] == '.')
-			continue;
-		if(!szpmatch(pn, "*.sav"))
-			continue;
-		if(is_saved_game(file.fullname(temp)))
-			continue;
-		io::file::remove(temp);
-	}
-}
-
 static void update_files() {
 	char temp[260];
 	files.clear();
@@ -42,10 +27,19 @@ static void update_files() {
 		if(!szpmatch(pn, "*.sav"))
 			continue;
 		auto p = files.add();
-		stringbuilder sb(p->file);
-		sb.add(szfnamewe(temp, pn));
-		p->read(p->file);
+		p->clear();
+		p->setfile(szfnamewe(temp, pn));
+		if(!p->read()) {
+			io::file::remove(file.fullname(temp));
+			p->clear();
+		}
 	}
+}
+
+static void update_files_save() {
+	update_files();
+	auto p = files.add();
+	p->clear();
 }
 
 static int get_file_number(const char* url, const char* mask) {
@@ -117,6 +111,12 @@ void saveheaderi::create() {
 }
 
 static void row_delete() {
+	auto p = (rowsaveheaderi*)hot.object;
+	if(!confirm("ConfirmDelete"))
+		return;
+	char temp[260];
+	io::file::remove(get_save_url(temp, p->file));
+	update_files_save();
 }
 
 static void row_save() {
@@ -132,27 +132,29 @@ static void row_save() {
 static void paint_game_row(void* object) {
 	pushrect push;
 	pushfore push_fore;
-	auto p = (rowsaveheaderi*)object;
-	setdialog(6, 6);  p->paint();
+	auto push_header = last_save_header;
+	last_save_header = (rowsaveheaderi*)object;
+	setdialog(6, 6);  last_save_header->paint();
 	setdialog(514, 13); auto push_party = caret;
 	for(auto i = 0; i < 6; i++) {
-		p->paintparty(i);
+		last_save_header->paintparty(i);
 		caret.x += 28;
 		if(i == 2) {
 			caret.x = push_party.x;
 			caret.y += 41;
 		}
 	}
-	setdialog(140, 15, 345, 18);
-	texta(NORMAL, *p ? p->name : getnm("Empty"), AlignLeft);
-	if(*p) {
-		setdialog(140, 40, 279, 18);
+	setdialog(132, 15, 345, 18);
+	texta(NORMAL, *last_save_header ? last_save_header->name : getnm("Empty"), AlignLeft);
+	if(*last_save_header) {
+		setdialog(132, 40, 279, 18);
 		fore = colors::white.mix(colors::black, 192);
-		texta(NORMAL, "Пролог, 9 часов", AlignLeft);
+		texta(NORMAL, str("%PassedTime\n%RealTime"), AlignLeft);
 	}
 	fore = push_fore.fore;
 	setdialog(604, 11); button(GBTNSTD, 1, 2, 0, "Save"); fire(row_save, 0, 0, object);
-	setdialog(604, 52); button(GBTNSTD, 1, 2, 0, "Delete", 3, p->file[0] != 0); fire(row_delete, 0, 0, object);
+	setdialog(604, 52); button(GBTNSTD, 1, 2, 0, "Delete", 3, last_save_header->file[0] != 0); fire(row_delete, 0, 0, object);
+	last_save_header = push_header;
 }
 
 static void paint_game_list() {
@@ -170,23 +172,21 @@ static void paint_save_game() {
 
 static void paint_confirm_overwrite() {
 	paint_dialog(GUISRRQB);
-	setdialog(23, 23, 280, 20); texta(NORMAL, "Enter a Save Game Name", AlignCenterCenter);
+	setdialog(23, 23, 280, 20); texta(NORMAL, getnm("EnterSaveGameName"), AlignCenterCenter);
 	setdialog(27, 56, 275, 16); edit(last_save_header->name, sizeof(last_save_header->name) / sizeof(last_save_header->name[0]), AlignLeft);
-	setdialog(23, 84, 280, 20); texta(NORMAL, "268435460", AlignCenterCenter);
+	setdialog(27, 84, 275, 20); texta(NORMAL, str("%PassedTime"), AlignCenterCenter);
 	setdialog(21, 114); button(GBTNSPB1, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 	setdialog(149, 114); button(GBTNMED, 1, 2, KeyEnter, "Overwrite"); fire(buttonok);
 }
 
 bool confirm_overvrite() {
+	caret_index = 0xFFFFFFFF;
 	open_dialog(paint_confirm_overwrite, true);
 	return getresult() != 0;
 }
 
 void open_save_game() {
-	check_save_files();
-	update_files();
-	auto p = files.add();
-	p->clear();
+	update_files_save();
 	scene(paint_save_game);
 	files.clear();
 }

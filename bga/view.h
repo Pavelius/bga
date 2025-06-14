@@ -7,6 +7,7 @@ struct item;
 
 enum resn : unsigned short;
 
+extern unsigned caret_index;
 extern bool button_pressed, button_executed, button_hilited, input_disabled;
 extern fnevent on_player_change;
 
@@ -21,6 +22,7 @@ void button_check(unsigned key);
 void change_zoom_factor();
 void checkbox(int& source, int value, resn res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key);
 void choose_creature();
+bool confirm(const char* id, ...);
 bool confirm_overvrite();
 void edit(char* string, size_t maximum, unsigned text_flags, bool upper_case = false);
 void fire(fnevent proc, long param = 0, long param2 = 0, const void* object = 0);

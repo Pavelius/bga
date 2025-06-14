@@ -119,17 +119,17 @@ const char* get_save_url(char* result, const char* id) {
 	return result;
 }
 
-bool saveheaderi::read(const char* id) {
+bool rowsaveheaderi::read() {
 	char temp[260];
-	io::file file(get_save_url(temp, id), StreamRead);
-	if(!file)
+	io::file flo(get_save_url(temp, file), StreamRead);
+	if(!flo)
 		return false;
-	archive a(file, false);
+	archive a(flo, false);
 	if(!a.signature("SAV"))
 		return false;
 	if(!a.signature(get_version()))
 		return false;
-	file.get(change);
+	flo.get(change);
 	serial_header(a, *this);
 	return true;
 }

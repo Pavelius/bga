@@ -19,6 +19,8 @@ using namespace draw;
 
 extern array console_data;
 
+unsigned caret_index;
+
 static point dialog_start;
 static bool button_pressed, button_executed, button_hilited, input_disabled;
 static bool game_pause;
@@ -29,7 +31,6 @@ static item drag_item;
 
 static char description_text[4096];
 static size_t description_cash_size;
-static size_t caret_index;
 static int character_info_mode;
 static int current_topic_list, cash_topic_list, current_content_list;
 static int current_spell_level;
@@ -1045,7 +1046,7 @@ void paint_list(void* data, size_t size, int maximum, int& origin, int per_page,
 	auto im = maximum;
 	if(im > origin + per_page)
 		im = origin + per_page;
-	auto push_dialog = dialog_start; 
+	auto push_dialog = dialog_start;
 	for(auto i = origin; i < im; i++) {
 		button_hilited = ishilite();
 		auto p = (char*)data + i * size;
@@ -1426,6 +1427,22 @@ void open_game() {
 
 void open_worldmap() {
 	scene(paint_worldmap);
+}
+
+static void paint_confirm() {
+	paint_dialog(GUIERR, 1);
+	setdialog(28, 28, 221, 64); texta(description, AlignCenterCenter);
+	setdialog(18, 104); button(GBTNSTD, 1, 2, KeyEscape, "No"); fire(buttoncancel);
+	setdialog(140, 104); button(GBTNSTD, 1, 2, KeyEnter, "Yes"); fire(buttonok);
+}
+
+bool confirm(const char* id, ...) {
+	XVA_FORMAT(id)
+	pushdescription push;
+	description.clear();
+	description.addv(getnm(id), format_param);
+	open_dialog(paint_confirm, true);
+	return getresult() != 0;
 }
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color) {
