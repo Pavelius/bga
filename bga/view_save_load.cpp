@@ -1,4 +1,6 @@
 #include "draw.h"
+#include "io_stream.h"
+#include "game.h"
 #include "resid.h"
 #include "saveheader.h"
 #include "slice.h"
@@ -8,17 +10,101 @@
 
 using namespace draw;
 
+rowsaveheaderi* last_save_header;
+
 static vector<rowsaveheaderi> files;
 
 void get_save_screenshoot(surface& sm);
 void get_player_portrait(surface& sm, int index);
 
+static void check_save_files() {
+	char temp[260];
+	files.clear();
+	for(io::file::find file("save"); file; file.next()) {
+		auto pn = file.name();
+		if(pn[0] == '.')
+			continue;
+		if(!szpmatch(pn, "*.sav"))
+			continue;
+		if(is_saved_game(file.fullname(temp)))
+			continue;
+		io::file::remove(temp);
+	}
+}
+
+static void update_files() {
+	char temp[260];
+	files.clear();
+	for(io::file::find file("save"); file; file.next()) {
+		auto pn = file.name();
+		if(pn[0] == '.')
+			continue;
+		if(!szpmatch(pn, "*.sav"))
+			continue;
+		auto p = files.add();
+		stringbuilder sb(p->file);
+		sb.add(szfnamewe(temp, pn));
+		p->read(p->file);
+	}
+}
+
+static int get_file_number(const char* url, const char* mask) {
+	char result[260]; stringbuilder sb(result); sb.clear();
+	for(io::file::find file(url); file; file.next()) {
+		auto pn = file.name();
+		if(pn[0] == '.')
+			continue;
+		if(!szpmatch(pn, mask))
+			continue;
+		if(!result[0] || szcmp(pn, result) > 0) {
+			sb.clear();
+			sb.add(pn);
+		}
+	}
+	auto index = 1;
+	if(result[0]) {
+		char temp[260]; szfnamewe(temp, result);
+		auto p = temp + zlen(temp);
+		while(p > temp) {
+			if(!isnum(p[-1]))
+				break;
+			p--;
+		}
+		psnum(p, index);
+		index++;
+	}
+	return index;
+}
+
 void saveheaderi::clear() {
 	memset(this, 0, sizeof(*this));
 }
 
+void saveheaderi::paint() const {
+	surface sm; sm.resize(102, 77, 32, false); sm.bits = (unsigned char*)screenshoot;
+	blit(*canvas, caret.x, caret.y, sm.width, sm.height, 0, sm, 0, 0);
+	sm.bits = 0; // To prevent deallocate bits, when destroy surface.
+}
+
+void saveheaderi::paintparty(int index) const {
+	surface pm; pm.resize(20, 22, 32, false); pm.bits = (unsigned char*)party[index];
+	blit(*canvas, caret.x, caret.y, pm.width, pm.height, 0, pm, 0, 0);
+	pm.bits = 0; // To prevent deallocate bits, when destroy surface.
+}
+
+void rowsaveheaderi::clear() {
+	memset(this, 0, sizeof(*this));
+}
+
+void rowsaveheaderi::setfile(const char* format, ...) {
+	XVA_FORMAT(format)
+	stringbuilder sb(file);
+	sb.addv(format, format_param);
+}
+
 void saveheaderi::create() {
-	clear();
+	rounds = game.get(Rounds);
+	chapter = game.get(Chapter);
 	surface sm; sm.resize(102, 77, 32, false); sm.bits = (unsigned char*)screenshoot;
 	get_save_screenshoot(sm);
 	surface pm; pm.resize(20, 22, 32, false);
@@ -34,30 +120,39 @@ static void row_delete() {
 }
 
 static void row_save() {
+	last_save_header = (rowsaveheaderi*)hot.object;
+	if(!last_save_header->file[0])
+		last_save_header->setfile("GAM%1.4i", get_file_number("save", "GAM*.sav"));
+	if(!confirm_overvrite())
+		return;
+	last_save_header->serial(true);
 	next_scene(open_game);
 }
 
 static void paint_game_row(void* object) {
 	pushrect push;
-	auto p = (saveheaderi*)object;
-	surface sm; sm.resize(102, 77, 32, false); sm.bits = (unsigned char*)p->screenshoot;
-	surface pm; pm.resize(20, 22, 32, false);
-	blit(*canvas, caret.x + 6, caret.y + 6, sm.width, sm.height, 0, sm, 0, 0);
+	pushfore push_fore;
+	auto p = (rowsaveheaderi*)object;
+	setdialog(6, 6);  p->paint();
+	setdialog(514, 13); auto push_party = caret;
 	for(auto i = 0; i < 6; i++) {
-		pm.bits = (unsigned char*)p->party[i];
-		blit(*canvas, caret.x + 514, caret.y + 13, pm.width, pm.height, 0, pm, 0, 0);
+		p->paintparty(i);
 		caret.x += 28;
 		if(i == 2) {
-			caret.x = push.caret.x;
+			caret.x = push_party.x;
 			caret.y += 41;
 		}
 	}
-	sm.bits = 0;
-	pm.bits = 0;
-	setdialog(140, 15, 345, 18); texta(NORMAL, "268435461", AlignLeft);
-	setdialog(140, 40, 279, 18); texta(NORMAL, "268435466", AlignLeft);
-	setdialog(604, 11); button(GBTNSTD, 1, 2); fire(row_save, 0, 0, object);
-	setdialog(604, 52); button(GBTNSTD, 1, 2); fire(row_delete, 0, 0, object);
+	setdialog(140, 15, 345, 18);
+	texta(NORMAL, *p ? p->name : getnm("Empty"), AlignLeft);
+	if(*p) {
+		setdialog(140, 40, 279, 18);
+		fore = colors::white.mix(colors::black, 192);
+		texta(NORMAL, "Пролог, 9 часов", AlignLeft);
+	}
+	fore = push_fore.fore;
+	setdialog(604, 11); button(GBTNSTD, 1, 2, 0, "Save"); fire(row_save, 0, 0, object);
+	setdialog(604, 52); button(GBTNSTD, 1, 2, 0, "Delete", 3, p->file[0] != 0); fire(row_delete, 0, 0, object);
 }
 
 static void paint_game_list() {
@@ -70,18 +165,28 @@ static void paint_save_game() {
 	paint_game_dialog(GUISRSVB);
 	setdialog(243, 22, 311, 28); texta(STONEBIG, getnm("SaveGame"), AlignCenterCenter);
 	setdialog(23, 78, 740, 498); paint_game_list();
-	//setdialog(159, 195, 345, 18); texta(NORMAL, "268435462", AlignCenterCenter);
-	//setdialog(159, 220, 279, 18); texta(NORMAL, "268435467", AlignCenterCenter);
-	//setdialog(159, 297, 345, 18); texta(NORMAL, "268435463", AlignCenterCenter);
-	//setdialog(159, 322, 279, 18); texta(NORMAL, "268435468", AlignCenterCenter);
-	//setdialog(159, 399, 345, 18); texta(NORMAL, "268435464", AlignCenterCenter);
-	//setdialog(159, 424, 279, 18); texta(NORMAL, "268435469", AlignCenterCenter);
 	setdialog(656, 22); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 }
 
+static void paint_confirm_overwrite() {
+	paint_dialog(GUISRRQB);
+	setdialog(23, 23, 280, 20); texta(NORMAL, "Enter a Save Game Name", AlignCenterCenter);
+	setdialog(27, 56, 275, 16); edit(last_save_header->name, sizeof(last_save_header->name) / sizeof(last_save_header->name[0]), AlignLeft);
+	setdialog(23, 84, 280, 20); texta(NORMAL, "268435460", AlignCenterCenter);
+	setdialog(21, 114); button(GBTNSPB1, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+	setdialog(149, 114); button(GBTNMED, 1, 2, KeyEnter, "Overwrite"); fire(buttonok);
+}
+
+bool confirm_overvrite() {
+	open_dialog(paint_confirm_overwrite, true);
+	return getresult() != 0;
+}
+
 void open_save_game() {
-	files.clear();
+	check_save_files();
+	update_files();
 	auto p = files.add();
-	p->create();
+	p->clear();
 	scene(paint_save_game);
+	files.clear();
 }

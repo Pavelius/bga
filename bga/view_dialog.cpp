@@ -29,6 +29,7 @@ static item drag_item;
 
 static char description_text[4096];
 static size_t description_cash_size;
+static size_t caret_index;
 static int character_info_mode;
 static int current_topic_list, cash_topic_list, current_content_list;
 static int current_spell_level;
@@ -319,6 +320,36 @@ static void color_picker_line(int index, int count, int dx) {
 		index++;
 	}
 	caret = push_caret;
+}
+
+void edit(char* string, size_t maximum, unsigned text_flags, bool upper_case) {
+	pushrect push;
+	auto lenght = zlen(string);
+	if(caret_index > lenght)
+		caret_index = lenght;
+	texta(string, text_flags);
+	auto tick = getcputime();
+	if(((tick / 100) % 10) < 4) {
+		auto push_caret = caret;
+		caret.x += textw(string, caret_index);
+		line(caret.x, caret.y + texth());
+		caret = push_caret;
+	}
+	switch(hot.key) {
+	case InputSymbol:
+		if(caret_index < (maximum - 1) && hot.param >= 0x20) {
+			if(upper_case)
+				string[caret_index++] = upper_symbol((char)hot.param);
+			else
+				string[caret_index++] = (char)hot.param;
+			string[caret_index] = 0;
+		}
+		break;
+	case KeyBackspace:
+		if(caret_index > 0)
+			string[--caret_index] = 0;
+		break;
+	}
 }
 
 static void scroll(resn res, int fu, int fd, int bar, int& origin, int maximum, int per_page, int per_row) {

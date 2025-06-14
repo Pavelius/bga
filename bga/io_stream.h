@@ -35,6 +35,10 @@ struct file : stream {
 		char			reserved[512];
 		void*			handle;
 	};
+	struct datei {
+		short unsigned	year;
+		unsigned char	month, day, hour, minute, seconds, day_week;
+	};
 	file();
 	file(const char* url, unsigned feats = StreamRead);
 	~file();
@@ -42,6 +46,7 @@ struct file : stream {
 	void				close();
 	bool				create(const char* url, unsigned feats);
 	static bool			exist(const char* url);
+	void				get(datei& v) const;
 	static char*		getdir(char* url, int size);
 	static char*		getmodule(char* url, int size);
 	static bool			getfullurl(const char* short_url, char* url, int size);

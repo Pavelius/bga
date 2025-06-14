@@ -21,6 +21,8 @@ void button_check(unsigned key);
 void change_zoom_factor();
 void checkbox(int& source, int value, resn res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key);
 void choose_creature();
+bool confirm_overvrite();
+void edit(char* string, size_t maximum, unsigned text_flags, bool upper_case = false);
 void fire(fnevent proc, long param = 0, long param2 = 0, const void* object = 0);
 void hotkey(unsigned key, fnevent proc, int param = 0);
 void initialize_ui();

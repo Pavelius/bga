@@ -16,5 +16,7 @@ struct periodi : nameable {
 
 int getday();
 int getday(unsigned passed);
+int getminute();
+int getminute(unsigned value);
 int gethour();
 int gethour(unsigned passed);

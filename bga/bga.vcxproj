@@ -110,6 +110,7 @@
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="moveable.cpp" />
     <ClCompile Include="nameable.cpp" />
+    <ClCompile Include="namestr.cpp" />
     <ClCompile Include="npc.cpp" />
     <ClCompile Include="order.cpp" />
     <ClCompile Include="point.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="math.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="moveable.h" />
+    <ClInclude Include="namestr.h" />
     <ClInclude Include="npc.h" />
     <ClInclude Include="my_initialize_list.h" />
     <ClInclude Include="order.h" />

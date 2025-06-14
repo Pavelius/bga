@@ -133,3 +133,18 @@ bool io::file::makedir(const char* url) {
 bool io::file::getfullurl(const char* short_url, char* url, int size) {
 	return GetFullPathNameA(short_url, size, url, 0) != 0;
 }
+
+void io::file::get(io::file::datei& result) const {
+	result = {};
+	FILETIME ft;
+	SYSTEMTIME st;
+	GetFileTime(handle, 0, 0, &ft);
+	FileTimeToSystemTime(&ft, &st);
+	result.year = st.wYear;
+	result.month = (unsigned char)st.wMonth;
+	result.day = (unsigned char)st.wDay;
+	result.day_week = (unsigned char)st.wDayOfWeek;
+	result.hour = (unsigned char)st.wHour;
+	result.minute = (unsigned char)st.wMinute;
+	result.seconds = (unsigned char)st.wSecond;
+}

@@ -103,10 +103,6 @@ static bool allow_use_steal(int bonus) {
 static void use_steal(int bonus) {
 }
 
-static void quicksave(int bonus) {
-	gamesave("autosave");
-}
-
 BSDATA(script) = {
 	{"Attack", attack_change},
 	{"BuyItem", buy_item_script, allow_buy_item},
@@ -121,7 +117,6 @@ BSDATA(script) = {
 	{"Done", button_cancel},
 	{"Heal", heal},
 	{"LevelUp", level_up, allow_level_up},
-	{"QuickSave", quicksave},
 	{"SellItem", sell_item_script, allow_sell_item},
 	{"ShowItemList", show_item_list},
 	{"UseSteal", use_steal, allow_use_steal},

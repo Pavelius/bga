@@ -23,8 +23,8 @@ struct renderi {
 	typedef void(*fnpaint)(const drawable* object);
 	const array&	source;
 	fnpaint			proc;
-	int				priority;
-	rendern			getindex() const;
+	int	priority;
+	rendern	getindex() const;
 };
 
 static worldmapi::area* current_world_area_hilite;
@@ -36,10 +36,6 @@ const int tile_size = 64;
 
 static point hotspot;
 static int zoom_factor = 1;
-
-//rendern	renderi::getindex() const {
-//	return (rendern)(this - bsdata<renderi>::elements);
-//}
 
 static unsigned get_game_tick() {
 	return current_tick / 64;
@@ -781,6 +777,10 @@ void* choose_combat_action() {
 	open_combat_mode();
 	return (void*)getresult();
 }
+
+//rendern	renderi::getindex() const {
+//	return (rendern)(this - bsdata<renderi>::elements);
+//}
 
 // TODO: Render concept
 //BSDATA(renderi) = {

@@ -9,6 +9,7 @@
 #include "game.h"
 #include "itemground.h"
 #include "iteminside.h"
+#include "rand.h"
 #include "region.h"
 #include "saveheader.h"
 #include "timer.h"
@@ -99,7 +100,7 @@ static unsigned long get_version() {
 	return r;
 }
 
-bool saveheaderi::read(const char* url) {
+bool is_saved_game(const char* url) {
 	io::file file(url, StreamRead);
 	if(!file)
 		return false;
@@ -108,22 +109,44 @@ bool saveheaderi::read(const char* url) {
 		return false;
 	if(!a.signature(get_version()))
 		return false;
-	serial_header(a, *this);
 	return true;
 }
 
-static bool archive_sav(const char* url, bool write_mode) {
-	io::file file(url, write_mode ? StreamWrite : StreamRead);
+const char* get_save_url(char* result, const char* id) {
+	stringbuilder sb(result, result + 259);
+	sb.clear();
+	sb.add("save/%1.sav", id);
+	return result;
+}
+
+bool saveheaderi::read(const char* id) {
+	char temp[260];
+	io::file file(get_save_url(temp, id), StreamRead);
 	if(!file)
 		return false;
-	archive a(file, write_mode);
+	archive a(file, false);
 	if(!a.signature("SAV"))
 		return false;
 	if(!a.signature(get_version()))
 		return false;
-	saveheaderi* phead = new saveheaderi;
-	serial_header(a, *phead);
-	delete phead;
+	file.get(change);
+	serial_header(a, *this);
+	return true;
+}
+
+bool rowsaveheaderi::serial(bool write_mode) {
+	char temp[260];
+	io::file flo(get_save_url(temp, file), write_mode ? StreamWrite : StreamRead);
+	if(!flo)
+		return false;
+	archive a(flo, write_mode);
+	if(!a.signature("SAV"))
+		return false;
+	if(!a.signature(get_version()))
+		return false;
+	if(!write_mode)
+		flo.get(change);
+	serial_header(a, *this);
 	a.set(area_name);
 	a.set(draw::camera);
 	a.set(current_game_tick);
@@ -136,16 +159,16 @@ static bool archive_sav(const char* url, bool write_mode) {
 	return true;
 }
 
-static bool archive_game(const char* name, bool write_mode) {
-	char temp[260]; stringbuilder sb(temp);
-	sb.add("save/%1.sav", name);
-	return archive_sav(temp, write_mode);
-}
-
-void gamesave(const char* name) {
-	archive_game(name, true);
+void game_auto_save() {
+	auto p = new rowsaveheaderi;
+	p->clear();
+	p->setname(getnm("Autosave"));
+	p->setfile("Autosave");
+	p->serial(true);
+	delete p;
 }
 
 void create_game() {
 	game.set(IdentifyCost, 100);
+	game.set(Rounds, xrand(10, 30));
 }

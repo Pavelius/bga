@@ -6,6 +6,7 @@ AreaMap: Карта местности
 ArmorBonus: Бонус брони
 ArmorCheckPenalty: Штраф брони на проверки
 AttackBonus: Бонус к атаке
+Autosave: Автоматическое сохранение
 BasicAbility: Базовая способность
 Biography: Биография
 Buy: Купить
@@ -22,10 +23,12 @@ Current: Текущий
 Customize: Персонализация
 Damage: Повреждения
 DefaultColor: По-умолчанию
+Delete: Удалить
 Description: Описание
 Done: Завершить
 Drink: Напиток или блюдо
 Drinks: Выпивка и еда
+Empty: Пусто
 Experience: Опыт
 Export: Экспорт
 Feats: Особенности
@@ -44,8 +47,10 @@ Name: Наименование
 NextLevel: Следующий уровень
 No: Нет
 Options: Опции
+Overwrite: Перезаписать
 Proficiency: Владение
 QuickItem: Предметы
+Quicksave: Быстрое сохранение
 QuickWeapon: Оружие
 Quiver: Колчан
 Range30: 30 футов
@@ -58,6 +63,7 @@ RoomPeasant: Крестьянская
 RoomQuality: Качество комнаты
 RoomRoyal: Королевская
 Rumors: Слухи
+Save: Сохранить
 SaveGame: Сохранить игру
 SavingThrows: Броски спасения
 Sell: Продать

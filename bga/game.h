@@ -4,7 +4,7 @@
 #include "point.h"
 
 enum gamen : unsigned char {
-	Reputation, Progress,
+	Reputation, Progress, Chapter, Rounds,
 	IdentifyCost,
 };
 struct gameni : nameable {
@@ -16,9 +16,12 @@ struct gamei {
 };
 extern gamei game;
 
+const char* get_save_url(char* result, const char* id);
+
 void create_game();
 void enter(const char* id, const char* location);
-void gamesave(const char* name);
+bool is_saved_game(const char* url);
+void game_auto_save();
 void moveparty(point v);
 void setcamera(point v);
 void setparty(point v);

@@ -72,6 +72,7 @@ static void start_main() {
 	player->additem(citem("TwoHandedSword"));
 	player->update();
 	current_world = bsdata<worldmapi>::elements;
+	game.set(Rounds, xrand(10, 40));
 	// next_scene(check_combat);
 }
 

@@ -1,5 +1,6 @@
 #include "ability.h"
 #include "alignment.h"
+#include "calendar.h"
 #include "creature.h"
 #include "item.h"
 #include "math.h"
@@ -261,6 +262,18 @@ static void item_information(stringbuilder& sb) {
 	addv(sb, "Weight", getkg(ei.weight));
 }
 
+static void passed_time(stringbuilder& sb) {
+	auto h = gethour();
+	auto d = getday();
+	auto m = getminute();
+	if(d)
+		sb.adds("%1i %2", d, getnm(str_count("Day", d)));
+	if(h)
+		sb.adds("%1i %2", h, getnm(str_count("Hour", h)));
+	if(!d && m)
+		sb.adds("%1i %2", h, getnm(str_count("Minute", m)));
+}
+
 template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
 	auto p = (skilli*)object;
 	add_description(sb, p->id);
@@ -306,6 +319,7 @@ void main_identifier(stringbuilder& sb, const char* identifier) {
 BSDATA(stringvari) = {
 	{"ItemInformation", item_information},
 	{"ItemName", item_name},
+	{"PassedTime", passed_time},
 	{"PlayerInformation", player_information},
 	{"PlayerSkillInformation", player_skill_information},
 	{"SpellInformation", spell_information},
