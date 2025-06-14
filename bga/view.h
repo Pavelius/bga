@@ -52,6 +52,7 @@ void open_dialog();
 void open_item_count();
 void open_item_description();
 void open_game();
+void open_load_game();
 void open_save_game();
 void open_scene();
 void open_store();

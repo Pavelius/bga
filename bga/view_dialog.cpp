@@ -909,17 +909,25 @@ static void paint_color_pick() {
 	hotkey(KeyEscape, buttonparam, -2);
 }
 
+static void quit_main_menu() {
+	if(!confirm("ConfirmQuitMainMenu"))
+		return;
+}
+
 static void paint_game_options() {
 	paint_game_dialog(STONEOPT);
 	paint_action_panel_na();
 	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("Options"), AlignCenterCenter);
-	setdialog(497, 68); button(GBTNLRG2, 1, 2, '1', "SaveGame"); fire(open_save_game);
-	setdialog(497, 98); button(GBTNLRG2, 1, 2);
-	setdialog(497, 128); button(GBTNLRG2, 1, 2);
-	setdialog(353, 386, 95, 16); texta(getnm("Version"), AlignCenterCenter);
-	setdialog(497, 168); button(GBTNLRG2, 1, 2);
-	setdialog(497, 198); button(GBTNLRG2, 1, 2);
+	setdialog(497, 68); button(GBTNLRG2, 1, 2, '1', "LoadGame"); fire(open_load_game);
+	setdialog(497, 98); button(GBTNLRG2, 1, 2, '2', "SaveGame"); fire(open_save_game);
+	setdialog(497, 128); button(GBTNLRG2, 1, 2, '3', "QuitMainMenu"); fire(quit_main_menu);
+	setdialog(497, 168); button(GBTNLRG2, 1, 2, '4', "Graphics");
+	setdialog(497, 198); button(GBTNLRG2, 1, 2, '5', "Sound");
+	setdialog(497, 228); button(GBTNLRG2, 1, 2, '6', "GamePlay");
+	setdialog(497, 268); button(GBTNLRG2, 1, 2, '7', "Movies");
+	setdialog(497, 298); button(GBTNLRG2, 1, 2, '8', "Keyboard");
 	setdialog(555, 338); button(GBTNSTD, 1, 2, KeyEscape, "Close"); fire(setgameproc, 1, 0, paint_game_options);
+	setdialog(353, 386, 95, 16); texta(str("%GameVersion"), AlignCenterCenter);
 }
 
 static void paint_game_journal() {
@@ -1432,8 +1440,8 @@ void open_worldmap() {
 static void paint_confirm() {
 	paint_dialog(GUIERR, 1);
 	setdialog(28, 28, 221, 64); texta(description, AlignCenterCenter);
-	setdialog(18, 104); button(GBTNSTD, 1, 2, KeyEscape, "No"); fire(buttoncancel);
-	setdialog(140, 104); button(GBTNSTD, 1, 2, KeyEnter, "Yes"); fire(buttonok);
+	setdialog(18, 104); button(GBTNSTD, 1, 2, KeyEnter, "Yes"); fire(buttonok);
+	setdialog(140, 104); button(GBTNSTD, 1, 2, KeyEscape, "No"); fire(buttoncancel);
 }
 
 bool confirm(const char* id, ...) {

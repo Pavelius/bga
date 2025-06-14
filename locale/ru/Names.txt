@@ -17,7 +17,8 @@ ChooseAmount: Укажите количество
 Close: Закрыть
 Coins: Золото
 Colors: Цвета
-ConfirmDelete: Вы действительно хотите удалить эту игру?
+ConfirmDelete: Вы действительно хотите удалить это сохранение игры?
+ConfirmQuitMainMenu: Вы действительно хотите покинуть текущую игру и вернуться в главное меню?
 CriticalHitLine: Критический удар: при результате %1i-20 урон x%2i
 CriticalHitLine20: Критический удар: при результате 20 урон x%2i
 Current: Текущий
@@ -35,16 +36,22 @@ Experience: Опыт
 Export: Экспорт
 Feats: Особенности
 From: из
+GamePlay: Игровой процесс
+Graphics: Графика
 Ground: На земле
 Information: Информация
 Identify: Опознать
 Identifying: Опознание предметов
 Journal: Журнал
+Keyboard: Клавиатура
 Kg: кг.
 Levels: Уровни
 LevelUp: Развитие
+Load: Зарузить
+LoadGame: Загрузить игру
 MagicBonus: Магический бонус
 MaxDexterityBonus: Максимальный бонус ловкости
+Movies: Видеоролики
 Name: Наименование
 NextLevel: Следующий уровень
 No: Нет
@@ -55,6 +62,7 @@ QuickItem: Предметы
 Quicksave: Быстрое сохранение
 QuickWeapon: Оружие
 Quiver: Колчан
+QuitMainMenu: Покинуть игру
 Range30: 30 футов
 Replay: Заново
 Required: Требования
@@ -70,6 +78,7 @@ SaveGame: Сохранить игру
 SavingThrows: Броски спасения
 Sell: Продать
 Skills: Навыки
+Sound: Звук
 SpellFailure: Неудача при создании заклинания
 SpellLevelShort: Уров.
 Steal: Украсть

@@ -287,6 +287,11 @@ static void real_time(stringbuilder& sb) {
 	real_time(sb, last_save_header->change);
 }
 
+static void game_version(stringbuilder& sb) {
+	sb.add(getnm("Version"));
+	sb.adds("%1i.%2i", 0, 1);
+}
+
 template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
 	auto p = (skilli*)object;
 	add_description(sb, p->id);
@@ -332,6 +337,7 @@ void main_identifier(stringbuilder& sb, const char* identifier) {
 BSDATA(stringvari) = {
 	{"ItemInformation", item_information},
 	{"ItemName", item_name},
+	{"GameVersion", game_version},
 	{"PassedTime", passed_time},
 	{"RealTime", real_time},
 	{"PlayerInformation", player_information},

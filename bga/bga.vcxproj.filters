@@ -22,9 +22,6 @@
     <Filter Include="utils">
       <UniqueIdentifier>{bf637da8-ca55-44db-a400-4c1ad2c2d468}</UniqueIdentifier>
     </Filter>
-    <Filter Include="forms">
-      <UniqueIdentifier>{071b14e1-b9f1-44ae-a499-6520f346576d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\rules\Colors.txt">
@@ -35,9 +32,6 @@
     </Text>
     <Text Include="..\errors.txt">
       <Filter>rules</Filter>
-    </Text>
-    <Text Include="..\forms\GUIINVAB.txt">
-      <Filter>forms</Filter>
     </Text>
     <Text Include="..\rules\Races.txt">
       <Filter>rules</Filter>
@@ -60,14 +54,8 @@
     <Text Include="..\rules\Calendar.txt">
       <Filter>rules</Filter>
     </Text>
-    <Text Include="..\forms\GUISTIDB.txt">
-      <Filter>forms</Filter>
-    </Text>
     <Text Include="..\rules\Store.txt">
       <Filter>rules</Filter>
-    </Text>
-    <Text Include="..\forms\GUISTBSB.txt">
-      <Filter>forms</Filter>
     </Text>
     <Text Include="..\locale\ru\Abilities.txt">
       <Filter>locale</Filter>

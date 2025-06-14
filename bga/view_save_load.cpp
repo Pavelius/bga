@@ -112,11 +112,15 @@ void saveheaderi::create() {
 
 static void row_delete() {
 	auto p = (rowsaveheaderi*)hot.object;
+	auto m = hot.param;
 	if(!confirm("ConfirmDelete"))
 		return;
 	char temp[260];
 	io::file::remove(get_save_url(temp, p->file));
-	update_files_save();
+	if(m)
+		update_files_save();
+	else
+		update_files();
 }
 
 static void row_save() {
@@ -129,7 +133,12 @@ static void row_save() {
 	next_scene(open_game);
 }
 
-static void paint_game_row(void* object) {
+static void row_load() {
+	last_save_header = (rowsaveheaderi*)hot.object;
+	next_scene(open_game);
+}
+
+static void paint_game_row(void* object, const char* id, fnevent action_proc, int mode) {
 	pushrect push;
 	pushfore push_fore;
 	auto push_header = last_save_header;
@@ -152,21 +161,36 @@ static void paint_game_row(void* object) {
 		texta(NORMAL, str("%PassedTime\n%RealTime"), AlignLeft);
 	}
 	fore = push_fore.fore;
-	setdialog(604, 11); button(GBTNSTD, 1, 2, 0, "Save"); fire(row_save, 0, 0, object);
-	setdialog(604, 52); button(GBTNSTD, 1, 2, 0, "Delete", 3, last_save_header->file[0] != 0); fire(row_delete, 0, 0, object);
+	setdialog(604, 11); button(GBTNSTD, 1, 2, 0, id); fire(action_proc, 0, 0, object);
+	setdialog(604, 52); button(GBTNSTD, 1, 2, 0, "Delete", 3, last_save_header->file[0] != 0); fire(row_delete, mode, 0, object);
 	last_save_header = push_header;
 }
 
-static void paint_game_list() {
+static void paint_save_game_row(void* object) {
+	paint_game_row(object, "Save", row_save, 1);
+}
+
+static void paint_load_game_row(void* object) {
+	paint_game_row(object, "Load", row_load, 0);
+}
+
+static void paint_game_list(fncommand proc) {
 	static int origin;
 	const int per_page = 5;
-	paint_list(files.data, files.element_size, files.count, origin, per_page, paint_game_row, 102, {}, 0, 0, 0);
+	paint_list(files.data, files.element_size, files.count, origin, per_page, proc, 102, {}, 0, 0, 0);
 }
 
 static void paint_save_game() {
 	paint_game_dialog(GUISRSVB);
 	setdialog(243, 22, 311, 28); texta(STONEBIG, getnm("SaveGame"), AlignCenterCenter);
-	setdialog(23, 78, 740, 498); paint_game_list();
+	setdialog(23, 78, 740, 498); paint_game_list(paint_save_game_row);
+	setdialog(656, 22); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+}
+
+static void paint_load_game() {
+	paint_game_dialog(GUISRSVB);
+	setdialog(243, 22, 311, 28); texta(STONEBIG, getnm("LoadGame"), AlignCenterCenter);
+	setdialog(23, 78, 740, 498); paint_game_list(paint_load_game_row);
 	setdialog(656, 22); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 }
 
@@ -188,5 +212,11 @@ bool confirm_overvrite() {
 void open_save_game() {
 	update_files_save();
 	scene(paint_save_game);
+	files.clear();
+}
+
+void open_load_game() {
+	update_files();
+	scene(paint_load_game);
 	files.clear();
 }
