@@ -1507,9 +1507,9 @@ void paint_game_panel(bool allow_input, bool combat_mode) {
 		setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M'); fire(setgameproc, 0, 0, paint_game_automap); tips("AreaMap");
 		setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J'); fire(setgameproc, 0, 0, paint_game_journal); tips("Journal");
 		setdialog(670, 57); button(GCOMMBTN, 10, 11, KeyEscape); fire(setgameproc, 1, 0, paint_game_options); tips("Options");
-		setdialog(576, 3); button(GCOMMBTN, 0, 1, '*'); fire(select_all_party);
-		setdialog(703, 2); button(GCOMMBTN, 2, 3);
-		setdialog(575, 72); button(GCOMMBTN, 16, 17);
+		setdialog(576, 3); button(GCOMMBTN, 0, 1, '*'); fire(select_all_party); tips("SelectAllParty");
+		setdialog(703, 2); button(GCOMMBTN, 2, 3); tips("RestParty");
+		setdialog(575, 72); button(GCOMMBTN, 16, 17); tips("ModifyParty");
 		hotkey('Z', change_zoom_factor);
 	} else {
 		setdialog(575, 2, 225, 105);

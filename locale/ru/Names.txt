@@ -48,6 +48,7 @@ Identifying: Опознание предметов
 Journal: Журнал
 Keyboard: Клавиатура
 Kg: кг.
+ModifyParty: Модификация партии
 Levels: Уровни
 LevelUp: Развитие
 Load: Зарузить
@@ -69,6 +70,7 @@ QuitMainMenu: Покинуть игру
 Range30: 30 футов
 Replay: Заново
 Required: Требования
+RestParty: Отдых
 Rooms: Снять комнату
 RoomMerchant: Купеческая
 RoomNoble: Благородная
@@ -79,6 +81,7 @@ Rumors: Слухи
 Save: Сохранить
 SaveGame: Сохранить игру
 SavingThrows: Броски спасения
+SelectAllParty: Выбрать всю партию
 Sell: Продать
 Skills: Навыки
 Sound: Звук
