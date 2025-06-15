@@ -39,6 +39,10 @@ void select_all_party() {
 		p->select();
 }
 
+bool have_multiselect() {
+	return party_selected[0] && party_selected[1];
+}
+
 template<typename T>
 static void copy(T& e1, const T& e2) {
 	e1 = e2;

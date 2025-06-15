@@ -407,6 +407,9 @@
     <ClCompile Include="option.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="action.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -704,6 +707,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="option.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="action.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

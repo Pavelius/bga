@@ -42,7 +42,7 @@ void setparty(point dst) {
 	for(auto p : party_selected) {
 		if(!p)
 			continue;
-		auto new_position = get_free(dst, start_position, FormationProtect, index++, p->getsize());
+		auto new_position = get_free(dst, start_position, current_formation, index++, p->getsize());
 		p->area_index = current_area;
 		p->lookat(new_position);
 		p->setposition(new_position);
@@ -58,7 +58,7 @@ void moveparty(point dst) {
 	for(auto p : party_selected) {
 		if(!p)
 			continue;
-		p->moveto(get_free(dst, start_position, FormationProtect, index++, p->getsize()));
+		p->moveto(get_free(dst, start_position, current_formation, index++, p->getsize()));
 	}
 }
 

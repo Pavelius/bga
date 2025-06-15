@@ -125,3 +125,7 @@ HelgateStreetMerchant: Купец из Хеллгейта
 
 BuyItemsTotal: %ItemListTotal зм
 SellItemsTotal: %ItemListTotal зм
+
+ActionAttack: Атаковать
+ActionDefend: Защищаться
+ActionStop: Остановить

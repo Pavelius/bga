@@ -40,5 +40,6 @@ void clear_selection();
 void create_character(racen race, gendern gender, classn classv, unsigned short portrait);
 void create_character(gendern gender);
 void create_npc(point position, const char* id);
+bool have_multiselect();
 bool have_selection();
 void select_all_party();

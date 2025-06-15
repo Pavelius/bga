@@ -1,7 +1,9 @@
+#include "action.h"
 #include "array.h"
 #include "colorgrad.h"
 #include "creature.h"
 #include "draw.h"
+#include "formation.h"
 #include "help.h"
 #include "option.h"
 #include "pushvalue.h"
@@ -38,6 +40,7 @@ static int current_spell_level;
 static vector<nameable*> content;
 static vector<spelli*> spells;
 static stringbuilder description(description_text);
+static unsigned long tips_stamp;
 
 static void paint_game_inventory();
 
@@ -228,12 +231,42 @@ void fire(fnevent proc, long param, long param2, const void* object) {
 		execute(proc, param, param2, object);
 }
 
+void tips(const nameable& e) {
+	if(button_hilited)
+		hilite_object = &e;
+}
+
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key) {
 	auto p = gres(res);
 	auto& f = p->get(f1);
 	width = f.sx; height = f.sy;
 	button_check(key);
 	image(p, button_pressed ? f2 : f1, 0);
+}
+
+static void button(actionn id) {
+	auto& ei = bsdata<actioni>::elements[id];
+	button(GUIBTACT, ei.avatar, ei.avatar + 1, 0);
+	tips(ei);
+	caret.x += width + 4;
+}
+
+static void buttona(resn res, int f1, bool checked) {
+	auto push_caret = caret;
+	button(GUIBTACT, checked ? 111 : 108, 109, 0);
+	if(button_pressed) {
+		caret.x += 2;
+		caret.y += 2;
+	}
+	caret.x += 3; caret.y += 3;
+	image(gres(res), f1, 0);
+	caret = push_caret;
+	caret.x += width + 4;
+}
+
+static void button(formationn id, formationn& value) {
+	buttona(FORM, id, id == value);
+	fire(cbsetchr, id, 0, &value);
 }
 
 static point get_pressed_offset(resn n) {
@@ -579,9 +612,27 @@ static void portrait_bar(bool player_hilite, bool allow_choose_player) {
 	}
 }
 
+static void paint_player_actions() {
+	pushrect push;
+	image(gres(GACTN), 0, 0);
+	caret.x += 6; caret.y += 12;
+	if(have_multiselect()) {
+		button(ActionDefend);
+		button(ActionAttack);
+		button(ActionStop);
+		for(auto i = FormationT; i <= FormationProtect; i = formationn(i + 1))
+			button(i, current_formation);
+	} else {
+
+	}
+}
+
 static void paint_action_panel() {
 	setcaret(0, 433);
-	image(gres(GACTN), 1, 0);
+	if(input_disabled)
+		image(gres(GACTN), 1, 0);
+	else
+		paint_player_actions();
 	portrait_bar(false, !input_disabled);
 }
 
@@ -1507,6 +1558,41 @@ static void paint_item_count() {
 	// Unlnown None 176 46 42 15
 }
 
+static bool paint_tips() {
+	static rect tips_area;
+	static unsigned long tips_stamp;
+	auto n = getcputime();
+	if(tips_area != hot.hilite) {
+		tips_stamp = n;
+		tips_area = hot.hilite;
+	}
+	if(!hilite_object)
+		return false;
+	if(tips_stamp + optvalues[ToolTipsDelay] > n)
+		return false;
+	auto pn = ((nameable*)hilite_object)->getname();
+	if(!pn)
+		return false;
+	auto ps = gres(TOOLTIP);
+	if(!ps)
+		return false;
+	const int pad_x = 8;
+	const int pad_y = 4;
+	caret.x = tips_area.x1;
+	caret.y = tips_area.y2 + 4;
+	width = textw(pn) + pad_x * 2;
+	height = 32;
+	image(caret.x, caret.y, ps, 1, ImageNoOffset);
+	auto push_clip = clipping; setclip({caret.x + 3, caret.y, caret.x + width - 3, caret.y + height});
+	image(caret.x + 3, caret.y, ps, 0, ImageNoOffset);
+	clipping = push_clip;
+	image(caret.x + width - 3, caret.y, ps, 4, ImageNoOffset);
+	caret.y += (32 - texth()) / 2;
+	caret.x += pad_x;
+	text(pn);
+	return true;
+}
+
 static void paint_cursor() {
 	auto pi = gres(cursor.id);
 	if(!pi)
@@ -1555,7 +1641,7 @@ static void paint_confirm() {
 
 bool confirm(const char* id, ...) {
 	XVA_FORMAT(id)
-	pushdescription push;
+		pushdescription push;
 	description.clear();
 	description.addv(getnm(id), format_param);
 	open_dialog(paint_confirm, true);
@@ -1572,8 +1658,14 @@ unsigned char open_color_pick(unsigned char current_color, unsigned char default
 		return (unsigned char)result;
 }
 
+static void tips_main() {
+	if(paint_tips())
+		return;
+	paint_cursor();
+}
+
 void initialize_ui() {
 	set_cursor();
-	ptips = paint_cursor;
+	ptips = tips_main;
 	draw::syscursor(false);
 }

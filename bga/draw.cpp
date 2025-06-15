@@ -46,15 +46,10 @@ color*				draw::palt;
 rect				draw::clipping;
 hoti				draw::hot;
 const void*			draw::hilite_object;
-point				draw::hilite_position;
-int					draw::hilite_size;
-// Hot keys and menus
-rect				sys_static_area;
 // Locale draw variables
 static draw::surface default_surface;
 draw::surface*		draw::canvas = &default_surface;
 point				draw::caret, draw::camera, draw::tips_caret, draw::tips_size;
-bool			    line_antialiasing = true;
 // Metrics
 sprite*				metrics::font;
 sprite*				metrics::h1;
@@ -67,7 +62,6 @@ int					metrics::padding = 2, metrics::border = 4;
 static bool			break_modal;
 static long			break_result;
 static fnevent		next_proc;
-extern rect			sys_static_area;
 static char			tips_text[4096];
 stringbuilder		draw::tips_sb(tips_text);
 awindowi			draw::awindow = {-1, -1, 800, 600, 160, WFMinmax | WFResize};
@@ -1022,7 +1016,7 @@ void draw::line(int xt, int yt) {
 	} else if(caret.y == y1) {
 		if(correct(x0, y0, x1, y1, clipping, false))
 			set32x(canvas->ptr(x0, y0), canvas->scanline, x1 - x0 + 1, 1);
-	} else if(line_antialiasing) {
+	} else {
 		int x0 = caret.x, y0 = caret.y;
 		int dx = iabs(x1 - x0), sx = x0 < x1 ? 1 : -1;
 		int dy = iabs(y1 - y0), sy = y0 < y1 ? 1 : -1;
@@ -1043,22 +1037,6 @@ void draw::line(int xt, int yt) {
 					break;
 				if(dx - e2 < ed)
 					pixel(x2 + sx, y0, alpha * (dx - e2) / ed);
-				err += dx; y0 += sy;
-			}
-		}
-	} else {
-		int dx = iabs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-		int dy = -iabs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-		int err = dx + dy, e2;
-		for(;;) {
-			pixel(x0, y0, alpha);
-			e2 = 2 * err;
-			if(e2 >= dy) {
-				if(x0 == x1) break;
-				err += dy; x0 += sx;
-			}
-			if(e2 <= dx) {
-				if(y0 == y1) break;
 				err += dx; y0 += sy;
 			}
 		}
@@ -1379,7 +1357,6 @@ static void intersect_rect(rect& r1, const rect& r2) {
 bool draw::ishilite(const rect& rc) {
 	if(hot.key == InputNoUpdate)
 		return false;
-	intersect_rect(sys_static_area, rc);
 	if(!hot.mouse.in(clipping))
 		return false;
 	if(hot.mouse.in(rc)) {
@@ -2382,18 +2359,12 @@ static void beforemodal() {
 	width = getwidth();
 	height = getheight();
 	hilite_object = 0;
-	hilite_position.clear();
-	hilite_size = 0;
 	hot.cursor = cursor::Arrow;
 	hot.hilite.clear();
 	if(hot.key == InputNeedUpdate)
 		hot.key = InputUpdate;
 	else
 		domodal = standart_domodal;
-	if(hot.mouse.x < 0 || hot.mouse.y < 0)
-		sys_static_area.clear();
-	else
-		sys_static_area = {0, 0, draw::getwidth(), draw::getheight()};
 	tips_sb.clear();
 	tips_caret.clear();
 	tips_size.clear();
