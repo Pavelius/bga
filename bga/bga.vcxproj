@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
+    <ClCompile Include="acm.cpp" />
     <ClCompile Include="action.cpp" />
     <ClCompile Include="actor.cpp" />
     <ClCompile Include="alignment.cpp" />

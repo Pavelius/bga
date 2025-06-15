@@ -185,7 +185,11 @@ void actor::stop() {
 }
 
 void actor::lookat(point destination) {
-	setorientation(get_look(position, destination));
+	lookat((directionn)get_look(position, destination));
+}
+
+void actor::lookat(directionn direction) {
+	setorientation(direction);
 	resetframes();
 }
 

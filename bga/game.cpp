@@ -65,8 +65,8 @@ void moveparty(point dst) {
 void enter(const char* id, const char* location) {
 	char temp[32]; stringbuilder sb(temp); sb.add(location);
 	print("Enter area [%1] at location [%2]", id, location);
-	read_area(id);
 	read_area(id, "ID2");
+	read_area(id);
 #ifdef _DEBUG
 	print("Count of points %1i", bsdata<point>::source.count);
 	print("Count of doors %1i", bsdata<door>::source.count);

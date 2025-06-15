@@ -27,6 +27,7 @@ enum animaten : unsigned char {
 	AnimateCastFour, AnimateCastFourRelease
 };
 enum gendern : unsigned char;
+enum directionn : unsigned char;
 
 struct actor : moveable, coloration, statable, classa, wearable {
 	short unsigned	position_index;
@@ -49,6 +50,7 @@ struct actor : moveable, coloration, statable, classa, wearable {
 	int				getsize() const { return 1; }
 	bool			ispresent() const;
 	void			lookat(point destination);
+	void			lookat(directionn direction);
 	void			moveto(point destination);
 	void			paint() const;
 	void			readybattle(bool v);

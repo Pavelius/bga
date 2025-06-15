@@ -953,10 +953,10 @@ static void paint_game_inventory() {
 	setdialog(704, 243, 70, 32); texta(REALMS, str("%1i", player->get(AC)), AlignCenterCenter);
 	setdialog(710, 353, 54, 16); texta(REALMS, str("%1i", player->hp_max), AlignCenterCenter);
 	setdialog(710, 371, 54, 16); texta(REALMS, str("%1i", player->hp), AlignCenterCenter);
-	setdialog(252, 191, 42, 42); creature_color(1);
-	setdialog(252, 231, 42, 42); creature_color(0);
-	setdialog(507, 191, 42, 42); creature_color(2);
-	setdialog(507, 231, 42, 42); creature_color(3);
+	setdialog(252, 191, 42, 42); creature_color(HairColor); tips("HairColor");
+	setdialog(252, 231, 42, 42); creature_color(SkinColor); tips("SkinColor");
+	setdialog(507, 191, 42, 42); creature_color(MajorColor); tips("MajorColor");
+	setdialog(507, 231, 42, 42); creature_color(MinorColor); tips("MinorColor");
 	setdialog(341, 281, 117, 14); paint_weight();
 }
 

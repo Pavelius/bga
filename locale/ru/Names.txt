@@ -46,6 +46,7 @@ Information: Информация
 Identify: Опознать
 Identifying: Опознание предметов
 Journal: Журнал
+HairColor: Цвет волос
 Keyboard: Клавиатура
 Kg: кг.
 ModifyParty: Модификация партии
@@ -54,6 +55,8 @@ LevelUp: Развитие
 Load: Зарузить
 LoadGame: Загрузить игру
 MagicBonus: Магический бонус
+MajorColor: Главный цвет
+MinorColor: Второстепенный цвет
 MaxDexterityBonus: Максимальный бонус ловкости
 Movies: Видеоролики
 Name: Наименование
@@ -84,6 +87,7 @@ SavingThrows: Броски спасения
 SelectAllParty: Выбрать всю партию
 Sell: Продать
 Skills: Навыки
+SkinColor: Цвет кожи
 Sound: Звук
 SpellFailure: Неудача при создании заклинания
 SpellLevelShort: Уров.

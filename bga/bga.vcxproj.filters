@@ -410,6 +410,9 @@
     <ClCompile Include="action.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="acm.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
