@@ -12,8 +12,10 @@ BasicAbility: Базовая способность
 Biography: Биография
 Buy: Купить
 Cancel: Отмена
+CharacterInventory: Предметы персонажа
 CharacterLevel: Класс персонажа (%1i уровень)
 CharacterRace: Раса персонажа
+CharacterSheet: Листок персонажа
 ChooseAmount: Укажите количество
 Close: Закрыть
 Coins: Золото
@@ -82,6 +84,7 @@ Skills: Навыки
 Sound: Звук
 SpellFailure: Неудача при создании заклинания
 SpellLevelShort: Уров.
+Spells: Заклинания
 Steal: Украсть
 Version: Версия
 Weight: Вес

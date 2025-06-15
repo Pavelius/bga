@@ -231,9 +231,13 @@ void fire(fnevent proc, long param, long param2, const void* object) {
 		execute(proc, param, param2, object);
 }
 
-void tips(const nameable& e) {
+static void tips(const char* p) {
 	if(button_hilited)
-		hilite_object = &e;
+		hilite_object = p;
+}
+
+static void tips(const nameable& e) {
+	tips(e.id);
 }
 
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key) {
@@ -1497,12 +1501,12 @@ void paint_game_panel(bool allow_input, bool combat_mode) {
 	setdialog(12, 8, 526, 92); paint_console();
 	if(allow_input) {
 		setdialog(736, 43); image(gres(CGEAR), (current_game_tick / 128) % 32, 0); // Rolling world
-		setdialog(600, 22); button(GCOMMBTN, 4, 5, 'C'); fire(setgameproc, 0, 0, paint_game_character);
-		setdialog(630, 17); button(GCOMMBTN, 6, 7, 'I'); fire(setgameproc, 0, 0, paint_game_inventory);
-		setdialog(668, 21); button(GCOMMBTN, 8, 9, 'S'); fire(setgameproc, 0, 0, paint_game_spells);
-		setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M'); fire(setgameproc, 0, 0, paint_game_automap);
-		setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J'); fire(setgameproc, 0, 0, paint_game_journal);
-		setdialog(670, 57); button(GCOMMBTN, 10, 11, KeyEscape); fire(setgameproc, 1, 0, paint_game_options);
+		setdialog(600, 22); button(GCOMMBTN, 4, 5, 'C'); fire(setgameproc, 0, 0, paint_game_character); tips("CharacterSheet");
+		setdialog(630, 17); button(GCOMMBTN, 6, 7, 'I'); fire(setgameproc, 0, 0, paint_game_inventory); tips("CharacterInventory");
+		setdialog(668, 21); button(GCOMMBTN, 8, 9, 'S'); fire(setgameproc, 0, 0, paint_game_spells); tips("Spells");
+		setdialog(600, 57); button(GCOMMBTN, 14, 15, 'M'); fire(setgameproc, 0, 0, paint_game_automap); tips("AreaMap");
+		setdialog(628, 60); button(GCOMMBTN, 12, 13, 'J'); fire(setgameproc, 0, 0, paint_game_journal); tips("Journal");
+		setdialog(670, 57); button(GCOMMBTN, 10, 11, KeyEscape); fire(setgameproc, 1, 0, paint_game_options); tips("Options");
 		setdialog(576, 3); button(GCOMMBTN, 0, 1, '*'); fire(select_all_party);
 		setdialog(703, 2); button(GCOMMBTN, 2, 3);
 		setdialog(575, 72); button(GCOMMBTN, 16, 17);
@@ -1558,6 +1562,10 @@ static void paint_item_count() {
 	// Unlnown None 176 46 42 15
 }
 
+static const char* get_object_name(const void* p) {
+	return getnm((const char*)p);
+}
+
 static bool paint_tips() {
 	static rect tips_area;
 	static unsigned long tips_stamp;
@@ -1570,7 +1578,7 @@ static bool paint_tips() {
 		return false;
 	if(tips_stamp + optvalues[ToolTipsDelay] > n)
 		return false;
-	auto pn = ((nameable*)hilite_object)->getname();
+	auto pn = get_object_name(hilite_object);
 	if(!pn)
 		return false;
 	auto ps = gres(TOOLTIP);
@@ -1582,6 +1590,10 @@ static bool paint_tips() {
 	caret.y = tips_area.y2 + 4;
 	width = textw(pn) + pad_x * 2;
 	height = 32;
+	if(caret.x >= getwidth() - width - 8)
+		caret.x = getwidth() - width - 8;
+	if(caret.y >= getheight() - height - 8)
+		caret.y = getheight() - height - 8;
 	image(caret.x, caret.y, ps, 1, ImageNoOffset);
 	auto push_clip = clipping; setclip({caret.x + 3, caret.y, caret.x + width - 3, caret.y + height});
 	image(caret.x + 3, caret.y, ps, 0, ImageNoOffset);
