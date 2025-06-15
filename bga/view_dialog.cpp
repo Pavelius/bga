@@ -47,7 +47,7 @@ fnevent on_player_change;
 
 struct pushdescription {
 	char value[lenghtof(description_text)];
-	pushdescription() { memcpy(value, description_text, sizeof(value)); }
+	pushdescription() { memcpy(value, description_text, sizeof(value)); description.clear(); }
 	~pushdescription() { memcpy(description_text, value, sizeof(value)); }
 };
 
@@ -964,6 +964,41 @@ static void slider(optionv id, int slider_width = 142) {
 		execute(toggle_option_value, id, ei.minimal + (hot.mouse.x - caret.x - 8) * range / maximum_width);
 }
 
+static void paint_game_opt_pause() {
+	paint_game_dialog(GOPT, 3);
+	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("AutoPause"), AlignCenterCenter);
+	setdialog(74, 70, 308, 18); checkbox(PauseCharacterHit);
+	setdialog(74, 97, 308, 18); checkbox(PauseCharacterInjured);
+	setdialog(74, 124, 308, 18); checkbox(PauseCharacterDeath);
+	setdialog(74, 151, 308, 18); checkbox(PauseCharacterAttacked);
+	setdialog(74, 178, 308, 18); checkbox(PauseWeaponUnusable);
+	setdialog(74, 205, 308, 18); checkbox(PauseEnemyDestroyed);
+	setdialog(74, 232, 308, 18); checkbox(PauseEndOfRound);
+	setdialog(74, 259, 308, 18); checkbox(PauseEnemySighted);
+	setdialog(74, 286, 308, 18); checkbox(PauseSpellCast);
+	setdialog(74, 313, 308, 18); checkbox(PauseTrapDetected);
+	setdialog(74, 340, 308, 18); checkbox(PauseCharacterCenter);
+	setdialog(438, 71, 270, 253); paint_description(9, -2, 4);
+	//setdialog(394, 67); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 95); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 122); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 148); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 175); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 203); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 229); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 256); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 283); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 310); button(GBTNOPT3, 1, 2);
+	//setdialog(394, 337); button(GBTNOPT3, 1, 2);
+	//setdialog(491, 338); button(GBTNSTD, 1, 2);
+	setdialog(614, 338); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttonok);
+}
+
+static void open_game_opt_pause() {
+	pushdescription push;
+	open_dialog(paint_game_opt_pause, false);
+}
+
 static void paint_game_opt_game_play() {
 	paint_game_dialog(GOPT, 2);
 	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("GamePlay"), AlignCenterCenter);
@@ -978,12 +1013,13 @@ static void paint_game_opt_game_play() {
 	setdialog(74, 277, 308, 18); checkbox(MaximumHitPointsPerLevel);
 	setdialog(438, 71, 270, 253); paint_description(9, -2, 4);
 	setdialog(71, 338); button(GBTNSTD, 1, 2);
-	setdialog(194, 338); button(GBTNSTD, 1, 2);
+	setdialog(194, 338); button(GBTNSTD, 1, 2, 'P', "AutoPause"); fire(open_game_opt_pause);
 	// setdialog(491, 338); button(GBTNSTD, 1, 2);
 	setdialog(614, 338); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttonok);
 }
 
 static void open_game_opt_game_play() {
+	pushdescription push;
 	open_dialog(paint_game_opt_game_play, true);
 }
 

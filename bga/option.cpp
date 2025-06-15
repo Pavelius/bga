@@ -7,8 +7,19 @@ BSDATA(optionfi) = {
 	{"ShowWeather"},
 	{"MaximumHitPointsPerLevel"},
 	{"ShowGore"},
+	{"PauseCharacterHit"},
+	{"PauseCharacterInjured"},
+	{"PauseCharacterDeath"},
+	{"PauseCharacterAttacked"},
+	{"PauseWeaponUnusable"},
+	{"PauseEnemyDestroyed"},
+	{"PauseEndOfRound"},
+	{"PauseEnemySighted"},
+	{"PauseSpellCast"},
+	{"PauseTrapDetected"},
+	{"PauseCharacterCenter"},
 };
-assert_enum(optionfi, ShowGore)
+assert_enum(optionfi, PauseCharacterCenter)
 
 BSDATA(optionvi) = {
 	{"GameDifficult", 0, 4, 2},

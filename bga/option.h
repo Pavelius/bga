@@ -5,6 +5,9 @@
 
 enum optionf : unsigned char {
 	DitherAlways, GroupDarkvision, ShowWeather, MaximumHitPointsPerLevel, ShowGore,
+	PauseCharacterHit, PauseCharacterInjured, PauseCharacterDeath, PauseCharacterAttacked,
+	PauseWeaponUnusable, PauseEnemyDestroyed, PauseEndOfRound, PauseEnemySighted, PauseSpellCast,
+	PauseTrapDetected, PauseCharacterCenter,
 };
 enum optionv : unsigned char {
 	GameDifficult, MouseScrollSpeed, KeyboardScrollSpeed, ToolTipsDelay,

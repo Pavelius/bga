@@ -1,2 +1,12 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `ToolTipsDelay`
+ Define translation for `PauseCharacterAttacked`
+ Define translation for `PauseCharacterCenter`
+ Define translation for `PauseCharacterDeath`
+ Define translation for `PauseCharacterHit`
+ Define translation for `PauseCharacterInjured`
+ Define translation for `PauseEndOfRound`
+ Define translation for `PauseEnemyDestroyed`
+ Define translation for `PauseEnemySighted`
+ Define translation for `PauseSpellCast`
+ Define translation for `PauseTrapDetected`
+ Define translation for `PauseWeaponUnusable`

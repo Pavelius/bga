@@ -13,3 +13,18 @@ GameDifficult: Сложность
 KeyboardScrollSpeed: Скорость клавиатуры
 MouseScrollSpeed: Скорость мышки
 ToolTipsDelay: Задержка подсказки
+
+PauseCharacterAttacked: Персонаж атакован
+PauseCharacterAttackedInfo: Пауза срабатывает в момент, когда враг пытается атаковать персонажа партии.
+PauseCharacterCenter: Центрировать на персонаже
+PauseCharacterCenterInfo: После того как сработала пауза центрировать экран на персонаже, который вызвал событие.
+PauseCharacterDeath: Персонаж погиб
+PauseCharacterDeathInfo: Пауза срабатывает в момент, когда персонаж из вашей партии погиб.
+PauseCharacterHit: Персонаж получил урон
+PauseCharacterInjured: Персонаж ранен
+PauseEndOfRound: Конец раунда
+PauseEnemyDestroyed: Враг уничтожен
+PauseEnemySighted: Враг обнаружен
+PauseSpellCast: Создано заклинание
+PauseTrapDetected: Ловушка обнаружена
+PauseWeaponUnusable: Оружие не эффективно

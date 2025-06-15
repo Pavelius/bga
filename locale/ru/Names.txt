@@ -6,6 +6,7 @@ AreaMap: Карта местности
 ArmorBonus: Бонус брони
 ArmorCheckPenalty: Штраф брони на проверки
 AttackBonus: Бонус к атаке
+AutoPause: Авто-Пауза
 Autosave: Автоматическое сохранение
 BasicAbility: Базовая способность
 Biography: Биография
