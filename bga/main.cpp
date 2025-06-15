@@ -8,6 +8,7 @@
 #include "game.h"
 #include "log.h"
 #include "itema.h"
+#include "option.h"
 #include "rand.h"
 #include "resid.h"
 #include "script.h"
@@ -97,6 +98,7 @@ int main(int argc, char* argv[]) {
 	srand(923811);
 	stringbuilder::custom = main_identifier;
 	read_rules();
+	read_options();
 #ifdef _DEBUG
 	util_main();
 #endif // _DEBUG

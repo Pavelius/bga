@@ -102,6 +102,9 @@
     <Text Include="..\locale\ru\Calendar.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\locale\ru\Options.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -401,6 +404,9 @@
     <ClCompile Include="namestr.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="option.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -695,6 +701,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="namestr.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="option.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

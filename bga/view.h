@@ -57,6 +57,7 @@ void open_save_game();
 void open_scene();
 void open_store();
 void open_worldmap();
+void set_description();
 void set_description(const char* id);
 void setdialog(int x, int y);
 void setdialog(int x, int y, int w, int h);

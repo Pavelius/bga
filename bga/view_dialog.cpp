@@ -3,6 +3,7 @@
 #include "creature.h"
 #include "draw.h"
 #include "help.h"
+#include "option.h"
 #include "pushvalue.h"
 #include "resid.h"
 #include "resinfo.h"
@@ -104,6 +105,14 @@ void set_description(const char* id) {
 	description.clear();
 	description.add(id);
 	description_cash_size = -1;
+}
+
+void set_description() {
+	auto pn = (nameable*)hot.object;
+	auto pd = getnme(ids(pn->id, "Info"));
+	if(!pd)
+		return;
+	set_description(pd);
 }
 
 void setdialog(int x, int y) {
@@ -914,6 +923,70 @@ static void quit_main_menu() {
 		return;
 }
 
+static void toggle_option_flag() {
+	auto n = (optionf)hot.param;
+	optflags.set(n, !getvalue(n));
+	hot.object = bsdata<optionfi>::elements + n;
+	set_description();
+}
+
+static void toggle_option_value() {
+	auto n = (optionf)hot.param;
+	auto v = hot.param2;
+	optvalues[n] = v;
+	hot.object = bsdata<optionvi>::elements + n;
+	set_description();
+}
+
+static void checkbox(optionf id) {
+	texta(bsdata<optionfi>::elements[id].getname(), AlignRightCenter);
+	button_check(0);
+	fire(set_description, 0, 0, bsdata<optionfi>::elements + id);
+	caret.x += width + 12; caret.y -= 3;
+	button(GBTNOPT3, getvalue(id) ? 3 : 0, 1); fire(toggle_option_flag, id);
+}
+
+static void slider(optionv id, int slider_width = 142) {
+	auto& ei = bsdata<optionvi>::elements[id];
+	texta(ei.getname(), AlignRightCenter);
+	button_check(0);
+	fire(set_description, 0, 0, &ei);
+	auto value = getvalue(id) - ei.minimal;
+	auto range = ei.maximum - ei.minimal;
+	auto maximum_width = slider_width - 24;
+	if(!range || maximum_width <= 0)
+		return;
+	caret.x += width + 22; width = maximum_width;
+	auto position = value * maximum_width / range;
+	image(caret.x + position, caret.y + 2, gres(GUISLDR), 0, 0);
+	button_check(0);
+	if(button_executed)
+		execute(toggle_option_value, id, ei.minimal + (hot.mouse.x - caret.x - 8) * range / maximum_width);
+}
+
+static void paint_game_opt_game_play() {
+	paint_game_dialog(GOPT, 2);
+	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("GamePlay"), AlignCenterCenter);
+	setdialog(74, 70, 184, 18); slider(ToolTipsDelay);
+	setdialog(74, 99, 184, 18); slider(MouseScrollSpeed);
+	setdialog(74, 128, 184, 18); slider(KeyboardScrollSpeed);
+	setdialog(74, 157, 184, 18); slider(GameDifficult);
+	setdialog(74, 187, 308, 18); checkbox(DitherAlways);
+	setdialog(74, 307, 308, 18); checkbox(ShowGore);
+	setdialog(74, 217, 308, 18); checkbox(GroupDarkvision);
+	setdialog(74, 247, 308, 18); checkbox(ShowWeather);
+	setdialog(74, 277, 308, 18); checkbox(MaximumHitPointsPerLevel);
+	setdialog(438, 71, 270, 253); paint_description(9, -2, 4);
+	setdialog(71, 338); button(GBTNSTD, 1, 2);
+	setdialog(194, 338); button(GBTNSTD, 1, 2);
+	// setdialog(491, 338); button(GBTNSTD, 1, 2);
+	setdialog(614, 338); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttonok);
+}
+
+static void open_game_opt_game_play() {
+	open_dialog(paint_game_opt_game_play, true);
+}
+
 static void paint_game_options() {
 	paint_game_dialog(STONEOPT);
 	paint_action_panel_na();
@@ -923,7 +996,7 @@ static void paint_game_options() {
 	setdialog(497, 128); button(GBTNLRG2, 1, 2, '3', "QuitMainMenu"); fire(quit_main_menu);
 	setdialog(497, 168); button(GBTNLRG2, 1, 2, '4', "Graphics");
 	setdialog(497, 198); button(GBTNLRG2, 1, 2, '5', "Sound");
-	setdialog(497, 228); button(GBTNLRG2, 1, 2, '6', "GamePlay");
+	setdialog(497, 228); button(GBTNLRG2, 1, 2, '6', "GamePlay"); fire(open_game_opt_game_play);
 	setdialog(497, 268); button(GBTNLRG2, 1, 2, '7', "Movies");
 	setdialog(497, 298); button(GBTNLRG2, 1, 2, '8', "Keyboard");
 	setdialog(555, 338); button(GBTNSTD, 1, 2, KeyEscape, "Close"); fire(setgameproc, 1, 0, paint_game_options);

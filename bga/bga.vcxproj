@@ -29,6 +29,7 @@
     <Text Include="..\locale\ru\Items.txt" />
     <Text Include="..\locale\ru\Names.txt" />
     <Text Include="..\locale\ru\NamesNewbe.txt" />
+    <Text Include="..\locale\ru\Options.txt" />
     <Text Include="..\locale\ru\Skills.txt" />
     <Text Include="..\locale\ru\Spells.txt" />
     <Text Include="..\locale\ru\UnknownNames.txt" />
@@ -110,6 +111,7 @@
     <ClCompile Include="nameable.cpp" />
     <ClCompile Include="namestr.cpp" />
     <ClCompile Include="npc.cpp" />
+    <ClCompile Include="option.cpp" />
     <ClCompile Include="order.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="portrait.cpp" />
@@ -195,6 +197,7 @@
     <ClInclude Include="namestr.h" />
     <ClInclude Include="npc.h" />
     <ClInclude Include="my_initialize_list.h" />
+    <ClInclude Include="option.h" />
     <ClInclude Include="order.h" />
     <ClInclude Include="rand.h" />
     <ClInclude Include="saveheader.h" />
