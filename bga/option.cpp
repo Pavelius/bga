@@ -25,7 +25,7 @@ BSDATA(optionvi) = {
 	{"GameDifficult", 0, 4, 2},
 	{"MouseScrollSpeed", 4, 64, 32},
 	{"KeyboardScrollSpeed", 4, 64, 32},
-	{"ToolTipsDelay", 1000, 4000, 2000},
+	{"ToolTipsDelay", 200, 4000, 2000},
 };
 assert_enum(optionvi, ToolTipsDelay)
 

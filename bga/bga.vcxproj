@@ -119,6 +119,7 @@
     <ClCompile Include="portrait.cpp" />
     <ClCompile Include="race.cpp" />
     <ClCompile Include="range.cpp" />
+    <ClCompile Include="region.cpp" />
     <ClCompile Include="resid.cpp" />
     <ClCompile Include="resinfo.cpp" />
     <ClCompile Include="scale2x.cpp" />

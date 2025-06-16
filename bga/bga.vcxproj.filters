@@ -413,6 +413,9 @@
     <ClCompile Include="acm.cpp">
       <Filter>support</Filter>
     </ClCompile>
+    <ClCompile Include="region.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
