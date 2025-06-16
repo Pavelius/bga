@@ -24,8 +24,8 @@ extern "C" void	free(void* pointer);
 
 #define LIBACM_VERSION "1.3"
 
-#define ACM_ID		0x032897
-#define ACM_WORD	2
+#define ACM_ID 0x032897
+#define ACM_WORD 2
 
 #define ACM_OK			 0
 #define ACM_ERR_OTHER		-1
@@ -37,7 +37,7 @@ extern "C" void	free(void* pointer);
 #define ACM_ERR_UNEXPECTED_EOF	-7
 #define ACM_ERR_NOT_SEEKABLE	-8
 
-typedef struct ACMInfo {
+struct ACMInfo {
 	unsigned channels;
 	unsigned rate;
 	unsigned acm_id;
@@ -46,9 +46,9 @@ typedef struct ACMInfo {
 	unsigned acm_level;
 	unsigned acm_cols;		/* 1 << acm_level */
 	unsigned acm_rows;
-} ACMInfo;
+};
 
-typedef struct {
+struct acm_io_callbacks {
 	/* read bytes */
 	int (*read_func)(void *ptr, int size, int n, void *datasrc);
 	/* optional, must support seeking into start*/
@@ -57,7 +57,7 @@ typedef struct {
 	int (*close_func)(void *datasrc);
 	/* returns size in bytes*/
 	int (*get_length_func)(void *datasrc);
-} acm_io_callbacks;
+};
 
 struct ACMStream {
 	ACMInfo info;
@@ -89,7 +89,6 @@ struct ACMStream {
 	unsigned stream_pos;			/* in words. absolute */
 	unsigned block_pos;			/* in words, relative */
 };
-typedef struct ACMStream ACMStream;
 
 #define NULL 0
 
@@ -99,8 +98,7 @@ typedef struct ACMStream ACMStream;
 
 typedef int (*filler_t)(ACMStream *acm, unsigned col);
 
-int acm_read(ACMStream *acm, void *buf, unsigned nbytes,
-	int bigendianp, int wordlen, int sgned);
+int acm_read(ACMStream *acm, void *buf, unsigned nbytes, int bigendianp, int wordlen, int sgned);
 void acm_close(ACMStream *acm);
 
 /**************************************
@@ -128,9 +126,8 @@ static int load_buf(ACMStream *acm) {
 		/* add single zero byte */
 		acm->buf[0] = 0;
 		acm->buf_size = 1;
-	} else {
+	} else
 		acm->buf_size = res;
-	}
 	acm->buf_pos = 0;
 	return 0;
 }
@@ -549,8 +546,6 @@ static int f_t37(ACMStream *acm, unsigned col) {
 	return 1;
 }
 
-/****************/
-
 static const filler_t filler_list[] = {
 	f_zero, f_bad, f_bad, f_linear, 	/* 0..3 */
 	f_linear, f_linear, f_linear, f_linear,	/* 4..7 */
@@ -818,7 +813,7 @@ static int read_header(ACMStream *acm) {
  * Public functions
  ***********************************************/
 
-int acm_open_decoder(ACMStream **res, void *arg, acm_io_callbacks io_cb, int force_chans) {
+int acm_open_decoder(ACMStream** res, void* arg, acm_io_callbacks io_cb, int force_chans) {
 	int err = ACM_ERR_OTHER;
 	ACMStream *acm;
 
@@ -886,8 +881,7 @@ err_out:
 	return err;
 }
 
-int acm_read(ACMStream *acm, void *dst, unsigned numbytes,
-	int bigendianp, int wordlen, int sgned) {
+int acm_read(ACMStream *acm, void *dst, unsigned numbytes, int bigendianp, int wordlen, int sgned) {
 	int avail, gotbytes = 0, err;
 	int *src, numwords;
 

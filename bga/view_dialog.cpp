@@ -1038,18 +1038,6 @@ static void paint_game_opt_pause() {
 	setdialog(74, 313, 308, 18); checkbox(PauseTrapDetected);
 	setdialog(74, 340, 308, 18); checkbox(PauseCharacterCenter);
 	setdialog(438, 71, 270, 253); paint_description(9, -2, 4);
-	//setdialog(394, 67); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 95); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 122); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 148); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 175); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 203); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 229); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 256); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 283); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 310); button(GBTNOPT3, 1, 2);
-	//setdialog(394, 337); button(GBTNOPT3, 1, 2);
-	//setdialog(491, 338); button(GBTNSTD, 1, 2);
 	setdialog(614, 338); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttonok);
 }
 

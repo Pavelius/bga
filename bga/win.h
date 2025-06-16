@@ -857,6 +857,25 @@ struct KERNINGPAIR {
 	WORD		wSecond;
 	int			iKernAmount;
 };
+struct WAVEFORMATEX {
+	WORD		wFormatTag;
+	WORD		nChannels;
+	DWORD		nSamplesPerSec;
+	DWORD		nAvgBytesPerSec;
+	WORD		nBlockAlign;
+	WORD		wBitsPerSample;
+	WORD		cbSize;
+};
+struct WAVEHDR {
+	char*       lpData;
+	unsigned    dwBufferLength;
+	unsigned    dwBytesRecorded;
+	unsigned*   dwUser;
+	unsigned    dwFlags;
+	unsigned    dwLoops;
+	WAVEHDR*	lpNext;
+	unsigned*   reserved;
+};
 
 DLL int WINAPI				AdjustWindowRectEx(RECT*, unsigned, int, unsigned);
 DLL int WINAPI				AppendMenuA(void*, UINT, unsigned, const char*);
@@ -995,6 +1014,10 @@ DLL int WINAPI				TranslateMessage(const MSG*);
 DLL int WINAPI				TryEnterCriticalSection(void* data);
 DLL int WINAPI				UpdateWindow(HWND);
 DLL int WINAPI				UnregisterClassA(const char*, void*);
+DLL int WINAPI				waveOutOpen(void** phwo, unsigned uDeviceID, const struct WAVEFORMATEX* pwfx, unsigned* dwCallback, unsigned* dwInstance, unsigned fdwOpen);
+DLL int WINAPI				waveOutPrepareHeader(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
+DLL int WINAPI				waveOutUnprepareHeader(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
+DLL int WINAPI				waveOutWrite(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
 DLL unsigned WINAPI			WaitForSingleObject(void* handle, unsigned dwMilliseconds);
 DLL int WINAPI				WriteFile(void* hFile, const void* lpBuffer, unsigned nNumberOfBytesToWrite, unsigned* lpNumberOfBytesWritten, void* lpOverlapped);
 DLL void* WINAPI			wglCreateContext(void*);

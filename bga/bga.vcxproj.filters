@@ -416,6 +416,9 @@
     <ClCompile Include="region.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="win_audio.cpp">
+      <Filter>platform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">

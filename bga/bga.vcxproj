@@ -150,6 +150,7 @@
     <ClCompile Include="wearable.cpp" />
     <ClCompile Include="win_draw.cpp" />
     <ClCompile Include="win_io_file.cpp" />
+    <ClCompile Include="win_audio.cpp" />
     <ClCompile Include="win_time.cpp" />
     <ClCompile Include="worldmap.cpp" />
     <ClCompile Include="zip_util.cpp" />
