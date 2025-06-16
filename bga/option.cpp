@@ -22,10 +22,10 @@ BSDATA(optionfi) = {
 assert_enum(optionfi, PauseCharacterCenter)
 
 BSDATA(optionvi) = {
-	{"GameDifficult", 0, 4, 2},
-	{"MouseScrollSpeed", 4, 64, 32},
-	{"KeyboardScrollSpeed", 4, 64, 32},
-	{"ToolTipsDelay", 200, 4000, 2000},
+	{"GameDifficult", 0, 2, 4},
+	{"MouseScrollSpeed", 4, 32, 64},
+	{"KeyboardScrollSpeed", 4, 32, 64},
+	{"ToolTipsDelay", 200, 2000, 4000},
 };
 assert_enum(optionvi, ToolTipsDelay)
 

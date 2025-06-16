@@ -33,7 +33,7 @@ static point get_free(point dst, point src, formationn formation, int index, int
 	return get_free(v, size);
 }
 
-void setparty(point dst) {
+void setparty(point dst, unsigned char orientation) {
 	auto index = 0;
 	auto p = get_selected();
 	if(!p)
@@ -44,7 +44,10 @@ void setparty(point dst) {
 			continue;
 		auto new_position = get_free(dst, start_position, current_formation, index++, p->getsize());
 		p->area_index = current_area;
-		p->lookat(new_position);
+		if(orientation==0xFF)
+			p->lookat(new_position);
+		else
+			p->orientation = orientation;
 		p->setposition(new_position);
 	}
 }
@@ -76,7 +79,7 @@ void enter(const char* id, const char* location) {
 	auto pn = entrance::find(temp);
 	if(pn) {
 		setcamera(pn->position);
-		setparty(pn->position);
+		setparty(pn->position, pn->orientation);
 	}
 	next_scene(open_game);
 }

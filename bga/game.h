@@ -24,5 +24,5 @@ bool is_saved_game(const char* url);
 void game_auto_save();
 void moveparty(point v);
 void setcamera(point v);
-void setparty(point v);
+void setparty(point v, unsigned char orientation = 0xFF);
 void setpartyall(point v);

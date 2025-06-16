@@ -985,12 +985,14 @@ static void toggle_option_flag() {
 	set_description();
 }
 
-static void toggle_option_value() {
-	auto n = (optionf)hot.param;
-	auto v = hot.param2;
+static void toggle_option_value(optionv n, int v) {
 	optvalues[n] = v;
 	hot.object = bsdata<optionvi>::elements + n;
 	set_description();
+}
+
+static void toggle_option_value() {
+	toggle_option_value((optionv)hot.param, hot.param2);
 }
 
 static void checkbox(optionf id) {
@@ -1011,12 +1013,14 @@ static void slider(optionv id, int slider_width = 142) {
 	auto maximum_width = slider_width - 24;
 	if(!range || maximum_width <= 0)
 		return;
-	caret.x += width + 22; width = maximum_width;
+	caret.x += width + 24; width = maximum_width;
 	auto position = value * maximum_width / range;
-	image(caret.x + position, caret.y + 2, gres(GUISLDR), 0, 0);
-	button_check(0);
-	if(button_executed)
-		execute(toggle_option_value, id, ei.minimal + (hot.mouse.x - caret.x - 8) * range / maximum_width);
+	button_hilited = ishilite();
+	button_pressed = button_hilited && hot.pressed;
+	button_executed = (hot.key == MouseLeft && !hot.pressed);
+	image(caret.x + position, caret.y + 2, gres(GUISLDR), button_pressed ? 1 : 0, 0);
+	if(button_pressed)
+		toggle_option_value(id, ei.minimal + (hot.mouse.x - caret.x - 8) * range / maximum_width);
 }
 
 static void paint_game_opt_pause() {

@@ -366,9 +366,8 @@ static void paint_float_text(const drawable* object) {
 	draw::alpha = 128;
 	draw::strokeout(draw::rectf, metrics::border + metrics::padding);
 	draw::alpha = push_alpha;
-	draw::fore = fore;
-	draw::textf(p->format);
 	draw::fore = push_fore;
+	draw::textf(p->format);
 }
 
 static void paint_door(const drawable* object) {

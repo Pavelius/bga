@@ -15,7 +15,7 @@ enum optionv : unsigned char {
 struct optionfi : nameable {
 };
 struct optionvi : nameable {
-	int minimal, maximum, start;
+	int minimal, start, maximum;
 	optionv getindex() const;
 };
 typedef flagable<1, unsigned> optionfa;
