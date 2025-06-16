@@ -19,6 +19,8 @@
 
 using namespace draw;
 
+void audio_play(const char* url);
+
 void main_identifier(stringbuilder& sb, const char* identifier);
 void initialize_translation();
 void initialize_store();
@@ -120,6 +122,8 @@ int main(int argc, char* argv[]) {
 	initialize(getnm("AppTitle"));
 	settimer(64);
 	next_scene(start_main);
+	// audio_play("wav/test.wav");
+	// audio_play("wav/AM1000D5.wav");
 	start_scene();
 	return 0;
 }

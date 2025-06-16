@@ -410,14 +410,14 @@
     <ClCompile Include="action.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="acm.cpp">
-      <Filter>support</Filter>
-    </ClCompile>
     <ClCompile Include="region.cpp">
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="win_audio.cpp">
       <Filter>platform</Filter>
+    </ClCompile>
+    <ClCompile Include="acm_util.cpp">
+      <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
