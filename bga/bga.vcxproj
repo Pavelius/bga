@@ -60,6 +60,7 @@
     <ClCompile Include="area_path.cpp" />
     <ClCompile Include="array.cpp" />
     <ClCompile Include="attack.cpp" />
+    <ClCompile Include="audio.cpp" />
     <ClCompile Include="bsreq.cpp" />
     <ClCompile Include="bstream.cpp" />
     <ClCompile Include="calendar.cpp" />
@@ -103,6 +104,7 @@
     <ClCompile Include="magic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_util.cpp" />
+    <ClCompile Include="manager.cpp" />
     <ClCompile Include="map.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -110,6 +112,7 @@
     <ClCompile Include="metadata.cpp" />
     <ClCompile Include="modifier.cpp" />
     <ClCompile Include="moveable.cpp" />
+    <ClCompile Include="mtevent.cpp" />
     <ClCompile Include="nameable.cpp" />
     <ClCompile Include="namestr.cpp" />
     <ClCompile Include="npc.cpp" />
@@ -137,6 +140,7 @@
     <ClCompile Include="surface_serial.cpp" />
     <ClCompile Include="szdup.cpp" />
     <ClCompile Include="tag.cpp" />
+    <ClCompile Include="thread.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="variable.cpp" />
     <ClCompile Include="variant.cpp" />
@@ -167,6 +171,7 @@
     <ClInclude Include="area.h" />
     <ClInclude Include="array.h" />
     <ClInclude Include="attack.h" />
+    <ClInclude Include="audio.h" />
     <ClInclude Include="bsdata.h" />
     <ClInclude Include="calendar.h" />
     <ClInclude Include="cflags.h" />
@@ -196,9 +201,11 @@
     <ClInclude Include="iteminside.h" />
     <ClInclude Include="itemlist.h" />
     <ClInclude Include="logvalue.h" />
+    <ClInclude Include="manager.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="modifier.h" />
     <ClInclude Include="moveable.h" />
+    <ClInclude Include="mtevent.h" />
     <ClInclude Include="namestr.h" />
     <ClInclude Include="npc.h" />
     <ClInclude Include="my_initialize_list.h" />
@@ -213,6 +220,7 @@
     <ClInclude Include="spell.h" />
     <ClInclude Include="store.h" />
     <ClInclude Include="stringvar.h" />
+    <ClInclude Include="thread.h" />
     <ClInclude Include="variable.h" />
     <ClInclude Include="portrait.h" />
     <ClInclude Include="region.h" />

@@ -1014,7 +1014,7 @@ DLL int WINAPI				TranslateMessage(const MSG*);
 DLL int WINAPI				TryEnterCriticalSection(void* data);
 DLL int WINAPI				UpdateWindow(HWND);
 DLL int WINAPI				UnregisterClassA(const char*, void*);
-DLL int WINAPI				waveOutOpen(void** phwo, unsigned uDeviceID, const struct WAVEFORMATEX* pwfx, unsigned* dwCallback, unsigned* dwInstance, unsigned fdwOpen);
+DLL int WINAPI				waveOutOpen(void** phwo, unsigned uDeviceID, const struct WAVEFORMATEX* pwfx, void* dwCallback, void* dwInstance, unsigned fdwOpen);
 DLL int WINAPI				waveOutPrepareHeader(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
 DLL int WINAPI				waveOutUnprepareHeader(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
 DLL int WINAPI				waveOutWrite(void* hwo, WAVEHDR* pwh, unsigned int cbwh);

@@ -1,5 +1,6 @@
 #include "action.h"
 #include "array.h"
+#include "audio.h"
 #include "colorgrad.h"
 #include "creature.h"
 #include "draw.h"
@@ -25,7 +26,7 @@ extern array console_data;
 unsigned caret_index;
 
 static point dialog_start;
-static bool button_pressed, button_executed, button_hilited, input_disabled;
+static bool button_pressed, button_executed, button_hilited, button_sound, input_disabled;
 static bool game_pause;
 static fnevent game_proc;
 static fnoperation drag_drop_proc;
@@ -204,6 +205,7 @@ void button_check(unsigned key) {
 	button_hilited = ishilite(rc);
 	button_pressed = false;
 	button_executed = false;
+	button_sound = false;
 	if(input_disabled) {
 		button_hilited = false;
 		return;
@@ -211,11 +213,15 @@ void button_check(unsigned key) {
 	if(button_hilited) {
 		if(hot.pressed)
 			button_pressed = true;
+		if(hot.key == MouseLeft && hot.pressed)
+			button_sound = true;
 		if(!hot.pressed && hot.key == MouseLeft)
 			button_executed = true;
 	}
-	if(key && hot.key == key)
+	if(key && hot.key == key) {
+		button_sound = true;
 		button_rect = rc;
+	}
 	if(hot.key == InputKeyUp) {
 		if(button_rect == rc) {
 			button_executed = true;
@@ -224,6 +230,12 @@ void button_check(unsigned key) {
 	}
 	if(button_rect == rc)
 		button_pressed = true;
+}
+
+static void button_check_sound(resn res) {
+	if(!button_sound)
+		return;
+	play_sound("GAM_09");
 }
 
 void fire(fnevent proc, long param, long param2, const void* object) {
@@ -245,6 +257,7 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key) {
 	auto& f = p->get(f1);
 	width = f.sx; height = f.sy;
 	button_check(key);
+	button_check_sound(res);
 	image(p, button_pressed ? f2 : f1, 0);
 }
 

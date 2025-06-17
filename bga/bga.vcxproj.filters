@@ -419,6 +419,18 @@
     <ClCompile Include="acm_util.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="thread.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="mtevent.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="audio.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -720,6 +732,18 @@
     </ClInclude>
     <ClInclude Include="action.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="thread.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="mtevent.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

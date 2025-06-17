@@ -1,5 +1,6 @@
 #include "ability.h"
 #include "area.h"
+#include "audio.h"
 #include "bsreq.h"
 #include "colorgrad.h"
 #include "console.h"
@@ -18,8 +19,6 @@
 #include "worldmap.h"
 
 using namespace draw;
-
-void audio_play(const char* url);
 
 void main_identifier(stringbuilder& sb, const char* identifier);
 void initialize_translation();
@@ -108,6 +107,7 @@ int main(int argc, char* argv[]) {
 	initialize_store();
 	initialize_colorgrad();
 	initialize_ui();
+	initialize_audio();
 	if(log::errors)
 		return -1;
 	metrics::font = gres(NORMAL);
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 	initialize(getnm("AppTitle"));
 	settimer(64);
 	next_scene(start_main);
-	// audio_play("wav/test.wav");
+	play_sound("MX1000A");
 	// audio_play("wav/AM1000D5.wav");
 	start_scene();
 	return 0;
