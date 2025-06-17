@@ -95,6 +95,7 @@ static void update_actor_animations() {
 			continue;
 		e.updateanimate();
 	}
+	audio_update_channels();
 }
 
 void update_frames() {

@@ -4,7 +4,7 @@
 #include "flagable.h"
 
 enum tagn : unsigned char {
-	Opened, Locked, Trapped, 
+	Opened, Locked, Trapped,
 };
 struct tagi : nameable {
 };

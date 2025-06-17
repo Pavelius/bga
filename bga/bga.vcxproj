@@ -53,6 +53,7 @@
     <ClCompile Include="action.cpp" />
     <ClCompile Include="actor.cpp" />
     <ClCompile Include="alignment.cpp" />
+    <ClCompile Include="ambient.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="answers.cpp" />
     <ClCompile Include="archive.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="adat.h" />
     <ClInclude Include="advance.h" />
     <ClInclude Include="alignment.h" />
+    <ClInclude Include="ambient.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="archive.h" />
     <ClInclude Include="area.h" />

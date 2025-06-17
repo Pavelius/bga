@@ -431,6 +431,9 @@
     <ClCompile Include="audio.cpp">
       <Filter>support</Filter>
     </ClCompile>
+    <ClCompile Include="ambient.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -744,6 +747,9 @@
     </ClInclude>
     <ClInclude Include="manager.h">
       <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="ambient.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
