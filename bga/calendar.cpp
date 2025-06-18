@@ -70,3 +70,10 @@ const char* get_real_month_of(int number) {
 	};
 	return source[number];
 }
+
+bool active_time(unsigned shedule) {
+	if(!shedule)
+		return true;
+	auto h = gethour();
+	return (shedule & (1 << h)) != 0;
+}
