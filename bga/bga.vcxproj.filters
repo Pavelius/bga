@@ -434,6 +434,9 @@
     <ClCompile Include="ambient.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="view_generate.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">

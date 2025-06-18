@@ -89,7 +89,9 @@ struct channelinfo {
     int getindex() const;
     void clear();
     void reset();
+    void update();
 };
+static channelinfo music_channel;
 static channelinfo channels[24];
 
 int channelinfo::getindex() const {
@@ -110,14 +112,18 @@ void channelinfo::reset() {
     playing = false;
 }
 
-void audio_update_channels() {
-    for(auto& e : channels) {
-        if(e.handle && !e.playing) {
-            e.reset();
-            if(e.stopping)
-                e.stopping(e.object, e.callback_object);
-        }
+void channelinfo::update() {
+    if(handle && !playing) {
+        reset();
+        if(stopping)
+            stopping(object, callback_object);
     }
+}
+
+void audio_update_channels() {
+    music_channel.update();
+    for(auto& e : channels)
+        e.update();
 }
 
 void audio_reset() {
@@ -140,6 +146,35 @@ static void CALLBACK audio_callback(void* hWaveOut, unsigned int uMsg, unsigned 
         auto p = (channelinfo*)dwInstance;
         p->playing = false;
     }
+}
+
+void music_create_player(int number_channels, int sample_rate, int bits_per_sample, fnaudiocb callback) {
+    WAVEFORMATEX wfx = {0};
+    wfx.cbSize = 0;
+    wfx.wFormatTag = 1;
+    wfx.nChannels = number_channels;
+    wfx.nSamplesPerSec = sample_rate;
+    wfx.wBitsPerSample = bits_per_sample;
+    wfx.nBlockAlign = wfx.nChannels * wfx.wBitsPerSample / 8;
+    wfx.nAvgBytesPerSec = wfx.nSamplesPerSec * wfx.nBlockAlign;
+    music_channel.clear();
+    music_channel.stopping = callback;
+    auto error = waveOutOpen(&music_channel.handle, (DWORD)-1, &wfx, (void*)audio_callback, &music_channel, CALLBACK_FUNCTION);
+}
+
+void play_music_raw(void* object) {
+    if(!music_channel.handle)
+        return;
+    if(music_channel.object == object)
+        return;
+    auto ph = (wav*)object;
+    music_channel.object = object;
+    music_channel.header = {};
+    music_channel.header.dwBufferLength = ph->subchunk2Size;
+    music_channel.header.lpData = (char*)ph + sizeof(*ph);
+    music_channel.playing = true;
+    auto error = waveOutPrepareHeader(music_channel.handle, &music_channel.header, sizeof(WAVEHDR));
+    error = waveOutWrite(music_channel.handle, &music_channel.header, sizeof(WAVEHDR));
 }
 
 void audio_play(void* object, short unsigned volume, fnaudiocb callback, void* callback_object) {

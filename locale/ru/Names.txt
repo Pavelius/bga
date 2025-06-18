@@ -8,10 +8,13 @@ ArmorCheckPenalty: Штраф брони на проверки
 AttackBonus: Бонус к атаке
 AutoPause: Авто-Пауза
 Autosave: Автоматическое сохранение
+Back: Назад
 BasicAbility: Базовая способность
+BeginGame: Начать игру
 Biography: Биография
 Buy: Купить
 Cancel: Отмена
+CharacterGeneration: Создание персонажа
 CharacterInventory: Предметы персонажа
 CharacterLevel: Класс персонажа (%1i уровень)
 CharacterRace: Раса персонажа
@@ -21,6 +24,7 @@ Close: Закрыть
 Coins: Золото
 Colors: Цвета
 ConfirmDelete: Вы действительно хотите удалить это сохранение игры?
+ConfirmQuitGame: Вы действительно хотите покинуть игру?
 ConfirmQuitMainMenu: Вы действительно хотите покинуть текущую игру и вернуться в главное меню?
 CriticalHitLine: Критический удар: при результате %1i-20 урон x%2i
 CriticalHitLine20: Критический удар: при результате 20 урон x%2i
@@ -39,12 +43,15 @@ Experience: Опыт
 Export: Экспорт
 Feats: Особенности
 From: из
+GameMode: Режим игры
 GamePlay: Игровой процесс
 Graphics: Графика
 Ground: На земле
+Import: Импортировать
 Information: Информация
 Identify: Опознать
 Identifying: Опознание предметов
+JoinGame: Присоединиться
 Journal: Журнал
 HairColor: Цвет волос
 Keyboard: Клавиатура
@@ -60,14 +67,18 @@ MinorColor: Второстепенный цвет
 MaxDexterityBonus: Максимальный бонус ловкости
 Movies: Видеоролики
 Name: Наименование
+NewGame: Новая игра
+Next: Далее
 NextLevel: Следующий уровень
 No: Нет
 Options: Опции
 Overwrite: Перезаписать
 Proficiency: Владение
 QuickItem: Предметы
+QuickLoad: Быстрая загрузка
 Quicksave: Быстрое сохранение
 QuickWeapon: Оружие
+QuitGame: Покинуть игру
 Quiver: Колчан
 QuitMainMenu: Покинуть игру
 Range30: 30 футов
@@ -86,6 +97,7 @@ SaveGame: Сохранить игру
 SavingThrows: Броски спасения
 SelectAllParty: Выбрать всю партию
 Sell: Продать
+SinglePlayer: Один игрок
 Skills: Навыки
 SkinColor: Цвет кожи
 Sound: Звук

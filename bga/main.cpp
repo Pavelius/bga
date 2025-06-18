@@ -107,6 +107,7 @@ int main(int argc, char* argv[]) {
 	initialize_store();
 	initialize_colorgrad();
 	initialize_ui();
+	music_create_player(2, 22050, 16, audio_repeat);
 	initialize_audio();
 	if(log::errors)
 		return -1;
@@ -121,7 +122,8 @@ int main(int argc, char* argv[]) {
 	colors::special = color(244, 214, 66);
 	initialize(getnm("AppTitle"));
 	settimer(64);
-	next_scene(start_main);
+	//next_scene(start_main);
+	next_scene(open_main_menu);
 	// play_sound("MX1000A", 0xFFFF, audio_repeat);
 	// audio_play("wav/AM1000D5.wav");
 	start_scene();

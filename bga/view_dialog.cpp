@@ -169,6 +169,10 @@ static void setgameproc() {
 	setgameproc(p, m);
 }
 
+static void quit_game() {
+	// Before quit game
+}
+
 void next_scene() {
 	next_scene((fnevent)hot.object);
 }
@@ -296,9 +300,17 @@ static point get_pressed_offset(resn n) {
 	}
 }
 
+static point get_text_offset(resn n) {
+	switch(n) {
+	case GBTNMED2: return {0, 1};
+	default: return {0, 0};
+	}
+}
+
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id) {
 	auto push_caret = caret;
 	button(res, f1, f2, key);
+	caret = caret + get_text_offset(res);
 	if(button_pressed)
 		caret = caret + get_pressed_offset(res);
 	auto push_height = height;
@@ -1086,6 +1098,12 @@ static void open_game_opt_game_play() {
 	open_dialog(paint_game_opt_game_play, true);
 }
 
+static void confirm_quit_game() {
+	if(!confirm("ConfirmQuitGame"))
+		return;
+	next_scene(quit_game);
+}
+
 static void paint_game_options() {
 	paint_game_dialog(STONEOPT);
 	paint_action_panel_na();
@@ -1098,7 +1116,7 @@ static void paint_game_options() {
 	setdialog(497, 228); button(GBTNLRG2, 1, 2, '6', "GamePlay"); fire(open_game_opt_game_play);
 	setdialog(497, 268); button(GBTNLRG2, 1, 2, '7', "Movies");
 	setdialog(497, 298); button(GBTNLRG2, 1, 2, '8', "Keyboard");
-	setdialog(555, 338); button(GBTNSTD, 1, 2, KeyEscape, "Close"); fire(setgameproc, 1, 0, paint_game_options);
+	setdialog(555, 338); button(GBTNSTD, 1, 2, 0, "Close"); fire(setgameproc, 1, 0, paint_game_options);
 	setdialog(353, 386, 95, 16); texta(str("%GameVersion"), AlignCenterCenter);
 }
 
@@ -1377,6 +1395,7 @@ static void paint_spell_description() {
 
 static void open_spell_info() {
 	last_spell = (spelli*)hot.object;
+	play_sound("GAM_03");
 	set_description("%SpellInformation");
 	open_dialog(paint_spell_description, true);
 }
@@ -1570,6 +1589,25 @@ static void paint_item_count() {
 	// Unlnown None 176 46 42 15
 }
 
+static void paint_main_menu() {
+	paint_game_dialog(START, 1);
+	setdialog(569, 133, 152, 21); texta(getnm("GameMode"), AlignCenterCenter);
+	setdialog(567, 160); button(GBTNMED2, 1, 2, 'M', "SinglePlayer");
+	setdialog(569, 220, 152, 21); texta(getnm("BeginGame"), AlignCenterCenter);
+	setdialog(567, 248); button(GBTNMED2, 5, 6, 'N', "NewGame"); fire(open_character_generation);
+	setdialog(567, 280); button(GBTNMED2, 9, 10, 'L', "LoadGame"); fire(open_load_game);
+	setdialog(567, 312); button(GBTNMED2, 13, 14, 'Q', "QuickLoad");
+	setdialog(567, 344); button(GBTNMED2, 1, 2, 'J', "JoinGame", 3, false);
+	setdialog(567, 396); button(GBTNMED2, 5, 6, 'O', "Options");
+	setdialog(567, 428); button(GBTNMED2, 9, 10, KeyEscape, "QuitGame"); fire(confirm_quit_game);
+	audio_update_channels();
+}
+
+void open_main_menu() {
+	play_music("THEMEA");
+	scene(paint_main_menu);
+}
+
 static const char* get_object_name(const void* p) {
 	return getnm((const char*)p);
 }
@@ -1634,6 +1672,7 @@ void open_item_description() {
 	pushdescription push_info;
 	auto push_last = last_item;
 	last_item = (item*)hot.object;
+	play_sound("GAM_03");
 	set_description("##%ItemName\n%ItemInformation");
 	open_dialog(paint_item_description, true);
 	last_item = push_last;

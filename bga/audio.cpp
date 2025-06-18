@@ -7,6 +7,12 @@ void initialize_audio() {
 	manager_initialize(resources, "wav", "*.wav", true);
 }
 
+void play_music(const char* id) {
+	auto p = manager_get(resources, id, "wav");
+	if(p)
+		play_music_raw(p);
+}
+
 void play_sound(const char* id, short unsigned volume, fnaudiocb proc, void* object) {
 	auto p = manager_get(resources, id, "wav");
 	if(p)

@@ -147,6 +147,7 @@
     <ClCompile Include="variant.cpp" />
     <ClCompile Include="view_area.cpp" />
     <ClCompile Include="view_dialog.cpp" />
+    <ClCompile Include="view_generate.cpp" />
     <ClCompile Include="view_list.cpp" />
     <ClCompile Include="view_save_load.cpp" />
     <ClCompile Include="view_store.cpp" />
