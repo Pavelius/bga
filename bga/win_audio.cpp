@@ -120,6 +120,11 @@ void audio_update_channels() {
     }
 }
 
+void audio_reset() {
+    for(auto& e : channels)
+        e.reset();
+}
+
 static channelinfo* find_channel() {
     audio_update_channels();
     for(auto& e : channels) {
@@ -137,7 +142,7 @@ static void CALLBACK audio_callback(void* hWaveOut, unsigned int uMsg, unsigned 
     }
 }
 
-void audio_play_memory(void* object, short unsigned volume, fnaudiocb callback, void* callback_object) {
+void audio_play(void* object, short unsigned volume, fnaudiocb callback, void* callback_object) {
     auto ph = (wav*)object;
     auto p = find_channel();
     WAVEFORMATEX wfx = {0};

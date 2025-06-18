@@ -1,4 +1,5 @@
 #include "ambient.h"
+#include "audio.h"
 #include "area.h"
 #include "archive.h"
 #include "console.h"
@@ -67,8 +68,9 @@ void moveparty(point dst) {
 }
 
 void enter(const char* id, const char* location) {
-	char temp[32]; stringbuilder sb(temp); sb.add(location);
+	char entrance_copy[32]; stringbuilder sb(entrance_copy); sb.add(location);
 	print("Enter area [%1] at location [%2]", id, location);
+	audio_reset();
 	read_area(id, "ID2");
 	read_area(id);
 #ifdef _DEBUG
@@ -77,7 +79,7 @@ void enter(const char* id, const char* location) {
 	print("Count of regions %1i", bsdata<region>::source.count);
 #endif
 	use_all_doors();
-	auto pn = entrance::find(temp);
+	auto pn = entrance::find(entrance_copy);
 	if(pn) {
 		setcamera(pn->position);
 		setparty(pn->position, pn->orientation);

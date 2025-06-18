@@ -49,7 +49,7 @@ void ambientplayer::update() {
 	ambient* p = getrecord();
 	if(!p)
 		return;
-	if(!p->sounds)
+	if(playing || !p->sounds)
 		return;
 	if(wait_stamp) {
 		if(current_game_tick < wait_stamp)

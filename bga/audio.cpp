@@ -10,9 +10,9 @@ void initialize_audio() {
 void play_sound(const char* id, short unsigned volume, fnaudiocb proc, void* object) {
 	auto p = manager_get(resources, id, "wav");
 	if(p)
-		audio_play_memory(p, volume, proc, object);
+		audio_play(p, volume, proc, object);
 }
 
 void audio_repeat(void* object, void* callback_object) {
-	audio_play_memory(object, 0xFFFF, audio_repeat, callback_object);
+	audio_play(object, 0xFFFF, audio_repeat, callback_object);
 }
