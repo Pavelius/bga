@@ -57,7 +57,7 @@ static void update_ambient_player(ambientplayer* pe) {
 	}
 	if(!active_time(p->shedule))
 		return;
-	auto volume = p->hearing(hearing_center);
+	short unsigned volume = p->hearing(hearing_center);
 	if(!volume)
 		return;
 	auto n = pe->next_sound;
@@ -66,7 +66,7 @@ static void update_ambient_player(ambientplayer* pe) {
 		n = pe->next_sound;
 	} else
 		pe->next_sound = (++pe->next_sound) % p->sounds.count;
-	play_sound(p->sounds[n].id, finish_playing, pe);
+	play_sound(p->sounds[n].id, volume, finish_playing, pe);
 	pe->current_channel = last_channel;
 }
 
@@ -75,6 +75,7 @@ void initialize_area_ambients() {
 	for(auto& e : bsdata<ambient>()) {
 		auto p = bsdata<ambientplayer>::add();
 		p->clear();
+		p->wait_stamp = current_game_tick + xrand(500, 16 * 1000);
 	}
 }
 

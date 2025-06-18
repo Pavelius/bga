@@ -74,7 +74,7 @@ WINBASEAPI int WINAPI waveOutClose(void* hwo);
 //WINBASEAPI int WINAPI waveOutGetVolume(void* hwo, unsigned* pdwVolume);
 WINBASEAPI int WINAPI waveOutOpen(void** phwo, unsigned uDeviceID, const struct WAVEFORMATEX* pwfx, void* dwCallback, void* dwInstance, unsigned fdwOpen);
 WINBASEAPI int WINAPI waveOutPrepareHeader(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
-//WINBASEAPI int WINAPI waveOutSetVolume(void* hwo, unsigned dwVolume);
+WINBASEAPI int WINAPI waveOutSetVolume(void* hwo, unsigned dwVolume);
 WINBASEAPI int WINAPI waveOutUnprepareHeader(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
 WINBASEAPI int WINAPI waveOutWrite(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
 
@@ -101,8 +101,9 @@ void channelinfo::clear() {
 
 void channelinfo::reset() {
     if(handle) {
-        if(waveOutReset(handle) == 0)
-            waveOutClose(handle);
+        auto error = waveOutUnprepareHeader(handle, &header, sizeof(header));
+        error = waveOutReset(handle);
+        error = waveOutClose(handle);
     }
     handle = 0;
     playing = false;
@@ -130,7 +131,6 @@ static channelinfo* find_channel() {
 
 static void CALLBACK audio_callback(void* hWaveOut, unsigned int uMsg, unsigned int dwInstance, unsigned int dwParam1, unsigned int dwParam2) {
     if(uMsg == WOM_DONE) {
-        waveOutUnprepareHeader(hWaveOut, (WAVEHDR*)dwParam1, sizeof(WAVEHDR));
         auto p = (channelinfo*)dwInstance;
         p->playing = false;
     }
@@ -140,7 +140,7 @@ void* audio_get_object(int channel) {
     return channels[channel].object;
 }
 
-void audio_play_memory(int channel, void* object, fnaudiocb callback, void* callback_object) {
+void audio_play_memory(int channel, short unsigned volume, void* object, fnaudiocb callback, void* callback_object) {
     auto ph = (wav*)object;
     auto p = (channel==-1) ? find_channel() : channels + channel;
     WAVEFORMATEX wfx = {0};
@@ -152,16 +152,17 @@ void audio_play_memory(int channel, void* object, fnaudiocb callback, void* call
     wfx.nBlockAlign = wfx.nChannels * wfx.wBitsPerSample / 8;
     wfx.nAvgBytesPerSec = wfx.nSamplesPerSec * wfx.nBlockAlign;
     p->clear();
-    p->playing = true;
     p->stopping = callback;
     p->object = callback_object;
-    waveOutOpen(&p->handle, (DWORD)-1, &wfx, (void*)audio_callback, p, CALLBACK_FUNCTION);
+    auto error = waveOutOpen(&p->handle, (DWORD)-1, &wfx, (void*)audio_callback, p, CALLBACK_FUNCTION);
     if(p->handle) {
         p->header = {};
         p->header.dwBufferLength = ph->subchunk2Size;
         p->header.lpData = (char*)ph + sizeof(*ph);
-        waveOutPrepareHeader(p->handle, &p->header, sizeof(WAVEHDR));
-        waveOutWrite(p->handle, &p->header, sizeof(WAVEHDR));
+        p->playing = true;
+        error = waveOutPrepareHeader(p->handle, &p->header, sizeof(WAVEHDR));
+        error = waveOutWrite(p->handle, &p->header, sizeof(WAVEHDR));
+        // error = waveOutSetVolume(p->handle, 0xFFFF);
     }
     last_channel = p->getindex();
 }

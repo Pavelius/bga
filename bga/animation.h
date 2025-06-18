@@ -13,14 +13,7 @@ enum animatef_s : unsigned char {
 };
 
 struct animation : drawable, variableid {
-	struct info {
-		const sprite*	source;
-		int				frame;
-		unsigned		flags;
-		unsigned char	transparent;
-		explicit operator bool() const { return source != 0; }
-	};
-	unsigned			schedule;
+	unsigned			shedule;
 	char				rsname[9], rsname_pallette[9];
 	unsigned short		circle, frame, start_frame;
 	unsigned			flags;

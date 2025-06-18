@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 	initialize(getnm("AppTitle"));
 	settimer(64);
 	next_scene(start_main);
-	play_sound("MX1000A", audio_repeat);
+	play_sound("MX1000A", 0xFFFF, audio_repeat);
 	// audio_play("wav/AM1000D5.wav");
 	start_scene();
 	return 0;
