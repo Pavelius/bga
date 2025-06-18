@@ -1,6 +1,7 @@
 #include "ambient.h"
 #include "audio.h"
 #include "bsdata.h"
+#include "calendar.h"
 #include "rand.h"
 #include "timer.h"
 
@@ -54,6 +55,8 @@ static void update_ambient_player(ambientplayer* pe) {
 			return;
 		pe->wait_stamp = 0;
 	}
+	if(!active_time(p->shedule))
+		return;
 	auto volume = p->hearing(hearing_center);
 	if(!volume)
 		return;
@@ -65,7 +68,6 @@ static void update_ambient_player(ambientplayer* pe) {
 		pe->next_sound = (++pe->next_sound) % p->sounds.count;
 	play_sound(p->sounds[n].id, finish_playing, pe);
 	pe->current_channel = last_channel;
-	audio_set_volume(pe->current_channel, (short unsigned)volume);
 }
 
 void initialize_area_ambients() {

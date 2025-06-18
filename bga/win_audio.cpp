@@ -71,9 +71,10 @@ struct WAVEHDR {
 
 WINBASEAPI int WINAPI waveOutReset(void* hwo);
 WINBASEAPI int WINAPI waveOutClose(void* hwo);
-WINBASEAPI int WINAPI waveOutGetVolume(void* hwo, unsigned* pdwVolume);
+//WINBASEAPI int WINAPI waveOutGetVolume(void* hwo, unsigned* pdwVolume);
 WINBASEAPI int WINAPI waveOutOpen(void** phwo, unsigned uDeviceID, const struct WAVEFORMATEX* pwfx, void* dwCallback, void* dwInstance, unsigned fdwOpen);
 WINBASEAPI int WINAPI waveOutPrepareHeader(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
+//WINBASEAPI int WINAPI waveOutSetVolume(void* hwo, unsigned dwVolume);
 WINBASEAPI int WINAPI waveOutUnprepareHeader(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
 WINBASEAPI int WINAPI waveOutWrite(void* hwo, WAVEHDR* pwh, unsigned int cbwh);
 
@@ -133,17 +134,6 @@ static void CALLBACK audio_callback(void* hWaveOut, unsigned int uMsg, unsigned 
         auto p = (channelinfo*)dwInstance;
         p->playing = false;
     }
-}
-
-short unsigned audio_get_volume(int channel) {
-    unsigned value = 0xFFFF;
-    if(waveOutGetVolume(channels[channel].handle, &value)==0)
-        return (short unsigned)(value & 0xFFFF);
-    return 0;
-}
-
-void audio_set_volume(int channel, short unsigned volume) {
-    auto p = channels + channel;
 }
 
 void* audio_get_object(int channel) {
