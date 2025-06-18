@@ -1,5 +1,6 @@
 #include "ability.h"
 #include "advance.h"
+#include "ambient.h"
 #include "animation.h"
 #include "area.h"
 #include "calendar.h"
@@ -36,6 +37,7 @@ BSMETA(variant) = {{}};
 BSMETA(varianti) = {BSREQ(id), {}};
 
 BSDATAC(advancei, 512)
+BSDATAC(ambient, 64)
 BSDATAC(animation, 128)
 BSDATAC(areai, 512)
 BSDATAC(calendari, 128)

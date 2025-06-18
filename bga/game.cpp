@@ -1,3 +1,4 @@
+#include "ambient.h"
 #include "area.h"
 #include "archive.h"
 #include "console.h"
@@ -81,6 +82,7 @@ void enter(const char* id, const char* location) {
 		setcamera(pn->position);
 		setparty(pn->position, pn->orientation);
 	}
+	initialize_area_ambients();
 	next_scene(open_game);
 }
 

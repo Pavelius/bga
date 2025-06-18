@@ -81,7 +81,6 @@ struct channelinfo {
     WAVEHDR         header;
     void*           handle;
     bool            playing;
-    short unsigned  volume;
     fnaudiocb       stopping;
     void*           object; // user defined object
     explicit operator bool() const { return handle != 0; }
@@ -97,7 +96,6 @@ int channelinfo::getindex() const {
 
 void channelinfo::clear() {
     memset(this, 0, sizeof(*this));
-    volume = 0xFFFF;
 }
 
 void channelinfo::reset() {
@@ -146,8 +144,6 @@ short unsigned audio_get_volume(int channel) {
 
 void audio_set_volume(int channel, short unsigned volume) {
     auto p = channels + channel;
-    if(p->volume == volume)
-        return;
 }
 
 void* audio_get_object(int channel) {
@@ -177,4 +173,5 @@ void audio_play_memory(int channel, void* object, fnaudiocb callback, void* call
         waveOutPrepareHeader(p->handle, &p->header, sizeof(WAVEHDR));
         waveOutWrite(p->handle, &p->header, sizeof(WAVEHDR));
     }
+    last_channel = p->getindex();
 }

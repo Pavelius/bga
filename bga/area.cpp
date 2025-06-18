@@ -1,3 +1,4 @@
+#include "ambient.h"
 #include "animation.h"
 #include "archive.h"
 #include "area.h"
@@ -88,6 +89,7 @@ void clear_area() {
 	memset(area_state, 0, sizeof(area_state));
 	memset(area_light, 0, sizeof(area_light));
 	memset(area_light_pallette, 0, sizeof(area_light_pallette));
+	bsdata<ambient>::source.clear();
 	bsdata<animation>::source.clear();
 	bsdata<container>::source.clear();
 	bsdata<door>::source.clear();
@@ -164,6 +166,7 @@ bool archive_ard(io::stream& file, bool writemode) {
 	ar.set(bsdata<container>::source);
 	ar.set(bsdata<entrance>::source);
 	ar.set(bsdata<animation>::source);
+	ar.set(bsdata<ambient>::source);
 	return true;
 }
 

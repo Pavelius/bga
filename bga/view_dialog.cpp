@@ -1,5 +1,6 @@
 #include "action.h"
 #include "array.h"
+#include "ambient.h"
 #include "audio.h"
 #include "colorgrad.h"
 #include "creature.h"
@@ -103,6 +104,7 @@ void update_frames() {
 	if(!game_pause) {
 		update_game_tick();
 		update_actor_animations();
+		update_ambients(camera);
 	}
 }
 

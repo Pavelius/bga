@@ -8,14 +8,22 @@ enum ambientf : unsigned char {
 };
 
 struct ambient {
-	typedef char resref[12];
+	struct soundi {
+		char		id[12];
+	};
 	point			position;
 	unsigned short	radius;
-	unsigned char	volume, volume_range;
-	unsigned short	delay, delay_range;
-	unsigned		shedule;
+	unsigned char	volume, volume_range; // Percent value
+	unsigned short	delay, delay_range; // Delay in Seconds between sounds
+	unsigned		shedule; // Hour by hour presence of sound.
+	adat<soundi, 10> sounds;
 	unsigned		flags; // Seriable
-	adat<resref, 10> sounds;
 	int hearing(point camera) const;
+	void clear();
 	bool is(ambientf v) const { return (flags & (1 << v)) != 0; }
+	void update();
 };
+extern point hearing_center;
+
+void initialize_area_ambients();
+void update_ambients(point camera);
