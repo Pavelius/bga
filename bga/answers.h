@@ -8,24 +8,11 @@ class answers {
 		const void* value;
 		const char* text;
 	};
-	char				buffer[2048];
+	char				buffer[1024];
 	stringbuilder		sc;
-	adat<element, 32>	elements;
+	adat<element, 24>	elements;
 public:
 	typedef void(*fnpaint)(int index, const void* value, const char* text, fnevent press_event);
-	static fnevent		beforepaint, afterpaint;
-	static fnpaint		paintcell;
-	static bool			interactive;
-	static int			column_count;
-	static stringbuilder* console;
-	static const char*	header;
-	static char			hotkeys[20];
-	static const char*	prompt;
-	static const char*	prompa;
-	static const char*	prompi;
-	static const char*	resid;
-	static bool			show_tips;
-	static answers*		last;
 	answers() : sc(buffer) {}
 	constexpr operator bool() const { return elements.count != 0; }
 	void				add(const void* value, const char* name, ...);
@@ -38,7 +25,6 @@ public:
 	const element*		end() const { return elements.end(); }
 	const char*			getname(void* v);
 	int					indexof(const void* v) const { return elements.indexof(v); }
-	void				modal(const char* title, const char* cancel) const;
 	void				paintanswers(int columns, const char* cancel_text) const;
 	void*				random() const;
 	void				remove(int index) { elements.remove(index, 1); }
@@ -46,10 +32,3 @@ public:
 	void				sort();
 };
 extern answers an;
-
-void message(const char* format, const char* header = 0);
-void pause();
-void pause(const char* title, ...);
-void pausenc(const char* title, ...);
-bool yesno(const char* title, ...);
-bool yesnov(const char* title, const char* title_param);

@@ -26,6 +26,7 @@
     <Text Include="..\locale\ru\Calendar.txt" />
     <Text Include="..\locale\ru\Classes.txt" />
     <Text Include="..\locale\ru\Feats.txt" />
+    <Text Include="..\locale\ru\Generate.txt" />
     <Text Include="..\locale\ru\Items.txt" />
     <Text Include="..\locale\ru\Names.txt" />
     <Text Include="..\locale\ru\NamesNewbe.txt" />
@@ -78,7 +79,6 @@
     <ClCompile Include="direction.cpp" />
     <ClCompile Include="door.cpp" />
     <ClCompile Include="draw.cpp" />
-    <ClCompile Include="draw_answers.cpp" />
     <ClCompile Include="draw_focus.cpp" />
     <ClCompile Include="drawable.cpp" />
     <ClCompile Include="draw_text.cpp" />
@@ -89,6 +89,7 @@
     <ClCompile Include="formation.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gender.cpp" />
+    <ClCompile Include="command.cpp" />
     <ClCompile Include="geography.cpp" />
     <ClCompile Include="help.cpp" />
     <ClCompile Include="information.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="formation.h" />
     <ClInclude Include="ftflag.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="command.h" />
     <ClInclude Include="geography.h" />
     <ClInclude Include="help.h" />
     <ClInclude Include="itema.h" />

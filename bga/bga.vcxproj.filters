@@ -105,6 +105,9 @@
     <Text Include="..\locale\ru\Options.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\locale\ru\Generate.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -162,9 +165,6 @@
       <Filter>support</Filter>
     </ClCompile>
     <ClCompile Include="draw.cpp">
-      <Filter>interface</Filter>
-    </ClCompile>
-    <ClCompile Include="draw_answers.cpp">
       <Filter>interface</Filter>
     </ClCompile>
     <ClCompile Include="color.cpp">
@@ -435,6 +435,9 @@
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="view_generate.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="command.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -752,6 +755,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="ambient.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="command.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,2 +1,3 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `CharacterGeneration`
+ Define translation for `Женщина`
+ Define translation for `Мужчина`

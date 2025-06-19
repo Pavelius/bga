@@ -42,6 +42,7 @@ EnterSaveGameName: Укажите имя сохраняемой игры
 Experience: Опыт
 Export: Экспорт
 Feats: Особенности
+Finish: Завершить
 From: из
 GameMode: Режим игры
 GamePlay: Игровой процесс
@@ -62,6 +63,7 @@ LevelUp: Развитие
 Load: Зарузить
 LoadGame: Загрузить игру
 MagicBonus: Магический бонус
+MainMenu: Главное меню
 MajorColor: Главный цвет
 MinorColor: Второстепенный цвет
 MaxDexterityBonus: Максимальный бонус ловкости

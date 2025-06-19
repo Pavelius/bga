@@ -108,18 +108,20 @@ void update_frames() {
 	}
 }
 
-void set_description(const char* id) {
+void set_description(const char* format) {
 	description.clear();
-	description.add(id);
+	description.add(format);
 	description_cash_size = -1;
 }
 
+void set_description_id(const char* id) {
+	auto pd = getnme(ids(id, "Info"));
+	if(pd)
+		set_description(pd);
+}
+
 void set_description() {
-	auto pn = (nameable*)hot.object;
-	auto pd = getnme(ids(pn->id, "Info"));
-	if(!pd)
-		return;
-	set_description(pd);
+	set_description_id(((nameable*)hot.object)->id);
 }
 
 void setdialog(int x, int y) {
@@ -307,7 +309,7 @@ static point get_text_offset(resn n) {
 	}
 }
 
-void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id) {
+void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, bool need_getname) {
 	auto push_caret = caret;
 	button(res, f1, f2, key);
 	caret = caret + get_text_offset(res);
@@ -315,7 +317,9 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const 
 		caret = caret + get_pressed_offset(res);
 	auto push_height = height;
 	height -= 2;
-	texta(str(getnm(id)), AlignCenterCenter);
+	if(need_getname)
+		id = str(getnm(id));
+	texta(id, AlignCenterCenter);
 	height = push_height;
 	caret = push_caret;
 }
@@ -324,13 +328,13 @@ static color get_disable_color(resn res) {
 	return color(90, 97, 83);
 }
 
-void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed) {
+void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed, bool need_getname) {
 	if(allowed)
-		button(res, f1, f2, key, id);
+		button(res, f1, f2, key, id, need_getname);
 	else {
 		pushfore push_fore(fore.mix(get_disable_color(res), 128));
 		auto push_input = input_disabled; input_disabled = true;
-		button(res, fd, f2, key, id);
+		button(res, fd, f2, key, id, need_getname);
 		input_disabled = push_input;
 	}
 }
