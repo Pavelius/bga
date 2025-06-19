@@ -32,3 +32,4 @@ public:
 	void				sort();
 };
 extern answers an;
+extern void* current_answer;

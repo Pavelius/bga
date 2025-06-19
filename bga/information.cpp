@@ -1,5 +1,6 @@
 #include "ability.h"
 #include "alignment.h"
+#include "answers.h"
 #include "calendar.h"
 #include "creature.h"
 #include "item.h"
@@ -54,9 +55,6 @@ static void addb(stringbuilder& sb, const char* id, int value, const char* forma
 
 static void addb(stringbuilder& sb, abilityn i, int value, bool skip_zero = true) {
 	addb(sb, bsdata<abilityi>::elements[i].id, value, bsdata<abilityi>::elements[i].format, skip_zero);
-}
-
-void status_info() {
 }
 
 static void add_description(stringbuilder& sb, const char* id, const char* id_basic = 0) {
@@ -296,6 +294,18 @@ static void character_brief_info(stringbuilder& sb) {
 	addv<genderi>(sb, "Gender", player->gender);
 }
 
+static void add_race_info(stringbuilder& sb, racei* p) {
+}
+
+static void answer_info(stringbuilder& sb) {
+	auto p = (nameable*)current_answer;
+	auto pn = getnme(ids(p->id, "Info"));
+	if(pn)
+		sb.addn(pn);
+	if(bsdata<racei>::have(pn))
+		add_race_info(sb, (racei*)p);
+}
+
 template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
 	auto p = (skilli*)object;
 	add_description(sb, p->id);
@@ -339,6 +349,7 @@ void main_identifier(stringbuilder& sb, const char* identifier) {
 }
 
 BSDATA(stringvari) = {
+	{"AnswerInfo", answer_info},
 	{"CharacterBriefInfo", character_brief_info},
 	{"ItemInformation", item_information},
 	{"ItemName", item_name},

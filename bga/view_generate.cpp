@@ -11,7 +11,6 @@
 using namespace draw;
 
 static commandn current_step;
-static void* current_answer;
 static vector<portraiti*> portraits;
 static unsigned current_value;
 
@@ -59,8 +58,8 @@ static void paint_steps() {
 
 static void pick_answer() {
 	auto p = (nameable*)hot.object;
-	set_description_id(p->id);
 	current_answer = p;
+	set_description("%AnswerInfo");
 }
 
 static void paint_answers(int bh) {
@@ -90,12 +89,16 @@ static void paint_answers_sex() {
 static void start_over() {
 	player->clear();
 	current_step = ChooseGender;
+	set_description(getnm("GenerationMainInfo"));
+}
+
+static void back_one_step() {
 }
 
 static void paint_footer() {
 	setdialog(35, 550); button(GBTNSTD, 1, 2, 0, "Biography", 3, false);
 	setdialog(204, 550); button(GBTNSTD, 5, 6, 0, "Import");
-	setdialog(342, 550); button(GBTNSTD, 9, 10, KeyEscape, "Back", 11, false); fire(buttoncancel);
+	setdialog(342, 550); button(GBTNSTD, 9, 10, KeyEscape, "Back", 11, current_step != ChooseGender); fire(back_one_step);
 	setdialog(478, 550); button(GBTNSTD, 1, 2, KeyEnter, "Finish", 3, false);
 	setdialog(647, 550);
 	if(current_step == ChooseGender) {
@@ -216,9 +219,7 @@ static void generate_step_by_step() {
 			break;
 		if(bsdata<commandi>::have(p)) {
 			current_step = (commandn)bsdata<commandi>::source.indexof(p);
-			if(!choose_step_action())
-				current_step = (commandn)(current_step - 1);
-			else
+			if(choose_step_action())
 				current_step = (commandn)(current_step + 1);
 		}
 	}

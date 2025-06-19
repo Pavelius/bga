@@ -3,6 +3,7 @@
 #include "rand.h"
 
 answers an;
+void* current_answer;
 
 int answers::compare(const void* v1, const void* v2) {
 	return szcmp(((answers::element*)v1)->text, ((answers::element*)v2)->text);
