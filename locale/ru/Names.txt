@@ -19,7 +19,16 @@ CharacterInventory: Предметы персонажа
 CharacterLevel: Класс персонажа (%1i уровень)
 CharacterRace: Раса персонажа
 CharacterSheet: Листок персонажа
+ChooseAbilities: Способности
+ChooseAvatar: Внешний вид
 ChooseAmount: Укажите количество
+ChooseAlignment: Мировозрение
+ChooseAppearance: Внешний вид
+ChooseClass: Класс
+ChooseGender: Пол
+ChooseName: Имя
+ChooseRace: Раса
+ChooseSkills: Навыки
 Close: Закрыть
 Coins: Золото
 Colors: Цвета
@@ -46,6 +55,7 @@ Finish: Завершить
 From: из
 GameMode: Режим игры
 GamePlay: Игровой процесс
+Gender: Пол
 Graphics: Графика
 Ground: На земле
 Import: Импортировать
@@ -83,6 +93,7 @@ QuickWeapon: Оружие
 QuitGame: Покинуть игру
 Quiver: Колчан
 QuitMainMenu: Покинуть игру
+Random: Случайно
 Range30: 30 футов
 Replay: Заново
 Required: Требования
@@ -106,6 +117,7 @@ Sound: Звук
 SpellFailure: Неудача при создании заклинания
 SpellLevelShort: Уров.
 Spells: Заклинания
+StartOver: Начать заново
 Steal: Украсть
 Version: Версия
 Weight: Вес

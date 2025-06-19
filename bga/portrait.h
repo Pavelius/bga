@@ -11,6 +11,7 @@ struct portraiti {
 	gendern			gender;
 	racen			race;
 	classn			classv;
+	int				getindex() const;
 };
 struct avatarable {
 	short unsigned	portrait;

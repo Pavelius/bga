@@ -1,3 +1,2 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `Женщина`
- Define translation for `Мужчина`
+ Define translation for `ChooseAvatar`

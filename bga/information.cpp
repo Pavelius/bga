@@ -292,6 +292,10 @@ static void game_version(stringbuilder& sb) {
 	sb.adds("%1i.%2i", 0, 1);
 }
 
+static void character_brief_info(stringbuilder& sb) {
+	addv<genderi>(sb, "Gender", player->gender);
+}
+
 template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
 	auto p = (skilli*)object;
 	add_description(sb, p->id);
@@ -335,6 +339,7 @@ void main_identifier(stringbuilder& sb, const char* identifier) {
 }
 
 BSDATA(stringvari) = {
+	{"CharacterBriefInfo", character_brief_info},
 	{"ItemInformation", item_information},
 	{"ItemName", item_name},
 	{"GameVersion", game_version},

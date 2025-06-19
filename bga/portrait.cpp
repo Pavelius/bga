@@ -92,6 +92,10 @@ BSDATA(portraiti) = {
 };
 BSDATAF(portraiti)
 
+int	portraiti::getindex() const {
+	return this - bsdata<portraiti>::elements;
+}
+
 static bool filter_gender(const void* object, int param) {
 	return ((portraiti*)object)->gender == (gendern)param;
 }
