@@ -6,11 +6,11 @@ AnimalEmpathy: Обращение с животными
 AnimalEmpathyInfo: Используй этот навык, чтобы заставить собаку перестать лаять на вас, заставить дикую птицу презимлиться вам на руку или успокоить разяренного совомедведя, чтобы вы смогли спокойно уйти.
 Bluff: Обман
 Concentration: Концентрация
+CraftWeapon: Ковка оружия
 Diplomacy: Дипломатия
 DisableDevice: Обезвредить устройство
 Healing: Лечение
 Hide: Прятаться
-Initiative: Инициатива
 Intimidate: Запугивание
 KnowledgeArcana: Знания тайного
 MoveSilently: Двигаться тихо
@@ -18,5 +18,6 @@ OpenLock: Вскрыть замок
 PickPocket: Очистить карманы
 Search: Обыск
 SpellCraft: Знания заклинаний
+Spot: Наблюдательность
 UseMagicDevice: Использовать волшебные предметы
 WildernessLore: Знание дикой местности

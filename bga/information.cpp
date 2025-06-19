@@ -1,13 +1,16 @@
 #include "ability.h"
+#include "advance.h"
 #include "alignment.h"
 #include "answers.h"
 #include "calendar.h"
+#include "command.h"
 #include "creature.h"
 #include "item.h"
 #include "io_stream.h"
 #include "math.h"
 #include "saveheader.h"
 #include "school.h"
+#include "script.h"
 #include "stringbuilder.h"
 #include "stringvar.h"
 
@@ -42,6 +45,11 @@ static void addv(stringbuilder& sb, const char* id, const char* value) {
 
 template<class T> void addv(stringbuilder& sb, const char* id, unsigned short v) {
 	sb.addn("%1: %2", getnm(id), bsdata<T>::elements[v].getname());
+}
+
+template<class T> void addv(stringbuilder& sb, const char* group, short unsigned value, int bonus) {
+	auto pn = getnm(group);
+	sb.addn(pn, bsdata<T>::elements[value].getname(), bonus);
 }
 
 static void addb(stringbuilder& sb, const char* id, int value, const char* format = 0, bool skip_zero = true) {
@@ -292,9 +300,43 @@ static void game_version(stringbuilder& sb) {
 
 static void character_brief_info(stringbuilder& sb) {
 	addv<genderi>(sb, "Gender", player->gender);
+	if(current_step>ChooseRace)
+		addv<racei>(sb, "Race", player->race);
+	if(current_step > ChooseClass)
+		addv<classi>(sb, "Class", player->getmainclass());
+	if(current_step > ChooseAlignment)
+		sb.addn(bsdata<alignmenti>::elements[player->alignment].getname());
+}
+
+static void add_advantage(stringbuilder& sb, variant v) {
+	if(v.iskind<abilityi>())
+		addv<abilityi>(sb, "StartAbility", v.value, v.counter);
+	else if(v.iskind<skilli>())
+		addv<skilli>(sb, "StartSkill", v.value, v.counter);
+	else if(v.iskind<feati>())
+		sb.addn(bsdata<feati>::elements[v.value].getname());
+	else if(v.iskind<script>())
+		sb.addn(getnm(bsdata<script>::elements[v.value].id));
+}
+
+static void add_advantages(stringbuilder& sb, variant parent) {
+	for(auto& e : bsdata<advancei>()) {
+		if(e.parent != parent)
+			continue;
+		for(auto v : e.elements)
+			add_advantage(sb, v);
+	}
 }
 
 static void add_race_info(stringbuilder& sb, racei* p) {
+	if(sb)
+		sb.add("\n\n");
+	sb.addn("###%1", getnm("Description"));
+	if(p->favor)
+		addv<classi>(sb, "FavorClass", p->favor);
+	else
+		addv(sb, "FavorClass", getnm("AnyClass"));
+	add_advantages(sb, p);
 }
 
 static void answer_info(stringbuilder& sb) {
@@ -302,7 +344,7 @@ static void answer_info(stringbuilder& sb) {
 	auto pn = getnme(ids(p->id, "Info"));
 	if(pn)
 		sb.addn(pn);
-	if(bsdata<racei>::have(pn))
+	if(bsdata<racei>::have(p))
 		add_race_info(sb, (racei*)p);
 }
 

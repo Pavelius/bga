@@ -36,3 +36,7 @@ Slots: Слоты
 Fortitude: Стойкость
 Reflexes: Рефлексы
 Will: Воля
+SaveVsCharm: Защита от шарма
+SaveVsFear: Защита от страха
+SaveVsPoison: Защита от яда
+SaveVsSpells: Защита от магии

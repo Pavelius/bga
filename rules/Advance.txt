@@ -1,30 +1,43 @@
 #Advance
 
-Fighter 1 WeaponProficiency
+Dwarf Abilities
+ elements Constitution+2 Charisma-2 SaveVsPoison+2 SaveVsSpells+2 CraftWeapon+2 Infravision HateGoblinoids
+Elf Abilities
+ elements Dexterity+2 Constitution-2 Search+2 Spot+2 SaveVsCharm+2 Infravision ProficientSwordsAndBows
+Halfling Abilities
+ elements Dexterity+2 Strenght-2 MoveSilently+2 Spot+2 Fortitude+1 Reflexes+1 Will+1 SaveVsFear+2
+HalfOrc Abilities
+ elements Strenght+2 Intellegence-2 Charisma-2 Infravision
+HalfElf Abilities
+ elements Search+1 Spot+1 SaveVsCharm+2 Infravision
+Human Abilities
+ elements BonusFeat BonusSkills
+
+Fighter+1 WeaponProficiency
  elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponSmallBlades\
   MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponLargeSword MartialWeaponPolearm
-Fighter 1 ArmorProficiency
+Fighter+1 ArmorProficiency
  elements ArmorProficiency+3 ShieldProficiency
-Fighter 1 SavingThrows
+Fighter+1 SavingThrows
  elements Fortitude+2
 
-Rogue 1 WeaponProficiency
+Rogue+1 WeaponProficiency
  elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponSmallBlades\
   MartialWeaponBow MartialWeaponLargeSword MartialWeaponPolearm
-Rogue 1 ArmorProficiency
+Rogue+1 ArmorProficiency
  elements ArmorProficiency+1
-Rogue 1 SavingThrows
+Rogue+1 SavingThrows
  elements Reflexes+2
 
-Cleric 1 WeaponProficiency
+Cleric+1 WeaponProficiency
  elements SimpleWeaponMace SimpleWeaponStaff\
   MartialWeaponFlail MartialWeaponHammer
-Cleric 1 ArmorProficiency
+Cleric+1 ArmorProficiency
  elements ArmorProficiency+3 ShieldProficiency
-Cleric 1 SavingThrows
+Cleric+1 SavingThrows
  elements Fortitude+2 Will+2
 
-Wizard 1 WeaponProficiency
+Wizard+1 WeaponProficiency
  elements SimpleWeaponMissile SimpleWeaponStaff SimpleWeaponSmallBlades
-Wizard 1 SavingThrows
+Wizard+1 SavingThrows
  elements Will+2

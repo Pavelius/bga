@@ -134,6 +134,14 @@ void setdialog(int x, int y, int w, int h) {
 	height = h;
 }
 
+void paint_dialog(int x, int y, fnevent proc) {
+	auto push_dialog = dialog_start;
+	dialog_start.x = x;
+	dialog_start.y = y;
+	proc();
+	dialog_start = push_dialog;
+}
+
 static void select_spellbooks() {
 	spellbooks.clear();
 	auto i = player->getindex();

@@ -3,8 +3,7 @@
 #pragma once
 
 struct advancei {
-	variant			parent;
-	int				level;
-	const char*		id;
-	variants		elements;
+	variant		parent;
+	const char*	id;
+	variants	elements;
 };

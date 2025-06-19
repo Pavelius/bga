@@ -15,4 +15,10 @@ MartialWeaponHammer: Владение молотом
 MartialWeaponLargeSword: Владение клинками
 MartialWeaponPolearm: Владение древковым оружием
 
+ProficientSwordsAndBows: Владение луком и мечом
 ShieldProficiency: Владение щитом
+
+Infravision: Видит в темноте
+HateGoblinoids: +1 атака орков и гоблинов
+BonusFeat: +1 особенность
+BonusSkills: +1 очко навыков / уровень

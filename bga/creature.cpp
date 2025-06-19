@@ -105,7 +105,7 @@ static void apply_advance(const variants& source) {
 
 static void apply_advance(variant v, int level) {
 	for(auto& e : bsdata<advancei>()) {
-		if(e.parent == v && e.level == level)
+		if(e.parent == v && e.parent.counter == level)
 			apply_advance(e.elements);
 	}
 }
@@ -134,7 +134,7 @@ static void raise_hit_points(classn v) {
 		player->basic.abilities[HitPoints] += xrand(1, bsdata<classi>::elements[v].hit_points);
 }
 
-static void raise_class(classn classv) {
+void raise_class(classn classv) {
 	variant v = bsdata<classi>::elements + classv;
 	player->classes[classv] = player->classes[classv] + 1;
 	apply_advance(v, player->classes[classv]);
@@ -408,7 +408,7 @@ static bool enemy_combatants_present() {
 static void check_initiative() {
 	for(auto p : combatants) {
 		if(p->initiative == -100)
-			p->initiative = d20() + p->abilities[Initiative];
+			p->initiative = d20() + p->getbonus(Dexterity);
 	}
 }
 

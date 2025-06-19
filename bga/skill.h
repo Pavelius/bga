@@ -6,9 +6,9 @@
 enum abilityn : unsigned char;
 
 enum skilln : unsigned char {
-	Alchemy, AnimalEmpathy, Bluff, Concentration, Diplomacy,
-	DisableDevice, Hide, Intimidate, Initiative, KnowledgeArcana,
-	MoveSilently, OpenLock, PickPocket, Search, SpellCraft,
+	Alchemy, AnimalEmpathy, Bluff, Concentration, CraftWeapon, Diplomacy,
+	DisableDevice, Hide, Intimidate, KnowledgeArcana,
+	MoveSilently, OpenLock, PickPocket, Search, SpellCraft, Spot,
 	UseMagicDevice, WildernessLore,
 };
 typedef flagable<1, unsigned> skillf;

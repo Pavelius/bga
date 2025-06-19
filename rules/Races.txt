@@ -1,5 +1,8 @@
 #Race
 
 Human hairs(HairNormal) skin(SkinNormal)
-Dwarf hairs(HairNormal) skin(SkinNormal)
-Elf hairs(HairNormal) skin(SkinNormal)
+Dwarf hairs(HairNormal) skin(SkinNormal) favor(Fighter)
+Elf hairs(HairNormal) skin(SkinNormal) favor(Wizard)
+Halfling hairs(HairNormal) skin(SkinNormal) favor(Rogue)
+HalfElf hairs(HairNormal) skin(SkinNormal)
+HalfOrc hairs(HairNormal) skin(SkinNormal) favor(Barbarian)

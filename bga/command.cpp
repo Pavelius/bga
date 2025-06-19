@@ -12,3 +12,5 @@ BSDATA(commandi) = {
 	{"ChooseName"},
 };
 assert_enum(commandi, ChooseName)
+
+commandn current_step;

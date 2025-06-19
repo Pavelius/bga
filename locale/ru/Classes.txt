@@ -2,6 +2,7 @@ Classes: Классы
 
 Commoner: Крестьянин
 
+Barbarian: Варвар
 Bard: Бард
 Cleric: Клерик
 Druid: Друид

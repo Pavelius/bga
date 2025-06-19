@@ -4,6 +4,7 @@
 BSDATA(classi) = {
 	{"Commoner", 0, 4, 2},
 	{"Warrior", 0, 8, 2},
+	{"Barbarian", 1, 10, 4},
 	{"Bard", 1, 6, 2},
 	{"Fighter", 1, 10, 2},
 	{"Cleric", 1, 8, 2},

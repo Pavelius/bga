@@ -9,6 +9,7 @@ enum abilityn : unsigned char {
 	AC, ArmorBonus, DodgeBonus, ArmorCheckPenalty, SpellFailure,
 	AttackMelee, AttackRanged, DamageMelee, DamageRanged,
 	Fortitude, Reflexes, Will,
+	SaveVsCharm, SaveVsFear, SaveVsPoison, SaveVsSpells,
 	WeightAllowance,
 	SneakAttack,
 	ArmorProficiency,

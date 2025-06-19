@@ -51,6 +51,7 @@ void paint_action_panel_na();
 void paint_area();
 void paint_description(int scr_x, int scr_y, int scr_height);
 void paint_dialog(resn v, int frame = 0);
+void paint_dialog(int x, int y, fnevent proc);
 void paint_game_dialog(resn v, int frame = 0);
 void paint_game_inventory();
 void paint_game_panel(bool allow_input, bool combat_mode);

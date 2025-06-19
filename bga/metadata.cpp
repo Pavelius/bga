@@ -1,5 +1,6 @@
 #include "ability.h"
 #include "advance.h"
+#include "alignment.h"
 #include "ambient.h"
 #include "animation.h"
 #include "area.h"
@@ -71,8 +72,11 @@ BSMETA(abilityi) = {
 	BSREQ(id),
 	{}};
 BSMETA(advancei) = {
-	BSREQ(parent), BSREQ(level), BSREQ(id),
+	BSREQ(parent), BSREQ(id),
 	BSREQ(elements),
+	{}};
+BSMETA(alignmenti) = {
+	BSREQ(id),
 	{}};
 BSMETA(calendari) = {
 	BSREQ(id),
@@ -84,6 +88,7 @@ BSMETA(classi) = {
 	BSREQ(hit_points), BSREQ(skill_points),
 	BSENM(cast, abilityi),
 	BSFLG(skills, skilli),
+	BSFLG(alignment, alignmenti),
 	{}};
 BSMETA(color) = {
 	BSREQ(r), BSREQ(g), BSREQ(b),
@@ -157,6 +162,7 @@ BSMETA(portraiti) = {
 BSMETA(racei) = {
 	BSREQ(id),
 	BSREQ(skin), BSREQ(hairs),
+	BSENM(favor, classi),
 	{}};
 BSMETA(rangei) = {
 	BSREQ(id),
@@ -232,7 +238,7 @@ BSMETA(worldmapi::link) = {
 BSDATA(varianti) = {
 	{"NoVariant"},
 	{"Ability", VAR(abilityi, 1), 0, 0, fnscript<abilityi>},
-	{"Advance", VAR(advancei, 3)},
+	{"Advance", VAR(advancei, 2)},
 	{"Calendar", VAR(calendari, 1)},
 	{"Class", VAR(classi, 1)},
 	{"ColorGrad", VAR(colorgrad, 1)},

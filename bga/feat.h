@@ -26,8 +26,7 @@ enum feat_s : unsigned char {
 	FocusMaces, FocusPolearm, FocusShooting, FocusSwords,
 	WhirlwindAttack,
 	FastMovement, Illiteracy,
-	HateGoblinoids, Infravision, ImmunityToSleepSpell, FindSecretDoors, Lucky, PreciseThrower,
-	SaveBonusVsEnchantment, SaveBonusVsFear, SaveBonusVsIllusion, SaveBonusVsPoison, SaveBonusVsSpell, Stability, Stonecunning,
+	HateGoblinoids, Infravision, BonusFeat, BonusSkills, 
 	Enemy, ReadyToBattle,
 };
 struct feati : nameable {

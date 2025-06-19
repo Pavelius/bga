@@ -13,3 +13,7 @@ BSDATA(alignmenti) = {
 	{"ChaoticEvil"},
 };
 BSDATAF(alignmenti)
+
+alignmentn alignmenti::getindex() const {
+	return (alignmentn)(this - bsdata<alignmenti>::elements);
+}

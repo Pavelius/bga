@@ -7,3 +7,7 @@ LawfulEvil: Законопослушно злой
 NeutralGood: Нейтрально добрый
 TrueNeutral: Истинно нейтральный
 NeutralEvil: Нейтрально злой
+
+ChaoticEvil: Хаотично злой
+ChaoticGood: Хаотично добрый
+ChaoticNeutral: Хаотично нейтральный

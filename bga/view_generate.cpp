@@ -1,3 +1,4 @@
+#include "alignment.h"
 #include "answers.h"
 #include "audio.h"
 #include "command.h"
@@ -10,7 +11,6 @@
 
 using namespace draw;
 
-static commandn current_step;
 static vector<portraiti*> portraits;
 static unsigned current_value;
 
@@ -86,13 +86,24 @@ static void paint_answers_sex() {
 	paint_answers(196);
 }
 
+static void set_step_description() {
+	if(current_step == ChooseGender)
+		set_description(getnm("GenerationMainInfo"));
+	else
+		set_description("%CharacterBriefInfo");
+}
+
 static void start_over() {
 	player->clear();
 	current_step = ChooseGender;
-	set_description(getnm("GenerationMainInfo"));
+	set_step_description();
 }
 
 static void back_one_step() {
+	if(current_step == ChooseGender)
+		return;
+	current_step = (commandn)(current_step - 1);
+	set_step_description();
 }
 
 static void paint_footer() {
@@ -144,14 +155,38 @@ static void paint_choose_avatar() {
 	audio_update_channels();
 }
 
+static void paint_choose_ability() {
+	auto ability_spent = 0;
+	auto ability_left = 18 - ability_spent;
+	image(254, 87, gres(GUISEX), 2, 0);
+	setdialog(27, 57, 205, 28); texta(getnm("AbilityPointsLeft"), AlignCenterCenter);
+	setdialog(240, 57, 33, 28); texta(str("%1i", ability_left), AlignCenterCenter);
+	setdialog(24, 94, 120, 28);
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1)) {
+		auto push_caret = caret; width = 120; height = 28;
+		texta(bsdata<abilityi>::elements[i].getname(), AlignRightCenter);
+		caret.x = push_caret.x + 136; width = 33;
+		texta(str("%1i", player->abilities[i]), AlignCenterCenter);
+		caret.x = push_caret.x + 176;
+		texta(str("%1i", player->abilities[i] / 2 - 5), AlignCenterCenter);
+		auto b = 3 * ((i - Strenght) % 4);
+		caret.y -= 3;
+		caret.x = push_caret.x + 215; button(GBTNPLUS, b, b + 1);
+		caret.x = push_caret.x + 233; button(GBTNMINS, b, b + 1);
+		caret = push_caret;
+		caret.y += 36;
+	}
+}
+
 static void paint_choose_step() {
 	paint_game_dialog(GUICGB);
 	paint_portrait();
 	paint_character_generation(bsdata<commandi>::elements[current_step].id);
-	if(current_step == ChooseGender)
-		paint_answers_sex();
-	else
-		paint_answers();
+	switch(current_step) {
+	case ChooseGender: paint_answers_sex(); break;
+	case ChooseAbilities: paint_dialog(254, 61, paint_choose_ability); break;
+	default: paint_answers(); break;
+	}
 	paint_footer_answer();
 	paint_description();
 	audio_update_channels();
@@ -171,6 +206,15 @@ static void add_answer(nameable* p) {
 	an.add(p, p->getname());
 }
 
+static void select_alignment() {
+	auto& ei = bsdata<classi>::elements[player->getmainclass()];
+	an.clear();
+	for(auto& e : bsdata<alignmenti>()) {
+		if(ei.is(e.getindex()))
+			add_answer(&e);
+	}
+}
+
 static void prepare_answers() {
 	an.clear();
 	switch(current_step) {
@@ -181,6 +225,17 @@ static void prepare_answers() {
 	case ChooseRace:
 		for(auto& e : bsdata<racei>())
 			add_answer(&e);
+		break;
+	case ChooseClass:
+		for(auto i = 0; i < lenghtof(player->classes); i++)
+			player->classes[i] = 0;
+		for(auto& e : bsdata<classi>()) {
+			if(e.player)
+				add_answer(&e);
+		}
+		break;
+	case ChooseAlignment:
+		select_alignment();
 		break;
 	}
 }
@@ -204,16 +259,17 @@ static bool choose_step_action() {
 	if(bsdata<genderi>::have(current_answer)) {
 		player->gender = (gendern)bsdata<genderi>::source.indexof(current_answer);
 		player->portrait = choose_avatar();
+	} else if(bsdata<racei>::have(current_answer)) {
+		player->race = (racen)bsdata<racei>::source.indexof(current_answer);
+	} else if(bsdata<classi>::have(current_answer)) {
+		player->classes[bsdata<classi>::source.indexof(current_answer)] = 1;
 	}
 	return true;
 }
 
 static void generate_step_by_step() {
 	while(true) {
-		if(current_step == ChooseGender)
-			set_description(getnm("GenerationMainInfo"));
-		else
-			set_description("%CharacterBriefInfo");
+		set_step_description();
 		auto p = scene(paint_main_menu);
 		if(!p)
 			break;
@@ -228,7 +284,16 @@ static void generate_step_by_step() {
 void open_character_generation() {
 	auto push_player = player;
 	creature copy = {}; player = &copy;
+#ifdef _DEBUG
+	current_step = ChooseAbilities;
+	player->gender = Female;
+	player->race = Human;
+	player->portrait = 14;
+	player->classes[Paladin] = 1;
+	player->alignment = (alignmentn)0;
+#else
 	current_step = ChooseGender;
+#endif // _DEBUG
 	generate_step_by_step();
 	player = push_player;
 }
