@@ -4,6 +4,7 @@
 
 enum abilityn : unsigned char;
 enum alignmentn : unsigned char;
+enum skilln : unsigned char;
 enum classn : unsigned char {
 	Commoner, Warrior,
 	Barbarian, Bard, Fighter, Cleric, Druid, Paladin, Ranger, Rogue, Sorcerer, Wizard,
@@ -15,6 +16,7 @@ struct classi : nameable {
 	abilityn	cast;
 	classn		getindex() const;
 	bool		is(alignmentn v) const { return (alignment & (1 << v)) != 0; }
+	bool		is(skilln v) const { return (skills & (1 << v)) != 0; }
 };
 struct classa {
 	char		classes[Wizard + 1];

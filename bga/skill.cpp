@@ -22,3 +22,7 @@ BSDATA(skilli) = {
 	{"WildernessLore", Wisdow},
 };
 assert_enum(skilli, WildernessLore)
+
+skilln skilli::getindex() const {
+	return (skilln)(this - bsdata<skilli>::elements);
+}

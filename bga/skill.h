@@ -14,6 +14,7 @@ enum skilln : unsigned char {
 typedef flagable<1, unsigned> skillf;
 struct skilli : nameable {
 	abilityn	ability;
+	skilln		getindex() const;
 };
 struct skilla {
 	char		skills[WildernessLore + 1];

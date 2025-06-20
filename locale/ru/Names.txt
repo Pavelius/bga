@@ -115,6 +115,7 @@ SavingThrows: Броски спасения
 SelectAllParty: Выбрать всю партию
 Sell: Продать
 SinglePlayer: Один игрок
+SkillPointsLeft: Осталось очков навыков
 Skills: Навыки
 SkinColor: Цвет кожи
 Sound: Звук

@@ -244,7 +244,7 @@ void create_character(gendern gender) {
 bool creature::isclass(skilln v) const {
 	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1)) {
 		if(classes[i]) {
-			if(FGT(bsdata<classi>::elements[i].skills, v))
+			if(bsdata<classi>::elements[i].is(v))
 				return true;
 		}
 	}

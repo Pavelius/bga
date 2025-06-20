@@ -7,12 +7,16 @@
 #include "math.h"
 #include "portrait.h"
 #include "rand.h"
+#include "skill.h"
 #include "vector.h"
 #include "view.h"
 
 using namespace draw;
 
 static vector<portraiti*> portraits;
+static vector<nameable*> records;
+static char current_skills[WildernessLore + 1];
+
 static unsigned current_value;
 static char ability_normal[Charisma + 1];
 static char ability_cost[] = {0, 1, 2, 3, 4, 5, 6, 8, 10, 13, 16, 20, 25};
@@ -98,7 +102,7 @@ static void paint_answers() {
 }
 
 static void paint_answers_sex() {
-	image(254, 87, gres(GUISEX), 0, 0);
+	image(254, 87, gres(GUIACG), 0, 0);
 	setdialog(274, 271);
 	paint_answers(196);
 }
@@ -169,7 +173,7 @@ static void paint_choose_avatar() {
 		current_value = 0;
 	paint_game_dialog(GUICGB);
 	paint_character_generation("ChooseAvatar");
-	image(254, 87, gres(GUISEX), 1, 0);
+	image(254, 87, gres(GUIACG), 1, 0);
 	image(295, 116, gres(PORTL), portraits[current_value]->getindex(), 0);
 	setdialog(262, 284); button(GBTNPOR, 0, 1, KeyLeft); fire(cbsetint, current_value - 1, 0, &current_value);
 	setdialog(512, 284); button(GBTNPOR, 2, 3, KeyRight); fire(cbsetint, current_value + 1, 0, &current_value);
@@ -201,7 +205,7 @@ static void tips_help_button(const char* id) {
 static void paint_choose_ability() {
 	auto ability_spent = get_ability_spend();
 	auto ability_left = ability_points_maximum - ability_spent;
-	image(254, 87, gres(GUISEX), 2, 0);
+	image(254, 87, gres(GUIACG), 2, 0);
 	setdialog(27, 57, 205, 28); tips_help("AbilityPointsLeft"); texta(getnm("AbilityPointsLeft"), AlignCenterCenter);
 	setdialog(240, 57, 33, 28); tips_help("AbilityPointsLeft"); texta(str("%1i", ability_left), AlignCenterCenter);
 	setdialog(24, 94, 120, 28);
@@ -231,6 +235,41 @@ static void paint_choose_ability() {
 	}
 }
 
+static void paint_skill_row(void* object) {
+	auto p = (skilli*)object;
+	auto n = p->getindex();
+	auto b = 3 * (n % 3);
+	auto v = player->basic.skills[n];
+	auto c = player->isclass(n) ? 1 : 2;
+	auto m = player->getlevel() + 3;
+	pushfore push_fore;
+	pushrect push; height = 28;
+	caret.x = push.caret.x + 206;
+	button(GBTNPLUS, b + 0, b + 1, 0, 0, b + 2, v < current_skills[n] + m);
+	fire(cbsetchr, v + 1, 0, &player->basic.skills[n]);
+	caret.x = push.caret.x + 224;
+	button(GBTNMINS, b + 0, b + 1, 0, 0, b + 2, v > current_skills[n]);
+	fire(cbsetchr, v - 1, 0, &player->basic.skills[n]);
+	caret.y += 2; height = 30;
+	if(player->isclass(n))
+		fore = fore.mix(colors::black, 224);
+	else
+		fore = fore.mix(colors::black, 128);
+	caret.x = push.caret.x + 0; width = 160; texta(p->getname(), AlignLeftCenter);
+	caret.x = push.caret.x + 169; width = 33; texta(str("%1i", v), AlignCenterCenter);
+}
+
+static void paint_choose_skills() {
+	static int origin;
+	const int per_page = 10;
+	image(254, 87, gres(GUIACG), 3, 0);
+	setdialog(27, 55, 205, 28); texta(getnm("SkillPointsLeft"), AlignCenterCenter);
+	setdialog(241, 55, 33, 28); texta(NORMAL, "268435468", AlignCenterCenter);
+	setdialog(31, 90, 254, 360);
+	paint_list(records.data, records.element_size, records.count, origin, per_page,
+		paint_skill_row, 36, {}, 0, 0, 0, true);
+}
+
 static void paint_choose_step() {
 	paint_game_dialog(GUICGB);
 	paint_portrait();
@@ -238,6 +277,7 @@ static void paint_choose_step() {
 	switch(current_step) {
 	case ChooseGender: paint_answers_sex(); break;
 	case ChooseAbilities: paint_dialog(254, 61, paint_choose_ability); break;
+	case ChooseSkills: paint_dialog(254, 61, paint_choose_skills); break;
 	default: paint_answers(); break;
 	}
 	paint_footer_answer();
@@ -268,6 +308,17 @@ static void select_alignment() {
 	}
 }
 
+static void select_skills() {
+	records.clear();
+	for(auto& e : bsdata<skilli>()) {
+		records.add(&e);
+	}
+	for(auto& e : bsdata<skilli>()) {
+		auto n = e.getindex();
+		current_skills[n] = player->basic.skills[n];
+	}
+}
+
 static void prepare_answers() {
 	an.clear();
 	switch(current_step) {
@@ -291,6 +342,9 @@ static void prepare_answers() {
 		select_alignment();
 		break;
 	case ChooseAbilities:
+		break;
+	case ChooseSkills:
+		select_skills();
 		break;
 	}
 }
@@ -358,13 +412,19 @@ void open_character_generation() {
 	auto push_player = player;
 	creature copy = {}; player = &copy;
 #ifdef _DEBUG
-	current_step = ChooseAbilities;
 	player->gender = Female;
 	player->race = Elf;
 	player->portrait = 14;
 	player->classes[Paladin] = 1;
 	player->alignment = (alignmentn)0;
 	prepare_ability();
+	player->basic.abilities[Strenght] = 15;
+	player->basic.abilities[Strenght] = 13;
+	player->basic.abilities[Strenght] = 8;
+	player->basic.abilities[Strenght] = 11;
+	player->basic.abilities[Strenght] = 12;
+	player->basic.abilities[Strenght] = 10;
+	current_step = ChooseSkills;
 #else
 	current_step = ChooseGender;
 #endif // _DEBUG

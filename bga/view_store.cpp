@@ -143,19 +143,19 @@ static void paint_identify_item(void* object) {
 static void paint_identify_items() {
 	static int origin;
 	paint_list(player_goods.data, player_goods.element_size, player_goods.count, origin, 6,
-		paint_identify_item, 45, {10, 1}, -4, pick_identify, 0);
+		paint_identify_item, 45, {10, 1}, -4, pick_identify, 0, false);
 }
 
 static void paint_player_goods() {
 	static int origin;
 	paint_list(player_goods.data, player_goods.element_size, player_goods.count, origin, 6,
-		paint_good, 45, {10, 1}, -4, pick_good, 0);
+		paint_good, 45, {10, 1}, -4, pick_good, 0, false);
 }
 
 static void paint_shop_goods() {
 	static int origin;
 	paint_list(shop_goods.data, shop_goods.element_size, shop_goods.count, origin, 6,
-		paint_good, 45, {10, 1}, -4, pick_good, 0);
+		paint_good, 45, {10, 1}, -4, pick_good, 0, false);
 }
 
 static void paint_right_panel() {

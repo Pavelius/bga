@@ -56,7 +56,7 @@ void paint_game_dialog(resn v, int frame = 0);
 void paint_game_inventory();
 void paint_game_panel(bool allow_input, bool combat_mode);
 void paint_item(const item* pi);
-void paint_list(void* data, size_t size, int maximum, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc);
+void paint_list(void* data, size_t size, int maximum, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc, bool ref_list);
 void paint_minimap();
 void paint_worldmap_area();
 void paperdoll();

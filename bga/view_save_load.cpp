@@ -177,7 +177,7 @@ static void paint_load_game_row(void* object) {
 static void paint_game_list(fncommand proc) {
 	static int origin;
 	const int per_page = 5;
-	paint_list(files.data, files.element_size, files.count, origin, per_page, proc, 102, {}, 0, 0, 0);
+	paint_list(files.data, files.element_size, files.count, origin, per_page, proc, 102, {}, 0, 0, 0, false);
 }
 
 static void paint_save_game() {
