@@ -43,4 +43,5 @@ void create_npc(point position, const char* id);
 bool have_multiselect();
 bool have_selection();
 void raise_class(classn classv);
+void raise_race();
 void select_all_party();

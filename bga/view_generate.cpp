@@ -4,6 +4,7 @@
 #include "command.h"
 #include "creature.h"
 #include "draw.h"
+#include "math.h"
 #include "portrait.h"
 #include "rand.h"
 #include "vector.h"
@@ -13,6 +14,22 @@ using namespace draw;
 
 static vector<portraiti*> portraits;
 static unsigned current_value;
+static char ability_normal[Charisma + 1];
+static char ability_cost[] = {0, 1, 2, 3, 4, 5, 6, 8, 10, 13, 16, 20, 25};
+
+const int ability_points_maximum = 22;
+
+static int get_ability_spend() {
+	auto r = 0;
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1)) {
+		auto d = player->basic.abilities[i] - ability_normal[i];
+		if(d < 0)
+			r -= maptbl(ability_cost, -d);
+		else
+			r += maptbl(ability_cost, d);
+	}
+	return r;
+}
 
 static bool have_party(int index) {
 	for(auto p : party) {
@@ -121,11 +138,18 @@ static void paint_footer() {
 	}
 }
 
+static bool allow_next_button() {
+	switch(current_step) {
+	case ChooseAbilities: return get_ability_spend() == ability_points_maximum;
+	default: return current_answer != 0;
+	}
+}
+
 static void paint_footer_answer() {
 	setdialog(35, 550); button(GBTNSTD, 1, 2, 0, "Biography", 3, false);
 	setdialog(204, 550); button(GBTNSTD, 5, 6, 0, "Import", 7, false);
 	setdialog(342, 550); button(GBTNSTD, 9, 10, KeyEscape, "Back"); fire(buttoncancel);
-	setdialog(478, 550); button(GBTNSTD, 1, 2, KeyEnter, "Next", 3, current_answer != 0); fire(buttonok);
+	setdialog(478, 550); button(GBTNSTD, 1, 2, KeyEnter, "Next", 3, allow_next_button()); fire(buttonok);
 	setdialog(647, 550); button(GBTNSTD, 5, 6, 0, "Cancel", 7, false);
 }
 
@@ -155,24 +179,53 @@ static void paint_choose_avatar() {
 	audio_update_channels();
 }
 
+static int cost_pay(int delta) {
+	if(delta >= 10)
+		return 100;
+	auto n1 = ability_cost[delta];
+	auto n2 = ability_cost[delta + 1];
+	return n2 - n1;
+}
+
+static void tips_help(const char* id) {
+	button_check(0);
+	if(button_executed)
+		set_description_id(id);
+}
+
+static void tips_help_button(const char* id) {
+	if(button_executed)
+		set_description_id(id);
+}
+
 static void paint_choose_ability() {
-	auto ability_spent = 0;
-	auto ability_left = 18 - ability_spent;
+	auto ability_spent = get_ability_spend();
+	auto ability_left = ability_points_maximum - ability_spent;
 	image(254, 87, gres(GUISEX), 2, 0);
-	setdialog(27, 57, 205, 28); texta(getnm("AbilityPointsLeft"), AlignCenterCenter);
-	setdialog(240, 57, 33, 28); texta(str("%1i", ability_left), AlignCenterCenter);
+	setdialog(27, 57, 205, 28); tips_help("AbilityPointsLeft"); texta(getnm("AbilityPointsLeft"), AlignCenterCenter);
+	setdialog(240, 57, 33, 28); tips_help("AbilityPointsLeft"); texta(str("%1i", ability_left), AlignCenterCenter);
 	setdialog(24, 94, 120, 28);
 	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1)) {
 		auto push_caret = caret; width = 120; height = 28;
+		auto help_id = bsdata<abilityi>::elements[i].id;
 		texta(bsdata<abilityi>::elements[i].getname(), AlignRightCenter);
+		tips_help(help_id);
 		caret.x = push_caret.x + 136; width = 33;
-		texta(str("%1i", player->abilities[i]), AlignCenterCenter);
+		auto value = player->basic.abilities[i];
+		auto delta = value - ability_normal[i];
+		texta(str("%1i", value), AlignCenterCenter);
 		caret.x = push_caret.x + 176;
-		texta(str("%1i", player->abilities[i] / 2 - 5), AlignCenterCenter);
+		texta(str("%1i", value / 2 - 5), AlignCenterCenter);
 		auto b = 3 * ((i - Strenght) % 4);
 		caret.y -= 3;
-		caret.x = push_caret.x + 215; button(GBTNPLUS, b, b + 1);
-		caret.x = push_caret.x + 233; button(GBTNMINS, b, b + 1);
+		caret.x = push_caret.x + 215;
+		button(GBTNPLUS, b, b + 1, 0, 0, b + 2, cost_pay(delta) <= ability_left);
+		tips_help_button(help_id);
+		fire(cbsetchr, value + 1, 0, &player->basic.abilities[i]);
+		caret.x = push_caret.x + 233;
+		button(GBTNMINS, b, b + 1, 0, 0, b + 2, delta > 0);
+		tips_help_button(help_id);
+		fire(cbsetchr, value - 1, 0, &player->basic.abilities[i]);
 		caret = push_caret;
 		caret.y += 36;
 	}
@@ -237,6 +290,8 @@ static void prepare_answers() {
 	case ChooseAlignment:
 		select_alignment();
 		break;
+	case ChooseAbilities:
+		break;
 	}
 }
 
@@ -248,6 +303,21 @@ static int choose_avatar() {
 	if(!scene(paint_choose_avatar))
 		return 0;
 	return portraits[current_value]->getindex();
+}
+
+static void prepare_ability_normal() {
+	auto push_player = player;
+	auto cp = *player; player = &cp;
+	raise_race();
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
+		ability_normal[i] = 8 + cp.basic.abilities[i];
+	player = push_player;
+}
+
+static void prepare_ability() {
+	prepare_ability_normal();
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
+		player->basic.abilities[i] = ability_normal[i];
 }
 
 static bool choose_step_action() {
@@ -263,6 +333,9 @@ static bool choose_step_action() {
 		player->race = (racen)bsdata<racei>::source.indexof(current_answer);
 	} else if(bsdata<classi>::have(current_answer)) {
 		player->classes[bsdata<classi>::source.indexof(current_answer)] = 1;
+	} else if(bsdata<alignmenti>::have(current_answer)) {
+		player->alignment = (alignmentn)bsdata<alignmenti>::source.indexof(current_answer);
+		prepare_ability();
 	}
 	return true;
 }
@@ -287,10 +360,11 @@ void open_character_generation() {
 #ifdef _DEBUG
 	current_step = ChooseAbilities;
 	player->gender = Female;
-	player->race = Human;
+	player->race = Elf;
 	player->portrait = 14;
 	player->classes[Paladin] = 1;
 	player->alignment = (alignmentn)0;
+	prepare_ability();
 #else
 	current_step = ChooseGender;
 #endif // _DEBUG

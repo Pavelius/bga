@@ -25,9 +25,9 @@ using namespace draw;
 extern array console_data;
 
 unsigned caret_index;
+bool button_pressed, button_executed, button_hilited, button_sound, input_disabled;
 
 static point dialog_start;
-static bool button_pressed, button_executed, button_hilited, button_sound, input_disabled;
 static bool game_pause;
 static fnevent game_proc;
 static fnoperation drag_drop_proc;

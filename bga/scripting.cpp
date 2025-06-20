@@ -3,6 +3,7 @@
 #include "creature.h"
 #include "draw.h"
 #include "game.h"
+#include "modifier.h"
 #include "script.h"
 #include "store.h"
 #include "stringvar.h"
@@ -11,6 +12,32 @@
 
 using namespace draw;
 
+template<> void ftscript<abilityi>(int value, int counter) {
+	switch(modifier) {
+	case Permanent: player->basic.abilities[value] += counter; break;
+	default: player->abilities[value] += counter; break;
+	}
+}
+
+template<> void ftscript<feati>(int value, int counter) {
+	if(counter >= 0) {
+		switch(modifier) {
+		case Permanent: player->basic.feats.set(value); break;
+		default: player->feats.set(value); break;
+		}
+	}
+}
+
+static void attack_change(int bonus) {
+	ftscript<abilityi>(AttackMelee, bonus);
+	ftscript<abilityi>(AttackRanged, bonus);
+}
+
+static void damage_change(int bonus) {
+	ftscript<abilityi>(DamageMelee, bonus);
+	ftscript<abilityi>(DamageRanged, bonus);
+}
+
 static void heal(int bonus) {
 	auto n = player->hp + bonus;
 	if(n < 0)
@@ -18,21 +45,6 @@ static void heal(int bonus) {
 	else if(n > player->hp_max)
 		n = player->hp_max;
 	player->hp = n;
-}
-
-static void debug_test(int bonus) {
-	print("Current timer %1i", current_game_tick);
-	// open_store(bonus);
-}
-
-static void attack_change(int bonus) {
-	fnscript<abilityi>(AttackMelee, bonus);
-	fnscript<abilityi>(AttackRanged, bonus);
-}
-
-static void damage_change(int bonus) {
-	fnscript<abilityi>(DamageMelee, bonus);
-	fnscript<abilityi>(DamageRanged, bonus);
 }
 
 static void proficient_swords_and_bow(int bonus) {
@@ -45,7 +57,6 @@ static void proficient_swords_and_bow(int bonus) {
 BSDATA(script) = {
 	{"Attack", attack_change},
 	{"Damage", damage_change},
-	{"DebugTest", debug_test},
 	{"Heal", heal},
 	{"ProficientSwordsAndBows", proficient_swords_and_bow},
 };

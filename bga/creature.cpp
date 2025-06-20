@@ -59,27 +59,10 @@ static void finish() {
 	player->stop();
 }
 
-template<> void fnscript<abilityi>(int value, int counter) {
-	switch(modifier) {
-	case Permanent: player->basic.abilities[value] += counter; break;
-	default: player->abilities[value] += counter; break;
-	}
-}
-
-template<> void fnscript<feati>(int value, int counter) {
-	if(counter >= 0) {
-		switch(modifier) {
-		case Permanent: player->basic.feats.set(value); break;
-		default: player->feats.set(value); break;
-		}
-	}
-}
-
 static void apply(const variants& source) {
 	pushvalue push_modifier(modifier, NoModifier);
-	pushvalue push_modifiers(apply_modifiers);
 	for(auto v : source)
-		script::run(v);
+		script_run(v);
 }
 
 static void apply_advance(variant v) {
@@ -91,21 +74,21 @@ static void apply_advance(variant v) {
 			if(player->basic.abilities[v.value] < level)
 				player->basic.abilities[v.value] = level;
 		} else
-			script::run(v);
+			script_run(v);
 	} else
-		script::run(v);
+		script_run(v);
 }
 
 static void apply_advance(const variants& source) {
 	pushvalue push_modifier(modifier, Permanent);
-	pushvalue push_modifiers(apply_modifiers);
 	for(auto v : source)
 		apply_advance(v);
 }
 
 static void apply_advance(variant v, int level) {
+	v.counter = level;
 	for(auto& e : bsdata<advancei>()) {
-		if(e.parent == v && e.parent.counter == level)
+		if(e.parent == v)
 			apply_advance(e.elements);
 	}
 }
@@ -138,6 +121,11 @@ void raise_class(classn classv) {
 	variant v = bsdata<classi>::elements + classv;
 	player->classes[classv] = player->classes[classv] + 1;
 	apply_advance(v, player->classes[classv]);
+}
+
+void raise_race() {
+	variant v = bsdata<racei>::elements + player->race;
+	apply_advance(v, 0);
 }
 
 static int get_maximum_rang() {

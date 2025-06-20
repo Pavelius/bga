@@ -413,7 +413,7 @@ void draw::textf(const char* p) {
 		else if(match(&p, "---")) { // Line
 			p = skipspcr(p);
 			separator(x2);
-		} else if(match(&p, "* "))
+		} else if(match(&p, "- "))
 			p = bullet_list(p, x2);
 		else if(match(&p, "$"))
 			p = parse_widget_command(p);
