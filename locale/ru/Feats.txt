@@ -1,4 +1,6 @@
 ArmorProficiencyLight: Ношение брони
+ArmorProficiencyHeavy: Ношение средней брони
+ArmorProficiencyMedium: Ношение тяжелой брони
 
 SimpleWeaponMace: Владение булавой
 SimpleWeaponMissile: Владение пращей
@@ -13,18 +15,14 @@ MartialWeaponHammer: Владение молотом
 MartialWeaponSword: Владение мечом
 MartialWeaponPolearm: Владение копьем
 
-ProficientSwordsAndBows: Владение луком и мечом
+FocusAxes: Фокус на топорах
+FocusDaggers: Фокус на кинжалах
+FocusMaces: Фокус на булаве
+FocusPolearm: Фокус на копье
+FocusShooting: Фокус на луках
+FocusSwords: Фокус на мечах
+
 ShieldProficiency: Владение щитом
-
-Infravision: Видит в темноте
-HateGoblinoids: +1 атака орков и гоблинов
-BonusFeat: +1 особенность
-BonusSkills: +1 очко навыков / уровень
-FastMovement: Быстрое движение
-Illiteracy: Безграмотный
-
-ReadyToBattle: Готов к битве
-Enemy: Враг
 
 Alertness: Бдительность
 BlindFight: Сражение вслепую
@@ -37,12 +35,6 @@ DeflectArrows: Отражение стрел
 Dodge: Уклонение
 Endurance: Выносливость
 FarShoot: Дальний выстрел
-FocusAxes: Фокус на топорах
-FocusDaggers: Фокус на кинжалах
-FocusMaces: Фокус на булаве
-FocusPolearm: Фокус на копье
-FocusShooting: Фокус на луках
-FocusSwords: Фокус на мечах
 GreateFortitude: Великая стойкость
 ImprovedCritical: Улучшенный критический
 ImprovedDisarm: Улучшенное обезоруживание
@@ -55,13 +47,13 @@ ImprovedUnarmedStrike: Улучшенный удар безоружным
 IronWill: Железная воля
 Leadership: Лидерство
 LightingReflexes: Молниеносные рефлексы
-Mobiliy: Подвижность
+Mobility: Подвижность
 Multiattack: Множество атак
-PointBlankShoot: Выстрел навскидку
+PointBlankShot: Выстрел навскидку
 PowerAttack: Мощная атака
 PreciseShoot: Точный выстрел
 RapidReload: Быстрая перезарядка
-RapidShoot: Быстрый выстрел
+RapidShot: Быстрый выстрел
 ShortOnTheRun: Выстрел на бегу
 SpellFocus: Фокус на заклинании
 SpringAttack: Атака с подскоком
@@ -70,3 +62,13 @@ Toughness: Живучесть
 Track: Выслеживание
 TwoWeaponFighting: Сражение двумя оружиями
 WhirlwindAttack: Атака вихрем
+
+Infravision: Видит в темноте
+HateGoblinoids: +1 атака орков и гоблинов
+BonusFeat: +1 особенность
+BonusSkills: +1 очко навыков / уровень
+FastMovement: Быстрое движение
+Illiteracy: Безграмотный
+
+ReadyToBattle: Готов к битве
+Enemy: Враг

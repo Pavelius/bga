@@ -1,2 +1,7 @@
-﻿Error in file `rules/Feats.txt`:
- Line 11: Can't find 'DeflectArrows' in existing enumerator
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `Интеллект`
+ Define translation for `Ловкость`
+ Define translation for `Мудрость`
+ Define translation for `Сила`
+ Define translation for `Телосложение`
+ Define translation for `Харизма`

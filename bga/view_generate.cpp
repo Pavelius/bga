@@ -503,7 +503,7 @@ static bool choose_step_action() {
 		}
 		if(!scene(paint_choose_step))
 			return false;
-		player->classes[bsdata<classi>::source.indexof(current_answer)] = 1;
+		raise_class((classn)bsdata<classi>::source.indexof(current_answer));
 		break;
 	case ChooseAlignment:
 		select_alignment();
@@ -517,13 +517,13 @@ static bool choose_step_action() {
 			return false;
 		break;
 	case ChooseSkills:
-		if(!open_choose_feat(GeneralFeat, player->basic.is(BonusFeat) ? 2 : 1))
-			return false;
-		select_skills();
 		player->basic.abilities[SkillPoints] = skill_points_per_level(player->getmainclass()) * 4;
 		if(player->basic.is(BonusSkills))
 			player->basic.abilities[SkillPoints] += 4;
+		select_skills();
 		if(!scene(paint_choose_skills))
+			return false;
+		if(!open_choose_feat(GeneralFeat, player->basic.is(BonusFeat) ? 2 : 1))
 			return false;
 		break;
 	}
@@ -550,6 +550,7 @@ void open_character_generation() {
 #ifdef _DEBUG
 	player->gender = Female;
 	player->race = Human;
+	raise_race();
 	player->portrait = 14;
 	raise_class(Fighter);
 	player->alignment = (alignmentn)0;
@@ -559,8 +560,8 @@ void open_character_generation() {
 	player->basic.abilities[Intelligence] = 11;
 	player->basic.abilities[Wisdow] = 12;
 	player->basic.abilities[Charisma] = 10;
-	raise_race();
 	current_step = ChooseSkills;
+	//current_step = ChooseGender;
 #else
 	current_step = ChooseGender;
 #endif // _DEBUG

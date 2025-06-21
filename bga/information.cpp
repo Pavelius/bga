@@ -279,6 +279,30 @@ static void game_version(stringbuilder& sb) {
 	sb.adds("%1i.%2i", 0, 1);
 }
 
+static void character_abilities(stringbuilder& sb) {
+	sb.addn("\n###%Abilities");
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i+1))
+		addb(sb, i, player->basic.abilities[i]);
+}
+
+static void character_skills(stringbuilder& sb) {
+	sb.addn("\n###%Skills");
+	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1))
+		addb(sb, bsdata<skilli>::elements[i].id, player->skills[i], "%+1i");
+}
+
+static void character_feats(stringbuilder& sb) {
+	sb.addn("\n###%Feats");
+	for(auto& e : bsdata<feati>()) {
+		if(!e.is(GeneralFeat))
+			continue;
+		auto n = e.getindex();
+		if(!player->basic.is(n))
+			continue;
+		sb.addn(e.getname());
+	}
+}
+
 static void character_brief_info(stringbuilder& sb) {
 	addv<genderi>(sb, "Gender", player->gender);
 	if(current_step>ChooseRace)
@@ -287,6 +311,12 @@ static void character_brief_info(stringbuilder& sb) {
 		addv<classi>(sb, "Class", player->getmainclass());
 	if(current_step > ChooseAlignment)
 		sb.addn(bsdata<alignmenti>::elements[player->alignment].getname());
+	if(current_step > ChooseAbilities)
+		character_abilities(sb);
+	if(current_step > ChooseSkills) {
+		character_skills(sb);
+		character_feats(sb);
+	}
 }
 
 static void add_advantage(stringbuilder& sb, variant v) {

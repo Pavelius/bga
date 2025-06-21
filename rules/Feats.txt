@@ -11,12 +11,24 @@ Dodge
 DeflectArrows
  require Dexterity+13 ImprovedUnarmedStrike
 FarShoot
- require PointBlankShoot
+ require PointBlankShot
 ImprovedDisarm
  require Intellegence+13 CombatExpertise
 ImprovedFeint
  require Intellegence+13 CombatExpertise
 ImprovedSunder
  require Strenght+13 PowerAttack
+ImprovedSunder
+ require Dexterity+13 Dodge
 PowerAttack
  require Strenght+13
+PreciseShoot
+ require PointBlankShot
+RapidShot
+ require PointBlankShot Dexterity+13
+SpringAttack
+ require Dexterity+13 Dodge Mobility AttackMelee+4
+StunningFist
+ require Dexterity+13 Wisdow+13 ImprovedUnarmedStrike AttackMelee+8
+WhirlwindAttack
+ require SpringAttack
