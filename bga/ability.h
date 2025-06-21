@@ -12,11 +12,7 @@ enum abilityn : unsigned char {
 	SaveVsCharm, SaveVsFear, SaveVsPoison, SaveVsSpells,
 	WeightAllowance,
 	SneakAttack,
-	ArmorProficiency,
-	SimpleWeaponMace, SimpleWeaponMissile, SimpleWeaponStaff, SimpleWeaponSmallBlades,
-	MartialWeaponAxe, MartialWeaponBow, MartialWeaponFlail, MartialWeaponGreatSword, MartialWeaponHammer,
-	MartialWeaponLargeSword, MartialWeaponPolearm,
-	HitPoints, Stamina,
+	SkillPoints, HitPoints, Stamina,
 };
 struct abilityi : nameable {
 	int			player;
@@ -30,6 +26,6 @@ struct statable : skilla {
 	int			get(abilityn v) const { return abilities[v]; }
 	int			get(damagen v) const { return resist[v]; }
 	int			get(skilln v) const { return skills[v]; }
-	bool		is(feat_s v) const { return feats.is(v); }
+	bool		is(featn v) const { return feats.is(v); }
 	int			getbonus(abilityn v) const { return abilities[v] / 2 - 5; }
 };

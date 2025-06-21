@@ -71,6 +71,7 @@
     <ClCompile Include="color.cpp" />
     <ClCompile Include="coloration.cpp" />
     <ClCompile Include="colorgrad.cpp" />
+    <ClCompile Include="condition.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="creature.cpp" />
     <ClCompile Include="damage.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="cflags.h" />
     <ClInclude Include="class.h" />
     <ClInclude Include="collection.h" />
+    <ClInclude Include="condition.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="container.h" />
     <ClInclude Include="damage.h" />

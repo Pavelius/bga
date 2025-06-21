@@ -8,6 +8,7 @@
 
 #pragma once
 
+enum featn : unsigned char;
 enum itemf_s : unsigned char {
 	TwoHanded, Balanced, UltraBalanced, Dangerous, Cursed,
 	BrilliantEnergy, Disruption, Distance, Flaming,
@@ -40,7 +41,7 @@ struct itemi : nameable {
 	variants		use, wearing;
 	itemi*			basic;
 	char			max_dex_bonus;
-	variant			required;
+	featn			required;
 	int				getcritical() const;
 	int				getmultiplier() const;
 	bool			is(itemf_s v) const { return (flags & (1 << v)) != 0; }

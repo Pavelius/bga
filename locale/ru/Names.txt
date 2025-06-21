@@ -54,6 +54,7 @@ EnterSaveGameName: Укажите имя сохраняемой игры
 Experience: Опыт
 Export: Экспорт
 FavorClass: Любимый класс
+FeatPointsLeft: Осталось очков особенностей
 Feats: Особенности
 Finish: Завершить
 From: из

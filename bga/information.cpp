@@ -123,23 +123,6 @@ static void add_critical(stringbuilder& sb, int critical, int multiplier, unsign
 	sb.addn(getnm(critical == 20 ? "CriticalHitLine20" : "CriticalHitLine"), critical, multiplier);
 }
 
-static const char* getfeatname(abilityn i, int level) {
-	static const char* armor_proficiency[] = {0, "LightArmorProficiency", "MediumArmorProficiency", "HeavyArmorProficiency"};
-	switch(i) {
-	case ArmorProficiency:
-		return getnm(maptbl(armor_proficiency, level));
-	default:
-		return getnm(bsdata<abilityi>::elements[i].id);
-	}
-}
-
-static const char* getfeatname(variant v) {
-	if(v.iskind<abilityi>())
-		return getfeatname((abilityn)v.value, v.counter);
-	else
-		return v.getname();
-}
-
 static void addh(stringbuilder& sb, const char* format, ...) {
 	if(!format)
 		return;
@@ -193,14 +176,12 @@ static void player_skill_information(stringbuilder& sb) {
 	}
 	addend(sb);
 	addh(sb, getnm("Feats"));
-	for(auto i = ArmorProficiency; i <= MartialWeaponPolearm; i = (abilityn)(i + 1)) {
-		auto level = player->get(i);
-		if(level)
-			sb.addn(getfeatname(i, level));
-	}
-	for(auto i = Alertness; i <= WhirlwindAttack; i = (feat_s)(i + 1)) {
-		if(player->is(i))
-			sb.addn(bsdata<feati>::elements[i].getname());
+	for(auto& e : bsdata<feati>()) {
+		if(!e.is(GeneralFeat))
+			continue;
+		auto n = e.getindex();
+		if(player->is(n))
+			sb.addn(e.getname());
 	}
 	addend(sb);
 }
@@ -266,7 +247,7 @@ static void item_information(stringbuilder& sb) {
 	add_statistics(sb, ei.wearing);
 	add_db(sb, "MaxDexterityBonus", ei.max_dex_bonus);
 	if(ei.required)
-		addv(sb, "Required", getfeatname(ei.required));
+		addv(sb, "Required", bsdata<feati>::elements[ei.required].getname());
 	addv(sb, "Weight", getkg(ei.weight));
 }
 

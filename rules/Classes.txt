@@ -9,7 +9,7 @@ Fighter
  skills CraftWeapon Intimidate WildernessLore
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
 Paladin
- skills CraftWeapon Intimidate WildernessLore
+ skills CraftWeapon Concentration Diplomacy
  alignment LawfulGood
 Ranger
  skills AnimalEmpathy Concentration Hide MoveSilently Search

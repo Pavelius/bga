@@ -24,6 +24,7 @@ struct classa {
 	int			getlevel() const;
 	classn		getmainclass() const;
 	unsigned	getnextlevel() const;
+	int			getmaxskill() const { return getlevel() + 3; }
 };
 
 bool ischaracter(classn v);

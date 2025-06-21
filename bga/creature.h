@@ -21,6 +21,7 @@ struct creature : actor, avatarable, spellv {
 	short unsigned	getindex() const;
 	const char*		getname() const { return "Pavelius"; }
 	int				getspellslots(classn type, int spell_level) const;
+	bool			isallow(featn v) const;
 	bool			isclass(skilln v) const;
 	bool			isparty() const;
 	bool			isselected() const;
@@ -34,6 +35,8 @@ extern creature* party_selected[16];
 
 creature* get_creature(const void* object);
 creature* get_selected();
+
+int skill_points_per_level(classn v);
 
 void check_combat();
 void clear_selection();

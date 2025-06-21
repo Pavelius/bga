@@ -1,2 +1,2 @@
-﻿Error in file `UnknownNames.txt`:
- Define translation for `SkillPointsLeft`
+﻿Error in file `rules/Feats.txt`:
+ Line 11: Can't find 'DeflectArrows' in existing enumerator

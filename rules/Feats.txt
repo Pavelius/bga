@@ -2,10 +2,14 @@
 
 Cleave
  require Strenght+13 PowerAttack
+CombatCasting
+ require IfSpellcaster
 CombatExpertise
  require Intellegence+13
 Dodge
  require Dexterity+13
+DeflectArrows
+ require Dexterity+13 ImprovedUnarmedStrike
 FarShoot
  require PointBlankShoot
 ImprovedDisarm
@@ -14,3 +18,5 @@ ImprovedFeint
  require Intellegence+13 CombatExpertise
 ImprovedSunder
  require Strenght+13 PowerAttack
+PowerAttack
+ require Strenght+13

@@ -437,6 +437,9 @@
     <ClCompile Include="command.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="condition.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -753,6 +756,9 @@
     </ClInclude>
     <ClInclude Include="command.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="condition.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

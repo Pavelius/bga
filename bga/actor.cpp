@@ -51,10 +51,12 @@ const int max_sprite_directions = 9;
 const int anm_monsters_a1 = 104;
 
 int get_armor_index(const item& e) {
-	auto v = e.geti().required;
-	if(v.iskind<abilityi>() && v.value == ArmorProficiency)
-		return v.counter;
-	return 0;
+	switch(e.geti().required) {
+	case ArmorProficiencyLight: return 1;
+	case ArmorProficiencyMedium: return 2;
+	case ArmorProficiencyHeavy: return 3;
+	default: return 0;
+	}
 }
 
 resn get_character_res(racen race, gendern gender, classn type, int ai, int& ws) {

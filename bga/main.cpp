@@ -106,6 +106,7 @@ int main(int argc, char* argv[]) {
 	initialize_translation();
 	initialize_store();
 	initialize_colorgrad();
+	initialize_feats();
 	initialize_ui();
 	music_create_player(2, 22050, 16, audio_repeat);
 	initialize_audio();

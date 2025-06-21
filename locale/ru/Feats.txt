@@ -1,19 +1,17 @@
-LightArmorProficiency: Ношение легкой брони
-MediumArmorProficiency: Ношение средней брони
-HeavyArmorProficiency: Ношение тяжелой брони
+ArmorProficiencyLight: Ношение брони
 
 SimpleWeaponMace: Владение булавой
-SimpleWeaponMissile: Владение стрелковым оружием
-SimpleWeaponSmallBlades: Владение кинжалами
+SimpleWeaponMissile: Владение пращей
+SimpleWeaponDagger: Владение кинжалом
 SimpleWeaponStaff: Владение посохом
 
-MartialWeaponAxe: Владение топорами
+MartialWeaponAxe: Владение топором
 MartialWeaponBow: Владение луком
 MartialWeaponFlail: Владение цепом
-MartialWeaponGreatSword: Владение двуручными клинками
+MartialWeaponGreatSword: Владение двуручными мечом
 MartialWeaponHammer: Владение молотом
-MartialWeaponLargeSword: Владение клинками
-MartialWeaponPolearm: Владение древковым оружием
+MartialWeaponSword: Владение мечом
+MartialWeaponPolearm: Владение копьем
 
 ProficientSwordsAndBows: Владение луком и мечом
 ShieldProficiency: Владение щитом
@@ -22,3 +20,53 @@ Infravision: Видит в темноте
 HateGoblinoids: +1 атака орков и гоблинов
 BonusFeat: +1 особенность
 BonusSkills: +1 очко навыков / уровень
+FastMovement: Быстрое движение
+Illiteracy: Безграмотный
+
+ReadyToBattle: Готов к битве
+Enemy: Враг
+
+Alertness: Бдительность
+BlindFight: Сражение вслепую
+Cleave: Рассечение
+CombatCasting: Боевые заклинания
+CombatExpertise: Боевой опыт
+CombatReflexes: Боевые рефлексы
+DeadlyPercision: Смертельная меткость
+DeflectArrows: Отражение стрел
+Dodge: Уклонение
+Endurance: Выносливость
+FarShoot: Дальний выстрел
+FocusAxes: Фокус на топорах
+FocusDaggers: Фокус на кинжалах
+FocusMaces: Фокус на булаве
+FocusPolearm: Фокус на копье
+FocusShooting: Фокус на луках
+FocusSwords: Фокус на мечах
+GreateFortitude: Великая стойкость
+ImprovedCritical: Улучшенный критический
+ImprovedDisarm: Улучшенное обезоруживание
+ImprovedFeint: Улучшенный финт
+ImprovedInitiative: Улучшенная инициатива
+ImprovedOverrun: Улучшенный наскок
+ImprovedSunder: Улучшенное выбивание
+ImprovedTrip: Улучшенная посечка
+ImprovedUnarmedStrike: Улучшенный удар безоружным
+IronWill: Железная воля
+Leadership: Лидерство
+LightingReflexes: Молниеносные рефлексы
+Mobiliy: Подвижность
+Multiattack: Множество атак
+PointBlankShoot: Выстрел навскидку
+PowerAttack: Мощная атака
+PreciseShoot: Точный выстрел
+RapidReload: Быстрая перезарядка
+RapidShoot: Быстрый выстрел
+ShortOnTheRun: Выстрел на бегу
+SpellFocus: Фокус на заклинании
+SpringAttack: Атака с подскоком
+StunningFist: Парализующий кулак
+Toughness: Живучесть
+Track: Выслеживание
+TwoWeaponFighting: Сражение двумя оружиями
+WhirlwindAttack: Атака вихрем

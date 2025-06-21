@@ -1,4 +1,5 @@
 #include "colorgrad.h"
+#include "condition.h"
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
@@ -47,17 +48,23 @@ static void heal(int bonus) {
 	player->hp = n;
 }
 
-static void proficient_swords_and_bow(int bonus) {
-	if(!player->abilities[MartialWeaponBow])
-		player->abilities[MartialWeaponBow]++;
-	if(!player->abilities[MartialWeaponLargeSword])
-		player->abilities[MartialWeaponLargeSword]++;
+static bool if_spellcaster() {
+	auto r = 0;
+	for(auto& e : bsdata<classi>()) {
+		if(!e.cast)
+			continue;
+		r += player->classes[e.getindex()];
+	}
+	return r > 0;
 }
 
+BSDATA(conditioni) = {
+	{"IfSpellcaster", if_spellcaster},
+};
+BSDATAF(conditioni)
 BSDATA(script) = {
 	{"Attack", attack_change},
 	{"Damage", damage_change},
 	{"Heal", heal},
-	{"ProficientSwordsAndBows", proficient_swords_and_bow},
 };
 BSDATAF(script)

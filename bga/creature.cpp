@@ -1,6 +1,7 @@
 #include "advance.h"
 #include "area.h"
 #include "collection.h"
+#include "condition.h"
 #include "creature.h"
 #include "math.h"
 #include "modifier.h"
@@ -65,24 +66,10 @@ static void apply(const variants& source) {
 		script_run(v);
 }
 
-static void apply_advance(variant v) {
-	if(v.iskind<abilityi>()) {
-		if(v.value >= SimpleWeaponMace && v.value <= MartialWeaponPolearm) {
-			auto level = v.counter;
-			if(!level)
-				level = 1;
-			if(player->basic.abilities[v.value] < level)
-				player->basic.abilities[v.value] = level;
-		} else
-			script_run(v);
-	} else
-		script_run(v);
-}
-
 static void apply_advance(const variants& source) {
 	pushvalue push_modifier(modifier, Permanent);
 	for(auto v : source)
-		apply_advance(v);
+		script_run(v);
 }
 
 static void apply_advance(variant v, int level) {
@@ -124,8 +111,7 @@ void raise_class(classn classv) {
 }
 
 void raise_race() {
-	variant v = bsdata<racei>::elements + player->race;
-	apply_advance(v, 0);
+	apply_advance(bsdata<racei>::elements + player->race, 0);
 }
 
 static int get_maximum_rang() {
@@ -308,19 +294,6 @@ void creature::update() {
 	update_weight();
 }
 
-static bool isallow(const statable& source, variant v) {
-	if(!v)
-		return true;
-	auto level = v.counter;
-	if(!level)
-		level = 1;
-	if(v.iskind<abilityi>())
-		return source.abilities[v.value] >= level;
-	else if(v.iskind<feati>())
-		return source.feats.is((feat_s)v.value);
-	return true;
-}
-
 bool creature::isparty() const {
 	for(auto pc : party) {
 		if(pc == this)
@@ -338,7 +311,10 @@ bool creature::isselected() const {
 }
 
 bool creature::isusable(const item& it) const {
-	return isallow(*this, it.geti().required);
+	auto n = it.geti().required;
+	if(!n)
+		return true;
+	return basic.is(n);
 }
 
 void creature::select() {
@@ -439,4 +415,33 @@ void check_combat() {
 		combatants.sort(compare_initiative);
 		play_combat_round();
 	}
+}
+
+int skill_points_per_level(classn v) {
+	auto n = player->basic.getbonus(Intelligence);
+	n += bsdata<classi>::elements[v].skill_points;
+	return n;
+}
+
+static bool is_allow(creature* p, variants source) {
+	pushvalue push_player(player, p);
+	for(auto v : source) {
+		if(v.iskind<abilityi>()) {
+			if(p->basic.abilities[v.value] < v.counter)
+				return false;
+		} else if(v.iskind<feati>()) {
+			if(!p->basic.feats.is(v.value))
+				return false;
+		} else if(v.iskind<conditioni>()) {
+			if(!bsdata<conditioni>::elements[v.value].proc())
+				return false;
+		}
+	}
+	return true;
+}
+
+bool creature::isallow(featn v) const {
+	if(basic.is(v))
+		return true;
+	return is_allow(const_cast<creature*>(this), bsdata<feati>::elements[v].require);
 }

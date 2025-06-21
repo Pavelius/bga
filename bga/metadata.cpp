@@ -7,6 +7,7 @@
 #include "calendar.h"
 #include "bsreq.h"
 #include "color.h"
+#include "condition.h"
 #include "container.h"
 #include "creature.h"
 #include "diety.h"
@@ -123,7 +124,7 @@ BSMETA(itemi) = {
 	BSREQ(id),
 	BSREQ(basic),
 	BSREQ(weapon),
-	BSREQ(required),
+	BSENM(required, feati),
 	BSREQ(count), BSREQ(weight), BSREQ(cost),
 	BSFLG(flags, itemfi),
 	BSREQ(magic), BSREQ(max_dex_bonus),
@@ -242,6 +243,7 @@ BSDATA(varianti) = {
 	{"Calendar", VAR(calendari, 1)},
 	{"Class", VAR(classi, 1)},
 	{"ColorGrad", VAR(colorgrad, 1)},
+	{"Condition", VAR(conditioni, 1), 0, 0, ftscript<conditioni>, fttest<conditioni>},
 	{"DayPart", VAR(periodi, 1)},
 	{"Diety", VAR(dietyi, 1)},
 	{"Feat", VAR(feati, 1), 0, 0, ftscript<feati>},

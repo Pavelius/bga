@@ -3,7 +3,7 @@
 Dwarf Abilities
  elements Constitution+2 Charisma-2 SaveVsPoison+2 SaveVsSpells+2 CraftWeapon+2 Infravision HateGoblinoids
 Elf Abilities
- elements Dexterity+2 Constitution-2 Search+2 Spot+2 SaveVsCharm+2 Infravision ProficientSwordsAndBows
+ elements Dexterity+2 Constitution-2 Search+2 Spot+2 SaveVsCharm+2 Infravision MartialWeaponSword MartialWeaponBow
 Halfling Abilities
  elements Dexterity+2 Strenght-2 MoveSilently+2 Spot+2 Fortitude+1 Reflexes+1 Will+1 SaveVsFear+2
 HalfOrc Abilities
@@ -14,18 +14,18 @@ Human Abilities
  elements BonusFeat BonusSkills
 
 Fighter+1 WeaponProficiency
- elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponSmallBlades\
-  MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponLargeSword MartialWeaponPolearm
+ elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
+  MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponSword MartialWeaponPolearm
 Fighter+1 ArmorProficiency
- elements ArmorProficiency+3 ShieldProficiency
+ elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
 Fighter+1 SavingThrows
  elements Fortitude+2
 
 Rogue+1 WeaponProficiency
- elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponSmallBlades\
-  MartialWeaponBow MartialWeaponLargeSword MartialWeaponPolearm
+ elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
+  MartialWeaponBow MartialWeaponSword MartialWeaponPolearm
 Rogue+1 ArmorProficiency
- elements ArmorProficiency+1
+ elements ArmorProficiencyLight
 Rogue+1 SavingThrows
  elements Reflexes+2
 
@@ -33,11 +33,11 @@ Cleric+1 WeaponProficiency
  elements SimpleWeaponMace SimpleWeaponStaff\
   MartialWeaponFlail MartialWeaponHammer
 Cleric+1 ArmorProficiency
- elements ArmorProficiency+3 ShieldProficiency
+ elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
 Cleric+1 SavingThrows
  elements Fortitude+2 Will+2
 
 Wizard+1 WeaponProficiency
- elements SimpleWeaponMissile SimpleWeaponStaff SimpleWeaponSmallBlades
+ elements SimpleWeaponMissile SimpleWeaponStaff SimpleWeaponDagger
 Wizard+1 SavingThrows
  elements Will+2

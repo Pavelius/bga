@@ -14,3 +14,9 @@ const char*	nameable::getshortname() const {
 		return pn;
 	return getname();
 }
+
+int compare_nameable(const void* v1, const void* v2) {
+	auto p1 = *((nameable**)v1);
+	auto p2 = *((nameable**)v2);
+	return szcmp(p1->getname(), p2->getname());
+}
