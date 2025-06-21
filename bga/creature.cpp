@@ -49,7 +49,7 @@ static void copy(T& e1, const T& e2) {
 	e1 = e2;
 }
 
-static void apply_portraits() {
+void apply_portraits() {
 	auto pi = bsdata<portraiti>::elements + player->portrait;
 	player->setcolor(pi->colors);
 }
@@ -110,7 +110,10 @@ void raise_class(classn classv) {
 	apply_advance(v, player->classes[classv]);
 }
 
-void raise_race() {
+void raise_race(racen race) {
+	player->race = race;
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
+		player->basic.abilities[i] = 8;
 	apply_advance(bsdata<racei>::elements + player->race, 0);
 }
 

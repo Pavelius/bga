@@ -287,8 +287,11 @@ static void character_abilities(stringbuilder& sb) {
 
 static void character_skills(stringbuilder& sb) {
 	sb.addn("\n###%Skills");
-	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1))
+	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1)) {
+		if(!player->basic.skills[i])
+			continue;
 		addb(sb, bsdata<skilli>::elements[i].id, player->skills[i], "%+1i");
+	}
 }
 
 static void character_feats(stringbuilder& sb) {

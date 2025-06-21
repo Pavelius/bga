@@ -1,7 +1,2 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `Интеллект`
- Define translation for `Ловкость`
- Define translation for `Мудрость`
- Define translation for `Сила`
- Define translation for `Телосложение`
- Define translation for `Харизма`
+ Define translation for `Appearance`

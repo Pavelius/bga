@@ -20,6 +20,8 @@ Fighter+1 ArmorProficiency
  elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
 Fighter+1 SavingThrows
  elements Fortitude+2
+Fighter+1 Special
+ elements BonusFighterFeat
 
 Rogue+1 WeaponProficiency
  elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\

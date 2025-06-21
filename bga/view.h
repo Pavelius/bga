@@ -24,6 +24,7 @@ void checkbox(int& source, int value, resn res, unsigned short f1, unsigned shor
 void choose_creature();
 bool confirm(const char* id, ...);
 bool confirm_overvrite();
+void creature_color(int index);
 void edit(char* string, size_t maximum, unsigned text_flags, bool upper_case = false);
 void fire(fnevent proc, long param = 0, long param2 = 0, const void* object = 0);
 void hotkey(unsigned key, fnevent proc, int param = 0);

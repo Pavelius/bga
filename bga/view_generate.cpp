@@ -8,6 +8,7 @@
 #include "portrait.h"
 #include "rand.h"
 #include "skill.h"
+#include "timer.h"
 #include "vector.h"
 #include "view.h"
 
@@ -17,18 +18,17 @@ static vector<portraiti*> portraits;
 static vector<nameable*> records;
 
 static unsigned current_value;
-static char ability_normal[Charisma + 1];
 static char ability_cost[] = {0, 1, 2, 3, 4, 5, 6, 8, 10, 13, 16, 20, 25};
-static char current_skills[WildernessLore + 1];
 static char feat_points;
-static featf current_feats;
+static creature before_race_apply, before_class_apply, before_abilities_apply, before_skills_apply;
+static const char* header_id;
 
 const int ability_points_maximum = 22;
 
 static int get_ability_spend() {
 	auto r = 0;
 	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1)) {
-		auto d = player->basic.abilities[i] - ability_normal[i];
+		auto d = player->basic.abilities[i] - before_abilities_apply.basic.abilities[i];
 		if(d < 0)
 			r -= maptbl(ability_cost, -d);
 		else
@@ -212,7 +212,7 @@ static void paint_choose_ability() {
 		tips_help(help_id);
 		caret.x = push_caret.x + 136; width = 33;
 		auto value = player->basic.abilities[i];
-		auto delta = value - ability_normal[i];
+		auto delta = value - before_abilities_apply.basic.abilities[i];
 		texta(str("%1i", value), AlignCenterCenter);
 		caret.x = push_caret.x + 176;
 		texta(str("%1i", value / 2 - 5), AlignCenterCenter);
@@ -259,10 +259,10 @@ static void paint_skill_row(void* object) {
 	pushfore push_fore;
 	pushrect push; height = 28;
 	caret.x = push.caret.x + 206;
-	button(GBTNPLUS, b + 0, b + 1, 0, 0, b + 2, (v < current_skills[n] + m) && skill_points >= c);
+	button(GBTNPLUS, b + 0, b + 1, 0, 0, b + 2, (v < before_skills_apply.basic.skills[n] + m) && skill_points >= c);
 	fire(change_skill, 1, n);
 	caret.x = push.caret.x + 224;
-	button(GBTNMINS, b + 0, b + 1, 0, 0, b + 2, v > current_skills[n]);
+	button(GBTNMINS, b + 0, b + 1, 0, 0, b + 2, v > before_skills_apply.basic.skills[n]);
 	fire(change_skill, -1, n);
 	caret.y += 2; height = 30;
 	if(player->isclass(n))
@@ -306,7 +306,7 @@ static void paint_feat_row(void* object) {
 	auto pf = get_feat(bf);
 	auto b = 3 * (bf % 3);
 	auto allow_plus = feat_points > 0 && uf && !player->is(uf) && player->isallow(uf);
-	auto allow_minus = pf && player->basic.is(pf) && !current_feats.is(pf);
+	auto allow_minus = pf && player->basic.is(pf) && !before_skills_apply.basic.is(pf);
 	pushrect push; height = 28;
 	caret.x = push.caret.x + 206;
 	button(GBTNPLUS, b + 0, b + 1, 0, 0, b + 2, allow_plus);
@@ -384,7 +384,7 @@ static void paint_choose_skills() {
 static void paint_choose_feats() {
 	paint_game_dialog(GUICGB);
 	paint_portrait();
-	paint_character_generation("Feats");
+	paint_character_generation(header_id);
 	static int origin;
 	const int per_page = 10;
 	image(254, 87, gres(GUIACG), 4, 0);
@@ -394,6 +394,28 @@ static void paint_choose_feats() {
 	paint_list(records.data, records.element_size, records.count, origin, per_page,
 		paint_feat_row, 36, {-9, 3}, -6, 0, 0, true);
 	paint_footer_answer(feat_points == 0);
+	paint_description();
+	audio_update_channels();
+}
+
+static void paint_choose_appearance() {
+	update_tick();
+	paint_game_dialog(GUICGB);
+	paint_portrait();
+	paint_character_generation("ColorChoices");
+	image(254, 87, gres(GUIACG), 5, 0);
+	setdialog(254 + 76, 61 + 229, 152, 20); texta(getnm("Appearance"), AlignCenterCenter);
+	setdialog(254 + 20, 61 + 253); creature_color(HairColor);
+	setdialog(254 + 73, 61 + 264, 195, 20); texta(getnm("HairColor"), AlignLeftCenter);
+	setdialog(254 + 20, 61 + 293); creature_color(SkinColor);
+	setdialog(254 + 73, 61 + 304, 195, 20); texta(getnm("SkinColor"), AlignLeftCenter);
+	setdialog(254 + 76, 61 + 337, 152, 20); texta(getnm("Clothing"), AlignCenterCenter);
+	setdialog(254 + 20, 61 + 361); creature_color(MajorColor);
+	setdialog(254 + 73, 61 + 371, 195, 20); texta(getnm("MajorColor"), AlignLeftCenter);
+	setdialog(254 + 20, 61 + 401); creature_color(MinorColor);
+	setdialog(254 + 73, 61 + 411, 195, 20); texta(getnm("MinorColor"), AlignLeftCenter);
+	setdialog(254 + 84, 61 + 58, 126, 160); paperdoll();
+	paint_footer_answer(true);
 	paint_description();
 	audio_update_channels();
 }
@@ -423,13 +445,8 @@ static void select_alignment() {
 
 static void select_skills() {
 	records.clear();
-	for(auto& e : bsdata<skilli>()) {
+	for(auto& e : bsdata<skilli>())
 		records.add(&e);
-	}
-	for(auto& e : bsdata<skilli>()) {
-		auto n = e.getindex();
-		current_skills[n] = player->basic.skills[n];
-	}
 	records.sort(compare_nameable);
 }
 
@@ -455,22 +472,6 @@ static int choose_avatar() {
 	return portraits[current_value]->getindex();
 }
 
-static void prepare_ability_normal() {
-	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
-		ability_normal[i] = player->basic.abilities[i];
-}
-
-static bool open_choose_feat(featgf v, int count) {
-	current_feats = player->basic.feats;
-	feat_points = count;
-	select_feats(v);
-	if(!scene(paint_choose_feats)) {
-		player->basic.feats = current_feats;
-		return false;
-	}
-	return true;
-}
-
 static bool choose_step_action() {
 	an.clear();
 	set_description_id(bsdata<commandi>::elements[current_step].id);
@@ -483,18 +484,20 @@ static bool choose_step_action() {
 			return false;
 		player->gender = (gendern)bsdata<genderi>::source.indexof(current_answer);
 		player->portrait = choose_avatar();
+		apply_portraits();
+		before_race_apply = *player;
 		break;
 	case ChooseRace:
+		*player = before_race_apply;
 		for(auto& e : bsdata<racei>())
 			add_answer(&e);
 		if(!scene(paint_choose_step))
 			return false;
-		player->race = (racen)bsdata<racei>::source.indexof(current_answer);
-		for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
-			player->basic.abilities[i] = 8;
-		raise_race();
+		raise_race((racen)bsdata<racei>::source.indexof(current_answer));
+		before_class_apply = *player;
 		break;
 	case ChooseClass:
+		*player = before_class_apply;
 		for(auto i = 0; i < lenghtof(player->classes); i++)
 			player->classes[i] = 0;
 		for(auto& e : bsdata<classi>()) {
@@ -510,20 +513,40 @@ static bool choose_step_action() {
 		if(!scene(paint_choose_step))
 			return false;
 		player->alignment = (alignmentn)bsdata<alignmenti>::source.indexof(current_answer);
+		before_abilities_apply = *player;
 		break;
 	case ChooseAbilities:
-		prepare_ability_normal();
+		*player = before_abilities_apply;
+		for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
+			player->basic.abilities[i] += 2;
 		if(!scene(paint_choose_abilities))
 			return false;
+		before_skills_apply = *player;
 		break;
 	case ChooseSkills:
+		*player = before_skills_apply;
 		player->basic.abilities[SkillPoints] = skill_points_per_level(player->getmainclass()) * 4;
 		if(player->basic.is(BonusSkills))
 			player->basic.abilities[SkillPoints] += 4;
 		select_skills();
 		if(!scene(paint_choose_skills))
 			return false;
-		if(!open_choose_feat(GeneralFeat, player->basic.is(BonusFeat) ? 2 : 1))
+		feat_points = player->basic.is(BonusFeat) ? 2 : 1;
+		select_feats(GeneralFeat);
+		header_id = "Feats";
+		if(!scene(paint_choose_feats))
+			return false;
+		if(player->basic.is(BonusFighterFeat)) {
+			feat_points = 1;
+			header_id = "FighterFeats";
+			select_feats(FighterFeat);
+			if(!scene(paint_choose_feats))
+				return false;
+		}
+		player->update();
+		break;
+	case ChooseAppearance:
+		if(!scene(paint_choose_appearance))
 			return false;
 		break;
 	}
@@ -549,18 +572,27 @@ void open_character_generation() {
 	creature copy = {}; player = &copy;
 #ifdef _DEBUG
 	player->gender = Female;
-	player->race = Human;
-	raise_race();
 	player->portrait = 14;
+	apply_portraits();
+	before_race_apply = *player;
+	raise_race(Elf);
+	before_class_apply = *player;
 	raise_class(Fighter);
 	player->alignment = (alignmentn)0;
+	before_abilities_apply = *player;
 	player->basic.abilities[Strenght] = 15;
 	player->basic.abilities[Dexterity] = 11;
 	player->basic.abilities[Constitution] = 10;
 	player->basic.abilities[Intelligence] = 11;
 	player->basic.abilities[Wisdow] = 12;
 	player->basic.abilities[Charisma] = 10;
-	current_step = ChooseSkills;
+	before_skills_apply = *player;
+	player->basic.skills[Intimidate] += 4;
+	player->basic.skills[CraftWeapon] += 4;
+	player->basic.feats.set(ImprovedInitiative);
+	player->basic.feats.set(PowerAttack);
+	player->update();
+	current_step = ChooseAppearance;
 	//current_step = ChooseGender;
 #else
 	current_step = ChooseGender;

@@ -38,6 +38,7 @@ creature* get_selected();
 
 int skill_points_per_level(classn v);
 
+void apply_portraits();
 void check_combat();
 void clear_selection();
 void create_character(racen race, gendern gender, classn classv, unsigned short portrait);
@@ -46,5 +47,5 @@ void create_npc(point position, const char* id);
 bool have_multiselect();
 bool have_selection();
 void raise_class(classn classv);
-void raise_race();
+void raise_race(racen race);
 void select_all_party();

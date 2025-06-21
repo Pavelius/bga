@@ -36,7 +36,7 @@ enum featn : unsigned char {
 	FocusMaces, FocusPolearm, FocusSwords, FocusGreatSword,
 	WhirlwindAttack,
 	FastMovement, Illiteracy,
-	HateGoblinoids, Infravision, BonusFeat, BonusSkills, 
+	HateGoblinoids, Infravision, BonusFeat, BonusFighterFeat, BonusSkills,
 	ReadyToBattle,
 };
 struct feati : nameable {

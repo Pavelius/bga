@@ -387,7 +387,7 @@ static void choose_creature_color() {
 	player->colors[index] = open_color_pick(player->colors[index], pi->colors[index]);
 }
 
-static void creature_color(int index) {
+void creature_color(int index) {
 	auto color_index = player->colors[index];
 	button(INVBUT2, 0, 1);
 	if(color_index == -1) {
@@ -924,7 +924,7 @@ static void quick_weapon(int index) {
 		image(gres(STONSLOT), 34, 0);
 }
 
-static void paperdoll() {
+void paperdoll() {
 	static int orientation = 1;
 	auto push_caret = caret;
 	caret.x += width / 2;

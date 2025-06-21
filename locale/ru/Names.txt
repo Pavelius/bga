@@ -4,6 +4,7 @@ Accept: Принять
 Advantages: Преемущества
 And: И
 AnyClass: Любой
+Appearance: Внешний вид
 AppTitle: Врата Балдура
 AreaMap: Карта местности
 ArmorBonus: Бонус брони
@@ -33,7 +34,9 @@ ChooseName: Имя
 ChooseRace: Раса
 ChooseSkills: Навыки
 Close: Закрыть
+Clothing: Одежда
 Coins: Золото
+ColorChoices: Выбор цветов
 Colors: Цвета
 ConfirmDelete: Вы действительно хотите удалить это сохранение игры?
 ConfirmQuitGame: Вы действительно хотите покинуть игру?
@@ -56,6 +59,7 @@ Export: Экспорт
 FavorClass: Любимый класс
 FeatPointsLeft: Осталось очков особенностей
 Feats: Особенности
+FighterFeats: Особенности воина
 Finish: Завершить
 From: из
 GameMode: Режим игры
