@@ -108,6 +108,9 @@
     <Text Include="..\locale\ru\Generate.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\locale\ru\Sounds.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -440,6 +443,9 @@
     <ClCompile Include="condition.cpp">
       <Filter>support</Filter>
     </ClCompile>
+    <ClCompile Include="resname.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -759,6 +765,9 @@
     </ClInclude>
     <ClInclude Include="condition.h">
       <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="resname.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

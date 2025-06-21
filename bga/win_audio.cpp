@@ -89,6 +89,7 @@ struct channelinfo {
     int getindex() const;
     void clear();
     void reset();
+    void resetmusic();
     void update();
 };
 static channelinfo music_channel;
@@ -109,6 +110,14 @@ void channelinfo::reset() {
         error = waveOutClose(handle);
     }
     handle = 0;
+    playing = false;
+}
+
+void channelinfo::resetmusic() {
+    if(!handle)
+        return;
+    waveOutUnprepareHeader(handle, &header, sizeof(header));
+    waveOutReset(handle);
     playing = false;
 }
 

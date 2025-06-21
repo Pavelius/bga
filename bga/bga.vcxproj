@@ -32,6 +32,7 @@
     <Text Include="..\locale\ru\NamesNewbe.txt" />
     <Text Include="..\locale\ru\Options.txt" />
     <Text Include="..\locale\ru\Skills.txt" />
+    <Text Include="..\locale\ru\Sounds.txt" />
     <Text Include="..\locale\ru\Spells.txt" />
     <Text Include="..\locale\ru\UnknownNames.txt" />
     <Text Include="..\rules\Advance.txt" />
@@ -127,6 +128,7 @@
     <ClCompile Include="region.cpp" />
     <ClCompile Include="resid.cpp" />
     <ClCompile Include="resinfo.cpp" />
+    <ClCompile Include="resname.cpp" />
     <ClCompile Include="scale2x.cpp" />
     <ClCompile Include="school.cpp" />
     <ClCompile Include="screenshoot.cpp" />
@@ -217,6 +219,7 @@
     <ClInclude Include="option.h" />
     <ClInclude Include="order.h" />
     <ClInclude Include="rand.h" />
+    <ClInclude Include="resname.h" />
     <ClInclude Include="saveheader.h" />
     <ClInclude Include="school.h" />
     <ClInclude Include="seqlink.h" />

@@ -67,7 +67,6 @@ public:
 	void addx(char separator, const char* format, const char* format_param);
 	void addx(const char* separator, const char* format, const char* format_param);
 	void adduint(unsigned value, int precision, const int radix);
-	void change(char s1, char s2);
 	void change(const char* s1, const char* s2);
 	void clear() { pb[0] = 0; p = pb; }
 	void copy(const char* v);
@@ -130,6 +129,7 @@ int szcmp(const char* p1, const char* p2);
 void default_string(stringbuilder& sb, const char* id);
 bool equal(const char* s1, const char* s2);
 void initialize_translation();
+void szchange(char* result, char s1, char s2);
 bool szstart(const char* text, const char* value);
 bool szmatch(const char* text, const char* value);
 bool szpmatch(const char* text, const char* pattern);

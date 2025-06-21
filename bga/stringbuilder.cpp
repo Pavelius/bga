@@ -233,6 +233,8 @@ bool szmatch(const char* text, const char* name) {
 }
 
 bool szpmatch(const char* string, const char* pattern) {
+	const char* rs = 0;
+	const char* rp = 0;
 	auto p = string;
 	while(*p) {
 		auto symbol = *pattern++;
@@ -242,12 +244,23 @@ bool szpmatch(const char* string, const char* pattern) {
 		case '*':
 			while(*p && *p != *pattern)
 				p++;
+			if(p[0] != 0) {
+				rs = p + 1;
+				rp = pattern;
+			}
 			continue;
 		case '?':
 			p++;
 			continue;
 		}
 		if(*p != symbol) {
+			if(rs && rp) {
+				p = rs;
+				pattern = rp;
+				rs = 0;
+				rp = 0;
+				continue;
+			}
 			while(symbol && symbol != ',')
 				symbol = *pattern++;
 			if(symbol == ',') {
@@ -518,10 +531,8 @@ void stringbuilder::addx(const char* separator, const char* format, const char* 
 	addv(format, format_param);
 }
 
-void stringbuilder::change(char s1, char s2) {
-	for(auto p = pb; p < pe; p++) {
-		if(*p == 0)
-			break;
+void szchange(char* result, char s1, char s2) {
+	for(auto p = result; *p; p++) {
 		if(*p == s1)
 			*p++ = s2;
 	}

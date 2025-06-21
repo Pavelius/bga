@@ -1220,9 +1220,9 @@ void paint_list(void* data, size_t size, int maximum, int& origin, int per_page,
 	if(im > origin + per_page)
 		im = origin + per_page;
 	auto push_dialog = dialog_start;
-	for(auto i = origin; i < im; i++) {
+	for(list_row_index = origin; list_row_index < im; list_row_index++) {
 		button_hilited = ishilite();
-		auto p = (char*)data + i * size;
+		auto p = (char*)data + list_row_index * size;
 		if(size == sizeof(void*) && ref_list)
 			p = *((char**)p);
 		dialog_start = caret;
@@ -1230,10 +1230,10 @@ void paint_list(void* data, size_t size, int maximum, int& origin, int per_page,
 		if(button_hilited) {
 			if(hot.key == MouseLeft && !hot.pressed) {
 				if(action_proc)
-					execute(action_proc, i, 0, p);
+					execute(action_proc, list_row_index, 0, p);
 			} else if(hot.key == MouseRight && !hot.pressed) {
 				if(info_proc)
-					execute(info_proc, i, 0, p);
+					execute(info_proc, list_row_index, 0, p);
 			}
 		}
 		caret.y += height;
@@ -1581,7 +1581,7 @@ static void paint_main_menu() {
 }
 
 void open_main_menu() {
-	play_music("THEMEA");
+	// play_music("THEMEA");
 	scene(paint_main_menu);
 }
 

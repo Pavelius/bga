@@ -11,6 +11,7 @@ struct portraiti {
 	gendern			gender;
 	racen			race;
 	classn			classv;
+	const char*		sound;
 	int				getindex() const;
 };
 struct avatarable {

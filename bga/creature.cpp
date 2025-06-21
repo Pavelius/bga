@@ -52,6 +52,8 @@ static void copy(T& e1, const T& e2) {
 void apply_portraits() {
 	auto pi = bsdata<portraiti>::elements + player->portrait;
 	player->setcolor(pi->colors);
+	if(pi->sound)
+		player->speak.set(pi->sound);
 }
 
 static void finish() {

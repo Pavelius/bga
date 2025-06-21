@@ -94,6 +94,7 @@ NextLevel: Следующий уровень
 No: Нет
 Options: Опции
 Overwrite: Перезаписать
+PlaySound: Проиграть пример
 Proficiency: Владение
 QuickItem: Предметы
 QuickLoad: Быстрая загрузка

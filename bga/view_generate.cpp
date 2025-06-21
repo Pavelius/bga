@@ -4,20 +4,25 @@
 #include "command.h"
 #include "creature.h"
 #include "draw.h"
+#include "io_stream.h"
 #include "math.h"
 #include "portrait.h"
 #include "rand.h"
+#include "resname.h"
 #include "skill.h"
 #include "timer.h"
 #include "vector.h"
 #include "view.h"
+#include "view_list.h"
 
 using namespace draw;
 
 static vector<portraiti*> portraits;
 static vector<nameable*> records;
+static vector<resname> sounds;
 
-static unsigned current_value;
+static int current_value;
+static int current_sound_played;
 static char ability_cost[] = {0, 1, 2, 3, 4, 5, 6, 8, 10, 13, 16, 20, 25};
 static char feat_points;
 static creature before_race_apply, before_class_apply, before_abilities_apply, before_skills_apply;
@@ -43,6 +48,10 @@ static bool have_party(int index) {
 			return true;
 	}
 	return false;
+}
+
+static void pick_current_value() {
+	current_value = hot.param;
 }
 
 static void select_portrait(gendern gender, int current) {
@@ -163,7 +172,7 @@ static void random_avatar() {
 }
 
 static void paint_choose_avatar() {
-	if(current_value >= portraits.count)
+	if(current_value >= (int)portraits.count)
 		current_value = portraits.count - 1;
 	if(current_value < 0)
 		current_value = 0;
@@ -420,6 +429,43 @@ static void paint_choose_appearance() {
 	audio_update_channels();
 }
 
+static void paint_sound_row(void* object) {
+	pushfore push_fore;
+	auto p = (resname*)object;
+	if(list_row_index == current_value)
+		fore = colors::yellow;
+	text(p->getname());
+}
+
+static void pick_current_sound() {
+	pick_current_value();
+	current_sound_played = 0;
+}
+
+static void play_sound_set() {
+	current_sound_played = 1 + (current_sound_played % 38);
+	play_speech(sounds[hot.param].name, current_sound_played);
+}
+
+static void paint_choose_sound() {
+	static int origin;
+	auto row_height = texth() + 2;
+	const int per_page = (320 + row_height - 1) / row_height;
+	paint_game_dialog(GUICGB);
+	paint_portrait();
+	paint_character_generation("Sound");
+	image(254, 87, gres(GUIACG), 6, 0);
+	setdialog(254 + 28, 61 + 59, 220, 320);
+	correct_table(current_value, sounds.count);
+	paint_list(sounds.data, sounds.element_size, sounds.count, origin, per_page,
+		paint_sound_row, row_height, {11, -4}, 10, pick_current_sound, 0, false);
+	// setdialog(254 + 22, 61 + 429); button(GBTNLRG, 1, 2);
+	setdialog(254 + 20, 61 + 392); button(GBTNLRG, 1, 2, 'P', "PlaySound"); fire(play_sound_set, current_value);
+	paint_footer_answer(true);
+	paint_description();
+	audio_update_channels();
+}
+
 static void paint_main_menu() {
 	paint_game_dialog(GUICGB);
 	paint_portrait();
@@ -460,6 +506,33 @@ static void select_feats(featgf v) {
 		records.add(&e);
 	}
 	records.sort(compare_nameable);
+}
+
+static void select_sound() {
+	if(sounds)
+		return;
+	current_value = -1;
+	for(io::file::find file("sounds"); file; file.next()) {
+		auto pn = file.name();
+		if(pn[0] == '.')
+			continue;
+		if(!szpmatch(pn, "*01.wav"))
+			continue;
+		auto n = zlen(pn);
+		if(n < 7)
+			continue;
+		char temp[64]; stringbuilder sb(temp);
+		sb.add(pn);
+		temp[zlen(pn) - 6] = 0;
+		szupper(temp);
+		auto p = sounds.add();
+		p->set(temp);
+	}
+	sounds.sort(compare_resname_name);
+	for(auto& e : sounds) {
+		if(player->speak==e.name)
+			current_value = sounds.indexof(&e);
+	}
 }
 
 static int choose_avatar() {
@@ -548,6 +621,11 @@ static bool choose_step_action() {
 	case ChooseAppearance:
 		if(!scene(paint_choose_appearance))
 			return false;
+		select_sound();
+		set_description_id("ChooseSound");
+		if(!scene(paint_choose_sound))
+			return false;
+		player->speak.set(sounds[current_value].name);
 		break;
 	}
 	return true;
@@ -598,5 +676,8 @@ void open_character_generation() {
 	current_step = ChooseGender;
 #endif // _DEBUG
 	generate_step_by_step();
+	portraits.clear();
+	records.clear();
+	sounds.clear();
 	player = push_player;
 }
