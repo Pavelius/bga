@@ -98,7 +98,6 @@ static void update_actor_animations() {
 			continue;
 		e.updateanimate();
 	}
-	audio_update_channels();
 }
 
 void update_frames() {
@@ -1573,13 +1572,12 @@ static void paint_main_menu() {
 	setdialog(569, 133, 152, 21); texta(getnm("GameMode"), AlignCenterCenter);
 	setdialog(567, 160); button(GBTNMED2, 1, 2, 'M', "SinglePlayer");
 	setdialog(569, 220, 152, 21); texta(getnm("BeginGame"), AlignCenterCenter);
-	setdialog(567, 248); button(GBTNMED2, 5, 6, 'N', "NewGame"); fire(open_character_generation);
+	setdialog(567, 248); button(GBTNMED2, 5, 6, 'N', "NewGame"); fire(open_party_formation);
 	setdialog(567, 280); button(GBTNMED2, 9, 10, 'L', "LoadGame"); fire(open_load_game);
 	setdialog(567, 312); button(GBTNMED2, 13, 14, 'Q', "QuickLoad");
 	setdialog(567, 344); button(GBTNMED2, 1, 2, 'J', "JoinGame", 3, false);
 	setdialog(567, 396); button(GBTNMED2, 5, 6, 'O', "Options");
 	setdialog(567, 428); button(GBTNMED2, 9, 10, KeyEscape, "QuitGame"); fire(confirm_quit_game);
-	audio_update_channels();
 }
 
 void open_main_menu() {
@@ -1593,7 +1591,6 @@ static void paint_name_dialog() {
 	setdialog(25, 57, 220, 20); edit(input_string, input_string_size, AlignLeftCenter);
 	setdialog(19, 84); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 	setdialog(141, 84); button(GBTNSTD, 1, 2, KeyEnter, "Done", 3, input_string[0] != 0); fire(buttonok);
-	audio_update_channels();
 }
 
 bool open_name(char* result, size_t size) {
@@ -1714,6 +1711,7 @@ unsigned char open_color_pick(unsigned char current_color, unsigned char default
 }
 
 static void tips_main() {
+	audio_update_channels();
 	if(paint_tips())
 		return;
 	paint_cursor();

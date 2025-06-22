@@ -188,7 +188,6 @@ static void paint_choose_avatar() {
 	setdialog(276, 394 + 87); button(GBTNLRG, 1, 2, 'R', "Random"); fire(random_avatar);
 	paint_footer_answer(allow_next_button());
 	paint_description();
-	audio_update_channels();
 }
 
 static int cost_pay(int delta) {
@@ -350,7 +349,6 @@ static void paint_choose_step() {
 	paint_answers();
 	paint_footer_answer(allow_next_button());
 	paint_description();
-	audio_update_channels();
 }
 
 static void paint_choose_sex() {
@@ -362,7 +360,6 @@ static void paint_choose_sex() {
 	paint_answers(196);
 	paint_footer_answer(allow_next_button());
 	paint_description();
-	audio_update_channels();
 }
 
 static void paint_choose_abilities() {
@@ -372,7 +369,6 @@ static void paint_choose_abilities() {
 	paint_dialog(254, 61, paint_choose_ability);
 	paint_footer_answer(allow_next_button());
 	paint_description();
-	audio_update_channels();
 }
 
 static void paint_choose_skills() {
@@ -390,7 +386,6 @@ static void paint_choose_skills() {
 		paint_skill_row, 36, {-9, 3}, -6, 0, 0, true);
 	paint_footer_answer(skill_points <= 1);
 	paint_description();
-	audio_update_channels();
 }
 
 static void paint_choose_feats() {
@@ -407,7 +402,6 @@ static void paint_choose_feats() {
 		paint_feat_row, 36, {-9, 3}, -6, 0, 0, true);
 	paint_footer_answer(feat_points == 0);
 	paint_description();
-	audio_update_channels();
 }
 
 static void paint_choose_appearance() {
@@ -429,7 +423,6 @@ static void paint_choose_appearance() {
 	setdialog(254 + 84, 61 + 58, 126, 160); paperdoll();
 	paint_footer_answer(true);
 	paint_description();
-	audio_update_channels();
 }
 
 static void paint_sound_row(void* object) {
@@ -466,7 +459,6 @@ static void paint_choose_sound() {
 	setdialog(254 + 20, 61 + 392); button(GBTNLRG, 1, 2, 'P', "PlaySound"); fire(play_sound_set, current_value);
 	paint_footer_answer(true);
 	paint_description();
-	audio_update_channels();
 }
 
 static void paint_main_menu() {
@@ -476,7 +468,6 @@ static void paint_main_menu() {
 	paint_steps();
 	paint_footer();
 	paint_description();
-	audio_update_channels();
 }
 
 static void add_answer(nameable* p) {
@@ -662,9 +653,9 @@ static bool generate_step_by_step() {
 	}
 }
 
-void open_character_generation() {
+static bool open_character_generation(creature& copy) {
 	auto push_player = player;
-	creature copy = {}; player = &copy;
+	player = &copy;
 #ifdef _DEBUG
 	player->gender = Female;
 	player->portrait = 14;
@@ -692,12 +683,60 @@ void open_character_generation() {
 #else
 	current_step = ChooseGender;
 #endif // _DEBUG
-	if(generate_step_by_step()) {
-		if(push_player)
-			*push_player = copy;
-	}
+	auto result = generate_step_by_step();
+	player_finish();
 	portraits.clear();
 	records.clear();
 	sounds.clear();
 	player = push_player;
+	return result;
+}
+
+static void create_character() {
+	auto index = hot.param;
+	creature character; character.clear();
+	if(!open_character_generation(character))
+		return;
+	party[index] = bsdata<creature>::addz();
+	*party[index] = character;
+}
+
+static void modify_character() {
+	auto index = hot.param;
+}
+
+static void exit_party_formation() {
+	if(!confirm("ConfirmExitPartyFormation"))
+		return;
+	buttoncancel();
+}
+
+static void paint_party_formation() {
+	auto allow_done = true;
+	paint_game_dialog(GUICARBB);
+	setdialog(279, 22, 242, 32); texta(STONEBIG, getnm("PartyFormation"), AlignCenterCenter);
+	setdialog(428, 81);
+	for(auto i = 0; i < 6; i++) {
+		auto push_caret = caret;
+		auto p = party[i];
+		auto b = 4 * (i % 3);
+		if(!p) {
+			button(GBTNBFRM, b + 1, b + 2, 0, "CreateCharacer");
+			fire(create_character, i);
+			setdialog(647, caret.y - 1); // button(GUIRZPOR, 0, 1);
+			allow_done = false;
+		} else {
+			button(GBTNBFRM, b + 1, b + 2, 0, p->getname(), false);
+			fire(modify_character, i);
+		}
+		caret = push_caret;
+		caret.y += 69;
+	}
+	setdialog(105, 495); button(GBTNSTD, 1, 2, KeyEscape, "Exit"); fire(exit_party_formation);
+	setdialog(322, 495); button(GBTNMED, 1, 2, 0, "ModifyCharacters", 3, false);
+	setdialog(576, 495); button(GBTNSTD, 1, 2, KeyEnter, "Done", 3, allow_done); fire(buttonok);
+}
+
+void open_party_formation() {
+	scene(paint_party_formation);
 }

@@ -19,7 +19,7 @@ struct creature : actor, avatarable, spellv {
 	void			select();
 	void			clear();
 	short unsigned	getindex() const;
-	const char*		getname() const { return "Pavelius"; }
+	const char*		getname() const { return name; }
 	int				getspellslots(classn type, int spell_level) const;
 	bool			isallow(featn v) const;
 	bool			isclass(skilln v) const;
@@ -46,6 +46,7 @@ void create_character(gendern gender);
 void create_npc(point position, const char* id);
 bool have_multiselect();
 bool have_selection();
+void player_finish();
 void raise_class(classn classv);
 void raise_race(racen race);
 void select_all_party();

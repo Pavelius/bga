@@ -307,7 +307,10 @@ static void character_feats(stringbuilder& sb) {
 }
 
 static void character_brief_info(stringbuilder& sb) {
-	addv<genderi>(sb, "Gender", player->gender);
+	if(current_step > ChooseName)
+		sb.addn("###%1", player->getname());
+	if(current_step > ChooseGender)
+		addv<genderi>(sb, "Gender", player->gender);
 	if(current_step>ChooseRace)
 		addv<racei>(sb, "Race", player->race);
 	if(current_step > ChooseClass)

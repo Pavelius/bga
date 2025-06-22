@@ -40,9 +40,11 @@ Coins: Золото
 ColorChoices: Выбор цветов
 Colors: Цвета
 ConfirmDelete: Вы действительно хотите удалить это сохранение игры?
+ConfirmExitPartyFormation: Вы действительно хотите покинуть процесс генерации партии?
 ConfirmQuitGame: Вы действительно хотите покинуть игру?
 ConfirmQuitMainMenu: Вы действительно хотите покинуть текущую игру и вернуться в главное меню?
 ConfirmStartOver: Начать генерацию персонажа с самого начала?
+CreateCharacer: Создать персонажа
 CriticalHitLine: Критический удар: при результате %1i-20 урон x%2i
 CriticalHitLine20: Критический удар: при результате 20 урон x%2i
 Current: Текущий
@@ -56,6 +58,7 @@ Drink: Напиток или блюдо
 Drinks: Выпивка и еда
 Empty: Пусто
 EnterSaveGameName: Укажите имя сохраняемой игры
+Exit: Выход
 Experience: Опыт
 Export: Экспорт
 FavorClass: Любимый класс
@@ -78,7 +81,8 @@ Journal: Журнал
 HairColor: Цвет волос
 Keyboard: Клавиатура
 Kg: кг.
-ModifyParty: Модификация партии
+ModifyCharacters: Изменить персонажа
+ModifyParty: Изменить партию
 Levels: Уровни
 LevelUp: Развитие
 Load: Зарузить
@@ -96,6 +100,7 @@ NextLevel: Следующий уровень
 No: Нет
 Options: Опции
 Overwrite: Перезаписать
+PartyFormation: Создание партии
 PlaySound: Проиграть пример
 Proficiency: Владение
 QuickItem: Предметы

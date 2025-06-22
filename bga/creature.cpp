@@ -56,7 +56,7 @@ void apply_portraits() {
 		player->speak.set(pi->sound);
 }
 
-static void finish() {
+void player_finish() {
 	player->update();
 	player->hp = player->hp_max;
 	player->stop();
@@ -99,17 +99,14 @@ static short unsigned random_portrait_no_party(gendern gender) {
 	return random_portrait(gender, exist);
 }
 
-static void raise_hit_points(classn v) {
-	if(player->getlevel() == 1 && ischaracter(v))
-		player->basic.abilities[HitPoints] += bsdata<classi>::elements[v].hit_points;
-	else
-		player->basic.abilities[HitPoints] += xrand(1, bsdata<classi>::elements[v].hit_points);
-}
-
 void raise_class(classn classv) {
 	variant v = bsdata<classi>::elements + classv;
 	player->classes[classv] = player->classes[classv] + 1;
 	apply_advance(v, player->classes[classv]);
+	if(player->getlevel() == 1 && ischaracter(classv))
+		player->basic.abilities[HitPoints] += bsdata<classi>::elements[classv].hit_points;
+	else
+		player->basic.abilities[HitPoints] += xrand(1, bsdata<classi>::elements[classv].hit_points);
 }
 
 void raise_race(racen race) {
@@ -202,12 +199,10 @@ void create_npc(point position, const char* id) {
 	for(auto i = Commoner; i <= Wizard; i = (classn)(i + 1)) {
 		if(!pn->classes[i])
 			continue;
-		for(auto n = 0; n < pn->classes[i]; n++) {
+		for(auto n = 0; n < pn->classes[i]; n++)
 			raise_class(i);
-			raise_hit_points(i);
-		}
 	}
-	finish();
+	player_finish();
 	player->setposition(position);
 }
 
@@ -222,8 +217,7 @@ void create_character(racen race, gendern gender, classn classv, unsigned short 
 	apply_portraits();
 	raise_class(classv);
 	raise_random_skills(get_skill_points(classv));
-	raise_hit_points(classv);
-	finish();
+	player_finish();
 }
 
 void create_character(gendern gender) {

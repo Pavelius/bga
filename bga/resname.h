@@ -2,6 +2,8 @@
 
 struct resname {
 	char name[16];
+	explicit operator bool() const { return name[0] != 0; }
+	operator const char*() const { return name; }
 	bool operator==(const char* v) const;
 	void clear() { name[0] = 0; }
 	void set(const char* p);
