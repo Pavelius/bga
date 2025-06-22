@@ -1,3 +1,4 @@
-﻿Error in file `UnknownNames.txt`:
- Define translation for `Character`
- Define translation for `DeleteCharacter`
+﻿Error in file `parties/HandsOfFury.txt`:
+ Line 9: Not found feat `FocusSword`
+ Line 10: Not found feat `LuckOfHeroes`
+ Line 10: Not found feat `FocusMissile`

@@ -17,7 +17,7 @@ static int compare(const void* v1, const void* v2) {
 	return szcmp(p1->id, p2->id);
 }
 
-static void update_elements() {
+void update_locale_names() {
 	if(!source_name)
 		return;
 	qsort(source_name.data, source_name.count, source_name.size(), compare);
@@ -69,7 +69,7 @@ static const char* read_identifier(const char* p, char* ps, const char* pe) {
 	return p;
 }
 
-static void apply_value(const char* id, const char* name) {
+void add_locale(const char* id, const char* name) {
 	id = szdup(id);
 	name = szdup(name);
 	if(source_name.findv(id, 0))
@@ -87,7 +87,7 @@ static void readl_extend(const char* p, int& records_read) {
 			p = read_identifier(p + 1, name, name + sizeof(name) - 1);
 		p = log::skipwscr(p);
 		p = read_string_v2(p, sb);
-		apply_value(name, value);
+		add_locale(name, value);
 		records_read++;
 	}
 }
@@ -108,12 +108,12 @@ static void read_names(const char* url) {
 				break;
 			p = skipsp(p + 1);
 			p = read_string_v1(p, sb);
-			apply_value(name, value);
+			add_locale(name, value);
 			records_read++;
 		}
 	}
 	log::close();
-	update_elements();
+	update_locale_names();
 }
 
 static void save_names(const char* url) {
@@ -190,7 +190,7 @@ const char* getnm(const char* id) {
 		p = (translate*)source_name.add();
 		p->id = szdup(id);
 		p->name = 0;
-		update_elements();
+		update_locale_names();
 #endif
 		return id;
 	}

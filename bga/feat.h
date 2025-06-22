@@ -9,7 +9,7 @@ enum featgf : unsigned char {
 };
 enum featn : unsigned char {
 	Enemy,
-	Alertness,
+	Alertness, Ambidexterity,
 	ArmorProficiencyLight,
 	ArmorProficiencyMedium,
 	ArmorProficiencyHeavy,
@@ -20,7 +20,7 @@ enum featn : unsigned char {
 	GreateFortitude,
 	ImprovedCritical, ImprovedDisarm, ImprovedFeint, ImprovedInitiative, ImprovedOverrun, ImprovedSunder, ImprovedTrip, ImprovedUnarmedStrike,
 	IronWill,
-	Leadership, LightingReflexes,
+	LuckOfHeroes, Leadership, LightingReflexes,
 	Mobility, Multiattack,
 	PointBlankShot, PowerAttack, PreciseShoot,
 	RapidShot, RapidReload,
@@ -32,8 +32,8 @@ enum featn : unsigned char {
 	SpellFocus,
 	SpringAttack, StunningFist,
 	Toughness, Track, TwoWeaponFighting,
-	FocusAxes, FocusBow, FocusDaggers,
-	FocusMaces, FocusPolearm, FocusSwords, FocusGreatSword,
+	FocusAxes, FocusBows, FocusDaggers,
+	FocusMaces, FocusPolearm, FocusSwords, FocusGreatSwords,
 	WhirlwindAttack,
 	FastMovement, Illiteracy,
 	HateGoblinoids, Infravision, BonusFeat, BonusFighterFeat, BonusSkills,

@@ -36,6 +36,7 @@
     <Text Include="..\locale\ru\Sounds.txt" />
     <Text Include="..\locale\ru\Spells.txt" />
     <Text Include="..\locale\ru\UnknownNames.txt" />
+    <Text Include="..\parties\HandsOfFury.txt" />
     <Text Include="..\rules\Advance.txt" />
     <Text Include="..\rules\Calendar.txt" />
     <Text Include="..\rules\Monsters.txt" />
@@ -122,6 +123,7 @@
     <ClCompile Include="npc.cpp" />
     <ClCompile Include="option.cpp" />
     <ClCompile Include="order.cpp" />
+    <ClCompile Include="party.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="portrait.cpp" />
     <ClCompile Include="race.cpp" />
@@ -219,6 +221,7 @@
     <ClInclude Include="my_initialize_list.h" />
     <ClInclude Include="option.h" />
     <ClInclude Include="order.h" />
+    <ClInclude Include="party.h" />
     <ClInclude Include="rand.h" />
     <ClInclude Include="resname.h" />
     <ClInclude Include="saveheader.h" />

@@ -21,6 +21,7 @@
 #include "list.h"
 #include "modifier.h"
 #include "npc.h"
+#include "party.h"
 #include "portrait.h"
 #include "race.h"
 #include "region.h"
@@ -55,6 +56,7 @@ BSDATAC(itemi, 512)
 BSDATAC(itemground, 512)
 BSDATAC(npci, 512)
 BSDATAC(point, 256*256)
+BSDATAC(partyi, 64)
 BSDATAC(region, 128)
 BSDATAC(spelli, 1024)
 BSDATAC(spellbook, 32)
@@ -240,6 +242,7 @@ BSDATA(varianti) = {
 	{"NoVariant"},
 	{"Ability", VAR(abilityi, 1), 0, 0, ftscript<abilityi>},
 	{"Advance", VAR(advancei, 2)},
+	{"Alignment", VAR(alignmenti, 1)},
 	{"Calendar", VAR(calendari, 1)},
 	{"Class", VAR(classi, 1)},
 	{"ColorGrad", VAR(colorgrad, 1)},
@@ -247,6 +250,7 @@ BSDATA(varianti) = {
 	{"DayPart", VAR(periodi, 1)},
 	{"Diety", VAR(dietyi, 1)},
 	{"Feat", VAR(feati, 1), 0, 0, ftscript<feati>},
+	{"Gender", VAR(genderi, 1)},
 	{"Item", VAR(itemi, 1)},
 	{"List", VAR(listi, 1)},
 	{"Modifier", VAR(modifieri, 1), 0, 0, ftscript<modifieri>},

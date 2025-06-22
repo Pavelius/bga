@@ -114,6 +114,9 @@
     <Text Include="..\locale\ru\Races.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\parties\HandsOfFury.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -449,6 +452,9 @@
     <ClCompile Include="resname.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="party.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -770,6 +776,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="resname.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="party.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

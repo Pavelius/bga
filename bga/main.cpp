@@ -10,6 +10,7 @@
 #include "log.h"
 #include "itema.h"
 #include "option.h"
+#include "party.h"
 #include "rand.h"
 #include "resid.h"
 #include "script.h"
@@ -107,9 +108,10 @@ int main(int argc, char* argv[]) {
 	initialize_store();
 	initialize_colorgrad();
 	initialize_feats();
-	initialize_ui();
+	initialize_parties();
 	music_create_player(2, 22050, 16, audio_repeat);
 	initialize_audio();
+	initialize_ui();
 	if(log::errors)
 		return -1;
 	metrics::font = gres(NORMAL);

@@ -126,6 +126,7 @@ int get_line_number(const char* start, const char* position);
 int	szcmpi(const char* p1, const char* p2);
 int szcmp(const char* p1, const char* p2);
 
+void add_locale(const char* id, const char* name); // After call this, before use any getnm() function, update records, calling update_locale_names().
 void default_string(stringbuilder& sb, const char* id);
 bool equal(const char* s1, const char* s2);
 void initialize_translation();
@@ -133,6 +134,7 @@ void szchange(char* result, char s1, char s2);
 bool szstart(const char* text, const char* value);
 bool szmatch(const char* text, const char* value);
 bool szpmatch(const char* text, const char* pattern);
+void update_locale_names();
 
 constexpr bool ischa(unsigned char s) { return (s >= 'A' && s <= 'Z') || (s >= 'a' && s <= 'z') || s >= 0xC0; }
 constexpr bool isnum(unsigned char s) { return s >= '0' && s <= '9'; }

@@ -16,7 +16,7 @@ BSDATA(skilli) = {
 	{"OpenLock", Dexterity},
 	{"PickPocket", Dexterity},
 	{"Search", Intelligence},
-	{"SpellCraft", Intelligence},
+	{"Spellcraft", Intelligence},
 	{"Spot", Wisdow},
 	{"UseMagicDevice", Intelligence},
 	{"WildernessLore", Wisdow},

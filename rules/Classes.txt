@@ -3,7 +3,7 @@
 Barbarian
  alignment NeutralGood ChaoticGood TrueNeutral ChaoticNeutral NeutralEvil ChaoticEvil
 Cleric cast(Wisdow)
- skills Alchemy Concentration Diplomacy KnowledgeArcana SpellCraft
+ skills Alchemy Concentration Diplomacy KnowledgeArcana Spellcraft
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
 Fighter
  skills CraftWeapon Intimidate WildernessLore
@@ -18,8 +18,8 @@ Rogue
  skills Bluff DisableDevice Hide Intimidate MoveSilently OpenLock PickPocket Search UseMagicDevice
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
 Sorcerer cast(Charisma)
- skills Alchemy Concentration KnowledgeArcana SpellCraft
+ skills Alchemy Concentration KnowledgeArcana Spellcraft
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
 Wizard cast(Intellegence)
- skills Alchemy Concentration KnowledgeArcana SpellCraft
+ skills Alchemy Concentration KnowledgeArcana Spellcraft
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
