@@ -13,8 +13,8 @@ struct creature : actor, avatarable, spellv {
 	dietyn			diety;
 	char			initiative;
 	short			hp, hp_max;
-	short unsigned	name;
 	unsigned		experience;
+	resname			name;
 	explicit operator bool() const { return hp > 0; }
 	void			select();
 	void			clear();

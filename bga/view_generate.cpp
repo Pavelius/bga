@@ -120,6 +120,8 @@ static void set_step_description() {
 }
 
 static void start_over() {
+	if(!confirm("ConfirmStartOver"))
+		return;
 	player->clear();
 	current_step = ChooseGender;
 	set_step_description();
@@ -136,7 +138,8 @@ static void paint_footer() {
 	setdialog(35, 550); button(GBTNSTD, 1, 2, 0, "Biography", 3, false);
 	setdialog(204, 550); button(GBTNSTD, 5, 6, 0, "Import");
 	setdialog(342, 550); button(GBTNSTD, 9, 10, KeyEscape, "Back", 11, current_step != ChooseGender); fire(back_one_step);
-	setdialog(478, 550); button(GBTNSTD, 1, 2, KeyEnter, "Finish", 3, false);
+	setdialog(478, 550); button(GBTNSTD, 1, 2, KeyEnter, "Finish", 3, current_step == ChooseFinish);
+	fire(buttonparam, (long)(bsdata<commandi>::elements + ChooseFinish));
 	setdialog(647, 550);
 	if(current_step == ChooseGender) {
 		button(GBTNSTD, 5, 6, 0, "Cancel");
@@ -545,6 +548,14 @@ static int choose_avatar() {
 	return portraits[current_value]->getindex();
 }
 
+static bool open_character_name() {
+	resname source = player->name;
+	if(!open_name(source.name, sizeof(source.name)))
+		return false;
+	player->name = source;
+	return true;
+}
+
 static bool choose_step_action() {
 	an.clear();
 	set_description_id(bsdata<commandi>::elements[current_step].id);
@@ -627,18 +638,24 @@ static bool choose_step_action() {
 			return false;
 		player->speak.set(sounds[current_value].name);
 		break;
+	case ChooseName:
+		if(!open_character_name())
+			return false;
+		break;
 	}
 	return true;
 }
 
-static void generate_step_by_step() {
+static bool generate_step_by_step() {
 	while(true) {
 		set_step_description();
 		auto p = scene(paint_main_menu);
 		if(!p)
-			break;
+			return false;
 		if(bsdata<commandi>::have(p)) {
 			current_step = (commandn)bsdata<commandi>::source.indexof(p);
+			if(current_step == ChooseFinish)
+				return true;
 			if(choose_step_action())
 				current_step = (commandn)(current_step + 1);
 		}
@@ -670,12 +687,15 @@ void open_character_generation() {
 	player->basic.feats.set(ImprovedInitiative);
 	player->basic.feats.set(PowerAttack);
 	player->update();
-	current_step = ChooseAppearance;
+	current_step = ChooseName;
 	//current_step = ChooseGender;
 #else
 	current_step = ChooseGender;
 #endif // _DEBUG
-	generate_step_by_step();
+	if(generate_step_by_step()) {
+		if(push_player)
+			*push_player = copy;
+	}
 	portraits.clear();
 	records.clear();
 	sounds.clear();

@@ -1,7 +1,7 @@
 #pragma once
 
 struct resname {
-	char name[12];
+	char name[16];
 	bool operator==(const char* v) const;
 	void clear() { name[0] = 0; }
 	void set(const char* p);

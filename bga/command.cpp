@@ -10,7 +10,8 @@ BSDATA(commandi) = {
 	{"ChooseSkills"},
 	{"ChooseAppearance"},
 	{"ChooseName"},
+	{"ChooseFinish"},
 };
-assert_enum(commandi, ChooseName)
+assert_enum(commandi, ChooseFinish)
 
 commandn current_step;

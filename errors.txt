@@ -1,2 +1,2 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `Play`
+ Define translation for `CharacterName`

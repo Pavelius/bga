@@ -43,6 +43,8 @@ static vector<nameable*> content;
 static vector<spelli*> spells;
 static stringbuilder description(description_text);
 static unsigned long tips_stamp;
+static char* input_string;
+static size_t input_string_size;
 
 static void paint_game_inventory();
 
@@ -1583,6 +1585,23 @@ static void paint_main_menu() {
 void open_main_menu() {
 	// play_music("THEMEA");
 	scene(paint_main_menu);
+}
+
+static void paint_name_dialog() {
+	paint_dialog(GUICNAME);
+	setdialog(22, 22, 233, 20); texta(getnm("CharacterName"), AlignCenterCenter);
+	setdialog(25, 57, 220, 20); edit(input_string, input_string_size, AlignLeftCenter);
+	setdialog(19, 84); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+	setdialog(141, 84); button(GBTNSTD, 1, 2, KeyEnter, "Done", 3, input_string[0] != 0); fire(buttonok);
+	audio_update_channels();
+}
+
+bool open_name(char* result, size_t size) {
+	if(!result)
+		return false;
+	input_string = result;
+	input_string_size = size;
+	return open_dialog(paint_name_dialog, true);
 }
 
 static const char* get_object_name(const void* p) {
