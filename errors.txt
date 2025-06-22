@@ -1,2 +1,3 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `ConfirmExitPartyFormation`
+ Define translation for `Character`
+ Define translation for `DeleteCharacter`

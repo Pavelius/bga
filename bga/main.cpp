@@ -95,8 +95,8 @@ static void read_rules() {
 }
 
 int main(int argc, char* argv[]) {
-	// srand(getcputime());
-	srand(923811);
+	srand(getcputime());
+	// srand(923811);
 	stringbuilder::custom = main_identifier;
 	read_rules();
 	read_options();

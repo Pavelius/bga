@@ -31,6 +31,7 @@
     <Text Include="..\locale\ru\Names.txt" />
     <Text Include="..\locale\ru\NamesNewbe.txt" />
     <Text Include="..\locale\ru\Options.txt" />
+    <Text Include="..\locale\ru\Races.txt" />
     <Text Include="..\locale\ru\Skills.txt" />
     <Text Include="..\locale\ru\Sounds.txt" />
     <Text Include="..\locale\ru\Spells.txt" />

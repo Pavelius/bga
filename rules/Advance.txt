@@ -43,3 +43,11 @@ Wizard+1 WeaponProficiency
  elements SimpleWeaponMissile SimpleWeaponStaff SimpleWeaponDagger
 Wizard+1 SavingThrows
  elements Will+2
+
+Paladin+1 WeaponProficiency
+ elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
+  MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponSword MartialWeaponPolearm
+Paladin+1 ArmorProficiency
+ elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
+Paladin+1 SavingThrows
+ elements Fortitude+2

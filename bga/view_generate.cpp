@@ -28,7 +28,7 @@ static char feat_points;
 static creature before_race_apply, before_class_apply, before_abilities_apply, before_skills_apply;
 static const char* header_id;
 
-const int ability_points_maximum = 22;
+const int ability_points_maximum = 25;
 
 static int get_ability_spend() {
 	auto r = 0;
@@ -656,7 +656,7 @@ static bool generate_step_by_step() {
 static bool open_character_generation(creature& copy) {
 	auto push_player = player;
 	player = &copy;
-#ifdef _DEBUG
+#ifdef _DEBUG_NOUSE
 	player->gender = Female;
 	player->portrait = 14;
 	apply_portraits();
@@ -701,8 +701,23 @@ static void create_character() {
 	*party[index] = character;
 }
 
+static void paint_character_option() {
+	paint_dialog(GMPMCHRB);
+	setdialog(24, 22, 230, 22); texta(getnm("Character"), AlignCenterCenter);
+	setdialog(23, 50); button(GBTNLRG2, 1, 2, 0, "CreateCharacter", 3, false); fire(buttonparam, 1);
+	setdialog(23, 81); button(GBTNLRG2, 1, 2, 0, "DeleteCharacter"); fire(buttonparam, 2);
+	setdialog(23, 112); button(GBTNLRG2, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+}
+
 static void modify_character() {
 	auto index = hot.param;
+	auto result = open_dialog(paint_character_option, true);
+	switch(result) {
+	case 2:
+		party[index]->clear();
+		party[index] = 0;
+		break;
+	}
 }
 
 static void exit_party_formation() {
@@ -721,12 +736,12 @@ static void paint_party_formation() {
 		auto p = party[i];
 		auto b = 4 * (i % 3);
 		if(!p) {
-			button(GBTNBFRM, b + 1, b + 2, 0, "CreateCharacer");
+			button(GBTNBFRM, b + 1, b + 2, 0, "CreateCharacter");
 			fire(create_character, i);
-			setdialog(647, caret.y - 1); // button(GUIRZPOR, 0, 1);
 			allow_done = false;
 		} else {
 			button(GBTNBFRM, b + 1, b + 2, 0, p->getname(), false);
+			setdialog(647, caret.y - 1); image(gres(PORTS), p->portrait, 0);
 			fire(modify_character, i);
 		}
 		caret = push_caret;
@@ -738,5 +753,6 @@ static void paint_party_formation() {
 }
 
 void open_party_formation() {
-	scene(paint_party_formation);
+	if(!scene(paint_party_formation))
+		return;
 }

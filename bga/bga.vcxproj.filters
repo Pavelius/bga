@@ -111,6 +111,9 @@
     <Text Include="..\locale\ru\Sounds.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\locale\ru\Races.txt">
+      <Filter>locale</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
