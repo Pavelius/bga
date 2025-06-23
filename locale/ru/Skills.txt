@@ -17,7 +17,7 @@ MoveSilently: Двигаться тихо
 OpenLock: Вскрыть замок
 PickPocket: Очистить карманы
 Search: Обыск
-SpellCraft: Знания заклинаний
+Spellcraft: Знания заклинаний
 Spot: Наблюдательность
 UseMagicDevice: Использовать волшебные предметы
 WildernessLore: Знание дикой местности

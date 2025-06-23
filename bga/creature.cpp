@@ -6,6 +6,7 @@
 #include "math.h"
 #include "modifier.h"
 #include "npc.h"
+#include "party.h"
 #include "pushvalue.h"
 #include "rand.h"
 #include "script.h"
@@ -217,6 +218,26 @@ void create_character(racen race, gendern gender, classn classv, unsigned short 
 	apply_portraits();
 	raise_class(classv);
 	raise_random_skills(get_skill_points(classv));
+	player_finish();
+}
+
+void create_party_character(int index) {
+	auto& e = last_party->characters[index];
+	player = bsdata<creature>::add();
+	player->clear();
+	player->area_index = current_area;
+	player->gender = e.gender;
+	player->portrait = e.portrait;
+	player->alignment = e.alignment;
+	player->race = e.race;
+	player->name = e.name;
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
+		player->basic.abilities[i] = e.abilities[i - Strenght];
+	apply_portraits();
+	raise_class(e.type);
+	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1))
+		player->skills[i] = e.skills[i];
+	player->basic.feats.add(e.feats);
 	player_finish();
 }
 

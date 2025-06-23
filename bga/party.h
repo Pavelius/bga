@@ -19,6 +19,7 @@ struct partyi : nameable {
 		char	abilities[6];
 		featf	feats;
 		char	skills[24];
+		short unsigned portrait;
 	};
 	character	characters[6];
 	const char*	content;
@@ -30,5 +31,6 @@ struct partyi : nameable {
 };
 extern partyi* last_party;
 
+void create_party_character(int index);
 void initialize_parties();
 void read_party(const char* url);

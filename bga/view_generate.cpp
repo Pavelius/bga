@@ -5,7 +5,9 @@
 #include "creature.h"
 #include "draw.h"
 #include "io_stream.h"
+#include "game.h"
 #include "math.h"
+#include "party.h"
 #include "portrait.h"
 #include "rand.h"
 #include "resname.h"
@@ -524,7 +526,7 @@ static void select_sound() {
 	}
 	sounds.sort(compare_resname_name);
 	for(auto& e : sounds) {
-		if(player->speak==e.name)
+		if(player->speak == e.name)
 			current_value = sounds.indexof(&e);
 	}
 }
@@ -752,7 +754,64 @@ static void paint_party_formation() {
 	setdialog(576, 495); button(GBTNSTD, 1, 2, KeyEnter, "Done", 3, allow_done); fire(buttonok);
 }
 
-void open_party_formation() {
-	if(!scene(paint_party_formation))
+static bool open_party_formation() {
+	return scene(paint_party_formation) != 0;
+}
+
+static void pick_party() {
+	pick_current_value();
+	auto p = records[current_value];
+	if(!p)
+		set_description_id("NewParty");
+	else {
+		auto pn = (partyi*)p;
+		set_description(pn->description);
+	}
+}
+
+static void paint_party_row(void* object) {
+	auto p = (partyi*)object;
+	auto id = p ? p->id : "CreateParty";
+	button(GBTNBFRM, (current_value == list_row_index) ? 0 : 1, 2, 0, id); fire(pick_party, list_row_index);
+}
+
+static void paint_select_party() {
+	static int origin;
+	const int per_page = 6;
+	paint_game_dialog(GCGPARTY);
+	setdialog(180, 25, 441, 37); texta(STONEBIG, getnm("SelectParty"), AlignCenterCenter);
+	setdialog(22, 130, 212, 351);
+	paint_list(records.data, records.element_size, records.count, origin, per_page,
+		paint_party_row, 62, {0}, 0, 0, 0, true);
+	setdialog(280, 136, 474, 338); paint_description(0, 0, 0);
+	setdialog(204, 550); button(GBTNSTD, 1, 2, 0, "Modify");
+	setdialog(341, 550); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+	setdialog(479, 550); button(GBTNSTD, 1, 2, KeyEnter, "Done"); fire(buttonok);
+}
+
+static void start_new_game() {
+	select_all_party();
+	enter("AR1000", "FR1001");
+}
+
+void open_select_party() {
+	current_value = 0;
+	records.clear();
+	records.add((nameable*)0);
+	for(auto& e : bsdata<partyi>())
+		records.add(&e);
+	set_description_id("NewParty");
+	if(!scene(paint_select_party))
 		return;
+	auto pr = records[current_value];
+	if(!pr) {
+		if(!open_party_formation())
+			return;
+	} else {
+		for(auto i = 0; i < lenghtof(last_party->characters); i++) {
+			create_party_character(i);
+			party[i] = player;
+		}
+	}
+	start_new_game();
 }

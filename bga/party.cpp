@@ -78,10 +78,10 @@ static void parse_type(partyi::character& e) {
 	skip(":");
 }
 
-static void parse_value(char& value) {
+static int parse_number() {
 	int number = 0;
 	p = psnum(p, number);
-	value = number;
+	return number;
 }
 
 static bool token(const char* id) {
@@ -128,9 +128,9 @@ static void parse_skills(partyi::character& e) {
 		skipne('(');
 		if(!ps) {
 			errorp(p, "Not found skill `%1`", text_value);
-			parse_value(e.skills[0]);
+			e.skills[0] = (char)parse_number();
 		} else
-			parse_value(e.skills[ps->getindex()]);
+			e.skills[ps->getindex()] = (char)parse_number();
 		skip(')');
 		skipne(',');
 	}
@@ -145,17 +145,19 @@ static void parse_stats(partyi::character& e) {
 		sb.clear();
 		p = skipsp(sb.psidf(p));
 		if(token("STR"))
-			parse_value(e.abilities[0]);
+			e.abilities[0] = (char)parse_number();
 		else if(token("DEX"))
-			parse_value(e.abilities[1]);
+			e.abilities[1] = (char)parse_number();
 		else if(token("CON"))
-			parse_value(e.abilities[2]);
+			e.abilities[2] = (char)parse_number();
 		else if(token("INT"))
-			parse_value(e.abilities[3]);
+			e.abilities[3] = (char)parse_number();
 		else if(token("WIS"))
-			parse_value(e.abilities[4]);
+			e.abilities[4] = (char)parse_number();
 		else if(token("CHA"))
-			parse_value(e.abilities[5]);
+			e.abilities[5] = (char)parse_number();
+		else if(token("PT"))
+			e.portrait = (short unsigned)parse_number();
 		else if(token("Feats"))
 			parse_feats(e);
 		else if(token("Skills"))
@@ -219,4 +221,5 @@ void read_party(const char* url) {
 
 void initialize_parties() {
 	readf(read_party, "parties", "*.txt");
+	update_locale_names();
 }

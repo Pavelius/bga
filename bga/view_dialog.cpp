@@ -1237,7 +1237,7 @@ void paint_list(void* data, size_t size, int maximum, int& origin, int per_page,
 					execute(info_proc, list_row_index, 0, p);
 			}
 		}
-		caret.y += height;
+		caret.y += row_height;
 	}
 	dialog_start = push_dialog;
 	clipping = push_clip;
@@ -1572,7 +1572,7 @@ static void paint_main_menu() {
 	setdialog(569, 133, 152, 21); texta(getnm("GameMode"), AlignCenterCenter);
 	setdialog(567, 160); button(GBTNMED2, 1, 2, 'M', "SinglePlayer");
 	setdialog(569, 220, 152, 21); texta(getnm("BeginGame"), AlignCenterCenter);
-	setdialog(567, 248); button(GBTNMED2, 5, 6, 'N', "NewGame"); fire(open_party_formation);
+	setdialog(567, 248); button(GBTNMED2, 5, 6, 'N', "NewGame"); fire(open_select_party);
 	setdialog(567, 280); button(GBTNMED2, 9, 10, 'L', "LoadGame"); fire(open_load_game);
 	setdialog(567, 312); button(GBTNMED2, 13, 14, 'Q', "QuickLoad");
 	setdialog(567, 344); button(GBTNMED2, 1, 2, 'J', "JoinGame", 3, false);
