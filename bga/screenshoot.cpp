@@ -44,9 +44,7 @@ long open_dialog(fnevent proc, bool faded) {
 	screenshoot push(faded);
 	while(ismodal()) {
 		push.restore();
-		paintstart();
 		proc();
-		paintfinish();
 		domodal();
 	}
 	return getresult();

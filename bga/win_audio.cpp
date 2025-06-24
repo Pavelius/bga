@@ -140,13 +140,15 @@ void audio_update_channels() {
 }
 
 static void channel_reset(channelinfo* p) {
-	if(!p->handle)
-		return;
+	if(p->handle && p->mode == ChannelPlayed)
+		waveOutReset(p->handle);
 }
 
 void audio_reset() {
+	audio_update_channels();
 	for(auto& e : channels)
 		channel_reset(&e);
+	audio_update_channels();
 }
 
 static channelinfo* find_channel() {

@@ -170,7 +170,7 @@ extern stringbuilder	tips_sb;
 extern long				text_params[16];
 extern color*			palt;
 extern int				tab_pixels;
-extern fnevent          pbackground, ptips, pfinish, pinput;
+extern fnevent          ptips, pinput;
 extern fnevent          pbeforemodal, pleavemodal, psetfocus;
 struct pushrect {
 	point caret;
@@ -223,8 +223,6 @@ void					image_tint(int x, int y, const sprite* e, int id, int flags);
 void					key2str(stringbuilder& sb, int key);
 void					line(int x, int y); // Draw line
 void					linet(int x, int y);
-void					paintstart();
-void					paintfinish();
 void					pixel(int x, int y);
 void					pixel(int x, int y, unsigned char alpha);
 unsigned char*			ptr(int x, int y);
