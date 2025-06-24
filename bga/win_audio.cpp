@@ -85,12 +85,12 @@ enum channelplayn : unsigned char {
 };
 
 struct channelinfo {
-	void*           object; // wav data playing
+	void*		object; // wav data playing
 	volatile channelplayn mode;
-	void*           handle;
-	WAVEHDR         header;
-	fnaudiocb       callback;
-	void*           callback_object; // user defined object
+	void*       handle;
+	WAVEHDR     header;
+	fnaudiocb   callback;
+	void*       callback_object; // user defined object
 	explicit operator bool() const { return handle != 0; }
 	int getindex() const;
 };
@@ -140,6 +140,20 @@ static void channel_create(channelinfo* p, int number_channels, int sample_rate,
 	waveOutOpen(&p->handle, (DWORD)-1, &wfx, (void*)audio_callback, p, CALLBACK_FUNCTION);
 }
 
+static void channel_write(channelinfo* p, void* object) {
+	auto ph = (wav*)object;
+	if(!ph)
+		return;
+	channel_create(p, ph->numChannels, ph->sampleRate, ph->bitsPerSample);
+	p->object = object;
+	p->header = {};
+	p->header.dwBufferLength = ph->subchunk2Size;
+	p->header.lpData = (char*)ph + sizeof(*ph);
+	p->mode = ChannelPlayed;
+	waveOutPrepareHeader(p->handle, &p->header, sizeof(WAVEHDR));
+	waveOutWrite(p->handle, &p->header, sizeof(WAVEHDR));
+}
+
 void audio_update_channels() {
 	channel_check_done(&music_channel);
 	for(auto& e : channels)
@@ -167,27 +181,11 @@ static channelinfo* find_channel() {
 	return 0;
 }
 
-void music_create_player(int number_channels, int sample_rate, int bits_per_sample, fnaudiocb callback) {
-	// Create music can be separated, because waveOpen make pause.
-	WAVEFORMATEX wfx = {0};
+void music_set(fnaudiocb callback) {
 	music_channel.callback = callback;
-	channel_create(&music_channel, number_channels, sample_rate, bits_per_sample);
-}
-
-static void channel_write(channelinfo* p, void* object) {
-	auto ph = (wav*)object;
-	p->object = object;
-	p->header = {};
-	p->header.dwBufferLength = ph->subchunk2Size;
-	p->header.lpData = (char*)ph + sizeof(*ph);
-	p->mode = ChannelPlayed;
-	waveOutPrepareHeader(p->handle, &p->header, sizeof(WAVEHDR));
-	waveOutWrite(p->handle, &p->header, sizeof(WAVEHDR));
 }
 
 void play_music_raw(void* object) {
-	if(!music_channel.handle)
-		return;
 	if(music_channel.mode != ChannelReady && music_channel.object == object)
 		return;
 	if(!object) {
@@ -199,8 +197,8 @@ void play_music_raw(void* object) {
 
 void audio_play(void* object, short unsigned volume, fnaudiocb callback, void* callback_object) {
 	auto p = find_channel();
-	auto ph = (wav*)object;
-	channel_create(p, ph->numChannels, ph->sampleRate, ph->bitsPerSample);
+	if(!p)
+		return;
 	p->callback = callback;
 	p->callback_object = callback_object;
 	channel_write(p, object);

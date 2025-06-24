@@ -110,9 +110,9 @@ int main(int argc, char* argv[]) {
 	initialize_colorgrad();
 	initialize_feats();
 	initialize_parties();
-	music_create_player(2, 22050, 16, music_repeat);
 	initialize_audio();
 	initialize_ui();
+	music_set(music_repeat);
 	if(log::errors)
 		return -1;
 	metrics::font = gres(NORMAL);
