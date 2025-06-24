@@ -109,7 +109,7 @@ int main(int argc, char* argv[]) {
 	initialize_colorgrad();
 	initialize_feats();
 	initialize_parties();
-	music_create_player(2, 22050, 16, audio_repeat);
+	music_create_player(2, 22050, 16, music_repeat);
 	initialize_audio();
 	initialize_ui();
 	if(log::errors)

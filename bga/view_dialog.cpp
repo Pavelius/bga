@@ -1581,7 +1581,7 @@ static void paint_main_menu() {
 }
 
 void open_main_menu() {
-	// play_music("THEMEA");
+	play_music("THEMEA");
 	scene(paint_main_menu);
 }
 
