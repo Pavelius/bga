@@ -4,6 +4,8 @@ Dwarf Abilities
  elements Constitution+2 Charisma-2 SaveVsPoison+2 SaveVsSpells+2 CraftWeapon+2 Infravision HateGoblinoids
 Elf Abilities
  elements Dexterity+2 Constitution-2 Search+2 Spot+2 SaveVsCharm+2 Infravision MartialWeaponSword MartialWeaponBow
+Gnome Abilities
+ elements Constitution+2 Strenght-2 Alchemy+2 Spot+2 SaveVsIllusion+2 Infravision HateGoblinoids
 Halfling Abilities
  elements Dexterity+2 Strenght-2 MoveSilently+2 Spot+2 Fortitude+1 Reflexes+1 Will+1 SaveVsFear+2
 HalfOrc Abilities

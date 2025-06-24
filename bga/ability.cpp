@@ -26,6 +26,7 @@ BSDATA(abilityi) = {
 	{"Reflexes", 0, format_bonus},
 	{"Will", 0, format_bonus},
 	{"SaveVsCharm", 0, format_bonus},
+	{"SaveVsIllusion", 0, format_bonus},
 	{"SaveVsFear", 0, format_bonus},
 	{"SaveVsPoison", 0, format_bonus},
 	{"SaveVsSpells", 0, format_bonus},
