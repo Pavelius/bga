@@ -93,6 +93,7 @@ static void read_rules() {
 	bsreq::read("rules/Spells.txt");
 	bsreq::read("rules/Diety.txt");
 	bsreq::read("rules/Monsters.txt");
+	bsreq::read("rules/Playlist.txt");
 }
 
 int main(int argc, char* argv[]) {

@@ -46,6 +46,7 @@
     <Text Include="..\rules\Diety.txt" />
     <Text Include="..\rules\Feats.txt" />
     <Text Include="..\rules\Items.txt" />
+    <Text Include="..\rules\Playlist.txt" />
     <Text Include="..\rules\Races.txt" />
     <Text Include="..\rules\Spells.txt" />
     <Text Include="..\rules\Store.txt" />
@@ -124,6 +125,7 @@
     <ClCompile Include="option.cpp" />
     <ClCompile Include="order.cpp" />
     <ClCompile Include="party.cpp" />
+    <ClCompile Include="playlist.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="portrait.cpp" />
     <ClCompile Include="race.cpp" />
@@ -216,6 +218,7 @@
     <ClInclude Include="modifier.h" />
     <ClInclude Include="moveable.h" />
     <ClInclude Include="mtevent.h" />
+    <ClInclude Include="playlist.h" />
     <ClInclude Include="namestr.h" />
     <ClInclude Include="npc.h" />
     <ClInclude Include="my_initialize_list.h" />

@@ -22,6 +22,7 @@
 #include "modifier.h"
 #include "npc.h"
 #include "party.h"
+#include "playlist.h"
 #include "portrait.h"
 #include "race.h"
 #include "region.h"
@@ -57,6 +58,7 @@ BSDATAC(itemground, 512)
 BSDATAC(npci, 512)
 BSDATAC(point, 256*256)
 BSDATAC(partyi, 64)
+BSDATAC(playlisti, 64)
 BSDATAC(region, 128)
 BSDATAC(spelli, 1024)
 BSDATAC(spellbook, 32)
@@ -150,6 +152,14 @@ BSMETA(npci) = {
 	BSDST(classes, classi),
 	{}};
 BSMETA(periodi) = {
+	BSREQ(id),
+	{}};
+BSMETA(playlisti) = {
+	BSREQ(id),
+	BSREQ(folder),
+	BSREQ(music),
+	{}};
+BSMETA(playlistni) = {
 	BSREQ(id),
 	{}};
 BSMETA(point) = {
@@ -255,6 +265,7 @@ BSDATA(varianti) = {
 	{"List", VAR(listi, 1)},
 	{"Modifier", VAR(modifieri, 1), 0, 0, ftscript<modifieri>},
 	{"NPC", VAR(npci, 1)},
+	{"Playlist", VAR(playlisti, 2)},
 	{"Portrait", VAR(portraiti, 1)},
 	{"Race", VAR(racei, 1)},
 	{"Rate", VAR(magici, 1)},

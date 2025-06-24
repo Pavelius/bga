@@ -170,8 +170,7 @@ extern stringbuilder	tips_sb;
 extern long				text_params[16];
 extern color*			palt;
 extern int				tab_pixels;
-extern fnevent          ptips, pinput;
-extern fnevent          pbeforemodal, pleavemodal, psetfocus;
+extern fnevent          ptips, pbeforemodal, pleavemodal, psetfocus;
 struct pushrect {
 	point caret;
 	int	width, height;

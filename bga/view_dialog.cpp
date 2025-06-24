@@ -262,8 +262,10 @@ void fire(fnevent proc, long param, long param2, const void* object) {
 }
 
 static void tips(const char* p) {
-	if(button_hilited)
-		hilite_object = p;
+	if(button_hilited) {
+		if(!tips_sb)
+			tips_sb.add(getnm(p));
+	}
 }
 
 static void tips(const nameable& e) {
@@ -1601,10 +1603,6 @@ bool open_name(char* result, size_t size) {
 	return open_dialog(paint_name_dialog, true);
 }
 
-static const char* get_object_name(const void* p) {
-	return getnm((const char*)p);
-}
-
 static bool paint_tips() {
 	static rect tips_area;
 	static unsigned long tips_stamp;
@@ -1613,11 +1611,11 @@ static bool paint_tips() {
 		tips_stamp = n;
 		tips_area = hot.hilite;
 	}
-	if(!hilite_object)
+	if(!tips_sb)
 		return false;
 	if(tips_stamp + optvalues[ToolTipsDelay] > n)
 		return false;
-	auto pn = get_object_name(hilite_object);
+	const char* pn = tips_sb;
 	if(!pn)
 		return false;
 	auto ps = gres(TOOLTIP);

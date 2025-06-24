@@ -120,8 +120,15 @@ static void CALLBACK audio_callback(void* hWaveOut, unsigned int uMsg, unsigned 
 }
 
 static void channel_create(channelinfo* p, int number_channels, int sample_rate, int bits_per_sample) {
-	if(p->handle)
-		return;
+	if(p->handle) {
+		auto pw = (wav*)p->object;
+		if(!pw)
+			return;
+		if(pw->numChannels != number_channels || pw->sampleRate != sample_rate || pw->bitsPerSample != bits_per_sample) {
+			waveOutClose(p->handle);
+			p->handle = 0;
+		}
+	}
 	WAVEFORMATEX wfx = {0};
 	wfx.cbSize = 0;
 	wfx.wFormatTag = 1;
@@ -183,7 +190,11 @@ void play_music_raw(void* object) {
 		return;
 	if(music_channel.mode != ChannelReady && music_channel.object == object)
 		return;
-	channel_write(&music_channel, object);
+	if(!object) {
+		channel_reset(&music_channel);
+		music_channel.object = object;
+	} else
+		channel_write(&music_channel, object);
 }
 
 void audio_play(void* object, short unsigned volume, fnaudiocb callback, void* callback_object) {

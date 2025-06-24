@@ -117,6 +117,9 @@
     <Text Include="..\parties\HandsOfFury.txt">
       <Filter>locale</Filter>
     </Text>
+    <Text Include="..\rules\Playlist.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -455,6 +458,9 @@
     <ClCompile Include="party.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="playlist.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -779,6 +785,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="party.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="playlist.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

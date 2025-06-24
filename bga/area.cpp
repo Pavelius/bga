@@ -143,11 +143,25 @@ static void archive_bitmap(archive& e, unsigned char* output, int output_bpp, in
 		e.set(pal, sizeof(color) * 256);
 }
 
+static unsigned long get_area_signature() {
+	unsigned long n = 0;
+	unsigned long r = 0;
+	r += (++n) * sizeof(areai);
+	r += (++n) * sizeof(doortile);
+	r += (++n) * sizeof(door);
+	r += (++n) * sizeof(region);
+	r += (++n) * sizeof(container);
+	r += (++n) * sizeof(entrance);
+	r += (++n) * sizeof(animation);
+	r += (++n) * sizeof(ambient);
+	return r;
+}
+
 bool archive_ard(io::stream& file, bool writemode) {
 	archive ar(file, writemode);
 	if(!ar.signature("ARD"))
 		return false;
-	if(!ar.version(1, 0))
+	if(!ar.signature(get_area_signature()))
 		return false;
 	// Area header
 	ar.set(area_width);

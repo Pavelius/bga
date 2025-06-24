@@ -11,6 +11,7 @@
 #include "game.h"
 #include "itemground.h"
 #include "iteminside.h"
+#include "playlist.h"
 #include "rand.h"
 #include "region.h"
 #include "saveheader.h"
@@ -73,6 +74,8 @@ void enter(const char* id, const char* location) {
 	audio_reset();
 	read_area(id, "ID2");
 	read_area(id);
+	play_music_raw(0);
+	playlist_play(id, "ID2", PlayDay);
 #ifdef _DEBUG
 	print("Count of points %1i", bsdata<point>::source.count);
 	print("Count of doors %1i", bsdata<door>::source.count);
