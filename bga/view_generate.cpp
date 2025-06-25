@@ -782,8 +782,8 @@ static void paint_select_party() {
 	setdialog(180, 25, 441, 37); texta(STONEBIG, getnm("SelectParty"), AlignCenterCenter);
 	setdialog(22, 130, 212, 351);
 	paint_list(records.data, records.element_size, records.count, origin, per_page,
-		paint_party_row, 62, {0}, 0, 0, 0, true);
-	setdialog(280, 136, 474, 338); paint_description(0, 0, 0);
+		paint_party_row, 62, {0, 0}, 0, 0, 0, true);
+	setdialog(280, 136, 474, 338); paint_description(11, -4, 11);
 	setdialog(204, 550); button(GBTNSTD, 1, 2, 0, "Modify");
 	setdialog(341, 550); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 	setdialog(479, 550); button(GBTNSTD, 1, 2, KeyEnter, "Done"); fire(buttonok);

@@ -600,6 +600,8 @@ static void alc132(unsigned char* p1, int d1, unsigned char* s, int h, const uns
 	auto ap = alpha;
 	if(fore.a && fore.a != 255)
 		ap = (unsigned char)((ap * fore.a) >> 8);
+	if(!ap)
+		return;
 	while(true) {
 		unsigned char c = *s++;
 		if(c == 0xFF) {
