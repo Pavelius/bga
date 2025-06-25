@@ -1,2 +1,3 @@
-﻿Error in file `rules/Classes.txt`:
- Line 36: Not found Ability identifier `Fotritude`
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `AnyProficientArmor`
+ Define translation for `AnyProficientWeapon`

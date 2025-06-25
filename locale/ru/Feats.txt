@@ -16,6 +16,7 @@ MartialWeaponSword: Владение мечом
 MartialWeaponPolearm: Владение копьем
 
 FocusAxes: Фокус на топорах
+FocusBows: Фокус на луках
 FocusDaggers: Фокус на кинжалах
 FocusMaces: Фокус на булаве
 FocusPolearm: Фокус на копье

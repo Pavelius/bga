@@ -4,7 +4,10 @@ Accept: Принять
 Advantages: Преемущества
 Ambidexterity: Левша и правша
 And: И
+AnyAlignment: Любое мировозрение
 AnyClass: Любой
+AnyProficientArmor: Любые доспехи и щиты
+AnyProficientWeapon: Любое оружие
 Appearance: Внешний вид
 AppTitle: Врата Балдура
 AreaMap: Карта местности
@@ -109,6 +112,8 @@ Overwrite: Перезаписать
 PartyFormation: Создание партии
 PlaySound: Проиграть пример
 Proficiency: Владение
+ProficientArmor: Владение доспехами
+ProficientWeapon: Владение оружием
 QuickItem: Предметы
 QuickLoad: Быстрая загрузка
 Quicksave: Быстрое сохранение

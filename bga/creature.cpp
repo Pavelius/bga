@@ -120,13 +120,14 @@ static short unsigned random_portrait_no_party(gendern gender) {
 }
 
 void raise_class(classn classv) {
+	auto& ei = bsdata<classi>::elements[classv];
 	variant v = bsdata<classi>::elements + classv;
 	auto prev_level = player->classes[classv];
 	player->classes[classv] += 1;
 	auto level = player->classes[classv];
-	v.counter = level;
+	if(level == 1)
+		player->basic.feats.add(0, ei.proficient);
 	apply_advance(v, player->classes[classv]);
-	auto& ei = bsdata<classi>::elements[classv];
 	if(player->getlevel() == 1 && ischaracter(classv))
 		player->basic.abilities[HitPoints] += ei.hit_points;
 	else

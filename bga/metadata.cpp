@@ -93,6 +93,7 @@ BSMETA(classi) = {
 	BSREQ(hit_points), BSREQ(skill_points), BSREQ(attack),
 	BSENM(cast, abilityi),
 	BSFLG(skills, skilli),
+	BSFLG(proficient, feati),
 	BSFLG(alignment, alignmenti),
 	BSFLG(saves, abilityi),
 	{}};

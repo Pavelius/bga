@@ -12,7 +12,7 @@ enum classn : unsigned char {
 struct classi : nameable {
 	int			player;
 	int			hit_points, skill_points, attack;
-	unsigned	skills, alignment, saves;
+	unsigned	skills, alignment, saves, proficient;
 	abilityn	cast;
 	classn		getindex() const;
 	bool		is(alignmentn v) const { return (alignment & (1 << v)) != 0; }

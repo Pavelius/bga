@@ -39,6 +39,12 @@ static gender_change_string player_gender[] = {
 };
 }
 
+static void addh(stringbuilder& sb, const char* id) {
+	if(sb)
+		sb.add("\n\n");
+	sb.addn("###%1", getnm(id));
+}
+
 static void addv(stringbuilder& sb, const char* id, const char* value) {
 	sb.addn("%1: %2", getnm(id), value);
 }
@@ -50,6 +56,31 @@ template<class T> void addv(stringbuilder& sb, const char* id, unsigned short v)
 template<class T> void addv(stringbuilder& sb, const char* group, short unsigned value, int bonus) {
 	auto pn = getnm(group);
 	sb.addn(pn, bsdata<T>::elements[value].getname(), bonus);
+}
+
+static unsigned set_flags(int f1, int f2) {
+	unsigned result = 0;
+	for(auto i = f1; i <= f2; i++)
+		result |= FG(i);
+	return result;
+}
+
+static void adds(stringbuilder& sb, const array& source, const char* id, unsigned flags, int fb, int fe) {
+	auto flags_default = set_flags(fb, fe);
+	flags = (flags & flags_default);
+	if(!flags)
+		return;
+	addh(sb, id);
+	if(flags == flags_default) {
+		sb.addn(getnm(ids("Any", id)));
+		return;
+	}
+	for(auto i = fb; i <= fe; i++) {
+		if(!FGT(flags, i))
+			continue;
+		auto pn = (nameable*)source.ptr(i);
+		sb.addn(pn->getname());
+	}
 }
 
 static void addb(stringbuilder& sb, const char* id, int value, const char* format = 0, bool skip_zero = true) {
@@ -123,14 +154,14 @@ static void add_critical(stringbuilder& sb, int critical, int multiplier, unsign
 	sb.addn(getnm(critical == 20 ? "CriticalHitLine20" : "CriticalHitLine"), critical, multiplier);
 }
 
-static void addh(stringbuilder& sb, const char* format, ...) {
-	if(!format)
-		return;
-	XVA_FORMAT(format);
-	sb.addn("**[");
-	sb.addv(format, format_param);
-	sb.add("]**");
-}
+//static void addh(stringbuilder& sb, const char* format, ...) {
+//	if(!format)
+//		return;
+//	XVA_FORMAT(format);
+//	sb.addn("**[");
+//	sb.addv(format, format_param);
+//	sb.add("]**");
+//}
 
 static void addend(stringbuilder& sb) {
 	sb.addn("\n");
@@ -140,7 +171,7 @@ static void addclasses(stringbuilder& sb, const classa& source) {
 	auto level = source.getlevel();
 	if(!level)
 		return;
-	addh(sb, getnm("CharacterLevel"), level);
+	sb.add("###%1 %2i", getnm("CharacterLevel"), level);
 	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1))
 		addb(sb, bsdata<classi>::elements[i].id, source.classes[i]);
 	addend(sb);
@@ -148,26 +179,26 @@ static void addclasses(stringbuilder& sb, const classa& source) {
 
 static void player_information(stringbuilder& sb) {
 	addclasses(sb, *player);
-	addh(sb, getnm("CharacterRace"));
+	addh(sb, "CharacterRace");
 	sb.addn("%1 %2", bsdata<racei>::elements[player->race].getname(), getnm(bsdata<genderi>::elements[player->gender].id));
 	addend(sb);
-	addh(sb, getnm("Alignment"));
+	addh(sb, "Alignment");
 	sb.addn(bsdata<alignmenti>::elements[player->alignment].getname());
 	addend(sb);
-	addh(sb, getnm("Experience"));
+	addh(sb, "Experience");
 	addb(sb, "Current", player->experience, 0, false);
 	addb(sb, "NextLevel", player->getnextlevel(), 0, false);
 	addend(sb);
-	addh(sb, getnm("SavingThrows"));
+	addh(sb, "SavingThrows");
 	for(auto i = Fortitude; i <= Will; i = (abilityn)(i + 1))
 		addb(sb, i, player->get(i), false);
 	addend(sb);
-	addh(sb, getnm("AbilityStatistic"));
+	addh(sb, "AbilityStatistic");
 	addv(sb, "WeightAllowance", getkg(player->allowed_weight));
 }
 
 static void player_skill_information(stringbuilder& sb) {
-	addh(sb, getnm("Skills"));
+	addh(sb, "Skills");
 	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1)) {
 		auto raw_level = player->basic.get(i);
 		auto level = player->get(i);
@@ -175,13 +206,16 @@ static void player_skill_information(stringbuilder& sb) {
 			sb.addn("%1%+2i", bsdata<skilli>::elements[i].getname(), level);
 	}
 	addend(sb);
-	addh(sb, getnm("Feats"));
+	addh(sb, "Feats");
 	for(auto& e : bsdata<feati>()) {
 		if(!e.is(GeneralFeat))
 			continue;
 		auto n = e.getindex();
-		if(player->is(n))
-			sb.addn(e.getname());
+		if(player->is(n)) {
+			//while(bsdata<feati>::elements[n].upgrade && player->is(bsdata<feati>::elements[n].upgrade))
+			//	n = bsdata<feati>::elements[n].upgrade;
+			sb.addn(bsdata<feati>::elements[n].getname());
+		}
 	}
 	addend(sb);
 }
@@ -281,7 +315,7 @@ static void game_version(stringbuilder& sb) {
 
 static void character_abilities(stringbuilder& sb) {
 	sb.addn("\n###%Abilities");
-	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i+1))
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
 		addb(sb, i, player->basic.abilities[i]);
 }
 
@@ -311,7 +345,7 @@ static void character_brief_info(stringbuilder& sb) {
 		sb.addn("###%1", player->getname());
 	if(current_step > ChooseGender)
 		addv<genderi>(sb, "Gender", player->gender);
-	if(current_step>ChooseRace)
+	if(current_step > ChooseRace)
 		addv<racei>(sb, "Race", player->race);
 	if(current_step > ChooseClass)
 		addv<classi>(sb, "Class", player->getmainclass());
@@ -346,14 +380,18 @@ static void add_advantages(stringbuilder& sb, variant parent) {
 }
 
 static void add_race_info(stringbuilder& sb, racei* p) {
-	if(sb)
-		sb.add("\n\n");
-	sb.addn("###%1", getnm("Description"));
+	addh(sb, "Description");
 	if(p->favor)
 		addv<classi>(sb, "FavorClass", p->favor);
 	else
 		addv(sb, "FavorClass", getnm("AnyClass"));
 	add_advantages(sb, p);
+}
+
+static void add_class_info(stringbuilder& sb, classi* p) {
+	adds(sb, bsdata<alignmenti>::source, "Alignment", p->alignment, 0, 8);
+	adds(sb, bsdata<feati>::source, "ProficientWeapon", p->proficient, SimpleWeaponMace, MartialWeaponPolearm);
+	adds(sb, bsdata<feati>::source, "ProficientArmor", p->proficient, ArmorProficiencyLight, ShieldProficiency);
 }
 
 static void answer_info(stringbuilder& sb) {
@@ -363,6 +401,8 @@ static void answer_info(stringbuilder& sb) {
 		sb.addn(pn);
 	if(bsdata<racei>::have(p))
 		add_race_info(sb, (racei*)p);
+	else if(bsdata<classi>::have(p))
+		add_class_info(sb, (classi*)p);
 }
 
 template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {

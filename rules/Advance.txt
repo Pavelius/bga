@@ -15,31 +15,5 @@ HalfElf Abilities
 Human Abilities
  elements BonusFeat BonusSkills
 
-Fighter+1 WeaponProficiency
- elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
-  MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponSword MartialWeaponPolearm
-Fighter+1 ArmorProficiency
- elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
 Fighter+1 Special
  elements BonusFighterFeat
-
-Rogue+1 WeaponProficiency
- elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
-  MartialWeaponBow MartialWeaponSword MartialWeaponPolearm
-Rogue+1 ArmorProficiency
- elements ArmorProficiencyLight
-
-Cleric+1 WeaponProficiency
- elements SimpleWeaponMace SimpleWeaponStaff\
-  MartialWeaponFlail MartialWeaponHammer
-Cleric+1 ArmorProficiency
- elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
-
-Wizard+1 WeaponProficiency
- elements SimpleWeaponMissile SimpleWeaponStaff SimpleWeaponDagger
-
-Paladin+1 WeaponProficiency
- elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
-  MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponSword MartialWeaponPolearm
-Paladin+1 ArmorProficiency
- elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
