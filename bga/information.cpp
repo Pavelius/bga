@@ -49,11 +49,11 @@ static void addv(stringbuilder& sb, const char* id, const char* value) {
 	sb.addn("%1: %2", getnm(id), value);
 }
 
-template<class T> void addv(stringbuilder& sb, const char* id, unsigned short v) {
+template<class T> static void addv(stringbuilder& sb, const char* id, unsigned short v) {
 	sb.addn("%1: %2", getnm(id), bsdata<T>::elements[v].getname());
 }
 
-template<class T> void addv(stringbuilder& sb, const char* group, short unsigned value, int bonus) {
+template<class T> static void addv(stringbuilder& sb, const char* group, short unsigned value, int bonus) {
 	auto pn = getnm(group);
 	sb.addn(pn, bsdata<T>::elements[value].getname(), bonus);
 }
@@ -189,13 +189,18 @@ static void player_skill_information(stringbuilder& sb) {
 	}
 	addh(sb, "Feats");
 	for(auto& e : bsdata<feati>()) {
-		if(!e.is(GeneralFeat))
+		if(!e.is(GeneralFeat) || e.is(UpgradeFeat))
 			continue;
 		auto n = e.getindex();
 		if(player->is(n)) {
-			//while(bsdata<feati>::elements[n].upgrade && player->is(bsdata<feati>::elements[n].upgrade))
-			//	n = bsdata<feati>::elements[n].upgrade;
-			sb.addn(bsdata<feati>::elements[n].getname());
+			auto level = 1;
+			while(bsdata<feati>::elements[n].upgrade && player->is(bsdata<feati>::elements[n].upgrade)) {
+				level++;
+				n = bsdata<feati>::elements[n].upgrade;
+			}
+			sb.addn(e.getname());
+			if(level > 1)
+				sb.adds("x%1i", level);
 		}
 	}
 }
@@ -294,13 +299,13 @@ static void game_version(stringbuilder& sb) {
 }
 
 static void character_abilities(stringbuilder& sb) {
-	sb.addn("\n###%Abilities");
+	addh(sb, "Abilities");
 	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1))
 		addb(sb, i, player->basic.abilities[i]);
 }
 
 static void character_skills(stringbuilder& sb) {
-	sb.addn("\n###%Skills");
+	addh(sb, "Skills");
 	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1)) {
 		if(!player->basic.skills[i])
 			continue;
@@ -309,7 +314,7 @@ static void character_skills(stringbuilder& sb) {
 }
 
 static void character_feats(stringbuilder& sb) {
-	sb.addn("\n###%Feats");
+	addh(sb, "Feats");
 	for(auto& e : bsdata<feati>()) {
 		if(!e.is(GeneralFeat))
 			continue;
