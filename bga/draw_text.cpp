@@ -6,7 +6,10 @@ const int glyph_count = 256 - glyph_start;
 void draw::glyph(int n, unsigned flags) {
 	if(n <= glyph_start)
 		return;
+	pushfore push;
 	image(font, n - glyph_start, 0);
+	fore = fore_stroke; fore.a = 128;
+	image(font, n - glyph_start + glyph_count, 0);
 }
 
 int draw::textw(int n) {

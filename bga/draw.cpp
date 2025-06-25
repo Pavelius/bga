@@ -597,6 +597,9 @@ static void alc132(unsigned char* p1, int d1, unsigned char* s, int h, const uns
 	auto fr = fore.b;
 	auto fg = fore.g;
 	auto fb = fore.r;
+	auto ap = alpha;
+	if(fore.a && fore.a != 255)
+		ap = (unsigned char)((ap * fore.a) >> 8);
 	while(true) {
 		unsigned char c = *s++;
 		if(c == 0xFF) {
@@ -622,21 +625,19 @@ static void alc132(unsigned char* p1, int d1, unsigned char* s, int h, const uns
 			d += n * cbd;
 		} else if(d + c * cbd > s2)
 			c = (s2 - d) / cbd;
-		if(alpha >= 255) {
-			while(c) {
+		if(ap >= 255) {
+			while(c--) {
 				d[0] = fr;
 				d[1] = fg;
 				d[2] = fb;
 				d += cbd;
-				c--;
 			}
 		} else {
-			while(c) {
-				d[0] = (((int)d[0] * (255 - alpha)) + ((fr) * (alpha))) >> 8;
-				d[1] = (((int)d[1] * (255 - alpha)) + ((fg) * (alpha))) >> 8;
-				d[2] = (((int)d[2] * (255 - alpha)) + ((fb) * (alpha))) >> 8;
+			while(c--) {
+				d[0] = (((int)d[0] * (255 - ap)) + ((fr) * (ap))) >> 8;
+				d[1] = (((int)d[1] * (255 - ap)) + ((fg) * (ap))) >> 8;
+				d[2] = (((int)d[2] * (255 - ap)) + ((fb) * (ap))) >> 8;
 				d += cbd;
-				c--;
 			}
 		}
 	}
@@ -814,7 +815,7 @@ static unsigned char* skip_v3(unsigned char* s, int h) {
 				return s;
 		} else if(c <= 0x7F)
 			s += c;
-		if(c == 0x80 || c==0xA0)
+		if(c == 0x80 || c == 0xA0)
 			s++; // Shadow index or Transparent index count in source
 	}
 }
