@@ -154,45 +154,27 @@ static void add_critical(stringbuilder& sb, int critical, int multiplier, unsign
 	sb.addn(getnm(critical == 20 ? "CriticalHitLine20" : "CriticalHitLine"), critical, multiplier);
 }
 
-//static void addh(stringbuilder& sb, const char* format, ...) {
-//	if(!format)
-//		return;
-//	XVA_FORMAT(format);
-//	sb.addn("**[");
-//	sb.addv(format, format_param);
-//	sb.add("]**");
-//}
-
-static void addend(stringbuilder& sb) {
-	sb.addn("\n");
-}
-
 static void addclasses(stringbuilder& sb, const classa& source) {
 	auto level = source.getlevel();
 	if(!level)
 		return;
-	sb.add("###%1 %2i", getnm("CharacterLevel"), level);
+	sb.addn("###"); sb.add(getnm("CharacterLevel"), level);
 	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1))
 		addb(sb, bsdata<classi>::elements[i].id, source.classes[i]);
-	addend(sb);
 }
 
 static void player_information(stringbuilder& sb) {
 	addclasses(sb, *player);
 	addh(sb, "CharacterRace");
 	sb.addn("%1 %2", bsdata<racei>::elements[player->race].getname(), getnm(bsdata<genderi>::elements[player->gender].id));
-	addend(sb);
 	addh(sb, "Alignment");
 	sb.addn(bsdata<alignmenti>::elements[player->alignment].getname());
-	addend(sb);
 	addh(sb, "Experience");
 	addb(sb, "Current", player->experience, 0, false);
 	addb(sb, "NextLevel", player->getnextlevel(), 0, false);
-	addend(sb);
 	addh(sb, "SavingThrows");
 	for(auto i = Fortitude; i <= Will; i = (abilityn)(i + 1))
 		addb(sb, i, player->get(i), false);
-	addend(sb);
 	addh(sb, "AbilityStatistic");
 	addv(sb, "WeightAllowance", getkg(player->allowed_weight));
 }
@@ -205,7 +187,6 @@ static void player_skill_information(stringbuilder& sb) {
 		if(raw_level > 0)
 			sb.addn("%1%+2i", bsdata<skilli>::elements[i].getname(), level);
 	}
-	addend(sb);
 	addh(sb, "Feats");
 	for(auto& e : bsdata<feati>()) {
 		if(!e.is(GeneralFeat))
@@ -217,7 +198,6 @@ static void player_skill_information(stringbuilder& sb) {
 			sb.addn(bsdata<feati>::elements[n].getname());
 		}
 	}
-	addend(sb);
 }
 
 static void item_name(stringbuilder& sb) {
