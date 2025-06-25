@@ -90,6 +90,7 @@
     <ClCompile Include="entrance.cpp" />
     <ClCompile Include="feat.cpp" />
     <ClCompile Include="floattext.cpp" />
+    <ClCompile Include="font_util.cpp" />
     <ClCompile Include="formation.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gender.cpp" />

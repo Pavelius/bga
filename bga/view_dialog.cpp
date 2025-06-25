@@ -1580,10 +1580,11 @@ static void paint_main_menu() {
 	setdialog(567, 344); button(GBTNMED2, 1, 2, 'J', "JoinGame", 3, false);
 	setdialog(567, 396); button(GBTNMED2, 5, 6, 'O', "Options");
 	setdialog(567, 428); button(GBTNMED2, 9, 10, KeyEscape, "QuitGame"); fire(confirm_quit_game);
+	input_debug();
 }
 
 void open_main_menu() {
-	play_music("THEMEA");
+	// play_music("THEMEA");
 	scene(paint_main_menu);
 }
 

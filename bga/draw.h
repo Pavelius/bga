@@ -65,7 +65,7 @@ struct pma {
 	const char*			getstring(int id) const;
 };
 struct sprite : pma {
-	enum encodes { Auto, RAW, RLE, ALC, RAW8, RLE8, ALC8 };
+	enum encodes { Auto, RAW, RLE, ALC, RAW8, RLE8, ALC8, ALC1};
 	struct frame {
 		short 			sx, sy;
 		short			ox, oy;
@@ -266,7 +266,6 @@ int						texth(const char* string, int width);
 int						textw(int sym);
 int						textw(const char* string, int count = -1);
 int						textw(rect& rc, const char* string);
-int						textw(const sprite* font);
 void					tipspos();
 void					updatewindow();
 void					write(const char* url, unsigned char* bits, int width, int height, int bpp, int scanline, color* pallette);

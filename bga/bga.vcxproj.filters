@@ -461,6 +461,9 @@
     <ClCompile Include="playlist.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="font_util.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">

@@ -549,7 +549,15 @@ typedef void(CALLBACK *PIMAGE_TLS_CALLBACK)(void* DllHandle, unsigned long Reaso
 #define FF_SCRIPT		64
 #define FF_SWISS		32
 
-#define GGO_GRAY8_BITMAP	6
+#define GGO_METRICS        0
+#define GGO_BITMAP         1
+#define GGO_NATIVE         2
+#define GGO_BEZIER         3
+
+#define  GGO_GRAY2_BITMAP  4
+#define  GGO_GRAY4_BITMAP  5
+#define  GGO_GRAY8_BITMAP  6
+#define  GGO_GLYPH_INDEX   0x0080
 
 #define INT_MIN     (-2147483647 - 1) // minimum (signed) int value
 

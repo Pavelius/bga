@@ -589,6 +589,59 @@ static void alc832(unsigned char* p1, int d1, unsigned char* s, int h, const uns
 	}
 }
 
+static void alc132(unsigned char* p1, int d1, unsigned char* s, int h, const unsigned char* s1, const unsigned char* s2, unsigned char alpha) {
+	const int cbd = 32 / 8;
+	unsigned char* d = p1;
+	if(!alpha)
+		return;
+	auto fr = fore.b;
+	auto fg = fore.g;
+	auto fb = fore.r;
+	while(true) {
+		unsigned char c = *s++;
+		if(c == 0xFF) {
+			p1 += d1;
+			s1 += d1;
+			s2 += d1;
+			if(--h == 0)
+				break;
+			d = p1;
+			continue; // New line
+		}
+		d += c * cbd; // Skip c bytes
+		c = *s++;
+		if(c == 0) {
+			// Skip visible part
+			continue;
+		} else if(d >= s2 || (d + c * cbd) <= s1) {
+			d += c * cbd; // Total invisible
+			continue;
+		} else if(d < s1) {
+			auto n = (s1 - d) / cbd;
+			c -= n;
+			d += n * cbd;
+		} else if(d + c * cbd > s2)
+			c = (s2 - d) / cbd;
+		if(alpha >= 255) {
+			while(c) {
+				d[0] = fr;
+				d[1] = fg;
+				d[2] = fb;
+				d += cbd;
+				c--;
+			}
+		} else {
+			while(c) {
+				d[0] = (((int)d[0] * (255 - alpha)) + ((fr) * (alpha))) >> 8;
+				d[1] = (((int)d[1] * (255 - alpha)) + ((fg) * (alpha))) >> 8;
+				d[2] = (((int)d[2] * (255 - alpha)) + ((fb) * (alpha))) >> 8;
+				d += cbd;
+				c--;
+			}
+		}
+	}
+}
+
 static void rle832m(unsigned char* p1, int d1, unsigned char* s, int h, const unsigned char* s1, const unsigned char* s2, unsigned char alpha, const color* pallette) {
 	const int cbd = 32 / 8;
 	unsigned char* d = p1;
@@ -1491,14 +1544,14 @@ int draw::textw(const char* string, int count) {
 	if(!font)
 		return 0;
 	auto x1 = 0;
-	auto s1 = string;
+	auto s1 = (unsigned char*)string;
 	if(count == -1) {
 		while(*s1)
-			x1 += textw(szget(&s1));
+			x1 += textw(*s1++);
 	} else {
-		auto s2 = string + count;
+		auto s2 = (unsigned char*)string + count;
 		while(s1 < s2)
-			x1 += textw(szget(&s1));
+			x1 += textw(*s1++);
 	}
 	return x1;
 }
@@ -1511,12 +1564,12 @@ void draw::text(const char* string, int count, unsigned flags) {
 		return;
 	if(count == -1)
 		count = zlen(string);
-	const char *s1 = string;
-	const char *s2 = string + count;
+	auto* s1 = (unsigned char*)string;
+	auto* s2 = (unsigned char*)string + count;
 	auto push_caret = caret;
 	unsigned char s0 = 0x0;
 	while(s1 < s2) {
-		int sm = szget(&s1);
+		int sm = *s1++;
 		if(sm >= 0x21)
 			glyph(sm, flags);
 		caret.x += textw(sm);
@@ -1535,16 +1588,16 @@ int draw::textbc(const char* string, int width) {
 		return 0;
 	int p = -1;
 	int w = 0;
-	const char* s1 = string;
+	auto* s1 = (unsigned char*)string;
 	while(true) {
-		unsigned s = szget(&s1);
+		unsigned s = *s1++;
 		if(s == 0x20 || s == 9)
-			p = s1 - string;
+			p = s1 - (unsigned char*)string;
 		else if(s == 0) {
-			p = s1 - string - 1;
+			p = s1 - (unsigned char*)string - 1;
 			break;
 		} else if(s == 10 || s == 13) {
-			p = s1 - string;
+			p = s1 - (unsigned char*)string;
 			break;
 		}
 		w += textw(s);
@@ -1552,7 +1605,7 @@ int draw::textbc(const char* string, int width) {
 			break;
 	}
 	if(p == -1)
-		p = s1 - string;
+		p = s1 - (unsigned char*)string;
 	return p;
 }
 
@@ -1678,13 +1731,14 @@ int	draw::texte(rect rc, const char* string, unsigned state, int p1, int p2) {
 	return y1 - rc.y1;
 }
 
-int draw::hittest(int x, int hit_x, const char* p, int lenght) {
+int draw::hittest(int x, int hit_x, const char* string, int lenght) {
 	if(hit_x < x)
 		return -2;
 	int index = 0;
 	int syw = 0;
+	auto s1 = (unsigned char*)string;
 	while(index < lenght) {
-		syw = draw::textw(szget(&p));
+		syw = textw(*s1++);
 		if(hit_x <= x + 1 + syw / 2)
 			break;
 		x += syw;
@@ -1889,6 +1943,14 @@ void draw::image(int x, int y, const sprite* e, int id, int flags) {
 		if(flags & ImageMirrorH) {
 		} else
 			alc832(ptr(x, sy), wd, s, y2 - y,
+				ptr(clipping.x1, sy),
+				ptr(clipping.x2, sy),
+				alpha);
+		break;
+	case sprite::ALC1:
+		if(flags & ImageMirrorH) {
+		} else
+			alc132(ptr(x, sy), wd, s, y2 - y,
 				ptr(clipping.x1, sy),
 				ptr(clipping.x2, sy),
 				alpha);

@@ -7,6 +7,9 @@ using namespace draw;
 
 #ifdef _DEBUG
 
+const int glyph_start = 32;
+const int glyph_count = 256 - glyph_start;
+
 void util_items_list();
 
 static void count_colors_rle832(unsigned* colors, unsigned char* s, int h) {
@@ -43,6 +46,68 @@ static void count_colors(sprite* p) {
 			continue;
 		count_colors_rle832(colors, (unsigned char*)p->ptr(f.offset), f.sy);
 	}
+}
+
+static void paint_glyph(unsigned char n) {
+	if(n <= glyph_start)
+		return;
+	pushfore push_fore;
+	auto g = n - glyph_start;
+	auto& f = font->get(g);
+	fore = push_fore.fore;
+	image(font, g, 0);
+	// fore = push_fore.fore.mix(fore_stroke, 128);
+	// image(font, g + glyph_count * 1, 0);
+	// fore = fore_stroke;
+	// image(font, g + glyph_count * 2, 0);
+	// fore = push_fore.fore.mix(fore_stroke, 64);
+	// image(font, g + glyph_count * 3, 0);
+}
+
+static int get_glyph_width(unsigned char n) {
+	if(n <= glyph_start)
+		n = 'l';
+	auto widths = (short*)font->ptr(font->size - glyph_count * 2);
+	return widths[n - glyph_start];
+}
+
+static void test_text(const char* p) {
+	pushfont push_font(gres(TEST));
+	while(*p) {
+		auto symbol = *((unsigned char*)p);
+		paint_glyph(symbol);
+		caret.x += get_glyph_width(symbol);
+		p++;
+	}
+}
+
+static void paint_test_table() {
+	pushrect push;
+	pushfont push_font(gres(TEST));
+	const int dx = 20;
+	const int dy = 20;
+	paint_game_dialog(GUICHP);
+	for(auto y = 0; y < 16; y++) {
+		for(auto x = 0; x < 16; x++) {
+			caret.x = 100 + x * dx;
+			caret.y = 100 + y * dy;
+			auto n = (unsigned char)(y * 16 + x);
+			paint_glyph(n);
+		}
+	}
+}
+
+static void paint_test_text() {
+	paint_game_dialog(GUICHP);
+	caret.x = 100;
+	caret.y = 100;
+	test_text("Test string to output");
+	caret.x = 100;
+	caret.y = 120;
+	test_text("А вот это строка на русском языке. Ее много и так.");
+	caret.x = 100;
+	caret.y = 140;
+	test_text("А ось ця строка на українській мові. Її і так багато і не дуже.");
 }
 
 static void paint_chapter() {
@@ -90,7 +155,7 @@ static void test_battle_stance() {
 }
 
 static void test_animation_hit() {
-	if(player==party[0])
+	if(player == party[0])
 		player->animateattack(party[1]);
 	else
 		player->animateattack(party[0]);
@@ -106,7 +171,7 @@ void input_debug() {
 	case 'Q': execute(test_animation_hit_drop); break;
 	case 'W': execute(test_battle_stance); break;
 	case Ctrl + 'D': execute(open_store); break;
-	case Ctrl + 'C': execute(open_dialog, 1, 0, paint_word_map); break;
+	case Ctrl + 'C': execute(open_scene, 0, 0, paint_test_text); break;
 	case Ctrl + 'I': execute(open_scene, 0, 0, util_items_list); break;
 	default: break;
 	}
