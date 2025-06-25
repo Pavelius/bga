@@ -22,6 +22,9 @@ bool playlist_play(const char* id, const char* folder, playlistn value) {
 	auto p = find_playlist(id, folder);
 	if(!p)
 		return false;
-	play_music(p->music[value]);
+	if(equal(p->music[value], "STOP"))
+		play_music(0);
+	else
+		play_music(p->music[value]);
 	return true;
 }

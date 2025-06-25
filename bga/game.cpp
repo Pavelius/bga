@@ -74,7 +74,6 @@ void enter(const char* id, const char* location) {
 	audio_reset();
 	read_area(id, "ID2");
 	read_area(id);
-	play_music_raw(0);
 	playlist_play(id, "ID2", PlayDay);
 #ifdef _DEBUG
 	print("Count of points %1i", bsdata<point>::source.count);
