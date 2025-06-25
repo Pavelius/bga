@@ -23,6 +23,25 @@ static int heavy_load[] = {
 	400, 460, 520, 600, 700, 800, 920, 1040, 1200, 1400
 };
 
+static int get_base_save(int level, abilityn save, unsigned good_saves) {
+	if(!level)
+		return 0;
+	else if(FGT(good_saves, save))
+		return (level + 4) / 2;
+	else if(level > 2)
+		return (level - 1) / 2;
+	else
+		return 0;
+}
+
+static int get_base_attack(int level, int attack_type) {
+	switch(attack_type) {
+	case 1: return level;
+	case 2: return level / 2;
+	default: return level / 3;
+	}
+}
+
 void clear_selection() {
 	memset(party_selected, 0, sizeof(party_selected));
 }
@@ -102,12 +121,20 @@ static short unsigned random_portrait_no_party(gendern gender) {
 
 void raise_class(classn classv) {
 	variant v = bsdata<classi>::elements + classv;
-	player->classes[classv] = player->classes[classv] + 1;
+	auto prev_level = player->classes[classv];
+	player->classes[classv] += 1;
+	auto level = player->classes[classv];
+	v.counter = level;
 	apply_advance(v, player->classes[classv]);
+	auto& ei = bsdata<classi>::elements[classv];
 	if(player->getlevel() == 1 && ischaracter(classv))
-		player->basic.abilities[HitPoints] += bsdata<classi>::elements[classv].hit_points;
+		player->basic.abilities[HitPoints] += ei.hit_points;
 	else
-		player->basic.abilities[HitPoints] += xrand(1, bsdata<classi>::elements[classv].hit_points);
+		player->basic.abilities[HitPoints] += xrand(1, ei.hit_points);
+	player->basic.abilities[Attack] += get_base_attack(level, ei.attack) - get_base_attack(prev_level, ei.attack);
+	player->basic.abilities[Fortitude] += get_base_save(level, Fortitude, ei.saves) - get_base_save(prev_level, Fortitude, ei.saves);
+	player->basic.abilities[Reflexes] += get_base_save(level, Reflexes, ei.saves) - get_base_save(prev_level, Reflexes, ei.saves);
+	player->basic.abilities[Will] += get_base_save(level, Will, ei.saves) - get_base_save(prev_level, Will, ei.saves);
 }
 
 void raise_race(racen race) {
@@ -297,6 +324,10 @@ void creature::update_abilities() {
 	abilities[AC] += 10;
 	abilities[AC] += abilities[DodgeBonus];
 	abilities[AC] += abilities[ArmorBonus];
+	// Saves
+	abilities[Fortitude] += getbonus(Constitution);
+	abilities[Reflexes] += getbonus(Dexterity);
+	abilities[Will] += getbonus(Wisdow);
 	// Hit points
 	hp_max = get(HitPoints) + level * getbonus(Constitution);
 	if(hp_max < level)

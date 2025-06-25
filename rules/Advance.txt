@@ -20,8 +20,6 @@ Fighter+1 WeaponProficiency
   MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponSword MartialWeaponPolearm
 Fighter+1 ArmorProficiency
  elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
-Fighter+1 SavingThrows
- elements Fortitude+2
 Fighter+1 Special
  elements BonusFighterFeat
 
@@ -30,26 +28,18 @@ Rogue+1 WeaponProficiency
   MartialWeaponBow MartialWeaponSword MartialWeaponPolearm
 Rogue+1 ArmorProficiency
  elements ArmorProficiencyLight
-Rogue+1 SavingThrows
- elements Reflexes+2
 
 Cleric+1 WeaponProficiency
  elements SimpleWeaponMace SimpleWeaponStaff\
   MartialWeaponFlail MartialWeaponHammer
 Cleric+1 ArmorProficiency
  elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
-Cleric+1 SavingThrows
- elements Fortitude+2 Will+2
 
 Wizard+1 WeaponProficiency
  elements SimpleWeaponMissile SimpleWeaponStaff SimpleWeaponDagger
-Wizard+1 SavingThrows
- elements Will+2
 
 Paladin+1 WeaponProficiency
  elements SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
   MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponSword MartialWeaponPolearm
 Paladin+1 ArmorProficiency
  elements ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
-Paladin+1 SavingThrows
- elements Fortitude+2

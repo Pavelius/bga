@@ -29,11 +29,6 @@ template<> void ftscript<feati>(int value, int counter) {
 	}
 }
 
-static void attack_change(int bonus) {
-	ftscript<abilityi>(AttackMelee, bonus);
-	ftscript<abilityi>(AttackRanged, bonus);
-}
-
 static void damage_change(int bonus) {
 	ftscript<abilityi>(DamageMelee, bonus);
 	ftscript<abilityi>(DamageRanged, bonus);
@@ -63,7 +58,6 @@ BSDATA(conditioni) = {
 };
 BSDATAF(conditioni)
 BSDATA(script) = {
-	{"Attack", attack_change},
 	{"Damage", damage_change},
 	{"Heal", heal},
 };

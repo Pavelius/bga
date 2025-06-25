@@ -9,7 +9,9 @@ void draw::glyph(int n, unsigned flags) {
 	pushfore push;
 	image(font, n - glyph_start, 0);
 	fore = fore_stroke; fore.a = 128;
-	image(font, n - glyph_start + glyph_count, 0);
+	image(font, n - glyph_start + glyph_count * 1, 0);
+	fore.a = 96;
+	image(font, n - glyph_start + glyph_count * 2, 0);
 }
 
 int draw::textw(int n) {

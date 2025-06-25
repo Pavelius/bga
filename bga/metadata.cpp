@@ -90,10 +90,11 @@ BSMETA(calendari) = {
 	{}};
 BSMETA(classi) = {
 	BSREQ(id),
-	BSREQ(hit_points), BSREQ(skill_points),
+	BSREQ(hit_points), BSREQ(skill_points), BSREQ(attack),
 	BSENM(cast, abilityi),
 	BSFLG(skills, skilli),
 	BSFLG(alignment, alignmenti),
+	BSFLG(saves, abilityi),
 	{}};
 BSMETA(color) = {
 	BSREQ(r), BSREQ(g), BSREQ(b),

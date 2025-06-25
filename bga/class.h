@@ -11,12 +11,13 @@ enum classn : unsigned char {
 };
 struct classi : nameable {
 	int			player;
-	int			hit_points, skill_points;
-	unsigned	skills, alignment;
+	int			hit_points, skill_points, attack;
+	unsigned	skills, alignment, saves;
 	abilityn	cast;
 	classn		getindex() const;
 	bool		is(alignmentn v) const { return (alignment & (1 << v)) != 0; }
 	bool		is(skilln v) const { return (skills & (1 << v)) != 0; }
+	bool		is(abilityn v) const { return (saves & (1 << v)) != 0; }
 };
 struct classa {
 	char		classes[Wizard + 1];

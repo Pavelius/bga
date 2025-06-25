@@ -18,6 +18,7 @@ BSDATA(abilityi) = {
 	{"DodgeBonus", 0, format_bonus},
 	{"ArmorCheckPenalty", 0, format_bonus},
 	{"SpellFailure", 0, format_percent},
+	{"Attack", 0, format_bonus},
 	{"AttackMelee", 0, format_bonus},
 	{"AttackRanged", 0, format_bonus},
 	{"DamageMelee", 0},

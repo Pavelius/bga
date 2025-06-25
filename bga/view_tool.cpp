@@ -48,42 +48,8 @@ static void count_colors(sprite* p) {
 	}
 }
 
-static void paint_glyph(unsigned char n) {
-	if(n <= glyph_start)
-		return;
-	pushfore push_fore;
-	auto g = n - glyph_start;
-	auto& f = font->get(g);
-	fore = push_fore.fore;
-	image(font, g, 0);
-	// fore = push_fore.fore.mix(fore_stroke, 128);
-	// image(font, g + glyph_count * 1, 0);
-	// fore = fore_stroke;
-	// image(font, g + glyph_count * 2, 0);
-	// fore = push_fore.fore.mix(fore_stroke, 64);
-	// image(font, g + glyph_count * 3, 0);
-}
-
-static int get_glyph_width(unsigned char n) {
-	if(n <= glyph_start)
-		n = 'l';
-	auto widths = (short*)font->ptr(font->size - glyph_count * 2);
-	return widths[n - glyph_start];
-}
-
-static void test_text(const char* p) {
-	pushfont push_font(gres(TEST));
-	while(*p) {
-		auto symbol = *((unsigned char*)p);
-		paint_glyph(symbol);
-		caret.x += get_glyph_width(symbol);
-		p++;
-	}
-}
-
 static void paint_test_table() {
 	pushrect push;
-	pushfont push_font(gres(TEST));
 	const int dx = 20;
 	const int dy = 20;
 	paint_game_dialog(GUICHP);
@@ -92,22 +58,9 @@ static void paint_test_table() {
 			caret.x = 100 + x * dx;
 			caret.y = 100 + y * dy;
 			auto n = (unsigned char)(y * 16 + x);
-			paint_glyph(n);
+			glyph(n, 0);
 		}
 	}
-}
-
-static void paint_test_text() {
-	paint_game_dialog(GUICHP);
-	caret.x = 100;
-	caret.y = 100;
-	test_text("Test string to output");
-	caret.x = 100;
-	caret.y = 120;
-	test_text("А вот это строка на русском языке. Ее много и так.");
-	caret.x = 100;
-	caret.y = 140;
-	test_text("А ось ця строка на українській мові. Її і так багато і не дуже.");
 }
 
 static void paint_chapter() {
@@ -171,7 +124,7 @@ void input_debug() {
 	case 'Q': execute(test_animation_hit_drop); break;
 	case 'W': execute(test_battle_stance); break;
 	case Ctrl + 'D': execute(open_store); break;
-	case Ctrl + 'C': execute(open_scene, 0, 0, paint_test_text); break;
+	case Ctrl + 'C': execute(open_scene, 0, 0, paint_test_table); break;
 	case Ctrl + 'I': execute(open_scene, 0, 0, util_items_list); break;
 	default: break;
 	}

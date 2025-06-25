@@ -1,25 +1,36 @@
 #Class
 
-Barbarian
+Barbarian attack(1)
  alignment NeutralGood ChaoticGood TrueNeutral ChaoticNeutral NeutralEvil ChaoticEvil
+ saves Fortitude
 Cleric cast(Wisdow)
  skills Alchemy Concentration Diplomacy KnowledgeArcana Spellcraft
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
-Fighter
+ saves Fortitude Will
+Fighter attack(1)
  skills CraftWeapon Intimidate WildernessLore
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
-Paladin
+ saves Fortitude
+Paladin attack(1)
  skills CraftWeapon Concentration Diplomacy
  alignment LawfulGood
-Ranger
+ saves Fortitude
+Ranger attack(1)
  skills AnimalEmpathy Concentration Hide MoveSilently Search
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
+ saves Fortitude
 Rogue
  skills Bluff DisableDevice Hide Intimidate MoveSilently OpenLock PickPocket Search UseMagicDevice
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
-Sorcerer cast(Charisma)
+ saves Reflexes
+Sorcerer cast(Charisma) attack(2)
  skills Alchemy Concentration KnowledgeArcana Spellcraft
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
-Wizard cast(Intellegence)
+ saves Will
+Wizard cast(Intellegence) attack(2)
  skills Alchemy Concentration KnowledgeArcana Spellcraft
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
+ saves Will
+
+Warrior attack(1)
+ saves Fortitude

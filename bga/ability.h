@@ -7,7 +7,7 @@
 enum abilityn : unsigned char {
 	Strenght, Dexterity, Constitution, Intelligence, Wisdow, Charisma,
 	AC, ArmorBonus, DodgeBonus, ArmorCheckPenalty, SpellFailure,
-	AttackMelee, AttackRanged, DamageMelee, DamageRanged,
+	Attack, AttackMelee, AttackRanged, DamageMelee, DamageRanged,
 	Fortitude, Reflexes, Will,
 	SaveVsCharm, SaveVsIllusion, SaveVsFear, SaveVsPoison, SaveVsSpells,
 	WeightAllowance,
