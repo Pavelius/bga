@@ -325,6 +325,10 @@ void creature::update_abilities() {
 	abilities[AC] += 10;
 	abilities[AC] += abilities[DodgeBonus];
 	abilities[AC] += abilities[ArmorBonus];
+	// Attacks
+	abilities[AttackMelee] += getbonus(Strenght);
+	abilities[DamageMelee] += getbonus(Strenght);
+	abilities[AttackRanged] += getbonus(Dexterity);
 	// Saves
 	abilities[Fortitude] += getbonus(Constitution);
 	abilities[Reflexes] += getbonus(Dexterity);
@@ -496,4 +500,19 @@ bool creature::isallow(featn v) const {
 	if(basic.is(v))
 		return true;
 	return is_allow(const_cast<creature*>(this), bsdata<feati>::elements[v].require);
+}
+
+void creature::getattack(weaponi& result, const item& weapon) const {
+	if(weapon)
+		result = weapon.geti().weapon;
+	else {
+		result.clear();
+		result.damage.c = 1;
+		result.damage.d = 2;
+	}
+	if(true) { // Melee attack
+		result.damage.b += get(DamageMelee);
+		result.bonus += get(Attack);
+		result.bonus += get(AttackMelee);
+	}
 }

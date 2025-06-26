@@ -22,11 +22,14 @@ FocusMaces: Фокус на булаве
 FocusPolearm: Фокус на копье
 FocusShooting: Фокус на луках
 FocusSwords: Фокус на мечах
+FocusGreatSwords: Фокус на двуручных мечах
 
 ShieldProficiency: Владение щитом
 
 Alertness: Бдительность
 BlindFight: Сражение вслепую
+BlindFightInfo: Вы обучены сражаться вслепую, когда не имеете возможности видеть вашего врага.
+BlindFightBenefit: Можете перебросить неудачный процентный шанс промаха при частичном сокрытии цели. Невидимые существа не получают бонусов попадания по вам.
 Cleave: Рассечение
 CombatCasting: Боевые заклинания
 CombatExpertise: Боевой опыт

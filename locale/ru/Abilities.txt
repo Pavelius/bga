@@ -18,6 +18,8 @@ Intellegence: Интеллект
 Wisdow: Мудрость
 Charisma: Харизма
 
+IntellegenceBonus: Бонус от интеллекта
+
 AC: КБ
 AttackMelee: Рукопашная
 AttackRanged: Дистанционная

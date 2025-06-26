@@ -19,6 +19,7 @@ Autosave: Автоматическое сохранение
 Back: Назад
 BasicAbility: Базовая способность
 BeginGame: Начать игру
+Benefit: Преемущество
 Biography: Биография
 Buy: Купить
 Cancel: Отмена
@@ -110,6 +111,7 @@ No: Нет
 Options: Опции
 Overwrite: Перезаписать
 PartyFormation: Создание партии
+PerLevel: На уровень
 PlaySound: Проиграть пример
 Proficiency: Владение
 ProficientArmor: Владение доспехами
@@ -140,6 +142,7 @@ SelectParty: Выбирайте партию
 SelectAllParty: Выбрать всю партию
 Sell: Продать
 SinglePlayer: Один игрок
+SkillPoints: Очки навыков
 SkillPointsLeft: Осталось очков навыков
 Skills: Навыки
 SkinColor: Цвет кожи
@@ -152,6 +155,7 @@ StartOver: Начать заново
 StartSkill: %+2i %-1
 Steal: Украсть
 Version: Версия
+WeaponStatistic: Статистика оружия
 Weight: Вес
 WeightAllowance: Максимальный переносимый вес
 Yes: Да

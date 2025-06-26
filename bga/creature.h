@@ -18,6 +18,7 @@ struct creature : actor, avatarable, spellv {
 	explicit operator bool() const { return hp > 0; }
 	void			select();
 	void			clear();
+	void			getattack(weaponi& result, const item& weapon) const;
 	short unsigned	getindex() const;
 	const char*		getname() const { return name; }
 	int				getspellslots(classn type, int spell_level) const;

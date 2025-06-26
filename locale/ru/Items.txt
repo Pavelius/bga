@@ -1,3 +1,5 @@
+UnarmedStrike: Удар кулаком
+
 Item: Предмет
 Items: Предметы
 NoItem: Нет предмета

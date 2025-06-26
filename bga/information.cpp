@@ -105,7 +105,14 @@ static void add_description(stringbuilder& sb, const char* id, const char* id_ba
 	if(!pn)
 		return;
 	sb.addn(pn);
-	sb.add("\n\n");
+}
+
+static void add_special(stringbuilder& sb, const char* id, const char* id_special) {
+	auto pn = getnme(ids(id, id_special));
+	if(!pn)
+		return;
+	addh(sb, id_special);
+	sb.addn(pn);
 }
 
 const char* getkg(int weight) {
@@ -127,13 +134,17 @@ static void add_db(stringbuilder& sb, const char* id, int value) {
 	addb(sb, id, value, "%+1i");
 }
 
+static void addv(stringbuilder& sb, const dice& value) {
+	sb.adds("%1id%2i", value.c, value.d);
+	if(value.b)
+		sb.add("%+1i", value.b);
+}
+
 static void addd(stringbuilder& sb, const char* id, const dice& value) {
 	if(!value)
 		return;
 	sb.addn("%1:", getnm(id));
-	sb.adds("%1id%2i", value.c, value.d);
-	if(value.b)
-		sb.add("%+1i", value.b);
+	addv(sb, value);
 }
 
 static void addv(stringbuilder& sb, const dice& value, damagen type) {
@@ -177,6 +188,28 @@ static void player_information(stringbuilder& sb) {
 		addb(sb, i, player->get(i), false);
 	addh(sb, "AbilityStatistic");
 	addv(sb, "WeightAllowance", getkg(player->allowed_weight));
+}
+
+static void add_attack_info(stringbuilder& sb, const item& weapon, int attack_bonus) {
+	weaponi info; player->getattack(info, weapon);
+	info.bonus += attack_bonus;
+	sb.addn("- %AttackMelee %+1i", info.bonus);
+	sb.adds("("); addv(sb, info.damage); sb.addv(")", 0);
+}
+
+static void player_combat_information(stringbuilder& sb) {
+	addh(sb, "WeaponStatistic");
+	for(auto i = 0; i < 4; i++) {
+		auto weapon = player->wears[QuickWeapon + i * 2];
+		auto offhand = player->wears[QuickOffhand + i * 2];
+		if(i > 0 && !weapon)
+			continue;
+		if(weapon)
+			sb.addn(weapon.getname());
+		else
+			sb.addn("%UnarmedStrike");
+		add_attack_info(sb, weapon, 0);
+	}
 }
 
 static void player_skill_information(stringbuilder& sb) {
@@ -355,6 +388,25 @@ static void add_advantage(stringbuilder& sb, variant v) {
 		sb.addn(getnm(bsdata<script>::elements[v.value].id));
 }
 
+static void add_value(stringbuilder& sb, variant v) {
+	if(v.iskind<abilityi>())
+		sb.addn("%1 %2i", bsdata<abilityi>::elements[v.value].getname(), v.counter);
+	else if(v.iskind<skilli>())
+		sb.addn("%1 %+2i", bsdata<skilli>::elements[v.value].getname(), v.counter);
+	else if(v.iskind<feati>())
+		sb.addn(bsdata<feati>::elements[v.value].getname());
+	else if(v.iskind<script>())
+		sb.addn(getnm(bsdata<script>::elements[v.value].id));
+}
+
+static void add_value(stringbuilder& sb, const char* id, variants source) {
+	if(!source)
+		return;
+	addh(sb, id);
+	for(auto v : source)
+		add_value(sb, v);
+}
+
 static void add_advantages(stringbuilder& sb, variant parent) {
 	for(auto& e : bsdata<advancei>()) {
 		if(e.parent != parent)
@@ -364,7 +416,9 @@ static void add_advantages(stringbuilder& sb, variant parent) {
 	}
 }
 
-static void add_race_info(stringbuilder& sb, racei* p) {
+template<> void ftinfo<racei>(const void* object, stringbuilder& sb) {
+	auto p = (racei*)object;
+	add_description(sb, p->id);
 	addh(sb, "Description");
 	if(p->favor)
 		addv<classi>(sb, "FavorClass", p->favor);
@@ -373,27 +427,43 @@ static void add_race_info(stringbuilder& sb, racei* p) {
 	add_advantages(sb, p);
 }
 
-static void add_class_info(stringbuilder& sb, classi* p) {
+template<> void ftinfo<classi>(const void* object, stringbuilder& sb) {
+	auto p = (classi*)object;
+	add_description(sb, p->id);
+	addh(sb, "HitPoints"); sb.addn("+1d%1i %-PerLevel", p->hit_points);
+	addh(sb, "SkillPoints"); sb.addn("%1i+%-IntellegenceBonus %-PerLevel", p->skill_points);
 	adds(sb, bsdata<alignmenti>::source, "Alignment", p->alignment, 0, 8);
 	adds(sb, bsdata<feati>::source, "ProficientWeapon", p->proficient, SimpleWeaponMace, MartialWeaponPolearm);
 	adds(sb, bsdata<feati>::source, "ProficientArmor", p->proficient, ArmorProficiencyLight, ShieldProficiency);
 }
 
+template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
+	auto p = (skilli*)object;
+	add_description(sb, p->id);
+	sb.add("\n\n");
+	addv<abilityi>(sb, "BasicAbility", p->ability);
+	// sb.add("%BasicAbility: %1", bsdata<abilityi>::elements[p->ability].getname());
+}
+
+template<> void ftinfo<feati>(const void* object, stringbuilder& sb) {
+	auto p = (feati*)object;
+	add_description(sb, p->id);
+	add_special(sb, p->id, "Benefit");
+	add_special(sb, p->id, "Normal");
+	add_value(sb, "Required", p->require);
+}
+
 static void answer_info(stringbuilder& sb) {
+	for(auto& e : bsdata<varianti>()) {
+		if(e.pstatus && e.source->have(current_answer)) {
+			e.pstatus(current_answer, sb);
+			return;
+		}
+	}
 	auto p = (nameable*)current_answer;
 	auto pn = getnme(ids(p->id, "Info"));
 	if(pn)
 		sb.addn(pn);
-	if(bsdata<racei>::have(p))
-		add_race_info(sb, (racei*)p);
-	else if(bsdata<classi>::have(p))
-		add_class_info(sb, (classi*)p);
-}
-
-template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
-	auto p = (skilli*)object;
-	add_description(sb, p->id);
-	sb.add("%BasicAbility: %1", bsdata<abilityi>::elements[p->ability].getname());
 }
 
 static bool creature_identifier(stringbuilder& sb, const char* identifier) {
@@ -441,6 +511,7 @@ BSDATA(stringvari) = {
 	{"PassedTime", passed_time},
 	{"RealTime", real_time},
 	{"PlayerInformation", player_information},
+	{"PlayerCombatInformation", player_combat_information},
 	{"PlayerSkillInformation", player_skill_information},
 	{"SpellInformation", spell_information},
 };

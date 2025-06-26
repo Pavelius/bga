@@ -211,6 +211,12 @@ static void tips_help_button(const char* id) {
 		set_description_id(id);
 }
 
+static void tips_help_button(nameable* p) {
+	if(!button_executed)
+		return;
+	set_description(p);
+}
+
 static void paint_choose_ability() {
 	auto ability_spent = get_ability_spend();
 	auto ability_left = ability_points_maximum - ability_spent;
@@ -261,6 +267,11 @@ static void change_feat() {
 	feat_points -= (char)v;
 }
 
+static void tips_click(const nameable* object) {
+	if(button_hilited && hot.key == MouseLeft && !hot.pressed)
+		set_description(object);
+}
+
 static void paint_skill_row(void* object) {
 	auto p = (skilli*)object;
 	auto n = p->getindex();
@@ -269,13 +280,16 @@ static void paint_skill_row(void* object) {
 	auto c = player->isclass(n) ? 1 : 2;
 	auto m = player->getmaxskill();
 	auto skill_points = player->basic.abilities[SkillPoints];
+	tips_click(p);
 	pushfore push_fore;
 	pushrect push; height = 28;
 	caret.x = push.caret.x + 206;
 	button(GBTNPLUS, b + 0, b + 1, 0, 0, b + 2, (v < before_skills_apply.basic.skills[n] + m) && skill_points >= c);
+	tips_help_button(p);
 	fire(change_skill, 1, n);
 	caret.x = push.caret.x + 224;
 	button(GBTNMINS, b + 0, b + 1, 0, 0, b + 2, v > before_skills_apply.basic.skills[n]);
+	tips_help_button(p);
 	fire(change_skill, -1, n);
 	caret.y += 2; height = 30;
 	if(player->isclass(n))
@@ -320,6 +334,7 @@ static void paint_feat_row(void* object) {
 	auto b = 3 * (bf % 3);
 	auto allow_plus = feat_points > 0 && uf && !player->is(uf) && player->isallow(uf);
 	auto allow_minus = pf && player->basic.is(pf) && !before_skills_apply.basic.is(pf);
+	tips_click(p);
 	pushrect push; height = 28;
 	caret.x = push.caret.x + 206;
 	button(GBTNPLUS, b + 0, b + 1, 0, 0, b + 2, allow_plus);

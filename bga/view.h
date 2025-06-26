@@ -4,6 +4,7 @@ typedef void (*fnevent)();
 typedef void (*fncommand)(void* object);
 
 struct item;
+struct nameable;
 
 enum resn : unsigned short;
 
@@ -64,6 +65,7 @@ void paint_worldmap_area();
 void paperdoll();
 void set_description();
 void set_description(const char* format);
+void set_description(const nameable* object);
 void set_description_id(const char* id);
 void setdialog(int x, int y);
 void setdialog(int x, int y, int w, int h);

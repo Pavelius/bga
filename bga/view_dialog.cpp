@@ -115,6 +115,20 @@ void set_description(const char* format) {
 	description_cash_size = -1;
 }
 
+void set_description(const nameable* object) {
+	description.clear();
+	description_cash_size = -1;
+	for(auto& e : bsdata<varianti>()) {
+		if(e.pstatus && e.source->have(object)) {
+			e.pstatus(object, description);
+			return;
+		}
+	}
+	auto pd = getnme(ids(object->id, "Info"));
+	if(pd)
+		description.add(pd);
+}
+
 void set_description_id(const char* id) {
 	auto pd = getnme(ids(id, "Info"));
 	if(pd)
@@ -1292,13 +1306,8 @@ static void paint_help() {
 	description.clear();
 	if(content && content.count > (size_t)current_content_list) {
 		auto p = content[current_content_list];
-		if(p) {
-			auto pv = find_variant(p);
-			if(pv && pv->pstatus)
-				pv->pstatus(p, description);
-			else
-				description.add(getnme(ids(p->id, "Info")));
-		}
+		if(p)
+			set_description(p);
 	}
 	setdialog(435, 72, 271, 286); paint_description(14, -2, 5);
 }
@@ -1312,7 +1321,8 @@ static void update_character() {
 	if(description_cash_size == -1) {
 		switch(character_info_mode) {
 		case 0: set_description("%PlayerInformation"); break;
-		case 1: set_description("%PlayerSkillInformation"); break;
+		case 1: set_description("%PlayerCombatInformation"); break;
+		case 2: set_description("%PlayerSkillInformation"); break;
 		}
 	}
 }

@@ -1,3 +1,2 @@
 ﻿Error in file `UnknownNames.txt`:
- Define translation for `AnyProficientArmor`
- Define translation for `AnyProficientWeapon`
+ Define translation for `Intelegence`
