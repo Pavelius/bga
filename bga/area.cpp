@@ -49,29 +49,29 @@ static const unsigned char orientations_7b7[49] = {
 	2, 1, 1, 0, 15, 15, 14,
 };
 
-int	areai::compare(const void* v1, const void* v2) {
-	return szcmp(((areai*)v1)->name, ((areai*)v2)->name);
+static void add_area_header(const char* url) {
+	io::file file(url, StreamRead);
+	if(!file)
+		return;
+	if(!archive_ard(file, false, false))
+		return;
+	auto p = bsdata<areai>::add();
+	p->id = szdup(area_name);
+	p->variables.setbegin();
+	bsdata<variable>::source.count += variable_count;
+	p->variables.setend();
 }
 
-areai* add_area(const char* name, const char* folder) {
-	auto p = find_area(name, folder);
-	if(!p) {
-		p = bsdata<areai>::add();
-		stringbuilder s1(p->name); s1.add(name); s1.upper();
-		stringbuilder s2(p->folder); s2.add(folder); s2.upper();
-		p->variables.setbegin();
-		bsdata<variable>::source.count += variable_count;
-		p->variables.setend();
+void initialize_area() {
+	for(io::file::find file("art/area"); file; file.next()) {
+		auto pn = file.name();
+		if(pn[0] == '.')
+			continue;
+		if(!szpmatch(pn, "*.ard"))
+			continue;
+		char temp[260];
+		add_area_header(file.fullname(temp));
 	}
-	return p;
-}
-
-areai* find_area(const char* name, const char* folder) {
-	for(auto& e : bsdata<areai>()) {
-		if(equal(e.name, name) && equal(e.folder, folder))
-			return &e;
-	}
-	return 0;
 }
 
 void clear_area() {
@@ -146,7 +146,6 @@ static void archive_bitmap(archive& e, unsigned char* output, int output_bpp, in
 static unsigned long get_area_signature() {
 	unsigned long n = 0;
 	unsigned long r = 0;
-	r += (++n) * sizeof(areai);
 	r += (++n) * sizeof(doortile);
 	r += (++n) * sizeof(door);
 	r += (++n) * sizeof(region);
@@ -157,7 +156,7 @@ static unsigned long get_area_signature() {
 	return r;
 }
 
-bool archive_ard(io::stream& file, bool writemode) {
+bool archive_ard(iostream& file, bool writemode, bool content) {
 	archive ar(file, writemode);
 	if(!ar.signature("ARD"))
 		return false;
@@ -168,19 +167,21 @@ bool archive_ard(io::stream& file, bool writemode) {
 	ar.set(area_height); area_height_tiles = (area_height * 12 + 15) / 16;
 	ar.set(area_name, 8);
 	ar.set(variable_count);
-	// Tile maps
-	archive_bitmap(ar, (unsigned char*)area_tiles, 16, 64 * sizeof(area_tiles[0]), area_width / 4, area_height_tiles / 4, 0);
-	archive_bitmap(ar, area_light, 8, 256, area_width, area_height, area_light_pallette);
-	archive_bitmap(ar, area_state, 8, 256, area_width, area_height, 0);
-	// Objects
-	ar.set(bsdata<point>::source);
-	ar.set(bsdata<doortile>::source);
-	ar.set(bsdata<door>::source);
-	ar.set(bsdata<region>::source);
-	ar.set(bsdata<container>::source);
-	ar.set(bsdata<entrance>::source);
-	ar.set(bsdata<animation>::source);
-	ar.set(bsdata<ambient>::source);
+	if(content) {
+		// Tile maps
+		archive_bitmap(ar, (unsigned char*)area_tiles, 16, 64 * sizeof(area_tiles[0]), area_width / 4, area_height_tiles / 4, 0);
+		archive_bitmap(ar, area_light, 8, 256, area_width, area_height, area_light_pallette);
+		archive_bitmap(ar, area_state, 8, 256, area_width, area_height, 0);
+		// Objects
+		ar.set(bsdata<point>::source);
+		ar.set(bsdata<doortile>::source);
+		ar.set(bsdata<door>::source);
+		ar.set(bsdata<region>::source);
+		ar.set(bsdata<container>::source);
+		ar.set(bsdata<entrance>::source);
+		ar.set(bsdata<animation>::source);
+		ar.set(bsdata<ambient>::source);
+	}
 	return true;
 }
 
@@ -206,7 +207,7 @@ static bool load_ard_file(const char* name) {
 	if(!file)
 		return false;
 	clear_area();
-	return archive_ard(file, false);
+	return archive_ard(file, false, true);
 }
 
 void read_area(const char* name) {
@@ -432,4 +433,11 @@ static bool is_passable(short unsigned i0, short unsigned i1, int size) {
 		}
 	}
 	return true;
+}
+
+variable* find_var(const char* area_id, size_t index) {
+	auto p = bsdata<areai>::find(area_id);
+	if(!p)
+		return 0;
+	return p->variables.begin() + index;
 }

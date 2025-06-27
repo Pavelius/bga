@@ -4,17 +4,9 @@
 
 worldmapi* current_world;
 
-static areai* find_area(const char* id) {
-	for(auto& e : bsdata<areai>()) {
-		if(equal(e.name, id) == 0)
-			return &e;
-	}
-	return 0;
-}
-
 worldmapi::area* get_party_world_area() {
 	for(auto& e : bsdata<worldmapi::area>()) {
-		auto pa = find_area(e.id);
+		auto pa = bsdata<areai>::find(e.id);
 		if(!pa)
 			continue;
 		if(getbsi(pa) == current_area)

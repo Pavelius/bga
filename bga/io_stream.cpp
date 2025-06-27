@@ -2,13 +2,13 @@
 #include "stringbuilder.h"
 #include "slice.h"
 
-io::stream& io::stream::operator<<(const int n) {
+iostream& iostream::operator<<(const int n) {
 	char temp[32]; stringbuilder sb(temp);
 	sb.add("%1i", n);
 	return *this << temp;
 }
 
-io::stream&	io::stream::operator<<(const char* t) {
+iostream& iostream::operator<<(const char* t) {
 	if(!t)
 		return *this;
 	// ѕриведем формат строки из стандартной кодировки
@@ -22,19 +22,19 @@ io::stream&	io::stream::operator<<(const char* t) {
 	return *this;
 }
 
-unsigned char io::stream::get() {
+unsigned char iostream::get() {
 	unsigned char r = 0;
 	read(&r, 1);
 	return r;
 }
 
-unsigned short io::stream::getLE16() {
+unsigned short iostream::getLE16() {
 	unsigned char u2 = get();
 	unsigned char u1 = get();
 	return (u2 << 8) | u1;
 }
 
-unsigned io::stream::getLE32() {
+unsigned iostream::getLE32() {
 	unsigned char u4 = get();
 	unsigned char u3 = get();
 	unsigned char u2 = get();

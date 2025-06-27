@@ -100,6 +100,7 @@ int main(int argc, char* argv[]) {
 	srand(getcputime());
 	// srand(923811);
 	stringbuilder::custom = main_identifier;
+	initialize_area();
 	read_rules();
 	read_options();
 #ifdef _DEBUG

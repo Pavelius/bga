@@ -158,7 +158,7 @@ BSMETA(periodi) = {
 	{}};
 BSMETA(playlisti) = {
 	BSREQ(id),
-	BSREQ(folder),
+	BSENM(type, playlistni),
 	BSREQ(music),
 	{}};
 BSMETA(playlistni) = {
@@ -224,6 +224,13 @@ BSMETA(storeti) = {
 BSMETA(stringvari) = {
 	BSREQ(id),
 	{}};
+BSMETA(variable) = {
+	BSREQ(lock_difficult),
+	BSREQ(trap_difficult),
+	BSREQ(counter),
+	BSREQ(stage),
+	BSREQ(flags),
+	{}};
 BSMETA(weaponi) = {
 	BSREQ(bonus),
 	BSENM(type, damagei),
@@ -267,7 +274,7 @@ BSDATA(varianti) = {
 	{"List", VAR(listi, 1)},
 	{"Modifier", VAR(modifieri, 1), 0, 0, ftscript<modifieri>},
 	{"NPC", VAR(npci, 1)},
-	{"Playlist", VAR(playlisti, 2)},
+	{"Playlist", VAR(playlisti, 3)},
 	{"Portrait", VAR(portraiti, 1)},
 	{"Race", VAR(racei, 1), ftinfo<racei>},
 	{"Rate", VAR(magici, 1)},
@@ -278,6 +285,7 @@ BSDATA(varianti) = {
 	{"Store", VAR(storei, 1)},
 	{"StringVar", VAR(stringvari, 1)},
 	{"Type", VAR(varianti, 1)},
+	{"Variable", VAR(variable, 0)},
 	{"WorldArea", VAR(worldmapi::area, 1)},
 	{"WorldLink", VAR(worldmapi::link, 3)},
 	{"WorldRealm", VAR(worldmapi, 1)},

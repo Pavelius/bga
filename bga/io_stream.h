@@ -8,11 +8,10 @@ enum stream_flags {
 };
 enum class codepage { No, W1251, UTF8, U16BE, U16LE };
 
-namespace io {
-// Abstract bi-stream interface
-struct stream {
-	stream&				operator<<(const char* t); // Post text string into stream data in correct coding.
-	stream&				operator<<(const int n); // Post number as string into stream data in correct coding.
+// Abstract bi-iostream interface
+struct iostream {
+	iostream&			operator<<(const char* t); // Post text string into iostream data in correct coding.
+	iostream&			operator<<(const int n); // Post number as string into iostream data in correct coding.
 	unsigned char		get();
 	unsigned short		getLE16();
 	unsigned			getLE32();
@@ -22,7 +21,9 @@ struct stream {
 	virtual int			write(const void* result, int count) = 0;
 	template<class T> void write(const T& e) { write(&e, sizeof(e)); }
 };
-struct file : stream {
+
+namespace io {
+struct file : iostream {
 	struct find {
 		find(const char* url);
 		~find();

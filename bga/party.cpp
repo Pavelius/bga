@@ -85,14 +85,11 @@ static int parse_number() {
 }
 
 static bool token(const char* id) {
-	if(p[0] != ':')
-		return false;
 	auto len = zlen(id);
 	if(memcmp(id, text_value, len) != 0)
 		return false;
 	if(text_value[len] != 0)
 		return false;
-	p = skipsp(p + 1);
 	return true;
 }
 
@@ -144,6 +141,8 @@ static void parse_stats(partyi::character& e) {
 		}
 		sb.clear();
 		p = skipsp(sb.psidf(p));
+		if(*p == ':')
+			p = skipsp(p + 1);
 		if(token("STR"))
 			e.abilities[0] = (char)parse_number();
 		else if(token("DEX"))
@@ -170,7 +169,7 @@ static void parse_stats(partyi::character& e) {
 static void parse_word() {
 	sb.clear();
 	while(*p) {
-		if(*p == 10 || *p == 13 || *p=='(' || *p==':')
+		if(*p == 10 || *p == 13 || *p == '(' || *p == ':')
 			break;
 		else
 			sb.addch(*p++);

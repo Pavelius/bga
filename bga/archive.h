@@ -7,9 +7,9 @@
 // Fast and simple driver for streaming binary data.
 // Allow arrays and simple collections.
 struct archive {
-	io::stream&	source;
+	iostream&	source;
 	bool		writemode;
-	constexpr archive(io::stream& source, bool writemode) : source(source), writemode(writemode) {}
+	constexpr archive(iostream& source, bool writemode) : source(source), writemode(writemode) {}
 	bool		signature(const char* id);
 	bool		signature(unsigned long value);
 	bool		version(short major, short minor);

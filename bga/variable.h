@@ -3,7 +3,7 @@
 #pragma once
 
 struct variable {
-	char		lock_difficult, trap_difficult;
+	char		lock_difficult, trap_difficult, counter, stage;
 	unsigned	flags;
 	bool		is(tagn v) const { return (flags & (1 << v)) != 0; }
 	void		remove(tagn v) { flags &= ~(1 << v); }

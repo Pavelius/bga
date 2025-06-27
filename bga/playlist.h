@@ -8,9 +8,9 @@ enum playlistn : unsigned char {
 struct playlistni : nameable {
 };
 struct playlisti {
+	playlistn type;
 	const char*	id;
-	const char*	folder;
-	const char* music[PlayCombat + 1];
+	const char* music;
 };
 
-bool playlist_play(const char* id, const char* folder, playlistn value);
+bool playlist_play(const char* id, playlistn value);

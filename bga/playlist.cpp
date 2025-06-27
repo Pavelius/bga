@@ -10,21 +10,21 @@ BSDATA(playlistni) = {
 };
 assert_enum(playlistni, PlayCombat)
 
-static playlisti* find_playlist(const char* id, const char* folder) {
+static playlisti* find_playlist(const char* id, playlistn type) {
 	for(auto& e : bsdata<playlisti>()) {
-		if(equal(e.id, id) && equal(e.folder, folder))
+		if(e.type == type && equal(e.id, id))
 			return &e;
 	}
 	return 0;
 }
 
-bool playlist_play(const char* id, const char* folder, playlistn value) {
-	auto p = find_playlist(id, folder);
+bool playlist_play(const char* id, playlistn value) {
+	auto p = find_playlist(id, value);
 	if(!p)
 		return false;
-	if(equal(p->music[value], "STOP"))
+	if(equal(p->music, "STOP"))
 		play_music(0);
 	else
-		play_music(p->music[value]);
+		play_music(p->music);
 	return true;
 }

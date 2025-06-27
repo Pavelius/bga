@@ -1,4 +1,5 @@
 #include "color.h"
+#include "nameable.h"
 #include "point.h"
 #include "stringbuilder.h"
 #include "sliceu.h"
@@ -15,13 +16,11 @@ enum areablockn : short unsigned {
 };
 enum directionn : unsigned char;
 
+struct iostream;
 struct sprite;
 
-struct areai {
-	char name[12];
-	char folder[4];
+struct areai : nameable {
 	sliceu<variable> variables;
-	static int compare(const void* v1, const void* v2);
 };
 extern short unsigned current_area;
 
@@ -60,9 +59,9 @@ color get_shadow(point s);
 const sprite* get_minimap();
 const sprite* get_area_sprites();
 
-areai* add_area(const char* name, const char* folder);
-areai* find_area(const char* name, const char* folder);
+variable* find_var(const char* area_id, size_t index);
 
+bool archive_ard(iostream& file, bool writemode, bool content);
 void block_creatures();
 void block_creatures(fnvisible allow, bool keep);
 void block_movement(int range);
@@ -70,6 +69,7 @@ void change_cost(short unsigned v1, short unsigned v2);
 void clear_area();
 void clear_path_map();
 void create_wave(short unsigned start, int size);
+void initialize_area();
 bool is_block(short unsigned index);
 bool is_block(short unsigned index, int size);
 bool is_state(short unsigned index, areafn v);

@@ -1,2 +1,2 @@
-﻿Error in file `UnknownNames.txt`:
- Define translation for `Intelegence`
+﻿Error in file `rules/Playlist.txt`:
+ Line 3: Not found Playlist identifier `PlayDay`
