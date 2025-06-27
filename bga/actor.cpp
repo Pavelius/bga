@@ -5,6 +5,7 @@
 #include "gender.h"
 #include "math.h"
 #include "npc.h"
+#include "order.h"
 #include "rand.h"
 #include "timer.h"
 
@@ -270,6 +271,7 @@ void actor::nextaction() {
 void actor::updateanimate() {
 	if(time_next > current_game_tick)
 		return;
+	auto prev_action = action;
 	wait(getwait());
 	if(frame == frame_stop)
 		nextaction();
@@ -281,6 +283,13 @@ void actor::updateanimate() {
 		movestep(getspeed());
 		if(!ismoving())
 			stop();
+	}
+	if(prev_action != action) {
+		last_order = find_active_order(this);
+		if(last_order) {
+			last_order->apply();
+			clear_order(last_order);
+		}
 	}
 }
 

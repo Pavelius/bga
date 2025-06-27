@@ -16,3 +16,4 @@ struct container : drawable, variableid {
 	rect			box;
 	sliceu<point>	points;
 };
+extern container* last_container;

@@ -14,6 +14,7 @@
 #include "resid.h"
 #include "resinfo.h"
 #include "timer.h"
+#include "vector.h"
 #include "view.h"
 #include "worldmap.h"
 
@@ -28,6 +29,7 @@ struct renderi {
 };
 
 static worldmapi::area* current_world_area_hilite;
+static vector<item*> container_items, items;
 
 void paperdoll(color* pallette, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm);
 void scale2x(void* void_dst, unsigned dst_slice, const void* void_src, unsigned src_slice, unsigned width, unsigned height);
@@ -202,7 +204,10 @@ static void setup_visible_area() {
 	last_screen.set(caret.x, caret.y, caret.x + width, caret.y + height);
 	last_area = last_screen; last_area.move(camera.x, camera.y);
 	last_area.offset(-128, -128);
-	hotspot = camera + hot.mouse;
+	if(hot.mouse.in(last_screen))
+		hotspot = hot.mouse - caret + camera;
+	else
+		hotspot = {-1000, -1000};
 }
 
 static void update_floattext_tail() {
@@ -484,7 +489,7 @@ static void jump_party() {
 }
 
 static void move_party() {
-	moveparty(hot.param);
+	party_move(hot.param);
 }
 
 static void apply_command() {
@@ -583,14 +588,27 @@ static void paint_area_map() {
 	clipping = push_clip;
 }
 
-static void paint_area_map_zoom_factor() {
+static void paint_area_map_spot() {
+	pushrect push;
+	auto push_clip = clipping; setclipall();
+	setup_visible_area();
+	cursor.set(CURSORS, 0);
+	paint_tiles();
+	paint_movement_target();
+	prepare_objects();
+	sort_objects();
+	paint_objects();
+	clipping = push_clip;
+}
+
+static void paint_area_map_zoom_factor(fnevent proc) {
 	auto push_clipping = clipping;
 	auto push_mouse = hot.mouse; hot.mouse.x /= zoom_factor; hot.mouse.y /= zoom_factor;
 	pushrect push; width /= zoom_factor; height /= zoom_factor;
 	static surface temporary_canvas; temporary_canvas.resize(width, height, 32, true);
 	auto push_canvas = canvas;
 	canvas = &temporary_canvas; setclip();
-	paint_area_map();
+	proc();
 	canvas = push_canvas;
 	if(zoom_factor == 2) {
 		scale2x(canvas->ptr(push.caret.x, push.caret.y), canvas->scanline,
@@ -601,15 +619,15 @@ static void paint_area_map_zoom_factor() {
 	clipping = push_clipping;
 }
 
-static void paint_area_map_zoomed() {
+static void paint_area_map_zoomed(fnevent proc) {
 	if(zoom_factor <= 1)
-		paint_area_map();
+		proc();
 	else
-		paint_area_map_zoom_factor();
+		paint_area_map_zoom_factor(proc);
 }
 
 void paint_area() {
-	paint_area_map_zoomed();
+	paint_area_map_zoomed(paint_area_map);
 	apply_shifer();
 }
 
@@ -775,6 +793,48 @@ void open_combat_mode() {
 void* choose_combat_action() {
 	open_combat_mode();
 	return (void*)getresult();
+}
+
+static void paint_container() {
+	paint_game_dialog(0, 476, GUICONT, 1);
+	setdialog(62, 25); image(gres(CONTAINER), 3, 0);
+	setdialog(430, 28); image(gres(CONTAINER), 1, 0);
+
+	setdialog(150, 22); button(STONSLOT, 0, 0);
+	setdialog(195, 22); button(STONSLOT, 0, 0);
+	setdialog(239, 22); button(STONSLOT, 0, 0);
+	setdialog(283, 22); button(STONSLOT, 0, 0);
+	setdialog(327, 22); button(STONSLOT, 0, 0);
+	setdialog(150, 65); button(STONSLOT, 0, 0);
+	setdialog(195, 65); button(STONSLOT, 0, 1);
+	setdialog(239, 65); button(STONSLOT, 0, 1);
+	setdialog(283, 65); button(STONSLOT, 0, 1);
+	setdialog(327, 65); button(STONSLOT, 0, 1);
+	//Scroll GBTNSCRL 375 24 12 76 frames(1 0 3 2 4 5)
+
+	setdialog(509, 22); button(STONSLOT, 0, 0);
+	setdialog(553, 22); button(STONSLOT, 0, 0);
+	setdialog(553, 65); button(STONSLOT, 0, 0);
+	setdialog(509, 65); button(STONSLOT, 0, 0);
+	//Scroll GBTNSCRL 602 24 12 76 frames(1 0 3 2 4 5)
+
+	setdialog(661, 78, 70, 20); texta(str("%1i", player->coins), AlignRightCenter);
+	setdialog(684, 28); button(GBTNOPT1, 1, 2, KeyEscape); fire(buttoncancel);
+}
+
+static void mouse_area_cancel() {
+	if(hot.key == MouseLeft && !hot.pressed && ishilite())
+		execute(buttoncancel);
+}
+
+static void paint_container_area() {
+	update_frames();
+	setcaret(0, 0, 800, 476); paint_area_map_zoomed(paint_area_map_spot); mouse_area_cancel();
+	paint_container();
+}
+
+void open_container() {
+	scene(paint_container_area);
 }
 
 //rendern	renderi::getindex() const {

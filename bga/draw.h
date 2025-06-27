@@ -65,7 +65,7 @@ struct pma {
 	const char*			getstring(int id) const;
 };
 struct sprite : pma {
-	enum encodes { Auto, RAW, RLE, ALC, RAW8, RLE8, ALC8, ALC1};
+	enum encodes { Auto, RAW, RLE, ALC, RAW8, RLE8, ALC8, RAW1, ALC41, ALC1 };
 	struct frame {
 		short 			sx, sy;
 		short			ox, oy;

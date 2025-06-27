@@ -6,6 +6,7 @@
 #include "math.h"
 #include "modifier.h"
 #include "npc.h"
+#include "order.h"
 #include "party.h"
 #include "pushvalue.h"
 #include "rand.h"

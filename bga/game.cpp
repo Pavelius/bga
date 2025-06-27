@@ -3,6 +3,7 @@
 #include "area.h"
 #include "archive.h"
 #include "console.h"
+#include "container.h"
 #include "creature.h"
 #include "door.h"
 #include "draw.h"
@@ -11,6 +12,7 @@
 #include "game.h"
 #include "itemground.h"
 #include "iteminside.h"
+#include "order.h"
 #include "playlist.h"
 #include "rand.h"
 #include "region.h"
@@ -47,7 +49,7 @@ void setparty(point dst, unsigned char orientation) {
 			continue;
 		auto new_position = get_free(dst, start_position, current_formation, index++, p->getsize());
 		p->area_index = current_area;
-		if(orientation==0xFF)
+		if(orientation == 0xFF)
 			p->lookat(new_position);
 		else
 			p->orientation = orientation;
@@ -55,7 +57,7 @@ void setparty(point dst, unsigned char orientation) {
 	}
 }
 
-void moveparty(point dst) {
+void party_move(point v) {
 	auto index = 0;
 	auto p = get_selected();
 	if(!p)
@@ -64,7 +66,7 @@ void moveparty(point dst) {
 	for(auto p : party_selected) {
 		if(!p)
 			continue;
-		p->moveto(get_free(dst, start_position, current_formation, index++, p->getsize()));
+		p->moveto(get_free(v, start_position, current_formation, index++, p->getsize()));
 	}
 }
 
@@ -100,7 +102,7 @@ static void serial_header(archive& a, saveheaderi& v) {
 
 static unsigned long get_version() {
 	unsigned long i = 0;
-	unsigned long r = sizeof(gamei)*(++i);
+	unsigned long r = sizeof(gamei) * (++i);
 	r += sizeof(areai) * (++i);
 	r += sizeof(creature) * (++i);
 	r += sizeof(itemground) * (++i);
@@ -180,4 +182,63 @@ void game_auto_save() {
 void create_game() {
 	game.set(IdentifyCost, 100);
 	game.set(Rounds, xrand(10, 30));
+}
+
+point get_action_position(void* object, point nearest) {
+	if(bsdata<region>::have(object)) {
+		auto p = (region*)object;
+		return p->use;
+	} else if(bsdata<door>::have(object)) {
+		auto p = (door*)object;
+		auto d = distance(p->position, nearest);
+		if(p->position_alternate && d > distance(p->position_alternate, nearest))
+			return p->position_alternate;
+		return p->position;
+	} else if(bsdata<container>::have(object)) {
+		auto p = (container*)object;
+		return p->position;
+	} else if(bsdata<creature>::have(object)) {
+		//if(combat_mode) {
+		//} else
+		//	execute(choose_creature, 0, 0, object);
+	}
+	return {0, 0};
+}
+
+void open_container_action() {
+	last_container = (container*)last_order->object;
+	open_container();
+}
+
+void party_action(void* object, fnevent apply) {
+	if(!player)
+		return;
+	auto position = player->position;
+	auto target_position = get_action_position(object, position);
+	if(distance(position, target_position) > 24) {
+		party_move(target_position);
+		add_order(player, object, apply);
+	} else
+		apply();
+	//if(bsdata<region>::have(object)) {
+	//	auto p = (region*)object;
+	//	if(p->type == RegionInfo) {
+	//		//auto pn = getnme(gettipsname(p->position));
+	//		//if(pn) {
+	//		//	add_float_text(hotspot, pn, 320, 1000 * 5, p);
+	//		//	print("[+%1]", pn);
+	//		//}
+	//	} else if(p->type == RegionTravel)
+	//		enter(p->move_to_area, p->move_to_entrance);
+	//} else if(bsdata<door>::have(object)) {
+	//	auto p = (door*)object;
+	//	p->use(!p->isopen());
+	//} else if(bsdata<container>::have(object)) {
+	//	auto p = (container*)object;
+	//	// Open container
+	//} else if(bsdata<creature>::have(object)) {
+	//	//if(combat_mode) {
+	//	//} else
+	//	//	execute(choose_creature, 0, 0, object);
+	//}
 }

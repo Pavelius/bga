@@ -12,12 +12,12 @@
 using namespace draw;
 
 struct tradegood {
-	item* source;
-	int count;
+	item*	source;
+	int		count;
 };
 struct tradegooda : vector<tradegood> {
-	int total() const;
-	int checkedcount() const;
+	int	total() const;
+	int	checkedcount() const;
 	void add(item& e);
 	bool checked() const;
 };
@@ -276,7 +276,6 @@ static void paint_identify() {
 	setdialog(285, 387, 80, 20); texta(str("%1i", shop_total), AlignCenterCenter);
 	setdialog(663, 123); button(GBTNSTD, 1, 2, 0, "Identify", 3, shop_total);
 	setdialog(141, 83, 225, 18); texta(getnm("Items"), AlignCenterCenter);
-	//Scroll GBTNSCRL 359 114 12 260 frames(1 0 3 2 4 5)
 	setdialog(135, 113, 214, 264); paint_identify_items();
 	setdialog(404, 82, 209, 325); paint_description(12, -1, 2);
 	paint_action_panel_player();

@@ -124,7 +124,7 @@ void input_debug() {
 	case 'Q': execute(test_animation_hit_drop); break;
 	case 'W': execute(test_battle_stance); break;
 	case Ctrl + 'D': execute(open_store); break;
-	case Ctrl + 'C': execute(open_scene, 0, 0, paint_test_table); break;
+	case Ctrl + 'C': execute(open_container, 0, 0, paint_test_table); break;
 	case Ctrl + 'I': execute(open_scene, 0, 0, util_items_list); break;
 	default: break;
 	}

@@ -464,6 +464,9 @@
     <ClCompile Include="font_util.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="container.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">

@@ -93,11 +93,14 @@ void texta(resn res, color fore, const char* string, unsigned flags) {
 }
 
 static void update_actor_animations() {
+	auto push_player = player;
 	for(auto& e : bsdata<creature>()) {
 		if(!e.ispresent())
 			continue;
+		player = &e;
 		e.updateanimate();
 	}
+	player = push_player;
 }
 
 void update_frames() {
@@ -222,6 +225,14 @@ void paint_game_dialog(resn v, int frame) {
 	set_cursor();
 	dialog_start.x = 0;
 	dialog_start.y = 0;
+	caret = dialog_start;
+	image(gres(v), frame, 0);
+}
+
+void paint_game_dialog(int x, int y, resn v, int frame) {
+	set_cursor();
+	dialog_start.x = x;
+	dialog_start.y = y;
 	caret = dialog_start;
 	image(gres(v), frame, 0);
 }
@@ -1006,7 +1017,7 @@ static void paint_game_inventory() {
 	setdialog(572, 88); quick_weapon(1);
 	setdialog(679, 48); quick_weapon(2);
 	setdialog(679, 88); quick_weapon(3);
-	setdialog(704, 141, 70, 20); texta(NORMAL, str("%1i", player->coins), AlignCenterCenter);
+	setdialog(704, 141, 70, 20); texta(str("%1i", player->coins), AlignCenterCenter);
 	setdialog(704, 243, 70, 32); texta(REALMS, str("%1i", player->get(AC)), AlignCenterCenter);
 	setdialog(710, 353, 54, 16); texta(REALMS, str("%1i", player->hp_max), AlignCenterCenter);
 	setdialog(710, 371, 54, 16); texta(REALMS, str("%1i", player->hp), AlignCenterCenter);

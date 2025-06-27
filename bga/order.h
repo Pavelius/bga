@@ -1,14 +1,18 @@
 #pragma once
 
-#include "drawable.h"
-#include "variant.h"
+typedef void(*fnevent)();
+
+// enum actionn : unsigned char;
 
 struct orderi {
-	variant			parent, action;
-	short unsigned	next;
-	explicit operator bool() const { return parent.type != 0; }
-	void			clear();
-	void			remove();
+	void*	parent;
+	void*	object;
+	fnevent apply;
+	explicit operator bool() const { return apply != 0; }
 };
+extern orderi* last_order;
 
-void addorder(variant parent, variant action);
+void clear_order(orderi* p);
+
+orderi* add_order(void* parent, void* object, fnevent apply);
+orderi* find_active_order(const void* parent);
