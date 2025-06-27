@@ -1,5 +1,6 @@
 #include "adat.h"
 #include "array.h"
+#include "bsdata.h"
 #include "io_stream.h"
 
 #pragma once
@@ -14,6 +15,7 @@ struct archive {
 	bool		signature(unsigned long value);
 	bool		version(short major, short minor);
 	void		set(void* value, unsigned size);
+	void		setpointer(array& source, void** value);
 	// Array with fixed count
 	template<typename T, size_t N> void set(T(&value)[N]) {
 		for(int i = 0; i < N; i++)

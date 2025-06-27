@@ -20,14 +20,6 @@
 
 using namespace draw;
 
-struct renderi {
-	typedef void(*fnpaint)(const drawable* object);
-	const array&	source;
-	fnpaint			proc;
-	int	priority;
-	rendern	getindex() const;
-};
-
 static worldmapi::area* current_world_area_hilite;
 static vector<item*> container_items, items;
 
@@ -473,7 +465,7 @@ static void apply_hilite_command() {
 			p->use(!p->isopen());
 		} else if(bsdata<container>::have(hilite_drawable)) {
 			auto p = (container*)hilite_drawable;
-			print("This is %1", p->name);
+			print("This is %1 (vairable %2i)", p->name, p->variable_index);
 			player->moveto(p->launch);
 		} else if(bsdata<creature>::have(hilite_drawable)) {
 			if(combat_mode) {
@@ -836,18 +828,3 @@ static void paint_container_area() {
 void open_container() {
 	scene(paint_container_area);
 }
-
-//rendern	renderi::getindex() const {
-//	return (rendern)(this - bsdata<renderi>::elements);
-//}
-
-// TODO: Render concept
-//BSDATA(renderi) = {
-//	{bsdata<animation>::source, paint_animation},
-//	{bsdata<creature>::source, paint_creature},
-//	{bsdata<door>::source, paint_door},
-//	{bsdata<region>::source, paint_region},
-//	{bsdata<container>::source, paint_container},
-//	{bsdata<floattext>::source, paint_float_text},
-//};
-//BSDATAF(renderi)

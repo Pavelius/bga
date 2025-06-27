@@ -81,7 +81,7 @@ void saveheaderi::paint() const {
 }
 
 void saveheaderi::paintparty(int index) const {
-	surface pm; pm.resize(20, 22, 32, false); pm.bits = (unsigned char*)party[index];
+	surface pm; pm.resize(20, 22, 32, false); pm.bits = (unsigned char*)portraits[index];
 	blit(*canvas, caret.x, caret.y, pm.width, pm.height, 0, pm, 0, 0);
 	pm.bits = 0; // To prevent deallocate bits, when destroy surface.
 }
@@ -103,7 +103,7 @@ void saveheaderi::create() {
 	get_save_screenshoot(sm);
 	surface pm; pm.resize(20, 22, 32, false);
 	for(auto i = 0; i < 6; i++) {
-		pm.bits = (unsigned char*)party[i];
+		pm.bits = (unsigned char*)portraits[i];
 		get_player_portrait(pm, i);
 	}
 	sm.bits = 0;
@@ -135,6 +135,7 @@ static void row_save() {
 
 static void row_load() {
 	last_save_header = (rowsaveheaderi*)hot.object;
+	last_save_header->serial(false);
 	next_scene(open_game);
 }
 

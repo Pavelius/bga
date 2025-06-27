@@ -436,8 +436,16 @@ static bool is_passable(short unsigned i0, short unsigned i1, int size) {
 }
 
 variable* find_var(const char* area_id, size_t index) {
+	if(!area_id && current_area != -1)
+		return bsdata<areai>::elements[current_area].variables.begin() + index;
 	auto p = bsdata<areai>::find(area_id);
 	if(!p)
 		return 0;
 	return p->variables.begin() + index;
+}
+
+void set_var(const char* id, short unsigned index, tagn value) {
+	auto p = find_var(id, index);
+	if(p)
+		p->set(value);
 }

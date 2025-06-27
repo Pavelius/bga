@@ -6,7 +6,7 @@
 
 struct saveheaderi : namestr {
 	color screenshoot[102][77];
-	color party[6][20][22];
+	color portraits[6][20][22];
 	unsigned rounds, chapter;
 	void clear();
 	void create();

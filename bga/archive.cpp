@@ -55,3 +55,17 @@ void archive::set(void* value, unsigned size) {
 	else
 		source.read(value, size);
 }
+
+void archive::setpointer(array& data, void** value) {
+	unsigned n;
+	if(writemode) {
+		n = data.indexof(*value);
+		source.write(&n, sizeof(n));
+	} else {
+		source.read(&n, sizeof(n));
+		if(n == -1)
+			*value = 0;
+		else
+			*value = data.ptr(n);
+	}
+}

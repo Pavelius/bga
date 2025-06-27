@@ -70,26 +70,30 @@ void party_move(point v) {
 	}
 }
 
-void enter(const char* id, const char* location) {
-	char entrance_copy[32]; stringbuilder sb(entrance_copy); sb.add(location);
-	print("Enter area [%1] at location [%2]", id, location);
+static void load_area(const char* id) {
 	audio_reset();
 	read_area_header(id);
 	read_area(id);
+	use_all_doors();
 	playlist_play(id, PlayDay);
+	initialize_area_ambients();
+	next_scene(open_game);
+}
+
+void enter(const char* id, const char* location) {
+	char entrance_copy[32]; stringbuilder sb(entrance_copy); sb.add(location);
+	print("Enter area [%1] at location [%2]", id, location);
+	load_area(id);
 #ifdef _DEBUG
 	print("Count of points %1i", bsdata<point>::source.count);
 	print("Count of doors %1i", bsdata<door>::source.count);
 	print("Count of regions %1i", bsdata<region>::source.count);
 #endif
-	use_all_doors();
 	auto pn = entrance::find(entrance_copy);
 	if(pn) {
 		setcamera(pn->position);
 		setparty(pn->position, pn->orientation);
 	}
-	initialize_area_ambients();
-	next_scene(open_game);
 }
 
 static void serial_header(archive& a, saveheaderi& v) {
@@ -145,6 +149,10 @@ bool rowsaveheaderi::read() {
 	return true;
 }
 
+template<> void archive::set<creature*>(creature*& v) {
+	setpointer(bsdata<creature>::source, (void**)&v);
+}
+
 bool rowsaveheaderi::serial(bool write_mode) {
 	char temp[260];
 	io::file flo(get_save_url(temp, file), write_mode ? StreamWrite : StreamRead);
@@ -161,12 +169,16 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	a.set(area_name);
 	a.set(draw::camera);
 	a.set(current_game_tick);
+	a.set(player);
+	a.set(party);
+	a.set(party_selected);
 	a.set(wearable::coins);
-	a.set(bsdata<areai>::source);
 	a.set(bsdata<variable>::source);
 	a.set(bsdata<creature>::source);
 	a.set(bsdata<itemground>::source);
 	a.set(bsdata<iteminside>::source);
+	if(!write_mode)
+		load_area(area_name);
 	return true;
 }
 
