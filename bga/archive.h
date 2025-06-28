@@ -46,3 +46,4 @@ struct archive {
 	}
 };
 template<> void archive::set<array>(array& v);
+template<> void archive::set<const char*>(const char*& v);

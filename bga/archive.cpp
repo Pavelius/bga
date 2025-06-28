@@ -49,6 +49,31 @@ template<> void archive::set<array>(array& v) {
 	set(v.data, v.element_size * v.count);
 }
 
+template<> void archive::set<const char*>(const char*& v) {
+	unsigned len;
+	if(writemode) {
+		len = v ? zlen(v) : 0;
+		source.write(&len, sizeof(len));
+		if(len)
+			source.write(v, len);
+	} else {
+		source.read(&len, sizeof(len));
+		if(!len)
+			v = "";
+		else {
+			char temp[2048];
+			auto pv = temp;
+			if(len > sizeof(temp) - 1)
+				pv = new char[len + 1];
+			source.read(pv, len);
+			pv[len] = 0;
+			v = szdup(pv);
+			if(pv != temp)
+				delete[] pv;
+		}
+	}
+}
+
 void archive::set(void* value, unsigned size) {
 	if(writemode)
 		source.write(value, size);
