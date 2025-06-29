@@ -1,5 +1,6 @@
 #include "alignment.h"
 #include "answers.h"
+#include "area.h"
 #include "audio.h"
 #include "command.h"
 #include "creature.h"
@@ -805,6 +806,7 @@ static void paint_select_party() {
 }
 
 static void start_new_game() {
+	initialize_area();
 	select_all_party();
 	enter("AR1000", "FR1001");
 }

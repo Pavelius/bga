@@ -1,6 +1,5 @@
 #include "adat.h"
 #include "array.h"
-#include "bsdata.h"
 #include "io_stream.h"
 
 #pragma once
@@ -35,13 +34,13 @@ struct archive {
 		if(writemode) {
 			set(v.count);
 		} else {
-			size_t size;
-			set(size);
-			v.reserve(size);
-			v.setcount(size);
+			decltype(v.count) count;
+			set(count);
+			v.reserve(count);
+			v.setcount(count);
 		}
 		auto pe = v.end();
-		for(auto p = v.begin(); p < pe; p += v.size)
+		for(auto p = v.begin(); p < pe; p += v.element_size)
 			set(*((T*)p));
 	}
 };

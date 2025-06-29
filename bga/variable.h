@@ -1,8 +1,9 @@
+#include "nameable.h"
 #include "tag.h"
 
 #pragma once
 
-struct variable {
+struct variable : nameable {
 	char		lock_difficult, trap_difficult, counter, stage;
 	unsigned	flags;
 	bool		is(tagn v) const { return (flags & (1 << v)) != 0; }

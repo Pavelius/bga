@@ -43,7 +43,6 @@ bool archive::version(short major, short minor) {
 
 template<> void archive::set<array>(array& v) {
 	set(v.count);
-	set(v.element_size);
 	if(!writemode)
 		v.reserve(v.count);
 	set(v.data, v.element_size * v.count);
@@ -63,7 +62,7 @@ template<> void archive::set<const char*>(const char*& v) {
 		else {
 			char temp[2048];
 			auto pv = temp;
-			if(len > sizeof(temp) - 1)
+			if(len >= sizeof(temp))
 				pv = new char[len + 1];
 			source.read(pv, len);
 			pv[len] = 0;

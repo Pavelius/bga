@@ -22,6 +22,24 @@
 
 gamei game;
 
+template<> void archive::set<creature*>(creature*& v) {
+	setpointer(bsdata<creature>::source, (void**)&v);
+}
+
+template<> void archive::set<variable>(variable& e) {
+	set(e.id);
+	set(e.lock_difficult);
+	set(e.trap_difficult);
+	set(e.counter);
+	set(e.stage);
+	set(e.flags);
+}
+
+template<> void archive::set<areai>(areai& e) {
+	set(e.id);
+	set(e.variables);
+}
+
 static void read_area_header(const char* id) {
 	auto p = bsdata<areai>::find(id);
 	current_area = getbsi(p);
@@ -96,14 +114,6 @@ void enter(const char* id, const char* location) {
 	}
 }
 
-static void serial_header(archive& a, saveheaderi& v) {
-	if(a.writemode) {
-		v.create();
-		a.set(v);
-	} else
-		a.set(v);
-}
-
 static unsigned long get_version() {
 	unsigned long i = 0;
 	unsigned long r = sizeof(gamei) * (++i);
@@ -134,6 +144,14 @@ const char* get_save_url(char* result, const char* id) {
 	return result;
 }
 
+static void serial_header(archive& a, saveheaderi& v) {
+	if(a.writemode) {
+		v.create();
+		a.set(v);
+	} else
+		a.set(v);
+}
+
 bool rowsaveheaderi::read() {
 	char temp[260];
 	io::file flo(get_save_url(temp, file), StreamRead);
@@ -147,10 +165,6 @@ bool rowsaveheaderi::read() {
 	flo.get(change);
 	serial_header(a, *this);
 	return true;
-}
-
-template<> void archive::set<creature*>(creature*& v) {
-	setpointer(bsdata<creature>::source, (void**)&v);
 }
 
 bool rowsaveheaderi::serial(bool write_mode) {
@@ -173,7 +187,8 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	a.set(party);
 	a.set(party_selected);
 	a.set(wearable::coins);
-	a.set(bsdata<variable>::source);
+	a.setc<areai>(bsdata<areai>::source);
+	a.setc<variable>(bsdata<variable>::source);
 	a.set(bsdata<creature>::source);
 	a.set(bsdata<itemground>::source);
 	a.set(bsdata<iteminside>::source);

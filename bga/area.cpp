@@ -49,10 +49,23 @@ static const unsigned char orientations_7b7[49] = {
 	2, 1, 1, 0, 15, 15, 14,
 };
 
+static void initialize_variable(variableid* pv, char type, int index) {
+	char sym[2] = {type, 0};
+	auto& e = pv->getvar();
+	e.id = szdup(str("%1%2%3.2i", area_name, sym, index + 1));
+}
+
+template<class T> void initilalize_variables(char type) {
+	int n = bsdata<T>::source.count;
+	for(auto i = 0; i < n; i++)
+		initialize_variable(bsdata<T>::elements + i, type, i);
+}
+
 static void add_area_header(const char* url) {
 	io::file file(url, StreamRead);
 	if(!file)
 		return;
+	clear_area();
 	if(!archive_ard(file, false, false))
 		return;
 	auto p = bsdata<areai>::add();
@@ -60,9 +73,16 @@ static void add_area_header(const char* url) {
 	p->variables.setbegin();
 	bsdata<variable>::source.count += variable_count;
 	p->variables.setend();
+	current_variable_base = p->variables.begin();
+	initilalize_variables<animation>('A');
+	initilalize_variables<ambient>('S');
+	initilalize_variables<container>('C');
+	initilalize_variables<door>('D');
+	initilalize_variables<region>('R');
 }
 
 void initialize_area() {
+	bsdata<areai>::source.clear();
 	for(io::file::find file("art/area"); file; file.next()) {
 		auto pn = file.name();
 		if(pn[0] == '.')
@@ -72,6 +92,7 @@ void initialize_area() {
 		char temp[260];
 		add_area_header(file.fullname(temp));
 	}
+	clear_area();
 }
 
 void clear_area() {
@@ -84,6 +105,7 @@ void clear_area() {
 		area_minimap_sprites = 0;
 	}
 	area_height = area_width = area_height_tiles = 0;
+	variable_count = 0;
 	memset(area_tiles, 0, sizeof(area_tiles));
 	memset(area_zmap, 0, sizeof(area_zmap));
 	memset(area_state, 0, sizeof(area_state));
@@ -163,24 +185,25 @@ bool archive_ard(iostream& file, bool writemode, bool content) {
 	if(!ar.signature(get_area_signature()))
 		return false;
 	// Area header
+	ar.set(area_name, 8);
 	ar.set(area_width);
 	ar.set(area_height); area_height_tiles = (area_height * 12 + 15) / 16;
-	ar.set(area_name, 8);
 	ar.set(variable_count);
+	// Objects with variables
+	ar.set(bsdata<container>::source);
+	ar.set(bsdata<door>::source);
+	ar.set(bsdata<region>::source);
+	ar.set(bsdata<animation>::source);
+	ar.set(bsdata<ambient>::source);
 	if(content) {
 		// Tile maps
 		archive_bitmap(ar, (unsigned char*)area_tiles, 16, 64 * sizeof(area_tiles[0]), area_width / 4, area_height_tiles / 4, 0);
 		archive_bitmap(ar, area_light, 8, 256, area_width, area_height, area_light_pallette);
 		archive_bitmap(ar, area_state, 8, 256, area_width, area_height, 0);
-		// Objects
+		// Objects without variables
 		ar.set(bsdata<point>::source);
 		ar.set(bsdata<doortile>::source);
-		ar.set(bsdata<door>::source);
-		ar.set(bsdata<region>::source);
-		ar.set(bsdata<container>::source);
 		ar.set(bsdata<entrance>::source);
-		ar.set(bsdata<animation>::source);
-		ar.set(bsdata<ambient>::source);
 	}
 	return true;
 }
