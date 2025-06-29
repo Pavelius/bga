@@ -618,9 +618,16 @@ static void paint_area_map_zoomed(fnevent proc) {
 		paint_area_map_zoom_factor(proc);
 }
 
+static void apply_hotkeys() {
+	switch(hot.key) {
+	case 'G': execute(game_quick_save); break;
+	}
+}
+
 void paint_area() {
 	paint_area_map_zoomed(paint_area_map);
 	apply_shifer();
+	apply_hotkeys();
 }
 
 static point minimap_origin, minimap_size;

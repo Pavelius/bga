@@ -77,6 +77,7 @@ Finish: Завершить
 From: из
 GameMode: Режим игры
 GamePlay: Игровой процесс
+GameQuickSaved: Игра записана
 Gender: Пол
 Graphics: Графика
 Ground: На земле

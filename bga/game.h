@@ -22,6 +22,8 @@ void create_game();
 void enter(const char* id, const char* location);
 bool is_saved_game(const char* url);
 void game_auto_save();
+void game_quick_load();
+void game_quick_save();
 void party_move(point v);
 void setcamera(point v);
 void setparty(point v, unsigned char orientation = 0xFF);

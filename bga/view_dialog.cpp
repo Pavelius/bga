@@ -6,6 +6,7 @@
 #include "creature.h"
 #include "draw.h"
 #include "formation.h"
+#include "game.h"
 #include "help.h"
 #include "option.h"
 #include "pushvalue.h"
@@ -1597,7 +1598,7 @@ static void paint_main_menu() {
 	setdialog(569, 220, 152, 21); texta(getnm("BeginGame"), AlignCenterCenter);
 	setdialog(567, 248); button(GBTNMED2, 5, 6, 'N', "NewGame"); fire(open_select_party);
 	setdialog(567, 280); button(GBTNMED2, 9, 10, 'L', "LoadGame"); fire(open_load_game);
-	setdialog(567, 312); button(GBTNMED2, 13, 14, 'Q', "QuickLoad");
+	setdialog(567, 312); button(GBTNMED2, 13, 14, 'Q', "QuickLoad"); fire(game_quick_load);
 	setdialog(567, 344); button(GBTNMED2, 1, 2, 'J', "JoinGame", 3, false);
 	setdialog(567, 396); button(GBTNMED2, 5, 6, 'O', "Options");
 	setdialog(567, 428); button(GBTNMED2, 9, 10, KeyEscape, "QuitGame"); fire(confirm_quit_game);

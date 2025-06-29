@@ -206,6 +206,24 @@ void game_auto_save() {
 	delete p;
 }
 
+static void game_quick_save(bool writemode) {
+	auto p = new rowsaveheaderi;
+	p->clear();
+	p->setname(getnm("Quicksave"));
+	p->setfile("Quicksave");
+	p->serial(writemode);
+	delete p;
+}
+
+void game_quick_save() {
+	game_quick_save(true);
+	print(getnm("GameQuickSaved"));
+}
+
+void game_quick_load() {
+	game_quick_save(false);
+}
+
 void create_game() {
 	game.set(IdentifyCost, 100);
 	game.set(Rounds, xrand(10, 30));
