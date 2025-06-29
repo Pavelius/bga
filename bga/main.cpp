@@ -54,30 +54,29 @@ static void add_enemies() {
 	player = push_player;
 }
 
-static void start_main() {
-	last_screen.set(0, 0, 800, 433);
-	create_game();
-	create_party();
-	select_all_party();
-	enter("AR1000", "FR1001");
-	add_enemies();
-	player->additem(citem("BattleAxe"));
-	player->additem(citem("BattleAxeP1"));
-	player->additem(citem("LeatherArmor"));
-	player->additem(citem("StuddedLeatherArmor"));
-	player->additem(citem("ScaleMail"));
-	player->additem(citem("LongSwordFlaming"));
-	player->additem(citem("HalfPlate"));
-	player->additem(citem("PotionOfHealing", 10));
-	player->additem(citem("Helm"));
-	player->additem(citem("HelmFull"));
-	player->additem(citem("LargeShield"));
-	player->additem(citem("TwoHandedSword"));
-	player->update();
-	current_world = bsdata<worldmapi>::elements;
-	game.set(Rounds, xrand(10, 40));
-	// next_scene(check_combat);
-}
+//static void start_main() {
+//	create_game();
+//	create_party();
+//	select_all_party();
+//	enter("AR1000", "FR1001");
+//	add_enemies();
+//	player->additem(citem("BattleAxe"));
+//	player->additem(citem("BattleAxeP1"));
+//	player->additem(citem("LeatherArmor"));
+//	player->additem(citem("StuddedLeatherArmor"));
+//	player->additem(citem("ScaleMail"));
+//	player->additem(citem("LongSwordFlaming"));
+//	player->additem(citem("HalfPlate"));
+//	player->additem(citem("PotionOfHealing", 10));
+//	player->additem(citem("Helm"));
+//	player->additem(citem("HelmFull"));
+//	player->additem(citem("LargeShield"));
+//	player->additem(citem("TwoHandedSword"));
+//	player->update();
+//	current_world = bsdata<worldmapi>::elements;
+//	game.set(Rounds, xrand(10, 40));
+//	// next_scene(check_combat);
+//}
 
 static void read_rules() {
 	bsreq::read("rules/Colors.txt");

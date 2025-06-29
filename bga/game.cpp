@@ -93,7 +93,7 @@ static void load_area(const char* id) {
 	read_area_header(id);
 	read_area(id);
 	use_all_doors();
-	playlist_play(id, PlayDay);
+	play_list(id, PlayDay);
 	initialize_area_ambients();
 	next_scene(open_game);
 }

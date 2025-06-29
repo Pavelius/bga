@@ -3,7 +3,6 @@
 
 #pragma once
 
-extern rect last_screen, last_area;
 extern struct drawable* hilite_drawable;
 
 enum rendern : unsigned char;

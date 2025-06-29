@@ -29,6 +29,7 @@ void scale2x(void* void_dst, unsigned dst_slice, const void* void_src, unsigned 
 const int tile_size = 64;
 
 static point hotspot;
+static rect last_screen, last_area;
 static int zoom_factor = 1;
 
 static unsigned get_game_tick() {
@@ -47,9 +48,8 @@ static void correct_camera() {
 }
 
 void setcamera(point v) {
-	v.x -= last_screen.width() / 2;
-	v.y -= last_screen.height() / 2;
-	camera = v;
+	camera.x = v.x - last_screen.width() / 2;
+	camera.y = v.y - last_screen.height() / 2;
 	correct_camera();
 }
 
@@ -77,8 +77,8 @@ static void paint_tiles() {
 	while(ty <= ty1) {
 		int tx = tx0;
 		while(tx <= tx1) {
-			auto x = tx * tile_size - camera.x;
-			auto y = ty * tile_size - camera.y;
+			auto x = last_screen.x1 + tx * tile_size - camera.x;
+			auto y = last_screen.y1 + ty * tile_size - camera.y;
 			draw::image(x, y, sp, area_tiles[ty * 64 + tx], 0);
 			tx++;
 		}
@@ -192,8 +192,33 @@ static void apply_shifer() {
 	correct_camera();
 }
 
+static void rectblack(rect rc) {
+	pushrect push;
+	pushfore push_fore(colors::black);
+	caret.x = rc.x1;
+	caret.y = rc.y1;
+	width = rc.width();
+	height = rc.height();
+	rectf();
+}
+
 static void setup_visible_area() {
-	last_screen.set(caret.x, caret.y, caret.x + width, caret.y + height);
+	auto push_caret = caret;
+	auto mx = (area_width / 4) * tile_size;
+	auto my = (area_height / 4) * tile_size;
+	if(mx < width) {
+		caret.x += (width - mx) / 2;
+		rectblack({push_caret.x, push_caret.y, caret.x, push_caret.y + height});
+		rectblack({caret.x + mx, push_caret.y, caret.x + width, push_caret.y + height});
+	} else
+		mx = width;
+	if(my < height) {
+		caret.y += (height - my) / 2;
+		rectblack({push_caret.x, push_caret.y, caret.x+width, caret.y});
+		rectblack({push_caret.x, caret.y + my, caret.x + width, caret.y + height});
+	} else
+		my = height;
+	last_screen.set(caret.x, caret.y, caret.x + mx, caret.y + my);
 	last_area = last_screen; last_area.move(camera.x, camera.y);
 	last_area.offset(-128, -128);
 	if(hot.mouse.in(last_screen))
@@ -435,6 +460,8 @@ static void paint_objects() {
 	hilite_drawable = 0;
 	for(auto p : objects) {
 		caret = p->position - camera;
+		caret.x += last_screen.x1;
+		caret.y += last_screen.y1;
 		if(is_hilite(p))
 			hilite_drawable = p;
 		paint_object(p);
@@ -583,8 +610,8 @@ static void paint_area_map() {
 static void paint_area_map_spot() {
 	pushrect push;
 	auto push_clip = clipping; setclipall();
-	setup_visible_area();
 	cursor.set(CURSORS, 0);
+	setup_visible_area();
 	paint_tiles();
 	paint_movement_target();
 	prepare_objects();

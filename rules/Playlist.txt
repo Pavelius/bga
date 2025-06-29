@@ -1,3 +1,5 @@
 #Playlist
 
+MAIN PlayDay "THEMEA"
+
 AR1000 PlayDay "MX1000A"

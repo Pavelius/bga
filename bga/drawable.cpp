@@ -5,7 +5,6 @@
 #include "screenshoot.h"
 
 drawablea objects;
-rect last_screen, last_area;
 drawable* hilite_drawable;
 
 void drawable::clear() {

@@ -18,7 +18,7 @@ static playlisti* find_playlist(const char* id, playlistn type) {
 	return 0;
 }
 
-bool playlist_play(const char* id, playlistn value) {
+bool play_list(const char* id, playlistn value) {
 	auto p = find_playlist(id, value);
 	if(!p)
 		return false;

@@ -9,6 +9,7 @@
 #include "game.h"
 #include "help.h"
 #include "option.h"
+#include "playlist.h"
 #include "pushvalue.h"
 #include "resid.h"
 #include "resinfo.h"
@@ -1606,7 +1607,7 @@ static void paint_main_menu() {
 }
 
 void open_main_menu() {
-	// play_music("THEMEA");
+	// play_list("MAIN", PlayDay);
 	scene(paint_main_menu);
 }
 
