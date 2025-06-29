@@ -5,6 +5,7 @@
 #include "colorgrad.h"
 #include "creature.h"
 #include "draw.h"
+#include "form.h"
 #include "formation.h"
 #include "game.h"
 #include "help.h"
@@ -1764,3 +1765,14 @@ void initialize_ui() {
 	ptips = tips_main;
 	draw::syscursor(false);
 }
+
+BSDATA(form) = {
+	{"ChangePanelMode", change_panel_mode},
+	{"OpenAutomap", setgameproc, 0, 0, paint_game_automap},
+	{"OpenCharacterSheet", setgameproc, 0, 0, paint_game_character},
+	{"OpenInventory", setgameproc, 0, 0, paint_game_inventory},
+	{"OpenJournal", setgameproc, 0, 0, paint_game_journal},
+	{"GameQuickLoad", game_quick_load},
+	{"GameQuickSave", game_quick_save},
+};
+BSDATAF(form);

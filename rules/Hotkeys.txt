@@ -1,0 +1,6 @@
+#Hotkey
+
+"H"			ChangePanelMode
+"G"			GameQuickSave
+"I"			OpenInventory
+"J"			OpenJournal

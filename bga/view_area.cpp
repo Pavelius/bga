@@ -9,6 +9,7 @@
 #include "drawable.h"
 #include "floattext.h"
 #include "game.h"
+#include "keybind.h"
 #include "math.h"
 #include "region.h"
 #include "resid.h"
@@ -644,17 +645,10 @@ static void paint_area_map_zoomed(fnevent proc) {
 		paint_area_map_zoom_factor(proc);
 }
 
-static void apply_hotkeys() {
-	switch(hot.key) {
-	case 'G': execute(game_quick_save); break;
-	case 'H': execute(change_panel_mode); break;
-	}
-}
-
 void paint_area() {
 	paint_area_map_zoomed(paint_area_map);
 	apply_shifer();
-	apply_hotkeys();
+	apply_keybinding();
 }
 
 static point minimap_origin, minimap_size;

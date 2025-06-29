@@ -39,6 +39,7 @@
     <Text Include="..\parties\HandsOfFury.txt" />
     <Text Include="..\rules\Advance.txt" />
     <Text Include="..\rules\Calendar.txt" />
+    <Text Include="..\rules\Hotkeys.txt" />
     <Text Include="..\rules\Monsters.txt" />
     <Text Include="..\rules\Classes.txt" />
     <Text Include="..\rules\Colors.txt" />
@@ -105,6 +106,7 @@
     <ClCompile Include="itema.cpp" />
     <ClCompile Include="iteminside.cpp" />
     <ClCompile Include="itemlist.cpp" />
+    <ClCompile Include="keybind.cpp" />
     <ClCompile Include="list.cpp" />
     <ClCompile Include="locale.cpp" />
     <ClCompile Include="log.cpp" />
@@ -204,6 +206,7 @@
     <ClInclude Include="feat.h" />
     <ClInclude Include="flagable.h" />
     <ClInclude Include="floattext.h" />
+    <ClInclude Include="form.h" />
     <ClInclude Include="formation.h" />
     <ClInclude Include="ftflag.h" />
     <ClInclude Include="game.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="itemground.h" />
     <ClInclude Include="iteminside.h" />
     <ClInclude Include="itemlist.h" />
+    <ClInclude Include="keybind.h" />
     <ClInclude Include="logvalue.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="math.h" />

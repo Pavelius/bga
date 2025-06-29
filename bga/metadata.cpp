@@ -15,9 +15,11 @@
 #include "draw.h"
 #include "entrance.h"
 #include "floattext.h"
+#include "form.h"
 #include "gender.h"
 #include "geography.h"
 #include "itemground.h"
+#include "keybind.h"
 #include "list.h"
 #include "modifier.h"
 #include "npc.h"
@@ -122,6 +124,9 @@ BSMETA(dietyi) = {
 BSMETA(feati) = {
 	BSREQ(id),
 	BSREQ(require),
+	{}};
+BSMETA(form) = {
+	BSREQ(id),
 	{}};
 BSMETA(geographyi) = {
 	BSREQ(id),
@@ -269,8 +274,10 @@ BSDATA(varianti) = {
 	{"DayPart", VAR(periodi, 1)},
 	{"Diety", VAR(dietyi, 1)},
 	{"Feat", VAR(feati, 1), ftinfo<feati>, 0, ftscript<feati>},
+	{"Form", VAR(form, 1), 0, 0, ftscript<form>},
 	{"Gender", VAR(genderi, 1)},
 	{"Item", VAR(itemi, 1)},
+	{"Hotkey", VAR(keybind, 2)},
 	{"List", VAR(listi, 1)},
 	{"Modifier", VAR(modifieri, 1), 0, 0, ftscript<modifieri>},
 	{"NPC", VAR(npci, 1)},

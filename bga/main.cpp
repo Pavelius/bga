@@ -7,8 +7,9 @@
 #include "creature.h"
 #include "draw.h"
 #include "game.h"
-#include "log.h"
 #include "itema.h"
+#include "keybind.h"
+#include "log.h"
 #include "option.h"
 #include "party.h"
 #include "rand.h"
@@ -93,6 +94,7 @@ static void read_rules() {
 	bsreq::read("rules/Diety.txt");
 	bsreq::read("rules/Monsters.txt");
 	bsreq::read("rules/Playlist.txt");
+	bsreq::read("rules/Hotkeys.txt");
 }
 
 int main(int argc, char* argv[]) {
@@ -111,6 +113,7 @@ int main(int argc, char* argv[]) {
 	initialize_parties();
 	initialize_audio();
 	initialize_ui();
+	initialize_keybind();
 	music_set(music_repeat);
 	if(log::errors)
 		return -1;

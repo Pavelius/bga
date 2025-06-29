@@ -120,6 +120,9 @@
     <Text Include="..\rules\Playlist.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\rules\Hotkeys.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -467,6 +470,9 @@
     <ClCompile Include="container.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="keybind.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -795,6 +801,12 @@
     </ClInclude>
     <ClInclude Include="playlist.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="keybind.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="form.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

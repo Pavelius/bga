@@ -3,6 +3,7 @@
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
+#include "form.h"
 #include "game.h"
 #include "modifier.h"
 #include "script.h"
@@ -27,6 +28,11 @@ template<> void ftscript<feati>(int value, int counter) {
 		default: player->feats.set(value); break;
 		}
 	}
+}
+
+template<> void ftscript<form>(int value, int counter) {
+	auto& e = bsdata<form>::elements[value];
+	execute(e.command, e.param1, e.param2, e.object);
 }
 
 static void damage_change(int bonus) {
