@@ -153,7 +153,6 @@ void change_zoom_factor(int bonus) {
 }
 
 static void set_standart_cursor() {
-	cursor.set(CURSORS, 0);
 	if(hot.mouse.in(last_screen)) {
 		if(!combat_mode || area_cost[s2i(hotspot)] < Blocked)
 			cursor.set(CURSORS, 4);
@@ -202,10 +201,11 @@ static void rectblack(rect rc) {
 	rectf();
 }
 
-static void setup_visible_area() {
+static void set_visible_area() {
+	cursor.set(CURSORS, 0);
 	auto push_caret = caret;
 	auto mx = (area_width / 4) * tile_size;
-	auto my = (area_height / 4) * tile_size;
+	auto my = (area_height_tiles / 4) * tile_size;
 	if(mx < width) {
 		caret.x += (width - mx) / 2;
 		rectblack({push_caret.x, push_caret.y, caret.x, push_caret.y + height});
@@ -589,7 +589,7 @@ static void paint_movement_target() {
 
 static void paint_area_map() {
 	auto push_clip = clipping; setclipall();
-	setup_visible_area();
+	set_visible_area();
 	set_standart_cursor();
 	paint_tiles();
 	paint_movement_target();
@@ -610,8 +610,7 @@ static void paint_area_map() {
 static void paint_area_map_spot() {
 	pushrect push;
 	auto push_clip = clipping; setclipall();
-	cursor.set(CURSORS, 0);
-	setup_visible_area();
+	set_visible_area();
 	paint_tiles();
 	paint_movement_target();
 	prepare_objects();
@@ -648,6 +647,7 @@ static void paint_area_map_zoomed(fnevent proc) {
 static void apply_hotkeys() {
 	switch(hot.key) {
 	case 'G': execute(game_quick_save); break;
+	case 'H': execute(change_panel_mode); break;
 	}
 }
 
@@ -724,10 +724,9 @@ void paint_minimap() {
 }
 
 static void paint_area_map_screen() {
-	pushrect push;
-	setcaret(0, 0, 800, 600);
+	pushrect push; setcaret(0, 0, 800, 600);
 	auto push_clip = clipping; setclip();
-	setup_visible_area();
+	set_visible_area();
 	paint_tiles();
 	prepare_objects();
 	sort_objects();
@@ -825,7 +824,6 @@ static void paint_container() {
 	paint_game_dialog(0, 476, GUICONT, 1);
 	setdialog(62, 25); image(gres(CONTAINER), 3, 0);
 	setdialog(430, 28); image(gres(CONTAINER), 1, 0);
-
 	setdialog(150, 22); button(STONSLOT, 0, 0);
 	setdialog(195, 22); button(STONSLOT, 0, 0);
 	setdialog(239, 22); button(STONSLOT, 0, 0);
@@ -837,13 +835,11 @@ static void paint_container() {
 	setdialog(283, 65); button(STONSLOT, 0, 1);
 	setdialog(327, 65); button(STONSLOT, 0, 1);
 	//Scroll GBTNSCRL 375 24 12 76 frames(1 0 3 2 4 5)
-
 	setdialog(509, 22); button(STONSLOT, 0, 0);
 	setdialog(553, 22); button(STONSLOT, 0, 0);
 	setdialog(553, 65); button(STONSLOT, 0, 0);
 	setdialog(509, 65); button(STONSLOT, 0, 0);
 	//Scroll GBTNSCRL 602 24 12 76 frames(1 0 3 2 4 5)
-
 	setdialog(661, 78, 70, 20); texta(str("%1i", player->coins), AlignRightCenter);
 	setdialog(684, 28); button(GBTNOPT1, 1, 2, KeyEscape); fire(buttoncancel);
 }

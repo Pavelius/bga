@@ -20,6 +20,7 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key = 0);
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, bool need_getname = true);
 void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed, bool need_getname = true);
 void button_check(unsigned key);
+void change_panel_mode();
 void change_zoom_factor();
 void checkbox(int& source, int value, resn res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key);
 void choose_creature();

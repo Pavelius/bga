@@ -38,6 +38,7 @@ static item drag_item;
 
 static char description_text[4096];
 static size_t description_cash_size;
+static int game_panel_mode;
 static int character_info_mode;
 static int current_topic_list, cash_topic_list, current_content_list;
 static int current_spell_level;
@@ -702,7 +703,6 @@ static void paint_player_actions() {
 }
 
 static void paint_action_panel() {
-	setcaret(0, 433);
 	if(input_disabled)
 		image(gres(GACTN), 1, 0);
 	else
@@ -724,6 +724,7 @@ void paint_action_panel_combat() {
 
 void paint_action_panel_na() {
 	auto push_input = input_disabled; input_disabled = true;
+	setcaret(0, 433);
 	paint_action_panel();
 	input_disabled = push_input;
 }
@@ -1553,16 +1554,35 @@ void paint_game_panel(bool allow_input, bool combat_mode) {
 	dialog_start = push_dialog;
 }
 
+void change_panel_mode() {
+	game_panel_mode = (++game_panel_mode) % 3;
+}
+
 void paint_game() {
 	update_frames();
-	setcaret(0, 0, 800, 433);
-	if(game_proc)
+	if(game_proc) {
+		setcaret(0, 0, 800, 433);
 		game_proc();
-	else {
-		paint_area();
-		paint_action_panel();
+		paint_game_panel();
+	} else {
+		switch(game_panel_mode) {
+		case 0:
+			setcaret(0, 0, 800, 433);
+			paint_area();
+			setcaret(0, 433); paint_action_panel();
+			paint_game_panel();
+			break;
+		case 1:
+			setcaret(0, 0, 800, 433 + 107);
+			paint_area();
+			setcaret(0, 433 + 107); paint_action_panel();
+			break;
+		default:
+			setcaret(0, 0, 800, 600);
+			paint_area();
+			break;
+		}
 	}
-	paint_game_panel();
 	input_debug();
 }
 
