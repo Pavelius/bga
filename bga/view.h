@@ -10,6 +10,7 @@ enum resn : unsigned short;
 
 extern unsigned caret_index;
 extern bool button_pressed, button_executed, button_hilited, input_disabled;
+extern int game_panel_mode;
 extern fnevent on_player_change;
 
 const char* getkg(int weight);

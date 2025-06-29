@@ -19,11 +19,16 @@
 #include "saveheader.h"
 #include "timer.h"
 #include "view.h"
+#include "worldmap.h"
 
 gamei game;
 
 template<> void archive::set<creature*>(creature*& v) {
 	setpointer(bsdata<creature>::source, (void**)&v);
+}
+
+template<> void archive::set<worldmapi*>(worldmapi*& v) {
+	setpointer(bsdata<worldmapi>::source, (void**)&v);
 }
 
 template<> void archive::set<variable>(variable& e) {
@@ -187,6 +192,8 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	a.set(player);
 	a.set(party);
 	a.set(party_selected);
+	a.set(game_panel_mode);
+	a.set(current_world);
 	a.set(wearable::coins);
 	a.setc<areai>(bsdata<areai>::source);
 	a.setc<variable>(bsdata<variable>::source);
@@ -287,4 +294,9 @@ void party_action(void* object, fnevent apply) {
 	//	//} else
 	//	//	execute(choose_creature, 0, 0, object);
 	//}
+}
+
+
+void initialize_story() {
+	current_world = bsdata<worldmapi>::elements;
 }

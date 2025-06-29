@@ -807,6 +807,7 @@ static void paint_select_party() {
 
 static void start_new_game() {
 	initialize_area();
+	initialize_story();
 	select_all_party();
 	enter("AR1000", "FR1001");
 }

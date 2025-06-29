@@ -9,6 +9,7 @@
 #include "formation.h"
 #include "game.h"
 #include "help.h"
+#include "keybind.h"
 #include "option.h"
 #include "playlist.h"
 #include "pushvalue.h"
@@ -23,9 +24,15 @@
 #include "view.h"
 #include "view_list.h"
 
+enum shortcutn : unsigned char {
+	KeyInventory, KeyCharacterSheet, KeyCharacterSpells, KeyJournal, KeyAutomap,
+	KeyPartySelect, KeyPartyRest, KeyTimeStop,
+};
+
 using namespace draw;
 
 extern array console_data;
+int game_panel_mode;
 
 unsigned caret_index;
 bool button_pressed, button_executed, button_hilited, button_sound, input_disabled;
@@ -39,7 +46,6 @@ static item drag_item;
 
 static char description_text[4096];
 static size_t description_cash_size;
-static int game_panel_mode;
 static int character_info_mode;
 static int current_topic_list, cash_topic_list, current_content_list;
 static int current_spell_level;
@@ -49,6 +55,7 @@ static stringbuilder description(description_text);
 static unsigned long tips_stamp;
 static char* input_string;
 static size_t input_string_size;
+static keybind shortcuts[KeyTimeStop + 1];
 
 static void paint_game_inventory();
 
@@ -540,8 +547,10 @@ static void paint_console() {
 		cash_size = console_data.count;
 		textfs((char*)console_data.data);
 		maximum = height;
+		origin = maximum - per_page;
 	}
 	correct_table(origin, maximum, per_page);
+	input_mouse_table(origin, maximum, per_page, per_row);
 	if(cash_origin != origin) {
 		cash_origin = origin;
 		cash_string = -1;
@@ -1770,6 +1779,7 @@ BSDATA(form) = {
 	{"ChangePanelMode", change_panel_mode},
 	{"OpenAutomap", setgameproc, 0, 0, paint_game_automap},
 	{"OpenCharacterSheet", setgameproc, 0, 0, paint_game_character},
+	{"OpenCharacterSpells", setgameproc, 0, 0, paint_game_spells},
 	{"OpenInventory", setgameproc, 0, 0, paint_game_inventory},
 	{"OpenJournal", setgameproc, 0, 0, paint_game_journal},
 	{"GameQuickLoad", game_quick_load},

@@ -11,9 +11,13 @@ void initialize_audio() {
 }
 
 void play_music(const char* id) {
-	auto p = manager_get(resources, id, "wav");
-	if(p)
-		play_music_raw(p);
+	if(!id)
+		play_music_raw(0);
+	else {
+		auto p = manager_get(resources, id, "wav");
+		if(p)
+			play_music_raw(p);
+	}
 }
 
 void play_speech(const char* id, int index) {
