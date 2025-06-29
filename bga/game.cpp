@@ -99,9 +99,10 @@ static void load_area(const char* id) {
 }
 
 void enter(const char* id, const char* location) {
+	char area_copy[12]; stringbuilder sa(area_copy); sa.add(id);
 	char entrance_copy[32]; stringbuilder sb(entrance_copy); sb.add(location);
-	print("Enter area [%1] at location [%2]", id, location);
-	load_area(id);
+	print("Enter area [%1] at location [%2]", area_copy, location);
+	load_area(area_copy);
 #ifdef _DEBUG
 	print("Count of points %1i", bsdata<point>::source.count);
 	print("Count of doors %1i", bsdata<door>::source.count);
