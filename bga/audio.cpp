@@ -29,6 +29,10 @@ void play_sound(const char* id, short unsigned volume, fnaudiocb proc, void* obj
 		audio_play(p, volume, proc, object);
 }
 
+bool is_played(const char* id) {
+	return audio_played(manager_get(resources, id, "wav"));
+}
+
 void music_repeat(void* object, void* callback_object) {
 	play_music_raw(object);
 }

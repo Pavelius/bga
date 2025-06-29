@@ -3,9 +3,11 @@
 typedef void(*fnaudiocb)(void* object, void* callback_object);
 
 void audio_play(void* object, short unsigned volume, fnaudiocb callback, void* callback_object);
+bool audio_played(const void* object);
 void audio_reset();
 void audio_update_channels();
 void initialize_audio();
+bool is_played(const char* id);
 void music_repeat(void* object, void* callback_object);
 void music_set(fnaudiocb callback);
 void play_music(const char* id);

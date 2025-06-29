@@ -203,3 +203,13 @@ void audio_play(void* object, short unsigned volume, fnaudiocb callback, void* c
 	p->callback_object = callback_object;
 	channel_write(p, object);
 }
+
+bool audio_played(const void* object) {
+	if(!object)
+		return false;
+	for(auto& e : channels) {
+		if(e.object == object)
+			return true;
+	}
+	return false;
+}
