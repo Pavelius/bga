@@ -493,8 +493,8 @@ static void apply_hilite_command() {
 			p->use(!p->isopen());
 		} else if(bsdata<container>::have(hilite_drawable)) {
 			auto p = (container*)hilite_drawable;
-			print("This is %1 (vairable %2i)", p->name, p->variable_index);
-			player->moveto(p->launch);
+			print("This is %1 (vairable %2i, %3)", p->name, p->variable_index, p->getvar().id);
+			party_action(&p->getvar(), p->launch, open_container);
 		} else if(bsdata<creature>::have(hilite_drawable)) {
 			if(combat_mode) {
 

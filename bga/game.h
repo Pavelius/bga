@@ -2,6 +2,7 @@
 
 #include "nameable.h"
 #include "point.h"
+#include "slice.h"
 
 enum gamen : unsigned char {
 	Reputation, Progress, Chapter, Rounds,
@@ -25,6 +26,7 @@ bool is_saved_game(const char* url);
 void game_auto_save();
 void game_quick_load();
 void game_quick_save();
+void party_action(void* object, point target_position, fnevent apply);
 void party_move(point v);
 void setcamera(point v);
 void setparty(point v, unsigned char orientation = 0xFF);

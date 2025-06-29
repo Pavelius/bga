@@ -230,6 +230,7 @@ BSMETA(stringvari) = {
 	BSREQ(id),
 	{}};
 BSMETA(variable) = {
+	BSREQ(id),
 	BSREQ(lock_difficult),
 	BSREQ(trap_difficult),
 	BSREQ(counter),
@@ -292,7 +293,7 @@ BSDATA(varianti) = {
 	{"Store", VAR(storei, 1)},
 	{"StringVar", VAR(stringvari, 1)},
 	{"Type", VAR(varianti, 1)},
-	{"Variable", VAR(variable, 0)},
+	{"Variable", VAR(variable, 1)},
 	{"WorldArea", VAR(worldmapi::area, 1)},
 	{"WorldLink", VAR(worldmapi::link, 3)},
 	{"WorldRealm", VAR(worldmapi, 1)},

@@ -287,7 +287,7 @@ void actor::updateanimate() {
 	if(prev_action != action) {
 		last_order = find_active_order(this);
 		if(last_order) {
-			last_order->apply();
+			execute(last_order->apply, 0, 0, last_order->object);
 			clear_order(last_order);
 		}
 	}

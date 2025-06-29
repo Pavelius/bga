@@ -249,7 +249,7 @@ point get_action_position(void* object, point nearest) {
 		return p->position;
 	} else if(bsdata<container>::have(object)) {
 		auto p = (container*)object;
-		return p->position;
+		return p->launch;
 	} else if(bsdata<creature>::have(object)) {
 		//if(combat_mode) {
 		//} else
@@ -258,44 +258,16 @@ point get_action_position(void* object, point nearest) {
 	return {0, 0};
 }
 
-void open_container_action() {
-	last_container = (container*)last_order->object;
-	open_container();
-}
-
-void party_action(void* object, fnevent apply) {
+void party_action(void* object, point target_position, fnevent apply) {
 	if(!player)
 		return;
 	auto position = player->position;
-	auto target_position = get_action_position(object, position);
 	if(distance(position, target_position) > 24) {
-		party_move(target_position);
+		player->moveto(target_position);
 		add_order(player, object, apply);
 	} else
-		apply();
-	//if(bsdata<region>::have(object)) {
-	//	auto p = (region*)object;
-	//	if(p->type == RegionInfo) {
-	//		//auto pn = getnme(gettipsname(p->position));
-	//		//if(pn) {
-	//		//	add_float_text(hotspot, pn, 320, 1000 * 5, p);
-	//		//	print("[+%1]", pn);
-	//		//}
-	//	} else if(p->type == RegionTravel)
-	//		enter(p->move_to_area, p->move_to_entrance);
-	//} else if(bsdata<door>::have(object)) {
-	//	auto p = (door*)object;
-	//	p->use(!p->isopen());
-	//} else if(bsdata<container>::have(object)) {
-	//	auto p = (container*)object;
-	//	// Open container
-	//} else if(bsdata<creature>::have(object)) {
-	//	//if(combat_mode) {
-	//	//} else
-	//	//	execute(choose_creature, 0, 0, object);
-	//}
+		draw::execute(apply, 0, 0, object);
 }
-
 
 void initialize_story() {
 	current_world = bsdata<worldmapi>::elements;

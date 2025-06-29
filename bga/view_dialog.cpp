@@ -24,10 +24,10 @@
 #include "view.h"
 #include "view_list.h"
 
-enum shortcutn : unsigned char {
-	KeyInventory, KeyCharacterSheet, KeyCharacterSpells, KeyJournal, KeyAutomap,
-	KeyPartySelect, KeyPartyRest, KeyTimeStop,
-};
+//enum shortcutn : unsigned char {
+//	KeyInventory, KeyCharacterSheet, KeyCharacterSpells, KeyJournal, KeyAutomap,
+//	KeyPartySelect, KeyPartyRest, KeyTimeStop,
+//};
 
 using namespace draw;
 
@@ -55,7 +55,7 @@ static stringbuilder description(description_text);
 static unsigned long tips_stamp;
 static char* input_string;
 static size_t input_string_size;
-static keybind shortcuts[KeyTimeStop + 1];
+//static keybind shortcuts[KeyTimeStop + 1];
 
 static void paint_game_inventory();
 

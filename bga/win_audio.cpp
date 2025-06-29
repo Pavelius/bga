@@ -188,10 +188,10 @@ void music_set(fnaudiocb callback) {
 void play_music_raw(void* object) {
 	if(music_channel.mode != ChannelReady && music_channel.object == object)
 		return;
-	if(!object) {
-		channel_reset(&music_channel);
+	channel_reset(&music_channel);
+	if(!object)
 		music_channel.object = object;
-	} else
+	else
 		channel_write(&music_channel, object);
 }
 
