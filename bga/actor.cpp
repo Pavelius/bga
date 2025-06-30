@@ -285,11 +285,9 @@ void actor::updateanimate() {
 			stop();
 	}
 	if(prev_action != action) {
-		last_order = find_active_order(this);
-		if(last_order) {
-			execute(last_order->apply, 0, 0, last_order->object);
-			clear_order(last_order);
-		}
+		auto p = find_active_order(this);
+		if(p)
+			p->set(OrderAction);
 	}
 }
 

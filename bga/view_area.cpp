@@ -11,6 +11,7 @@
 #include "game.h"
 #include "keybind.h"
 #include "math.h"
+#include "order.h"
 #include "region.h"
 #include "resid.h"
 #include "resinfo.h"
@@ -649,6 +650,7 @@ void paint_area() {
 	paint_area_map_zoomed(paint_area_map);
 	apply_shifer();
 	apply_keybinding();
+	update_orders();
 }
 
 static point minimap_origin, minimap_size;
