@@ -241,7 +241,6 @@ void paint_game_dialog(resn v, int frame) {
 }
 
 void paint_game_dialog(int x, int y, resn v, int frame) {
-	set_cursor();
 	dialog_start.x = x;
 	dialog_start.y = y;
 	caret = dialog_start;

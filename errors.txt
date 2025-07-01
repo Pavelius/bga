@@ -1,2 +1,2 @@
-﻿Error in file `rules/Playlist.txt`:
- Line 3: Not found Playlist identifier `PlayDay`
+﻿Error in file `rules/Hotkeys.txt`:
+ Line 5: Can't find variant `OpenAutomap1`

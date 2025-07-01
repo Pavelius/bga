@@ -12,6 +12,7 @@
 #include "keybind.h"
 #include "math.h"
 #include "order.h"
+#include "pushvalue.h"
 #include "region.h"
 #include "resid.h"
 #include "resinfo.h"
@@ -50,6 +51,8 @@ static void correct_camera() {
 }
 
 void setcamera(point v) {
+	if(!last_screen.width())
+		last_screen.set(0, 0, 800, 600);
 	camera.x = v.x - last_screen.width() / 2;
 	camera.y = v.y - last_screen.height() / 2;
 	correct_camera();
@@ -816,9 +819,20 @@ void* choose_combat_action() {
 	return (void*)getresult();
 }
 
+static int container_frame(container::typen type) {
+	switch(type) {
+	case container::Bag: return 1;
+	case container::Barrel: return 3;
+	case container::Altar: return 0;
+	case container::Body: return 4;
+	case container::Spellbook: return 5;
+	default: return 0;
+	}
+}
+
 static void paint_container() {
 	paint_game_dialog(0, 476, GUICONT, 1);
-	setdialog(62, 25); image(gres(CONTAINER), 3, 0);
+	setdialog(62, 25); image(gres(CONTAINER), container_frame(last_container->type), 0);
 	setdialog(430, 28); image(gres(CONTAINER), 1, 0);
 	setdialog(150, 22); button(STONSLOT, 0, 0);
 	setdialog(195, 22); button(STONSLOT, 0, 0);
@@ -842,15 +856,21 @@ static void paint_container() {
 
 static void mouse_area_cancel() {
 	if(hot.key == MouseLeft && !hot.pressed && ishilite())
-		execute(buttoncancel);
+		breakmodal(0);
 }
 
 static void paint_container_area() {
 	update_frames();
-	setcaret(0, 0, 800, 476); paint_area_map_zoomed(paint_area_map_spot); mouse_area_cancel();
+	// setcaret(0, 0, 800, 476); paint_area_map_zoomed(paint_area_map_spot); mouse_area_cancel();
+	setcaret(0, 0, 800, 476); mouse_area_cancel(); paint_area_map_zoomed(paint_area_map);
+	apply_shifer();
 	paint_container();
 }
 
 void open_container() {
+	pushvalue push_container(last_container);
+	last_container = get_container((variable*)hot.object);
+	if(!last_container)
+		return;
 	scene(paint_container_area);
 }

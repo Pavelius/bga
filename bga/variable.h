@@ -4,7 +4,7 @@
 #pragma once
 
 struct variable : nameable {
-	char		lock_difficult, trap_difficult, counter, stage;
+	char		lock_difficult, trap_difficult, counter, index;
 	unsigned	flags;
 	bool		is(tagn v) const { return (flags & (1 << v)) != 0; }
 	void		remove(tagn v) { flags &= ~(1 << v); }

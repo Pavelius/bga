@@ -36,7 +36,7 @@ template<> void archive::set<variable>(variable& e) {
 	set(e.lock_difficult);
 	set(e.trap_difficult);
 	set(e.counter);
-	set(e.stage);
+	set(e.index);
 	set(e.flags);
 }
 

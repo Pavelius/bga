@@ -53,6 +53,7 @@ static void initialize_variable(variableid* pv, char type, int index) {
 	char sym[2] = {type, 0};
 	auto& e = pv->getvar();
 	e.id = szdup(str("%1%2%3.2i", area_name, sym, index + 1));
+	e.index = index;
 }
 
 template<class T> void initilalize_variables(char type) {

@@ -234,8 +234,6 @@ BSMETA(variable) = {
 	BSREQ(lock_difficult),
 	BSREQ(trap_difficult),
 	BSREQ(counter),
-	BSREQ(stage),
-	BSREQ(flags),
 	{}};
 BSMETA(weaponi) = {
 	BSREQ(bonus),

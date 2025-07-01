@@ -265,7 +265,7 @@ void create_party_character(int index) {
 	apply_portraits();
 	raise_class(e.type);
 	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1))
-		player->skills[i] = e.skills[i];
+		player->basic.skills[i] = e.skills[i];
 	player->basic.feats.add(e.feats);
 	player_finish();
 }
