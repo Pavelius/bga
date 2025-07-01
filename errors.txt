@@ -1,2 +1,2 @@
-﻿Error in file `rules/Hotkeys.txt`:
- Line 5: Can't find variant `OpenAutomap1`
+﻿Error in file `parties/HandsOfFury.txt`:
+ Line 7: Not found item `Longsword`

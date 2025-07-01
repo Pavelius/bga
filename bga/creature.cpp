@@ -267,6 +267,12 @@ void create_party_character(int index) {
 	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1))
 		player->basic.skills[i] = e.skills[i];
 	player->basic.feats.add(e.feats);
+	for(auto i : e.items) {
+		if(!i)
+			break;
+		item it(i);
+		player->equip(it);
+	}
 	player_finish();
 }
 

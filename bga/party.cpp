@@ -4,6 +4,7 @@
 #include "class.h"
 #include "gender.h"
 #include "io_stream.h"
+#include "item.h"
 #include "log.h"
 #include "party.h"
 #include "race.h"
@@ -133,6 +134,25 @@ static void parse_skills(partyi::character& e) {
 	}
 }
 
+static void parse_items(partyi::character& e) {
+	auto index = 0;
+	memset(e.items, 0, sizeof(e.items));
+	while(*p && *p != 10 && *p != 13) {
+		if(*p == '.') {
+			p = skipsp(p + 1);
+			break;
+		}
+		sb.clear();
+		p = skipsp(sb.psidf(p));
+		auto ps = bsdata<itemi>::find(text_value);
+		if(!ps)
+			errorp(p, "Not found item `%1`", text_value);
+		else
+			e.items[index++] = bsdata<itemi>::source.indexof(ps);
+		skipne(',');
+	}
+}
+
 static void parse_stats(partyi::character& e) {
 	while(*p && *p != 10 && *p != 13) {
 		if(*p == '.') {
@@ -161,6 +181,8 @@ static void parse_stats(partyi::character& e) {
 			parse_feats(e);
 		else if(token("Skills"))
 			parse_skills(e);
+		else if(token("Items"))
+			parse_items(e);
 		if(*p == ',')
 			p = skipsp(p + 1);
 	}

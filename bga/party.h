@@ -19,6 +19,7 @@ struct partyi : nameable {
 		char	abilities[6];
 		featf	feats;
 		char	skills[24];
+		short	items[16];
 		short unsigned portrait;
 	};
 	character	characters[6];
