@@ -85,6 +85,7 @@ void party_move(point v) {
 	auto p = get_selected();
 	if(!p)
 		return;
+	clear_orders(player);
 	auto start_position = p->position;
 	for(auto p : party_selected) {
 		if(!p)
@@ -128,6 +129,7 @@ static unsigned long get_version() {
 	r += sizeof(itemground) * (++i);
 	r += sizeof(iteminside) * (++i);
 	r += sizeof(variable) * (++i);
+	r += bsdata<itemi>::source.count * (++i);
 	return r;
 }
 
@@ -261,6 +263,7 @@ point get_action_position(void* object, point nearest) {
 void party_action(void* object, point target_position, fnevent apply) {
 	if(!player)
 		return;
+	clear_orders(player);
 	auto position = player->position;
 	if(distance(position, target_position) > 24) {
 		player->moveto(target_position);

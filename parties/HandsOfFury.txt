@@ -2,7 +2,7 @@
 
 Группа не очень дружелюбных приключенцев с Побережья Мечей, называющих себя [Руки Ярости] имеют тенденцию к грабежу и насилию по отношению к людям, которых встречают по пути. После путишествия в Лускан с группой пиратов их запланированая экспедиция с командой с треском провалилась. Оказавшись в Таргосе они решили испытать удачу в качестве наемников, посланых на помощь Таргосу. Имя для группы придумал их лидер-тиран Макадос.
 
-- Макадос (ChaoticEvil Human Male Cleric): STR 14, DEX 12, CON 10, INT 10, WIS 14, CHA 16, PT 71, Skills: Bluff (2), Intimidate (1), Feats: Toughness, FocusMaces.
+- Макадос (ChaoticEvil Human Male Cleric): STR 14, DEX 12, CON 10, INT 10, WIS 14, CHA 16, PT 71, Skills: Bluff (2), Intimidate (1), Feats: Toughness, FocusMaces. Items: Mace.
 - Дахил Кровавая четверка (ChaoticEvil Human Male Barbarian): STR 16, DEX 16, CON 18, INT 8, WIS 10, CHA 8, PT 44, Skills: Intimidate (2), WildernessLore (4), Feats: Dodge, FocusAxes. Items: LeatherArmor.
 - Амрайт (NeutralEvil Human Elf Fighter): STR 10, DEX 20, CON 10, INT 14, WIS 14, CHA 8, PT: 69, Skills: Intimidate (4), KnowledgeArcana (2), WildernessLore (2), Feats: Ambidexterity, TwoWeaponFighting. Items: LongSword, LeatherArmor.
 - Мираи Венрайт (ChaoticNeutral HalfElf Female Wizard): STR 10, DEX 14, CON 14, INT 18, WIS 10, CHA 10, PT 33, Skills: Alchemy (4), Concentration (4), Hide (2), Spellcraft (4), Feats: RapidShot, FocusBows.

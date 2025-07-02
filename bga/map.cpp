@@ -200,16 +200,3 @@
 //	}
 //	return result;
 //}
-
-//unsigned short map::getdistance(indext start, indext goal) {
-//	if(start == Blocked || goal == Blocked)
-//		return Blocked;
-//	auto dx = iabs(getx(start) - getx(goal));
-//	auto dy = iabs(gety(start) - gety(goal));
-//	return dx > dy ? dx : dy;
-//}
-
-//void map::initialize() {
-//	for(auto& e : path_node)
-//		e.clear();
-//}

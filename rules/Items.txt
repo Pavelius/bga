@@ -14,6 +14,8 @@ LongSword weight(4) cost(15) avatar(821) equiped(WQSS1) wear(QuickWeapon) requir
 LongSwordFlaming weight(4) cost(15) avatar(821) equiped(WQSS1) wear(QuickWeapon) required(MartialWeaponSword) magic(2) basic(LongSword)
  weapon type(Slashing) damage(1 8 2) bonus(2)
  flags Balanced Flaming
+Mace weight(12) cost(12) avatar(484) equiped(WQSMC) wear(QuickWeapon) required(SimpleWeaponMace)
+ weapon type(Bludgeon) damage(1 8)
 TwoHandedSword weight(8) cost(15) avatar(866) equiped(WQSS2) wear(QuickWeapon) required(MartialWeaponGreatSword) 
  weapon type(Slashing) damage(2 6)
  flags Balanced TwoHanded

@@ -3,36 +3,36 @@
 #include "draw.h"
 #include "order.h"
 
-BSDATAC(orderi, 64)
+enum orderfn : unsigned char {
+	OrderAction,
+};
 
-static void remove_tail() {
-	while(bsdata<orderi>::source.count) {
-		auto& e = bsdata<orderi>::elements[bsdata<orderi>::source.count - 1];
-		if(e)
-			break;
-		bsdata<orderi>::source.count--;
-	}
+struct orderi {
+	void*		parent;
+	void*		object;
+	fnevent		apply;
+	unsigned char flags;
+	explicit operator bool() const { return apply != 0; }
+	void		clear();
+	bool		is(orderfn v) const { return (flags & (1 << v)) != 0; }
+	void		set(orderfn v) { flags |= 1 << v; }
+};
+
+static orderi last_order;
+
+void orderi::clear() {
+	memset(this, 0, sizeof(*this));
 }
 
-static void clear_order(orderi* p) {
-	memset(p, 0, sizeof(*p));
+void clear_orders(void* parent) {
+	last_order.clear();
 }
 
-orderi* add_order(void* parent, void* object, fnevent apply) {
-	auto p = bsdata<orderi>::addz();
-	p->apply = apply;
-	p->parent = parent;
-	p->object = object;
-	p->flags = 0;
-	return p;
-}
-
-orderi* find_active_order(const void* parent) {
-	for(auto& e : bsdata<orderi>()) {
-		if(e.parent == parent)
-			return &e;
-	}
-	return 0;
+void add_order(void* parent, void* object, fnevent apply) {
+	last_order.apply = apply;
+	last_order.parent = parent;
+	last_order.object = object;
+	last_order.flags = 0;
 }
 
 static void execute_order() {
@@ -43,12 +43,14 @@ static void execute_order() {
 }
 
 void update_orders() {
-	for(auto& e : bsdata<orderi>()) {
-		if(e.is(OrderAction)) {
-			draw::execute(execute_order, (long)e.parent, (long)e.apply, e.object);
-			clear_order(&e);
-			break;
-		}
-	}
-	remove_tail();
+	if(!last_order.is(OrderAction))
+		return;
+	draw::execute(execute_order, (long)last_order.parent, (long)last_order.apply, last_order.object);
+	last_order.clear();
+}
+
+void activate_order(void* parent) {
+	if(last_order.parent != parent)
+		return;
+	last_order.set(OrderAction);
 }

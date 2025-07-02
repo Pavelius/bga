@@ -284,11 +284,8 @@ void actor::updateanimate() {
 		if(!ismoving())
 			stop();
 	}
-	if(prev_action != action) {
-		auto p = find_active_order(this);
-		if(p)
-			p->set(OrderAction);
-	}
+	if(prev_action != action)
+		activate_order(this);
 }
 
 static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {
