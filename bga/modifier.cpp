@@ -5,5 +5,6 @@
 BSDATA(modifieri) = {
 	{"NoModifier"},
 	{"Permanent"},
+	{"LayInside"},
 };
-assert_enum(modifieri, Permanent)
+assert_enum(modifieri, LayInside)

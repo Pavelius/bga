@@ -3,6 +3,7 @@
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
+#include "iteminside.h"
 #include "form.h"
 #include "game.h"
 #include "modifier.h"
@@ -10,6 +11,7 @@
 #include "store.h"
 #include "stringvar.h"
 #include "timer.h"
+#include "variable.h"
 #include "view.h"
 
 using namespace draw;
@@ -33,6 +35,18 @@ template<> void ftscript<feati>(int value, int counter) {
 template<> void ftscript<form>(int value, int counter) {
 	auto& e = bsdata<form>::elements[value];
 	execute(e.command, e.param1, e.param2, e.object);
+}
+
+template<> void ftscript<itemi>(int value, int counter) {
+	item it(value);
+	switch(modifier) {
+	case LayInside: add_item(current_variable, it); break;
+	default: player->equip(it); break;
+	}
+}
+
+template<> void ftscript<variable>(int value, int counter) {
+	current_variable = bsdata<variable>::elements + value;
 }
 
 static void damage_change(int bonus) {

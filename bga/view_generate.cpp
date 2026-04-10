@@ -674,7 +674,7 @@ static bool generate_step_by_step() {
 static bool open_character_generation(creature& copy) {
 	auto push_player = player;
 	player = &copy;
-#ifdef _DEBUG_NOUSE
+#ifdef _DEBUG
 	player->gender = Female;
 	player->portrait = 14;
 	apply_portraits();

@@ -2,3 +2,6 @@
 
 HelpElements
  elements Ability Race Class Skill Feat
+
+RandomBarrel
+ elements LongSword LongSwordFlaming

@@ -17,6 +17,7 @@
 #include "rand.h"
 #include "region.h"
 #include "saveheader.h"
+#include "script.h"
 #include "timer.h"
 #include "view.h"
 #include "worldmap.h"
@@ -274,4 +275,5 @@ void party_action(void* object, point target_position, fnevent apply) {
 
 void initialize_story() {
 	current_world = bsdata<worldmapi>::elements;
+	script_run("StartGame");
 }

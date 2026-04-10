@@ -11,6 +11,7 @@ struct variable : nameable {
 	void		set(tagn v) { flags |= (1 << v); }
 };
 extern variable* current_variable_base;
+extern variable* current_variable;
 extern unsigned variable_count;
 struct variableid {
 	short unsigned variable_index;

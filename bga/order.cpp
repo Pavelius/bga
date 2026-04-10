@@ -6,7 +6,6 @@
 enum orderfn : unsigned char {
 	OrderAction,
 };
-
 struct orderi {
 	void*		parent;
 	void*		object;
@@ -17,7 +16,6 @@ struct orderi {
 	bool		is(orderfn v) const { return (flags & (1 << v)) != 0; }
 	void		set(orderfn v) { flags |= 1 << v; }
 };
-
 static orderi last_order;
 
 void orderi::clear() {

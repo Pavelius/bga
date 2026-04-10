@@ -1,2 +1,2 @@
-﻿Error in file `parties/HandsOfFury.txt`:
- Line 7: Not found item `Longsword`
+﻿Error in file `rules/Basic.txt`:
+ Line 7: Can't find variant `AR1000C03`
