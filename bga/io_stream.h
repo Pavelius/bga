@@ -60,6 +60,16 @@ struct file : iostream {
 private:
 	void*				handle;
 };
+struct memory : iostream {
+	memory(unsigned char* data, unsigned size) : data(data), current(0), size(size) {}
+	unsigned char*		ptr() const { return data; }
+	int					read(void* result, int count) override { return 0; }
+	int					seek(int result, int count) override;
+	int					write(const void* result, int count) override;
+private:
+	unsigned char*		data;
+	unsigned			current, size;
+};
 }
 
 unsigned szget(const char** input, codepage code = codepage::W1251);

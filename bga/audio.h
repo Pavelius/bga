@@ -14,3 +14,4 @@ void play_music(const char* id);
 void play_music_raw(void* object);
 void play_sound(const char* id, short unsigned volumne = 0xFFFF, fnaudiocb proc = 0, void* object = 0);
 void play_speech(const char* id, int index);
+void prepare_sound(const char* id);

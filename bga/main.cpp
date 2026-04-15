@@ -97,6 +97,10 @@ static void read_rules() {
 	bsreq::read("rules/Hotkeys.txt");
 }
 
+static void prepare_sounds() {
+	prepare_sound("GAM_09");
+}
+
 int main(int argc, char* argv[]) {
 	srand(getcputime());
 	// srand(923811);
@@ -112,6 +116,7 @@ int main(int argc, char* argv[]) {
 	initialize_feats();
 	initialize_parties();
 	initialize_audio();
+	prepare_sounds();
 	initialize_ui();
 	initialize_keybind();
 	music_set(music_repeat);

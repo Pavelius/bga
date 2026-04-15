@@ -42,6 +42,31 @@ unsigned iostream::getLE32() {
 	return (u4 << 24) | (u3 << 16) | (u2 << 8) | u1;
 }
 
+int io::memory::write(const void* result, int count) {
+	if(count <= 0)
+		return 0;
+	int m = size - current;
+	if(count > m)
+		count = m;
+	memcpy(data, result, count);
+	current += count;
+	return count;
+}
+
+int io::memory::seek(int position, int type) {
+	switch(type) {
+	case SeekCur: position += current; break;
+	case SeekEnd: position = size - position; break;
+	default: break;
+	}
+	if(position < 0)
+		position = 0;
+	else if((unsigned)position > size)
+		position = size;
+	current = position;
+	return position;
+}
+
 void* loadb(const char* url, int* size, int additional) {
 	void* p = 0;
 	if(size)

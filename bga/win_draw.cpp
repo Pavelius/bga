@@ -306,7 +306,7 @@ int draw::rawinput() {
 		TranslateMessage(&msg);
 		DispatchMessageA(&msg);
 		unsigned m = handle(msg);
-		if(m == InputNoUpdate || m == MouseMove)
+		if(m == InputNoUpdate)
 			continue;
 		if(m) {
 			m = handle_event(m);

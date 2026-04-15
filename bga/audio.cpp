@@ -40,3 +40,7 @@ bool is_played(const char* id) {
 void music_repeat(void* object, void* callback_object) {
 	play_music_raw(object);
 }
+
+void prepare_sound(const char* id) {
+	manager_get(resources, id, "wav");
+}
