@@ -428,9 +428,6 @@
     <ClCompile Include="win_audio.cpp">
       <Filter>platform</Filter>
     </ClCompile>
-    <ClCompile Include="acm_util.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="thread.cpp">
       <Filter>support</Filter>
     </ClCompile>
@@ -471,6 +468,12 @@
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="keybind.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
+    <ClCompile Include="acm.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="arcfile.cpp">
       <Filter>support</Filter>
     </ClCompile>
   </ItemGroup>
@@ -806,6 +809,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="form.h">
+      <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="arcfile.h">
       <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>

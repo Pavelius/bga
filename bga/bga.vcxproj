@@ -55,13 +55,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp" />
-    <ClCompile Include="acm_util.cpp" />
+    <ClCompile Include="acm.cpp" />
     <ClCompile Include="action.cpp" />
     <ClCompile Include="actor.cpp" />
     <ClCompile Include="alignment.cpp" />
     <ClCompile Include="ambient.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="answers.cpp" />
+    <ClCompile Include="arcfile.cpp" />
     <ClCompile Include="archive.cpp" />
     <ClCompile Include="area.cpp" />
     <ClCompile Include="area_path.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="alignment.h" />
     <ClInclude Include="ambient.h" />
     <ClInclude Include="animation.h" />
+    <ClInclude Include="arcfile.h" />
     <ClInclude Include="archive.h" />
     <ClInclude Include="area.h" />
     <ClInclude Include="array.h" />

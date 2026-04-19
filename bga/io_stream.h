@@ -60,6 +60,13 @@ struct file : iostream {
 private:
 	void*				handle;
 };
+struct counter : iostream {
+	unsigned count;
+	counter() : count(0) {}
+	int	read(void* result, int count) override { return 0; }
+	int	seek(int count, int rel) override { return 0; }
+	int	write(const void* result, int count) override { this->count += count; return count; }
+};
 struct memory : iostream {
 	memory(unsigned char* data, unsigned size) : data(data), current(0), size(size) {}
 	unsigned char*		ptr() const { return data; }
