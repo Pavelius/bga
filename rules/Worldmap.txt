@@ -1,3 +1,7 @@
+#Area
+
+AR1000 music(MX1000A)
+
 #WorldRealm
 
 IcewindDale background(WMAP1) icons(MAPICONS)

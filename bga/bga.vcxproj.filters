@@ -476,6 +476,9 @@
     <ClCompile Include="arcfile.cpp">
       <Filter>support</Filter>
     </ClCompile>
+    <ClCompile Include="sndfile.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -813,6 +816,9 @@
     </ClInclude>
     <ClInclude Include="arcfile.h">
       <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="sndfile.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
