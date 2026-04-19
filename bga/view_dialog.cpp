@@ -123,6 +123,10 @@ static void update_area_music() {
 		play_music(pa->music);
 }
 
+void update_main_music() {
+	play_music("MXMAIN");
+}
+
 void update_frames() {
 	update_tick();
 	audio_update_channels();
@@ -1634,6 +1638,7 @@ static void paint_item_count() {
 }
 
 static void paint_main_menu() {
+	update_main_music();
 	paint_game_dialog(START, 1);
 	setdialog(569, 133, 152, 21); texta(getnm("GameMode"), AlignCenterCenter);
 	setdialog(567, 160); button(GBTNMED2, 1, 2, 'M', "SinglePlayer");

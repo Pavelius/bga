@@ -1,2 +1,42 @@
-﻿Error in file `rules/Basic.txt`:
- Line 7: Can't find variant `AR1000C03`
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `A`
+ Define translation for `B`
+ Define translation for `BA`
+ Define translation for `BE`
+ Define translation for `C`
+ Define translation for `CH`
+ Define translation for `D`
+ Define translation for `DJ`
+ Define translation for `DR`
+ Define translation for `E`
+ Define translation for `EF`
+ Define translation for `G`
+ Define translation for `GO`
+ Define translation for `GU`
+ Define translation for `H`
+ Define translation for `HF`
+ Define translation for `HM`
+ Define translation for `I`
+ Define translation for `IC`
+ Define translation for `IS`
+ Define translation for `L`
+ Define translation for `M`
+ Define translation for `MA`
+ Define translation for `N`
+ Define translation for `O`
+ Define translation for `OR`
+ Define translation for `P`
+ Define translation for `R`
+ Define translation for `S`
+ Define translation for `SH`
+ Define translation for `SW`
+ Define translation for `T`
+ Define translation for `U`
+ Define translation for `V`
+ Define translation for `VE`
+ Define translation for `VI`
+ Define translation for `W`
+ Define translation for `WA`
+ Define translation for `Y`
+ Define translation for `Z`
+ Define translation for `ZO`

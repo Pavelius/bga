@@ -2,15 +2,14 @@
 #include "audio.h"
 #include "bsdata.h"
 #include "sndfile.h"
+#include "stringbuilder.h"
+
+extern array character_speech;
 
 bool audio_allow_sfx = true;
 bool audio_allow_music = true;
 
 void play_music_raw(void* object);
-
-void initialize_audio() {
-	arc_open(bsdata<sndfile>::source, "art/sound.arc");
-}
 
 static void* get_sound(const char* id) {
 	return ((sndfile*)arc_find(bsdata<sndfile>::source, id))->get();

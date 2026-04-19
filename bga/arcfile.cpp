@@ -4,7 +4,7 @@
 #include "slice.h"
 #include "stringbuilder.h"
 
-static int arc_compare_name(const void* v1, const void* v2) {
+int arc_compare_name(const void* v1, const void* v2) {
 	auto p1 = (arcfile*)v1;
 	auto p2 = (arcfile*)v2;
 	return szcmp(p1->id, p2->id);

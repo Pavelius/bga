@@ -75,5 +75,6 @@ void setdialog(int x, int y);
 void setdialog(int x, int y, int w, int h);
 void texta(resn res, const char* string, unsigned flags);
 void update_frames();
+void update_main_music();
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color);

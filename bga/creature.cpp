@@ -11,6 +11,7 @@
 #include "pushvalue.h"
 #include "rand.h"
 #include "script.h"
+#include "sndfile.h"
 #include "view.h"
 
 creature* party[6];
@@ -74,7 +75,7 @@ void apply_portraits() {
 	auto pi = bsdata<portraiti>::elements + player->portrait;
 	player->setcolor(pi->colors);
 	if(pi->sound)
-		player->speak.set(pi->sound);
+		player->speak = character_speech_index(find_character_sound(pi->sound, 1));
 }
 
 void player_finish() {

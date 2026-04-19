@@ -27,56 +27,32 @@ void initialize_translation();
 void initialize_store();
 void util_main();
 
-static item& citem(const char* id, int count = 1) {
-	static item it;
-	it.clear();
-	auto pi = bsdata<itemi>::find(id);
-	if(pi)
-		it.type = pi - bsdata<itemi>::elements;
-	it.count = count;
-	return it;
-}
-
-static void create_party() {
-	print("Create random party...");
-	for(auto i = 0; i < 6; i++) {
-		create_character(Male);
-		player->update();
-		player->addcoins(xrand(3, 18));
-		party[i] = player;
-		add_player_spellbooks();
-	}
-}
-
-static void add_enemies() {
-	auto push_player = player;
-	create_npc({744, 1049}, "GoblinWarrior");
-	player->feats.set(Enemy);
-	player = push_player;
-}
-
-//static void start_main() {
-//	create_game();
-//	create_party();
-//	select_all_party();
-//	enter("AR1000", "FR1001");
-//	add_enemies();
-//	player->additem(citem("BattleAxe"));
-//	player->additem(citem("BattleAxeP1"));
-//	player->additem(citem("LeatherArmor"));
-//	player->additem(citem("StuddedLeatherArmor"));
-//	player->additem(citem("ScaleMail"));
-//	player->additem(citem("LongSwordFlaming"));
-//	player->additem(citem("HalfPlate"));
-//	player->additem(citem("PotionOfHealing", 10));
-//	player->additem(citem("Helm"));
-//	player->additem(citem("HelmFull"));
-//	player->additem(citem("LargeShield"));
-//	player->additem(citem("TwoHandedSword"));
-//	player->update();
-//	current_world = bsdata<worldmapi>::elements;
-//	game.set(Rounds, xrand(10, 40));
-//	// next_scene(check_combat);
+//static item& citem(const char* id, int count = 1) {
+//	static item it;
+//	it.clear();
+//	auto pi = bsdata<itemi>::find(id);
+//	if(pi)
+//		it.type = pi - bsdata<itemi>::elements;
+//	it.count = count;
+//	return it;
+//}
+//
+//static void create_party() {
+//	print("Create random party...");
+//	for(auto i = 0; i < 6; i++) {
+//		create_character(Male);
+//		player->update();
+//		player->addcoins(xrand(3, 18));
+//		party[i] = player;
+//		add_player_spellbooks();
+//	}
+//}
+//
+//static void add_enemies() {
+//	auto push_player = player;
+//	create_npc({744, 1049}, "GoblinWarrior");
+//	player->feats.set(Enemy);
+//	player = push_player;
 //}
 
 static void read_rules() {
@@ -126,7 +102,7 @@ int main(int argc, char* argv[]) {
 	colors::h1 = colors::text.mix(colors::h3, 64);
 	colors::h2 = colors::text.mix(colors::h3, 96);
 	colors::special = color(244, 214, 66);
-	play_music("MXMAIN");
+	update_main_music();
 	initialize(getnm("AppTitle"));
 	settimer(64);
 	//next_scene(start_main);

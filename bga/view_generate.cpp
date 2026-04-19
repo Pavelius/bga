@@ -5,7 +5,6 @@
 #include "command.h"
 #include "creature.h"
 #include "draw.h"
-#include "io_stream.h"
 #include "game.h"
 #include "math.h"
 #include "party.h"
@@ -13,6 +12,7 @@
 #include "rand.h"
 #include "resname.h"
 #include "skill.h"
+#include "sndfile.h"
 #include "timer.h"
 #include "vector.h"
 #include "view.h"
@@ -22,7 +22,7 @@ using namespace draw;
 
 static vector<portraiti*> portraits;
 static vector<nameable*> records;
-static vector<resname> sounds;
+static vector<sndfile*> sounds;
 
 static int current_value;
 static int current_sound_played;
@@ -32,6 +32,8 @@ static creature before_race_apply, before_class_apply, before_abilities_apply, b
 static const char* header_id;
 
 const int ability_points_maximum = 25;
+
+extern array character_speech;
 
 static int get_ability_spend() {
 	auto r = 0;
@@ -445,10 +447,10 @@ static void paint_choose_appearance() {
 
 static void paint_sound_row(void* object) {
 	pushfore push_fore;
-	auto p = (resname*)object;
+	auto p = (sndfile*)object;
 	if(list_row_index == current_value)
 		fore = colors::yellow;
-	text(p->getname());
+	text(getnm(p->id));
 }
 
 static void pick_current_sound() {
@@ -458,7 +460,7 @@ static void pick_current_sound() {
 
 static void play_sound_set() {
 	current_sound_played = 1 + (current_sound_played % 38);
-	// play_speech(sounds[hot.param].name, current_sound_played);
+	play_sound(find_character_sound(sounds[hot.param]->id, current_sound_played));
 }
 
 static void paint_choose_sound() {
@@ -472,7 +474,7 @@ static void paint_choose_sound() {
 	setdialog(254 + 28, 61 + 59, 220, 320);
 	correct_table(current_value, sounds.count);
 	paint_list(sounds.data, sounds.element_size, sounds.count, origin, per_page,
-		paint_sound_row, row_height, {11, -4}, 10, pick_current_sound, 0, false);
+		paint_sound_row, row_height, {11, -4}, 10, pick_current_sound, 0, true);
 	// setdialog(254 + 22, 61 + 429); button(GBTNLRG, 1, 2);
 	setdialog(254 + 20, 61 + 392); button(GBTNLRG, 1, 2, 'P', "PlaySound"); fire(play_sound_set, current_value);
 	paint_footer_answer(true);
@@ -520,30 +522,26 @@ static void select_feats(featgf v) {
 	records.sort(compare_nameable);
 }
 
+static int compare_sndfile(const void* v1, const void* v2) {
+	auto p1 = *((sndfile**)v1);
+	auto p2 = *((sndfile**)v2);
+	return szcmp(getnm(p1->id), getnm(p2->id));
+}
+
 static void select_sound() {
 	if(sounds)
 		return;
 	current_value = -1;
-	for(io::file::find file("sounds"); file; file.next()) {
-		auto pn = file.name();
-		if(pn[0] == '.')
+	for(auto& e : character_speech.records<sndfile>()) {
+		if(!szpmatch(e.id, "*01"))
 			continue;
-		if(!szpmatch(pn, "*01.wav"))
-			continue;
-		auto n = zlen(pn);
-		if(n < 7)
-			continue;
-		char temp[64]; stringbuilder sb(temp);
-		sb.add(pn);
-		temp[zlen(pn) - 6] = 0;
-		szupper(temp);
-		auto p = sounds.add();
-		p->set(temp);
+		sounds.add(&e);
 	}
-	sounds.sort(compare_resname_name);
-	for(auto& e : sounds) {
-		if(player->speak == e.name)
-			current_value = sounds.indexof(&e);
+	sounds.sort(compare_sndfile);
+	auto index = character_speech.ptr(player->speak);
+	for(auto& p : sounds) {
+		if(index==p)
+			current_value = sounds.indexof(&p);
 	}
 }
 
@@ -645,7 +643,7 @@ static bool choose_step_action() {
 		set_description_id("ChooseSound");
 		if(!scene(paint_choose_sound))
 			return false;
-		player->speak.set(sounds[current_value].name);
+		player->speak = character_speech_index(sounds[current_value]);
 		break;
 	case ChooseName:
 		if(!open_character_name())
@@ -747,6 +745,7 @@ static void exit_party_formation() {
 static void paint_party_formation() {
 	auto allow_done = true;
 	paint_game_dialog(GUICARBB);
+	update_main_music();
 	setdialog(279, 22, 242, 32); texta(STONEBIG, getnm("PartyFormation"), AlignCenterCenter);
 	setdialog(428, 81);
 	for(auto i = 0; i < 6; i++) {
@@ -795,6 +794,7 @@ static void paint_select_party() {
 	static int origin;
 	const int per_page = 6;
 	paint_game_dialog(GCGPARTY);
+	update_main_music();
 	setdialog(180, 25, 441, 37); texta(STONEBIG, getnm("SelectParty"), AlignCenterCenter);
 	setdialog(22, 130, 212, 351);
 	paint_list(records.data, records.element_size, records.count, origin, per_page,

@@ -41,7 +41,7 @@ struct actor : moveable, coloration, statable, classa, wearable {
 	unsigned short	npc, enemy_id;
 	racen			race;
 	gendern			gender;
-	resname			speak;
+	short unsigned	speak;
 	void			animateattack(drawable* target);
 	void			animatedamage();
 	rect			getbox() const;
