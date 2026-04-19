@@ -13,4 +13,4 @@ struct playlisti {
 	const char* music;
 };
 
-bool play_list(const char* id, playlistn value = PlayDay);
+const char* play_list(const char* id, playlistn value = PlayDay);

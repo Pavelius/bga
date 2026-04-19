@@ -85,6 +85,10 @@ BSMETA(advancei) = {
 BSMETA(alignmenti) = {
 	BSREQ(id),
 	{}};
+BSMETA(areai) = {
+	BSREQ(id),
+	BSREQ(music),
+	{}};
 BSMETA(calendari) = {
 	BSREQ(id),
 	BSENM(period, periodi),
@@ -266,6 +270,7 @@ BSDATA(varianti) = {
 	{"Ability", VAR(abilityi, 1), 0, 0, ftscript<abilityi>},
 	{"Advance", VAR(advancei, 2)},
 	{"Alignment", VAR(alignmenti, 1)},
+	{"Area", VAR(areai, 1)},
 	{"Calendar", VAR(calendari, 1)},
 	{"Class", VAR(classi, 1), ftinfo<classi>},
 	{"ColorGrad", VAR(colorgrad, 1)},

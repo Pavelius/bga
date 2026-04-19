@@ -878,6 +878,7 @@ DLL int WINAPI				CreateDirectoryA(const char* lpPathName, void* lpSecurityAttri
 DLL void* WINAPI			CreateFileA(const char* lpFileName, unsigned dwDesiredAccess, unsigned dwShareMode, void* lpSecurityAttributes, unsigned dwCreationDisposition, unsigned dwFlagsAndAttributes, void* hTemplateFile);
 DLL void* WINAPI			CreateWaitableTimerW(void* lpTimerAttributes, int bManualReset, const wchar_t* lpTimerName);
 DLL int WINAPI				GetFullPathNameA(const char* lpFileName, unsigned nBufferLength, char* lpBuffer, char** lpFilePart);
+DLL int WINAPI				CopyFileA(const char* lpExistingFileName, const char* lpNewFileName, int bFailIfExists);
 WINGDIAPI void*	WINAPI		CreateFontA(int, int, int, int, int, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, const char*);
 WINGDIAPI void*	WINAPI		CreateFontW(int, int, int, int, int, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, const wchar_t*);
 DLL void* WINAPI			CreateMenu(void);
@@ -914,6 +915,7 @@ DLL void* WINAPI			GetDC(void*);
 DLL int WINAPI				GetExitCodeThread(void* hThread, unsigned* lpExitCode);
 WINGDIAPI DWORD WINAPI		GetGlyphOutlineW(void*, UINT, UINT, GLYPHMETRICS*, DWORD, void*, const MAT2*);
 WINGDIAPI DWORD WINAPI		GetKerningPairsA(HDC hdc, DWORD nPairs, KERNINGPAIR* lpKernPair);
+DLL int WINAPI				GetLastError();
 DLL void WINAPI				GetLocalTime(SYSTEMTIME* lpSystemTime);
 DLL unsigned WINAPI			GetModuleFileNameA(void* hModule, char* lpFilename, unsigned nSize);
 DLL void* WINAPI			GetProcessHeap(void);

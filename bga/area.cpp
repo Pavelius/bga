@@ -473,3 +473,7 @@ void set_var(const char* id, short unsigned index, tagn value) {
 	if(p)
 		p->set(value);
 }
+
+areai* get_area() {
+	return (current_area == -1) ? 0 : bsdata<areai>::elements + current_area;
+}

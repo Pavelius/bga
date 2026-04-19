@@ -97,14 +97,12 @@ static void read_rules() {
 	bsreq::read("rules/Hotkeys.txt");
 }
 
-static void prepare_sounds() {
-	prepare_sound("GAM_09");
-}
-
 int main(int argc, char* argv[]) {
 	srand(getcputime());
 	// srand(923811);
 	stringbuilder::custom = main_identifier;
+	initialize_audio();
+	initialize_area();
 	read_rules();
 	read_options();
 #ifdef _DEBUG
@@ -115,11 +113,8 @@ int main(int argc, char* argv[]) {
 	initialize_colorgrad();
 	initialize_feats();
 	initialize_parties();
-	initialize_audio();
-	prepare_sounds();
 	initialize_ui();
 	initialize_keybind();
-	music_set(music_repeat);
 	if(log::errors)
 		return -1;
 	metrics::font = gres(NORMAL);
@@ -131,6 +126,7 @@ int main(int argc, char* argv[]) {
 	colors::h1 = colors::text.mix(colors::h3, 64);
 	colors::h2 = colors::text.mix(colors::h3, 96);
 	colors::special = color(244, 214, 66);
+	play_music("MXMAIN");
 	initialize(getnm("AppTitle"));
 	settimer(64);
 	//next_scene(start_main);

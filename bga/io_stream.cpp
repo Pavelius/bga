@@ -48,7 +48,7 @@ int io::memory::write(const void* result, int count) {
 	int m = size - current;
 	if(count > m)
 		count = m;
-	memcpy(data, result, count);
+	memcpy(data + current, result, count);
 	current += count;
 	return count;
 }

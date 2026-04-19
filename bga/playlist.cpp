@@ -18,13 +18,12 @@ static playlisti* find_playlist(const char* id, playlistn type) {
 	return 0;
 }
 
-bool play_list(const char* id, playlistn value) {
+const char* play_list(const char* id, playlistn value) {
 	auto p = find_playlist(id, value);
 	if(!p)
-		return false;
+		return 0;
 	if(equal(p->music, "STOP"))
-		play_music(0);
+		return 0;
 	else
-		play_music(p->music);
-	return true;
+		return p->music;
 }

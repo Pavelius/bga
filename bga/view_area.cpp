@@ -1,5 +1,6 @@
 #include "animation.h"
 #include "area.h"
+#include "audio.h"
 #include "calendar.h"
 #include "console.h"
 #include "container.h"

@@ -18,9 +18,11 @@ enum directionn : unsigned char;
 
 struct iostream;
 struct sprite;
+struct sndfile;
 
 struct areai : nameable {
-	sliceu<variable> variables;
+	sliceu<variable>	variables;
+	sndfile*			music;
 };
 extern short unsigned current_area;
 
@@ -42,6 +44,7 @@ extern short unsigned area_cost[256 * 256];
 extern short unsigned area_width, area_height, area_height_tiles;
 extern bool combat_mode;
 
+areai* get_area();
 unsigned char get_look(point s, point d); // Determine orientation
 
 point get_free(point position, int size);
@@ -78,3 +81,4 @@ void setcamera(point v);
 void set_state(short unsigned index, areafn v);
 void set_tile(short unsigned index, short unsigned tile);
 void set_var(const char* id, short unsigned index, tagn value);
+void update_area_music();

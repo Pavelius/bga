@@ -98,6 +98,13 @@ bool io::file::remove(const char* url) {
 	return DeleteFileA(url) != 0;
 }
 
+bool io::file::copy(const char* dest, const char* source) {
+	if(CopyFileA(source, dest, 0))
+		return true;
+//	auto e = GetLastError();
+	return false;
+}
+
 int io::file::read(void* p, int size) {
 	unsigned opsize;
 	if(!ReadFile((void*)handle, p, size, &opsize, 0))

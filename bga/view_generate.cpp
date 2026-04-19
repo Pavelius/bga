@@ -458,7 +458,7 @@ static void pick_current_sound() {
 
 static void play_sound_set() {
 	current_sound_played = 1 + (current_sound_played % 38);
-	play_speech(sounds[hot.param].name, current_sound_played);
+	// play_speech(sounds[hot.param].name, current_sound_played);
 }
 
 static void paint_choose_sound() {
@@ -806,7 +806,6 @@ static void paint_select_party() {
 }
 
 static void start_new_game() {
-	initialize_area();
 	initialize_story();
 	select_all_party();
 	enter("AR1000", "FR1001");

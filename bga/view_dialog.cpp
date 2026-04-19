@@ -1,5 +1,6 @@
 #include "action.h"
 #include "array.h"
+#include "area.h"
 #include "ambient.h"
 #include "audio.h"
 #include "colorgrad.h"
@@ -32,11 +33,13 @@
 using namespace draw;
 
 extern array console_data;
+
 int game_panel_mode;
 
 unsigned caret_index;
 bool button_pressed, button_executed, button_hilited, button_sound, input_disabled;
 
+static sndfile* music_stop;
 static point dialog_start;
 static bool game_pause;
 static fnevent game_proc;
@@ -114,8 +117,16 @@ static void update_actor_animations() {
 	player = push_player;
 }
 
+static void update_area_music() {
+	auto pa = get_area();
+	if(pa)
+		play_music(pa->music);
+}
+
 void update_frames() {
 	update_tick();
+	audio_update_channels();
+	update_area_music();
 	if(!game_pause) {
 		update_game_tick();
 		update_actor_animations();
@@ -233,6 +244,7 @@ void paint_dialog(resn v, int frame) {
 }
 
 void paint_game_dialog(resn v, int frame) {
+	audio_update_channels();
 	set_cursor();
 	dialog_start.x = 0;
 	dialog_start.y = 0;

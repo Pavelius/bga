@@ -928,7 +928,7 @@ static unsigned time2pcm(ACMStream *acm, unsigned long long time_ms) {
 	/* return (time_ms / 100) * (acm->info.rate / 10); */
 }
 
-unsigned acm_pcm_tell(ACMStream *acm) {
+static unsigned acm_pcm_tell(ACMStream *acm) {
 	return acm->stream_pos / acm->info.channels;
 }
 

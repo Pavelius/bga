@@ -93,7 +93,7 @@ static unsigned get_size(iostream& file) {
 
 static void read_file(arcfile& e, const char* folder, const char* ext) {
 	char temp[260];
-	auto pn = szurl(temp, folder, 0, e.id, ext);
+	auto pn = szurl(temp, folder, e.id, ext);
 	io::file file(pn, StreamRead);
 	if(!file)
 		return;

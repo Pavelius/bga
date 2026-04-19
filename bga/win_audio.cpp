@@ -61,14 +61,14 @@ struct WAVEFORMATEX {
 	WORD		cbSize;
 };
 struct WAVEHDR {
-	char*       lpData;
-	unsigned    dwBufferLength;
-	unsigned    dwBytesRecorded;
-	unsigned*   dwUser;
-	unsigned    dwFlags;
-	unsigned    dwLoops;
+	char*		lpData;
+	unsigned	dwBufferLength;
+	unsigned	dwBytesRecorded;
+	unsigned*	dwUser;
+	unsigned	dwFlags;
+	unsigned	dwLoops;
 	WAVEHDR*	lpNext;
-	unsigned*   reserved;
+	unsigned*	reserved;
 };
 
 WINBASEAPI int WINAPI waveOutReset(void* hwo);
@@ -89,13 +89,11 @@ struct channelinfo {
 	volatile channelplayn mode;
 	void*       handle;
 	WAVEHDR     header;
-	fnaudiocb   callback;
-	void*       callback_object; // user defined object
 	explicit operator bool() const { return handle != 0; }
 	int getindex() const;
 };
 static channelinfo music_channel;
-static channelinfo channels[24];
+static channelinfo channels[16];
 
 int channelinfo::getindex() const {
 	return this - channels;
@@ -107,8 +105,6 @@ static void channel_check_done(channelinfo* p) {
 	if(p->mode == ChannelDone) {
 		waveOutUnprepareHeader(p->handle, &p->header, sizeof(p->header));
 		p->mode = ChannelReady;
-		if(p->callback)
-			p->callback(p->object, p->callback_object);
 	}
 }
 
@@ -181,10 +177,6 @@ static channelinfo* find_channel() {
 	return 0;
 }
 
-void music_set(fnaudiocb callback) {
-	music_channel.callback = callback;
-}
-
 void play_music_raw(void* object) {
 	if(music_channel.mode != ChannelReady && music_channel.object == object)
 		return;
@@ -195,12 +187,10 @@ void play_music_raw(void* object) {
 		channel_write(&music_channel, object);
 }
 
-void audio_play(void* object, short unsigned volume, fnaudiocb callback, void* callback_object) {
+void audio_play(void* object) {
 	auto p = find_channel();
 	if(!p)
 		return;
-	p->callback = callback;
-	p->callback_object = callback_object;
 	channel_write(p, object);
 }
 
@@ -212,4 +202,12 @@ bool audio_played(const void* object) {
 			return true;
 	}
 	return false;
+}
+
+int audio_lenght(const void* object) {
+	auto ph = (wav*)object;
+	if(!ph || !ph->byteRate)
+		return 0;
+	auto r = (unsigned long long)ph->subchunk2Size * 1000;
+	return (int)(r / ph->byteRate);
 }

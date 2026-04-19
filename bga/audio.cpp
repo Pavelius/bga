@@ -1,46 +1,41 @@
+#include "arcfile.h"
 #include "audio.h"
-#include "manager.h"
-#include "stringbuilder.h"
+#include "bsdata.h"
+#include "sndfile.h"
 
-static array resources(sizeof(manageri));
-static array characters(sizeof(manageri));
+bool audio_allow_sfx = true;
+bool audio_allow_music = true;
+
+void play_music_raw(void* object);
 
 void initialize_audio() {
-	manager_initialize(resources, "wav", "*.wav", true);
-	manager_initialize(characters, "sounds", "*.wav", true);
+	arc_open(bsdata<sndfile>::source, "art/sound.arc");
+}
+
+static void* get_sound(const char* id) {
+	return ((sndfile*)arc_find(bsdata<sndfile>::source, id))->get();
+}
+
+void play_sound(const char* id) {
+	if(!id || id[0] == 0)
+		return;
+	if(audio_allow_sfx)
+		audio_play(get_sound(id));
+}
+
+void play_sound(sndfile* p) {
+	if(!p)
+		return;
+	if(audio_allow_sfx)
+		audio_play(p->get());
 }
 
 void play_music(const char* id) {
-	if(!id)
-		play_music_raw(0);
-	else {
-		auto p = manager_get(resources, id, "wav");
-		if(p)
-			play_music_raw(p);
-	}
+	if(audio_allow_music)
+		play_music_raw(get_sound(id));
 }
 
-void play_speech(const char* id, int index) {
-	char temp[32]; stringbuilder sb(temp); sb.add("%1%2.2i", id, index);
-	auto p = manager_get(characters, temp, "wav");
-	if(p)
-		audio_play(p, 0xFFFF, 0, 0);
-}
-
-void play_sound(const char* id, short unsigned volume, fnaudiocb proc, void* object) {
-	auto p = manager_get(resources, id, "wav");
-	if(p)
-		audio_play(p, volume, proc, object);
-}
-
-bool is_played(const char* id) {
-	return audio_played(manager_get(resources, id, "wav"));
-}
-
-void music_repeat(void* object, void* callback_object) {
-	play_music_raw(object);
-}
-
-void prepare_sound(const char* id) {
-	manager_get(resources, id, "wav");
+void play_music(sndfile* p) {
+	if(audio_allow_music)
+		play_music_raw(p->get());
 }

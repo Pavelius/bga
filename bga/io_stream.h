@@ -45,6 +45,7 @@ struct file : iostream {
 	~file();
 	operator bool() const { return handle != 0; }
 	void				close();
+	static bool			copy(const char* dest, const char* source);
 	bool				create(const char* url, unsigned feats);
 	static bool			exist(const char* url);
 	void				get(datei& v) const;

@@ -1,17 +1,15 @@
 #pragma once
 
-typedef void(*fnaudiocb)(void* object, void* callback_object);
+struct sndfile;
 
-void audio_play(void* object, short unsigned volume, fnaudiocb callback, void* callback_object);
+int audio_lenght(const void* object);
+
+void audio_play(void* object);
 bool audio_played(const void* object);
 void audio_reset();
 void audio_update_channels();
 void initialize_audio();
-bool is_played(const char* id);
-void music_repeat(void* object, void* callback_object);
-void music_set(fnaudiocb callback);
 void play_music(const char* id);
-void play_music_raw(void* object);
-void play_sound(const char* id, short unsigned volumne = 0xFFFF, fnaudiocb proc = 0, void* object = 0);
-void play_speech(const char* id, int index);
-void prepare_sound(const char* id);
+void play_music(sndfile* p);
+void play_sound(const char* id);
+void play_sound(sndfile* p);
