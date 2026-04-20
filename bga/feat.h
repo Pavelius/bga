@@ -37,11 +37,11 @@ enum featn : unsigned char {
 	ReadyToBattle,
 };
 struct feati : nameable {
-	unsigned flags;
-	featn upgrade;
-	variants require;
-	featn getindex() const;
-	bool is(featgf v) const { return (flags & FG(v)) != 0; }
+	unsigned	flags;
+	featn		upgrade;
+	variants	require;
+	featn		getindex() const;
+	bool		is(featgf v) const { return (flags & FG(v)) != 0; }
 };
 typedef flagable<(ReadyToBattle + 31) / 32, unsigned> featf;
 

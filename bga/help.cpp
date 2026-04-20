@@ -6,8 +6,8 @@
 #include "skill.h"
 
 static bool filter_ability(const void* object) {
-	auto p = ((abilityi*)object);
-	return p->player != 0;
+	auto i = (abilityn)bsdata<abilityi>::source.indexof(object);
+	return i >= Strenght && i <= Charisma;
 }
 
 static bool filter_class(const void* object) {

@@ -138,7 +138,8 @@ sprite* actor::getsprite(int& ws) const {
 }
 
 void actor::wait(unsigned milliseconds) {
-	time_next = current_game_tick + milliseconds;
+	delay += milliseconds;
+	// time_next = current_game_tick + milliseconds;
 }
 
 static sprite::cicle* get_cicle(sprite* ps, animaten action, int o) {
@@ -215,7 +216,6 @@ rect actor::getbox() const {
 
 unsigned actor::getwait() const {
 	return 74;
-	// return 300;
 }
 
 void actor::setreverse(animaten v) {
@@ -269,23 +269,24 @@ void actor::nextaction() {
 }
 
 void actor::updateanimate() {
-	if(time_next > current_game_tick)
-		return;
-	auto prev_action = action;
-	wait(getwait());
-	if(frame == frame_stop)
-		nextaction();
-	else if(frame < frame_stop)
-		frame++;
-	else
-		frame--;
-	if(action == AnimateMove) {
-		movestep(getspeed());
-		if(!ismoving())
-			stop();
+	delay -= current_tick_delta;
+	while(delay < 0) {
+		auto prev_action = action;
+		wait(getwait());
+		if(frame == frame_stop)
+			nextaction();
+		else if(frame < frame_stop)
+			frame++;
+		else
+			frame--;
+		if(action == AnimateMove) {
+			movestep(getspeed());
+			if(!ismoving())
+				stop();
+		}
+		if(prev_action != action)
+			activate_order(this);
 	}
-	if(prev_action != action)
-		activate_order(this);
 }
 
 static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {

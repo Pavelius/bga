@@ -15,7 +15,6 @@ enum abilityn : unsigned char {
 	SkillPoints, HitPoints, Stamina,
 };
 struct abilityi : nameable {
-	int			player;
 	const char*	format;
 };
 struct statable : skilla {
@@ -26,6 +25,6 @@ struct statable : skilla {
 	int			get(abilityn v) const { return abilities[v]; }
 	int			get(damagen v) const { return resist[v]; }
 	int			get(skilln v) const { return skills[v]; }
-	bool		is(featn v) const { return feats.is(v); }
 	int			getbonus(abilityn v) const { return abilities[v] / 2 - 5; }
+	bool		is(featn v) const { return feats.is(v); }
 };

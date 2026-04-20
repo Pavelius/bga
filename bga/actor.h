@@ -37,7 +37,7 @@ struct actor : moveable, coloration, statable, classa, wearable {
 	short unsigned	frame, frame_stop, frame_start;
 	unsigned		frame_flags;
 	unsigned char	orientation;
-	unsigned long	time_next;
+	int				delay;
 	unsigned short	npc, enemy_id;
 	racen			race;
 	gendern			gender;
