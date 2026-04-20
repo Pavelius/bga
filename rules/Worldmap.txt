@@ -16,6 +16,7 @@ AR1200 position(206 109) avatar(2)
 AR2102 position(92 277) avatar(4)
 AR2000 position(89 235) avatar(3)
 AR3000 position(270 260) avatar(5)
+
 Bremen position(159 34) avatar(-1)
 Lonelywood position(289 15) avatar(-1)
 KelvinsCairn position(444 17) avatar(-1)
@@ -39,6 +40,7 @@ AR5102 position(477 49) avatar(12)
 AR5005 position(483 100) avatar(11)
 AR5200 position(446 5) avatar(13)
 AR5300 position(541 34) avatar(14)
+
 Luskan position(203 299)
 NeverwinterWood position(475 320)
 

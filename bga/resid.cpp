@@ -10,8 +10,6 @@ static const char* mons = "art/monsters";
 static const char* proj = "art/projectiles";
 static const char* wrld = "art/worldmap";
 
-static array dynamic_headers(sizeof(residi));
-
 BSDATA(residi) = {
 	{"NONE"},
 	{"STONEBIG", font}, {"REALMS", font}, {"NORMAL", font}, {"TOOLFONT", font}, {"NUMBER", font}, {"TEST", font},
@@ -92,15 +90,4 @@ sprite* gres(resn i) {
 	if(i == NONE)
 		return 0;
 	return bsdata<residi>::elements[i].get();
-}
-
-sprite* gres(const char* id, const char* folder) {
-	auto p = (residi*)dynamic_headers.findv(id, 0);
-	if(!p) {
-		p = (residi*)dynamic_headers.add();
-		p->clear();
-		p->id = szdup(id);
-		p->folder = szdup(folder);
-	}
-	return p->get();
 }
