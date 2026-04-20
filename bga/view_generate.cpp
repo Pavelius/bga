@@ -12,7 +12,7 @@
 #include "rand.h"
 #include "resname.h"
 #include "skill.h"
-#include "sndfile.h"
+#include "rfiles.h"
 #include "timer.h"
 #include "vector.h"
 #include "view.h"
@@ -22,7 +22,7 @@ using namespace draw;
 
 static vector<portraiti*> portraits;
 static vector<nameable*> records;
-static vector<sndfile*> sounds;
+static vector<rfvoc*> sounds;
 
 static int current_value;
 static int current_sound_played;
@@ -32,8 +32,6 @@ static creature before_race_apply, before_class_apply, before_abilities_apply, b
 static const char* header_id;
 
 const int ability_points_maximum = 25;
-
-extern array character_speech;
 
 static int get_ability_spend() {
 	auto r = 0;
@@ -447,7 +445,7 @@ static void paint_choose_appearance() {
 
 static void paint_sound_row(void* object) {
 	pushfore push_fore;
-	auto p = (sndfile*)object;
+	auto p = (rfsnd*)object;
 	if(list_row_index == current_value)
 		fore = colors::yellow;
 	text(getnm(p->id));
@@ -460,7 +458,7 @@ static void pick_current_sound() {
 
 static void play_sound_set() {
 	current_sound_played = 1 + (current_sound_played % 38);
-	play_sound(find_character_sound(sounds[hot.param]->id, current_sound_played));
+	play_sound(find_voice(sounds[hot.param]->id, current_sound_played));
 }
 
 static void paint_choose_sound() {
@@ -523,8 +521,8 @@ static void select_feats(featgf v) {
 }
 
 static int compare_sndfile(const void* v1, const void* v2) {
-	auto p1 = *((sndfile**)v1);
-	auto p2 = *((sndfile**)v2);
+	auto p1 = *((rfsnd**)v1);
+	auto p2 = *((rfsnd**)v2);
 	return szcmp(getnm(p1->id), getnm(p2->id));
 }
 
@@ -532,15 +530,15 @@ static void select_sound() {
 	if(sounds)
 		return;
 	current_value = -1;
-	for(auto& e : character_speech.records<sndfile>()) {
+	for(auto& e : bsdata<rfvoc>()) {
 		if(!szpmatch(e.id, "*01"))
 			continue;
 		sounds.add(&e);
 	}
 	sounds.sort(compare_sndfile);
-	auto index = character_speech.ptr(player->speak);
+	auto ps = bsdata<rfvoc>::ptr(player->speak);
 	for(auto& p : sounds) {
-		if(index==p)
+		if(ps == p)
 			current_value = sounds.indexof(&p);
 	}
 }
@@ -643,7 +641,7 @@ static bool choose_step_action() {
 		set_description_id("ChooseSound");
 		if(!scene(paint_choose_sound))
 			return false;
-		player->speak = character_speech_index(sounds[current_value]);
+		player->speak = getbsi((rfvoc*)sounds[current_value]);
 		break;
 	case ChooseName:
 		if(!open_character_name())

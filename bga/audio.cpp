@@ -1,7 +1,7 @@
 #include "arcfile.h"
 #include "audio.h"
 #include "bsdata.h"
-#include "sndfile.h"
+#include "rfiles.h"
 #include "stringbuilder.h"
 
 extern array character_speech;
@@ -12,7 +12,7 @@ bool audio_allow_music = true;
 void play_music_raw(void* object);
 
 static void* get_sound(const char* id) {
-	return ((sndfile*)arc_find(bsdata<sndfile>::source, id))->get();
+	return ((rfsnd*)arc_find(bsdata<rfsnd>::source, id))->get();
 }
 
 void play_sound(const char* id) {
@@ -22,7 +22,7 @@ void play_sound(const char* id) {
 		audio_play(get_sound(id));
 }
 
-void play_sound(sndfile* p) {
+void play_sound(rfsnd* p) {
 	if(!p)
 		return;
 	if(audio_allow_sfx)
@@ -34,7 +34,7 @@ void play_music(const char* id) {
 		play_music_raw(get_sound(id));
 }
 
-void play_music(sndfile* p) {
+void play_music(rfsnd* p) {
 	if(audio_allow_music)
 		play_music_raw(p->get());
 }

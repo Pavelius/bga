@@ -3,7 +3,7 @@
 #include "bsdata.h"
 #include "calendar.h"
 #include "rand.h"
-#include "sndfile.h"
+#include "rfiles.h"
 #include "timer.h"
 
 struct ambientplayer {

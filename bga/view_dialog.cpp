@@ -39,7 +39,7 @@ int game_panel_mode;
 unsigned caret_index;
 bool button_pressed, button_executed, button_hilited, button_sound, input_disabled;
 
-static sndfile* music_stop;
+static rfsnd* music_stop;
 static point dialog_start;
 static bool game_pause;
 static fnevent game_proc;

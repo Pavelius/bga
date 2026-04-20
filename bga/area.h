@@ -18,11 +18,11 @@ enum directionn : unsigned char;
 
 struct iostream;
 struct sprite;
-struct sndfile;
+struct rfsnd;
 
 struct areai : nameable {
 	sliceu<variable>	variables;
-	sndfile*			music;
+	rfsnd*			music;
 };
 extern short unsigned current_area;
 

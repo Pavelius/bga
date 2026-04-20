@@ -476,7 +476,7 @@
     <ClCompile Include="arcfile.cpp">
       <Filter>support</Filter>
     </ClCompile>
-    <ClCompile Include="sndfile.cpp">
+    <ClCompile Include="rfiles.cpp">
       <Filter>logic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -817,7 +817,7 @@
     <ClInclude Include="arcfile.h">
       <Filter>support</Filter>
     </ClInclude>
-    <ClInclude Include="sndfile.h">
+    <ClInclude Include="rfiles.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

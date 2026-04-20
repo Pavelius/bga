@@ -146,7 +146,7 @@
     <ClCompile Include="scripting.cpp" />
     <ClCompile Include="scrollable.cpp" />
     <ClCompile Include="skill.cpp" />
-    <ClCompile Include="sndfile.cpp" />
+    <ClCompile Include="rfiles.cpp" />
     <ClCompile Include="spell.cpp" />
     <ClCompile Include="sprite_util.cpp" />
     <ClCompile Include="store.cpp" />
@@ -241,7 +241,7 @@
     <ClInclude Include="seqlink.h" />
     <ClInclude Include="slice.h" />
     <ClInclude Include="sliceu.h" />
-    <ClInclude Include="sndfile.h" />
+    <ClInclude Include="rfiles.h" />
     <ClInclude Include="spell.h" />
     <ClInclude Include="store.h" />
     <ClInclude Include="stringvar.h" />
