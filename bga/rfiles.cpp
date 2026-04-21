@@ -4,9 +4,14 @@
 #include "rfiles.h"
 #include "resid.h"
 
+BSDATAD(rfard)
 BSDATAD(rfpma)
 BSDATAD(rfsnd)
 BSDATAD(rfvoc)
+
+BSMETA(rfard) = {
+	BSREQ(id),
+	{}};
 BSMETA(rfsnd) = {
 	BSREQ(id),
 	{}};
@@ -44,7 +49,12 @@ rfpma* find_image(const char* id) {
 	return (rfpma*)arc_find(bsdata<rfpma>::source, id);
 }
 
+rfard* find_area(const char* id) {
+	return (rfard*)arc_find(bsdata<rfard>::source, id);
+}
+
 static void initialize_resources() {
+	arc_open(bsdata<rfard>::source, "art/areasinfo.arc");
 	arc_open(bsdata<rfpma>::source, "art/animations.arc");
 	arc_open(bsdata<rfpma>::source, "art/intrface.arc");
 	arc_open(bsdata<rfpma>::source, "art/areas.arc");

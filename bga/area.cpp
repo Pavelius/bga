@@ -63,10 +63,11 @@ template<class T> void initilalize_variables(char type) {
 		initialize_variable(bsdata<T>::elements + i, type, i);
 }
 
-static void add_area_header(const char* url) {
-	io::file file(url, StreamRead);
+static void add_area_header(const rfard& e) {
+	io::file file(e.url, StreamRead);
 	if(!file)
 		return;
+	file.seek(e.offset, SeekSet);
 	clear_area();
 	if(!archive_ard(file, false, false))
 		return;
@@ -85,15 +86,8 @@ static void add_area_header(const char* url) {
 
 void initialize_area() {
 	bsdata<areai>::source.clear();
-	for(io::file::find file("art/area"); file; file.next()) {
-		auto pn = file.name();
-		if(pn[0] == '.')
-			continue;
-		if(!szpmatch(pn, "*.ard"))
-			continue;
-		char temp[260];
-		add_area_header(file.fullname(temp));
-	}
+	for(auto& e : bsdata<rfard>())
+		add_area_header(e);
 	clear_area();
 }
 
@@ -228,11 +222,23 @@ static bool load_mmp_file(const char* name) {
 	return pma_minimap != 0;
 }
 
+//static bool load_ard_file(const char* name) {
+//	char temp[260];
+//	io::file file(gmurl(temp, name));
+//	if(!file)
+//		return false;
+//	clear_area();
+//	return archive_ard(file, false, true);
+//}
+
 static bool load_ard_file(const char* name) {
-	char temp[260];
-	io::file file(gmurl(temp, name));
+	auto p = (rfard*)arc_find(bsdata<rfard>::source, name);
+	if(!p)
+		return false;
+	io::file file(p->url, StreamRead);
 	if(!file)
 		return false;
+	file.seek(p->offset, SeekSet);
 	clear_area();
 	return archive_ard(file, false, true);
 }
