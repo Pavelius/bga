@@ -817,5 +817,8 @@
     <ClInclude Include="rfiles.h">
       <Filter>logic</Filter>
     </ClInclude>
+    <ClInclude Include="enum.h">
+      <Filter>support</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

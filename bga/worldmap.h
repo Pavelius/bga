@@ -23,7 +23,7 @@ struct worldmapi : nameable {
 		worldmapi::area* from;
 		worldmapi::area* to;
 		const char*		entry;
-		geography_s		side;
+		geographyn		side;
 		unsigned		time; // Travel hours = time * 4
 		unsigned char	encounter_chance;
 		unsigned		flags;

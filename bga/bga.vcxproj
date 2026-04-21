@@ -205,6 +205,7 @@
     <ClInclude Include="drawable.h" />
     <ClInclude Include="duration.h" />
     <ClInclude Include="entrance.h" />
+    <ClInclude Include="enum.h" />
     <ClInclude Include="feat.h" />
     <ClInclude Include="flagable.h" />
     <ClInclude Include="floattext.h" />

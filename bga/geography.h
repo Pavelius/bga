@@ -2,7 +2,7 @@
 
 #include "nameable.h"
 
-enum geography_s : unsigned char {
+enum geographyn : unsigned char {
 	North, East, South, West
 };
 struct geographyi : nameable {
