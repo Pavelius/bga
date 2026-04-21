@@ -13,5 +13,6 @@ struct rfpma : arcfile {
 	sprite*		get() { return (sprite*)arcfile::get(0); }
 };
 
+rfpma* find_image(const char* id);
 rfsnd* find_sound(const char* id);
 rfsnd* find_voice(const char* id, int index);

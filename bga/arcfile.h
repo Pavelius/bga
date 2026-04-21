@@ -11,6 +11,7 @@ struct arcfile {
 	unsigned	offset; // Offset of file from start of archive
 	void*		data; // This is cashed value. 0 - if not cashed
 	void*		get(fnarcencode encoder);
+	void		release();
 };
 
 int arc_compare_name(const void* v1, const void* v2);

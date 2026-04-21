@@ -84,6 +84,13 @@ void* arcfile::get(fnarcencode encoder) {
 	return data;
 }
 
+void arcfile::release() {
+	if(!data)
+		return;
+	delete[] data;
+	data = 0;
+}
+
 static unsigned get_size(iostream& file) {
 	auto push = file.seek(0, SeekCur);
 	auto result = file.seek(0, SeekEnd);

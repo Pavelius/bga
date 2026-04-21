@@ -40,7 +40,7 @@ rfsnd* find_voice(const char* id, int index) {
 	return (rfsnd*)arc_find(bsdata<rfvoc>::source, temp);
 }
 
-static rfpma* find_image(const char* id) {
+rfpma* find_image(const char* id) {
 	return (rfpma*)arc_find(bsdata<rfpma>::source, id);
 }
 

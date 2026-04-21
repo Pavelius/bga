@@ -8,6 +8,7 @@
 #include "door.h"
 #include "draw.h"
 #include "entrance.h"
+#include "rfiles.h"
 #include "floattext.h"
 #include "io_stream.h"
 #include "itemground.h"
@@ -29,8 +30,8 @@ bool combat_mode;
 
 unsigned short current_area;
 
-static sprite* area_sprites;
-static sprite* area_minimap_sprites;
+static rfpma* pma_area;
+static rfpma* pma_minimap;
 
 static const unsigned char orientations_5b5[25] = {
 	6, 7, 8, 9, 10,
@@ -97,13 +98,13 @@ void initialize_area() {
 }
 
 void clear_area() {
-	if(area_sprites) {
-		delete area_sprites;
-		area_sprites = 0;
+	if(pma_area) {
+		pma_area->release();
+		pma_area = 0;
 	}
-	if(area_minimap_sprites) {
-		delete area_minimap_sprites;
-		area_minimap_sprites = 0;
+	if(pma_minimap) {
+		pma_minimap->release();
+		pma_minimap = 0;
 	}
 	area_height = area_width = area_height_tiles = 0;
 	variable_count = 0;
@@ -210,19 +211,21 @@ bool archive_ard(iostream& file, bool writemode, bool content) {
 }
 
 static bool load_tls_file(const char* name) {
-	char temp[260];
-	if(area_sprites)
-		delete area_sprites;
-	area_sprites = (sprite*)loadb(gmurl(temp, name, "pma"));
-	return area_sprites != 0;
+	if(pma_area) {
+		pma_area->release();
+		pma_area = 0;
+	}
+	pma_area = find_image(name);
+	return pma_area != 0;
 }
 
 static bool load_mmp_file(const char* name) {
-	char temp[260];
-	if(area_minimap_sprites)
-		delete area_minimap_sprites;
-	area_minimap_sprites = (sprite*)loadb(gmurl(temp, name, "pma", "MM"));
-	return area_minimap_sprites != 0;
+	if(pma_minimap) {
+		pma_minimap->release();
+		pma_minimap = 0;
+	}
+	pma_minimap = find_image(ids(name, "MM"));
+	return pma_minimap != 0;
 }
 
 static bool load_ard_file(const char* name) {
@@ -274,11 +277,11 @@ bool is_block(short unsigned index) {
 }
 
 const sprite* get_minimap() {
-	return area_minimap_sprites;
+	return pma_minimap->get();
 }
 
 const sprite* get_area_sprites() {
-	return area_sprites;
+	return pma_area->get();
 }
 
 point get_free(point position, int size) {
