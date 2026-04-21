@@ -5,6 +5,7 @@ typedef void (*fncommand)(void* object);
 
 struct item;
 struct nameable;
+struct sprite;
 
 enum resn : unsigned short;
 
@@ -78,3 +79,6 @@ void update_frames();
 void update_main_music();
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color);
+
+sprite* gres(resn i);
+sprite* gres(const char* id, const char* folder);

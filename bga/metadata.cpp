@@ -28,6 +28,7 @@
 #include "portrait.h"
 #include "race.h"
 #include "region.h"
+#include "rfiles.h"
 #include "school.h"
 #include "script.h"
 #include "skill.h"
@@ -187,6 +188,9 @@ BSMETA(racei) = {
 	BSREQ(id),
 	BSREQ(skin), BSREQ(hairs),
 	BSENM(favor, classi),
+	BSREQ(resmale),
+	BSREQ(resfemale),
+	BSREQ(restype),
 	{}};
 BSMETA(rangei) = {
 	BSREQ(id),
@@ -289,6 +293,7 @@ BSDATA(varianti) = {
 	{"Portrait", VAR(portraiti, 1)},
 	{"Race", VAR(racei, 1), ftinfo<racei>},
 	{"Rate", VAR(magici, 1)},
+	{"ResImage", VAR(rfpma, 1)},
 	{"Resource", VAR(residi, 1)},
 	{"Script", VAR(script, 1)},
 	{"Skill", VAR(skilli, 1), ftinfo<skilli>},

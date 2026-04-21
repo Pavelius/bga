@@ -1,8 +1,8 @@
 #Race
 
-Human hairs(HairNormal) skin(SkinNormal)
-Dwarf hairs(HairNormal) skin(SkinNormal) favor(Fighter)
-Elf hairs(HairNormal) skin(SkinNormal) favor(Wizard)
-Halfling hairs(HairNormal) skin(SkinNormal) favor(Rogue)
-HalfElf hairs(HairNormal) skin(SkinNormal)
-HalfOrc hairs(HairNormal) skin(SkinNormal) favor(Barbarian)
+Human hairs(HairNormal) skin(SkinNormal) resmale(CHMB1) resfemale(CHFB1)
+Dwarf hairs(HairNormal) skin(SkinNormal) favor(Fighter) resmale(CDMB1) resfemale(CDMB1)
+Elf hairs(HairNormal) skin(SkinNormal) favor(Wizard) resmale(CEMB1) resfemale(CEFB1)
+Halfling hairs(HairNormal) skin(SkinNormal) favor(Rogue) resmale(CIMB1) resfemale(CIFB1) restype(1)
+HalfElf hairs(HairNormal) skin(SkinNormal) resmale(CEMB1) resfemale(CEFB1)
+HalfOrc hairs(HairNormal) skin(SkinNormal) favor(Barbarian) resmale(CHMB1) resfemale(CHFB1)

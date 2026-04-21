@@ -70,5 +70,3 @@ struct residi {
 	void		clear();
 	sprite*		get();
 };
-sprite* gres(resn i);
-sprite* gres(const char* id, const char* folder);

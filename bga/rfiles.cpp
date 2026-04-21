@@ -12,6 +12,9 @@ BSMETA(rfsnd) = {
 BSMETA(rfvoc) = {
 	BSREQ(id),
 	{}};
+BSMETA(rfpma) = {
+	BSREQ(id),
+	{}};
 
 void* acm_encoder(const char* in_url, unsigned file_size, unsigned file_position, int force_channel);
 
