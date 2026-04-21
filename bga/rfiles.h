@@ -2,13 +2,15 @@
 
 #include "arcfile.h"
 
+struct sprite;
+
 struct rfsnd : arcfile {
 	void*		get();
 };
 struct rfvoc : rfsnd {
 };
 struct rfpma : arcfile {
-	void*		get() { return arcfile::get(0); }
+	sprite*		get() { return (sprite*)arcfile::get(0); }
 };
 
 rfsnd* find_sound(const char* id);

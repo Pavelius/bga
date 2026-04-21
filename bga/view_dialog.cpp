@@ -1183,7 +1183,7 @@ static void paint_game_options() {
 }
 
 static void paint_game_journal() {
-	paint_game_dialog(GUIJRLN);
+	paint_game_dialog(GUIJRNL);
 	setdialog(234, 24, 205, 28); texta(STONEBIG, getnm("Journal"), AlignCenterCenter);
 	setdialog(66, 90, 651, 275); texta("Test text 1", AlignLeft); // fore(255 255 246)
 	//Scroll GBTNSCRL 727 64 12 304 frames(1 0 3 2 4 5)

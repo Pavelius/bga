@@ -1,2 +1,7 @@
-﻿Error in file `rules/Races.txt`:
- Line 4: Not found ResImage identifier `CDFB1`
+﻿Error in file `rules/Worldmap.txt`:
+ Line 7: Not found ResImage identifier `WMAP1`
+ Line 7: Not found ResImage identifier `MAPICONS`
+ Line 8: Not found ResImage identifier `WMAP2`
+ Line 8: Not found ResImage identifier `MAPICONS`
+ Line 9: Not found ResImage identifier `WMAP3`
+ Line 9: Not found ResImage identifier `MAPICONS`

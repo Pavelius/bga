@@ -144,7 +144,7 @@ BSMETA(itemi) = {
 	BSREQ(count), BSREQ(weight), BSREQ(cost),
 	BSFLG(flags, itemfi),
 	BSREQ(magic), BSREQ(max_dex_bonus),
-	BSREQ(avatar), BSREQ(ground), BSENM(equiped, residi), BSENM(thrown, residi),
+	BSREQ(avatar), BSREQ(ground), BSENM(equiped, rfpma), BSENM(thrown, rfpma),
 	BSENM(wear, weari),
 	BSREQ(wearing), BSREQ(use),
 	{}};
@@ -193,9 +193,6 @@ BSMETA(racei) = {
 	BSREQ(restype),
 	{}};
 BSMETA(rangei) = {
-	BSREQ(id),
-	{}};
-BSMETA(residi) = {
 	BSREQ(id),
 	{}};
 BSMETA(schooli) = {
@@ -293,8 +290,8 @@ BSDATA(varianti) = {
 	{"Portrait", VAR(portraiti, 1)},
 	{"Race", VAR(racei, 1), ftinfo<racei>},
 	{"Rate", VAR(magici, 1)},
-	{"ResImage", VAR(rfpma, 1)},
-	{"Resource", VAR(residi, 1)},
+	{"ResPMA", VAR(rfpma, 1)},
+	{"ResSND", VAR(rfsnd, 1)},
 	{"Script", VAR(script, 1)},
 	{"Skill", VAR(skilli, 1), ftinfo<skilli>},
 	{"Spell", VAR(spelli, 1)},

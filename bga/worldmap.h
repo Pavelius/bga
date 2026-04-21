@@ -3,7 +3,7 @@
 #include "geography.h"
 #include "point.h"
 
-struct residi;
+struct rfpma;
 
 enum worldf_s {
 	AreaVisible = 1,
@@ -28,8 +28,8 @@ struct worldmapi : nameable {
 		unsigned char	encounter_chance;
 		unsigned		flags;
 	};
-	residi*				background;
-	residi*				icons;
+	rfpma*				background;
+	rfpma*				icons;
 };
 extern worldmapi*		current_world;
 worldmapi::area*		get_party_world_area();

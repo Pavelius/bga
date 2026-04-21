@@ -6,7 +6,7 @@ sprite* npci::getres(int n) {
 		return sprites[n];
 	if(!res[n])
 		return 0;
-	sprites[n] = gres(res[n], "art/monsters");
+	sprites[n] = gres(res[n]);
 	return sprites[n];
 }
 

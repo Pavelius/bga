@@ -17,6 +17,7 @@
 #include "region.h"
 #include "resid.h"
 #include "resinfo.h"
+#include "rfiles.h"
 #include "timer.h"
 #include "vector.h"
 #include "view.h"
@@ -369,7 +370,7 @@ static void paint_creature(const drawable* object) {
 
 static void paint_animation(const drawable* object) {
 	auto p = (animation*)object;
-	auto pr = gres(p->rsname, "art/animations");
+	auto pr = gres(p->rsname);
 	if(!pr)
 		return;
 	auto hour = gethour();
@@ -526,7 +527,7 @@ static void apply_command() {
 			if(rc.size() >= 8) {
 				pushrect push;
 				pushfore push_fore(colors::green);
-				cursor.set(NONE, 0);
+				cursor.set((resn)0, 0);
 				caret.x = rc.x1 - camera.x;
 				caret.y = rc.y1 - camera.y;
 				width = rc.width();

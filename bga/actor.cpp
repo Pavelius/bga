@@ -61,7 +61,7 @@ int get_armor_index(const item& e) {
 }
 
 resn get_character_res(racen race, gendern gender, classn type, int ai, int& ws) {
-	resn icn = NONE;
+	resn icn = (resn)0;
 	switch(race) {
 	case Dwarf:
 	case Gnome:

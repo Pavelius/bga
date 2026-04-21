@@ -233,9 +233,6 @@
     <ClCompile Include="zip_util.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="resid.cpp">
-      <Filter>interface</Filter>
-    </ClCompile>
     <ClCompile Include="colorgrad.cpp">
       <Filter>interface</Filter>
     </ClCompile>

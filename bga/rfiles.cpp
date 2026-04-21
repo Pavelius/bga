@@ -2,6 +2,7 @@
 #include "draw.h"
 #include "stringbuilder.h"
 #include "rfiles.h"
+#include "resid.h"
 
 BSDATAD(rfpma)
 BSDATAD(rfsnd)
@@ -48,6 +49,7 @@ static void initialize_resources() {
 	arc_open(bsdata<rfpma>::source, "art/intrface.arc");
 	arc_open(bsdata<rfpma>::source, "art/areas.arc");
 	arc_open(bsdata<rfpma>::source, "art/characters.arc");
+	arc_open(bsdata<rfpma>::source, "art/fonts.arc");
 	arc_open(bsdata<rfpma>::source, "art/monsters.arc");
 	arc_open(bsdata<rfpma>::source, "art/world.arc");
 }
@@ -58,14 +60,10 @@ void initialize_audio() {
 	initialize_resources();
 }
 
-sprite* gres(const char* id, const char* folder) {
+sprite* gres(const char* id) {
 	return (sprite*)find_image(id)->get();
-	//auto p = (residi*)dynamic_headers.findv(id, 0);
-	//if(!p) {
-	//	p = (residi*)dynamic_headers.add();
-	//	p->clear();
-	//	p->id = szdup(id);
-	//	p->folder = szdup(folder);
-	//}
-	//return p->get();
+}
+
+sprite* gres(resn i) {
+	return ((rfpma*)(bsdata<rfpma>::source.data))[i].get();
 }
