@@ -90,6 +90,7 @@ int main(int argc, char* argv[]) {
 	initialize_feats();
 	initialize_parties();
 	initialize_ui();
+	initialize_interface();
 	initialize_keybind();
 	if(log::errors)
 		return -1;

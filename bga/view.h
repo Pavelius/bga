@@ -32,6 +32,7 @@ void edit(char* string, size_t maximum, unsigned text_flags, bool upper_case = f
 void fire(fnevent proc, long param = 0, long param2 = 0, const void* object = 0);
 void hotkey(unsigned key, fnevent proc, int param = 0);
 void initialize_ui();
+void initialize_interface();
 void input_debug();
 void next_scene();
 void next_scene(fnevent proc);

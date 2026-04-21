@@ -42,6 +42,9 @@ static fnoperation drag_drop_proc;
 static item *drag_item_source, *drag_item_dest;
 static item drag_item;
 
+static sprite* pma_items;
+static sprite* pma_port[2];
+
 static char description_text[4096];
 static size_t description_cash_size;
 static int character_info_mode;
@@ -619,13 +622,13 @@ static void hilight_drag_protrait() {
 }
 
 static void portrait_large() {
-	image(gres(PORTL), player->portrait, 0);
+	image(pma_port[1], player->portrait, 0);
 }
 
 void get_player_portrait(surface& sm, int index) {
 	auto push_canvas = canvas;
 	surface sa(42, 42, 32); canvas = &sa;
-	image(0, 0, gres(PORTS), party[index]->portrait, 0);
+	image(0, 0, pma_port[0], party[index]->portrait, 0);
 	blit(sm, 0, 0, sm.width, sm.height, 0, *canvas, 0, 0, canvas->width, canvas->height);
 	canvas = push_canvas;
 }
@@ -649,7 +652,7 @@ static void portrait_small(creature* pc, bool player_hilite) {
 
 static void paint_item_avatar() {
 	auto i = last_item->geti().avatar * 2;
-	image(caret.x + width / 2, caret.y + height / 2, gres(ITEMS), i + 1, 0);
+	image(caret.x + width / 2, caret.y + height / 2, pma_items, i + 1, 0);
 }
 
 void choose_creature() {
@@ -785,7 +788,7 @@ void paint_item(const item* pi) {
 	setoffset(2, 2);
 	if(!player->isusable(*pi))
 		layer(colors::red);
-	image(gres(ITEMS), pi->geti().avatar * 2, 0);
+	image(pma_items, pi->geti().avatar * 2, 0);
 	if(button_hilited && hot.key == MouseRight && !hot.pressed)
 		execute(open_item_description, 0, 0, pi);
 	if(pi->count > 1) {
@@ -910,7 +913,7 @@ static void inventory(wearn slot, int index, int empthy_frame, bool show_back = 
 		paint_item_dragable(pi);
 	else if(empthy_frame != -1) {
 		if(empthy_frame >= 100) // Item frame
-			image(caret.x + 2, caret.y + 2, gres(ITEMS), empthy_frame - 100, 0);
+			image(caret.x + 2, caret.y + 2, pma_items, empthy_frame - 100, 0);
 		else
 			image(caret.x + 2, caret.y + 2, gres(STON), empthy_frame, 0);
 	}
@@ -1783,6 +1786,12 @@ void initialize_ui() {
 	set_cursor();
 	ptips = tips_main;
 	draw::syscursor(false);
+}
+
+void initialize_interface() {
+	pma_items = gres("ITEMS");
+	pma_port[0] = gres("PORTS");
+	pma_port[1] = gres("PORTL");
 }
 
 BSDATA(form) = {
