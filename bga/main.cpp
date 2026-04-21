@@ -94,10 +94,10 @@ int main(int argc, char* argv[]) {
 	initialize_keybind();
 	if(log::errors)
 		return -1;
-	metrics::font = gres(NORMAL);
-	metrics::h1 = gres(STONEBIG);
-	metrics::h2 = gres(REALMS);
-	metrics::h3 = gres(NORMAL);
+	metrics::font = gres("NORMAL");
+	metrics::h1 = gres("STONEBIG");
+	metrics::h2 = gres("REALMS");
+	metrics::h3 = gres("NORMAL");
 	colors::text = color(255, 255, 255);
 	colors::h3 = color(244, 214, 66);
 	colors::h1 = colors::text.mix(colors::h3, 64);

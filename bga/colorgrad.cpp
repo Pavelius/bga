@@ -28,5 +28,5 @@ void set_color(const char* id) {
 }
 
 void initialize_colorgrad() {
-	pallette_bitmap.read("art/bmp/MPALETTE.bmp");
+	pallette_bitmap.read("art/mpalette.bmp");
 }
