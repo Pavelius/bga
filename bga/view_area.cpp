@@ -221,7 +221,7 @@ static void set_visible_area() {
 		mx = width;
 	if(my < height) {
 		caret.y += (height - my) / 2;
-		rectblack({push_caret.x, push_caret.y, caret.x+width, caret.y});
+		rectblack({push_caret.x, push_caret.y, caret.x + width, caret.y});
 		rectblack({push_caret.x, caret.y + my, caret.x + width, caret.y + height});
 	} else
 		my = height;
@@ -331,10 +331,61 @@ static void polygon(const sliceu<point>& source) {
 	line(pb->x - camera.x, pb->y - camera.y);
 }
 
+static void fill_polygon(const sliceu<point>& source) {
+	auto pb = source.begin();
+	auto pe = source.end();
+	if(pb >= pe)
+		return;
+	pushrect push;
+	auto y2 = caret.y + height;
+	auto py1 = pb[0].y - camera.y;
+	for(; caret.y < y2; caret.y++) {
+		auto above = caret.y >= py1;
+		auto outside = true;
+		for(auto p = pb; p < pe; p++) {
+			point p0 = p[0] - camera;
+			point p1 = (((p + 1) == pe) ? *pb : p[1]) - camera;
+			if(p0.y == p1.y && caret.y == p1.y) {
+				caret.x = p0.x;
+				line(p1.x, caret.y);
+				continue;
+			}
+			auto cur_above = caret.y >= p1.y;
+			if(above == cur_above)
+				continue;
+			auto dx = p0.x - p1.x;
+			auto dy = p0.y - p1.y;
+			auto dt = caret.y - p1.y;
+			if(outside) {
+				caret.x = p1.x + dt * dx / dy;
+				outside = false;
+			} else {
+				line(p1.x, caret.y);
+				outside = true;
+			}
+			above = cur_above;
+		}
+	}
+}
+
 static void polygon_green(const sliceu<point>& source) {
 	auto push_fore = fore;
 	fore = colors::green;
 	polygon(source);
+	fore = push_fore;
+}
+
+static void polygon_green_filled(const sliceu<point>& source, const rect& rc) {
+	auto push_fore = fore;
+	auto push_alpha = alpha; alpha = 64;
+	pushrect push;
+	caret.x = rc.x1 - camera.x;
+	caret.y = rc.y1 - camera.y;
+	width = rc.width();
+	height = rc.height();
+	fore = colors::green;
+	fill_polygon(source);
+	alpha = push_alpha;
 	fore = push_fore;
 }
 
@@ -402,6 +453,7 @@ static void paint_float_text(const drawable* object) {
 static void paint_door(const drawable* object) {
 	auto p = (door*)object;
 	if(p->ishilite()) {
+		polygon_green_filled(p->getpoints(), p->box);
 		polygon_green(p->getpoints());
 		cursor.cicle = p->cursor;
 	}
@@ -420,6 +472,7 @@ static void paint_region(const drawable* object) {
 static void paint_container(const drawable* object) {
 	auto p = (container*)object;
 	if(p->ishilite()) {
+		polygon_green_filled(p->points, p->box);
 		polygon_green(p->points);
 		cursor.cicle = 2;
 	}
