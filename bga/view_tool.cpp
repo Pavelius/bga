@@ -52,7 +52,7 @@ static void paint_test_table() {
 	pushrect push;
 	const int dx = 20;
 	const int dy = 20;
-	paint_game_dialog(GUICHP);
+	paint_game_dialog("GUICHP");
 	for(auto y = 0; y < 16; y++) {
 		for(auto x = 0; x < 16; x++) {
 			caret.x = 100 + x * dx;
@@ -64,7 +64,7 @@ static void paint_test_table() {
 }
 
 static void paint_chapter() {
-	paint_game_dialog(GUICHP);
+	paint_game_dialog("GUICHP");
 	setdialog(412, 529); button(GBTNBFRM, 1, 2, KeySpace, "Done"); fire(buttonok);
 	setdialog(183, 529); button(GBTNBFRM, 1, 2, KeySpace, "Replay");
 	setdialog(193, 35, 412, 30); texta(STONEBIG, "Header", AlignCenterCenter);
@@ -88,7 +88,7 @@ static void textn(resn res, const char* string, unsigned flags) {
 }
 
 static void paint_word_map() {
-	paint_dialog(GUIMAP, 2);
+	paint_dialog("GUIMAP", 2);
 	setdialog(61, 157); button(GBTNMED, 1, 2, 0);
 	setdialog(61, 187); button(GBTNMED, 1, 2, 0);
 	setdialog(61, 217); button(GBTNMED, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);

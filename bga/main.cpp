@@ -27,34 +27,6 @@ void initialize_translation();
 void initialize_store();
 void util_main();
 
-//static item& citem(const char* id, int count = 1) {
-//	static item it;
-//	it.clear();
-//	auto pi = bsdata<itemi>::find(id);
-//	if(pi)
-//		it.type = pi - bsdata<itemi>::elements;
-//	it.count = count;
-//	return it;
-//}
-//
-//static void create_party() {
-//	print("Create random party...");
-//	for(auto i = 0; i < 6; i++) {
-//		create_character(Male);
-//		player->update();
-//		player->addcoins(xrand(3, 18));
-//		party[i] = player;
-//		add_player_spellbooks();
-//	}
-//}
-//
-//static void add_enemies() {
-//	auto push_player = player;
-//	create_npc({744, 1049}, "GoblinWarrior");
-//	player->feats.set(Enemy);
-//	player = push_player;
-//}
-
 static void read_rules() {
 	bsreq::read("rules/Colors.txt");
 	bsreq::read("rules/Races.txt");

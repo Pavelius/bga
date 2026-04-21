@@ -182,7 +182,7 @@ static void paint_choose_avatar() {
 		current_value = portraits.count - 1;
 	if(current_value < 0)
 		current_value = 0;
-	paint_game_dialog(GUICGB);
+	paint_game_dialog("GUICGB");
 	paint_character_generation("ChooseAvatar");
 	image(254, 87, gres(GUIACG), 1, 0);
 	image(295, 116, gres(PORTL), portraits[current_value]->getindex(), 0);
@@ -361,7 +361,7 @@ static void paint_feat_row(void* object) {
 }
 
 static void paint_choose_step() {
-	paint_game_dialog(GUICGB);
+	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation(bsdata<commandi>::elements[current_step].id);
 	paint_answers();
@@ -370,7 +370,7 @@ static void paint_choose_step() {
 }
 
 static void paint_choose_sex() {
-	paint_game_dialog(GUICGB);
+	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation(bsdata<commandi>::elements[current_step].id);
 	image(254, 87, gres(GUIACG), 0, 0);
@@ -381,7 +381,7 @@ static void paint_choose_sex() {
 }
 
 static void paint_choose_abilities() {
-	paint_game_dialog(GUICGB);
+	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation(bsdata<commandi>::elements[current_step].id);
 	paint_dialog(254, 61, paint_choose_ability);
@@ -390,7 +390,7 @@ static void paint_choose_abilities() {
 }
 
 static void paint_choose_skills() {
-	paint_game_dialog(GUICGB);
+	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation(bsdata<commandi>::elements[current_step].id);
 	static int origin;
@@ -407,7 +407,7 @@ static void paint_choose_skills() {
 }
 
 static void paint_choose_feats() {
-	paint_game_dialog(GUICGB);
+	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation(header_id);
 	static int origin;
@@ -424,7 +424,7 @@ static void paint_choose_feats() {
 
 static void paint_choose_appearance() {
 	update_tick();
-	paint_game_dialog(GUICGB);
+	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation("ColorChoices");
 	image(254, 87, gres(GUIACG), 5, 0);
@@ -465,7 +465,7 @@ static void paint_choose_sound() {
 	static int origin;
 	auto row_height = texth() + 2;
 	const int per_page = (320 + row_height - 1) / row_height;
-	paint_game_dialog(GUICGB);
+	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation("Sound");
 	image(254, 87, gres(GUIACG), 6, 0);
@@ -480,7 +480,7 @@ static void paint_choose_sound() {
 }
 
 static void paint_main_menu() {
-	paint_game_dialog(GUICGB);
+	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation("MainMenu");
 	paint_steps();
@@ -716,7 +716,7 @@ static void create_character() {
 }
 
 static void paint_character_option() {
-	paint_dialog(GMPMCHRB);
+	paint_dialog("GMPMCHRB");
 	setdialog(24, 22, 230, 22); texta(getnm("Character"), AlignCenterCenter);
 	setdialog(23, 50); button(GBTNLRG2, 1, 2, 0, "CreateCharacter", 3, false); fire(buttonparam, 1);
 	setdialog(23, 81); button(GBTNLRG2, 1, 2, 0, "DeleteCharacter"); fire(buttonparam, 2);
@@ -742,7 +742,7 @@ static void exit_party_formation() {
 
 static void paint_party_formation() {
 	auto allow_done = true;
-	paint_game_dialog(GUICARBB);
+	paint_game_dialog("GUICARBB");
 	update_main_music();
 	setdialog(279, 22, 242, 32); texta(STONEBIG, getnm("PartyFormation"), AlignCenterCenter);
 	setdialog(428, 81);
@@ -791,7 +791,7 @@ static void paint_party_row(void* object) {
 static void paint_select_party() {
 	static int origin;
 	const int per_page = 6;
-	paint_game_dialog(GCGPARTY);
+	paint_game_dialog("GCGPARTY");
 	update_main_music();
 	setdialog(180, 25, 441, 37); texta(STONEBIG, getnm("SelectParty"), AlignCenterCenter);
 	setdialog(22, 130, 212, 351);

@@ -232,9 +232,9 @@ void open_scene() {
 	scene((fnevent)hot.object);
 }
 
-void paint_dialog(resn v, int frame) {
+void paint_dialog(const char* id, int frame) {
 	set_cursor();
-	auto p = gres(v);
+	auto p = gres(id);
 	auto& f = p->get(frame);
 	dialog_start.x = (getwidth() - f.sx) / 2;
 	dialog_start.y = (getheight() - f.sy) / 2 - 128;
@@ -244,13 +244,13 @@ void paint_dialog(resn v, int frame) {
 	image(p, frame, 0);
 }
 
-void paint_game_dialog(resn v, int frame) {
+void paint_game_dialog(const char* res, int frame) {
 	audio_update_channels();
 	set_cursor();
 	dialog_start.x = 0;
 	dialog_start.y = 0;
 	caret = dialog_start;
-	image(gres(v), frame, 0);
+	image(gres(res), frame, 0);
 }
 
 void paint_game_dialog(int x, int y, resn v, int frame) {
@@ -1006,7 +1006,7 @@ static void paperdoll_dragable() {
 }
 
 static void paint_game_inventory() {
-	paint_game_dialog(GUIINV);
+	paint_game_dialog("GUIINV");
 	paint_game_player();
 	setdialog(339, 86, 126, 160); paperdoll_dragable();
 	setdialog(251, 299, 36, 36); inventory_line(0);
@@ -1054,7 +1054,7 @@ static void paint_game_inventory() {
 }
 
 static void paint_color_pick() {
-	paint_dialog(COLOR);
+	paint_dialog("COLOR");
 	setdialog(23, 23, 158, 21); texta(getnm("Colors"), AlignCenter);
 	setdialog(21, 51); color_picker_line(0, 6, 28);
 	setdialog(21, 79); color_picker_line(6, 6, 28);
@@ -1117,7 +1117,7 @@ static void slider(optionv id, int slider_width = 142) {
 }
 
 static void paint_game_opt_pause() {
-	paint_game_dialog(GOPT, 3);
+	paint_game_dialog("GOPT", 3);
 	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("AutoPause"), AlignCenterCenter);
 	setdialog(74, 70, 308, 18); checkbox(PauseCharacterHit);
 	setdialog(74, 97, 308, 18); checkbox(PauseCharacterInjured);
@@ -1140,7 +1140,7 @@ static void open_game_opt_pause() {
 }
 
 static void paint_game_opt_game_play() {
-	paint_game_dialog(GOPT, 2);
+	paint_game_dialog("GOPT", 2);
 	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("GamePlay"), AlignCenterCenter);
 	setdialog(74, 70, 184, 18); slider(ToolTipsDelay);
 	setdialog(74, 99, 184, 18); slider(MouseScrollSpeed);
@@ -1170,7 +1170,7 @@ static void confirm_quit_game() {
 }
 
 static void paint_game_options() {
-	paint_game_dialog(STONEOPT);
+	paint_game_dialog("STONEOPT");
 	paint_action_panel_na();
 	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("Options"), AlignCenterCenter);
 	setdialog(497, 68); button(GBTNLRG2, 1, 2, '1', "LoadGame"); fire(open_load_game);
@@ -1186,7 +1186,7 @@ static void paint_game_options() {
 }
 
 static void paint_game_journal() {
-	paint_game_dialog(GUIJRNL);
+	paint_game_dialog("GUIJRNL");
 	setdialog(234, 24, 205, 28); texta(STONEBIG, getnm("Journal"), AlignCenterCenter);
 	setdialog(66, 90, 651, 275); texta("Test text 1", AlignLeft); // fore(255 255 246)
 	//Scroll GBTNSCRL 727 64 12 304 frames(1 0 3 2 4 5)
@@ -1332,7 +1332,7 @@ static void paint_content_lists() {
 }
 
 static void paint_help() {
-	paint_game_dialog(GUIHELP);
+	paint_game_dialog("GUIHELP");
 	// paint_action_panel_na();
 	// paint_game_panel_na();
 	setdialog(300, 23, 200, 30); texta(STONEBIG, getnm("Information"), AlignCenterCenter);
@@ -1364,7 +1364,7 @@ static void update_character() {
 }
 
 static void paint_game_character() {
-	paint_game_dialog(GUIREC);
+	paint_game_dialog("GUIREC");
 	paint_game_player();
 	setdialog(258, 23, 115, 28); texta(bsdata<racei>::elements[player->race].getname(), AlignCenterCenter);
 	setdialog(253, 78, 45, 30); ability(Strenght);
@@ -1392,14 +1392,14 @@ static void paint_game_character() {
 }
 
 static void paint_worldmap() {
-	paint_game_dialog(GUIMAP, 1);
+	paint_game_dialog("GUIMAP", 1);
 	setdialog(666, 18, 113, 22); texta(getnm("WorldMap"), AlignCenterCenter);
 	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 0, 0, open_game);
 	setdialog(23, 20, 630, 392); paint_worldmap_area();
 }
 
 static void paint_game_automap() {
-	paint_game_dialog(GUIMAP);
+	paint_game_dialog("GUIMAP");
 	paint_action_panel_na();
 	setdialog(696, 56, 82, 20); texta(getnm("AreaNotes"), AlignCenterCenter);
 	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 0, 0, open_worldmap);
@@ -1410,7 +1410,7 @@ static void paint_game_automap() {
 }
 
 static void paint_spell_description() {
-	paint_dialog(GUISPL, 2);
+	paint_dialog("GUISPL", 2);
 	setdialog(22, 22, 343, 20); texta(getnm("Spell"), AlignCenterCenter);
 	setdialog(22, 52, 343, 20); texta(NORMAL, colors::yellow, last_spell->getname(), AlignCenterCenter);
 	setdialog(27, 87, 355, 304); paint_description(14, -5, 9);
@@ -1521,7 +1521,7 @@ static void paint_spell_memorized() {
 }
 
 static void paint_game_spells() {
-	paint_game_dialog(GUISPL);
+	paint_game_dialog("GUISPL");
 	paint_game_player();
 	setdialog(253, 50, 228, 19); texta(getnm("MemorizedSpells"), AlignCenterCenter);
 	setdialog(492, 50, 228, 19); texta(getnm("KnownSpells"), AlignCenterCenter);
@@ -1614,7 +1614,7 @@ static void identify_item() {
 }
 
 static void paint_item_description() {
-	paint_dialog(GIITMH08);
+	paint_dialog("GIITMH08");
 	setdialog(36, 37, 357, 30); texta(STONEBIG, getnm("Item"), AlignCenterCenter);
 	setdialog(430, 20, 64, 64); paint_item_avatar();
 	setdialog(20, 432); button(GBTNMED, 1, 2, 'I', "Identify"); fire(identify_item);
@@ -1624,7 +1624,7 @@ static void paint_item_description() {
 }
 
 static void paint_item_count() {
-	paint_dialog(GUIINV, 2);
+	paint_dialog("GUIINV", 2);
 	setdialog(22, 22); paint_item(last_item);
 	setdialog(20, 90); button(GBTNSTD, 1, 2, KeyEnter, "Accept"); fire(buttonok);
 	setdialog(142, 90); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
@@ -1636,7 +1636,7 @@ static void paint_item_count() {
 
 static void paint_main_menu() {
 	update_main_music();
-	paint_game_dialog(START, 1);
+	paint_game_dialog("START", 1);
 	setdialog(569, 133, 152, 21); texta(getnm("GameMode"), AlignCenterCenter);
 	setdialog(567, 160); button(GBTNMED2, 1, 2, 'M', "SinglePlayer");
 	setdialog(569, 220, 152, 21); texta(getnm("BeginGame"), AlignCenterCenter);
@@ -1655,7 +1655,7 @@ void open_main_menu() {
 }
 
 static void paint_name_dialog() {
-	paint_dialog(GUICNAME);
+	paint_dialog("GUICNAME");
 	setdialog(22, 22, 233, 20); texta(getnm("CharacterName"), AlignCenterCenter);
 	setdialog(25, 57, 220, 20); edit(input_string, input_string_size, AlignLeftCenter);
 	setdialog(19, 84); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
@@ -1750,7 +1750,7 @@ void open_worldmap() {
 }
 
 static void paint_confirm() {
-	paint_dialog(GUIERR, 1);
+	paint_dialog("GUIERR", 1);
 	setdialog(28, 28, 221, 64); texta(description, AlignCenterCenter);
 	setdialog(18, 104); button(GBTNSTD, 1, 2, KeyEnter, "Yes"); fire(buttonok);
 	setdialog(140, 104); button(GBTNSTD, 1, 2, KeyEscape, "No"); fire(buttoncancel);

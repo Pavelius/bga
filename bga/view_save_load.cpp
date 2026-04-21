@@ -182,21 +182,21 @@ static void paint_game_list(fncommand proc) {
 }
 
 static void paint_save_game() {
-	paint_game_dialog(GUISRSVB);
+	paint_game_dialog("GUISRSVB");
 	setdialog(243, 22, 311, 28); texta(STONEBIG, getnm("SaveGame"), AlignCenterCenter);
 	setdialog(23, 78, 740, 498); paint_game_list(paint_save_game_row);
 	setdialog(656, 22); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 }
 
 static void paint_load_game() {
-	paint_game_dialog(GUISRSVB);
+	paint_game_dialog("GUISRSVB");
 	setdialog(243, 22, 311, 28); texta(STONEBIG, getnm("LoadGame"), AlignCenterCenter);
 	setdialog(23, 78, 740, 498); paint_game_list(paint_load_game_row);
 	setdialog(656, 22); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 }
 
 static void paint_confirm_overwrite() {
-	paint_dialog(GUISRRQB);
+	paint_dialog("GUISRRQB");
 	setdialog(23, 23, 280, 20); texta(NORMAL, getnm("EnterSaveGameName"), AlignCenterCenter);
 	setdialog(27, 56, 275, 16); edit(last_save_header->name, sizeof(last_save_header->name) / sizeof(last_save_header->name[0]), AlignLeft);
 	setdialog(27, 84, 275, 20); texta(NORMAL, str("%PassedTime"), AlignCenterCenter);
