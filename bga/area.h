@@ -1,4 +1,5 @@
 #include "color.h"
+#include "flagable.h"
 #include "nameable.h"
 #include "point.h"
 #include "stringbuilder.h"
@@ -22,7 +23,10 @@ struct rfsnd;
 
 struct areai : nameable {
 	sliceu<variable>	variables;
-	rfsnd*			music;
+	rfsnd*				music;
+	flag32				doors_opened, doors_trapped, doors_locked;
+	flag32				region_disabled;
+	flag64				animate_disabled;
 };
 extern short unsigned current_area;
 
