@@ -6,3 +6,8 @@ Elf hairs(HairNormal) skin(SkinNormal) favor(Wizard) resmale(CEMB1) resfemale(CE
 Halfling hairs(HairNormal) skin(SkinNormal) favor(Rogue) resmale(CIMB1) resfemale(CIFB1) restype(1)
 HalfElf hairs(HairNormal) skin(SkinNormal) resmale(CEMB1) resfemale(CEFB1)
 HalfOrc hairs(HairNormal) skin(SkinNormal) favor(Barbarian) resmale(CHMB1) resfemale(CHFB1)
+
+#List
+
+PlayerRaces
+ elements Human Dwarf Elf Halfling HalfElf HalfOrc

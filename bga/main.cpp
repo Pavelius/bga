@@ -27,31 +27,13 @@ void initialize_translation();
 void initialize_store();
 void util_main();
 
-static void read_rules() {
-	bsreq::read("rules/Colors.txt");
-	bsreq::read("rules/Races.txt");
-	bsreq::read("rules/Classes.txt");
-	bsreq::read("rules/Items.txt");
-	bsreq::read("rules/Advance.txt");
-	bsreq::read("rules/Basic.txt");
-	bsreq::read("rules/Store.txt");
-	bsreq::read("rules/Worldmap.txt");
-	bsreq::read("rules/Calendar.txt");
-	bsreq::read("rules/Feats.txt");
-	bsreq::read("rules/Spells.txt");
-	bsreq::read("rules/Diety.txt");
-	bsreq::read("rules/Monsters.txt");
-	bsreq::read("rules/Playlist.txt");
-	bsreq::read("rules/Hotkeys.txt");
-}
-
 int main(int argc, char* argv[]) {
 	srand(getcputime());
 	// srand(923811);
 	stringbuilder::custom = main_identifier;
 	initialize_audio();
 	initialize_area();
-	read_rules();
+	bsreq::read("rules/Basic.txt");
 	read_options();
 #ifdef _DEBUG
 	util_main();

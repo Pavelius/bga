@@ -113,10 +113,12 @@ static void cashe_files(array& source, const char* folder, const char* ext) {
 	io::counter dest;
 	archive a(dest, true);
 	arc_serial(a, source, 0);
-	for(auto& e : source.records<arcfile>()) {
-		read_file(e, folder, ext);
-		e.offset = dest.count;
-		dest.write(0, e.size);
+	auto pe = source.end();
+	for(auto ps = source.begin(); ps < pe; ps += source.element_size) {
+		auto p = (arcfile*)ps;
+		read_file(*p, folder, ext);
+		p->offset = dest.count;
+		dest.write(0, p->size);
 	}
 }
 
@@ -147,7 +149,10 @@ bool arc_pack(const char* url, const char* folder, const char* ext) {
 	archive a(dest, true);
 	if(!arc_serial(a, source, 0))
 		return false;
-	for(auto& e : source.records<arcfile>())
-		a.source.write(e.data, e.size);
+	auto pe = source.end();
+	for(auto ps = source.begin(); ps < pe; ps += source.element_size) {
+		auto p = (arcfile*)ps;
+		a.source.write(p->data, p->size);
+	}
 	return true;
 }
