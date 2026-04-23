@@ -1,10 +1,9 @@
 #include "drawable.h"
-#include "variable.h"
 #include "sliceu.h"
 
 #pragma once
 
-struct container : drawable, variableid {
+struct container : drawable {
 	enum typen : unsigned char {
 		None,
 		Bag, Chest, Drawer, Pile, Table, Shelf, Altar, Nonvisible,
@@ -17,5 +16,3 @@ struct container : drawable, variableid {
 	sliceu<point>	points;
 };
 extern container* last_container;
-
-container* get_container(variable* p);

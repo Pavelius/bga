@@ -27,9 +27,7 @@ unsigned short area_tiles[64 * 64];
 unsigned short area_width, area_height, area_height_tiles;
 
 bool combat_mode;
-
-unsigned short current_area;
-
+short unsigned current_area;
 static rfpma* pma_area;
 static rfpma* pma_minimap;
 
@@ -50,45 +48,6 @@ static const unsigned char orientations_7b7[49] = {
 	2, 1, 1, 0, 15, 15, 14,
 };
 
-static void initialize_variable(variableid* pv, char type, int index) {
-	char sym[2] = {type, 0};
-	auto& e = pv->getvar();
-	e.id = szdup(str("%1%2%3.2i", area_name, sym, index + 1));
-	e.index = index;
-}
-
-template<class T> void initilalize_variables(char type) {
-	int n = bsdata<T>::source.count;
-	for(auto i = 0; i < n; i++)
-		initialize_variable(bsdata<T>::elements + i, type, i);
-}
-
-//static void add_area_header(const areai& e) {
-//	io::file file(e.url, StreamRead);
-//	if(!file)
-//		return;
-//	file.seek(e.offset, SeekSet);
-//	clear_area();
-//	if(!archive_ard(file, false, false))
-//		return;
-//	e.variables.setbegin();
-//	bsdata<variable>::source.count += variable_count;
-//	e.variables.setend();
-//	current_variable_base = p->variables.begin();
-//	initilalize_variables<animation>('A');
-//	initilalize_variables<ambient>('S');
-//	initilalize_variables<container>('C');
-//	initilalize_variables<door>('D');
-//	initilalize_variables<region>('R');
-//}
-
-void initialize_area() {
-	//bsdata<areai>::source.clear();
-	//for(auto& e : bsdata<rfard>())
-	//	add_area_header(e);
-	//clear_area();
-}
-
 void clear_area() {
 	if(pma_area) {
 		pma_area->release();
@@ -99,7 +58,6 @@ void clear_area() {
 		pma_minimap = 0;
 	}
 	area_height = area_width = area_height_tiles = 0;
-	variable_count = 0;
 	memset(area_tiles, 0, sizeof(area_tiles));
 	memset(area_zmap, 0, sizeof(area_zmap));
 	memset(area_state, 0, sizeof(area_state));
@@ -172,33 +130,33 @@ static unsigned long get_area_signature() {
 	return r;
 }
 
-bool archive_ard(iostream& file, bool writemode, bool content) {
-	archive ar(file, writemode);
-	if(!ar.signature("ARD"))
+bool archive_ard(iostream& file, bool writemode) {
+	archive a(file, writemode);
+	if(!a.signature("ARD"))
 		return false;
-	if(!ar.signature(get_area_signature()))
+	if(!a.signature(get_area_signature()))
 		return false;
 	// Area header
-	ar.set(area_name, 8);
-	ar.set(area_width);
-	ar.set(area_height); area_height_tiles = (area_height * 12 + 15) / 16;
-	ar.set(variable_count);
+	a.set(area_name, 8);
+	a.set(area_width);
+	a.set(area_height); area_height_tiles = (area_height * 12 + 15) / 16;
 	// Objects with variables
-	ar.set(bsdata<container>::source);
-	ar.set(bsdata<door>::source);
-	ar.set(bsdata<region>::source);
-	ar.set(bsdata<animation>::source);
-	ar.set(bsdata<ambient>::source);
-	if(content) {
-		// Tile maps
-		archive_bitmap(ar, (unsigned char*)area_tiles, 16, 64 * sizeof(area_tiles[0]), area_width / 4, area_height_tiles / 4, 0);
-		archive_bitmap(ar, area_light, 8, 256, area_width, area_height, area_light_pallette);
-		archive_bitmap(ar, area_state, 8, 256, area_width, area_height, 0);
-		// Objects without variables
-		ar.set(bsdata<point>::source);
-		ar.set(bsdata<doortile>::source);
-		ar.set(bsdata<entrance>::source);
-	}
+	if(!a.signature("OBJ"))
+		return false;
+	a.set(bsdata<container>::source);
+	a.set(bsdata<door>::source);
+	a.set(bsdata<region>::source);
+	a.set(bsdata<animation>::source);
+	a.set(bsdata<ambient>::source);
+	a.set(bsdata<point>::source);
+	a.set(bsdata<doortile>::source);
+	a.set(bsdata<entrance>::source);
+	// Tile maps
+	if(!a.signature("BMP"))
+		return false;
+	archive_bitmap(a, (unsigned char*)area_tiles, 16, 64 * sizeof(area_tiles[0]), area_width / 4, area_height_tiles / 4, 0);
+	archive_bitmap(a, area_light, 8, 256, area_width, area_height, area_light_pallette);
+	archive_bitmap(a, area_state, 8, 256, area_width, area_height, 0);
 	return true;
 }
 
@@ -220,16 +178,8 @@ static bool load_mmp_file(const char* name) {
 	return pma_minimap != 0;
 }
 
-//static bool load_ard_file(const char* name) {
-//	char temp[260];
-//	io::file file(gmurl(temp, name));
-//	if(!file)
-//		return false;
-//	clear_area();
-//	return archive_ard(file, false, true);
-//}
-
 static bool load_ard_file(const char* name) {
+	current_area = -1;
 	auto p = (areai*)arc_find(bsdata<areai>::source, name);
 	if(!p)
 		return false;
@@ -238,11 +188,11 @@ static bool load_ard_file(const char* name) {
 		return false;
 	file.seek(p->offset, SeekSet);
 	clear_area();
-	return archive_ard(file, false, true);
+	current_area = getbsi(p);
+	return archive_ard(file, false);
 }
 
 void read_area(const char* name) {
-	//res::cleanup();
 	if(!load_ard_file(name))
 		return;
 	if(!load_tls_file(area_name))
@@ -464,21 +414,6 @@ static bool is_passable(short unsigned i0, short unsigned i1, int size) {
 		}
 	}
 	return true;
-}
-
-variable* find_var(const char* area_id, size_t index) {
-	if(!area_id && current_area != -1)
-		return bsdata<areai>::elements[current_area].variables.begin() + index;
-	auto p = bsdata<areai>::find(area_id);
-	if(!p)
-		return 0;
-	return p->variables.begin() + index;
-}
-
-void set_var(const char* id, short unsigned index, tagn value) {
-	auto p = find_var(id, index);
-	if(p)
-		p->set(value);
 }
 
 areai* get_area() {

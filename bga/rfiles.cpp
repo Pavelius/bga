@@ -1,3 +1,4 @@
+#include "area.h"
 #include "bsreq.h"
 #include "draw.h"
 #include "stringbuilder.h"
@@ -45,21 +46,11 @@ rfpma* find_image(const char* id) {
 	return (rfpma*)arc_find(bsdata<rfpma>::source, id);
 }
 
-static void initialize_resources() {
-	arc_open(bsdata<areai>::source, "art/areasinfo.arc");
-	arc_open(bsdata<rfpma>::source, "art/animations.arc");
-	arc_open(bsdata<rfpma>::source, "art/intrface.arc");
-	arc_open(bsdata<rfpma>::source, "art/areas.arc");
-	arc_open(bsdata<rfpma>::source, "art/characters.arc");
-	arc_open(bsdata<rfpma>::source, "art/fonts.arc");
-	arc_open(bsdata<rfpma>::source, "art/monsters.arc");
-	arc_open(bsdata<rfpma>::source, "art/world.arc");
-}
-
-void initialize_audio() {
+void initialize_resources() {
+	arc_open(bsdata<areai>::source, "art/area.arc");
+	arc_open(bsdata<rfpma>::source, "art/graphic.arc");
 	arc_open(bsdata<rfsnd>::source, "art/sound.arc");
 	arc_open(bsdata<rfvoc>::source, "art/soundchr.arc");
-	initialize_resources();
 }
 
 sprite* gres(const char* id) {

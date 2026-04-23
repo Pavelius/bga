@@ -157,7 +157,6 @@
     <ClCompile Include="tag.cpp" />
     <ClCompile Include="thread.cpp" />
     <ClCompile Include="timer.cpp" />
-    <ClCompile Include="variable.cpp" />
     <ClCompile Include="variant.cpp" />
     <ClCompile Include="view_area.cpp" />
     <ClCompile Include="view_dialog.cpp" />
@@ -247,7 +246,6 @@
     <ClInclude Include="store.h" />
     <ClInclude Include="stringvar.h" />
     <ClInclude Include="thread.h" />
-    <ClInclude Include="variable.h" />
     <ClInclude Include="portrait.h" />
     <ClInclude Include="region.h" />
     <ClInclude Include="resinfo.h" />

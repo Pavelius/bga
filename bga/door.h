@@ -1,7 +1,6 @@
 #include "drawable.h"
 #include "point.h"
 #include "sliceu.h"
-#include "variable.h"
 
 #pragma once
 
@@ -10,7 +9,7 @@ struct doortile {
 	short unsigned		open; // new tile index
 	short unsigned		closed; // new tile index
 };
-struct door : drawable, variableid {
+struct door : drawable {
 	unsigned char		cursor;
 	rect				box;
 	point				launch;
@@ -25,7 +24,7 @@ struct door : drawable, variableid {
 	sliceu<point>		getpoints() const { return isopen() ? open_points : close_points; }
 	point				getposition() const { return position; }
 	rect				getrect() const { return box; }
-	bool				isopen() const { return getvar().is(Opened); }
+	bool				isopen() const;
 	bool				isvisibleactive() const { return true; }
 	void				use(bool open);
 };

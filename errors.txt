@@ -1,2 +1,6 @@
-﻿Error in file `rules/Monsters.txt`:
- Line 4: Can't find variant `Axe`
+﻿Error in file `rules/Colors.txt`:
+ Line 4: Unknown type in requisit `number`
+ Line 4: Unknown type in requisit ``
+ Line 4: Unknown type in requisit ``
+ Line 4: Unknown type in requisit ``
+ Line 4: Unknown type in requisit ``

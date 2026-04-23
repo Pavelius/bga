@@ -11,7 +11,6 @@
 #include "store.h"
 #include "stringvar.h"
 #include "timer.h"
-#include "variable.h"
 #include "view.h"
 
 using namespace draw;
@@ -40,13 +39,10 @@ template<> void ftscript<form>(int value, int counter) {
 template<> void ftscript<itemi>(int value, int counter) {
 	item it(value);
 	switch(modifier) {
-	case LayInside: add_item(current_variable, it); break;
+	// case LayInside: add_item(current_variable, it); break;
+	case LayInside: break;
 	default: player->equip(it); break;
 	}
-}
-
-template<> void ftscript<variable>(int value, int counter) {
-	current_variable = bsdata<variable>::elements + value;
 }
 
 static void damage_change(int bonus) {

@@ -1,7 +1,19 @@
 #include "area.h"
 #include "door.h"
 
+bool door::isopen() const {
+	auto index = getbsi(this);
+	auto p = get_area();
+	if(p)
+		return p->doors_opened.is(index);
+	return false;
+}
+
 void door::use(bool open) {
+	auto index = getbsi(this);
+	auto p = get_area();
+	if(!p)
+		return;
 	if(open) {
 		for(auto& e : tiles)
 			set_tile(e.index, e.open);
@@ -10,7 +22,7 @@ void door::use(bool open) {
 			set_tile(e.index, e.closed);
 	}
 	if(open)
-		getvar().set(Opened);
+		p->doors_opened.set(index);
 	else
-		getvar().remove(Opened);
+		p->doors_opened.remove(index);
 }

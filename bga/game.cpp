@@ -32,24 +32,12 @@ template<> void archive::set<worldmapi*>(worldmapi*& v) {
 	setpointer(bsdata<worldmapi>::source, (void**)&v);
 }
 
-template<> void archive::set<variable>(variable& e) {
-	set(e.id);
-	set(e.lock_difficult);
-	set(e.trap_difficult);
-	set(e.counter);
-	set(e.index);
-	set(e.flags);
-}
-
 template<> void archive::set<areai>(areai& e) {
-	set(e.id);
-	set(e.variables);
-}
-
-static void read_area_header(const char* id) {
-	auto p = bsdata<areai>::find(id);
-	current_area = getbsi(p);
-	current_variable_base = p->variables.begin();
+	set(e.doors_opened);
+	set(e.doors_locked);
+	set(e.doors_trapped);
+	set(e.region_disabled);
+	set(e.animate_disabled);
 }
 
 static void use_all_doors() {
@@ -97,7 +85,6 @@ void party_move(point v) {
 
 static void load_area(const char* id) {
 	audio_reset();
-	read_area_header(id);
 	read_area(id);
 	use_all_doors();
 	play_list(id, PlayDay);
@@ -122,15 +109,15 @@ void enter(const char* id, const char* location) {
 	}
 }
 
-static unsigned long get_version() {
+static unsigned long game_signature() {
 	unsigned long i = 0;
 	unsigned long r = sizeof(gamei) * (++i);
 	r += sizeof(areai) * (++i);
 	r += sizeof(creature) * (++i);
 	r += sizeof(itemground) * (++i);
 	r += sizeof(iteminside) * (++i);
-	r += sizeof(variable) * (++i);
 	r += bsdata<itemi>::source.count * (++i);
+	r += bsdata<areai>::source.count * (++i);
 	return r;
 }
 
@@ -141,7 +128,7 @@ bool is_saved_game(const char* url) {
 	archive a(file, false);
 	if(!a.signature("SAV"))
 		return false;
-	if(!a.signature(get_version()))
+	if(!a.signature(game_signature()))
 		return false;
 	return true;
 }
@@ -169,7 +156,7 @@ bool rowsaveheaderi::read() {
 	archive a(flo, false);
 	if(!a.signature("SAV"))
 		return false;
-	if(!a.signature(get_version()))
+	if(!a.signature(game_signature()))
 		return false;
 	flo.get(change);
 	serial_header(a, *this);
@@ -184,7 +171,7 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	archive a(flo, write_mode);
 	if(!a.signature("SAV"))
 		return false;
-	if(!a.signature(get_version()))
+	if(!a.signature(game_signature()))
 		return false;
 	if(!write_mode)
 		flo.get(change);
@@ -199,7 +186,6 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	a.set(current_world);
 	a.set(wearable::coins);
 	a.setc<areai>(bsdata<areai>::source);
-	a.setc<variable>(bsdata<variable>::source);
 	a.set(bsdata<creature>::source);
 	a.set(bsdata<itemground>::source);
 	a.set(bsdata<iteminside>::source);

@@ -62,7 +62,6 @@ BSDATAC(playlisti, 64)
 BSDATAC(region, 128)
 BSDATAC(spelli, 1024)
 BSDATAC(spellbook, 32)
-BSDATAC(variable, 256 * 64)
 BSDATAC(worldmapi, 8)
 BSDATAC(worldmapi::area, 128)
 BSDATAC(worldmapi::link, 512)
@@ -228,12 +227,6 @@ BSMETA(storeti) = {
 BSMETA(stringvari) = {
 	BSREQ(id),
 	{}};
-BSMETA(variable) = {
-	BSREQ(id),
-	BSREQ(lock_difficult),
-	BSREQ(trap_difficult),
-	BSREQ(counter),
-	{}};
 BSMETA(weaponi) = {
 	BSREQ(bonus),
 	BSENM(type, damagei),
@@ -292,7 +285,6 @@ BSDATA(varianti) = {
 	{"Store", VAR(storei, 1)},
 	{"StringVar", VAR(stringvari, 1)},
 	{"Type", VAR(varianti, 1)},
-	{"Variable", VAR(variable, 1)},
 	{"WorldArea", VAR(worldmapi::area, 1)},
 	{"WorldLink", VAR(worldmapi::link, 3)},
 	{"WorldRealm", VAR(worldmapi, 1)},

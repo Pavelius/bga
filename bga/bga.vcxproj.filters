@@ -317,9 +317,6 @@
     <ClCompile Include="tag.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="variable.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="formation.cpp">
       <Filter>logic</Filter>
     </ClCompile>
@@ -651,9 +648,6 @@
     </ClInclude>
     <ClInclude Include="dice.h">
       <Filter>support</Filter>
-    </ClInclude>
-    <ClInclude Include="variable.h">
-      <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="tag.h">
       <Filter>logic</Filter>

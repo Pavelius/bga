@@ -4,8 +4,7 @@
 #include "nameable.h"
 #include "point.h"
 #include "stringbuilder.h"
-#include "sliceu.h"
-#include "variable.h"
+#include "slice.h"
 
 #pragma once
 
@@ -23,11 +22,11 @@ struct sprite;
 struct rfsnd;
 
 struct areai : arcfile {
-	sliceu<variable>	variables;
-	rfsnd*				music;
-	flag32				doors_opened, doors_trapped, doors_locked;
-	flag32				region_disabled;
-	flag64				animate_disabled;
+	typedef flagable<2, unsigned> flag64;
+	rfsnd* music;
+	flag64 doors_opened, doors_trapped, doors_locked;
+	flag32 region_disabled;
+	flag64 animate_disabled;
 };
 extern short unsigned current_area;
 
@@ -67,9 +66,7 @@ color get_shadow(point s);
 const sprite* get_minimap();
 const sprite* get_area_sprites();
 
-variable* find_var(const char* area_id, size_t index);
-
-bool archive_ard(iostream& file, bool writemode, bool content);
+bool archive_ard(iostream& file, bool writemode);
 void block_creatures();
 void block_creatures(fnvisible allow, bool keep);
 void block_movement(int range);
@@ -77,7 +74,6 @@ void change_cost(short unsigned v1, short unsigned v2);
 void clear_area();
 void clear_path_map();
 void create_wave(short unsigned start, int size);
-void initialize_area();
 bool is_block(short unsigned index);
 bool is_block(short unsigned index, int size);
 bool is_state(short unsigned index, areafn v);
@@ -85,4 +81,3 @@ void read_area(const char* name);
 void setcamera(point v);
 void set_state(short unsigned index, areafn v);
 void set_tile(short unsigned index, short unsigned tile);
-void set_var(const char* id, short unsigned index, tagn value);

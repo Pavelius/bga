@@ -552,8 +552,8 @@ static void apply_hilite_command() {
 			p->use(!p->isopen());
 		} else if(bsdata<container>::have(hilite_drawable)) {
 			auto p = (container*)hilite_drawable;
-			print("This is %1 (vairable %2i, %3)", p->name, p->variable_index, p->getvar().id);
-			party_action(&p->getvar(), p->launch, open_container);
+			print("This is %1", p->name);
+			// party_action(&p->getvar(), p->launch, open_container);
 		} else if(bsdata<creature>::have(hilite_drawable)) {
 			if(combat_mode) {
 
@@ -916,16 +916,17 @@ static void mouse_area_cancel() {
 
 static void paint_container_area() {
 	update_frames();
-	// setcaret(0, 0, 800, 476); paint_area_map_zoomed(paint_area_map_spot); mouse_area_cancel();
-	setcaret(0, 0, 800, 476); mouse_area_cancel(); paint_area_map_zoomed(paint_area_map);
+	setcaret(0, 0, 800, 476);
+	mouse_area_cancel();
+	paint_area_map_zoomed(paint_area_map);
 	apply_shifer();
 	paint_container();
 }
 
 void open_container() {
 	pushvalue push_container(last_container);
-	last_container = get_container((variable*)hot.object);
-	if(!last_container)
-		return;
-	scene(paint_container_area);
+	//last_container = get_container((variable*)hot.object);
+	//if(!last_container)
+	//	return;
+	//scene(paint_container_area);
 }

@@ -14,6 +14,7 @@
 #include "party.h"
 #include "rand.h"
 #include "resid.h"
+#include "rfiles.h"
 #include "script.h"
 #include "spell.h"
 #include "timer.h"
@@ -31,8 +32,7 @@ int main(int argc, char* argv[]) {
 	srand(getcputime());
 	// srand(923811);
 	stringbuilder::custom = main_identifier;
-	initialize_audio();
-	initialize_area();
+	initialize_resources();
 	bsreq::read("rules/Basic.txt");
 	read_options();
 #ifdef _DEBUG

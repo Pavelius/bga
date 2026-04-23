@@ -2,13 +2,12 @@
 
 #include "adat.h"
 #include "point.h"
-#include "variable.h"
 
 enum ambientf : unsigned char {
 	AmbientEnabled, AmbientNoEnvironmentEffect, AmbientGlobal, AmbientRandom
 };
 
-struct ambient : variableid {
+struct ambient {
 	struct soundi {
 		char			id[12];
 	};

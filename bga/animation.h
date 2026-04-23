@@ -1,5 +1,4 @@
 #include "drawable.h"
-#include "variable.h"
 
 #pragma once
 
@@ -12,7 +11,7 @@ enum animatef_s : unsigned char {
 	ShowInCombat
 };
 
-struct animation : drawable, variableid {
+struct animation : drawable {
 	unsigned			shedule;
 	char				rsname[9], rsname_pallette[9];
 	unsigned short		circle, frame, start_frame;

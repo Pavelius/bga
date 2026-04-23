@@ -191,3 +191,5 @@ SellItemsTotal: %ItemListTotal зм
 ActionAttack: Атаковать
 ActionDefend: Защищаться
 ActionStop: Остановить
+
+HandsOfFury: Руки ярости
