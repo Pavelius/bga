@@ -1,3 +1,4 @@
+#include "arcfile.h"
 #include "color.h"
 #include "flagable.h"
 #include "nameable.h"
@@ -21,7 +22,7 @@ struct iostream;
 struct sprite;
 struct rfsnd;
 
-struct areai : nameable {
+struct areai : arcfile {
 	sliceu<variable>	variables;
 	rfsnd*				music;
 	flag32				doors_opened, doors_trapped, doors_locked;
