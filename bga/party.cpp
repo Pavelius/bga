@@ -20,7 +20,7 @@ partyi* last_party;
 void partyi::clear() {
 	if(content)
 		delete[] content;
-	memset(this, 0, sizeof(*this));
+	memset((void*)this, 0, sizeof(*this));
 }
 
 void partyi::release() {

@@ -86,4 +86,3 @@ void setcamera(point v);
 void set_state(short unsigned index, areafn v);
 void set_tile(short unsigned index, short unsigned tile);
 void set_var(const char* id, short unsigned index, tagn value);
-void update_area_music();

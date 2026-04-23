@@ -61,7 +61,7 @@ struct ACMInfo {
 struct ACMStream {
 	ACMInfo	info;
 	unsigned total_values;
-	
+
 	/* acm data stream */
 	void* io_arg;
 	acm_io_callbacks io;
@@ -75,7 +75,7 @@ struct ACMStream {
 	/* block lengths (in samples) */
 	unsigned block_len;
 	unsigned wrapbuf_len;
-	
+
 	int *block;
 	int *wrapbuf;
 	int *ampbuf;
@@ -923,10 +923,9 @@ static unsigned pcm2time(ACMStream *acm, unsigned long long pcm) {
 	/* return ((10 * pcm) / acm->info.rate) * 100; */
 }
 
-static unsigned time2pcm(ACMStream *acm, unsigned long long time_ms) {
-	return (unsigned)(time_ms * acm->info.rate / 1000);
-	/* return (time_ms / 100) * (acm->info.rate / 10); */
-}
+//static unsigned time2pcm(ACMStream *acm, unsigned long long time_ms) {
+//	return (unsigned)(time_ms * acm->info.rate / 1000);
+//}
 
 static unsigned acm_pcm_tell(ACMStream *acm) {
 	return acm->stream_pos / acm->info.channels;
@@ -936,9 +935,9 @@ static unsigned acm_pcm_total(ACMStream *acm) {
 	return acm->total_values / acm->info.channels;
 }
 
-static unsigned acm_time_tell(ACMStream *acm) {
-	return pcm2time(acm, acm_pcm_tell(acm));
-}
+//static unsigned acm_time_tell(ACMStream *acm) {
+//	return pcm2time(acm, acm_pcm_tell(acm));
+//}
 
 static unsigned acm_rate(ACMStream *acm) {
 	return acm->info.rate;
@@ -1042,7 +1041,7 @@ static int acm_read_loop(ACMStream *acm, void *dst, unsigned bytes,
 }
 
 void acm2wav(const char* source_file, const char* output_file, int force_channels) {
-	
+
 	ACMStream *acm;
 	char *buf;
 	int res, res2, buflen, err;
@@ -1083,7 +1082,7 @@ void acm2wav(const char* source_file, const char* output_file, int force_channel
 	}
 
 	memset(buf, 0, buflen);
-	
+
 	while(bytes_done < total_bytes) {
 		int bs;
 		if(bytes_done + buflen > total_bytes)

@@ -7,5 +7,5 @@ typedef void(*fnevent)();
 struct form : nameable {
 	fnevent	command;
 	long	param1, param2;
-	void*	object;
+	fnevent	object;
 };

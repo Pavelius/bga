@@ -1,7 +1,8 @@
+#pragma once
+
 #include "ability.h"
 #include "colorgrad.h"
-
-#pragma once
+#include "variant.h"
 
 struct rfpma;
 
@@ -11,10 +12,11 @@ enum racen : unsigned char {
 };
 
 struct racei : nameable {
+	classn favor;
 	colorgrad* hairs;
 	colorgrad* skin;
-	classn favor;
 	rfpma* resmale;
 	rfpma* resfemale;
 	char restype;
+	variants abilities;
 };

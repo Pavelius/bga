@@ -116,14 +116,14 @@ bool actor::ispresent() const {
 	return area_index == current_area;
 }
 
-static animaten common(animaten v) {
-	switch(v) {
-	case AnimateStand: case AnimateCombatStanceTwoHanded: case AnimateCombatStance:
-		return AnimateStand;
-	default:
-		return v;
-	}
-}
+//static animaten common(animaten v) {
+//	switch(v) {
+//	case AnimateStand: case AnimateCombatStanceTwoHanded: case AnimateCombatStance:
+//		return AnimateStand;
+//	default:
+//		return v;
+//	}
+//}
 
 npci* actor::getnpc() const {
 	return (npc == 0xFFFF) ? 0 : bsdata<npci>::elements + npc;

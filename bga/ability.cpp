@@ -40,5 +40,5 @@ BSDATA(abilityi) = {
 assert_enum(abilityi, Stamina)
 
 void statable::clear() {
-	memset(this, 0, sizeof(*this));
+	memset((void*)this, 0, sizeof(*this));
 }

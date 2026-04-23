@@ -59,13 +59,15 @@ int main(int argc, char* argv[]) {
 	colors::special = color(244, 214, 66);
 	update_main_music();
 	initialize(getnm("AppTitle"));
-	settimer(64);
+	sys_timer(64);
 	//next_scene(start_main);
 	next_scene(open_main_menu);
 	start_scene();
 	return 0;
 }
 
+#ifndef __GNUC__
 int _stdcall WinMain(void* ci, void* pi, char* cmd, int sw) {
 	return main(0, 0);
 }
+#endif // __GNUC__

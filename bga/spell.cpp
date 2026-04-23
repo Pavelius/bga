@@ -6,7 +6,7 @@ spellbook* last_spellbook;
 spelli* last_spell;
 
 void spellbook::clear() {
-	memset(this, 0, sizeof(*this));
+	memset((void*)this, 0, sizeof(*this));
 }
 
 const char* spellbook::getid() const {

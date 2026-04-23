@@ -29,8 +29,6 @@ struct collection : collectiona {
 	constexpr T* operator[](unsigned i) const { return (T*)data[i]; }
 	constexpr operator slice<T*>() const { return slice<T*>((T**)data, count); }
 	T**		begin() const { return (T**)data; }
-	T*		choose(const char* title, const char* cancel = 0, bool autochoose = true) const { return (T*)collectiona::choose(T::getname, title, cancel, autochoose); }
-	bool	chooseu(const char* title, const char* cancel = 0) const { return collectiona::chooseu(T::getname, title, cancel); }
 	T**		end() const { return (T**)data + count; }
 	T*		pick() { return (T*)collectiona::pick(); }
 	T*		random() const { return (T*)collectiona::random(); }

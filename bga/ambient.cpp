@@ -19,7 +19,7 @@ static point hearing_center;
 BSDATAC(ambientplayer, 32)
 
 void ambient::clear() {
-	memset(this, 0, sizeof(*this));
+	memset((void*)this, 0, sizeof(*this));
 }
 
 int ambient::hearing(point camera) const {

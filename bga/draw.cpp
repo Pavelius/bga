@@ -64,7 +64,6 @@ static long			break_result;
 static fnevent		next_proc;
 static char			tips_text[4096];
 stringbuilder		draw::tips_sb(tips_text);
-awindowi			draw::awindow = {-1, -1, 800, 600, 160, WFMinmax | WFResize};
 
 static void correct(int& x1, int& y1, int& x2, int& y2) {
 	if(x1 > x2)
@@ -2414,7 +2413,7 @@ void draw::execute(fnevent proc, long value, long value2, const void* object) {
 static void standart_domodal() {
 	if(draw::ptips)
 		draw::ptips();
-	draw::hot.key = draw::rawinput();
+	sys_input();
 	if(!draw::hot.key)
 		exit(0);
 }
@@ -2560,9 +2559,9 @@ void draw::initialize(const char* title) {
 	draw::font = metrics::font;
 	draw::fore = colors::text;
 	draw::fore_stroke = colors::border;
-	draw::create(awindow.x, awindow.y, awindow.width, awindow.height, awindow.flags, 32);
+	sys_create_window(-1, -1, 800, 600, 0, 32, false);
 	if(title)
-		draw::setcaption(title);
+		sys_caption(title);
 }
 
 void* draw::scene(fnevent proc) {
@@ -2573,7 +2572,7 @@ void* draw::scene(fnevent proc) {
 	return (void*)getresult();
 }
 
-void draw::fire(bool run, fnevent proc, long value, long value2, const void* object) {
+void draw::fire(bool run, fnevent proc, long value, long value2, void* object) {
 	if(!proc)
 		return;
 	if(run)

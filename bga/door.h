@@ -20,7 +20,7 @@ struct door : drawable, variableid {
 	sliceu<point>		search_open_points;
 	sliceu<point>		search_close_points;
 	sliceu<doortile>	tiles;
-	void				clear() { memset(this, 0, sizeof(*this)); }
+	void				clear() { memset((void*)this, 0, sizeof(*this)); }
 	int					getcursor() const { return 30; }
 	sliceu<point>		getpoints() const { return isopen() ? open_points : close_points; }
 	point				getposition() const { return position; }

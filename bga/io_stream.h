@@ -35,6 +35,7 @@ struct file : iostream {
 		char			path[261];
 		char			reserved[512];
 		void*			handle;
+		void*			handle_ent;
 	};
 	struct datei {
 		short unsigned	year;

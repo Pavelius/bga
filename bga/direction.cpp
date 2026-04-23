@@ -10,6 +10,7 @@ directionn to(directionn d, directionn d1) {
 		case Up: return Left;
 		case Right: return Up;
 		case Down: return Right;
+		default: return Center;
 		}
 		break;
 	case Right:
@@ -18,6 +19,7 @@ directionn to(directionn d, directionn d1) {
 		case Up: return Right;
 		case Right: return Down;
 		case Down: return Left;
+		default: return Center;
 		}
 		break;
 	case Down:
@@ -26,8 +28,9 @@ directionn to(directionn d, directionn d1) {
 		case Up: return Down;
 		case Right: return Left;
 		case Down: return Up;
+		default: return Center;
 		}
 		break;
+	default: return Center;
 	}
-	return Center;
 }

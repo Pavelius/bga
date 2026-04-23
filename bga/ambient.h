@@ -24,7 +24,6 @@ struct ambient : variableid {
 	bool is(ambientf v) const { return (flags & (1 << v)) != 0; }
 	void update();
 };
-extern point hearing_center;
 
 void initialize_area_ambients();
 void update_ambients(point camera);

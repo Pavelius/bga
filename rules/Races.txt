@@ -7,6 +7,9 @@ Halfling hairs(HairNormal) skin(SkinNormal) favor(Rogue) resmale(CIMB1) resfemal
 HalfElf hairs(HairNormal) skin(SkinNormal) resmale(CEMB1) resfemale(CEFB1)
 HalfOrc hairs(HairNormal) skin(SkinNormal) favor(Barbarian) resmale(CHMB1) resfemale(CHFB1)
 
+Goblin
+ abilities Dexterity+1 Constitution+1 Wisdow+1 Charisma-2
+
 #List
 
 PlayerRaces

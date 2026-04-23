@@ -82,7 +82,7 @@ void initialize_keybind() {
 	bsdata<keybind>::source.sort(compare);
 }
 
-static keybind* find_key(unsigned key) {
+keybind* find_key(unsigned key) {
 	//keybind e = {};	e.key = key;
 	//return (keybind*)bsearch(&e, bsdata<keybind>::source.data, bsdata<keybind>::source.count, bsdata<keybind>::source.element_size, compare);
 	for(auto& e : bsdata<keybind>()) {

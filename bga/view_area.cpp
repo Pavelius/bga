@@ -132,7 +132,7 @@ static void paint_block_area() {
 	rectb();
 	fore = colors::white;
 	auto index = m2i(pt.x, pt.y);
-	auto blocked = is_block(index);
+	// auto blocked = is_block(index);
 	char temp[512]; stringbuilder sb(temp);
 	sb.add("%1i, %2i index = %3i", pt.x, pt.y, index);
 	sb.adds("(spot %1i, %2i)", hotspot.x, hotspot.y);

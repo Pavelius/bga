@@ -174,19 +174,19 @@ extern fnevent          ptips, pbeforemodal, pleavemodal, psetfocus;
 struct pushrect {
 	point caret;
 	int	width, height;
-	constexpr pushrect() : caret(draw::caret), width(draw::width), height(draw::height) {}
+	pushrect() : caret(draw::caret), width(draw::width), height(draw::height) {}
 	~pushrect() { draw::caret = caret; draw::width = width; draw::height = height; }
 };
 struct pushfore {
 	color fore;
-	constexpr pushfore() : fore(draw::fore) {}
-	constexpr pushfore(color v) : fore(draw::fore) { draw::fore = v; }
+	pushfore() : fore(draw::fore) {}
+	pushfore(color v) : fore(draw::fore) { draw::fore = v; }
 	~pushfore() { draw::fore = fore; }
 };
 struct pushfont {
 	const sprite* font;
-	constexpr pushfont() : font(draw::font) {}
-	constexpr pushfont(const sprite* v) : font(draw::font) { draw::font = v; }
+	pushfont() : font(draw::font) {}
+	pushfont(const sprite* v) : font(draw::font) { draw::font = v; }
 	~pushfont() { draw::font = font; }
 };
 int						aligned(int x, int width, unsigned state, int string_width);
@@ -195,7 +195,6 @@ void					blit(surface& dest, int x, int y, int width, int height, unsigned flags
 void					blit(surface& dest, int x, int y, int width, int height, unsigned flags, const surface& source, int x_source, int y_source, int width_source, int height_source);
 void					circle(int size);
 void					circlef(int size);
-void					create(int x, int y, int width, int height, unsigned flags, int bpp);
 void					execute(fnevent proc, long value = 0, long value2 = 0, const void* object = 0);
 void					fhexagon();
 void					fillform();
@@ -225,7 +224,6 @@ void					linet(int x, int y);
 void					pixel(int x, int y);
 void					pixel(int x, int y, unsigned char alpha);
 unsigned char*			ptr(int x, int y);
-int						rawinput();
 void					rectb(); // Draw rectangle border
 void					rectb3d(); // Draw rectangle border
 void					rectf(); // Draw rectangle area. Right and bottom side is one pixel less.
@@ -234,7 +232,6 @@ void					rectfe(rect rc, int radius);
 void					rectx();
 void					rectfocus();
 void					set(int x, int y);
-void					setcaption(const char* string);
 void					setcaret(int x, int y);
 void					setcaret(int x, int y, int w, int h);
 void					setclip(rect rc);
@@ -243,14 +240,12 @@ inline void				setclipall() { setclip({caret.x, caret.y, caret.x + width, caret.
 void					setoffset(int x, int y);
 void					setpos(int x, int y);
 void					setpos(int x, int y, int width, int height);
-void					settimer(unsigned milleseconds);
 const char*				skiptr(const char* string);
 void					stroke(int x, int y, const sprite* e, int id, int flags, unsigned char thin = 1, unsigned char* koeff = 0);
 void					strokeactive();
 void					strokeborder();
 void					strokeline();
 void					strokeout(fnevent proc, int dx = 0);
-void					syscursor(bool enable);
 void					text(const char* string, int count = -1, unsigned flags = 0);
 int						text(rect rc, const char* string, unsigned state = 0, int* max_width = 0);
 void					texta(const char* string, unsigned state = 0);
@@ -272,21 +267,6 @@ void					write(const char* url, unsigned char* bits, int width, int height, int 
 void					vertical(fnevent proc);
 }
 namespace draw {
-struct awindowi {
-	int			x, y, width, height;
-	int			header_width;
-	unsigned	flags;
-};
-extern awindowi awindow;
-void applicationinitialize();
-void applicationafterinitialize();
-void fieldsetfocus();
-void statusbeforemodal();
-void statuspaint();
-void tooltipspaint();
-void loginitialize();
-}
-namespace draw {
 void breakmodal(long result);
 void buttoncancel();
 void buttonok();
@@ -296,7 +276,7 @@ void cbsetsht();
 void cbsetint();
 void cbsetptr();
 void doredraw();
-void fire(bool run, fnevent proc, long value = 0, long value2 = 0, const void* object = 0);
+void fire(bool run, fnevent proc, long value = 0, long value2 = 0, void* object = 0);
 long getresult();
 bool isnext();
 void initialize(const char* title);
@@ -304,6 +284,12 @@ bool ismodal();
 void* scene(fnevent proc);
 void setneedupdate();
 }
+
+void sys_caption(const char* string);
+void sys_create_window(int x, int y, int width, int height, unsigned flags, int bpp, bool full_screen);
+void sys_cursor(bool show);
+void sys_input();
+void sys_timer(unsigned v);
 
 void next_scene(fnevent v);
 void start_scene();

@@ -105,7 +105,7 @@ static void paint_answers(int bh) {
 		if(current_answer == e.value)
 			c = b + 0;
 		button(GBTNLRG, c, b + 2, '1' + i, e.text, b + 3, true, false);
-		fire(pick_answer, 0, 0, e.value);
+		fire(pick_answer, 0, 0, (void*)e.value);
 		caret.y += bh;
 	}
 }

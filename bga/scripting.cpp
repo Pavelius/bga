@@ -34,7 +34,7 @@ template<> void ftscript<feati>(int value, int counter) {
 
 template<> void ftscript<form>(int value, int counter) {
 	auto& e = bsdata<form>::elements[value];
-	execute(e.command, e.param1, e.param2, e.object);
+	execute(e.command, e.param1, e.param2, (void*)e.object);
 }
 
 template<> void ftscript<itemi>(int value, int counter) {

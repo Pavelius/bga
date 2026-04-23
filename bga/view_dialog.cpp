@@ -34,7 +34,6 @@ int game_panel_mode;
 unsigned caret_index;
 bool button_pressed, button_executed, button_hilited, button_sound, input_disabled;
 
-static rfsnd* music_stop;
 static point dialog_start;
 static bool game_pause;
 static fnevent game_proc;
@@ -69,7 +68,7 @@ struct pushdescription {
 	~pushdescription() { memcpy(description_text, value, sizeof(value)); }
 };
 
-static int compare_nameable(const void* v1, const void* v2) {
+static int compare_nameable_ptr(const void* v1, const void* v2) {
 	auto p1 = *((nameable**)v1);
 	auto p2 = *((nameable**)v2);
 	return szcmp(p1->getname(), p2->getname());
@@ -203,7 +202,7 @@ static void select_spells() {
 			continue;
 		spells.add(&e);
 	}
-	spells.sort(compare_nameable);
+	spells.sort(compare_nameable_ptr);
 }
 
 static void setgameproc(fnevent v, bool cancel_mode) {
@@ -304,9 +303,14 @@ static void button_check_sound(resn res) {
 	play_sound("GAM_09");
 }
 
-void fire(fnevent proc, long param, long param2, const void* object) {
+void fire(fnevent proc, long param, long param2, void* object) {
 	if(button_executed)
 		execute(proc, param, param2, object);
+}
+
+void fire(fnevent proc, long param, long param2, fnevent object) {
+	if(button_executed)
+		execute(proc, param, param2, (void*)object);
 }
 
 static void tips(const char* p) {
@@ -453,7 +457,7 @@ static void color_picker_line(int index, int count, int dx) {
 	auto push_caret = caret;
 	for(auto i = 0; i < count; i++) {
 		color_picker(index);
-		fire(buttonparam, color_indecies[index], 0, 0);
+		fire(buttonparam, color_indecies[index]);
 		caret.x += dx;
 		index++;
 	}
@@ -538,10 +542,6 @@ static bool dragging(fnevent paint) {
 
 static void paint_game_panel() {
 	paint_game_panel(true, false);
-}
-
-static void paint_game_panel_na() {
-	paint_game_panel(false, false);
 }
 
 static void paint_console() {
@@ -1084,9 +1084,9 @@ static void toggle_option_value(optionv n, int v) {
 	set_description();
 }
 
-static void toggle_option_value() {
-	toggle_option_value((optionv)hot.param, hot.param2);
-}
+//static void toggle_option_value() {
+//	toggle_option_value((optionv)hot.param, hot.param2);
+//}
 
 static void checkbox(optionf id) {
 	texta(bsdata<optionfi>::elements[id].getname(), AlignRightCenter);
@@ -1181,7 +1181,7 @@ static void paint_game_options() {
 	setdialog(497, 228); button(GBTNLRG2, 1, 2, '6', "GamePlay"); fire(open_game_opt_game_play);
 	setdialog(497, 268); button(GBTNLRG2, 1, 2, '7', "Movies");
 	setdialog(497, 298); button(GBTNLRG2, 1, 2, '8', "Keyboard");
-	setdialog(555, 338); button(GBTNSTD, 1, 2, 0, "Close"); fire(setgameproc, 1, 0, paint_game_options);
+	setdialog(555, 338); button(GBTNSTD, 1, 2, 0, "Close"); fire(setgameproc, 1, 0, (void*)paint_game_options);
 	setdialog(353, 386, 95, 16); texta(str("%GameVersion"), AlignCenterCenter);
 }
 
@@ -1394,7 +1394,7 @@ static void paint_game_character() {
 static void paint_worldmap() {
 	paint_game_dialog("GUIMAP", 1);
 	setdialog(666, 18, 113, 22); texta(getnm("WorldMap"), AlignCenterCenter);
-	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 0, 0, open_game);
+	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 0, 0, (void*)open_game);
 	setdialog(23, 20, 630, 392); paint_worldmap_area();
 }
 
@@ -1402,7 +1402,7 @@ static void paint_game_automap() {
 	paint_game_dialog("GUIMAP");
 	paint_action_panel_na();
 	setdialog(696, 56, 82, 20); texta(getnm("AreaNotes"), AlignCenterCenter);
-	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 0, 0, open_worldmap);
+	setdialog(680, 288); button(GUIMAPWC, 0, 1, 'W'); fire(next_scene, 0, 0, (void*)open_worldmap);
 	setdialog(664, 54); button(GBTNOPT1, 1, 2);
 	setdialog(666, 18, 113, 22); texta(getnm("AreaMap"), AlignCenterCenter);
 	setdialog(98, 36, 480, 360); paint_minimap();
@@ -1689,7 +1689,7 @@ static bool paint_tips() {
 	if(!ps)
 		return false;
 	const int pad_x = 8;
-	const int pad_y = 4;
+	//const int pad_y = 4;
 	caret.x = tips_area.x1;
 	caret.y = tips_area.y2 + 4;
 	width = textw(pn) + pad_x * 2;
@@ -1785,7 +1785,7 @@ static void tips_main() {
 void initialize_ui() {
 	set_cursor();
 	ptips = tips_main;
-	draw::syscursor(false);
+	sys_cursor(false);
 }
 
 void initialize_interface() {

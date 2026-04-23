@@ -1,5 +1,7 @@
 #include "mtevent.h"
 
+#ifndef __GNUC__
+
 // #include "windows.h"
 
 #define WINBASEAPI extern "C" __declspec(dllimport)
@@ -26,3 +28,19 @@ void io::event::post() {
 void io::event::wait() {
 	WaitForSingleObject(data, INFINITE);
 }
+
+#else
+
+io::event::event() : data(0) {
+}
+
+io::event::~event() {
+}
+
+void io::event::post() {
+}
+
+void io::event::wait() {
+}
+
+#endif

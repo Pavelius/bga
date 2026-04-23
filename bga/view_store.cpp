@@ -282,8 +282,8 @@ static void paint_identify() {
 }
 
 static void paint_store() {
-	auto player_total = player_goods.total();
-	auto shop_total = shop_goods.total();
+	// auto player_total = player_goods.total();
+	// auto shop_total = shop_goods.total();
 	paint_game_dialog("GUISTDRB", get_back_frame());
 	paint_right_panel();
 	switch(trade_mode) {
