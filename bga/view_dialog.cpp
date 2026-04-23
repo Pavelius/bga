@@ -41,7 +41,10 @@ static fnoperation drag_drop_proc;
 static item *drag_item_source, *drag_item_dest;
 static item drag_item;
 
+static sprite* pma_actn;
 static sprite* pma_items;
+static sprite* pma_number;
+static sprite* pma_stoneslot;
 static sprite* pma_port[2];
 
 static char description_text[4096];
@@ -243,20 +246,20 @@ void paint_dialog(const char* id, int frame) {
 	image(p, frame, 0);
 }
 
-void paint_game_dialog(const char* res, int frame) {
+void paint_game_dialog(const char* id, int frame) {
 	audio_update_channels();
 	set_cursor();
 	dialog_start.x = 0;
 	dialog_start.y = 0;
 	caret = dialog_start;
-	image(gres(res), frame, 0);
+	image(gres(id), frame, 0);
 }
 
-void paint_game_dialog(int x, int y, resn v, int frame) {
+void paint_game_dialog(int x, int y, const char* id, int frame) {
 	dialog_start.x = x;
 	dialog_start.y = y;
 	caret = dialog_start;
-	image(gres(v), frame, 0);
+	image(gres(id), frame, 0);
 }
 
 void hotkey(unsigned key, fnevent proc, int param) {
@@ -643,7 +646,7 @@ static void portrait_small(creature* pc, bool player_hilite) {
 			hilight_protrait();
 	}
 	setoffset(2, 2);
-	image(gres(PORTS), pc->portrait, 0);
+	image(pma_port[0], pc->portrait, 0);
 	if(drag_item_source && player != pc && ishilite()) {
 		drag_item_dest = pc->wears;
 		hilight_drag_protrait();
@@ -711,7 +714,7 @@ static void portrait_bar(bool player_hilite, bool allow_choose_player) {
 
 static void paint_player_actions() {
 	pushrect push;
-	image(gres(GACTN), 0, 0);
+	image(pma_actn, 0, 0);
 	caret.x += 6; caret.y += 12;
 	if(have_multiselect()) {
 		button(ActionDefend);
@@ -726,7 +729,7 @@ static void paint_player_actions() {
 
 static void paint_action_panel() {
 	if(input_disabled)
-		image(gres(GACTN), 1, 0);
+		image(pma_actn, 1, 0);
 	else
 		paint_player_actions();
 	portrait_bar(false, !input_disabled);
@@ -734,13 +737,13 @@ static void paint_action_panel() {
 
 void paint_action_panel_player() {
 	setcaret(0, 433);
-	image(gres(GACTN), 1, 0);
+	image(pma_actn, 1, 0);
 	portrait_bar(true, !input_disabled);
 }
 
 void paint_action_panel_combat() {
 	setcaret(0, 433);
-	image(gres(GACTN), 1, 0);
+	image(pma_actn, 1, 0);
 	portrait_bar(true, false);
 }
 
@@ -761,7 +764,6 @@ void layer(color v, unsigned char a = 32) {
 
 static void paint_number(int v) {
 	unsigned char result[16];
-	auto p = gres(NUMBER);
 	auto m = 0;
 	if(!v)
 		result[0] = 0;
@@ -774,8 +776,8 @@ static void paint_number(int v) {
 	}
 	auto push_caret = caret;
 	for(auto i = m - 1; i >= 0; i--) {
-		auto& f = p->get(result[i]);
-		image(p, result[i], 0);
+		auto& f = pma_number->get(result[i]);
+		image(pma_number, result[i], 0);
 		caret.x += f.sx;
 	}
 	caret = push_caret;
@@ -876,13 +878,13 @@ static void paint_drag_target(item* pi, wearn slot) {
 		if(button_hilited) {
 			drag_item_dest = pi;
 			drag_drop_proc = drag_drop_item;
-			image(gres(STONSLOT), 25, 0);
+			image(pma_stoneslot, 25, 0);
 		} else {
 			auto p = get_creature(pi);
 			if(p) {
 				if(slot != Backpack && p->isusable(drag_item)) {
 					if(drag_item.is(slot))
-						image(gres(STONSLOT), 16, 0);
+						image(pma_stoneslot, 16, 0);
 				}
 			}
 		}
@@ -905,7 +907,7 @@ static void inventory(wearn slot, int index, int empthy_frame, bool show_back = 
 		auto index_frame = index % 8;
 		if(index_frame >= 4)
 			index_frame += 4;
-		image(gres(STONSLOT), index_frame, 0);
+		image(pma_stoneslot, index_frame, 0);
 	}
 	button_check(0);
 	paint_drag_target(pi, slot);
@@ -968,13 +970,13 @@ static void quick_weapon(int index) {
 	caret.x += 28;
 	if(player->weapon_index == index) {
 		inventory(QuickWeapon, index * 2, 100);
-		image(gres(STONSLOT), 34, 0);
+		image(pma_stoneslot, 34, 0);
 	} else
 		inventory(QuickWeapon, index * 2, 17);
 	caret.x += 38;
 	inventory(QuickOffhand, index * 2, 13);
 	if(player->weapon_index == index && player->useoffhand())
-		image(gres(STONSLOT), 34, 0);
+		image(pma_stoneslot, 34, 0);
 }
 
 void paperdoll() {
@@ -1789,8 +1791,11 @@ void initialize_ui() {
 
 void initialize_interface() {
 	pma_items = gres("ITEMS");
+	pma_actn = gres("GACTN");
+	pma_number = gres("NUMBER");
 	pma_port[0] = gres("PORTS");
 	pma_port[1] = gres("PORTL");
+	pma_stoneslot = gres("STONSLOT");
 }
 
 BSDATA(form) = {

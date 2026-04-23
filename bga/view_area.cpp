@@ -886,7 +886,7 @@ static int container_frame(container::typen type) {
 }
 
 static void paint_container() {
-	paint_game_dialog(0, 476, GUICONT, 1);
+	paint_game_dialog(0, 476, "GUICONT", 1);
 	setdialog(62, 25); image(gres(CONTAINER), container_frame(last_container->type), 0);
 	setdialog(430, 28); image(gres(CONTAINER), 1, 0);
 	setdialog(150, 22); button(STONSLOT, 0, 0);
