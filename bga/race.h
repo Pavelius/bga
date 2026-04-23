@@ -9,6 +9,7 @@ struct rfpma;
 enum classn : unsigned char;
 enum racen : unsigned char {
 	Human, Dwarf, Elf, Gnome, HalfElf, Halfling, HalfOrc,
+	Goblin,
 };
 
 struct racei : nameable {

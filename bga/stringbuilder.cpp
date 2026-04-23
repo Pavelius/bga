@@ -899,3 +899,22 @@ const char*	getnms(const char* id) {
 		return p;
 	return getnm(id);
 }
+
+const char* szupper(char* source) {
+	for(auto p = source; *p; p++)
+		*p = upper_symbol(*p);
+	return source;
+}
+
+const char* szlower(char* source) {
+	for(auto p = source; *p; p++)
+		*p = lower_symbol(*p);
+	return source;
+}
+
+void szchange(char* source, char s1, char s2) {
+	for(auto p = source; *p; p++) {
+		if(*p == s1)
+			*p = s2;
+	}
+}

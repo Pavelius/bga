@@ -4,14 +4,10 @@
 #include "rfiles.h"
 #include "resid.h"
 
-//BSDATAD(rfard)
 BSDATAD(rfpma)
 BSDATAD(rfsnd)
 BSDATAD(rfvoc)
 
-//BSMETA(rfard) = {
-//	BSREQ(id),
-//	{}};
 BSMETA(rfsnd) = {
 	BSREQ(id),
 	{}};

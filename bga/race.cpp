@@ -9,5 +9,6 @@ BSDATA(racei) = {
 	{"HalfElf"},
 	{"Halfling"},	
 	{"HalfOrc"},
+	{"Goblin"},
 };
-assert_enum(racei, HalfOrc)
+assert_enum(racei, Goblin)

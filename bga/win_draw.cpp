@@ -220,11 +220,11 @@ void draw::updatewindow() {
 	UpdateWindow(hwnd);
 }
 
-void draw::syscursor(bool enable) {
+void sys_cursor(bool enable) {
 	ShowCursor(enable ? 1 : 0);
 }
 
-void draw::create(int x, int y, int width, int height, unsigned flags, int bpp) {
+void sys_create_window(int x, int y, int width, int height, unsigned flags, int bpp, bool full_screen) {
 	if(!bpp)
 		bpp = draw::canvas->bpp;
 	auto screen_w = GetSystemMetrics(SM_CXFULLSCREEN);
@@ -297,11 +297,11 @@ void draw::doredraw() {
 	}
 }
 
-int draw::rawinput() {
+void sys_input() {
 	MSG	msg;
 	updatewindow();
 	if(!hwnd)
-		return 0;
+		return;
 	while(GetMessageA(&msg, 0, 0, 0)) {
 		TranslateMessage(&msg);
 		DispatchMessageA(&msg);
@@ -309,18 +309,18 @@ int draw::rawinput() {
 		if(m == InputNoUpdate)
 			continue;
 		if(m) {
-			m = handle_event(m);
-			return m;
+			hot.key = handle_event(m);
+			return;
 		}
 	}
-	return 0;
+	hot.key = 0;
 }
 
-void draw::setcaption(const char* string) {
+void sys_caption(const char* string) {
 	SetWindowTextA(hwnd, string);
 }
 
-void draw::settimer(unsigned milleseconds) {
+void sys_timer(unsigned milleseconds) {
 	if(milleseconds)
 		SetTimer(hwnd, InputTimer, milleseconds, 0);
 	else
