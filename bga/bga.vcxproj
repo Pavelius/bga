@@ -100,6 +100,7 @@
     <ClCompile Include="command.cpp" />
     <ClCompile Include="geography.cpp" />
     <ClCompile Include="help.cpp" />
+    <ClCompile Include="ids_util.cpp" />
     <ClCompile Include="information.cpp" />
     <ClCompile Include="io_bsreq.cpp" />
     <ClCompile Include="io_stream.cpp" />

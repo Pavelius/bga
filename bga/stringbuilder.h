@@ -119,6 +119,7 @@ const char* szdup(const char* text);
 const char* szdupz(const char* text);
 
 void szupper(char* text);
+void szlower(char* text);
 
 int gender_by_name(const char* s);
 int get_number(const char* p);

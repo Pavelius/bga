@@ -476,6 +476,9 @@
     <ClCompile Include="rfiles.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="ids_util.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">

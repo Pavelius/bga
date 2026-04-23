@@ -890,3 +890,10 @@ void szupper(char* p) {
 		p++;
 	}
 }
+
+void szlower(char* p) {
+	while(*p) {
+		*p = lower_symbol(*p);
+		p++;
+	}
+}
