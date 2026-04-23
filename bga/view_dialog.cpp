@@ -1785,7 +1785,6 @@ static void tips_main() {
 void initialize_ui() {
 	set_cursor();
 	ptips = tips_main;
-	sys_cursor(false);
 }
 
 void initialize_interface() {

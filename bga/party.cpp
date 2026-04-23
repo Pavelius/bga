@@ -214,12 +214,12 @@ static void parse_party() {
 	// Add party name (required, filled line #1)
 	sb.clear();
 	p = skipspcr(sb.psstrlf(skipspcr(p)));
-	add_locale(last_party->id, sb);
+	// add_locale(last_party->id, sb);
 	last_party->description = p;
 	// Add party description (required, filled line #2)
 	sb.clear();
 	p = skipspcr(sb.psstrlf(skipspcr(p)));
-	add_locale(ids(last_party->id, "Info"), sb);
+	// add_locale(ids(last_party->id, "Info"), sb);
 	// Characters
 	for(auto i = 0; i < lenghtof(last_party->characters) && p[0] == '-'; i++) {
 		auto& e = last_party->characters[i];
@@ -242,5 +242,4 @@ void read_party(const char* url) {
 
 void initialize_parties() {
 	readf(read_party, "parties", "*.txt");
-	update_locale_names();
 }

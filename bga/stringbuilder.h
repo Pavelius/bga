@@ -39,7 +39,7 @@ class stringbuilder {
 	const char* pe;
 	const char*	readformat(const char* format, const char* format_param);
 	const char*	readvariable(const char* format);
-	void add(const char* s, const grammar* source, const char* def = 0);
+	void addgr(const char* s, const grammar* source, const char* def = 0);
 public:
 	typedef void (*fncustom)(stringbuilder& sb, const char* id);
 	constexpr stringbuilder(char* pb, const char* pe) : p(pb), pb(pb), pe(pe) {}
@@ -67,6 +67,7 @@ public:
 	void addx(char separator, const char* format, const char* format_param);
 	void addx(const char* separator, const char* format, const char* format_param);
 	void adduint(unsigned value, int precision, const int radix);
+	void change(char s1, char s2);
 	void change(const char* s1, const char* s2);
 	void clear() { pb[0] = 0; p = pb; }
 	void copy(const char* v);
@@ -92,7 +93,6 @@ public:
 typedef const char* (*fntext)(const void* object, stringbuilder& sb);
 typedef void (*fnstatus)(const void* object, stringbuilder& sb);
 typedef void (*fnprint)(stringbuilder& sb);
-typedef void (*fnoutput)(const char* format);
 
 unsigned char lower_symbol(unsigned char sym);
 unsigned char upper_symbol(unsigned char sym);
@@ -100,6 +100,7 @@ unsigned char upper_symbol(unsigned char sym);
 const char* getnm(const char* id);
 const char*	getnme(const char* id);
 const char* getnme(const char* id, const char* p1);
+const char*	getnms(const char* id);
 
 const char* ids(const char* p1, const char* p2);
 const char* ids(const char* p1, const char* p2, const char* p3);
@@ -114,12 +115,11 @@ const char* skipcr(const char* format);
 const char* skipsp(const char* p);
 const char* skipspcr(const char* p);
 const char* skipline(const char* p);
+const char* skipline(const char* p, char delimeter);
 const char* szfind(const char* text, const char* value);
+const char*	szfindend(const char* source, const char* value);
 const char* szdup(const char* text);
 const char* szdupz(const char* text);
-
-void szupper(char* text);
-void szlower(char* text);
 
 int gender_by_name(const char* s);
 int get_number(const char* p);
@@ -127,15 +127,12 @@ int get_line_number(const char* start, const char* position);
 int	szcmpi(const char* p1, const char* p2);
 int szcmp(const char* p1, const char* p2);
 
-void add_locale(const char* id, const char* name); // After call this, before use any getnm() function, update records, calling update_locale_names().
 void default_string(stringbuilder& sb, const char* id);
 bool equal(const char* s1, const char* s2);
 void initialize_translation();
-void szchange(char* result, char s1, char s2);
 bool szstart(const char* text, const char* value);
 bool szmatch(const char* text, const char* value);
 bool szpmatch(const char* text, const char* pattern);
-void update_locale_names();
 
 constexpr bool ischa(unsigned char s) { return (s >= 'A' && s <= 'Z') || (s >= 'a' && s <= 'z') || s >= 0xC0; }
 constexpr bool isnum(unsigned char s) { return s >= '0' && s <= '9'; }

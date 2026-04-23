@@ -1,7 +1,7 @@
-﻿Error in file `rules/Worldmap.txt`:
- Line 7: Not found ResImage identifier `WMAP1`
- Line 7: Not found ResImage identifier `MAPICONS`
- Line 8: Not found ResImage identifier `WMAP2`
- Line 8: Not found ResImage identifier `MAPICONS`
- Line 9: Not found ResImage identifier `WMAP3`
- Line 9: Not found ResImage identifier `MAPICONS`
+Error in file `rules/Colors.txt`:
+ Line 4: Expected line feed
+Error in file `parties/HandsOfFury.txt`:
+ Line 5: Not found item `Mace`
+ Line 6: Not found item `LeatherArmor`
+ Line 7: Not found item `LongSword`
+ Line 7: Not found item `LeatherArmor`

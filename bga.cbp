@@ -166,7 +166,6 @@
 		<Unit filename="bga/moveable.cpp" />
 		<Unit filename="bga/moveable.h" />
 		<Unit filename="bga/mtevent.cpp" />
-		<Unit filename="bga/mtevent.h" />
 		<Unit filename="bga/my_initialize_list.h" />
 		<Unit filename="bga/nameable.cpp" />
 		<Unit filename="bga/nameable.h" />

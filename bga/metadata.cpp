@@ -40,9 +40,6 @@
 
 using namespace draw;
 
-BSMETA(variant) = {{}};
-BSMETA(varianti) = {BSREQ(id), {}};
-
 BSDATAC(advancei, 512)
 BSDATAC(ambient, 64)
 BSDATAC(animation, 128)
@@ -65,7 +62,6 @@ BSDATAC(playlisti, 64)
 BSDATAC(region, 128)
 BSDATAC(spelli, 1024)
 BSDATAC(spellbook, 32)
-BSDATAD(variant)
 BSDATAC(variable, 256 * 64)
 BSDATAC(worldmapi, 8)
 BSDATAC(worldmapi::area, 128)
@@ -154,9 +150,6 @@ BSMETA(itemfi) = {
 BSMETA(magici) = {
 	BSREQ(id),
 	{}};
-BSMETA(modifieri) = {
-	BSREQ(id),
-	{}};
 BSMETA(npci) = {
 	BSREQ(id),
 	BSREQ(res),
@@ -196,9 +189,6 @@ BSMETA(rangei) = {
 	BSREQ(id),
 	{}};
 BSMETA(schooli) = {
-	BSREQ(id),
-	{}};
-BSMETA(script) = {
 	BSREQ(id),
 	{}};
 BSMETA(skilli) = {

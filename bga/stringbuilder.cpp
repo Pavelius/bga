@@ -25,8 +25,8 @@ stringbuilder::fncustom stringbuilder::custom = default_string;
 struct stringbuilder::grammar {
 	const char* name;
 	const char* change;
-	unsigned name_size;
-	unsigned change_size;
+	size_t name_size;
+	size_t change_size;
 	constexpr grammar() : name(0), change(0), name_size(0), change_size(0) {}
 	constexpr grammar(const char* name, const char* change) :
 		name(name), change(change), name_size(zlen(name)), change_size(zlen(change)) {
@@ -203,6 +203,14 @@ const char* skipline(const char* p) {
 	return p;
 }
 
+const char* skipline(const char* p, char delimeter) {
+	while(*p && !(*p == 10 || *p == 13 || *p == delimeter))
+		p++;
+	if(*p == delimeter)
+		p++;
+	return p;
+}
+
 int get_line_number(const char* start, const char* position) {
 	auto p = start;
 	auto r = 0;
@@ -233,8 +241,6 @@ bool szmatch(const char* text, const char* name) {
 }
 
 bool szpmatch(const char* string, const char* pattern) {
-	const char* rs = 0;
-	const char* rp = 0;
 	auto p = string;
 	while(*p) {
 		auto symbol = *pattern++;
@@ -242,25 +248,14 @@ bool szpmatch(const char* string, const char* pattern) {
 		case 0:
 			return false;
 		case '*':
-			while(*p && *p != *pattern)
+			while(*p && upper_symbol(*p) != upper_symbol(*pattern))
 				p++;
-			if(p[0] != 0) {
-				rs = p + 1;
-				rp = pattern;
-			}
 			continue;
 		case '?':
 			p++;
 			continue;
 		}
-		if(*p != symbol) {
-			if(rs && rp) {
-				p = rs;
-				pattern = rp;
-				rs = 0;
-				rp = 0;
-				continue;
-			}
+		if(upper_symbol(*p) != upper_symbol(symbol)) {
 			while(symbol && symbol != ',')
 				symbol = *pattern++;
 			if(symbol == ',') {
@@ -531,8 +526,10 @@ void stringbuilder::addx(const char* separator, const char* format, const char* 
 	addv(format, format_param);
 }
 
-void szchange(char* result, char s1, char s2) {
-	for(auto p = result; *p; p++) {
+void stringbuilder::change(char s1, char s2) {
+	for(auto p = pb; p < pe; p++) {
+		if(*p == 0)
+			break;
 		if(*p == s1)
 			*p++ = s2;
 	}
@@ -550,6 +547,17 @@ const char*	szfind(const char* source, const char* value) {
 	auto s = value[0];
 	for(auto p = source; *p; p++) {
 		if(*p == s && szstart(p, value))
+			return p;
+	}
+	return 0;
+}
+
+const char*	szfindend(const char* source, const char* value) {
+	if(!value || !source || !value[0])
+		return 0;
+	auto s = value[0];
+	for(auto p = source; *p; p++) {
+		if(*p == s && equal(p, value))
 			return p;
 	}
 	return 0;
@@ -580,7 +588,7 @@ void stringbuilder::change(const char* s1, const char* s2) {
 	}
 }
 
-void stringbuilder::add(const char* s, const grammar* source, const char* def) {
+void stringbuilder::addgr(const char* s, const grammar* source, const char* def) {
 	auto ps = skip_space(s);
 	while(*ps) {
 		auto pw = word_end(ps);
@@ -655,8 +663,9 @@ void stringbuilder::addch(char sym) {
 	switch(sym) {
 	case -85: case -69: add('\"'); break;
 	case -72: add('е'); break;
-	case -105: case 17: add('-'); break;
+	case -105: case 17: case 0x14: add('-'); break;
 	case -123: add("..."); break;
+	case 0x19: add("'"); break;
 	default: add(sym);
 	}
 }
@@ -764,7 +773,7 @@ void stringbuilder::addof(const char* s) {
 		{"ь", "и"},
 		{"я", "и"},
 		{}};
-	add(s, map, "а");
+	addgr(s, map, "а");
 }
 
 void stringbuilder::addnounf(const char* s) {
@@ -773,7 +782,7 @@ void stringbuilder::addnounf(const char* s) {
 		{"ой", "ая"},
 		{"ый", "ая"},
 		{}};
-	add(s, map, "");
+	addgr(s, map, "");
 }
 
 void stringbuilder::addnouni(const char* s) {
@@ -783,7 +792,7 @@ void stringbuilder::addnouni(const char* s) {
 		{"ой", "ое"},
 		{"ый", "ое"},
 		{}};
-	add(s, map, "");
+	addgr(s, map, "");
 }
 
 void stringbuilder::addnounx(const char* s) {
@@ -791,7 +800,7 @@ void stringbuilder::addnounx(const char* s) {
 		{"ий", "ие"},
 		{"ый", "ые"},
 		{}};
-	add(s, map, "");
+	addgr(s, map, "");
 }
 
 void stringbuilder::addby(const char* s) {
@@ -812,7 +821,7 @@ void stringbuilder::addby(const char* s) {
 		{"а", "ой"},
 		{"ч", "чем"},
 		{}};
-	add(s, map, "ом");
+	addgr(s, map, "ом");
 }
 
 void stringbuilder::addto(const char* s) {
@@ -822,7 +831,7 @@ void stringbuilder::addto(const char* s) {
 		{"ы", "ам"},
 		{}
 	};
-	add(s, map, "у");
+	addgr(s, map, "у");
 }
 
 int gender_by_name(const char* s) {
@@ -884,16 +893,9 @@ const char* ids(const char* p1, const char* p2, const char* p3) {
 	return temp;
 }
 
-void szupper(char* p) {
-	while(*p) {
-		*p = upper_symbol(*p);
-		p++;
-	}
-}
-
-void szlower(char* p) {
-	while(*p) {
-		*p = lower_symbol(*p);
-		p++;
-	}
+const char*	getnms(const char* id) {
+	auto p = getnme(ids(id, "Short"));
+	if(p)
+		return p;
+	return getnm(id);
 }

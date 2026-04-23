@@ -27,7 +27,7 @@
 1776924738 /home/user-331/projects/bga/bga/sliceu.h
 	"bsdata.h"
 
-1776924738 /home/user-331/projects/bga/bga/bsdata.h
+1776938899 /home/user-331/projects/bga/bga/bsdata.h
 	"array.h"
 
 1776929156 /home/user-331/projects/bga/bga/array.h
@@ -35,7 +35,7 @@
 
 1776932066 /home/user-331/projects/bga/bga/slice.h
 
-1776924738 /home/user-331/projects/bga/bga/stringbuilder.h
+1775041741 /home/user-331/projects/bga/bga/stringbuilder.h
 	"slice.h"
 	<stdarg.h>
 
@@ -716,7 +716,7 @@
 
 1776924738 source:/home/user-331/projects/bga/bga/math.cpp
 
-1776924738 source:/home/user-331/projects/bga/bga/metadata.cpp
+1776939139 source:/home/user-331/projects/bga/bga/metadata.cpp
 	"ability.h"
 	"advance.h"
 	"alignment.h"
@@ -776,7 +776,7 @@
 	"namestr.h"
 	"stringbuilder.h"
 
-1776933195 source:/home/user-331/projects/bga/bga/main.cpp
+1776939239 source:/home/user-331/projects/bga/bga/main.cpp
 	"ability.h"
 	"area.h"
 	"audio.h"
@@ -817,7 +817,7 @@
 	"draw.h"
 	"order.h"
 
-1776929865 source:/home/user-331/projects/bga/bga/party.cpp
+1776939411 source:/home/user-331/projects/bga/bga/party.cpp
 	"alignment.h"
 	"bsdata.h"
 	"console.h"
@@ -929,7 +929,7 @@
 	"iteminside.h"
 	"store.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/stringbuilder.cpp
+1775041741 source:/home/user-331/projects/bga/bga/stringbuilder.cpp
 	"stringbuilder.h"
 	"slice.h"
 
@@ -1057,7 +1057,7 @@
 	"bsdata.h"
 	"worldmap.h"
 
-1776933125 source:/home/user-331/projects/bga/bga/view_dialog.cpp
+1776939244 source:/home/user-331/projects/bga/bga/view_dialog.cpp
 	"action.h"
 	"array.h"
 	"area.h"

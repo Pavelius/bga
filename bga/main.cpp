@@ -59,6 +59,7 @@ int main(int argc, char* argv[]) {
 	colors::special = color(244, 214, 66);
 	update_main_music();
 	initialize(getnm("AppTitle"));
+	sys_cursor(false);
 	sys_timer(64);
 	//next_scene(start_main);
 	next_scene(open_main_menu);
