@@ -152,7 +152,10 @@ BSMETA(magici) = {
 	{}};
 BSMETA(npci) = {
 	BSREQ(id),
+	BSREQ(cr),
 	BSREQ(res),
+	BSENM(race, racei),
+	BSREQ(elements),
 	BSDST(abilities, abilityi),
 	BSDST(classes, classi),
 	{}};
@@ -184,6 +187,7 @@ BSMETA(racei) = {
 	BSREQ(resmale),
 	BSREQ(resfemale),
 	BSREQ(restype),
+	BSREQ(elements),
 	{}};
 BSMETA(rangei) = {
 	BSREQ(id),

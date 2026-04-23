@@ -71,7 +71,6 @@
 		<Unit filename="bga/bstream.h" />
 		<Unit filename="bga/calendar.cpp" />
 		<Unit filename="bga/calendar.h" />
-		<Unit filename="bga/cflags.h" />
 		<Unit filename="bga/class.cpp" />
 		<Unit filename="bga/class.h" />
 		<Unit filename="bga/collection.cpp" />
@@ -112,7 +111,6 @@
 		<Unit filename="bga/entrance.cpp" />
 		<Unit filename="bga/entrance.h" />
 		<Unit filename="bga/enum.h" />
-		<Unit filename="bga/errors.txt" />
 		<Unit filename="bga/feat.cpp" />
 		<Unit filename="bga/feat.h" />
 		<Unit filename="bga/flagable.h" />
@@ -166,7 +164,6 @@
 		<Unit filename="bga/moveable.cpp" />
 		<Unit filename="bga/moveable.h" />
 		<Unit filename="bga/mtevent.cpp" />
-		<Unit filename="bga/my_initialize_list.h" />
 		<Unit filename="bga/nameable.cpp" />
 		<Unit filename="bga/nameable.h" />
 		<Unit filename="bga/namestr.cpp" />
@@ -258,6 +255,7 @@
 		<Unit filename="bga/wearable.h" />
 		<Unit filename="bga/worldmap.cpp" />
 		<Unit filename="bga/worldmap.h" />
+		<Unit filename="errors.txt" />
 		<Unit filename="rules/Advance.txt" />
 		<Unit filename="rules/Basic.txt" />
 		<Unit filename="rules/Calendar.txt" />

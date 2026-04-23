@@ -647,6 +647,8 @@ static bool choose_step_action() {
 		if(!open_character_name())
 			return false;
 		break;
+	default:
+		break;
 	}
 	return true;
 }

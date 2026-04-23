@@ -1,2 +1,0 @@
-﻿Can't find file 'rules/Basic.txt'
-Can't find file 'locale/ru/Names.txt'

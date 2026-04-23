@@ -1,18 +1,8 @@
 #include "npc.h"
-#include "resid.h"
+#include "rfiles.h"
 
 sprite* npci::getres(int n) {
-	if(sprites[n])
-		return sprites[n];
-	if(!res[n])
-		return 0;
-	sprites[n] = gres(res[n]);
-	return sprites[n];
-}
-
-void clear_npc_sprites() {
-	for(auto& e : bsdata<npci>()) {
-		e.sprites[0] = 0;
-		e.sprites[1] = 0;
-	}
+	if(res[n])
+		return res[n]->get();
+	return 0;
 }

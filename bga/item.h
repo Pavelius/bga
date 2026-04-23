@@ -39,7 +39,7 @@ struct itemi : nameable {
 	wearn			wear;
 	char			magic;
 	variants		use, wearing;
-	itemi*			basic;
+	itemi*			basic; // Basic item. Showm as unidentified. Can be identified.
 	char			max_dex_bonus;
 	featn			required;
 	int				getcritical() const;
@@ -48,7 +48,7 @@ struct itemi : nameable {
 };
 struct item {
 	unsigned short type;
-	unsigned char count;
+	unsigned char count; // Every item have count or damage.
 	union {
 		struct {
 			unsigned char identified : 1;

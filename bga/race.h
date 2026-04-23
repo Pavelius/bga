@@ -18,5 +18,5 @@ struct racei : nameable {
 	rfpma* resmale;
 	rfpma* resfemale;
 	char restype;
-	variants abilities;
+	variants elements;
 };

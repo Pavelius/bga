@@ -186,7 +186,7 @@
 1776924738 /home/user-331/projects/bga/bga/moveable.h
 	"drawable.h"
 
-1776933825 /home/user-331/projects/bga/bga/race.h
+1776944511 /home/user-331/projects/bga/bga/race.h
 	"ability.h"
 	"colorgrad.h"
 	"variant.h"
@@ -200,7 +200,7 @@
 1776924738 /home/user-331/projects/bga/bga/wearable.h
 	"item.h"
 
-1776924738 /home/user-331/projects/bga/bga/item.h
+1776946028 /home/user-331/projects/bga/bga/item.h
 	"ability.h"
 	"dice.h"
 	"magic.h"
@@ -366,11 +366,12 @@
 
 1776924738 /home/user-331/projects/bga/bga/modifier.h
 
-1776924738 /home/user-331/projects/bga/bga/npc.h
+1776945236 /home/user-331/projects/bga/bga/npc.h
 	"ability.h"
 	"coloration.h"
 	"class.h"
 	"nameable.h"
+	"variant.h"
 
 1776924738 /home/user-331/projects/bga/bga/order.h
 
@@ -716,7 +717,7 @@
 
 1776924738 source:/home/user-331/projects/bga/bga/math.cpp
 
-1776939139 source:/home/user-331/projects/bga/bga/metadata.cpp
+1776945341 source:/home/user-331/projects/bga/bga/metadata.cpp
 	"ability.h"
 	"advance.h"
 	"alignment.h"
@@ -803,9 +804,9 @@
 	"nameable.h"
 	"flagable.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/npc.cpp
+1776945158 source:/home/user-331/projects/bga/bga/npc.cpp
 	"npc.h"
-	"resid.h"
+	"rfiles.h"
 
 1776924738 source:/home/user-331/projects/bga/bga/option.cpp
 	"bsdata.h"
@@ -989,7 +990,7 @@
 	"view.h"
 	"worldmap.h"
 
-1776928821 source:/home/user-331/projects/bga/bga/view_generate.cpp
+1776946108 source:/home/user-331/projects/bga/bga/view_generate.cpp
 	"alignment.h"
 	"answers.h"
 	"area.h"

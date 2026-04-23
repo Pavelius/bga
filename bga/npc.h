@@ -4,19 +4,24 @@
 #include "coloration.h"
 #include "class.h"
 #include "nameable.h"
+#include "variant.h"
 
 struct sprite;
+struct rfpma;
 
 enum alignmentn : unsigned char;
 enum gendern : unsigned char;
 enum dietyn : unsigned char;
+enum racen : unsigned char;
 
 struct npci : nameable, classa, coloration, statable {
 	gendern		gender;
 	alignmentn	alignment;
 	dietyn		diety;
-	const char*	res[2]; // Resources
-	sprite*		sprites[2]; // Loaded resources
-	sprite*		getres(int n);
+	racen		race;
+	char		cr;
+	rfpma*		res[2]; // Resources
+	variants	elements;
+	sprite* getres(int n);
 };
 void clear_npc_sprites();
