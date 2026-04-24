@@ -41,10 +41,11 @@ static fnoperation drag_drop_proc;
 static item *drag_item_source, *drag_item_dest;
 static item drag_item;
 
+sprite* pma_stoneslot;
+
 static sprite* pma_actn;
 static sprite* pma_items;
 static sprite* pma_number;
-static sprite* pma_stoneslot;
 static sprite* pma_port[2];
 
 static char description_text[4096];

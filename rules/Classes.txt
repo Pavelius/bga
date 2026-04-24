@@ -1,12 +1,14 @@
 #Class
 
+// `ai` is class of animation. 0 - default, 1 - cleric like, 2 - theif like, 3 - wizard like, 4 - monk like.
+
 Barbarian attack(1)
  alignment NeutralGood ChaoticGood TrueNeutral ChaoticNeutral NeutralEvil ChaoticEvil
  saves Fortitude
  proficient SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
   MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponSword MartialWeaponPolearm\
   ArmorProficiencyLight ArmorProficiencyMedium ShieldProficiency
-Cleric cast(Wisdow)
+Cleric cast(Wisdow) ai(1)
  skills Alchemy Concentration Diplomacy KnowledgeArcana Spellcraft
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
  saves Fortitude Will
@@ -34,19 +36,19 @@ Ranger attack(1)
  proficient SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
   MartialWeaponAxe MartialWeaponBow MartialWeaponFlail MartialWeaponGreatSword MartialWeaponHammer MartialWeaponSword MartialWeaponPolearm\
   ArmorProficiencyLight ArmorProficiencyMedium ArmorProficiencyHeavy ShieldProficiency
-Rogue
+Rogue ai(2)
  skills Bluff DisableDevice Hide Intimidate MoveSilently OpenLock PickPocket Search UseMagicDevice
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
  saves Reflexes
  proficient SimpleWeaponMace SimpleWeaponStaff SimpleWeaponMissile SimpleWeaponDagger\
   MartialWeaponBow MartialWeaponSword MartialWeaponPolearm\
   ArmorProficiencyLight
-Sorcerer cast(Charisma) attack(2)
+Sorcerer cast(Charisma) attack(2) ai(3)
  skills Alchemy Concentration KnowledgeArcana Spellcraft
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
  saves Will
  proficient SimpleWeaponMissile SimpleWeaponStaff SimpleWeaponDagger
-Wizard cast(Intellegence) attack(2)
+Wizard cast(Intellegence) attack(2) ai(3)
  skills Alchemy Concentration KnowledgeArcana Spellcraft
  alignment LawfulGood NeutralGood ChaoticGood LawfulNeutral TrueNeutral ChaoticNeutral LawfulEvil NeutralEvil ChaoticEvil
  saves Will

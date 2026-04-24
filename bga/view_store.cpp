@@ -118,7 +118,7 @@ static void paint_good(void* object) {
 	//if(hot.mouse.in({caret.x, caret.y, caret.x + 32, caret.y + 32}) && hot.key == MouseRight && !hot.pressed)
 	//	execute(remove_good, 0, 0, object);
 	if(p->count)
-		image(gres(STONSLOT), 25, 0);
+		image(pma_stoneslot, 25, 0);
 	paint_item(p->source);
 	caret.x += 50; caret.y += 1; width = 160;
 	auto push_clip = clipping; setclipall();
@@ -134,7 +134,7 @@ static void paint_identify_item(void* object) {
 	auto p = (tradegood*)object;
 	height = 34;
 	if(p->count)
-		image(gres(STONSLOT), 25, 0);
+		image(pma_stoneslot, 25, 0);
 	paint_item(p->source);
 	caret.x += 50; caret.y += 1; width = 160;
 	texta(p->source->getname(), AlignCenterCenter);

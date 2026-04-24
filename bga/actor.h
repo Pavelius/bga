@@ -74,6 +74,6 @@ private:
 
 int get_armor_index(const item& e);
 
-resn get_character_res(racen race, gendern gender, classn type, int ai, int& ws);
+sprite* get_character_res(racen race, gendern gender, classn type, int ai, int& ws);
 
 void paperdoll(const coloration& colors, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm);

@@ -98,6 +98,7 @@ BSMETA(classi) = {
 	BSFLG(proficient, feati),
 	BSFLG(alignment, alignmenti),
 	BSFLG(saves, abilityi),
+	BSREQ(ai),
 	{}};
 BSMETA(color) = {
 	BSREQ(r), BSREQ(g), BSREQ(b),
@@ -183,9 +184,7 @@ BSMETA(racei) = {
 	BSREQ(id),
 	BSREQ(skin), BSREQ(hairs),
 	BSENM(favor, classi),
-	BSREQ(resmale),
-	BSREQ(resfemale),
-	BSREQ(restype),
+	BSREQ(res), BSREQ(ws), BSREQ(resm),
 	BSREQ(elements),
 	{}};
 BSMETA(rangei) = {

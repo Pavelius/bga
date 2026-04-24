@@ -225,7 +225,6 @@ void create_npc(point position, const char* id) {
 	player->area_index = current_area;
 	player->gender = pn->gender;
 	player->portrait = 0xFFFF;
-	player->race = Human;
 	copy(player->basic, *((statable*)pn));
 	for(auto i = Commoner; i <= Wizard; i = (classn)(i + 1)) {
 		if(!pn->classes[i])

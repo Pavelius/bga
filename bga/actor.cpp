@@ -7,6 +7,7 @@
 #include "npc.h"
 #include "order.h"
 #include "rand.h"
+#include "rfiles.h"
 #include "timer.h"
 
 using namespace draw;
@@ -60,56 +61,57 @@ int get_armor_index(const item& e) {
 	}
 }
 
-resn get_character_res(racen race, gendern gender, classn type, int ai, int& ws) {
-	resn icn = (resn)0;
-	switch(race) {
-	case Dwarf:
-	case Gnome:
-		icn = CDMB1;
-		ws = 0;
+sprite* get_character_res(racen race, gendern gender, classn type, int ai, int& ws) {
+	// `ai` is armor index
+	// 0 - no armor
+	// 1 - light (or leather) armor
+	// 2 - medium armor (chaimail and other)
+	// 3 - heavy armor (plate and like)
+	// `ws` is index of weapon set
+	auto& ei = bsdata<racei>::elements[race];
+	auto i = (gender == Female) ? 1 : 0;
+	auto p = ei.res[i];
+	if(!p)
+		return 0;
+	auto& ec = bsdata<classi>::elements[type];
+	auto n = ec.ai;
+	// Class of animation.
+	// 0 - default
+	// 1 - cleric like
+	// 2 - theif like
+	// 3 - wizard like
+	// 4 - monk like
+	ws = ei.ws[i];
+	// Allowed animation set (by count of animation types)
+	// 10 - CDMB1, CDMB2, CDMB3, CDMC4, CDMF4, CDMT1, CDMW1, CDMW2, CDMW3, CDMW4
+	// 11 - CHFB1, CHFB2, CHFB3, CHFC4, CHFF4, CHFM1, CHFT1, CHFW1, CHFW2, CHFW3, CHFW4,
+	//  6 - CIMB1, CIMB2, CIMB3, CIMC4, CIMF4, CIMT1
+	if(n==0 && ai == 3)
+		ai = 4; // Default animation have other index for heavy armor
+	switch(ei.resm) {
+	case 10:
+		switch(n) {
+		case 2: case 4: p += 5; break;
+		case 3: p += 6 + ai; break;
+		default: p += ai; break;
+		}
 		break;
-	case Elf:
-	case HalfElf:
-		if(gender == Female)
-			icn = CEFB1;
-		else
-			icn = CEMB1;
-		ws = 2;
-		break;
-	case Halfling:
-		if(gender == Female)
-			icn = CIFB1;
-		else
-			icn = CIMB1;
-		if(type == Wizard || type == Sorcerer)
-			type = Rogue;
-		if(ai > 1)
-			ai = 1;
-		ws = 0;
+	case 6:
+		switch(n) {
+		case 2: case 3: case 4: p += 5; break;
+		default: p += ai; break;
+		}
 		break;
 	default:
-		if(gender == Female) {
-			ws = 1;
-			icn = CHFB1;
-		} else {
-			ws = 3;
-			icn = CHMB1;
+		switch(n) {
+		case 2: p += 6; break;
+		case 3: p += 7 + ai; break;
+		case 4: p += 5; break;
+		default: p += ai; break;
 		}
 		break;
 	}
-	if(type == Wizard || type == Sorcerer)
-		icn = (resn)(icn + (CDMW1 - CDMB1) + ai);
-	else if(type == Cleric)
-		icn = (resn)(icn + ai);
-	else if(type == Rogue && ai)
-		icn = (resn)(icn + (CDMT1 - CDMB1));
-	else {
-		if(ai == 3)
-			icn = (resn)(icn + 4);
-		else
-			icn = (resn)(icn + ai);
-	}
-	return icn;
+	return p->get();
 }
 
 bool actor::ispresent() const {
@@ -132,7 +134,7 @@ npci* actor::getnpc() const {
 sprite* actor::getsprite(int& ws) const {
 	auto npc = getnpc();
 	if(!npc)
-		return gres(get_character_res(race, gender, getmainclass(), get_armor_index(wears[Body]), ws));
+		return get_character_res(race, gender, getmainclass(), get_armor_index(wears[Body]), ws);
 	else
 		return npc->getres(0);
 }
@@ -306,7 +308,7 @@ void paperdoll(color* pallette, racen race, gendern gender, classn type, int ani
 	sprite* source;
 	unsigned flags;
 	int ws;
-	source = gres(get_character_res(race, gender, type, get_armor_index(armor), ws));
+	source = get_character_res(race, gender, type, get_armor_index(armor), ws);
 	if(!source)
 		return;
 	const int directions = 9;

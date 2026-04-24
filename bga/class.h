@@ -14,6 +14,7 @@ struct classi : nameable {
 	int			hit_points, skill_points, attack;
 	unsigned	skills, alignment, saves, proficient;
 	abilityn	cast;
+	char		ai; // Class of animation. 0 - default, 1 - cleric like, 2 - theif like, 3 - wizard like, 4 - monk like.
 	classn		getindex() const;
 	bool		is(alignmentn v) const { return (alignment & (1 << v)) != 0; }
 	bool		is(skilln v) const { return (skills & (1 << v)) != 0; }

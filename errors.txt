@@ -1,6 +1,2 @@
-﻿Error in file `rules/Colors.txt`:
- Line 4: Unknown type in requisit `number`
- Line 4: Unknown type in requisit ``
- Line 4: Unknown type in requisit ``
- Line 4: Unknown type in requisit ``
- Line 4: Unknown type in requisit ``
+﻿Error in file `rules/Races.txt`:
+ Line 6: Not found requisit `restype`
