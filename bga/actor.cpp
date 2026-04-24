@@ -50,6 +50,7 @@ BSDATA(animatei) = {
 assert_enum(animatei, AnimateCastFourRelease)
 
 const int max_sprite_directions = 9;
+const int max_weapon_anim = 26;
 const int anm_monsters_a1 = 104;
 
 int get_armor_index(const item& e) {
@@ -67,21 +68,13 @@ sprite* get_character_res(racen race, gendern gender, classn type, int ai, int& 
 	// 1 - light (or leather) armor
 	// 2 - medium armor (chaimail and other)
 	// 3 - heavy armor (plate and like)
-	// `ws` is index of weapon set
 	auto& ei = bsdata<racei>::elements[race];
 	auto i = (gender == Female) ? 1 : 0;
 	auto p = ei.res[i];
 	if(!p)
 		return 0;
-	auto& ec = bsdata<classi>::elements[type];
-	auto n = ec.ai;
-	// Class of animation.
-	// 0 - default
-	// 1 - cleric like
-	// 2 - theif like
-	// 3 - wizard like
-	// 4 - monk like
-	ws = ei.ws[i];
+	auto n = bsdata<classi>::elements[type].ai; // Animation class: 0 - default, 1 - cleric, 2 - theif, 3 - wizard, 4 - monk.
+	ws = ei.ws[i]; // `ws` is index of weapon set
 	// Allowed animation set (by count of animation types)
 	// 10 - CDMB1, CDMB2, CDMB3, CDMC4, CDMF4, CDMT1, CDMW1, CDMW2, CDMW3, CDMW4
 	// 11 - CHFB1, CHFB2, CHFB3, CHFC4, CHFF4, CHFM1, CHFT1, CHFW1, CHFW2, CHFW3, CHFW4,
@@ -292,11 +285,14 @@ void actor::updateanimate() {
 }
 
 static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {
+	static int ai[] = {max_weapon_anim * 3, max_weapon_anim * 2, max_weapon_anim * 1, 0};
 	if(!equipment)
 		return;
-	auto tb = equipment.geti().equiped;
-	if(tb)
-		image(gres(resn(tb + ws)), frame, flags, pallette);
+	auto p = equipment.geti().equiped;
+	if(!p)
+		return;
+	p += ai[ws];
+	image(p->get(), frame, flags, pallette);
 }
 
 static void apply_shadow(color* pallette, color fore) {

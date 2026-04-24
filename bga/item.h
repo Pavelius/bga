@@ -8,6 +8,8 @@
 
 #pragma once
 
+struct rfpma;
+
 enum featn : unsigned char;
 enum itemf_s : unsigned char {
 	TwoHanded, Balanced, UltraBalanced, Dangerous, Cursed,
@@ -33,7 +35,8 @@ struct weaponi {
 struct itemi : nameable {
 	unsigned		count, weight, cost;
 	short			avatar, ground;
-	resn			equiped, thrown;
+	rfpma*			equiped;
+	rfpma*			thrown;
 	weaponi			weapon;
 	unsigned		flags;
 	wearn			wear;

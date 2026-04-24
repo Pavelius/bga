@@ -2,7 +2,7 @@
 
 Human hairs(HairNormal) skin(SkinNormal) res(CHMB1 CHFB1) ws(1 3) resm(11)
 Dwarf hairs(HairNormal) skin(SkinNormal) favor(Fighter) res(CDMB1 CDMB1) resm(10)
-Elf hairs(HairNormal) skin(SkinNormal) favor(Wizard) res(CEMB1 CEFB1) resm(10)
+Elf hairs(HairNormal) skin(SkinNormal) favor(Wizard) res(CEMB1 CEFB1) ws(2 2) resm(10)
 Halfling hairs(HairNormal) skin(SkinNormal) favor(Rogue) res(CIMB1 CIFB1) resm(6)
 HalfElf hairs(HairNormal) skin(SkinNormal) res(CEMB1 CEFB1) ws(2 2) resm(10)
 HalfOrc hairs(HairNormal) skin(SkinNormal) favor(Barbarian) res(CHMB1 CHFB1) ws(1 3) resm(11)
