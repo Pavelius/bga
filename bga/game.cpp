@@ -263,3 +263,9 @@ void initialize_story() {
 	current_world = bsdata<worldmapi>::elements;
 	script_run("StartGame");
 }
+
+void read_area_description(const char* url) {
+	auto p0 = loadt(url);
+	if(!p0)
+		return;
+}

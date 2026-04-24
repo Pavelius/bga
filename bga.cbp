@@ -155,7 +155,6 @@
 		<Unit filename="bga/main.cpp" />
 		<Unit filename="bga/manager.cpp" />
 		<Unit filename="bga/manager.h" />
-		<Unit filename="bga/map.cpp" />
 		<Unit filename="bga/math.cpp" />
 		<Unit filename="bga/math.h" />
 		<Unit filename="bga/metadata.cpp" />
@@ -235,8 +234,6 @@
 		<Unit filename="bga/thread.h" />
 		<Unit filename="bga/timer.cpp" />
 		<Unit filename="bga/timer.h" />
-		<Unit filename="bga/variable.cpp" />
-		<Unit filename="bga/variable.h" />
 		<Unit filename="bga/variant.cpp" />
 		<Unit filename="bga/variant.h" />
 		<Unit filename="bga/vector.h" />
@@ -255,6 +252,7 @@
 		<Unit filename="bga/wearable.h" />
 		<Unit filename="bga/worldmap.cpp" />
 		<Unit filename="bga/worldmap.h" />
+		<Unit filename="doc/test/AR1000.inf" />
 		<Unit filename="errors.txt" />
 		<Unit filename="rules/Advance.txt" />
 		<Unit filename="rules/Basic.txt" />
