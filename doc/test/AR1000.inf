@@ -1,8 +1,8 @@
-//////////////////////////////////
-// Creature block.
-// 1. Type of creature initialize inner id structure. Creature can be found by id.
-// 2. If `npci` follow in properties, then it overload npc, but leave name untouch.
-// 3. Comments can be applied.
+/////////////////////////////////////////////////////////////////////////////////
+// - Type of creature initialize inner id structure. Creature can be found by id.
+// - If `npci` follow in properties, then it overload npc, but leave name untouch.
+// - Comments can be applied.
+// - Container items can be stored in common list.
 
 Creature 12231 1 GoblinWarrior
 Creature 20500 5 Nazghuul GoblinWarrior // Standart monster Golblin warrior with unique identifier `Nazghuul`.

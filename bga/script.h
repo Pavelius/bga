@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////
-// 
+//
 // Copyright 2024 Pavel Chistyakov
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,8 +44,6 @@ void script_run();
 void script_run(variant v);
 void script_run(const variants& elements);
 void script_run(const char* id, const variants& elements);
-
-variant next_script();
 
 template<typename T> bool fttest(int index, int value);
 template<typename T> void ftscript(int index, int value);

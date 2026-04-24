@@ -322,7 +322,7 @@
 	"nameable.h"
 	"variant.h"
 
-1776924738 /home/user-331/projects/bga/bga/script.h
+1777037153 /home/user-331/projects/bga/bga/script.h
 	"variant.h"
 
 1776924738 source:/home/user-331/projects/bga/bga/console.cpp
@@ -515,7 +515,7 @@
 1776924738 /home/user-331/projects/bga/bga/formation.h
 	"point.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/game.cpp
+1777020630 source:/home/user-331/projects/bga/bga/game.cpp
 	"ambient.h"
 	"audio.h"
 	"area.h"
@@ -772,7 +772,7 @@
 	"namestr.h"
 	"stringbuilder.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/main.cpp
+1777014941 source:/home/user-331/projects/bga/bga/main.cpp
 	"ability.h"
 	"area.h"
 	"audio.h"
@@ -887,7 +887,7 @@
 1776924738 source:/home/user-331/projects/bga/bga/screenshoot.cpp
 	"screenshoot.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/script.cpp
+1777037141 source:/home/user-331/projects/bga/bga/script.cpp
 	"bsreq.h"
 	"rand.h"
 	"script.h"

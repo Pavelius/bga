@@ -16,7 +16,7 @@
 #include "rand.h"
 #include "region.h"
 
-static directionn all_aroud[] = {Left, Right, Up, Down, LeftUp, LeftDown, RightUp, RightDown};
+// static directionn all_aroud[] = {Left, Right, Up, Down, LeftUp, LeftDown, RightUp, RightDown};
 
 char area_name[12];
 color area_light_pallette[256];
@@ -95,19 +95,6 @@ color get_shadow(point v) {
 	return area_light_pallette[area_light[s2i(v)]];
 }
 
-static const char* gmurl(char* temp, const char* name, const char* ext = 0, const char* suffix = 0) {
-	stringbuilder sb(temp, temp + 259);
-	sb.add("art/area/");
-	sb.add(name);
-	if(suffix)
-		sb.add(suffix);
-	if(!ext)
-		ext = "ard";
-	sb.add(".");
-	sb.add(ext);
-	return temp;
-}
-
 static void archive_bitmap(archive& e, unsigned char* output, int output_bpp, int scan_line, int width, int height, color* pal) {
 	for(int i = 0; i < height; i++) {
 		e.set(output, width * (output_bpp / 8));
@@ -117,7 +104,7 @@ static void archive_bitmap(archive& e, unsigned char* output, int output_bpp, in
 		e.set(pal, sizeof(color) * 256);
 }
 
-static unsigned long get_area_signature() {
+static unsigned long area_signature() {
 	unsigned long n = 0;
 	unsigned long r = 0;
 	r += (++n) * sizeof(doortile);
@@ -134,7 +121,7 @@ bool archive_ard(iostream& file, bool writemode) {
 	archive a(file, writemode);
 	if(!a.signature("ARD"))
 		return false;
-	if(!a.signature(get_area_signature()))
+	if(!a.signature(area_signature()))
 		return false;
 	// Area header
 	a.set(area_name, 8);

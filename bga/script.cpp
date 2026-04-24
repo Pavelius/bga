@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////
-// 
+//
 // Copyright 2024 Pavel Chistyakov
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -114,10 +114,4 @@ void script_run(const char* id, const variants& elements) {
 	script_run(elements);
 	modifier = push_modifier;
 	last_id = push_id;
-}
-
-variant next_script() {
-	if(script_begin && script_begin < script_end)
-		return *script_begin++;
-	return variant();
 }
