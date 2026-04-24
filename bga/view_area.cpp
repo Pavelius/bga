@@ -162,7 +162,7 @@ void change_zoom_factor(int bonus) {
 static void set_standart_cursor() {
 	if(hot.mouse.in(last_screen)) {
 		if(!combat_mode || area_cost[s2i(hotspot)] < Blocked)
-			cursor.set(CURSORS, 4);
+			cursor.set(pma_cursors, 4);
 	}
 }
 
@@ -188,7 +188,7 @@ static void apply_shifer() {
 	if(index == -1)
 		return;
 	const int camera_step = 16;
-	cursor.set(CURSARW, index);
+	cursor.set(pma_cursarw, index);
 	switch(index) {
 	case 0: camera.x += camera_step; break;
 	case 2: camera.y -= camera_step; break;
@@ -209,7 +209,7 @@ static void rectblack(rect rc) {
 }
 
 static void set_visible_area() {
-	cursor.set(CURSORS, 0);
+	cursor.set(pma_cursors, 0);
 	auto push_caret = caret;
 	auto mx = (area_width / 4) * tile_size;
 	auto my = (area_height_tiles / 4) * tile_size;
@@ -580,7 +580,7 @@ static void apply_command() {
 			if(rc.size() >= 8) {
 				pushrect push;
 				pushfore push_fore(colors::green);
-				cursor.set((resn)0, 0);
+				cursor.clear();
 				caret.x = rc.x1 - camera.x;
 				caret.y = rc.y1 - camera.y;
 				width = rc.width();
@@ -611,7 +611,7 @@ static void apply_command_combat() {
 		return;
 	auto map_index = s2i(hotspot);
 	if(area_cost[map_index] >= Blocked) {
-		cursor.set(CURSORS, 6);
+		cursor.set(pma_cursors, 6);
 		return;
 	}
 	if(hot.key == MouseLeft && !hot.pressed)

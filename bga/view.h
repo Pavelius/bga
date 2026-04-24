@@ -15,6 +15,8 @@ extern int game_panel_mode;
 extern fnevent on_player_change;
 
 extern sprite* pma_stoneslot;
+extern sprite* pma_cursors;
+extern sprite* pma_cursarw;
 
 const char* getkg(int weight);
 

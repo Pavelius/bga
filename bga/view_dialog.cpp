@@ -42,6 +42,8 @@ static item *drag_item_source, *drag_item_dest;
 static item drag_item;
 
 sprite* pma_stoneslot;
+sprite* pma_cursors;
+sprite* pma_cursarw;
 
 static sprite* pma_actn;
 static sprite* pma_items;
@@ -89,7 +91,7 @@ static void cbsetintds() {
 }
 
 static void set_cursor() {
-	cursor.set(CURSORS, 0);
+	cursor.set(pma_cursors, 0);
 }
 
 static const char* getnms(abilityn v) {
@@ -801,7 +803,7 @@ void paint_item(const item* pi) {
 }
 
 static void set_drag_item_cursor() {
-	cursor.id = ITEMS;
+	cursor.res = pma_items;
 	cursor.cicle = drag_item.geti().avatar * 2 + 1;
 }
 
@@ -1713,19 +1715,18 @@ static bool paint_tips() {
 }
 
 static void paint_cursor() {
-	auto pi = gres(cursor.id);
+	auto pi = cursor.res;
 	if(!pi)
 		return;
 	auto cicle = cursor.cicle;
-	if(cursor.id == CURSORS) {
+	if(cursor.res == pma_cursors) {
 		auto pressed = hot.pressed;
 		if(pressed)
 			cicle += 1;
 		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
-	} else if(cursor.id == CURSARW) {
-		auto ti = pi->ganim(cursor.cicle, current_tick / 32);
-		image(hot.mouse.x, hot.mouse.y, pi, ti, 0);
-	} else
+	} else if(cursor.res == pma_cursarw)
+		image(hot.mouse.x, hot.mouse.y, pi, pi->ganim(cursor.cicle, current_tick / 32), 0);
+	else
 		image(hot.mouse.x, hot.mouse.y, pi, cicle, 0);
 }
 
@@ -1793,6 +1794,8 @@ void initialize_ui() {
 void initialize_interface() {
 	pma_items = gres("ITEMS");
 	pma_actn = gres("GACTN");
+	pma_cursors = gres("CURSORS");
+	pma_cursarw = gres("CURSARW");
 	pma_number = gres("NUMBER");
 	pma_port[0] = gres("PORTS");
 	pma_port[1] = gres("PORTL");
