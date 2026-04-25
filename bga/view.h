@@ -14,9 +14,11 @@ extern bool button_pressed, button_executed, button_hilited, input_disabled;
 extern int game_panel_mode;
 extern fnevent on_player_change;
 
-extern sprite* pma_stoneslot;
 extern sprite* pma_cursors;
 extern sprite* pma_cursarw;
+extern sprite* pma_port[2];
+extern sprite* pma_stoneslot;
+extern sprite* pma_pfcm;
 
 const char* getkg(int weight);
 
@@ -78,7 +80,8 @@ void set_description(const nameable* object);
 void set_description_id(const char* id);
 void setdialog(int x, int y);
 void setdialog(int x, int y, int w, int h);
-void texta(resn res, const char* string, unsigned flags);
+void stoneslot(unsigned short f1, unsigned short f2, unsigned key = 0);
+void texta(sprite* ps, const char* string, unsigned flags);
 void update_area_music();
 void update_frames();
 void update_main_music();

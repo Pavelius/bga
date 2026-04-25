@@ -43,11 +43,14 @@ static item drag_item;
 sprite* pma_stoneslot;
 sprite* pma_cursors;
 sprite* pma_cursarw;
+sprite* pma_port[2];
 
 static sprite* pma_actn;
+static sprite* pma_colgrad;
 static sprite* pma_items;
+static sprite* pma_hitp;
 static sprite* pma_number;
-static sprite* pma_port[2];
+static sprite* pma_spells;
 
 static char description_text[4096];
 static size_t description_cash_size;
@@ -97,14 +100,14 @@ static const char* getnms(abilityn v) {
 	return getnm(ids(bsdata<abilityi>::elements[v].id, "Short"));
 }
 
-void texta(resn res, const char* string, unsigned flags) {
-	pushfont push(gres(res));
+void texta(sprite* ps, const char* string, unsigned flags) {
+	pushfont push(ps);
 	texta(string, flags);
 }
 
-void texta(resn res, color fore, const char* string, unsigned flags) {
+void texta(sprite* ps, color fore, const char* string, unsigned flags) {
 	pushfore push(fore);
-	texta(res, string, flags);
+	texta(ps, string, flags);
 }
 
 static void update_actor_animations() {
@@ -338,6 +341,18 @@ void button(resn res, unsigned short f1, unsigned short f2, unsigned key) {
 	image(p, button_pressed ? f2 : f1, 0);
 }
 
+static void button(sprite* p, unsigned short f1, unsigned short f2, unsigned key) {
+	auto& f = p->get(f1);
+	width = f.sx; height = f.sy;
+	button_check(key);
+	button_check_sound((resn)100);
+	image(p, button_pressed ? f2 : f1, 0);
+}
+
+void stoneslot(unsigned short f1, unsigned short f2, unsigned key) {
+	button(pma_stoneslot, f1, f2, key);
+}
+
 static void button(actionn id) {
 	auto& ei = bsdata<actioni>::elements[id];
 	button(GUIBTACT, ei.avatar, ei.avatar + 1, 0);
@@ -422,7 +437,7 @@ static void button_colorgrad(int index, int size) {
 	}
 	auto push_palt = palt; palt = pallette;
 	set_color(pallette, 4, index);
-	image(gres(COLGRAD), size, ImagePallette);
+	image(pma_colgrad, size, ImagePallette);
 	palt = push_palt;
 }
 
@@ -687,7 +702,7 @@ static void hits_bar(int current, int maximum) {
 		index = 3;
 	auto push_clipping = clipping;
 	setclip({caret.x, caret.y, caret.x + nw, caret.y + height});
-	image(gres(GUIHITPT), index, 0);
+	image(pma_hitp, index, 0);
 	clipping = push_clipping;
 }
 
@@ -939,7 +954,7 @@ static void inventory_line(int index) {
 
 static void paint_game_player() {
 	setdialog(20, 79, 210, 330); portrait_large();
-	setdialog(22, 23, 206, 28); texta(REALMS, player->getname(), AlignCenterCenter);
+	setdialog(22, 23, 206, 28); texta(metrics::h2, player->getname(), AlignCenterCenter);
 	paint_action_panel_player();
 }
 
@@ -958,7 +973,7 @@ static void paint_weight() {
 	sb.adds("%-1", getnm("From"));
 	sb.adds(getkg(player->allowed_weight));
 	apply_weight_color();
-	texta(TOOLFONT, temp, AlignCenterCenter);
+	texta(metrics::small, temp, AlignCenterCenter);
 }
 
 static void quick_weapon(int index) {
@@ -1047,9 +1062,9 @@ static void paint_game_inventory() {
 	setdialog(679, 48); quick_weapon(2);
 	setdialog(679, 88); quick_weapon(3);
 	setdialog(704, 141, 70, 20); texta(str("%1i", player->coins), AlignCenterCenter);
-	setdialog(704, 243, 70, 32); texta(REALMS, str("%1i", player->get(AC)), AlignCenterCenter);
-	setdialog(710, 353, 54, 16); texta(REALMS, str("%1i", player->hp_max), AlignCenterCenter);
-	setdialog(710, 371, 54, 16); texta(REALMS, str("%1i", player->hp), AlignCenterCenter);
+	setdialog(704, 243, 70, 32); texta(metrics::h2, str("%1i", player->get(AC)), AlignCenterCenter);
+	setdialog(710, 353, 54, 16); texta(metrics::h2, str("%1i", player->hp_max), AlignCenterCenter);
+	setdialog(710, 371, 54, 16); texta(metrics::h2, str("%1i", player->hp), AlignCenterCenter);
 	setdialog(252, 191, 42, 42); creature_color(HairColor); tips("HairColor");
 	setdialog(252, 231, 42, 42); creature_color(SkinColor); tips("SkinColor");
 	setdialog(507, 191, 42, 42); creature_color(MajorColor); tips("MajorColor");
@@ -1115,14 +1130,14 @@ static void slider(optionv id, int slider_width = 142) {
 	button_hilited = ishilite();
 	button_pressed = button_hilited && hot.pressed;
 	button_executed = (hot.key == MouseLeft && !hot.pressed);
-	image(caret.x + position, caret.y + 2, gres(GUISLDR), button_pressed ? 1 : 0, 0);
+	image(caret.x + position, caret.y + 2, gres("GUISLDR"), button_pressed ? 1 : 0, 0);
 	if(button_pressed)
 		toggle_option_value(id, ei.minimal + (hot.mouse.x - caret.x - 8) * range / maximum_width);
 }
 
 static void paint_game_opt_pause() {
 	paint_game_dialog("GOPT", 3);
-	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("AutoPause"), AlignCenterCenter);
+	setdialog(279, 23, 242, 30); texta(metrics::h1, getnm("AutoPause"), AlignCenterCenter);
 	setdialog(74, 70, 308, 18); checkbox(PauseCharacterHit);
 	setdialog(74, 97, 308, 18); checkbox(PauseCharacterInjured);
 	setdialog(74, 124, 308, 18); checkbox(PauseCharacterDeath);
@@ -1145,7 +1160,7 @@ static void open_game_opt_pause() {
 
 static void paint_game_opt_game_play() {
 	paint_game_dialog("GOPT", 2);
-	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("GamePlay"), AlignCenterCenter);
+	setdialog(279, 23, 242, 30); texta(metrics::h1, getnm("GamePlay"), AlignCenterCenter);
 	setdialog(74, 70, 184, 18); slider(ToolTipsDelay);
 	setdialog(74, 99, 184, 18); slider(MouseScrollSpeed);
 	setdialog(74, 128, 184, 18); slider(KeyboardScrollSpeed);
@@ -1176,7 +1191,7 @@ static void confirm_quit_game() {
 static void paint_game_options() {
 	paint_game_dialog("STONEOPT");
 	paint_action_panel_na();
-	setdialog(279, 23, 242, 30); texta(STONEBIG, getnm("Options"), AlignCenterCenter);
+	setdialog(279, 23, 242, 30); texta(metrics::h1, getnm("Options"), AlignCenterCenter);
 	setdialog(497, 68); button(GBTNLRG2, 1, 2, '1', "LoadGame"); fire(open_load_game);
 	setdialog(497, 98); button(GBTNLRG2, 1, 2, '2', "SaveGame"); fire(open_save_game);
 	setdialog(497, 128); button(GBTNLRG2, 1, 2, '3', "QuitMainMenu"); fire(quit_main_menu);
@@ -1191,7 +1206,7 @@ static void paint_game_options() {
 
 static void paint_game_journal() {
 	paint_game_dialog("GUIJRNL");
-	setdialog(234, 24, 205, 28); texta(STONEBIG, getnm("Journal"), AlignCenterCenter);
+	setdialog(234, 24, 205, 28); texta(metrics::h1, getnm("Journal"), AlignCenterCenter);
 	setdialog(66, 90, 651, 275); texta("Test text 1", AlignLeft); // fore(255 255 246)
 	//Scroll GBTNSCRL 727 64 12 304 frames(1 0 3 2 4 5)
 	setdialog(460, 18); button(GBTNJBTN, 1, 2);
@@ -1339,7 +1354,7 @@ static void paint_help() {
 	paint_game_dialog("GUIHELP");
 	// paint_action_panel_na();
 	// paint_game_panel_na();
-	setdialog(300, 23, 200, 30); texta(STONEBIG, getnm("Information"), AlignCenterCenter);
+	setdialog(300, 23, 200, 30); texta(metrics::h1, getnm("Information"), AlignCenterCenter);
 	setdialog(297, 373); button(GBTNBFRM, 1, 2, KeyEscape, "Close"); fire(buttoncancel);
 	setdialog(74, 72, 95, 286); paint_topic_lists();
 	setdialog(194, 72, 197, 286); paint_content_lists();
@@ -1416,9 +1431,9 @@ static void paint_game_automap() {
 static void paint_spell_description() {
 	paint_dialog("GUISPL", 2);
 	setdialog(22, 22, 343, 20); texta(getnm("Spell"), AlignCenterCenter);
-	setdialog(22, 52, 343, 20); texta(NORMAL, colors::yellow, last_spell->getname(), AlignCenterCenter);
+	setdialog(22, 52, 343, 20); texta(metrics::font, colors::yellow, last_spell->getname(), AlignCenterCenter);
 	setdialog(27, 87, 355, 304); paint_description(14, -5, 9);
-	setdialog(375, 22); image(gres(SPELLS), last_spell->avatar, 0);
+	setdialog(375, 22); image(pma_spells, last_spell->avatar, 0);
 	//Scroll GBTNSCRL 396 82 12 313 frames(1 0 3 2 4 5)
 	setdialog(135, 402); button(GBTNMED, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
 }
@@ -1471,7 +1486,7 @@ static void spell_type_filter() {
 static void paint_spell(void* object) {
 	pushrect push;
 	auto p = (spelli*)object;
-	image(gres(SPELLS), p->avatar, 0);
+	image(pma_spells, p->avatar, 0);
 	caret.x += 32; width -= 32; height -= 12;
 	texta(p->getname(), AlignCenterCenter);
 }
@@ -1513,7 +1528,7 @@ static void paint_spell_memorized() {
 			auto p = source.data[index];
 			auto pi = last_spellbook->powers + p->getindex();
 			texta(str("%1i", *pi), AlignCenterCenter);
-			image(caret.x + 39, caret.y, gres(SPELLS), p->avatar, 0);
+			image(caret.x + 39, caret.y, pma_spells, p->avatar, 0);
 			if(hot.mouse.in({caret.x, caret.y, caret.x + 79, caret.y + height})) {
 				if(hot.key == MouseLeft && !hot.pressed)
 					execute(cbsetchr, *pi - 1, 0, pi);
@@ -1619,7 +1634,7 @@ static void identify_item() {
 
 static void paint_item_description() {
 	paint_dialog("GIITMH08");
-	setdialog(36, 37, 357, 30); texta(STONEBIG, getnm("Item"), AlignCenterCenter);
+	setdialog(36, 37, 357, 30); texta(metrics::h1, getnm("Item"), AlignCenterCenter);
 	setdialog(430, 20, 64, 64); paint_item_avatar();
 	setdialog(20, 432); button(GBTNMED, 1, 2, 'I', "Identify"); fire(identify_item);
 	setdialog(179, 432); button(GBTNMED, 1, 2, 'U', "UseItem");
@@ -1689,7 +1704,7 @@ static bool paint_tips() {
 	const char* pn = tips_sb;
 	if(!pn)
 		return false;
-	auto ps = gres(TOOLTIP);
+	auto ps = gres("TOOLTIP");
 	if(!ps)
 		return false;
 	const int pad_x = 8;
@@ -1792,6 +1807,7 @@ void initialize_ui() {
 
 void initialize_interface() {
 	pma_items = gres("ITEMS");
+	pma_spells = gres("SPELLS");
 	pma_actn = gres("GACTN");
 	pma_cursors = gres("CURSORS");
 	pma_cursarw = gres("CURSARW");
@@ -1799,6 +1815,9 @@ void initialize_interface() {
 	pma_port[0] = gres("PORTS");
 	pma_port[1] = gres("PORTL");
 	pma_stoneslot = gres("STONSLOT");
+	pma_colgrad = gres("COLGRAD");
+	pma_hitp = gres("GUIHITPT");
+	pma_pfcm = gres("GUIPFC");
 }
 
 BSDATA(form) = {

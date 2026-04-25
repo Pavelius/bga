@@ -107,7 +107,7 @@ static void paint_player_coins() {
 }
 
 static void paint_store_name() {
-	texta(STONEBIG, last_store->getname(), AlignCenterCenter);
+	texta(metrics::h1, last_store->getname(), AlignCenterCenter);
 }
 
 static void paint_good(void* object) {
@@ -209,7 +209,7 @@ static void sell_goods() {
 static void paint_buy_sell() {
 	auto player_total = player_goods.total();
 	auto shop_total = shop_goods.total();
-	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("BuyAndSell"), AlignCenterCenter);
+	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("BuyAndSell"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(663, 191); button(GBTNSTD, 1, 2, 0, "Buy", 3, shop_total);
 	setdialog(663, 220); button(GBTNSTD, 1, 2, 0, "Sell", 3, player_total); fire(sell_goods);
@@ -225,7 +225,7 @@ static void paint_buy_sell() {
 	setdialog(403, 387, 125, 20); texta(getnm("Price"), AlignRightCenter);
 	setdialog(551, 387, 80, 20); texta(str("%1i", player_total), AlignCenterCenter);
 	setdialog(692, 90, 80, 20); paint_player_coins();
-	setdialog(690, 123); image(gres(CONTAINER), 1, 0);
+	setdialog(690, 123); image(gres("CONTAINER"), 1, 0);
 	paint_action_panel_player();
 }
 
@@ -233,13 +233,13 @@ static void checkroom(storefn v, int f1, const char* id) {
 	auto allowed = last_store->is(v);
 	if(!allowed)
 		f1++;
-	image(gres(ROOMS), f1, 0);
+	image(gres("ROOMS"), f1, 0);
 	caret.x -= 3; caret.y += 102;
 	button(GBTNSTD, 1, 2, 0, id, 3, allowed);
 }
 
 static void paint_inn() {
-	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("Rooms"), AlignCenterCenter);
+	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("Rooms"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(141, 83, 225, 18); texta(getnm("RoomQuality"), AlignCenterCenter);
 	setdialog(136, 114); checkroom(AllowPeasantRoom, 0 * 2, "RoomPeasant");
@@ -255,11 +255,11 @@ static void paint_inn() {
 }
 
 static void paint_drink() {
-	setdialog(140, 117, 40, 20); texta(NORMAL, "100", AlignCenterCenter);
+	setdialog(140, 117, 40, 20); texta("100", AlignCenterCenter);
 	setdialog(195, 111); button(GBTNMED2, 1, 2, 0, "Rumors");
 	setdialog(199, 82, 170, 20); texta(getnm("Drink"), AlignCenterCenter);
 	setdialog(137, 82, 48, 20); texta(getnm("Price"), AlignCenterCenter);
-	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("Drinks"), AlignCenterCenter);
+	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("Drinks"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(403, 82, 232, 20); texta(getnm("Rumors"), AlignCenterCenter);
@@ -269,7 +269,7 @@ static void paint_drink() {
 
 static void paint_identify() {
 	auto shop_total = player_goods.checkedcount() * game.get(IdentifyCost);
-	setdialog(134, 23, 238, 28); texta(STONEBIG, getnm("Identifying"), AlignCenterCenter);
+	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("Identifying"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);

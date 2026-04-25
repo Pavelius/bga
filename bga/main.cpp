@@ -52,6 +52,7 @@ int main(int argc, char* argv[]) {
 	metrics::h1 = gres("STONEBIG");
 	metrics::h2 = gres("REALMS");
 	metrics::h3 = gres("NORMAL");
+	metrics::small = gres("TOOLFONT");
 	colors::text = color(255, 255, 255);
 	colors::h3 = color(244, 214, 66);
 	colors::h1 = colors::text.mix(colors::h3, 64);

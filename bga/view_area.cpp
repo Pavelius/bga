@@ -874,24 +874,25 @@ static int container_frame(container::typen type) {
 }
 
 static void paint_container() {
+	auto pc = gres("CONTAINER");
 	paint_game_dialog(0, 476, "GUICONT", 1);
-	setdialog(62, 25); image(gres(CONTAINER), container_frame(last_container->type), 0);
-	setdialog(430, 28); image(gres(CONTAINER), 1, 0);
-	setdialog(150, 22); button(STONSLOT, 0, 0);
-	setdialog(195, 22); button(STONSLOT, 0, 0);
-	setdialog(239, 22); button(STONSLOT, 0, 0);
-	setdialog(283, 22); button(STONSLOT, 0, 0);
-	setdialog(327, 22); button(STONSLOT, 0, 0);
-	setdialog(150, 65); button(STONSLOT, 0, 0);
-	setdialog(195, 65); button(STONSLOT, 0, 1);
-	setdialog(239, 65); button(STONSLOT, 0, 1);
-	setdialog(283, 65); button(STONSLOT, 0, 1);
-	setdialog(327, 65); button(STONSLOT, 0, 1);
+	setdialog(62, 25); image(pc, container_frame(last_container->type), 0);
+	setdialog(430, 28); image(pc, 1, 0);
+	setdialog(150, 22); stoneslot(0, 0);
+	setdialog(195, 22); stoneslot(0, 0);
+	setdialog(239, 22); stoneslot(0, 0);
+	setdialog(283, 22); stoneslot(0, 0);
+	setdialog(327, 22); stoneslot(0, 0);
+	setdialog(150, 65); stoneslot(0, 0);
+	setdialog(195, 65); stoneslot(0, 1);
+	setdialog(239, 65); stoneslot(0, 1);
+	setdialog(283, 65); stoneslot(0, 1);
+	setdialog(327, 65); stoneslot(0, 1);
 	//Scroll GBTNSCRL 375 24 12 76 frames(1 0 3 2 4 5)
-	setdialog(509, 22); button(STONSLOT, 0, 0);
-	setdialog(553, 22); button(STONSLOT, 0, 0);
-	setdialog(553, 65); button(STONSLOT, 0, 0);
-	setdialog(509, 65); button(STONSLOT, 0, 0);
+	setdialog(509, 22); stoneslot(0, 0);
+	setdialog(553, 22); stoneslot(0, 0);
+	setdialog(553, 65); stoneslot(0, 0);
+	setdialog(509, 65); stoneslot(0, 0);
 	//Scroll GBTNSCRL 602 24 12 76 frames(1 0 3 2 4 5)
 	setdialog(661, 78, 70, 20); texta(str("%1i", player->coins), AlignRightCenter);
 	setdialog(684, 28); button(GBTNOPT1, 1, 2, KeyEscape); fire(buttoncancel);

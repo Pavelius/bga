@@ -73,11 +73,11 @@ static void select_portrait(gendern gender, int current) {
 
 static void paint_portrait() {
 	if(player->portrait)
-		image(23, 151, gres(PORTL), player->portrait, 0);
+		image(23, 151, pma_port[1], player->portrait, 0);
 }
 
 static void paint_character_generation(const char* id) {
-	setdialog(174, 22, 452, 29); texta(STONEBIG, getnm("CharacterGeneration"), AlignCenterCenter);
+	setdialog(174, 22, 452, 29); texta(metrics::h1, getnm("CharacterGeneration"), AlignCenterCenter);
 	setdialog(173, 65, 453, 20); texta(getnm(id), AlignCenterCenter);
 }
 
@@ -184,8 +184,8 @@ static void paint_choose_avatar() {
 		current_value = 0;
 	paint_game_dialog("GUICGB");
 	paint_character_generation("ChooseAvatar");
-	image(254, 87, gres(GUIACG), 1, 0);
-	image(295, 116, gres(PORTL), portraits[current_value]->getindex(), 0);
+	image(254, 87, gres("GUIACG"), 1, 0);
+	image(295, 116, pma_port[1], portraits[current_value]->getindex(), 0);
 	setdialog(262, 284); button(GBTNPOR, 0, 1, KeyLeft); fire(cbsetint, current_value - 1, 0, &current_value);
 	setdialog(512, 284); button(GBTNPOR, 2, 3, KeyRight); fire(cbsetint, current_value + 1, 0, &current_value);
 	setdialog(276, 394 + 87); button(GBTNLRG, 1, 2, 'R', "Random"); fire(random_avatar);
@@ -221,7 +221,7 @@ static void tips_help_button(nameable* p) {
 static void paint_choose_ability() {
 	auto ability_spent = get_ability_spend();
 	auto ability_left = ability_points_maximum - ability_spent;
-	image(254, 87, gres(GUIACG), 2, 0);
+	image(254, 87, gres("GUIACG"), 2, 0);
 	setdialog(27, 57, 205, 28); tips_help("AbilityPointsLeft"); texta(getnm("AbilityPointsLeft"), AlignCenterCenter);
 	setdialog(240, 57, 33, 28); tips_help("AbilityPointsLeft"); texta(str("%1i", ability_left), AlignCenterCenter);
 	setdialog(24, 94, 120, 28);
@@ -352,7 +352,7 @@ static void paint_feat_row(void* object) {
 	// Show all points possible
 	caret.x += 190; caret.y += 12;
 	while(true) {
-		image(gres(GUIPFC), player->basic.is(bf) ? 0 : 1, 0);
+		image(pma_pfcm, player->basic.is(bf) ? 0 : 1, 0);
 		caret.x -= 12;
 		bf = bsdata<feati>::elements[bf].upgrade;
 		if(!bf)
@@ -373,7 +373,7 @@ static void paint_choose_sex() {
 	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation(bsdata<commandi>::elements[current_step].id);
-	image(254, 87, gres(GUIACG), 0, 0);
+	image(254, 87, gres("GUIACG"), 0, 0);
 	setdialog(274, 271);
 	paint_answers(196);
 	paint_footer_answer(allow_next_button());
@@ -396,7 +396,7 @@ static void paint_choose_skills() {
 	static int origin;
 	const int per_page = 10;
 	auto skill_points = player->basic.abilities[SkillPoints];
-	image(254, 87, gres(GUIACG), 3, 0);
+	image(254, 87, gres("GUIACG"), 3, 0);
 	setdialog(254 + 27, 61 + 55, 205, 28); texta(getnm("SkillPointsLeft"), AlignCenterCenter);
 	setdialog(254 + 241, 61 + 55, 33, 28); texta(str("%1i", skill_points), AlignCenterCenter);
 	setdialog(254 + 31, 61 + 90, 254, 360);
@@ -412,7 +412,7 @@ static void paint_choose_feats() {
 	paint_character_generation(header_id);
 	static int origin;
 	const int per_page = 10;
-	image(254, 87, gres(GUIACG), 4, 0);
+	image(254, 87, gres("GUIACG"), 4, 0);
 	setdialog(254 + 27, 61 + 55, 205, 28); texta(getnm("FeatPointsLeft"), AlignCenterCenter);
 	setdialog(254 + 241, 61 + 55, 33, 28); texta(str("%1i", feat_points), AlignCenterCenter);
 	setdialog(254 + 31, 61 + 90, 254, 360);
@@ -427,7 +427,7 @@ static void paint_choose_appearance() {
 	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation("ColorChoices");
-	image(254, 87, gres(GUIACG), 5, 0);
+	image(254, 87, gres("GUIACG"), 5, 0);
 	setdialog(254 + 76, 61 + 229, 152, 20); texta(getnm("Appearance"), AlignCenterCenter);
 	setdialog(254 + 20, 61 + 253); creature_color(HairColor);
 	setdialog(254 + 73, 61 + 264, 195, 20); texta(getnm("HairColor"), AlignLeftCenter);
@@ -468,7 +468,7 @@ static void paint_choose_sound() {
 	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation("Sound");
-	image(254, 87, gres(GUIACG), 6, 0);
+	image(254, 87, gres("GUIACG"), 6, 0);
 	setdialog(254 + 28, 61 + 59, 220, 320);
 	correct_table(current_value, sounds.count);
 	paint_list(sounds.data, sounds.element_size, sounds.count, origin, per_page,
@@ -746,7 +746,7 @@ static void paint_party_formation() {
 	auto allow_done = true;
 	paint_game_dialog("GUICARBB");
 	update_main_music();
-	setdialog(279, 22, 242, 32); texta(STONEBIG, getnm("PartyFormation"), AlignCenterCenter);
+	setdialog(279, 22, 242, 32); texta(metrics::h1, getnm("PartyFormation"), AlignCenterCenter);
 	setdialog(428, 81);
 	for(auto i = 0; i < 6; i++) {
 		auto push_caret = caret;
@@ -758,7 +758,7 @@ static void paint_party_formation() {
 			allow_done = false;
 		} else {
 			button(GBTNBFRM, b + 1, b + 2, 0, p->getname(), false);
-			setdialog(647, caret.y - 1); image(gres(PORTS), p->portrait, 0);
+			setdialog(647, caret.y - 1); image(pma_port[0], p->portrait, 0);
 			fire(modify_character, i);
 		}
 		caret = push_caret;
@@ -795,7 +795,7 @@ static void paint_select_party() {
 	const int per_page = 6;
 	paint_game_dialog("GCGPARTY");
 	update_main_music();
-	setdialog(180, 25, 441, 37); texta(STONEBIG, getnm("SelectParty"), AlignCenterCenter);
+	setdialog(180, 25, 441, 37); texta(metrics::h1, getnm("SelectParty"), AlignCenterCenter);
 	setdialog(22, 130, 212, 351);
 	paint_list(records.data, records.element_size, records.count, origin, per_page,
 		paint_party_row, 62, {0, 0}, 0, 0, 0, true);
