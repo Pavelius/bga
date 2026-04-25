@@ -1,7 +1,7 @@
 #include "creature.h"
 #include "draw.h"
 #include "game.h"
-#include "iteminside.h"
+#include "itemground.h"
 #include "pushvalue.h"
 #include "store.h"
 #include "vector.h"
@@ -55,12 +55,12 @@ void tradegooda::add(item& e) {
 }
 
 static void update_shop_items() {
-	variant parent = last_store;
 	shop_goods.clear();
 	if(!last_store->is(UserAllowBuy))
 		return;
-	for(auto& e : bsdata<iteminside>()) {
-		if(e.parent == parent)
+	auto index = last_store->index();
+	for(auto& e : bsdata<itemground>()) {
+		if(e.inside(e.Store, index))
 			shop_goods.add(e);
 	}
 }
@@ -200,7 +200,7 @@ static void sell_goods() {
 		item it(e.source->type);
 		it.setcount(e.count);
 		e.source->setcount(e.source->count - e.count);
-		add_item(last_store, it);
+		last_store->add(it);
 	}
 	player->coins += total;
 	update_items();

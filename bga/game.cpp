@@ -11,7 +11,6 @@
 #include "formation.h"
 #include "game.h"
 #include "itemground.h"
-#include "iteminside.h"
 #include "order.h"
 #include "rand.h"
 #include "region.h"
@@ -117,7 +116,6 @@ static unsigned long game_signature() {
 	r += sizeof(areai) * (++i);
 	r += sizeof(creature) * (++i);
 	r += sizeof(itemground) * (++i);
-	r += sizeof(iteminside) * (++i);
 	r += bsdata<itemi>::source.count * (++i);
 	r += bsdata<areai>::source.count * (++i);
 	return r;
@@ -190,7 +188,6 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	a.setc<areai>(bsdata<areai>::source);
 	a.set(bsdata<creature>::source);
 	a.set(bsdata<itemground>::source);
-	a.set(bsdata<iteminside>::source);
 	if(!write_mode) {
 		auto p = bsdata<areai>::find(area_name);
 		if(!p)

@@ -332,9 +332,6 @@
     <ClCompile Include="store.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="iteminside.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="itemlist.cpp">
       <Filter>logic</Filter>
     </ClCompile>
@@ -646,9 +643,6 @@
     <ClInclude Include="actor.h">
       <Filter>logic</Filter>
     </ClInclude>
-    <ClInclude Include="itemground.h">
-      <Filter>logic</Filter>
-    </ClInclude>
     <ClInclude Include="itema.h">
       <Filter>logic</Filter>
     </ClInclude>
@@ -671,9 +665,6 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="store.h">
-      <Filter>logic</Filter>
-    </ClInclude>
-    <ClInclude Include="iteminside.h">
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="itemlist.h">
@@ -801,6 +792,9 @@
     </ClInclude>
     <ClInclude Include="enum.h">
       <Filter>support</Filter>
+    </ClInclude>
+    <ClInclude Include="itemground.h">
+      <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

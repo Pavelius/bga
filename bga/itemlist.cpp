@@ -1,6 +1,6 @@
 #include "creature.h"
+#include "itemground.h"
 #include "itemlist.h"
-#include "iteminside.h"
 #include "store.h"
 
 // itemlist* last_itemstore;
@@ -18,9 +18,9 @@ void itemlist::clear() {
 }
 
 void storeitemlist::update() {
-	variant parent = last_store;
-	for(auto& e : bsdata<iteminside>()) {
-		if(e.parent == parent)
+	auto index = last_store->index();
+	for(auto& e : bsdata<itemground>()) {
+		if(e.inside(e.Store, index))
 			add(&e);
 	}
 }

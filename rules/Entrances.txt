@@ -425,4 +425,3 @@ AR6703FR6702 position(295 670) orientation(6) area(AR6703)
 
 AR6800FR6401 position(172 508) orientation(12) area(AR6800)
 AR6800FR6702 position(907 369) orientation(4) area(AR6800)
-

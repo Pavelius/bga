@@ -106,7 +106,6 @@
     <ClCompile Include="io_stream.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="itema.cpp" />
-    <ClCompile Include="iteminside.cpp" />
     <ClCompile Include="itemlist.cpp" />
     <ClCompile Include="keybind.cpp" />
     <ClCompile Include="list.cpp" />
@@ -213,7 +212,6 @@
     <ClInclude Include="help.h" />
     <ClInclude Include="itema.h" />
     <ClInclude Include="itemground.h" />
-    <ClInclude Include="iteminside.h" />
     <ClInclude Include="itemlist.h" />
     <ClInclude Include="keybind.h" />
     <ClInclude Include="logvalue.h" />

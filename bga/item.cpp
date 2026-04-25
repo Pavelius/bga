@@ -65,12 +65,9 @@ bool item::is(wearn v) const {
 		return true;
 	auto ew = geti().wear;
 	switch(ew) {
-	case LeftFinger:
-		return v == LeftFinger || v == RightFinger;
-	case Backpack:
-		return true;
-	default:
-		return ew == v;
+	case LeftFinger: return v == LeftFinger || v == RightFinger;
+	case Backpack: return true;
+	default: return ew == v;
 	}
 }
 
@@ -86,13 +83,14 @@ int	item::getcostall() const {
 void item::add(item& v) {
 	if(type != v.type || data != v.data)
 		return;
+	auto max_count = 255;
 	auto new_count = count + (1 + v.count);
-	if(new_count <= 255) {
+	if(new_count <= max_count) {
 		v.count = 0;
 		count = new_count;
 	} else {
-		v.count = new_count - 255;
-		count = 255;
+		v.count = new_count - max_count;
+		count = max_count;
 	}
 }
 
@@ -130,4 +128,7 @@ void item::setcount(int v) {
 	count = v;
 	if(!count)
 		clear();
+}
+
+static void add_item(short unsigned area, short unsigned index, item& v) {
 }

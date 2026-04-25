@@ -51,9 +51,9 @@ struct item {
 	unsigned char count; // Every item have count or damage.
 	union {
 		struct {
-			unsigned char identified : 1;
-			unsigned char personal : 1;
-			unsigned char charges : 5;
+			unsigned char identified : 1; // Item is fully identified
+			unsigned char personal : 1; // Item can't be dropped or remove from inventory
+			unsigned char broken : 3; // 0 is new, 7 is almost broken.
 		};
 		unsigned char data;
 	};

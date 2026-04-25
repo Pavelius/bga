@@ -553,7 +553,7 @@ static void apply_hilite_command() {
 			p->use(!p->isopen());
 		} else if(bsdata<container>::have(hilite_drawable)) {
 			auto p = (container*)hilite_drawable;
-			print("This is %1", p->name);
+			// print("This is %1", p->name);
 			// party_action(&p->getvar(), p->launch, open_container);
 		} else if(bsdata<creature>::have(hilite_drawable)) {
 			if(combat_mode) {

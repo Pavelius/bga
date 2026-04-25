@@ -10,9 +10,9 @@ struct container : drawable {
 		Spellbook, Body, Barrel, Crate
 	};
 	typen			type;
-	char			name[32];
 	point			launch;
 	rect			box;
 	sliceu<point>	points;
+	unsigned char	index() const;
 };
 extern container* last_container;

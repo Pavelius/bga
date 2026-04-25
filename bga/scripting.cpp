@@ -3,7 +3,7 @@
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
-#include "iteminside.h"
+#include "itemground.h"
 #include "form.h"
 #include "game.h"
 #include "modifier.h"

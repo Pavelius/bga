@@ -23,6 +23,8 @@ struct storei : nameable {
 	int			steal_difficult; // 0 - if steal not availabe. Set default DC 10. Set to 15-20 for hard attemp.
 	int			room_prices[4];
 	variants	items;
+	void		add(item& v);
 	bool		is(storefn v) const { return (flags & (1 << v)) != 0; }
+	short unsigned index() const;
 };
 extern storei* last_store;

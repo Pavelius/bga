@@ -1,0 +1,434 @@
+﻿#Container
+
+AR1000 name(Goblin Shield) position(685 1492)
+AR1000 name(Goblin Axe) position(524 1408)
+AR1000 name(Goblin Short Sword) position(529 1530)
+AR1000 name(Goblin Short Bow) position(1370 1768)
+AR1000 name(Goblin Arrows) position(1470 1805)
+AR1000 name(Soldier Helmet) position(1367 1545)
+AR1000 name(Soldier Spear) position(1324 1625)
+
+AR1001 name(Crate 1) position(1169 468)
+
+AR1002 name(Crate 1) position(1091 444)
+AR1002 name(Barrel 1) position(817 442)
+
+AR1003 name(Main Loop) position(176 258) break(1)
+
+AR1004 name(Rainbarrel) position(473 369)
+
+AR1005 name(Footlocker 1) position(433 249) lock(10)
+
+AR1006 name(Crate 1) position(402 253)
+
+AR1007 name(Main Loop) position(384 320) break(1) trap_removal(80)
+
+AR1100 name(Rain Barrel) position(180 1324)
+AR1100 name(Rain Barrel 2) position(955 1112)
+AR1100 name(Rain Barrel 3) position(357 1534)
+AR1100 name(Rain Barrel 4) position(745 1755)
+AR1100 name(Rain Barrel 5) position(1035 1631)
+AR1100 name(Weapon Rack 1) position(2708 1908)
+AR1100 name(Rain Barrel 7) position(2126 1141)
+AR1100 name(Rain Barrel 8) position(2135 987)
+
+AR1101 name(Crack in Couch) position(182 448)
+
+AR1102 name(Main loop) position(384 320) break(1)
+
+AR1103 name(Locked Cabinet) position(349 139)
+
+AR1104 name(Crate) position(184 236)
+AR1104 name(00GENIR) position(0 0)
+
+AR1105 name(Nightstand) position(233 252)
+
+AR1106 name(Chest) position(478 217) lock(10)
+
+AR1107 name(Locked Desk Drawer) position(492 210)
+
+AR1200 name(Weapon Rack 1) position(2754 2666)
+AR1200 name(Weapon Rack 2) position(3315 1884)
+AR1200 name(Shield_Rack) position(3279 1671)
+
+AR1201 name(Crate) position(266 366) lock(20)
+
+AR2000 name(Container 1) position(1346 2135)
+AR2000 name(Container 2) position(1906 1064)
+
+AR2001 name(Container 1) position(516 1630)
+AR2001 name(Container 3) position(2776 749)
+AR2001 name(Container 4) position(2563 905)
+
+AR2002 name(Container_1) position(2257 2163)
+
+AR2100 name(Container 1) position(1894 438)
+AR2100 name(Container 2) position(254 714)
+
+AR2101 name(Container 1) position(1464 1318)
+AR2101 name(Container 2) position(1380 1490)
+
+AR2102 name(Container 1) position(1421 1559)
+AR2102 name(Container 2) position(1001 1089)
+
+AR3000 name(NW Camp Tent1) position(487 645)
+AR3000 name(NW Camp Tent3) position(444 848)
+AR3000 name(NE Camp Tent1) position(3380 791)
+
+AR3001 name(MClan Tent 1) position(3459 1838)
+AR3001 name(MClan Tent 2) position(3450 1938)
+
+AR3002 name(PClan_Tent_1) position(2725 2400)
+AR3002 name(PClan_Tent_2) position(2854 2315)
+
+AR3100 name(Barrel 1) position(1058 1187) lock(45)
+AR3100 name(Crate 1) position(1369 1133) lock(40)
+AR3100 name(Barrel 2) position(1446 1159) lock(45)
+
+AR3101 name(KitchTable 1) position(2153 830)
+
+AR4000 name(PeriaptContainer) position(920 1081) lock(40)
+AR4000 name(WoodPile1c) position(307 1341)
+AR4000 name(WoodPile1b) position(761 1740)
+AR4000 name(BeetleNest) position(550 1824)
+
+AR4001 name(RightCase) position(394 294)
+
+AR4100 name(ZackNote) position(168 1420)
+AR4100 name(WoodPile) position(2678 1375)
+AR4100 name(NecromancerChest) position(2616 1401) lock(60) trap_removal(60)
+AR4100 name(Shrine1) position(568 1122)
+
+AR4101 name(Alcove1) position(234 2057)
+AR4101 name(Alcove2) position(136 2158)
+AR4101 name(Alcove3) position(150 2515)
+AR4101 name(Alcove4) position(780 2758)
+AR4101 name(Alcove5) position(919 2755)
+AR4101 name(Alcove6) position(1057 2759)
+
+AR4102 name(TreasuryCrate1) position(280 1844)
+AR4102 name(TreasuryCrate2) position(138 1795)
+AR4102 name(TreasuryCrate3) position(167 1937)
+AR4102 name(TreasuryCrate4) position(151 2064)
+AR4102 name(TreasuryCrate5) position(175 2171)
+AR4102 name(TreasuryCrate6) position(213 2189)
+
+AR4103 name(TreasuryCrate1) position(280 1844)
+
+AR5000 name(Sordirsin's_Tomb) position(856 1532)
+AR5000 name(MISC07) position(0 0) break(112)
+AR5000 position(0 0)
+AR5000 name(00D) position(0 0)
+
+AR5001 name(Main Loop) position(384 320) break(1) trap_removal(85)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0) break(859975728)
+AR5001 name() position(0 0) break(41748807)
+AR5001 name(Л
+Ж
+М~
+xM
+_  '2!G(O6WIWNRQLQCN=J5;') position(529 562)
+AR5001 position(0 0) break(1380533318)
+AR5001 name() position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+AR5001 position(0 0)
+
+AR5002 name(Urn) position(486 337)
+
+AR5004 name(Troll_Lair) position(1892 1815)
+AR5004 name(Frostrose) position(3275 2173)
+AR5004 name(Yeti_Lair) position(785 678)
+
+AR5005 name(Main Loop) position(384 320) break(1) trap_removal(70)
+AR5005 position(25955 27680)
+AR5005 position(0 0)
+
+AR5010 name(Main Loop) position(384 320) break(1) trap_removal(70)
+AR5010 position(0 0)
+AR5010 position(0 0)
+AR5010 position(0 0) break(860107568)
+AR5010 name() position(0 0) break(41812850)
+AR5010 name(яяяя) position(0 0)
+
+AR5011 name(Corpse) position(524 506)
+AR5011 name(50GENDH) position(90 0)
+AR5011 position(0 0) break(808602945)
+
+AR5012 name(Main Loop) position(384 320) break(1) trap_removal(70)
+AR5012 position(0 0)
+AR5012 position(0 0)
+AR5012 position(0 0) break(859975984)
+
+AR5013 name(Main Loop) position(384 320) break(1) trap_removal(70)
+
+AR5014 name(Main Loop) position(384 320) break(1) trap_removal(70)
+
+AR5015 name(Main Loop) position(384 320) break(1) trap_removal(70)
+AR5015 position(0 0)
+AR5015 position(0 0)
+AR5015 position(0 0) break(860107568)
+AR5015 name() position(0 0) break(196611)
+
+AR5016 name(Main Loop) position(384 384) break(1) trap_removal(70)
+AR5016 position(0 0)
+AR5016 position(0 0)
+AR5016 position(0 0) break(876884784)
+
+AR5017 name(Trunk) position(529 409) trap_removal(65)
+AR5017 name(00POTN03) position(0 0)
+AR5017 position(0 0)
+AR5017 position(0 0) break(860041264)
+AR5017 name(
+) position(0 0) break(808799553)
+AR5017 position(13 0)
+
+AR5018 name(Main Loop) position(384 320) break(1) trap_removal(70)
+
+AR5019 name(Main Loop) position(512 320) break(1) trap_removal(70)
+
+AR5020 name(Main Loop) position(384 448) break(1) trap_removal(70)
+
+AR5021 name(Main loop) position(384 320) break(1) trap_removal(70)
+AR5021 position(0 0)
+AR5021 position(0 0)
+AR5021 position(0 0) break(859975984)
+AR5021 name(
+) position(0 0) break(808799553)
+
+AR5022 name(Main Loop) position(384 576) break(1) trap_removal(70)
+
+AR5023 name(Main Loop) position(384 512) break(1) trap_removal(70)
+
+AR5024 name(Main Loop) position(384 320) break(1) trap_removal(70)
+AR5024 position(0 0)
+
+AR5025 name(Stump) position(485 531)
+AR5025 name(RT08_M) position(90 0)
+
+AR5026 name(Main Loop) position(448 320) break(1) trap_removal(70)
+AR5026 position(0 0)
+AR5026 position(0 0)
+AR5026 position(0 0) break(876884784)
+AR5026 name() position(0 0) break(196611)
+AR5026 position(216 296) break(1121)
+AR5026 name(") position(0 0) break(8258176)
+
+AR5027 name(Main Loop) position(384 320) break(1) trap_removal(70)
+
+AR5028 name(Main Loop) position(384 576) break(1) trap_removal(70)
+
+AR5029 name(Main Loop) position(384 576) break(1) trap_removal(70)
+
+AR5030 name(Spooky_Tree) position(549 610)
+AR5030 name(MISC07) position(0 0) break(808799553)
+
+AR5100 name(Nest) position(730 339)
+AR5100 name(Trash_01) position(554 625)
+
+AR5101 name(Altar) position(359 439) lock(80)
+AR5101 name(Iron_Chest) position(776 319) lock(70)
+AR5101 name(Crate_01) position(729 407)
+AR5101 name(Crate_02) position(840 368)
+
+AR5102 name(Main Loop) position(384 320) break(1) trap_removal(80)
+AR5102 position(0 0)
+AR5102 position(0 0)
+
+AR5200 name(Nest) position(1164 1213)
+AR5200 name(00MISC40) position(0 0)
+AR5200 position(0 0)
+AR5200 position(0 0) break(842353985)
+AR5200 position(3 0)
+
+AR5201 name(Bookshelf_01) position(1447 583)
+AR5201 name(Bookshelf_02) position(1414 620)
+
+AR5202 name(C1_RACK) position(507 883)
+AR5202 name(C2_RACK) position(926 1184)
+
+AR5203 name(BR_Tomb) position(599 1093) lock(75)
+AR5203 name(00MISC07) position(0 0)
+AR5203 position(0 0)
+
+AR5300 name(Barrel 1) position(297 2133)
+AR5300 name(Chest 1) position(264 2155) lock(80)
+AR5300 name(Chest 2) position(232 2170) lock(80)
+AR5300 name(Box 1) position(136 2206) lock(60)
+AR5300 name(Chest 3) position(221 2280) lock(80)
+AR5300 name(Chest 4) position(303 2302) lock(80)
+AR5300 name(Box 2) position(348 2328) lock(50)
+
+AR5301 name(Imphraili's Workbench 1) position(1603 1769)
+AR5301 name(Imphraili's Workbench 2) position(1574 1724)
+AR5301 name(Papers 1) position(1521 1785)
+
+AR5302 name(Weapon Rack 1) position(810 1572)
+AR5302 name(Weapon Rack 2) position(903 1571)
+AR5302 name(Weapon Rack 3) position(569 1574)
+AR5302 name(Weapon Rack 4) position(397 1865)
+
+AR5303 name(Main Loop) position(384 320) break(1) trap_removal(65)
+AR5303 position(0 0)
+
+AR6000 name(Main Loop Day) position(384 320) break(1) trap_removal(75)
+AR6000 position(26727 116)
+AR6000 position(0 0) break(808865089)
+AR6000 position(0 0)
+AR6000 position(0 0) break(808865089)
+AR6000 position(9 0)
+AR6000 name(00G6AM6000G7AM6000G8) position(0 0) break(7564129)
+
+AR6001 name(Main Loop Day) position(1152 1664) break(1) trap_removal(75)
+AR6001 position(26727 116)
+AR6001 position(0 0)
+AR6001 position(0 0) break(860303408)
+AR6001 name() position(0 0) break(808865089)
+AR6001 position(3 0)
+AR6001 position(0 0) break(829583215)
+AR6001 name(п) position(30 0) break(808866369)
+AR6001 name(?Xm¤ы) position(0 0)
+
+AR6002 name(Main Loop Day) position(384 320) break(1)
+AR6002 position(26727 116)
+
+AR6003 name(AR6003_Container1) position(712 374)
+
+AR6004 name(Main Loop) position(256 192) break(1) trap_removal(50)
+
+AR6005 name(Shelf) position(265 189)
+AR6005 name(RPRI_06) position(1 1) break(808865089) trap_removal(51)
+
+AR6006 name(Desk) position(246 286)
+
+AR6007 name(Oswald_Lab) position(212 180)
+
+AR6008 name(Main Loop) position(192 320) break(1) trap_removal(70)
+AR6008 position(436 585)
+
+AR6009 name(Shelf_1) position(191 312)
+
+AR6010 name(Dresser_1) position(476 317)
+
+AR6050 name(6050_Altar) position(1364 1051)
+AR6050 name(MISC07) position(0 0)
+
+AR6051 name(Treasury Table 1) position(3276 1335)
+
+AR6100 name(Main Loop) position(384 320) break(1) trap_removal(85)
+AR6100 position(8307 29555)
+
+AR6101 name(WyvernNest) position(2042 2481)
+AR6101 name(ArmoryChest1) position(510 2200) trap_removal(80)
+AR6101 name(ArmoryChest2) position(670 2320) trap_removal(80)
+
+AR6102 name(Bookcase1) position(1361 2633)
+AR6102 name(Bookcase2) position(1391 2586)
+AR6102 name(Bookcase3) position(1485 2560)
+
+AR6103 name(NorthPool) position(2943 249)
+AR6103 name(SouthPool) position(656 2175)
+AR6103 name(EastPool) position(3028 2181)
+AR6103 name(WestPool) position(514 264)
+
+AR6104 name(Bridge) position(1724 2544)
+AR6104 name(Stash) position(2251 1802)
+AR6104 name(EmbassyShelf) position(2570 2005)
+
+AR6200 name(Container_Old_Tent_1) position(648 744)
+AR6200 name(Container_Old_Tent_2) position(811 926) trap_removal(70)
+AR6200 name(Container_Ancient_Armor_1) position(641 838)
+
+AR6201 name(Tent_1) position(486 808)
+AR6201 name(Dead_body_1) position(608 806)
+AR6201 name(Dead_body_2) position(1401 898)
+
+AR6300 name(Container1) position(513 334)
+AR6300 name(00RTHF69) position(0 0)
+
+AR6301 name(Container 1) position(1191 492)
+AR6301 name(Container 3) position(1406 459)
+AR6301 name(Container 5) position(382 914)
+AR6301 name(Container 7) position(2559 1150)
+
+AR6302 name(Container 1) position(1640 415)
+AR6302 name(Container 2) position(1699 478)
+AR6302 name(Container 3) position(955 499)
+
+AR6303 name(Container 1) position(400 801)
+AR6303 name(Container 3) position(1849 1881)
+
+AR6304 name(Poisoned_Food) position(821 792)
+AR6304 name(Container 2) position(2178 1706)
+AR6304 name(Container 3) position(1776 1928)
+AR6304 name(Container 4) position(325 951)
+AR6304 name(Container 5) position(1163 334)
+
+AR6305 name(Container 1) position(400 801)
+AR6305 name(Container 3) position(1849 1881)
+
+AR6400 name(Main Loop) position(384 320) break(1) trap_removal(70)
+AR6400 position(0 0)
+
+AR6401 name(Container 1) position(550 334)
+AR6401 name(Container 2) position(532 244)
+
+AR6402 name(Container 1) position(247 285)
+AR6402 name(Container 2) position(781 278)
+
+AR6403 name(Container 1) position(795 422)
+
+AR6500 name(Main Loop) position(384 320) break(1)
+AR6500 position(26740 0)
+
+AR6501 name(Buffet_Table) position(592 635)
+AR6501 name(00POTN11) position(1 0) break(112)
+
+AR6502 name(Container_1) position(686 394) lock(99) trap_removal(99)
+AR6502 name(Alter) position(619 385) lock(99) trap_removal(99)
+
+AR6503 name(Brutai's_Chest) position(769 371) lock(80) trap_removal(95)
+AR6503 name(Brutai's_Chest_2) position(867 357) lock(80) trap_removal(95)
+
+AR6600 name(Desk) position(641 480)
+AR6600 name(00BOOK32) position(1 0) break(1310720)
+
+AR6601 name(Chest) position(190 523)
+AR6601 name(Blocking_Dummy) position(908 405)
+
+AR6602 name(Shelf_1) position(607 383)
+AR6602 name(Shelf_2) position(481 501)
+
+AR6603 name(Bush) position(598 395)
+
+AR6700 name(Jail_desk) position(541 543) lock(65)
+AR6700 name(63KEYWT) position(1 0) break(926305601)
+
+AR6701 name(StretchTable) position(321 360)
+AR6701 name(IronMaiden) position(402 277)
+
+AR6702 name(WeaponRack1) position(373 325)
+AR6702 name(WeaponRack2) position(634 387)
+AR6702 name(WeaponRack3) position(707 455)
+
+AR6703 name(Main Loop) position(512 320) break(1) trap_removal(70)
+
+AR6800 name(Main Loop) position(384 320) break(1) trap_removal(70)
+AR6800 position(0 0)
+

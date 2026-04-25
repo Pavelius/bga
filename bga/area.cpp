@@ -11,7 +11,6 @@
 #include "rfiles.h"
 #include "floattext.h"
 #include "io_stream.h"
-#include "itemground.h"
 #include "math.h"
 #include "rand.h"
 #include "region.h"
@@ -68,7 +67,6 @@ void clear_area() {
 	bsdata<container>::source.clear();
 	bsdata<door>::source.clear();
 	bsdata<doortile>::source.clear();
-	bsdata<itemground>::source.clear();
 	bsdata<region>::source.clear();
 	bsdata<point>::source.clear();
 	bsdata<floattext>::source.clear();

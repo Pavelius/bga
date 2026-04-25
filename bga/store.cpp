@@ -1,5 +1,5 @@
 #include "bsdata.h"
-#include "iteminside.h"
+#include "itemground.h"
 #include "store.h"
 
 BSDATAC(storei, 256);
@@ -29,13 +29,19 @@ assert_enum(storeti, ShopContainer);
 
 storei* last_store;
 
+short unsigned storei::index() const {
+	return this - bsdata<storei>::elements;
+}
+
+void storei::add(item& v) {
+}
+
 static void store_refresh(variant v) {
-	variant parent = last_store;
 	if(v.iskind<itemi>()) {
 		item it(v.value);
 		if(v.counter)
 			it.count = v.counter;
-		add_item(parent, it);
+		// add_item(parent, it);
 	}
 }
 
