@@ -61,6 +61,7 @@ BSDATAC(racei, 32)
 BSDATAC(region, 128)
 BSDATAC(spelli, 1024)
 BSDATAC(spellbook, 32)
+BSDATAC(storei, 64);
 BSDATAC(worldmapi, 8)
 BSDATAC(worldmapi::area, 128)
 BSDATAC(worldmapi::link, 512)

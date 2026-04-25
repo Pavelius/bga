@@ -81,7 +81,9 @@ int	item::getcostall() const {
 }
 
 void item::add(item& v) {
-	if(type != v.type || data != v.data)
+	if(!v)
+		return;
+	if(!equal(v))
 		return;
 	auto max_count = 255;
 	auto new_count = count + (1 + v.count);

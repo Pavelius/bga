@@ -106,6 +106,7 @@
     <ClCompile Include="io_stream.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="itema.cpp" />
+    <ClCompile Include="itemground.cpp" />
     <ClCompile Include="itemlist.cpp" />
     <ClCompile Include="keybind.cpp" />
     <ClCompile Include="list.cpp" />

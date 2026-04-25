@@ -464,6 +464,9 @@
     <ClCompile Include="cre_util.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="itemground.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">

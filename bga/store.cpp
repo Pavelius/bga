@@ -2,8 +2,6 @@
 #include "itemground.h"
 #include "store.h"
 
-BSDATAC(storei, 256);
-
 BSDATA(storefi) = {
 	{"UserAllowBuy"},
 	{"UserAllowSell"},
@@ -34,6 +32,7 @@ short unsigned storei::index() const {
 }
 
 void storei::add(item& v) {
+	add_item(0xFFFF, {itemground::Store, index()}, v);
 }
 
 static void store_refresh(variant v) {
@@ -41,7 +40,7 @@ static void store_refresh(variant v) {
 		item it(v.value);
 		if(v.counter)
 			it.count = v.counter;
-		// add_item(parent, it);
+		last_store->add(it);
 	}
 }
 

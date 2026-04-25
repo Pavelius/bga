@@ -60,20 +60,21 @@ struct item {
 	constexpr item() : type(0), count(1), data(0) {}
 	item(unsigned short type) : type(type), count(geti().count ? geti().count : 1), data(0) {}
 	constexpr explicit operator bool() const { return type != 0; }
-	void		add(item& v);
-	bool		canequip(wearn v) const;
-	void		clear() { type = 0; count = 0; data = 0; }
-	void		identify(int v) { identified = v; }
-	bool		is(itemf v) const { return geti().is(v); }
-	bool		is(wearn v) const;
-	bool		isweapon() const { return geti().weapon.operator bool(); }
-	int			getcost() const { return geti().cost; }
-	int			getcostall() const;
-	const itemi& geti() const { return bsdata<itemi>::elements[type]; }
-	void		getinfo(stringbuilder& sb) const;
-	const char*	getname() const;
-	int			getweight() const { return count * geti().weight; }
-	void		setcount(int v);
+	void			add(item& v);
+	bool			canequip(wearn v) const;
+	void			clear() { type = 0; count = 0; data = 0; }
+	bool			equal(const item& v) const { return type == v.type && data == v.data; }
+	void			identify(int v) { identified = v; }
+	bool			is(itemf v) const { return geti().is(v); }
+	bool			is(wearn v) const;
+	bool			isweapon() const { return geti().weapon.operator bool(); }
+	int				getcost() const { return geti().cost; }
+	int				getcostall() const;
+	const itemi&	geti() const { return bsdata<itemi>::elements[type]; }
+	void			getinfo(stringbuilder& sb) const;
+	const char*		getname() const;
+	int				getweight() const { return count * geti().weight; }
+	void			setcount(int v);
 };
 extern item* last_item;
 extern item* party_item;
