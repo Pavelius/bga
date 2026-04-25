@@ -776,7 +776,7 @@ void layer(color v, unsigned char a = 32) {
 	fore = push_fore;
 }
 
-static void paint_number(int v) {
+static void paint_number(int v, unsigned flags) {
 	unsigned char result[16];
 	auto m = 0;
 	if(!v)
@@ -788,7 +788,20 @@ static void paint_number(int v) {
 			v /= 10;
 		}
 	}
+	auto w = 0;
+	auto h = 0;
+	for(auto i = m - 1; i >= 0; i--) {
+		auto& f = pma_number->get(result[i]);
+		w += f.sx;
+		if(h < f.sy)
+			h = f.sy;
+	}
 	auto push_caret = caret;
+	caret.x = aligned(caret.x, width, flags, w);
+	if((flags & (AlignLeftCenter| AlignRightCenter |AlignCenterCenter))!=0)
+		caret.y += (height - h) / 2;
+	else if((flags & (AlignLeftBottom | AlignRightBottom | AlignCenterBottom)) != 0)
+		caret.y += (height - h);
 	for(auto i = m - 1; i >= 0; i--) {
 		auto& f = pma_number->get(result[i]);
 		image(pma_number, result[i], 0);
@@ -802,15 +815,15 @@ void paint_item(const item* pi) {
 		return;
 	pushrect push;
 	setoffset(2, 2);
+	width = 32;
+	height = 32;
 	if(!player->isusable(*pi))
 		layer(colors::red);
 	image(pma_items, pi->geti().avatar * 2, 0);
 	if(button_hilited && hot.key == MouseRight && !hot.pressed)
 		execute(open_item_description, 0, 0, pi);
-	if(pi->count > 1) {
-		caret.x += 20; caret.y += 24;
-		paint_number(pi->count);
-	}
+	if(pi->count > 1)
+		paint_number(pi->count, AlignRightBottom);
 }
 
 static void set_drag_item_cursor() {

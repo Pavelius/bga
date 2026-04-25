@@ -26,5 +26,9 @@ struct storei : nameable {
 	void		add(item& v);
 	bool		is(storefn v) const { return (flags & (1 << v)) != 0; }
 	short unsigned index() const;
+	void		supply();
 };
 extern storei* last_store;
+
+void initialize_store();
+void store_supply();

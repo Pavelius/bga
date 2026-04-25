@@ -24,7 +24,6 @@ using namespace draw;
 
 void main_identifier(stringbuilder& sb, const char* identifier);
 void initialize_translation();
-void initialize_store();
 void util_main();
 
 int main(int argc, char* argv[]) {
@@ -38,7 +37,6 @@ int main(int argc, char* argv[]) {
 	util_main();
 #endif // _DEBUG
 	initialize_translation();
-	initialize_store();
 	initialize_colorgrad();
 	initialize_feats();
 	initialize_parties();

@@ -85,8 +85,8 @@ void item::add(item& v) {
 		return;
 	if(!equal(v))
 		return;
-	auto max_count = 255;
-	auto new_count = count + (1 + v.count);
+	auto max_count = 200;
+	auto new_count = count + v.count;
 	if(new_count <= max_count) {
 		v.count = 0;
 		count = new_count;

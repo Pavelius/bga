@@ -9,6 +9,7 @@
 #include "form.h"
 #include "game.h"
 #include "modifier.h"
+#include "pushvalue.h"
 #include "script.h"
 #include "store.h"
 #include "stringvar.h"
@@ -16,6 +17,12 @@
 #include "view.h"
 
 using namespace draw;
+
+static int get_bonus(int counter, int minimum = 1) {
+	if(counter < minimum)
+		counter = minimum;
+	return counter;
+}
 
 template<> void fnscript<abilityi>(int value, int counter) {
 	switch(modifier) {
@@ -39,17 +46,22 @@ template<> void fnscript<form>(int value, int counter) {
 }
 
 template<> void fnscript<itemi>(int value, int counter) {
-	item it(value);
-	switch(modifier) {
-	case InsideBackpack: player->additem(it); break;
-	case InsideContainer: last_container->add(it); break;
-	case InsideStore: last_store->add(it); break;
-	default: player->equip(it); break;
+	if(counter >= 0) {
+		counter = get_bonus(counter);
+		item it(value, counter);
+		switch(modifier) {
+		case InsideBackpack: player->additem(it); break;
+		case InsideContainer: last_container->add(it); break;
+		case InsideStore: last_store->add(it); break;
+		default: player->equip(it); break;
+		}
 	}
 }
 
 template<> void fnscript<listi>(int value, int counter) {
+	auto push_modifier = modifier;
 	script_run(bsdata<listi>::elements[value].elements);
+	modifier = push_modifier;
 }
 
 static void damage_change(int bonus) {
@@ -64,6 +76,12 @@ static void heal(int bonus) {
 	else if(n > player->hp_max)
 		n = player->hp_max;
 	player->hp = n;
+}
+
+static void party_member(int bonus) {
+	if(bonus >= lenghtof(party))
+		bonus = lenghtof(party) - 1;
+	player = party[bonus];
 }
 
 static bool if_spellcaster() {
@@ -83,5 +101,6 @@ BSDATAF(conditioni)
 BSDATA(script) = {
 	{"Damage", damage_change},
 	{"Heal", heal},
+	{"PartyMember", party_member},
 };
 BSDATAF(script)

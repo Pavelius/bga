@@ -275,7 +275,7 @@ BSDATA(varianti) = {
 	{"Rate", VAR(magici, 1)},
 	{"ResPMA", VAR(rfpma, 1)},
 	{"ResSND", VAR(rfsnd, 1)},
-	{"Script", VAR(script, 1)},
+	{"Script", VAR(script, 1), 0, 0, fnscript<script>},
 	{"Skill", VAR(skilli, 1), ftinfo<skilli>},
 	{"Spell", VAR(spelli, 1)},
 	{"Store", VAR(storei, 1)},

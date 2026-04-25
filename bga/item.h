@@ -59,7 +59,8 @@ struct item {
 	};
 	constexpr item() : type(0), count(1), data(0) {}
 	item(unsigned short type) : type(type), count(geti().count ? geti().count : 1), data(0) {}
-	constexpr explicit operator bool() const { return type != 0; }
+	item(unsigned short type, int count) : type(type), count((unsigned char)count), data(0) {}
+	constexpr explicit operator bool() const { return count > 0; }
 	void			add(item& v);
 	bool			canequip(wearn v) const;
 	void			clear() { type = 0; count = 0; data = 0; }

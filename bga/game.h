@@ -19,12 +19,15 @@ extern gamei game;
 
 const char* get_save_url(char* result, const char* id);
 
+int game_rand(int v1, int v2);
+
 void create_game();
 void enter(const char* location);
 void enter_from_wmap(const char* area);
 void initialize_story();
 bool is_saved_game(const char* url);
 void game_auto_save();
+bool game_chance(int v);
 void game_quick_load();
 void game_quick_save();
 void party_action(void* object, point target_position, fnevent apply);

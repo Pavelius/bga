@@ -1,5 +1,6 @@
 #include "bsdata.h"
 #include "itemground.h"
+#include "game.h"
 #include "store.h"
 
 BSDATA(storefi) = {
@@ -32,20 +33,21 @@ short unsigned storei::index() const {
 }
 
 void storei::add(item& v) {
-	add_item(0xFFFF, {itemground::Store, index()}, v);
+	add_item(0xFFFF, {index(), itemground::Store}, v);
 }
 
 static void store_refresh(variant v) {
 	if(v.iskind<itemi>()) {
-		item it(v.value);
-		if(v.counter)
-			it.count = v.counter;
+		auto count = v.counter;
+		if(!count)
+			count = 1;
+		item it(v.value, game_rand(count, count * 2));
 		last_store->add(it);
 	}
 }
 
-static void store_refresh(const variants& source) {
-	for(auto v : source)
+void store_supply() {
+	for(auto v : last_store->items)
 		store_refresh(v);
 }
 
@@ -53,6 +55,10 @@ void initialize_store() {
 	auto push_store = last_store;
 	for(auto& e : bsdata<storei>()) {
 		last_store = &e;
-		store_refresh(e.items);
+		store_supply();
+		if(game_chance(60))
+			store_supply();
+		if(game_chance(30))
+			store_supply();
 	}
 }

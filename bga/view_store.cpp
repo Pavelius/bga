@@ -202,16 +202,16 @@ static void sell_goods() {
 	for(auto& e : player_goods) {
 		if(!e.count)
 			continue;
-		item it(e.source->type);
-		it.setcount(e.count);
+		item it(e.source->type, e.count);
 		e.source->setcount(e.source->count - e.count);
 		last_store->add(it);
 	}
 	player->coins += total;
-	update_items();
+	need_update_items = true;
 }
 
 static void paint_buy_sell() {
+	update_items();
 	auto player_total = player_goods.total();
 	auto shop_total = shop_goods.total();
 	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("BuyAndSell"), AlignCenterCenter);
@@ -288,8 +288,6 @@ static void paint_identify() {
 }
 
 static void paint_store() {
-	// auto player_total = player_goods.total();
-	// auto shop_total = shop_goods.total();
 	paint_game_dialog("GUISTDRB", get_back_frame());
 	paint_right_panel();
 	switch(trade_mode) {
@@ -304,6 +302,6 @@ static void paint_store() {
 
 void open_store() {
 	last_store = bsdata<storei>::elements;
-	update_items();
+	need_update_items = true;
 	scene(paint_store);
 }

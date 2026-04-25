@@ -9,5 +9,5 @@ unsigned char container::index() const {
 }
 
 void container::add(item& v) {
-	add_item(current_area, {itemground::Container, index()}, v);
+	add_item(current_area, {index(), itemground::Container}, v);
 }
