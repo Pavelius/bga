@@ -2,7 +2,6 @@
 #include "dice.h"
 #include "magic.h"
 #include "range.h"
-#include "resid.h"
 #include "variant.h"
 #include "wear.h"
 

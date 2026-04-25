@@ -267,7 +267,6 @@
     <ClInclude Include="range.h" />
     <ClInclude Include="rect.h" />
     <ClInclude Include="rects.h" />
-    <ClInclude Include="resid.h" />
     <ClInclude Include="screenshoot.h" />
     <ClInclude Include="script.h" />
     <ClInclude Include="scrollable.h" />

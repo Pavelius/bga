@@ -562,9 +562,6 @@
     <ClInclude Include="bstream.h">
       <Filter>support</Filter>
     </ClInclude>
-    <ClInclude Include="resid.h">
-      <Filter>interface</Filter>
-    </ClInclude>
     <ClInclude Include="colorgrad.h">
       <Filter>interface</Filter>
     </ClInclude>

@@ -162,8 +162,8 @@ static void paint_game_row(void* object, const char* id, fnevent action_proc, in
 		texta(metrics::font, str("%PassedTime\n%RealTime"), AlignLeft);
 	}
 	fore = push_fore.fore;
-	setdialog(604, 11); button(GBTNSTD, 1, 2, 0, id); fire(action_proc, 0, 0, object);
-	setdialog(604, 52); button(GBTNSTD, 1, 2, 0, "Delete", 3, last_save_header->file[0] != 0); fire(row_delete, mode, 0, object);
+	setdialog(604, 11); button(pma_butstd, 1, 2, 0, id); fire(action_proc, 0, 0, object);
+	setdialog(604, 52); button(pma_butstd, 1, 2, 0, "Delete", 3, last_save_header->file[0] != 0); fire(row_delete, mode, 0, object);
 	last_save_header = push_header;
 }
 
@@ -185,23 +185,25 @@ static void paint_save_game() {
 	paint_game_dialog("GUISRSVB");
 	setdialog(243, 22, 311, 28); texta(metrics::h1, getnm("SaveGame"), AlignCenterCenter);
 	setdialog(23, 78, 740, 498); paint_game_list(paint_save_game_row);
-	setdialog(656, 22); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+	setdialog(656, 22); button(pma_butstd, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 }
 
 static void paint_load_game() {
 	paint_game_dialog("GUISRSVB");
 	setdialog(243, 22, 311, 28); texta(metrics::h1, getnm("LoadGame"), AlignCenterCenter);
 	setdialog(23, 78, 740, 498); paint_game_list(paint_load_game_row);
-	setdialog(656, 22); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+	setdialog(656, 22); button(pma_butstd, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 }
 
 static void paint_confirm_overwrite() {
+	auto pb1 = gres("GBTNSPB1");
+	auto pb2 = gres("GBTNMED");
 	paint_dialog("GUISRRQB");
 	setdialog(23, 23, 280, 20); texta(getnm("EnterSaveGameName"), AlignCenterCenter);
 	setdialog(27, 56, 275, 16); edit(last_save_header->name, sizeof(last_save_header->name) / sizeof(last_save_header->name[0]), AlignLeft);
 	setdialog(27, 84, 275, 20); texta(str("%PassedTime"), AlignCenterCenter);
-	setdialog(21, 114); button(GBTNSPB1, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
-	setdialog(149, 114); button(GBTNMED, 1, 2, KeyEnter, "Overwrite"); fire(buttonok);
+	setdialog(21, 114); button(pb1, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+	setdialog(149, 114); button(pb2, 1, 2, KeyEnter, "Overwrite"); fire(buttonok);
 }
 
 bool confirm_overvrite() {

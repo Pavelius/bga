@@ -15,7 +15,6 @@
 #include "order.h"
 #include "pushvalue.h"
 #include "region.h"
-#include "resid.h"
 #include "resinfo.h"
 #include "rfiles.h"
 #include "timer.h"
@@ -895,7 +894,7 @@ static void paint_container() {
 	setdialog(509, 65); stoneslot(0, 0);
 	//Scroll GBTNSCRL 602 24 12 76 frames(1 0 3 2 4 5)
 	setdialog(661, 78, 70, 20); texta(str("%1i", player->coins), AlignRightCenter);
-	setdialog(684, 28); button(GBTNOPT1, 1, 2, KeyEscape); fire(buttoncancel);
+	setdialog(684, 28); button(pma_butopt1, 1, 2, KeyEscape); fire(buttoncancel);
 }
 
 static void mouse_area_cancel() {

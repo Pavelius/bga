@@ -1,4 +1,4 @@
-#include "resid.h"
+#include "view.h"
 
 #pragma once
 

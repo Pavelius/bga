@@ -3,7 +3,6 @@
 #include "game.h"
 #include "iteminside.h"
 #include "pushvalue.h"
-#include "resid.h"
 #include "store.h"
 #include "vector.h"
 #include "view.h"
@@ -159,26 +158,27 @@ static void paint_shop_goods() {
 }
 
 static void paint_right_panel() {
+	auto pb1 = gres("GUISTBBC");
 	setdialog(23, 78);
 	if(last_store->is(UserAllowSell) || last_store->is(UserAllowBuy)) {
-		checkbox(trade_mode, UserAllowBuy, GUISTBBC, 1, 2, 0, 0);
+		checkbox(trade_mode, UserAllowBuy, pb1, 1, 2, 0, 0);
 		caret.y += 80;
 	}
 	if(last_store->is(UserAllowIdentify)) {
-		checkbox(trade_mode, UserAllowIdentify, GUISTBBC, 4, 5, 3, 0);
+		checkbox(trade_mode, UserAllowIdentify, pb1, 4, 5, 3, 0);
 		caret.y += 80;
 	}
 	if(last_store->is(UserPurchaseCures)) {
-		checkbox(trade_mode, UserPurchaseCures, GUISTBBC, 10, 11, 9, 0);
+		checkbox(trade_mode, UserPurchaseCures, pb1, 10, 11, 9, 0);
 		caret.y += 80;
 	}
 	if(last_store->is(UserPurchaseDrinks)) {
-		checkbox(trade_mode, UserPurchaseDrinks, GUISTBBC, 16, 17, 15, 0);
+		checkbox(trade_mode, UserPurchaseDrinks, pb1, 16, 17, 15, 0);
 		caret.y += 80;
 	}
 	if(last_store->is(AllowPeasantRoom) || last_store->is(AllowMerchantRoom)
 		|| last_store->is(AllowNobleRoom) || last_store->is(AllowRoyalRoom)) {
-		checkbox(trade_mode, AllowPeasantRoom, GUISTBBC, 19, 20, 18, 0);
+		checkbox(trade_mode, AllowPeasantRoom, pb1, 19, 20, 18, 0);
 		caret.y += 80;
 	}
 }
@@ -211,10 +211,10 @@ static void paint_buy_sell() {
 	auto shop_total = shop_goods.total();
 	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("BuyAndSell"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
-	setdialog(663, 191); button(GBTNSTD, 1, 2, 0, "Buy", 3, shop_total);
-	setdialog(663, 220); button(GBTNSTD, 1, 2, 0, "Sell", 3, player_total); fire(sell_goods);
+	setdialog(663, 191); button(pma_butstd, 1, 2, 0, "Buy", 3, shop_total);
+	setdialog(663, 220); button(pma_butstd, 1, 2, 0, "Sell", 3, player_total); fire(sell_goods);
 	if(last_store->steal_difficult) {
-		setdialog(663, 249); button(GBTNSTD, 1, 2, 0, "Steal", 3, shop_total);
+		setdialog(663, 249); button(pma_butstd, 1, 2, 0, "Steal", 3, shop_total);
 	}
 	setdialog(141, 83, 225, 18); texta(getnm("Store"), AlignCenterCenter);
 	setdialog(407, 83, 225, 18); texta(player->getname(), AlignCenterCenter);
@@ -235,7 +235,7 @@ static void checkroom(storefn v, int f1, const char* id) {
 		f1++;
 	image(gres("ROOMS"), f1, 0);
 	caret.x -= 3; caret.y += 102;
-	button(GBTNSTD, 1, 2, 0, id, 3, allowed);
+	button(pma_butstd, 1, 2, 0, id, 3, allowed);
 }
 
 static void paint_inn() {
@@ -247,7 +247,7 @@ static void paint_inn() {
 	setdialog(136, 250); checkroom(AllowNobleRoom, 2 * 2, "RoomNoble");
 	setdialog(259, 250); checkroom(AllowRoyalRoom, 3 * 2, "RoomRoyal");
 	setdialog(692, 90, 80, 20); paint_player_coins();
-	setdialog(663, 123); button(GBTNSTD, 1, 2);
+	setdialog(663, 123); button(pma_butstd, 1, 2);
 	setdialog(404, 82, 209, 325); paint_description(12, -1, 2);
 	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
 	setdialog(285, 387, 80, 20); texta("268435469", AlignCenterCenter);
@@ -255,8 +255,9 @@ static void paint_inn() {
 }
 
 static void paint_drink() {
+	auto pb1 = gres("GBTNMED2");
 	setdialog(140, 117, 40, 20); texta("100", AlignCenterCenter);
-	setdialog(195, 111); button(GBTNMED2, 1, 2, 0, "Rumors");
+	setdialog(195, 111); button(pb1, 1, 2, 0, "Rumors");
 	setdialog(199, 82, 170, 20); texta(getnm("Drink"), AlignCenterCenter);
 	setdialog(137, 82, 48, 20); texta(getnm("Price"), AlignCenterCenter);
 	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("Drinks"), AlignCenterCenter);
@@ -274,7 +275,7 @@ static void paint_identify() {
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
 	setdialog(285, 387, 80, 20); texta(str("%1i", shop_total), AlignCenterCenter);
-	setdialog(663, 123); button(GBTNSTD, 1, 2, 0, "Identify", 3, shop_total);
+	setdialog(663, 123); button(pma_butstd, 1, 2, 0, "Identify", 3, shop_total);
 	setdialog(141, 83, 225, 18); texta(getnm("Items"), AlignCenterCenter);
 	setdialog(135, 113, 214, 264); paint_identify_items();
 	setdialog(404, 82, 209, 325); paint_description(12, -1, 2);
@@ -292,7 +293,7 @@ static void paint_store() {
 	case UserAllowIdentify: paint_identify(); break;
 	default: paint_buy_sell(); break;
 	}
-	setdialog(663, 384); button(GBTNSTD, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
+	setdialog(663, 384); button(pma_butstd, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
 	paint_game_panel(false, false);
 }
 

@@ -1,3 +1,5 @@
+#include "point.h"
+
 #pragma once
 
 typedef void (*fnevent)();
@@ -14,23 +16,28 @@ extern bool button_pressed, button_executed, button_hilited, input_disabled;
 extern int game_panel_mode;
 extern fnevent on_player_change;
 
+extern sprite* pma_butopt1;
+extern sprite* pma_butstd;
 extern sprite* pma_cursors;
 extern sprite* pma_cursarw;
 extern sprite* pma_port[2];
 extern sprite* pma_stoneslot;
 extern sprite* pma_pfcm;
 
+sprite* gres(resn i);
+sprite* gres(const char* id);
+
 const char* getkg(int weight);
 
 void* choose_combat_action();
 
-void button(resn res, unsigned short f1, unsigned short f2, unsigned key = 0);
-void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, bool need_getname = true);
-void button(resn res, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed, bool need_getname = true);
+void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key = 0);
+void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key, const char* id, bool need_getname = true);
+void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed, bool need_getname = true);
 void button_check(unsigned key);
 void change_panel_mode();
 void change_zoom_factor();
-void checkbox(int& source, int value, resn res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key);
+void checkbox(int& source, int value, sprite* res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key);
 void choose_creature();
 bool confirm(const char* id, ...);
 bool confirm_overvrite();

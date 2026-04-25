@@ -82,10 +82,11 @@ static void paint_character_generation(const char* id) {
 }
 
 static void paint_steps() {
+	auto pb1 = gres("GBTNLRG");
 	setdialog(274, 113);
 	for(auto i = ChooseGender; i <= ChooseName; i = (commandn)(i + 1)) {
 		auto b = (i % 4) * 4;
-		button(GBTNLRG, b + 1, b + 2, '1' + i, bsdata<commandi>::elements[i].id, b + 3, current_step == i);
+		button(pb1, b + 1, b + 2, '1' + i, bsdata<commandi>::elements[i].id, b + 3, current_step == i);
 		fire(buttonparam, (long)(bsdata<commandi>::elements + i));
 		caret.y += 35;
 	}
@@ -98,13 +99,14 @@ static void pick_answer() {
 }
 
 static void paint_answers(int bh) {
+	auto pb1 = gres("GBTNLRG");
 	for(auto& e : an) {
 		auto i = an.indexof(&e);
 		auto b = (i % 4) * 4;
 		auto c = b + 1;
 		if(current_answer == e.value)
 			c = b + 0;
-		button(GBTNLRG, c, b + 2, '1' + i, e.text, b + 3, true, false);
+		button(pb1, c, b + 2, '1' + i, e.text, b + 3, true, false);
 		fire(pick_answer, 0, 0, (void*)e.value);
 		caret.y += bh;
 	}
@@ -138,17 +140,18 @@ static void back_one_step() {
 }
 
 static void paint_footer() {
-	setdialog(35, 550); button(GBTNSTD, 1, 2, 0, "Biography", 3, false);
-	setdialog(204, 550); button(GBTNSTD, 5, 6, 0, "Import");
-	setdialog(342, 550); button(GBTNSTD, 9, 10, KeyEscape, "Back", 11, current_step != ChooseGender); fire(back_one_step);
-	setdialog(478, 550); button(GBTNSTD, 1, 2, KeyEnter, "Finish", 3, current_step == ChooseFinish);
+	auto pb1 = gres("GBTNSTD");
+	setdialog(35, 550); button(pb1, 1, 2, 0, "Biography", 3, false);
+	setdialog(204, 550); button(pb1, 5, 6, 0, "Import");
+	setdialog(342, 550); button(pb1, 9, 10, KeyEscape, "Back", 11, current_step != ChooseGender); fire(back_one_step);
+	setdialog(478, 550); button(pb1, 1, 2, KeyEnter, "Finish", 3, current_step == ChooseFinish);
 	fire(buttonparam, (long)(bsdata<commandi>::elements + ChooseFinish));
 	setdialog(647, 550);
 	if(current_step == ChooseGender) {
-		button(GBTNSTD, 5, 6, 0, "Cancel");
+		button(pb1, 5, 6, 0, "Cancel");
 		fire(buttoncancel);
 	} else {
-		button(GBTNSTD, 5, 6, 0, "StartOver");
+		button(pb1, 5, 6, 0, "StartOver");
 		fire(start_over);
 	}
 }
@@ -161,11 +164,12 @@ static bool allow_next_button() {
 }
 
 static void paint_footer_answer(bool enable_next) {
-	setdialog(35, 550); button(GBTNSTD, 1, 2, 0, "Biography", 3, false);
-	setdialog(204, 550); button(GBTNSTD, 5, 6, 0, "Import", 7, false);
-	setdialog(342, 550); button(GBTNSTD, 9, 10, KeyEscape, "Back"); fire(buttoncancel);
-	setdialog(478, 550); button(GBTNSTD, 1, 2, KeyEnter, "Next", 3, enable_next); fire(buttonok);
-	setdialog(647, 550); button(GBTNSTD, 5, 6, 0, "Cancel", 7, false);
+	auto pb1 = gres("GBTNSTD");
+	setdialog(35, 550); button(pb1, 1, 2, 0, "Biography", 3, false);
+	setdialog(204, 550); button(pb1, 5, 6, 0, "Import", 7, false);
+	setdialog(342, 550); button(pb1, 9, 10, KeyEscape, "Back"); fire(buttoncancel);
+	setdialog(478, 550); button(pb1, 1, 2, KeyEnter, "Next", 3, enable_next); fire(buttonok);
+	setdialog(647, 550); button(pb1, 5, 6, 0, "Cancel", 7, false);
 }
 
 static void paint_description() {
@@ -182,13 +186,15 @@ static void paint_choose_avatar() {
 		current_value = portraits.count - 1;
 	if(current_value < 0)
 		current_value = 0;
+	auto pb1 = gres("GBTNPOR");
+	auto pb2 = gres("GBTNLRG");
 	paint_game_dialog("GUICGB");
 	paint_character_generation("ChooseAvatar");
 	image(254, 87, gres("GUIACG"), 1, 0);
 	image(295, 116, pma_port[1], portraits[current_value]->getindex(), 0);
-	setdialog(262, 284); button(GBTNPOR, 0, 1, KeyLeft); fire(cbsetint, current_value - 1, 0, &current_value);
-	setdialog(512, 284); button(GBTNPOR, 2, 3, KeyRight); fire(cbsetint, current_value + 1, 0, &current_value);
-	setdialog(276, 394 + 87); button(GBTNLRG, 1, 2, 'R', "Random"); fire(random_avatar);
+	setdialog(262, 284); button(pb1, 0, 1, KeyLeft); fire(cbsetint, current_value - 1, 0, &current_value);
+	setdialog(512, 284); button(pb1, 2, 3, KeyRight); fire(cbsetint, current_value + 1, 0, &current_value);
+	setdialog(276, 394 + 87); button(pb2, 1, 2, 'R', "Random"); fire(random_avatar);
 	paint_footer_answer(allow_next_button());
 	paint_description();
 }
@@ -221,6 +227,8 @@ static void tips_help_button(nameable* p) {
 static void paint_choose_ability() {
 	auto ability_spent = get_ability_spend();
 	auto ability_left = ability_points_maximum - ability_spent;
+	auto pbp = gres("GBTNPLUS");
+	auto pbm = gres("GBTNMINS");
 	image(254, 87, gres("GUIACG"), 2, 0);
 	setdialog(27, 57, 205, 28); tips_help("AbilityPointsLeft"); texta(getnm("AbilityPointsLeft"), AlignCenterCenter);
 	setdialog(240, 57, 33, 28); tips_help("AbilityPointsLeft"); texta(str("%1i", ability_left), AlignCenterCenter);
@@ -239,11 +247,11 @@ static void paint_choose_ability() {
 		auto b = 3 * ((i - Strenght) % 4);
 		caret.y -= 3;
 		caret.x = push_caret.x + 215;
-		button(GBTNPLUS, b, b + 1, 0, 0, b + 2, cost_pay(delta) <= ability_left);
+		button(pbp, b, b + 1, 0, 0, b + 2, cost_pay(delta) <= ability_left);
 		tips_help_button(help_id);
 		fire(cbsetchr, value + 1, 0, &player->basic.abilities[i]);
 		caret.x = push_caret.x + 233;
-		button(GBTNMINS, b, b + 1, 0, 0, b + 2, delta > 0);
+		button(pbm, b, b + 1, 0, 0, b + 2, delta > 0);
 		tips_help_button(help_id);
 		fire(cbsetchr, value - 1, 0, &player->basic.abilities[i]);
 		caret = push_caret;
@@ -281,15 +289,17 @@ static void paint_skill_row(void* object) {
 	auto c = player->isclass(n) ? 1 : 2;
 	auto m = player->getmaxskill();
 	auto skill_points = player->basic.abilities[SkillPoints];
+	auto pbp = gres("GBTNPLUS");
+	auto pbm = gres("GBTNMINS");
 	tips_click(p);
 	pushfore push_fore;
 	pushrect push; height = 28;
 	caret.x = push.caret.x + 206;
-	button(GBTNPLUS, b + 0, b + 1, 0, 0, b + 2, (v < before_skills_apply.basic.skills[n] + m) && skill_points >= c);
+	button(pbp, b + 0, b + 1, 0, 0, b + 2, (v < before_skills_apply.basic.skills[n] + m) && skill_points >= c);
 	tips_help_button(p);
 	fire(change_skill, 1, n);
 	caret.x = push.caret.x + 224;
-	button(GBTNMINS, b + 0, b + 1, 0, 0, b + 2, v > before_skills_apply.basic.skills[n]);
+	button(pbm, b + 0, b + 1, 0, 0, b + 2, v > before_skills_apply.basic.skills[n]);
 	tips_help_button(p);
 	fire(change_skill, -1, n);
 	caret.y += 2; height = 30;
@@ -328,6 +338,8 @@ static featn get_feat(featn v) {
 }
 
 static void paint_feat_row(void* object) {
+	auto pbp = gres("GBTNPLUS");
+	auto pbm = gres("GBTNMINS");
 	auto p = (feati*)object;
 	auto bf = p->getindex();
 	auto uf = get_next_feat(bf);
@@ -338,10 +350,10 @@ static void paint_feat_row(void* object) {
 	tips_click(p);
 	pushrect push; height = 28;
 	caret.x = push.caret.x + 206;
-	button(GBTNPLUS, b + 0, b + 1, 0, 0, b + 2, allow_plus);
+	button(pbp, b + 0, b + 1, 0, 0, b + 2, allow_plus);
 	fire(change_feat, 1, uf);
 	caret.x = push.caret.x + 224;
-	button(GBTNMINS, b + 0, b + 1, 0, 0, b + 2, allow_minus);
+	button(pbm, b + 0, b + 1, 0, 0, b + 2, allow_minus);
 	fire(change_feat, -1, pf);
 	pushfore push_fore;
 	if(player->isallow(bf))
@@ -474,7 +486,7 @@ static void paint_choose_sound() {
 	paint_list(sounds.data, sounds.element_size, sounds.count, origin, per_page,
 		paint_sound_row, row_height, {11, -4}, 10, pick_current_sound, 0, true);
 	// setdialog(254 + 22, 61 + 429); button(GBTNLRG, 1, 2);
-	setdialog(254 + 20, 61 + 392); button(GBTNLRG, 1, 2, 'P', "PlaySound"); fire(play_sound_set, current_value);
+	setdialog(254 + 20, 61 + 392); button(gres("GBTNLRG"), 1, 2, 'P', "PlaySound"); fire(play_sound_set, current_value);
 	paint_footer_answer(true);
 	paint_description();
 }
@@ -719,10 +731,11 @@ static void create_character() {
 
 static void paint_character_option() {
 	paint_dialog("GMPMCHRB");
+	auto pb1 = gres("GBTNLRG2");
 	setdialog(24, 22, 230, 22); texta(getnm("Character"), AlignCenterCenter);
-	setdialog(23, 50); button(GBTNLRG2, 1, 2, 0, "CreateCharacter", 3, false); fire(buttonparam, 1);
-	setdialog(23, 81); button(GBTNLRG2, 1, 2, 0, "DeleteCharacter"); fire(buttonparam, 2);
-	setdialog(23, 112); button(GBTNLRG2, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+	setdialog(23, 50); button(pb1, 1, 2, 0, "CreateCharacter", 3, false); fire(buttonparam, 1);
+	setdialog(23, 81); button(pb1, 1, 2, 0, "DeleteCharacter"); fire(buttonparam, 2);
+	setdialog(23, 112); button(pb1, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 }
 
 static void modify_character() {
@@ -748,25 +761,27 @@ static void paint_party_formation() {
 	update_main_music();
 	setdialog(279, 22, 242, 32); texta(metrics::h1, getnm("PartyFormation"), AlignCenterCenter);
 	setdialog(428, 81);
+	auto pb1 = gres("GBTNBFRM");
+	auto pb2 = gres("GBTNMED");
 	for(auto i = 0; i < 6; i++) {
 		auto push_caret = caret;
 		auto p = party[i];
 		auto b = 4 * (i % 3);
 		if(!p) {
-			button(GBTNBFRM, b + 1, b + 2, 0, "CreateCharacter");
+			button(pb1, b + 1, b + 2, 0, "CreateCharacter");
 			fire(create_character, i);
 			allow_done = false;
 		} else {
-			button(GBTNBFRM, b + 1, b + 2, 0, p->getname(), false);
+			button(pb1, b + 1, b + 2, 0, p->getname(), false);
 			setdialog(647, caret.y - 1); image(pma_port[0], p->portrait, 0);
 			fire(modify_character, i);
 		}
 		caret = push_caret;
 		caret.y += 69;
 	}
-	setdialog(105, 495); button(GBTNSTD, 1, 2, KeyEscape, "Exit"); fire(exit_party_formation);
-	setdialog(322, 495); button(GBTNMED, 1, 2, 0, "ModifyCharacters", 3, false);
-	setdialog(576, 495); button(GBTNSTD, 1, 2, KeyEnter, "Done", 3, allow_done); fire(buttonok);
+	setdialog(105, 495); button(pma_butstd, 1, 2, KeyEscape, "Exit"); fire(exit_party_formation);
+	setdialog(322, 495); button(pb2, 1, 2, 0, "ModifyCharacters", 3, false);
+	setdialog(576, 495); button(pma_butstd, 1, 2, KeyEnter, "Done", 3, allow_done); fire(buttonok);
 }
 
 static bool open_party_formation() {
@@ -787,7 +802,7 @@ static void pick_party() {
 static void paint_party_row(void* object) {
 	auto p = (partyi*)object;
 	auto id = p ? p->id : "CreateParty";
-	button(GBTNBFRM, (current_value == list_row_index) ? 0 : 1, 2, 0, id); fire(pick_party, list_row_index);
+	button(gres("GBTNBFRM"), (current_value == list_row_index) ? 0 : 1, 2, 0, id); fire(pick_party, list_row_index);
 }
 
 static void paint_select_party() {
@@ -800,9 +815,9 @@ static void paint_select_party() {
 	paint_list(records.data, records.element_size, records.count, origin, per_page,
 		paint_party_row, 62, {0, 0}, 0, 0, 0, true);
 	setdialog(280, 136, 474, 338); paint_description(11, -4, 11);
-	setdialog(204, 550); button(GBTNSTD, 1, 2, 0, "Modify");
-	setdialog(341, 550); button(GBTNSTD, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
-	setdialog(479, 550); button(GBTNSTD, 1, 2, KeyEnter, "Next"); fire(buttonok);
+	setdialog(204, 550); button(pma_butstd, 1, 2, 0, "Modify");
+	setdialog(341, 550); button(pma_butstd, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
+	setdialog(479, 550); button(pma_butstd, 1, 2, KeyEnter, "Next"); fire(buttonok);
 }
 
 static void start_new_game() {

@@ -54,7 +54,10 @@ void initialize_resources() {
 }
 
 sprite* gres(const char* id) {
-	return (sprite*)find_image(id)->get();
+	auto p = find_image(id);
+	if(!p)
+		return 0;
+	return p->get();
 }
 
 sprite* gres(resn i) {

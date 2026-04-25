@@ -1,6 +1,5 @@
 #include "draw.h"
 #include "creature.h"
-#include "resid.h"
 #include "view.h"
 
 using namespace draw;

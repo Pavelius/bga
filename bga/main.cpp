@@ -13,7 +13,6 @@
 #include "option.h"
 #include "party.h"
 #include "rand.h"
-#include "resid.h"
 #include "rfiles.h"
 #include "script.h"
 #include "spell.h"
