@@ -13,45 +13,48 @@
 using namespace draw;
 
 struct animatei : nameable {
-	int a1o8;
+	int a1o8, hg1o8, b18o9;
 };
 BSDATA(animatei) = {
-	{"AnimateMove", 9},
-	{"AnimateStand", 0},
-	{"AnimateStandRelax", 0},
-	{"AnimateStandLook", 0},
-	{"AnimateCombatStance", 1},
-	{"AnimateCombatStanceTwoHanded", 1},
-	{"AnimateGetHit", 2},
-	{"AnimateGetHitAndDrop", 3},
-	{"AnimateAgony", 4},
-	{"AnimateGetUp", 5},
-	{"AnimateMeleeOneHanded", 10},
-	{"AnimateMeleeOneHandedSwing", 11},
-	{"AnimateMeleeOneHandedThrust", 12},
-	{"AnimateMeleeTwoHanded", 10},
-	{"AnimateMeleeTwoHandedSwing", 11},
-	{"AnimateMeleeTwoHandedThrust", 12},
-	{"AnimateMeleeTwoWeapon", 10},
-	{"AnimateMeleeTwoWeaponSwing", 11},
-	{"AnimateMeleeTwoWeaponThrust", 12},
-	{"AnimateShootBow", 10},
-	{"AnimateShootSling", 10},
-	{"AnimateShootXBow", 10},
-	{"AnimateCastBig", 6},
-	{"AnimateCastBigRelease", 7},
-	{"AnimateCast", 6},
-	{"AnimateCastRelease", 7},
-	{"AnimateCastThird", 6},
-	{"AnimateCastThirdRelease", 7},
-	{"AnimateCastFour", 6},
-	{"AnimateCastFourRelease", 7},
+	{"AnimateMove", 9, 1, 1},
+	{"AnimateStand", 0, 0, 0},
+	{"AnimateStandRelax", 0, 0, 0},
+	{"AnimateStandLook", 0, 0, 0},
+	{"AnimateCombatStance", 1, 0, 0},
+	{"AnimateCombatStanceTwoHanded", 1, 0, 0},
+	{"AnimateGetHit", 2, 2, 0},
+	{"AnimateGetHitAndDrop", 3, 3, 0},
+	{"AnimateAgony", 4, 0, 0},
+	{"AnimateGetUp", 5, 0, 0},
+	{"AnimateMeleeOneHanded", 10, 0, 0},
+	{"AnimateMeleeOneHandedSwing", 11, 0, 0},
+	{"AnimateMeleeOneHandedThrust", 12, 0, 0},
+	{"AnimateMeleeTwoHanded", 10, 0, 0},
+	{"AnimateMeleeTwoHandedSwing", 11, 0, 0},
+	{"AnimateMeleeTwoHandedThrust", 12, 0, 0},
+	{"AnimateMeleeTwoWeapon", 10, 0, 0},
+	{"AnimateMeleeTwoWeaponSwing", 11, 0, 0},
+	{"AnimateMeleeTwoWeaponThrust", 12, 0, 0},
+	{"AnimateShootBow", 10, 0, 0},
+	{"AnimateShootSling", 10, 0, 0},
+	{"AnimateShootXBow", 10, 0, 0},
+	{"AnimateCastBig", 6, 0, 0},
+	{"AnimateCastBigRelease", 7, 0, 0},
+	{"AnimateCast", 6, 0, 0},
+	{"AnimateCastRelease", 7, 0, 0},
+	{"AnimateCastThird", 6, 0, 0},
+	{"AnimateCastThirdRelease", 7, 0, 0},
+	{"AnimateCastFour", 6, 0, 0},
+	{"AnimateCastFourRelease", 7, 0, 0},
 };
 assert_enum(animatei, AnimateCastFourRelease)
 
 const int max_sprite_directions = 9;
 const int max_weapon_anim = 26;
-const int anm_monsters_a1 = 104;
+
+const int anm_a1o8 = 104;
+const int anm_hg1o8 = 32;
+const int anm_b18o9 = 18;
 
 int get_armor_index(const item& e) {
 	switch(e.geti().required) {
@@ -79,7 +82,7 @@ sprite* get_character_res(racen race, gendern gender, classn type, int ai, int& 
 	// 10 - CDMB1, CDMB2, CDMB3, CDMC4, CDMF4, CDMT1, CDMW1, CDMW2, CDMW3, CDMW4
 	// 11 - CHFB1, CHFB2, CHFB3, CHFC4, CHFF4, CHFM1, CHFT1, CHFW1, CHFW2, CHFW3, CHFW4,
 	//  6 - CIMB1, CIMB2, CIMB3, CIMC4, CIMF4, CIMT1
-	if(n==0 && ai == 3)
+	if(n == 0 && ai == 3)
 		ai = 4; // Default animation have other index for heavy armor
 	switch(ei.resm) {
 	case 10:
@@ -134,13 +137,15 @@ sprite* actor::getsprite(int& ws) const {
 
 void actor::wait(unsigned milliseconds) {
 	delay += milliseconds;
-	// time_next = current_game_tick + milliseconds;
 }
 
 static sprite::cicle* get_cicle(sprite* ps, animaten action, int o) {
-	if(ps->cicles== anm_monsters_a1)
+	switch(ps->cicles) {
+	case anm_a1o8:
 		return ps->gcicle(bsdata<animatei>::elements[action].a1o8 * 8 + o / 2);
-	else {
+	case anm_hg1o8:
+		return ps->gcicle(bsdata<animatei>::elements[action].hg1o8 * 8 + o / 2);
+	default:
 		// Standat character animation
 		if(o >= max_sprite_directions)
 			o = (max_sprite_directions - 1) * 2 - o;
@@ -149,12 +154,12 @@ static sprite::cicle* get_cicle(sprite* ps, animaten action, int o) {
 }
 
 static unsigned get_flags(sprite* ps, int o) {
-	if(ps->cicles == anm_monsters_a1)
+	switch(ps->cicles) {
+	case anm_a1o8: case anm_hg1o8:
 		return 0;
-	if(o >= max_sprite_directions)
-		return ImageMirrorH;
-	else
-		return 0;
+	default:
+		return (o >= max_sprite_directions) ? ImageMirrorH : 0;
+	}
 }
 
 void actor::resetframes() {
@@ -335,7 +340,7 @@ void actor::paint() const {
 	auto ps = getsprite(ws);
 	if(!ps)
 		return;
-	if(ps->cicles == anm_monsters_a1)
+	if(ps->cicles == anm_a1o8)
 		image(ps, frame, frame_flags);
 	else {
 		color pallette[256]; setpallette(pallette);
