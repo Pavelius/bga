@@ -1,0 +1,428 @@
+﻿#Entrance
+
+AR1000FR1100 position(299 513) orientation(14) area(AR1000)
+AR1000FR1001 position(973 668) orientation(0) area(AR1000)
+AR1000FR1002 position(2291 609) orientation(4) area(AR1000)
+AR1000FR1003 position(896 1912) orientation(0) area(AR1000)
+AR1000FR1004 position(680 2162) orientation(8) area(AR1000)
+AR1000FR1005 position(809 1053) orientation(0) area(AR1000)
+AR1000FR1006 position(377 1797) orientation(12) area(AR1000)
+
+AR1001FR1000 position(602 771) orientation(10) area(AR1001)
+
+AR1002FR1000 position(410 775) orientation(10) area(AR1002)
+AR1002FR1007 position(541 304) orientation(2) area(AR1002)
+
+AR1003FR1000 position(397 334) orientation(10) area(AR1003)
+
+AR1004FR1000 position(246 302) orientation(8) area(AR1004)
+
+AR1005FR1000 position(165 224) orientation(8) area(AR1005)
+
+AR1006FR1000 position(154 233) orientation(8) area(AR1006)
+
+AR1007FR1002 position(2606 874) orientation(8) area(AR1007)
+
+AR1100FR1000 position(249 1376) orientation(8) area(AR1100)
+AR1100FR1101 position(2180 1354) orientation(6) area(AR1100)
+AR1100FR1102 position(1475 1916) orientation(0) area(AR1100)
+AR1100FR1103 position(1266 718) orientation(0) area(AR1100)
+AR1100FR1104 position(793 1813) orientation(0) area(AR1100)
+AR1100FR1106 position(2139 1043) orientation(4) area(AR1100)
+AR1100FR1107 position(432 1087) orientation(0) area(AR1100)
+AR1100FR1200 position(1620 368) orientation(0) area(AR1100)
+
+AR1101FR1100 position(452 540) orientation(10) area(AR1101)
+
+AR1102FR1100 position(220 489) orientation(8) area(AR1102)
+
+AR1103FR1100 position(504 505) orientation(8) area(AR1103)
+
+AR1104FR1100 position(625 550) orientation(6) area(AR1104)
+AR1104FR1105 position(419 428) orientation(12) area(AR1104)
+
+AR1105FR1104 position(303 482) orientation(12) area(AR1105)
+
+AR1106FR1100 position(211 310) orientation(8) area(AR1106)
+
+AR1107FR1100 position(228 367) orientation(8) area(AR1107)
+
+AR1200FR1100 position(2373 2682) orientation(8) area(AR1200)
+AR1200FR1201 position(2535 2540) orientation(4) area(AR1200)
+AR1200FRWMAP position(977 709) orientation(14) area(AR1200)
+
+AR1201FR1200 position(326 362) orientation(10) area(AR1201)
+
+AR2000FRWMAP position(1212 2668) orientation(8) area(AR2000)
+AR2000FR2001 position(2110 179) orientation(2) area(AR2000)
+
+AR2001FR2000 position(564 1922) orientation(12) area(AR2001)
+AR2001FR2100 position(977 148) orientation(12) area(AR2001)
+AR2001FR2002 position(2446 403) orientation(2) area(AR2001)
+
+AR2002FR2001 position(982 2109) orientation(8) area(AR2002)
+
+AR2100FR2001 position(1955 1268) orientation(4) area(AR2100)
+AR2100FR2101 position(249 538) orientation(12) area(AR2100)
+
+AR2101FR2100 position(2471 680) orientation(4) area(AR2101)
+AR2101FR2102 position(94 1145) orientation(12) area(AR2101)
+
+AR2102FR2101 position(1547 1544) orientation(8) area(AR2102)
+AR2102FRWMAP position(220 1082) orientation(12) area(AR2102)
+
+AR3000FRWMAP position(514 2697) orientation(10) area(AR3000)
+AR3000FR3100 position(2169 607) orientation(0) area(AR3000)
+AR3000FR3001 position(3581 2462) orientation(4) area(AR3000)
+
+AR3001FR3000 position(3575 1142) orientation(4) area(AR3001)
+AR3001FR3002 position(3292 258) orientation(0) area(AR3001)
+
+AR3002FR3100 position(2495 440) orientation(14) area(AR3002)
+AR3002FR3001 position(3067 2651) orientation(6) area(AR3002)
+
+AR3100FR3002 position(1702 1258) orientation(2) area(AR3100)
+AR3100FR3000 position(802 1698) orientation(10) area(AR3100)
+AR3100FR3101 position(802 1213) orientation(0) area(AR3100)
+
+AR3101FR3100W position(373 1293) orientation(10) area(AR3101)
+
+AR4000FR4001 position(880 2243) orientation(10) area(AR4000)
+AR4000FR4100 position(3210 637) orientation(4) area(AR4000)
+AR4000FR4000B position(3476 599) orientation(14) area(AR4000)
+AR4000FR4000A position(2662 236) orientation(14) area(AR4000)
+
+AR4001FR4000 position(412 193) orientation(2) area(AR4001)
+
+AR4100FR4000 position(215 2421) orientation(10) area(AR4100)
+AR4100FR4101A position(2594 804) orientation(2) area(AR4100)
+AR4100FR4101B position(3145 1007) orientation(14) area(AR4100)
+AR4100FR5000 position(1007 196) orientation(0) area(AR4100)
+
+AR4101FR4100A position(473 2598) orientation(10) area(AR4101)
+AR4101FR4100B position(1555 569) orientation(2) area(AR4101)
+AR4101FR4102A position(2706 658) orientation(10) area(AR4101)
+AR4101FR4102B position(3002 1368) orientation(6) area(AR4101)
+AR4101CHAPELWARP position(1544 1934) orientation(10) area(AR4101)
+AR4101PRISONWARP position(1140 1564) orientation(6) area(AR4101)
+
+AR4102FR4101A position(2720 457) orientation(2) area(AR4102)
+AR4102FR4101B position(3449 2180) orientation(6) area(AR4102)
+AR4102ALTARWARP position(755 921) orientation(14) area(AR4102)
+AR4102TREASURYWARP position(2270 2446) orientation(2) area(AR4102)
+AR4102VAULTWARP position(1718 998) orientation(2) area(AR4102)
+AR4102NICKWARP position(1421 1476) orientation(6) area(AR4102)
+
+AR4103FR6104 position(960 380) orientation(6) area(AR4103)
+
+AR5000FR4100 position(289 1421) orientation(10) area(AR5000)
+AR5000FRWMAPW position(289 1421) orientation(10) area(AR5000)
+AR5000FR5001 position(2569 1371) orientation(6) area(AR5000)
+AR5000FRWMAPE position(2569 1371) orientation(6) area(AR5000)
+
+AR5001FR5000 position(264 1208) orientation(12) area(AR5001)
+AR5001FR5002 position(2303 733) orientation(2) area(AR5001)
+AR5001FR5003A position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003B position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003C position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003D position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003E position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003F position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003G position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003H position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003I position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003J position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003K position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003L position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003 position(2831 1018) orientation(4) area(AR5001)
+AR5001FRWMAP position(264 1208) orientation(12) area(AR5001)
+AR5001FR5003M position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003N position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003O position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003P position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003Q position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003R position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003S position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003T position(2831 1018) orientation(4) area(AR5001)
+AR5001FR5003U position(2831 1018) orientation(4) area(AR5001)
+
+AR5002FR5001 position(220 384) orientation(10) area(AR5002)
+
+AR5004FR5015 position(155 1732) orientation(14) area(AR5004)
+AR5004FR5005 position(3225 193) orientation(0) area(AR5004)
+AR5004FRWMAP position(3225 193) orientation(0) area(AR5004)
+
+AR5005FR5004 position(139 1046) orientation(10) area(AR5005)
+AR5005FR5100 position(1012 735) orientation(2) area(AR5005)
+AR5005FRWMAP position(139 1046) orientation(10) area(AR5005)
+
+AR5010FR5001 position(298 705) orientation(10) area(AR5010)
+AR5010FR5011 position(615 415) orientation(2) area(AR5010)
+AR5010FR5015 position(582 586) orientation(0) area(AR5010)
+AR5010FR5024 position(353 643) orientation(10) area(AR5010)
+AR5010FR5025 position(350 368) orientation(0) area(AR5010)
+AR5010FR5030 position(343 658) orientation(10) area(AR5010)
+
+AR5011FR5029 position(320 511) orientation(12) area(AR5011)
+AR5011FR5030 position(323 515) orientation(10) area(AR5011)
+AR5011FR5026 position(320 507) orientation(12) area(AR5011)
+
+AR5012FR5011 position(282 310) orientation(0) area(AR5012)
+AR5012FR5012 position(435 332) orientation(0) area(AR5012)
+AR5012FR5013 position(560 371) orientation(0) area(AR5012)
+AR5012FR5014 position(484 339) orientation(0) area(AR5012)
+
+AR5013FR5012 position(624 362) orientation(4) area(AR5013)
+
+AR5014FR5013 position(505 336) orientation(0) area(AR5014)
+
+AR5015FR5010 position(968 878) orientation(0) area(AR5015)
+AR5015FR5011 position(771 752) orientation(4) area(AR5015)
+AR5015FR5004 position(425 348) orientation(2) area(AR5015)
+AR5015FR5024 position(603 832) orientation(10) area(AR5015)
+AR5015FR5030 position(690 894) orientation(8) area(AR5015)
+
+AR5016FR5019 position(412 446) orientation(10) area(AR5016)
+AR5016FR5020 position(374 420) orientation(12) area(AR5016)
+AR5016FR5030 position(431 464) orientation(8) area(AR5016)
+AR5016FR5017 position(396 431) orientation(10) area(AR5016)
+
+AR5017FR5010 position(323 350) orientation(0) area(AR5017)
+AR5017FR5015 position(353 338) orientation(0) area(AR5017)
+AR5017FR5017 position(564 326) orientation(0) area(AR5017)
+AR5017FR5018 position(544 322) orientation(0) area(AR5017)
+AR5017FR5019 position(468 340) orientation(0) area(AR5017)
+AR5017FR5024 position(343 353) orientation(12) area(AR5017)
+
+AR5018FR5017 position(559 330) orientation(0) area(AR5018)
+
+AR5019FR5018 position(559 327) orientation(0) area(AR5019)
+
+AR5020FR5016 position(269 405) orientation(14) area(AR5020)
+
+AR5021FR5014 position(349 329) orientation(0) area(AR5021)
+AR5021FR5021 position(389 526) orientation(12) area(AR5021)
+AR5021FR5022 position(391 539) orientation(12) area(AR5021)
+AR5021FR5023 position(392 543) orientation(12) area(AR5021)
+AR5021FR5012 position(391 525) orientation(12) area(AR5021)
+
+AR5022FR5021 position(381 535) orientation(0) area(AR5022)
+
+AR5023FR5022 position(389 551) orientation(12) area(AR5023)
+
+AR5024FR5010 position(228 324) orientation(12) area(AR5024)
+AR5024FR5015 position(795 416) orientation(4) area(AR5024)
+
+AR5025FR5016 position(332 464) orientation(0) area(AR5025)
+AR5025FR5020 position(318 445) orientation(14) area(AR5025)
+
+AR5026FR5016 position(487 637) orientation(14) area(AR5026)
+AR5026FR5020 position(503 660) orientation(12) area(AR5026)
+AR5026FR5025 position(402 360) orientation(0) area(AR5026)
+AR5026FR5026 position(492 650) orientation(12) area(AR5026)
+AR5026FR5027 position(485 648) orientation(12) area(AR5026)
+AR5026FR5028 position(495 647) orientation(12) area(AR5026)
+AR5026FR5029 position(498 648) orientation(12) area(AR5026)
+
+AR5027FR5026 position(530 588) orientation(0) area(AR5027)
+
+AR5028FR5027 position(459 644) orientation(12) area(AR5028)
+
+AR5029FR5028 position(474 647) orientation(12) area(AR5029)
+
+AR5030FR5023 position(449 401) orientation(0) area(AR5030)
+AR5030FR5021 position(551 413) orientation(0) area(AR5030)
+
+AR5100FR5005 position(175 673) orientation(10) area(AR5100)
+AR5100FR5101 position(832 407) orientation(4) area(AR5100)
+
+AR5101FR5100 position(502 2120) orientation(14) area(AR5101)
+AR5101FR5102 position(3240 772) orientation(2) area(AR5101)
+AR5101FR5101B position(1297 1909) orientation(0) area(AR5101)
+AR5101FR5101A position(1633 1788) orientation(4) area(AR5101)
+
+AR5102FR5101 position(565 1325) orientation(10) area(AR5102)
+AR5102FR5200 position(1672 265) orientation(2) area(AR5102)
+AR5102FRWMAP position(1672 265) orientation(2) area(AR5102)
+
+AR5200FRWMAP position(545 1772) orientation(8) area(AR5200)
+AR5200FR5200B position(2537 1446) orientation(4) area(AR5200)
+AR5200FR5200A position(2952 1070) orientation(4) area(AR5200)
+AR5200FR5201 position(2906 880) orientation(14) area(AR5200)
+AR5200FR5102 position(545 1772) orientation(8) area(AR5200)
+
+AR5201FR5200 position(1873 812) orientation(6) area(AR5201)
+AR5201FR5202 position(1210 685) orientation(2) area(AR5201)
+
+AR5202FR5201 position(696 658) orientation(4) area(AR5202)
+AR5202FR5203 position(662 716) orientation(8) area(AR5202)
+
+AR5203FR5202 position(271 204) orientation(14) area(AR5203)
+AR5203FR5300 position(1429 178) orientation(0) area(AR5203)
+AR5203FRWMAP position(1429 178) orientation(0) area(AR5203)
+
+AR5300FR5203 position(331 419) orientation(14) area(AR5300)
+AR5300FR5302A position(2988 648) orientation(0) area(AR5300)
+AR5300FR5302B position(3214 641) orientation(0) area(AR5300)
+AR5300FR5301A position(3406 1076) orientation(4) area(AR5300)
+AR5300FR5301B position(3507 1333) orientation(4) area(AR5300)
+AR5300FR5301C position(3660 1543) orientation(4) area(AR5300)
+AR5300FRWMAP position(331 419) orientation(14) area(AR5300)
+
+AR5301FR5300A position(180 1390) orientation(12) area(AR5301)
+AR5301FR5300B position(175 1755) orientation(12) area(AR5301)
+AR5301FR5300C position(175 2049) orientation(12) area(AR5301)
+
+AR5302FR5300A position(1500 2484) orientation(8) area(AR5302)
+AR5302FR5300B position(1895 2518) orientation(8) area(AR5302)
+AR5302FR5303A position(2807 560) orientation(2) area(AR5302)
+AR5302FR5303B position(2958 617) orientation(2) area(AR5302)
+
+AR5303FR5302A position(793 373) orientation(14) area(AR5303)
+AR5303FR5302B position(498 432) orientation(0) area(AR5303)
+
+AR6000FR5303 position(759 1493) orientation(12) area(AR6000)
+AR6000FR6007 position(759 1493) orientation(12) area(AR6000)
+AR6000FR6002 position(1489 434) orientation(0) area(AR6000)
+AR6000FR6001A position(3614 1065) orientation(4) area(AR6000)
+AR6000FR6001B position(3619 1279) orientation(4) area(AR6000)
+AR6000FR6008B position(1694 462) orientation(6) area(AR6000)
+AR6000FR6008A position(1789 922) orientation(2) area(AR6000)
+
+AR6001FR6000A position(416 2123) orientation(12) area(AR6001)
+AR6001FR6000B position(552 2351) orientation(12) area(AR6001)
+AR6001FR6050 position(1433 768) orientation(0) area(AR6001)
+AR6001FR6004 position(884 1850) orientation(4) area(AR6001)
+AR6001FR6005 position(1337 2318) orientation(0) area(AR6001)
+AR6001FRWMAPE position(3547 1666) orientation(4) area(AR6001)
+AR6001FRWMAPN position(2446 149) orientation(0) area(AR6001)
+AR6001FR6009 position(330 909) orientation(0) area(AR6001)
+AR6001FR6010 position(2960 925) orientation(14) area(AR6001)
+
+AR6002FR6000 position(519 1112) orientation(8) area(AR6002)
+AR6002FR6003 position(1568 424) orientation(0) area(AR6002)
+
+AR6003FR6002 position(346 553) orientation(10) area(AR6003)
+
+AR6004FR6001 position(233 247) orientation(12) area(AR6004)
+
+AR6005FR6001 position(164 306) orientation(8) area(AR6005)
+AR6005FR6006 position(197 319) orientation(4) area(AR6005)
+
+AR6006FR6005 position(193 157) orientation(4) area(AR6006)
+
+AR6007FR6000 position(437 230) orientation(8) area(AR6007)
+
+AR6008FR6000A position(316 549) orientation(6) area(AR6008)
+AR6008FR6000B position(99 517) orientation(12) area(AR6008)
+
+AR6009FR6001 position(166 435) orientation(8) area(AR6009)
+
+AR6010FR6001 position(430 396) orientation(6) area(AR6010)
+
+AR6050FR6001 position(2115 422) orientation(2) area(AR6050)
+AR6050FR6051 position(442 1524) orientation(10) area(AR6050)
+
+AR6051FR6050 position(1811 1612) orientation(2) area(AR6051)
+
+AR6100FRWMAP position(834 887) orientation(8) area(AR6100)
+AR6100FR6101 position(545 281) orientation(14) area(AR6100)
+
+AR6101FR6100 position(434 1203) orientation(12) area(AR6101)
+AR6101FR6102B position(2962 578) orientation(2) area(AR6101)
+AR6101FR6102A position(1602 1955) orientation(4) area(AR6101)
+
+AR6102FR6101B position(2346 414) orientation(0) area(AR6102)
+AR6102FR6101A position(2154 1756) orientation(14) area(AR6102)
+AR6102FR6103 position(2940 2241) orientation(0) area(AR6102)
+
+AR6103FR6102 position(2917 1002) orientation(6) area(AR6103)
+AR6103FR6104 position(2977 1435) orientation(2) area(AR6103)
+AR6103FR6103A position(3039 2229) orientation(2) area(AR6103)
+AR6103FR6103B position(1959 2417) orientation(6) area(AR6103)
+
+AR6104FR6103 position(1906 516) orientation(0) area(AR6104)
+AR6104FR6200 position(1914 719) orientation(0) area(AR6104)
+AR6104FRWMAP position(1914 719) orientation(0) area(AR6104)
+
+AR6200FRWMAP position(378 2547) orientation(10) area(AR6200)
+AR6200FR6201 position(3596 1090) orientation(4) area(AR6200)
+AR6200FR6104 position(378 2547) orientation(10) area(AR6200)
+
+AR6201FR6200 position(194 1250) orientation(12) area(AR6201)
+AR6201FR6300 position(1699 895) orientation(4) area(AR6201)
+AR6201FRWMAP position(1699 895) orientation(4) area(AR6201)
+
+AR6300FRWMAP position(871 708) orientation(6) area(AR6300)
+AR6300FR6301 position(670 410) orientation(14) area(AR6300)
+
+AR6301FR6300A position(1133 1428) orientation(2) area(AR6301)
+AR6301FR6300B position(1133 1428) orientation(2) area(AR6301)
+AR6301FR6302A position(1829 1464) orientation(14) area(AR6301)
+AR6301FR6302B position(1383 2088) orientation(4) area(AR6301)
+
+AR6302FR6301A position(2003 1294) orientation(12) area(AR6302)
+AR6302FR6301B position(1673 2088) orientation(12) area(AR6302)
+AR6302FR6303 position(1277 1437) orientation(2) area(AR6302)
+
+AR6303FR6302 position(1129 1297) orientation(2) area(AR6303)
+AR6303FR6304 position(1563 1639) orientation(12) area(AR6303)
+
+AR6304FR6400 position(626 1177) orientation(12) area(AR6304)
+AR6304FR6500 position(2301 1178) orientation(4) area(AR6304)
+AR6304FR6600 position(1462 1748) orientation(8) area(AR6304)
+AR6304FR6700 position(1863 710) orientation(2) area(AR6304)
+AR6304FR6303 position(1114 1108) orientation(8) area(AR6304)
+
+AR6305FR6302 position(1129 1297) orientation(2) area(AR6305)
+AR6305FR6304 position(1563 1639) orientation(12) area(AR6305)
+
+AR6400FR6304 position(372 766) orientation(12) area(AR6400)
+AR6400FR6401 position(430 766) orientation(4) area(AR6400)
+
+AR6401FR6402 position(792 837) orientation(4) area(AR6401)
+AR6401FR6800 position(726 803) orientation(8) area(AR6401)
+
+AR6402FR6401 position(485 783) orientation(12) area(AR6402)
+AR6402FR6403 position(491 779) orientation(4) area(AR6402)
+
+AR6403FR6402 position(845 513) orientation(6) area(AR6403)
+
+AR6500FR6304 position(916 764) orientation(4) area(AR6500)
+AR6500FR6501 position(473 897) orientation(10) area(AR6500)
+
+AR6501FR6500 position(924 780) orientation(6) area(AR6501)
+AR6501FR6502 position(495 982) orientation(12) area(AR6501)
+
+AR6502FR6501 position(304 647) orientation(10) area(AR6502)
+AR6502FR6503 position(772 864) orientation(4) area(AR6502)
+
+AR6503FR6502 position(532 838) orientation(8) area(AR6503)
+AR6503FR6501 position(624 607) orientation(0) area(AR6503)
+
+AR6600FR6304 position(654 1029) orientation(12) area(AR6600)
+AR6600FR6601 position(629 1029) orientation(4) area(AR6600)
+
+AR6601FR6600 position(682 1024) orientation(12) area(AR6601)
+AR6601FR6602 position(643 1023) orientation(4) area(AR6601)
+
+AR6602FR6601 position(587 885) orientation(4) area(AR6602)
+AR6602FR6603 position(664 887) orientation(12) area(AR6602)
+
+AR6603FR6602 position(658 553) orientation(8) area(AR6603)
+
+AR6700FR6304 position(668 839) orientation(4) area(AR6700)
+AR6700FR6701 position(571 841) orientation(12) area(AR6700)
+
+AR6701FR6700 position(469 661) orientation(4) area(AR6701)
+AR6701FR6702 position(385 664) orientation(12) area(AR6701)
+
+AR6702FR6701 position(529 682) orientation(4) area(AR6702)
+AR6702FR6703 position(513 681) orientation(12) area(AR6702)
+AR6702FR6800 position(314 480) orientation(12) area(AR6702)
+
+AR6703FR6702 position(295 670) orientation(6) area(AR6703)
+
+AR6800FR6401 position(172 508) orientation(12) area(AR6800)
+AR6800FR6702 position(907 369) orientation(4) area(AR6800)
+

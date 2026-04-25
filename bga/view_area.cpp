@@ -545,7 +545,7 @@ static void apply_hilite_command() {
 					print("[+%1]", pn);
 				}
 			} else if(p->type == RegionTravel)
-				enter(p->move_to_area, p->move_to_entrance);
+				enter(p->move_to_entrance);
 		} else if(bsdata<door>::have(hilite_drawable)) {
 			auto p = (door*)hilite_drawable;
 			p->use(!p->isopen());
@@ -785,7 +785,7 @@ void get_save_screenshoot(surface& sm) {
 static void enter_current_world_area() {
 	auto p = (worldmapi::area*)hot.object;
 	if(p)
-		enter(p->id, 0);
+		enter_from_wmap(p->id);
 }
 
 void paint_worldmap_area() {

@@ -77,7 +77,7 @@ void create_wave(short unsigned start, int size);
 bool is_block(short unsigned index);
 bool is_block(short unsigned index, int size);
 bool is_state(short unsigned index, areafn v);
-void read_area(const char* name);
+void read_area(areai* area);
 void setcamera(point v);
 void set_state(short unsigned index, areafn v);
 void set_tile(short unsigned index, short unsigned tile);

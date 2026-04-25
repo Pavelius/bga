@@ -1,9 +1,12 @@
-#include "drawable.h"
-
 #pragma once
 
-struct entrance : drawable {
-	char			name[32];
+#include "nameable.h"
+#include "point.h"
+
+struct areai;
+
+struct entrancei : nameable {
+	areai*			area;
+	point			position;
 	unsigned char	orientation;
-	static entrance* find(const char* id);
 };

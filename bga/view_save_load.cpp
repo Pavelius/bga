@@ -1,7 +1,6 @@
 #include "draw.h"
 #include "io_stream.h"
 #include "game.h"
-#include "resid.h"
 #include "saveheader.h"
 #include "slice.h"
 #include "vector.h"

@@ -50,7 +50,7 @@ BSDATAC(creature, 256)
 BSDATAC(door, 64)
 BSDATAC(dietyi, 32)
 BSDATAC(doortile, 256)
-BSDATAC(entrance, 64)
+BSDATAC(entrancei, 512)
 BSDATAC(floattext, 64)
 BSDATAC(itemi, 512)
 BSDATAC(itemground, 512)
@@ -120,6 +120,12 @@ BSMETA(dietyi) = {
 	BSREQ(powers),
 	BSREQ(spells),
 	BSFLG(skills, skilli),
+	{}};
+BSMETA(entrancei) = {
+	BSREQ(id),
+	BSREQ(area),
+	BSREQ(position),
+	BSREQ(orientation),
 	{}};
 BSMETA(feati) = {
 	BSREQ(id),
@@ -254,6 +260,7 @@ BSDATA(varianti) = {
 	{"Condition", VAR(conditioni, 1), 0, 0, ftscript<conditioni>, fttest<conditioni>},
 	{"DayPart", VAR(periodi, 1)},
 	{"Diety", VAR(dietyi, 1)},
+	{"Entrance", VAR(entrancei, 1)},
 	{"Feat", VAR(feati, 1), ftinfo<feati>, 0, ftscript<feati>},
 	{"Form", VAR(form, 1), 0, 0, ftscript<form>},
 	{"Gender", VAR(genderi, 1)},

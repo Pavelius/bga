@@ -3,7 +3,6 @@
 #include "draw.h"
 #include "stringbuilder.h"
 #include "rfiles.h"
-#include "resid.h"
 
 BSDATAD(rfpma)
 BSDATAD(rfsnd)
@@ -58,8 +57,4 @@ sprite* gres(const char* id) {
 	if(!p)
 		return 0;
 	return p->get();
-}
-
-sprite* gres(resn i) {
-	return ((rfpma*)(bsdata<rfpma>::source.data))[i].get();
 }

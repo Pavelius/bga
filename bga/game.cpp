@@ -82,27 +82,33 @@ void party_move(point v) {
 	}
 }
 
-static void load_area(const char* id) {
+static void load_area(areai* area) {
 	audio_reset();
-	read_area(id);
+	read_area(area);
 	use_all_doors();
 	update_area_music();
 	initialize_area_ambients();
 	next_scene(open_game);
 }
 
-void enter(const char* id, const char* location) {
-	char area_copy[12]; stringbuilder sa(area_copy); sa.add(id);
-	char entrance_copy[32]; stringbuilder sb(entrance_copy); sb.add(location);
-	load_area(area_copy);
+void enter(const char* location) {
+	auto pn = bsdata<entrancei>::find(location);
+	if(!pn)
+		return;
+	load_area(pn->area);
 #ifdef _DEBUG
-	print("Enter area [%1] at location [%2]", area_copy, location);
+	print("Enter location [%1]", pn->id);
 #endif
-	auto pn = entrance::find(entrance_copy);
-	if(pn) {
-		setcamera(pn->position);
-		setparty(pn->position, pn->orientation);
-	}
+	setcamera(pn->position);
+	setparty(pn->position, pn->orientation);
+}
+
+void enter_from_wmap(const char* area) {
+	char temp[16]; stringbuilder sb(temp);
+	sb.add(area);
+	sb.add("FRWMAP");
+	sb.upper();
+	enter(temp);
 }
 
 static unsigned long game_signature() {
@@ -185,8 +191,12 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	a.set(bsdata<creature>::source);
 	a.set(bsdata<itemground>::source);
 	a.set(bsdata<iteminside>::source);
-	if(!write_mode)
-		load_area(area_name);
+	if(!write_mode) {
+		auto p = bsdata<areai>::find(area_name);
+		if(!p)
+			return false;
+		load_area(p);
+	}
 	return true;
 }
 

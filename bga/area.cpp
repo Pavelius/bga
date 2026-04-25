@@ -68,7 +68,6 @@ void clear_area() {
 	bsdata<container>::source.clear();
 	bsdata<door>::source.clear();
 	bsdata<doortile>::source.clear();
-	bsdata<entrance>::source.clear();
 	bsdata<itemground>::source.clear();
 	bsdata<region>::source.clear();
 	bsdata<point>::source.clear();
@@ -111,7 +110,6 @@ static unsigned long area_signature() {
 	r += (++n) * sizeof(door);
 	r += (++n) * sizeof(region);
 	r += (++n) * sizeof(container);
-	r += (++n) * sizeof(entrance);
 	r += (++n) * sizeof(animation);
 	r += (++n) * sizeof(ambient);
 	return r;
@@ -137,7 +135,6 @@ bool archive_ard(iostream& file, bool writemode) {
 	a.set(bsdata<ambient>::source);
 	a.set(bsdata<point>::source);
 	a.set(bsdata<doortile>::source);
-	a.set(bsdata<entrance>::source);
 	// Tile maps
 	if(!a.signature("BMP"))
 		return false;
@@ -165,9 +162,8 @@ static bool load_mmp_file(const char* name) {
 	return pma_minimap != 0;
 }
 
-static bool load_ard_file(const char* name) {
+static bool load_ard_file(areai* p) {
 	current_area = -1;
-	auto p = (areai*)arc_find(bsdata<areai>::source, name);
 	if(!p)
 		return false;
 	io::file file(p->url, StreamRead);
@@ -179,12 +175,12 @@ static bool load_ard_file(const char* name) {
 	return archive_ard(file, false);
 }
 
-void read_area(const char* name) {
-	if(!load_ard_file(name))
+void read_area(areai* area) {
+	if(!load_ard_file(area))
 		return;
-	if(!load_tls_file(area_name))
+	if(!load_tls_file(area->id))
 		return;
-	if(!load_mmp_file(area_name))
+	if(!load_mmp_file(area->id))
 		return;
 }
 

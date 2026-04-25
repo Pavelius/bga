@@ -20,7 +20,8 @@ extern gamei game;
 const char* get_save_url(char* result, const char* id);
 
 void create_game();
-void enter(const char* id, const char* location);
+void enter(const char* location);
+void enter_from_wmap(const char* area);
 void initialize_story();
 bool is_saved_game(const char* url);
 void game_auto_save();

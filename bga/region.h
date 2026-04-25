@@ -12,8 +12,7 @@ struct region : drawable {
 	point launch;
 	point use;
 	rect box;
-	char move_to_area[8];
-	char move_to_entrance[32];
+	char move_to_entrance[16];
 	sliceu<point> points;
 };
 
