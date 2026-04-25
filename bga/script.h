@@ -46,4 +46,4 @@ void script_run(const variants& elements);
 void script_run(const char* id, const variants& elements);
 
 template<typename T> bool fttest(int index, int value);
-template<typename T> void ftscript(int index, int value);
+template<typename T> void fnscript(int index, int value);

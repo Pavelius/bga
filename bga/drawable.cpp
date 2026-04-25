@@ -6,6 +6,7 @@
 
 drawablea objects;
 drawable* hilite_drawable;
+drawable* last_object;
 
 void drawable::clear() {
 	memset(this, 0, sizeof(*this));

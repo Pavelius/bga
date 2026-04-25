@@ -17,5 +17,6 @@ struct drawable {
 };
 typedef adat<drawable*, 512> drawablea;
 extern drawablea objects;
+extern drawable* last_object;
 
 bool inside(point t, point* points, int count);

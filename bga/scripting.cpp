@@ -1,9 +1,11 @@
 #include "colorgrad.h"
+#include "container.h"
 #include "condition.h"
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
 #include "itemground.h"
+#include "list.h"
 #include "form.h"
 #include "game.h"
 #include "modifier.h"
@@ -15,14 +17,14 @@
 
 using namespace draw;
 
-template<> void ftscript<abilityi>(int value, int counter) {
+template<> void fnscript<abilityi>(int value, int counter) {
 	switch(modifier) {
 	case Permanent: player->basic.abilities[value] += counter; break;
 	default: player->abilities[value] += counter; break;
 	}
 }
 
-template<> void ftscript<feati>(int value, int counter) {
+template<> void fnscript<feati>(int value, int counter) {
 	if(counter >= 0) {
 		switch(modifier) {
 		case Permanent: player->basic.feats.set(value); break;
@@ -31,23 +33,28 @@ template<> void ftscript<feati>(int value, int counter) {
 	}
 }
 
-template<> void ftscript<form>(int value, int counter) {
+template<> void fnscript<form>(int value, int counter) {
 	auto& e = bsdata<form>::elements[value];
 	execute(e.command, e.param1, e.param2, (void*)e.object);
 }
 
-template<> void ftscript<itemi>(int value, int counter) {
+template<> void fnscript<itemi>(int value, int counter) {
 	item it(value);
 	switch(modifier) {
-	// case LayInside: add_item(current_variable, it); break;
-	case LayInside: break;
+	case InsideBackpack: player->additem(it); break;
+	case InsideContainer: last_container->add(it); break;
+	case InsideStore: last_store->add(it); break;
 	default: player->equip(it); break;
 	}
 }
 
+template<> void fnscript<listi>(int value, int counter) {
+	script_run(bsdata<listi>::elements[value].elements);
+}
+
 static void damage_change(int bonus) {
-	ftscript<abilityi>(DamageMelee, bonus);
-	ftscript<abilityi>(DamageRanged, bonus);
+	fnscript<abilityi>(DamageMelee, bonus);
+	fnscript<abilityi>(DamageRanged, bonus);
 }
 
 static void heal(int bonus) {

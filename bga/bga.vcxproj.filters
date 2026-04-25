@@ -123,6 +123,9 @@
     <Text Include="..\rules\Entrances.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\rules\General.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -330,9 +333,6 @@
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="store.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
-    <ClCompile Include="itemlist.cpp">
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="order.cpp">
@@ -668,9 +668,6 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="store.h">
-      <Filter>logic</Filter>
-    </ClInclude>
-    <ClInclude Include="itemlist.h">
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="order.h">

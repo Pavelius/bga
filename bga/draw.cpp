@@ -49,7 +49,7 @@ const void*			draw::hilite_object;
 // Locale draw variables
 static draw::surface default_surface;
 draw::surface*		draw::canvas = &default_surface;
-point				draw::caret, draw::camera, draw::tips_caret, draw::tips_size;
+point				draw::caret, camera, draw::tips_caret, draw::tips_size;
 // Metrics
 sprite*				metrics::font;
 sprite*				metrics::h1;

@@ -30,14 +30,14 @@ variant* script_end;
 modifiern modifier;
 const char* last_id;
 
-template<> void ftscript<modifieri>(int value, int counter) {
+template<> void fnscript<modifieri>(int value, int counter) {
 	modifier = (modifiern)value;
 }
 template<> bool fttest<modifieri>(int value, int counter) {
-	ftscript<modifieri>(value, counter);
+	fnscript<modifieri>(value, counter);
 	return true;
 }
-template<> void ftscript<script>(int value, int counter) {
+template<> void fnscript<script>(int value, int counter) {
 	bsdata<script>::elements[value].proc(counter);
 }
 

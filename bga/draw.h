@@ -112,6 +112,9 @@ extern sprite*			h3;
 extern sprite*			icons;
 extern int				border, padding;
 }
+
+extern point camera;
+
 namespace draw {
 struct hoti {
 	enum cursor			cursor; // set this mouse cursor
@@ -158,7 +161,7 @@ struct surface {
 extern surface*			canvas;
 extern rect				clipping; // Clipping area
 extern fnevent			domodal;
-extern point			dragmouse, caret, camera, tips_caret, tips_size;
+extern point			dragmouse, caret, tips_caret, tips_size;
 extern color			fore, fore_stroke;
 extern const void*		hilite_object;
 extern unsigned char    alpha;

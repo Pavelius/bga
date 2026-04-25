@@ -20,6 +20,8 @@
 #include "view.h"
 #include "worldmap.h"
 
+using namespace draw;
+
 gamei game;
 
 template<> void archive::set<creature*>(creature*& v) {
@@ -177,7 +179,7 @@ bool rowsaveheaderi::serial(bool write_mode) {
 		flo.get(change);
 	serial_header(a, *this);
 	a.set(area_name);
-	a.set(draw::camera);
+	a.set(camera);
 	a.set(current_game_tick);
 	a.set(player);
 	a.set(party);
@@ -259,11 +261,12 @@ void party_action(void* object, point target_position, fnevent apply) {
 		player->moveto(target_position);
 		add_order(player, object, apply);
 	} else
-		draw::execute(apply, 0, 0, object);
+		execute(apply, 0, 0, object);
 }
 
 void initialize_story() {
 	current_world = bsdata<worldmapi>::elements;
+	player = party[0];
 	script_run("StartGame");
 }
 

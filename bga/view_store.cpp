@@ -15,10 +15,10 @@ struct tradegood {
 	int		count;
 };
 struct tradegooda : vector<tradegood> {
-	int	total() const;
-	int	checkedcount() const;
 	void add(item& e);
 	bool checked() const;
+	int	checkedcount() const;
+	int	total() const;
 };
 
 static tradegooda shop_goods, player_goods;
@@ -69,6 +69,8 @@ static void update_player_items() {
 	player_goods.clear();
 	if(!last_store->is(UserAllowSell))
 		return;
+	if(!player)
+		return;
 	for(auto& e : player->backpack()) {
 		if(!e)
 			continue;
@@ -77,8 +79,11 @@ static void update_player_items() {
 }
 
 static void update_items() {
-	update_player_items();
-	update_shop_items();
+	if(need_update_items) {
+		need_update_items = false;
+		update_player_items();
+		update_shop_items();
+	}
 }
 
 static void pick_good() {
@@ -298,7 +303,6 @@ static void paint_store() {
 }
 
 void open_store() {
-	pushvalue push_change(on_player_change, update_items);
 	last_store = bsdata<storei>::elements;
 	update_items();
 	scene(paint_store);

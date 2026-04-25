@@ -31,6 +31,7 @@ int game_panel_mode;
 
 unsigned caret_index;
 bool button_pressed, button_executed, button_hilited, button_sound, input_disabled;
+bool need_update_items;
 
 static point dialog_start;
 static bool game_pause;
@@ -73,8 +74,6 @@ static size_t input_string_size;
 static void paint_game_inventory();
 
 static adat<spellbook*, 16> spellbooks;
-
-fnevent on_player_change;
 
 struct pushdescription {
 	char value[lenghtof(description_text)];
@@ -680,8 +679,7 @@ void choose_creature() {
 		clear_selection();
 	player->select();
 	set_invalidate();
-	if(on_player_change)
-		on_player_change();
+	need_update_items = true;
 }
 
 static void hits_bar(int current, int maximum) {

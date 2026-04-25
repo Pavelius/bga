@@ -1,0 +1,7 @@
+#List
+
+HelpElements
+ elements Ability Race Class Skill Feat
+
+StartGame
+ elements InsideBackpack LongSword

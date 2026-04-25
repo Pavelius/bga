@@ -5,6 +5,8 @@
 BSDATA(modifieri) = {
 	{"NoModifier"},
 	{"Permanent"},
-	{"LayInside"},
+	{"InsideBackpack"},
+	{"InsideContainer"},
+	{"InsideStore"},
 };
-assert_enum(modifieri, LayInside)
+assert_enum(modifieri, InsideStore)

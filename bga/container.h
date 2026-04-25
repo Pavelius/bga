@@ -3,6 +3,8 @@
 
 #pragma once
 
+struct item;
+
 struct container : drawable {
 	enum typen : unsigned char {
 		None,
@@ -13,6 +15,7 @@ struct container : drawable {
 	point			launch;
 	rect			box;
 	sliceu<point>	points;
+	void			add(item& v);
 	unsigned char	index() const;
 };
 extern container* last_container;

@@ -2,5 +2,5 @@
 
 enum modifiern : unsigned char {
 	NoModifier,
-	Permanent, LayInside,
+	Permanent, InsideBackpack, InsideContainer, InsideStore,
 };

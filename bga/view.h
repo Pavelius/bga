@@ -14,7 +14,6 @@ enum resn : unsigned short;
 extern unsigned caret_index;
 extern bool button_pressed, button_executed, button_hilited, input_disabled;
 extern int game_panel_mode;
-extern fnevent on_player_change;
 
 extern sprite* pma_butopt1;
 extern sprite* pma_butstd;
@@ -23,6 +22,8 @@ extern sprite* pma_cursarw;
 extern sprite* pma_port[2];
 extern sprite* pma_stoneslot;
 extern sprite* pma_pfcm;
+
+extern bool need_update_items;
 
 sprite* gres(resn i);
 sprite* gres(const char* id);

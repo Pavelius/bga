@@ -13,7 +13,4 @@
 #include "rules/Monsters.txt"
 #include "rules/Hotkeys.txt"
 
-#List
-
-HelpElements
- elements Ability Race Class Skill Feat
+#include "rules/General.txt"

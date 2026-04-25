@@ -10,6 +10,7 @@
 #include "drawable.h"
 #include "floattext.h"
 #include "game.h"
+#include "itemground.h"
 #include "keybind.h"
 #include "math.h"
 #include "order.h"
@@ -306,6 +307,16 @@ static void prepare_doors() {
 	}
 }
 
+static void prepare_items() {
+	for(auto& e : bsdata<itemground>()) {
+		if(e.inside())
+			continue;
+		if(!e.position.in(last_area))
+			continue;
+		objects.add(&e);
+	}
+}
+
 static void prepare_objects() {
 	objects.clear();
 	prepare_animation();
@@ -314,6 +325,7 @@ static void prepare_objects() {
 	prepare_doors();
 	prepare_floattext();
 	prepare_regions();
+	prepare_items();
 	update_floattext_tail();
 }
 
@@ -412,47 +424,45 @@ static void paint_markers(const creature* p) {
 	fore = push_fore;
 }
 
-static void paint_creature(const drawable* object) {
-	auto p = (creature*)object;
+static void paint_creature() {
+	auto p = (creature*)last_object;
 	if(p->ishilite())
 		cursor.cicle = 0;
 	paint_markers(p);
 	p->paint();
 }
 
-static void paint_animation(const drawable* object) {
-	auto p = (animation*)object;
+static void paint_animation() {
+	auto p = (animation*)last_object;
 	auto pr = gres(p->rsname);
 	if(!pr)
 		return;
 	auto hour = gethour();
 	if(p->is(RenderBlackAsTransparent)) {
-		// image_tint(caret.x, caret.y, pr, pr->ganim(frame, get_game_tick()), is(Mirrored) ? ImageMirrorV : 0);
-		auto push_alpha = alpha;
-		alpha = alpha >> 2;
+		auto push_alpha = alpha; alpha = alpha >> 2;
 		image(pr, pr->ganim(p->frame, get_game_tick()), p->is(Mirrored) ? ImageMirrorV : 0);
 		alpha = push_alpha;
 	} else
 		image(pr, pr->ganim(p->frame, get_game_tick()), p->is(Mirrored) ? ImageMirrorV : 0);
 }
 
-static void paint_float_text(const drawable* object) {
-	draw::pushrect push;
-	auto p = (floattext*)object;
+static void paint_float_text() {
+	pushrect push;
+	auto p = (floattext*)last_object;
 	auto push_fore = draw::fore;
 	auto push_alpha = draw::alpha;
-	draw::width = p->box.width();
-	draw::height = p->box.height();
-	draw::fore = colors::black;
-	draw::alpha = 128;
-	draw::strokeout(draw::rectf, metrics::border + metrics::padding);
-	draw::alpha = push_alpha;
-	draw::fore = push_fore;
-	draw::textf(p->format);
+	width = p->box.width();
+	height = p->box.height();
+	fore = colors::black;
+	alpha = 128;
+	strokeout(rectf, metrics::border + metrics::padding);
+	alpha = push_alpha;
+	fore = push_fore;
+	textf(p->format);
 }
 
-static void paint_door(const drawable* object) {
-	auto p = (door*)object;
+static void paint_door() {
+	auto p = (door*)last_object;
 	if(p->ishilite()) {
 		polygon_green_filled(p->getpoints(), p->box);
 		polygon_green(p->getpoints());
@@ -460,8 +470,8 @@ static void paint_door(const drawable* object) {
 	}
 }
 
-static void paint_region(const drawable* object) {
-	auto p = (region*)object;
+static void paint_region() {
+	auto p = (region*)last_object;
 	if(p->ishilite()) {
 		switch(p->type) {
 		case RegionInfo: cursor.cicle = 22; break;
@@ -470,8 +480,8 @@ static void paint_region(const drawable* object) {
 	}
 }
 
-static void paint_container(const drawable* object) {
-	auto p = (container*)object;
+static void paint_container() {
+	auto p = (container*)last_object;
 	if(p->ishilite()) {
 		polygon_green_filled(p->points, p->box);
 		polygon_green(p->points);
@@ -479,55 +489,55 @@ static void paint_container(const drawable* object) {
 	}
 }
 
-static void paint_object(drawable* object) {
-	if(bsdata<door>::have(object))
-		paint_door(object);
-	else if(bsdata<region>::have(object))
-		paint_region(object);
-	else if(bsdata<container>::have(object))
-		paint_container(object);
-	else if(bsdata<floattext>::have(object))
-		paint_float_text(object);
-	else if(bsdata<creature>::have(object))
-		paint_creature(object);
-	else if(bsdata<animation>::have(object))
-		paint_animation(object);
+static void paint_object() {
+	if(bsdata<door>::have(last_object))
+		paint_door();
+	else if(bsdata<region>::have(last_object))
+		paint_region();
+	else if(bsdata<container>::have(last_object))
+		paint_container();
+	else if(bsdata<floattext>::have(last_object))
+		paint_float_text();
+	else if(bsdata<creature>::have(last_object))
+		paint_creature();
+	else if(bsdata<animation>::have(last_object))
+		paint_animation();
 }
 
-static bool is_hilite(const drawable* object) {
-	if(bsdata<door>::have(object)) {
-		auto p = (door*)object;
+static bool is_hilite() {
+	if(bsdata<door>::have(last_object)) {
+		auto p = (door*)last_object;
 		if(hotspot.in(p->box)) {
 			auto n = p->getpoints();
 			return inside(hotspot, n.begin(), n.size());
 		}
-	} else if(bsdata<region>::have(object)) {
-		auto p = (region*)object;
+	} else if(bsdata<region>::have(last_object)) {
+		auto p = (region*)last_object;
 		if(hotspot.in(p->box))
 			return inside(hotspot, p->points.begin(), p->points.size());
-	} else if(bsdata<container>::have(object)) {
-		auto p = (container*)object;
+	} else if(bsdata<container>::have(last_object)) {
+		auto p = (container*)last_object;
 		if(hotspot.in(p->box))
 			return inside(hotspot, p->points.begin(), p->points.size());
-	} else if(bsdata<creature>::have(object)) {
-		auto p = (creature*)object;
+	} else if(bsdata<creature>::have(last_object)) {
+		auto p = (creature*)last_object;
 		return hotspot.in(p->getbox());
 	}
 	return false;
 }
 
 static void paint_objects() {
-	auto push_caret = caret;
+	pushrect push;
 	hilite_drawable = 0;
 	for(auto p : objects) {
-		caret = p->position - camera;
+		last_object = p;
+		caret = last_object->position - camera;
 		caret.x += last_screen.x1;
 		caret.y += last_screen.y1;
-		if(is_hilite(p))
-			hilite_drawable = p;
-		paint_object(p);
+		if(is_hilite())
+			hilite_drawable = last_object;
+		paint_object();
 	}
-	caret = push_caret;
 }
 
 static const char* gettipsname(point position) {
@@ -554,7 +564,7 @@ static void apply_hilite_command() {
 		} else if(bsdata<container>::have(hilite_drawable)) {
 			auto p = (container*)hilite_drawable;
 			// print("This is %1", p->name);
-			// party_action(&p->getvar(), p->launch, open_container);
+			party_action(p, p->launch, open_container);
 		} else if(bsdata<creature>::have(hilite_drawable)) {
 			if(combat_mode) {
 
@@ -874,7 +884,7 @@ static int container_frame(container::typen type) {
 	}
 }
 
-static void paint_container() {
+static void paint_pick_container() {
 	auto pc = gres("CONTAINER");
 	paint_game_dialog(0, 476, "GUICONT", 1);
 	setdialog(62, 25); image(pc, container_frame(last_container->type), 0);
@@ -910,13 +920,13 @@ static void paint_container_area() {
 	mouse_area_cancel();
 	paint_area_map_zoomed(paint_area_map);
 	apply_shifer();
-	paint_container();
+	paint_pick_container();
 }
 
 void open_container() {
 	pushvalue push_container(last_container);
-	//last_container = get_container((variable*)hot.object);
-	//if(!last_container)
-	//	return;
-	//scene(paint_container_area);
+	last_container = (container*)hot.object;
+	if(!last_container)
+		return;
+	scene(paint_container_area);
 }
