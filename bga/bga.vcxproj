@@ -84,7 +84,6 @@
     <ClCompile Include="cre_util.cpp" />
     <ClCompile Include="damage.cpp" />
     <ClCompile Include="dice.cpp" />
-    <ClCompile Include="diety.cpp" />
     <ClCompile Include="direction.cpp" />
     <ClCompile Include="door.cpp" />
     <ClCompile Include="draw.cpp" />
@@ -131,7 +130,6 @@
     <ClCompile Include="party.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="portrait.cpp" />
-    <ClCompile Include="race.cpp" />
     <ClCompile Include="range.cpp" />
     <ClCompile Include="region.cpp" />
     <ClCompile Include="resinfo.cpp" />

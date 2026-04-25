@@ -245,9 +245,6 @@
     <ClCompile Include="collection.cpp">
       <Filter>support</Filter>
     </ClCompile>
-    <ClCompile Include="race.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="area.cpp">
       <Filter>logic</Filter>
     </ClCompile>
@@ -376,9 +373,6 @@
     </ClCompile>
     <ClCompile Include="logvalue.cpp">
       <Filter>support</Filter>
-    </ClCompile>
-    <ClCompile Include="diety.cpp">
-      <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="school.cpp">
       <Filter>logic</Filter>

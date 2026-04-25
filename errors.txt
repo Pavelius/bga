@@ -1,2 +1,2 @@
-﻿Error in file `rules/Advance.txt`:
- Line 7: Can't find variant `Gnome`
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `Goblin`
