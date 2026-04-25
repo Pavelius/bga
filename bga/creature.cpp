@@ -276,11 +276,11 @@ void create_party_character(int index) {
 	player_finish();
 }
 
-void create_character(gendern gender) {
-	auto pi = random_portrait_no_party(gender);
-	auto p = bsdata<portraiti>::elements + pi;
-	create_character(p->race, p->gender, p->classv, pi);
-}
+//void create_character(gendern gender) {
+//	auto pi = random_portrait_no_party(gender);
+//	auto p = bsdata<portraiti>::elements + pi;
+//	create_character(p->race, p->gender, p->classv, pi);
+//}
 
 bool creature::isclass(skilln v) const {
 	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1)) {

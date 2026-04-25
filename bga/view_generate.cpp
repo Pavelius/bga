@@ -677,7 +677,7 @@ static bool open_character_generation(creature& copy) {
 	player->portrait = 14;
 	apply_portraits();
 	before_race_apply = *player;
-	raise_race(Elf);
+	raise_race((racen)1);
 	before_class_apply = *player;
 	raise_class(Fighter);
 	player->alignment = (alignmentn)0;

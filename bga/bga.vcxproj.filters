@@ -473,6 +473,12 @@
     <ClCompile Include="ids_util.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="bam_util.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="cre_util.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">

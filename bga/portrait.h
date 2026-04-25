@@ -9,8 +9,6 @@ struct portraiti {
 	const char*		id;
 	unsigned char	colors[4];
 	gendern			gender;
-	racen			race;
-	classn			classv;
 	const char*		sound;
 	int				getindex() const;
 };

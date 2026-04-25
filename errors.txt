@@ -1,2 +1,2 @@
-Error in file `rules/Worldmap.txt`:
- Line 3: Not found ResSND identifier `MX1000A`
+﻿Error in file `rules/Advance.txt`:
+ Line 7: Can't find variant `Gnome`

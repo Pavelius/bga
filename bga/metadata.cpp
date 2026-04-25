@@ -59,6 +59,7 @@ BSDATAC(npci, 512)
 BSDATAC(point, 256 * 256)
 BSDATAC(partyi, 64)
 BSDATAC(playlisti, 64)
+BSDATAC(racei, 32)
 BSDATAC(region, 128)
 BSDATAC(spelli, 1024)
 BSDATAC(spellbook, 32)
@@ -176,10 +177,8 @@ BSMETA(point) = {
 	{}};
 BSMETA(portraiti) = {
 	BSREQ(id),
-	BSREQ(colors),
 	BSENM(gender, genderi),
-	BSENM(race, racei),
-	BSENM(classv, classi),
+	BSREQ(colors),
 	{}};
 BSMETA(racei) = {
 	BSREQ(id),

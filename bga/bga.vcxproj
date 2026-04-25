@@ -69,6 +69,7 @@
     <ClCompile Include="array.cpp" />
     <ClCompile Include="attack.cpp" />
     <ClCompile Include="audio.cpp" />
+    <ClCompile Include="bam_util.cpp" />
     <ClCompile Include="bsreq.cpp" />
     <ClCompile Include="bstream.cpp" />
     <ClCompile Include="calendar.cpp" />
@@ -81,6 +82,7 @@
     <ClCompile Include="console.cpp" />
     <ClCompile Include="container.cpp" />
     <ClCompile Include="creature.cpp" />
+    <ClCompile Include="cre_util.cpp" />
     <ClCompile Include="damage.cpp" />
     <ClCompile Include="dice.cpp" />
     <ClCompile Include="diety.cpp" />
