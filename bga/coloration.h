@@ -7,7 +7,7 @@ enum colorationn : unsigned char {
 	ArmorColor, MetalColor, LeatherColor,
 };
 struct coloration {
-	unsigned char	colors[7];
+	unsigned char	colors[LeatherColor + 1];
 	void			setpallette(color* v) const;
 	void			setcolor(unsigned char* v);
 };

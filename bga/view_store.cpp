@@ -88,9 +88,14 @@ static void update_items() {
 
 static void pick_good() {
 	auto p = (tradegood*)hot.object;
-	if(!p->count)
-		p->count = p->source->count;
-	else
+	if(!p->count) {
+		if(p->source->count > 1) {
+			pushvalue push(last_item);
+			last_item = p->source;
+			open_item_count();
+		} else
+			p->count = p->source->count;
+	} else
 		p->count = 0;
 }
 
@@ -167,23 +172,33 @@ static void paint_right_panel() {
 	setdialog(23, 78);
 	if(last_store->is(UserAllowSell) || last_store->is(UserAllowBuy)) {
 		checkbox(trade_mode, UserAllowBuy, pb1, 1, 2, 0, 0);
+		if(button_executed)
+			set_description_id("UserAllowBuy");
 		caret.y += 80;
 	}
 	if(last_store->is(UserAllowIdentify)) {
 		checkbox(trade_mode, UserAllowIdentify, pb1, 4, 5, 3, 0);
+		if(button_executed)
+			set_description_id("UserAllowIdentify");
 		caret.y += 80;
 	}
 	if(last_store->is(UserPurchaseCures)) {
 		checkbox(trade_mode, UserPurchaseCures, pb1, 10, 11, 9, 0);
+		if(button_executed)
+			set_description_id("UserPurchaseCures");
 		caret.y += 80;
 	}
 	if(last_store->is(UserPurchaseDrinks)) {
 		checkbox(trade_mode, UserPurchaseDrinks, pb1, 16, 17, 15, 0);
+		if(button_executed)
+			set_description_id("UserPurchaseDrinks");
 		caret.y += 80;
 	}
 	if(last_store->is(AllowPeasantRoom) || last_store->is(AllowMerchantRoom)
 		|| last_store->is(AllowNobleRoom) || last_store->is(AllowRoyalRoom)) {
 		checkbox(trade_mode, AllowPeasantRoom, pb1, 19, 20, 18, 0);
+		if(button_executed)
+			set_description_id("AllowPeasantRoom");
 		caret.y += 80;
 	}
 }

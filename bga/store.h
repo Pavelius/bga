@@ -22,8 +22,10 @@ struct storei : nameable {
 	int			buy_percent, sell_percent;
 	int			steal_difficult; // 0 - if steal not availabe. Set default DC 10. Set to 15-20 for hard attemp.
 	int			room_prices[4];
+	int			identify_price;
 	variants	items;
 	void		add(item& v);
+	int			getcost(storefn v) const;
 	bool		is(storefn v) const { return (flags & (1 << v)) != 0; }
 	short unsigned index() const;
 	void		supply();

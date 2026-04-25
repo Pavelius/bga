@@ -28,6 +28,17 @@ assert_enum(storeti, ShopContainer);
 
 storei* last_store;
 
+int	storei::getcost(storefn v) const {
+	switch(v) {
+	case UserAllowIdentify: return identify_price;
+	case AllowPeasantRoom: return room_prices[0];
+	case AllowMerchantRoom: return room_prices[1];
+	case AllowNobleRoom: return room_prices[2];
+	case AllowRoyalRoom: return room_prices[3];
+	default: return 0;
+	}
+}
+
 short unsigned storei::index() const {
 	return this - bsdata<storei>::elements;
 }

@@ -11,6 +11,7 @@
 #include "saveheader.h"
 #include "school.h"
 #include "script.h"
+#include "store.h"
 #include "stringbuilder.h"
 #include "stringvar.h"
 
@@ -105,6 +106,7 @@ static void add_description(stringbuilder& sb, const char* id, const char* id_ba
 	if(!pn)
 		return;
 	sb.addn(pn);
+	sb.add("\n\n");
 }
 
 static void add_special(stringbuilder& sb, const char* id, const char* id_special) {
@@ -494,6 +496,10 @@ static bool creature_identifier(stringbuilder& sb, const char* identifier) {
 	return false;
 }
 
+static void store_identify_cost(stringbuilder& sb) {
+	sb.add("%1i", last_store->getcost(UserAllowIdentify));
+}
+
 void main_identifier(stringbuilder& sb, const char* identifier) {
 	if(creature_identifier(sb, identifier))
 		return;
@@ -514,5 +520,6 @@ BSDATA(stringvari) = {
 	{"PlayerCombatInformation", player_combat_information},
 	{"PlayerSkillInformation", player_skill_information},
 	{"SpellInformation", spell_information},
+	{"StoreIdentiyCost", store_identify_cost},
 };
 BSDATAF(stringvari)

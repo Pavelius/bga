@@ -39,6 +39,7 @@ static fnevent game_proc;
 static fnoperation drag_drop_proc;
 static item *drag_item_source, *drag_item_dest;
 static item drag_item;
+static char edit_field[32];
 
 sprite* pma_butstd;
 sprite* pma_butopt1;
@@ -810,7 +811,7 @@ static void paint_number(int v, unsigned flags) {
 	caret = push_caret;
 }
 
-void paint_item(const item* pi) {
+void paint_item(const item* pi, bool show_count) {
 	if(!pi)
 		return;
 	pushrect push;
@@ -822,7 +823,7 @@ void paint_item(const item* pi) {
 	image(pma_items, pi->geti().avatar * 2, 0);
 	if(button_hilited && hot.key == MouseRight && !hot.pressed)
 		execute(open_item_description, 0, 0, pi);
-	if(pi->count > 1)
+	if(show_count && pi->count > 1)
 		paint_number(pi->count, AlignRightBottom);
 }
 
@@ -1654,7 +1655,7 @@ static void identify_item() {
 static void paint_item_description() {
 	auto pb1 = gres("GBTNMED");
 	paint_dialog("GIITMH08");
-	setdialog(36, 37, 357, 30); texta(metrics::h1, getnm("Item"), AlignCenterCenter);
+	setdialog(36, 37, 357, 30); texta(metrics::h1, str("%ItemName"), AlignCenterCenter);
 	setdialog(430, 20, 64, 64); paint_item_avatar();
 	setdialog(20, 432); button(pb1, 1, 2, 'I', "Identify"); fire(identify_item);
 	setdialog(179, 432); button(pb1, 1, 2, 'U', "UseItem");
@@ -1662,15 +1663,16 @@ static void paint_item_description() {
 	setdialog(28, 115, 435, 299); paint_description(17, -6, 12);
 }
 
-static void paint_item_count() {
+static void view_item_count() {
 	paint_dialog("GUIINV", 2);
-	setdialog(22, 22); paint_item(last_item);
+	setdialog(22, 22); paint_item(last_item, false);
 	setdialog(20, 90); button(pma_butstd, 1, 2, KeyEnter, "Accept"); fire(buttonok);
 	setdialog(142, 90); button(pma_butstd, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
 	setdialog(222, 44); button(gres("GBTNPLUS"), 0, 1, '+');
 	setdialog(242, 44); button(gres("GBTNMINS"), 0, 1, '-');
 	setdialog(71, 22, 186, 18); texta(getnm("ChooseAmount"), AlignCenterCenter);
-	// Unlnown None 176 46 42 15
+	pushfont push_font(metrics::small);
+	setdialog(176, 46, 42, 15); edit(edit_field, lenghtof(edit_field)-1, AlignRight);
 }
 
 static void paint_main_menu() {
@@ -1770,13 +1772,13 @@ void open_item_description() {
 	auto push_last = last_item;
 	last_item = (item*)hot.object;
 	play_sound("GAM_03");
-	set_description("##%ItemName\n%ItemInformation");
+	set_description("%ItemInformation");
 	open_dialog(paint_item_description, true);
 	last_item = push_last;
 }
 
 void open_item_count() {
-	open_dialog(paint_item_count, true);
+	open_dialog(view_item_count, true);
 }
 
 void open_game() {
