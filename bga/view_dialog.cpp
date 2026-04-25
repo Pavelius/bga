@@ -111,7 +111,7 @@ void texta(sprite* ps, const char* string, unsigned flags) {
 	texta(string, flags);
 }
 
-void texta(sprite* ps, color fore, const char* string, unsigned flags) {
+static void texta(sprite* ps, color fore, const char* string, unsigned flags) {
 	pushfore push(fore);
 	texta(ps, string, flags);
 }

@@ -13,39 +13,39 @@
 using namespace draw;
 
 struct animatei : nameable {
-	int a1o8, hg1o8, b18o9;
+	int a1o8, hg1o8, g26o9;
 };
 BSDATA(animatei) = {
-	{"AnimateMove", 9, 1, 1},
+	{"AnimateMove", 9, 1, 2},
 	{"AnimateStand", 0, 0, 0},
 	{"AnimateStandRelax", 0, 0, 0},
 	{"AnimateStandLook", 0, 0, 0},
-	{"AnimateCombatStance", 1, 0, 0},
-	{"AnimateCombatStanceTwoHanded", 1, 0, 0},
-	{"AnimateGetHit", 2, 2, 0},
-	{"AnimateGetHitAndDrop", 3, 3, 0},
-	{"AnimateAgony", 4, 0, 0},
+	{"AnimateCombatStance", 1, 0, 1},
+	{"AnimateCombatStanceTwoHanded", 1, 0, 1},
+	{"AnimateGetHit", 2, 2, 3},
+	{"AnimateGetHitAndDrop", 3, 3, 4},
+	{"AnimateAgony", 4, 0, 5},
 	{"AnimateGetUp", 5, 0, 0},
-	{"AnimateMeleeOneHanded", 10, 0, 0},
-	{"AnimateMeleeOneHandedSwing", 11, 0, 0},
-	{"AnimateMeleeOneHandedThrust", 12, 0, 0},
-	{"AnimateMeleeTwoHanded", 10, 0, 0},
-	{"AnimateMeleeTwoHandedSwing", 11, 0, 0},
-	{"AnimateMeleeTwoHandedThrust", 12, 0, 0},
-	{"AnimateMeleeTwoWeapon", 10, 0, 0},
-	{"AnimateMeleeTwoWeaponSwing", 11, 0, 0},
-	{"AnimateMeleeTwoWeaponThrust", 12, 0, 0},
-	{"AnimateShootBow", 10, 0, 0},
-	{"AnimateShootSling", 10, 0, 0},
-	{"AnimateShootXBow", 10, 0, 0},
-	{"AnimateCastBig", 6, 0, 0},
-	{"AnimateCastBigRelease", 7, 0, 0},
-	{"AnimateCast", 6, 0, 0},
-	{"AnimateCastRelease", 7, 0, 0},
-	{"AnimateCastThird", 6, 0, 0},
-	{"AnimateCastThirdRelease", 7, 0, 0},
-	{"AnimateCastFour", 6, 0, 0},
-	{"AnimateCastFourRelease", 7, 0, 0},
+	{"AnimateMeleeOneHanded", 10, 0, 6},
+	{"AnimateMeleeOneHandedSwing", 11, 0, 7},
+	{"AnimateMeleeOneHandedThrust", 12, 0, 8},
+	{"AnimateMeleeTwoHanded", 10, 0, 6},
+	{"AnimateMeleeTwoHandedSwing", 11, 0, 7},
+	{"AnimateMeleeTwoHandedThrust", 12, 0, 8},
+	{"AnimateMeleeTwoWeapon", 10, 0, 6},
+	{"AnimateMeleeTwoWeaponSwing", 11, 0, 7},
+	{"AnimateMeleeTwoWeaponThrust", 12, 0, 8},
+	{"AnimateShootBow", 10, 0, 9},
+	{"AnimateShootSling", 10, 0, 9},
+	{"AnimateShootXBow", 10, 0, 9},
+	{"AnimateCastBig", 6, 0, 10},
+	{"AnimateCastBigRelease", 7, 0, 11},
+	{"AnimateCast", 6, 0, 10},
+	{"AnimateCastRelease", 7, 0, 11},
+	{"AnimateCastThird", 6, 0, 10},
+	{"AnimateCastThirdRelease", 7, 0, 11},
+	{"AnimateCastFour", 6, 0, 10},
+	{"AnimateCastFourRelease", 7, 0, 11},
 };
 assert_enum(animatei, AnimateCastFourRelease)
 
@@ -54,7 +54,7 @@ const int max_weapon_anim = 26;
 
 const int anm_a1o8 = 104;
 const int anm_hg1o8 = 32;
-const int anm_b18o9 = 18;
+const int anm_g26o9 = 108;
 
 int get_armor_index(const item& e) {
 	switch(e.geti().required) {
