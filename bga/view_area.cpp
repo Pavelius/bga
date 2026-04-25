@@ -43,17 +43,17 @@ static unsigned get_game_tick() {
 static void correct_camera() {
 	if(camera.x + last_screen.width() > area_width * 16)
 		camera.x = area_width * 16 - last_screen.width();
-	if(camera.x < 0)
-		camera.x = 0;
 	if(camera.y + last_screen.height() > area_height_tiles * 16)
 		camera.y = area_height_tiles * 16 - last_screen.height();
+	if(camera.x < 0)
+		camera.x = 0;
 	if(camera.y < 0)
 		camera.y = 0;
 }
 
 void setcamera(point v) {
 	if(!last_screen.width())
-		last_screen.set(0, 0, 800, 600);
+		last_screen.set(0, 0, 800, 433);
 	camera.x = v.x - last_screen.width() / 2;
 	camera.y = v.y - last_screen.height() / 2;
 	correct_camera();
@@ -72,9 +72,12 @@ static void paint_tiles() {
 	auto sp = get_area_sprites();
 	if(!sp)
 		return;
-	int tx0 = camera.x / tile_size, ty0 = camera.y / tile_size;
-	int dx = width / tile_size + 1, dy = height / tile_size + 1;
-	int tx1 = tx0 + dx, ty1 = ty0 + dy;
+	auto tx0 = camera.x / tile_size;
+	auto ty0 = camera.y / tile_size;
+	auto tdx = width / tile_size + 1;
+	auto tdy = height / tile_size + 1;
+	auto tx1 = tx0 + tdx;
+	auto ty1 = ty0 + tdy;
 	if(tx1 > area_width / 4 - 1)
 		tx1 = area_width / 4 - 1;
 	if(ty1 > area_height_tiles / 4 - 1)
@@ -98,8 +101,8 @@ static void paint_block_area() {
 		show = !show;
 	if(!show)
 		return;
-	int tx0 = camera.x / 16, ty0 = camera.y / 12;
-	int tx1 = tx0 + width / 16 + 1, ty1 = ty0 + height / 12 + 1;
+	auto tx0 = camera.x / 16, ty0 = camera.y / 12;
+	auto tx1 = tx0 + width / 16 + 1, ty1 = ty0 + height / 12 + 1;
 	if(tx1 > area_width - 1)
 		tx1 = area_width - 1;
 	if(ty1 > area_height - 1)
@@ -209,23 +212,22 @@ static void rectblack(rect rc) {
 
 static void set_visible_area() {
 	cursor.set(pma_cursors, 0);
+	last_screen.set(caret.x, caret.y, caret.x + width, caret.y + height);
 	auto push_caret = caret;
 	auto mx = (area_width / 4) * tile_size;
 	auto my = (area_height_tiles / 4) * tile_size;
-	if(mx < width) {
-		caret.x += (width - mx) / 2;
+	if(mx > width)
+		mx = width;
+	if(my > height)
+		my = height;
+	if((mx < width) || (my < height)) {
 		rectblack({push_caret.x, push_caret.y, caret.x, push_caret.y + height});
 		rectblack({caret.x + mx, push_caret.y, caret.x + width, push_caret.y + height});
-	} else
-		mx = width;
-	if(my < height) {
-		caret.y += (height - my) / 2;
 		rectblack({push_caret.x, push_caret.y, caret.x + width, caret.y});
 		rectblack({push_caret.x, caret.y + my, caret.x + width, caret.y + height});
-	} else
-		my = height;
-	last_screen.set(caret.x, caret.y, caret.x + mx, caret.y + my);
-	last_area = last_screen; last_area.move(camera.x, camera.y);
+	}
+	last_area.set(caret.x, caret.y, caret.x + mx, caret.y + my);
+	last_area.move(camera.x, camera.y);
 	last_area.offset(-128, -128);
 	if(hot.mouse.in(last_screen))
 		hotspot = hot.mouse - caret + camera;

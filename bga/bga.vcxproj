@@ -39,6 +39,7 @@
     <Text Include="..\parties\HandsOfFury.txt" />
     <Text Include="..\rules\Advance.txt" />
     <Text Include="..\rules\Calendar.txt" />
+    <Text Include="..\rules\Entrances.txt" />
     <Text Include="..\rules\Hotkeys.txt" />
     <Text Include="..\rules\Monsters.txt" />
     <Text Include="..\rules\Classes.txt" />

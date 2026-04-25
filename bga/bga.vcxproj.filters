@@ -120,6 +120,9 @@
     <Text Include="..\rules\Hotkeys.txt">
       <Filter>rules</Filter>
     </Text>
+    <Text Include="..\rules\Entrances.txt">
+      <Filter>rules</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
