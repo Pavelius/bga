@@ -1,6 +1,7 @@
 #Area
 
-AR1000 //music(MX1000A)
+AR1000 music(MX1000A)
+AR1100 music(MX1100A)
 
 #WorldRealm
 

@@ -10,7 +10,6 @@
 #include "rules/Spells.txt"
 #include "rules/Diety.txt"
 #include "rules/Monsters.txt"
-#include "rules/Playlist.txt"
 #include "rules/Hotkeys.txt"
 
 #List

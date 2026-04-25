@@ -1,7 +1,0 @@
-#Playlist
-
-MAIN PlayDay "THEMEA"
-
-AR1000 PlayDay "MX1000A"
-AR1100 PlayDay "MX1100A"
-AR1007 PlayDay "STOP"

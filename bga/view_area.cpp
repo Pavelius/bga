@@ -667,18 +667,6 @@ static void paint_area_map() {
 	clipping = push_clip;
 }
 
-static void paint_area_map_spot() {
-	pushrect push;
-	auto push_clip = clipping; setclipall();
-	set_visible_area();
-	paint_tiles();
-	paint_movement_target();
-	prepare_objects();
-	sort_objects();
-	paint_objects();
-	clipping = push_clip;
-}
-
 static void paint_area_map_zoom_factor(fnevent proc) {
 	auto push_clipping = clipping;
 	auto push_mouse = hot.mouse; hot.mouse.x /= zoom_factor; hot.mouse.y /= zoom_factor;

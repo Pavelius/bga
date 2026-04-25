@@ -12,7 +12,6 @@
 #include "help.h"
 #include "keybind.h"
 #include "option.h"
-#include "playlist.h"
 #include "pushvalue.h"
 #include "resid.h"
 #include "resinfo.h"
@@ -119,7 +118,7 @@ static void update_actor_animations() {
 	player = push_player;
 }
 
-static void update_area_music() {
+void update_area_music() {
 	auto pa = get_area();
 	if(pa)
 		play_music(pa->music);

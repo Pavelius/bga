@@ -79,6 +79,7 @@ void set_description_id(const char* id);
 void setdialog(int x, int y);
 void setdialog(int x, int y, int w, int h);
 void texta(resn res, const char* string, unsigned flags);
+void update_area_music();
 void update_frames();
 void update_main_music();
 

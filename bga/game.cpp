@@ -13,7 +13,6 @@
 #include "itemground.h"
 #include "iteminside.h"
 #include "order.h"
-#include "playlist.h"
 #include "rand.h"
 #include "region.h"
 #include "saveheader.h"
@@ -87,7 +86,7 @@ static void load_area(const char* id) {
 	audio_reset();
 	read_area(id);
 	use_all_doors();
-	play_list(id, PlayDay);
+	update_area_music();
 	initialize_area_ambients();
 	next_scene(open_game);
 }
@@ -98,9 +97,6 @@ void enter(const char* id, const char* location) {
 	load_area(area_copy);
 #ifdef _DEBUG
 	print("Enter area [%1] at location [%2]", area_copy, location);
-	print("Count of points %1i", bsdata<point>::source.count);
-	print("Count of doors %1i", bsdata<door>::source.count);
-	print("Count of regions %1i", bsdata<region>::source.count);
 #endif
 	auto pn = entrance::find(entrance_copy);
 	if(pn) {
