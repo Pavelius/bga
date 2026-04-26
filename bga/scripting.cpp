@@ -4,10 +4,11 @@
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
-#include "itemground.h"
-#include "list.h"
 #include "form.h"
 #include "game.h"
+#include "itemground.h"
+#include "list.h"
+#include "npc.h"
 #include "modifier.h"
 #include "pushvalue.h"
 #include "script.h"
@@ -62,6 +63,15 @@ template<> void fnscript<listi>(int value, int counter) {
 	auto push_modifier = modifier;
 	script_run(bsdata<listi>::elements[value].elements);
 	modifier = push_modifier;
+}
+
+template<> void fnscript<npci>(int value, int counter) {
+	auto pm = bsdata<npci>::elements + value;
+	player->gender = pm->gender;
+	player->race = pm->race;
+	player->alignment = pm->alignment;
+	player->npc = getbsi(pm);
+	memcpy(player->colors, pm->colors, sizeof(player->colors));
 }
 
 static void damage_change(int bonus) {

@@ -22,6 +22,9 @@
     <Filter Include="utils">
       <UniqueIdentifier>{bf637da8-ca55-44db-a400-4c1ad2c2d468}</UniqueIdentifier>
     </Filter>
+    <Filter Include="areas">
+      <UniqueIdentifier>{c42caa8b-805a-4766-8ae4-4947f7452320}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\rules\Colors.txt">
@@ -802,5 +805,10 @@
     <ClInclude Include="itemground.h">
       <Filter>logic</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\areas\AR1000.inf">
+      <Filter>areas</Filter>
+    </None>
   </ItemGroup>
 </Project>

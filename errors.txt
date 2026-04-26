@@ -1,5 +1,2 @@
-﻿Error in file `areas/AR1000.inf`:
- Line 7: Not found variant type `12231`
- Line 8: Not found variant type `20500`
- Line 9: Not found variant type `20501`
- Line 11: Not found variant type `4`
+﻿Can't find file 'areas/AR1001.inf'
+Can't find file 'areas/AR1005.inf'

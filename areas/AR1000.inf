@@ -4,8 +4,8 @@
 // - Comments can be applied.
 // - Container items can be stored in common list.
 
-Creature 12231 1 GoblinWarrior
-Creature 20500 5 Nazghuul GoblinWarrior // Standart monster Golblin warrior with unique identifier `Nazghuul`.
-Creature 20501 5 StrongLeader Human Male Fighter+4 LeatherArmor LongSword // Automatic random color if need and automatic random name if valid.
+Creature 17442 6 GoblinWarrior
+Creature 18465 10 Nazghuul GoblinWarrior // Standart monster Golblin warrior with unique identifier `Nazghuul`.
+// Creature 18700 5 StrongLeader Human Male Fighter+4 LeatherArmor LongSword // Automatic random color if need and automatic random name if valid.
 
 Container 4 LongSword LeatherArmor SetLocked // Container identified by number.

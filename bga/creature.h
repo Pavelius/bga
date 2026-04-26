@@ -29,7 +29,6 @@ struct creature : actor, avatarable, spellv {
 	bool			isusable(const item& it) const;
 	bool			roll(skilln value, int bonus = 0); // Default roll against difficult 10.
 	void			update();
-	void			update_abilities();
 };
 extern creature* player;
 extern creature* party[6];
@@ -53,3 +52,4 @@ void player_finish();
 void raise_class(classn classv);
 void raise_race(racen race);
 void select_all_party();
+void update_player();

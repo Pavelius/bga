@@ -325,36 +325,40 @@ static void update_skills() {
 		player->skills[i] += player->getbonus(bsdata<skilli>::elements[i].ability);
 }
 
-void creature::update_abilities() {
-	auto level = getlevel();
+static void update_abilities() {
+	auto level = player->getlevel();
 	// Armor class
-	abilities[DodgeBonus] += get_dex_bonus(getbonus(Dexterity), wears[Body].geti().max_dex_bonus);
-	abilities[AC] += 10;
-	abilities[AC] += abilities[DodgeBonus];
-	abilities[AC] += abilities[ArmorBonus];
+	player->abilities[DodgeBonus] += get_dex_bonus(player->getbonus(Dexterity), player->wears[Body].geti().max_dex_bonus);
+	player->abilities[AC] += 10;
+	player->abilities[AC] += player->abilities[DodgeBonus];
+	player->abilities[AC] += player->abilities[ArmorBonus];
 	// Attacks
-	abilities[AttackMelee] += getbonus(Strenght);
-	abilities[DamageMelee] += getbonus(Strenght);
-	abilities[AttackRanged] += getbonus(Dexterity);
+	player->abilities[AttackMelee] += player->getbonus(Strenght);
+	player->abilities[DamageMelee] += player->getbonus(Strenght);
+	player->abilities[AttackRanged] += player->getbonus(Dexterity);
 	// Saves
-	abilities[Fortitude] += getbonus(Constitution);
-	abilities[Reflexes] += getbonus(Dexterity);
-	abilities[Will] += getbonus(Wisdow);
+	player->abilities[Fortitude] += player->getbonus(Constitution);
+	player->abilities[Reflexes] += player->getbonus(Dexterity);
+	player->abilities[Will] += player->getbonus(Wisdow);
 	// Hit points
-	hp_max = get(HitPoints) + level * getbonus(Constitution);
-	if(hp_max < level)
-		hp_max = level;
-	if(hp > hp_max)
-		hp = hp_max;
+	player->hp_max = player->get(HitPoints) + level * player->getbonus(Constitution);
+	if(player->hp_max < level)
+		player->hp_max = level;
+	if(player->hp > player->hp_max)
+		player->hp = player->hp_max;
 }
 
-void creature::update() {
-	pushvalue push_player(player, this);
-	copy(*static_cast<statable*>(this), basic);
+void update_player() {
+	copy(*static_cast<statable*>(player), player->basic);
 	update_wears();
 	update_abilities();
 	update_skills();
 	update_weight();
+}
+
+void creature::update() {
+	pushvalue push_player(player, this);
+	update_player();
 }
 
 bool creature::isparty() const {
