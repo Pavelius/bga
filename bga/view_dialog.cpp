@@ -1628,31 +1628,34 @@ void change_panel_mode() {
 	game_panel_mode = (++game_panel_mode) % 3;
 }
 
-void paint_game() {
+void view_game_area() {
+	switch(game_panel_mode) {
+	case 0:
+		setcaret(0, 0, 800, 433);
+		paint_area();
+		setcaret(0, 433); paint_action_panel();
+		paint_game_panel();
+		break;
+	case 1:
+		setcaret(0, 0, 800, 433 + 107);
+		paint_area();
+		setcaret(0, 433 + 107); paint_action_panel();
+		break;
+	default:
+		setcaret(0, 0, 800, 600);
+		paint_area();
+		break;
+	}
+}
+
+static void view_game() {
 	update_frames();
 	if(game_proc) {
 		setcaret(0, 0, 800, 433);
 		game_proc();
 		paint_game_panel();
-	} else {
-		switch(game_panel_mode) {
-		case 0:
-			setcaret(0, 0, 800, 433);
-			paint_area();
-			setcaret(0, 433); paint_action_panel();
-			paint_game_panel();
-			break;
-		case 1:
-			setcaret(0, 0, 800, 433 + 107);
-			paint_area();
-			setcaret(0, 433 + 107); paint_action_panel();
-			break;
-		default:
-			setcaret(0, 0, 800, 600);
-			paint_area();
-			break;
-		}
-	}
+	} else
+		view_game_area();
 	input_debug();
 }
 
@@ -1814,7 +1817,7 @@ void open_item_count() {
 
 void open_game() {
 	game_proc = 0;
-	scene(paint_game);
+	scene(view_game);
 }
 
 void open_worldmap() {
@@ -1856,10 +1859,11 @@ void warning(const char* id, ...) {
 void statusv(const char* prefix, const char* format, const char* format_param) {
 	char temp[260]; stringbuilder sb(temp);
 	sb.addv(format, format_param);
+	printclf();
 	printcnv("[");
 	printcnv(prefix);
 	printcnv(temp);
-	printcnv("]\n");
+	printcnv("]");
 }
 
 void statusr(const char* id, ...) {

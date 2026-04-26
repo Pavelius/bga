@@ -16,6 +16,7 @@
 #include "region.h"
 #include "saveheader.h"
 #include "script.h"
+#include "screenshoot.h"
 #include "store.h"
 #include "timer.h"
 #include "view.h"
@@ -91,10 +92,10 @@ static void load_area(areai* area) {
 	use_all_doors();
 	update_area_music();
 	initialize_area_ambients();
-	next_scene(open_game);
 }
 
 void enter(const char* location) {
+	scene_disapear(0, colors::black);
 	auto pn = bsdata<entrancei>::find(location);
 	if(!pn)
 		return;
@@ -104,6 +105,9 @@ void enter(const char* location) {
 #endif
 	setcamera(pn->position);
 	setparty(pn->position, pn->orientation);
+	update_frames();
+	scene_appear(view_game_area, 0);
+	next_scene(open_game);
 }
 
 void enter_from_wmap(const char* area) {
@@ -194,10 +198,14 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	a.set(bsdata<creature>::source);
 	a.set(bsdata<itemground>::source);
 	if(!write_mode) {
+		scene_disapear(0, colors::black);
 		auto p = bsdata<areai>::find(area_name);
 		if(!p)
 			return false;
 		load_area(p);
+		update_frames();
+		scene_appear(view_game_area, 0);
+		next_scene(open_game);
 	}
 	return true;
 }

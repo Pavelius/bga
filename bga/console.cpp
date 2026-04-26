@@ -4,6 +4,11 @@
 
 array console_data(1);
 
+void printclf() {
+	if(console_data.count)
+		printcnv("\n");
+}
+
 void printcnv(const char* format) {
 	auto i = zlen(format);
 	console_data.reserve(console_data.getcount() + i + 1);
@@ -17,17 +22,16 @@ void printcnv(const char* format) {
 	}
 }
 
-void printcnv(const char* format, const char* format_param, const char* line_feed) {
+void printcnv(const char* format, const char* format_param) {
 	if(!format)
 		return;
-	if(line_feed && console_data.count)
-		printcnv(line_feed);
 	char temp[4096]; stringbuilder sb(temp);
 	sb.addv(format, format_param);
+	printclf();
 	printcnv(temp);
 }
 
 void print(const char* format, ...) {
 	XVA_FORMAT(format);
-	printcnv(format, format_param, "\n");
+	printcnv(format, format_param);
 }

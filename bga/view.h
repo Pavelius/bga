@@ -97,6 +97,7 @@ void stoneslot(unsigned short f1, unsigned short f2, unsigned key = 0);
 void texta(sprite* ps, const char* string, unsigned flags);
 void update_area_music();
 void update_frames();
+void view_game_area();
 void warning(const char* id, ...);
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color);

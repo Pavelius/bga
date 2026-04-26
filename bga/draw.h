@@ -174,6 +174,11 @@ extern long				text_params[16];
 extern color*			palt;
 extern int				tab_pixels;
 extern fnevent          ptips, pbeforemodal, pleavemodal, psetfocus;
+struct pushclip {
+	rect clip;
+	pushclip() : clip(draw::clipping) {}
+	~pushclip() { draw::clipping = clip; }
+};
 struct pushrect {
 	point caret;
 	int	width, height;
@@ -292,6 +297,7 @@ void sys_caption(const char* string);
 void sys_create_window(int x, int y, int width, int height, unsigned flags, int bpp, bool full_screen);
 void sys_cursor(bool show);
 void sys_input();
+void sys_redraw();
 void sys_timer(unsigned v);
 
 void next_scene(fnevent v);

@@ -1,3 +1,4 @@
+#include "audio.h"
 #include "creature.h"
 #include "draw.h"
 #include "game.h"
@@ -229,6 +230,7 @@ static int get_back_frame() {
 static bool check_coins(int value) {
 	if(creature::coins >= (unsigned)value)
 		return true;
+	play_sound("GAM_47");
 	statusr("NotEnoughGoldCoins", value, creature::coins, value - creature::coins);
 	return false;
 }

@@ -2,6 +2,7 @@
 
 #pragma once
 
+void printclf();
 void printcnv(const char* format);
-void printcnv(const char* format, const char* format_param, const char* line_feed);
+void printcnv(const char* format, const char* format_param);
 void print(const char* format, ...);
