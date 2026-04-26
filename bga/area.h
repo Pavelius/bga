@@ -8,6 +8,9 @@
 
 #pragma once
 
+enum areaf : unsigned char {
+	AreaScounted, AreaVisited,
+};
 enum areafn : unsigned char {
 	StateExplored, StateVisible,
 };
@@ -27,6 +30,10 @@ struct areai : arcfile {
 	flag64 doors_opened, doors_trapped, doors_locked;
 	flag32 region_disabled;
 	flag64 animate_disabled;
+	flag32 flags;
+	bool is(areaf v) const { return flags.is(v); }
+	void set(areaf v) { flags.set(v); }
+	void remove(areaf v) { flags.remove(v); }
 };
 extern short unsigned current_area;
 
