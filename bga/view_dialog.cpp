@@ -131,10 +131,8 @@ void update_area_music() {
 	auto pa = get_area();
 	if(pa)
 		play_music(pa->music);
-}
-
-void update_main_music() {
-	play_music("MXMAIN");
+	else
+		play_music("MXMAIN");
 }
 
 void update_frames() {
@@ -246,6 +244,7 @@ void open_scene() {
 }
 
 void paint_dialog(const char* id, int frame) {
+	update_tick();
 	set_cursor();
 	auto p = gres(id);
 	auto& f = p->get(frame);
@@ -258,7 +257,9 @@ void paint_dialog(const char* id, int frame) {
 }
 
 void paint_game_dialog(const char* id, int frame) {
+	update_tick();
 	audio_update_channels();
+	update_area_music();
 	set_cursor();
 	dialog_start.x = 0;
 	dialog_start.y = 0;
@@ -490,11 +491,12 @@ void edit(char* string, size_t maximum, unsigned text_flags, bool upper_case) {
 	if(caret_index > lenght)
 		caret_index = lenght;
 	texta(string, text_flags);
-	auto tick = getcputime();
-	if(((tick / 100) % 10) < 4) {
+	if(((current_tick / 100) % 10) < 4) {
 		auto push_caret = caret;
-		caret.x += textw(string, caret_index);
-		line(caret.x, caret.y + texth());
+		auto tw = textw(string);
+		auto x = aligned(caret.x, width, text_flags, tw);
+		caret.x = x + textw(string, caret_index);
+		line(caret.x, caret.y + texth() - 2);
 		caret = push_caret;
 	}
 	switch(hot.key) {
@@ -512,6 +514,14 @@ void edit(char* string, size_t maximum, unsigned text_flags, bool upper_case) {
 			string[--caret_index] = 0;
 		break;
 	}
+}
+
+void edit_number() {
+	if(hot.key == InputSymbol) {
+		if(hot.param == '+' || hot.param == '-')
+			hot.key = 0;
+	}
+	edit(edit_field, lenghtof(edit_field) - 1, AlignRight, false);
 }
 
 static void scroll(sprite* pr, int fu, int fd, int bar, int& origin, int maximum, int per_page, int per_row) {
@@ -811,7 +821,7 @@ static void paint_number(int v, unsigned flags) {
 	caret = push_caret;
 }
 
-void paint_item(const item* pi, bool show_count) {
+void paint_item(const item* pi, int current_count, int choose_count) {
 	if(!pi)
 		return;
 	pushrect push;
@@ -823,8 +833,14 @@ void paint_item(const item* pi, bool show_count) {
 	image(pma_items, pi->geti().avatar * 2, 0);
 	if(button_hilited && hot.key == MouseRight && !hot.pressed)
 		execute(open_item_description, 0, 0, pi);
-	if(show_count && pi->count > 1)
-		paint_number(pi->count, AlignRightBottom);
+	if(current_count)
+		paint_number(current_count, AlignRightBottom);
+	if(choose_count)
+		paint_number(choose_count, AlignLeft);
+}
+
+void paint_item(const item* pi) {
+	paint_item(pi, (pi->count > 1) ? pi->count : 0, 0);
 }
 
 static void set_drag_item_cursor() {
@@ -1647,9 +1663,13 @@ void paint_game() {
 	input_debug();
 }
 
+static void set_item_description() {
+	set_description("%ItemInformation");
+}
+
 static void identify_item() {
 	last_item->identify(1);
-	set_description("###%ItemName\n%ItemInformation");
+	set_item_description();
 }
 
 static void paint_item_description() {
@@ -1663,22 +1683,30 @@ static void paint_item_description() {
 	setdialog(28, 115, 435, 299); paint_description(17, -6, 12);
 }
 
+static void add_edit() {
+	auto r = 0; psnum(edit_field, r);
+	auto n = r + hot.param;
+	if(n < 0)
+		n = 0;
+	stringbuilder sb(edit_field); sb.add("%1i", n);
+	caret_index = -1;
+}
+
 static void view_item_count() {
 	paint_dialog("GUIINV", 2);
-	setdialog(22, 22); paint_item(last_item, false);
+	setdialog(22, 22); paint_item(last_item, 0, 0);
 	setdialog(20, 90); button(pma_butstd, 1, 2, KeyEnter, "Accept"); fire(buttonok);
 	setdialog(142, 90); button(pma_butstd, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);
-	setdialog(222, 44); button(gres("GBTNPLUS"), 0, 1, '+');
-	setdialog(242, 44); button(gres("GBTNMINS"), 0, 1, '-');
+	setdialog(222, 44); button(gres("GBTNPLUS"), 0, 1, '+'); fire(add_edit, 1);
+	setdialog(242, 44); button(gres("GBTNMINS"), 0, 1, '-'); fire(add_edit, -1);
 	setdialog(71, 22, 186, 18); texta(getnm("ChooseAmount"), AlignCenterCenter);
 	pushfont push_font(metrics::small);
-	setdialog(176, 46, 42, 15); edit(edit_field, lenghtof(edit_field)-1, AlignRight);
+	setdialog(179, 47, 34, 13); edit_number();
 }
 
 static void paint_main_menu() {
-	update_main_music();
-	paint_game_dialog("START", 1);
 	auto pb1 = gres("GBTNMED2");
+	paint_game_dialog("START", 1);
 	setdialog(569, 133, 152, 21); texta(getnm("GameMode"), AlignCenterCenter);
 	setdialog(567, 160); button(pb1, 1, 2, 'M', "SinglePlayer");
 	setdialog(569, 220, 152, 21); texta(getnm("BeginGame"), AlignCenterCenter);
@@ -1769,16 +1797,22 @@ static void paint_cursor() {
 
 void open_item_description() {
 	pushdescription push_info;
-	auto push_last = last_item;
-	last_item = (item*)hot.object;
+	pushvalue push(last_item, (item*)hot.object);
 	play_sound("GAM_03");
-	set_description("%ItemInformation");
+	set_item_description();
 	open_dialog(paint_item_description, true);
-	last_item = push_last;
 }
 
 void open_item_count() {
+	last_number = 0;
+	if(!last_item)
+		return;
+	stringbuilder sb(edit_field); sb.add("%1i", last_item->count);
+	caret_index = -1;
 	open_dialog(view_item_count, true);
+	if(!getresult())
+		return;
+	psnum(edit_field, last_number);
 }
 
 void open_game() {

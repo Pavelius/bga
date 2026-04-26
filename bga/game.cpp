@@ -24,6 +24,7 @@
 using namespace draw;
 
 gamei game;
+int last_number;
 
 template<> void archive::set<creature*>(creature*& v) {
 	setpointer(bsdata<creature>::source, (void**)&v);
@@ -179,6 +180,7 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	if(!write_mode)
 		flo.get(change);
 	serial_header(a, *this);
+	a.set(game);
 	a.set(area_name);
 	a.set(camera);
 	a.set(current_game_tick);
@@ -227,7 +229,8 @@ void game_quick_load() {
 	game_quick_save(false);
 }
 
-void create_game() {
+static void create_game() {
+	game.clear();
 	game.set(IdentifyCost, 100);
 	game.set(Rounds, xrand(10, 30));
 }
@@ -265,7 +268,13 @@ void party_action(void* object, point target_position, fnevent apply) {
 		execute(apply, 0, 0, object);
 }
 
+void gamei::clear() {
+	memset(abilities, 0, sizeof(*this));
+	bsdata<itemground>::source.clear();
+}
+
 void initialize_story() {
+	create_game();
 	initialize_store();
 	current_world = bsdata<worldmapi>::elements;
 	player = party[0];

@@ -435,7 +435,6 @@ static void paint_choose_feats() {
 }
 
 static void paint_choose_appearance() {
-	update_tick();
 	paint_game_dialog("GUICGB");
 	paint_portrait();
 	paint_character_generation("ColorChoices");
@@ -758,7 +757,6 @@ static void exit_party_formation() {
 static void paint_party_formation() {
 	auto allow_done = true;
 	paint_game_dialog("GUICARBB");
-	update_main_music();
 	setdialog(279, 22, 242, 32); texta(metrics::h1, getnm("PartyFormation"), AlignCenterCenter);
 	setdialog(428, 81);
 	auto pb1 = gres("GBTNBFRM");
@@ -809,7 +807,6 @@ static void paint_select_party() {
 	static int origin;
 	const int per_page = 6;
 	paint_game_dialog("GCGPARTY");
-	update_main_music();
 	setdialog(180, 25, 441, 37); texta(metrics::h1, getnm("SelectParty"), AlignCenterCenter);
 	setdialog(22, 130, 212, 351);
 	paint_list(records.data, records.element_size, records.count, origin, per_page,

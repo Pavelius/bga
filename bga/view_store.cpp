@@ -93,16 +93,29 @@ static void pick_good() {
 			pushvalue push(last_item);
 			last_item = p->source;
 			open_item_count();
+			if(last_number) {
+				if(last_number > p->source->count)
+					last_number = p->source->count;
+				p->count = last_number;
+			}
 		} else
 			p->count = p->source->count;
 	} else
 		p->count = 0;
 }
 
+static void mark_good() {
+	auto p = (tradegood*)hot.object;
+	if(!p->count)
+		p->count = p->source->count;
+	else
+		p->count = 0;
+}
+
 static void pick_identify() {
+	mark_good();
 	auto p = (tradegood*)hot.object;
 	pushvalue push_item(last_item, p->source);
-	pick_good();
 	set_description("%ItemInformation");
 }
 
@@ -128,7 +141,7 @@ static void paint_good(void* object) {
 	//	execute(remove_good, 0, 0, object);
 	if(p->count)
 		image(pma_stoneslot, 25, 0);
-	paint_item(p->source);
+	paint_item(p->source, p->source->count, p->count);
 	caret.x += 50; caret.y += 1; width = 160;
 	auto push_clip = clipping; setclipall();
 	text(str("%1", p->source->getname())); caret.y += texth();
@@ -275,9 +288,8 @@ static void paint_inn() {
 }
 
 static void paint_drink() {
-	auto pb1 = gres("GBTNMED2");
 	setdialog(140, 117, 40, 20); texta("100", AlignCenterCenter);
-	setdialog(195, 111); button(pb1, 1, 2, 0, "Rumors");
+	setdialog(195, 111); button(gres("GBTNMED2"), 1, 2, 0, "Rumors");
 	setdialog(199, 82, 170, 20); texta(getnm("Drink"), AlignCenterCenter);
 	setdialog(137, 82, 48, 20); texta(getnm("Price"), AlignCenterCenter);
 	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("Drinks"), AlignCenterCenter);
@@ -289,7 +301,8 @@ static void paint_drink() {
 }
 
 static void paint_identify() {
-	auto shop_total = player_goods.checkedcount() * game.get(IdentifyCost);
+	update_items();
+	auto shop_total = player_goods.checkedcount() * last_store->getcost(UserAllowIdentify);
 	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("Identifying"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(692, 90, 80, 20); paint_player_coins();

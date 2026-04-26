@@ -1,2 +1,2 @@
-﻿Error in file `UnknownNames.txt`:
- Define translation for `Goblin`
+﻿Error in file `rules/Store.txt`:
+ Line 3: Not found requisit `identify_price`

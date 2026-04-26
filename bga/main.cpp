@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
 	colors::h1 = colors::text.mix(colors::h3, 64);
 	colors::h2 = colors::text.mix(colors::h3, 96);
 	colors::special = color(244, 214, 66);
-	update_main_music();
+	update_area_music();
 	initialize(getnm("AppTitle"));
 	sys_cursor(false);
 	sys_timer(64);

@@ -26,7 +26,7 @@ unsigned short area_tiles[64 * 64];
 unsigned short area_width, area_height, area_height_tiles;
 
 bool combat_mode;
-short unsigned current_area;
+short unsigned current_area = -1;
 static rfpma* pma_area;
 static rfpma* pma_minimap;
 
@@ -398,5 +398,7 @@ static bool is_passable(short unsigned i0, short unsigned i1, int size) {
 }
 
 areai* get_area() {
-	return (current_area == -1) ? 0 : bsdata<areai>::elements + current_area;
+	if(current_area == 0xFFFF)
+		return 0;
+	return bsdata<areai>::elements + current_area;
 }

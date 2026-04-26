@@ -5,23 +5,25 @@
 #include "slice.h"
 
 enum gamen : unsigned char {
-	Reputation, Progress, Chapter, Rounds,
+	Reputation, Progress, Chapter, Blessing, Rounds,
 	IdentifyCost,
 };
 struct gameni : nameable {
 };
 struct gamei {
-	int abilities[IdentifyCost + 1];
-	int get(gamen i) const { return abilities[i]; }
-	void set(gamen i, int v) { abilities[i] = v; }
+	int		abilities[IdentifyCost + 1];
+	void	clear();
+	int		get(gamen i) const { return abilities[i]; }
+	void	set(gamen i, int v) { abilities[i] = v; }
 };
 extern gamei game;
+
+extern int last_number;
 
 const char* get_save_url(char* result, const char* id);
 
 int game_rand(int v1, int v2);
 
-void create_game();
 void enter(const char* location);
 void enter_from_wmap(const char* area);
 void initialize_story();
