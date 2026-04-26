@@ -32,9 +32,9 @@ int	storei::getcost(storefn v) const {
 	int n;
 	switch(v) {
 	case UserAllowIdentify:
-		n = game.get(IdentifyCost);
+		n = 100;
 		if(identify_percent)
-			n = n * identify_percent / 100;
+			n = identify_percent;
 		return n;
 	case UserAllowBuy:
 		n = buy_percent;

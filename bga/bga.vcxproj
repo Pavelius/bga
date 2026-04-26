@@ -35,6 +35,7 @@
     <Text Include="..\locale\ru\Skills.txt" />
     <Text Include="..\locale\ru\Sounds.txt" />
     <Text Include="..\locale\ru\Spells.txt" />
+    <Text Include="..\locale\ru\Store.txt" />
     <Text Include="..\locale\ru\UnknownNames.txt" />
     <Text Include="..\parties\HandsOfFury.txt" />
     <Text Include="..\rules\Advance.txt" />

@@ -23,6 +23,7 @@ struct tradegooda : vector<tradegood> {
 
 static tradegooda shop_goods, player_goods;
 static int trade_mode;
+static int room_rent;
 
 int tradegooda::total() const {
 	auto result = 0;
@@ -211,7 +212,7 @@ static void paint_right_panel() {
 		|| last_store->is(AllowNobleRoom) || last_store->is(AllowRoyalRoom)) {
 		checkbox(trade_mode, AllowPeasantRoom, pb1, 19, 20, 18, 0);
 		if(button_executed)
-			set_description_id("AllowPeasantRoom");
+			set_description_id("UserAllowRentRooms");
 		caret.y += 80;
 	}
 }
@@ -225,8 +226,28 @@ static int get_back_frame() {
 	}
 }
 
+static bool check_coins(int value) {
+	if(creature::coins >= (unsigned)value)
+		return true;
+	statusr("NotEnoughGoldCoins", value, creature::coins, value - creature::coins);
+	return false;
+}
+
+static int checkout(tradegooda& source, storefn type) {
+	switch(type) {
+	case AllowPeasantRoom: case AllowMerchantRoom: case AllowNobleRoom: case AllowRoyalRoom:
+		return last_store->getcost(type);
+	case UserAllowIdentify:
+		return source.checkedcount() * game.get(IdentifyCost) * last_store->getcost(type) / 100;
+	default:
+		return source.total() * last_store->getcost(type) / 100;
+	}
+}
+
 static void buy_goods() {
-	auto total = shop_goods.total() * last_store->getcost(UserAllowBuy) / 100;
+	auto total = checkout(shop_goods, UserAllowBuy);
+	if(!check_coins(total))
+		return;
 	for(auto& e : shop_goods) {
 		if(!e.count)
 			continue;
@@ -234,12 +255,12 @@ static void buy_goods() {
 		e.source->setcount(e.source->count - e.count);
 		party_add_item(it);
 	}
-	player->coins += total;
+	player->coins -= total;
 	need_update_items = true;
 }
 
 static void sell_goods() {
-	auto total = player_goods.total() * last_store->getcost(UserAllowSell) / 100;
+	auto total = checkout(player_goods, UserAllowSell);
 	for(auto& e : player_goods) {
 		if(!e.count)
 			continue;
@@ -251,13 +272,35 @@ static void sell_goods() {
 	need_update_items = true;
 }
 
+static void identify_all() {
+	auto total = checkout(player_goods, UserAllowIdentify);
+	if(!check_coins(total))
+		return;
+	for(auto& e : player_goods) {
+		if(!e.count)
+			continue;
+		e.source->identify(1);
+	}
+	player->coins -= total;
+	need_update_items = true;
+}
+
+static void inn_rest() {
+	auto total = checkout(player_goods, (storefn)room_rent);
+	if(!check_coins(total))
+		return;
+	player->coins -= total;
+	for(auto p : party) {
+	}
+}
+
 static void paint_buy_sell() {
 	update_items();
-	auto player_total = player_goods.total();
-	auto shop_total = shop_goods.total();
+	auto player_total = checkout(player_goods, UserAllowSell);
+	auto shop_total = checkout(shop_goods, UserAllowBuy);
 	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("BuyAndSell"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
-	setdialog(663, 191); button(pma_butstd, 1, 2, 0, "Buy", 3, shop_total);
+	setdialog(663, 191); button(pma_butstd, 1, 2, 0, "Buy", 3, shop_total); fire(buy_goods);
 	setdialog(663, 220); button(pma_butstd, 1, 2, 0, "Sell", 3, player_total); fire(sell_goods);
 	if(last_store->steal_difficult) {
 		setdialog(663, 249); button(pma_butstd, 1, 2, 0, "Steal", 3, shop_total);
@@ -281,7 +324,15 @@ static void checkroom(storefn v, int f1, const char* id) {
 		f1++;
 	image(gres("ROOMS"), f1, 0);
 	caret.x -= 3; caret.y += 102;
-	button(pma_butstd, 1, 2, 0, id, 3, allowed);
+	if(allowed && room_rent == -1)
+		room_rent = v;
+	auto btn = 1;
+	if(room_rent == v)
+		btn = 0;
+	button(pma_butstd, btn, 2, 0, id, 3, allowed);
+	if(button_executed)
+		set_description_id(bsdata<storefi>::elements[v].id);
+	fire(cbsetintds, v, 0, &room_rent);
 }
 
 static void paint_inn() {
@@ -293,10 +344,11 @@ static void paint_inn() {
 	setdialog(136, 250); checkroom(AllowNobleRoom, 2 * 2, "RoomNoble");
 	setdialog(259, 250); checkroom(AllowRoyalRoom, 3 * 2, "RoomRoyal");
 	setdialog(692, 90, 80, 20); paint_player_coins();
-	setdialog(663, 123); button(pma_butstd, 1, 2);
+	setdialog(663, 123); button(pma_butstd, 1, 2, 0, "RoomRest"); fire(inn_rest);
 	setdialog(404, 82, 209, 325); paint_description(12, -1, 2);
+	auto total = checkout(player_goods, (storefn)room_rent);
 	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
-	setdialog(285, 387, 80, 20); texta("268435469", AlignCenterCenter);
+	setdialog(285, 387, 80, 20); texta(str("%1i", total), AlignCenterCenter);
 	paint_action_panel_na();
 }
 
@@ -310,18 +362,18 @@ static void paint_drink() {
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(403, 82, 232, 20); texta(getnm("Rumors"), AlignCenterCenter);
 	setdialog(404, 115, 210, 292); paint_description(12, -1, 2);
-	paint_action_panel_na();
+	paint_action_panel_player();
 }
 
 static void paint_identify() {
 	update_items();
-	auto shop_total = player_goods.checkedcount() * last_store->getcost(UserAllowIdentify);
+	auto total = checkout(player_goods, UserAllowIdentify);
 	setdialog(134, 23, 238, 28); texta(metrics::h1, getnm("Identifying"), AlignCenterCenter);
 	setdialog(400, 23, 238, 28); paint_store_name();
 	setdialog(692, 90, 80, 20); paint_player_coins();
 	setdialog(138, 387, 125, 20); texta(getnm("Cost"), AlignRightCenter);
-	setdialog(285, 387, 80, 20); texta(str("%1i", shop_total), AlignCenterCenter);
-	setdialog(663, 123); button(pma_butstd, 1, 2, 0, "Identify", 3, shop_total);
+	setdialog(285, 387, 80, 20); texta(str("%1i", total), AlignCenterCenter);
+	setdialog(663, 123); button(pma_butstd, 1, 2, 0, "Identify", 3, total); fire(identify_all);
 	setdialog(141, 83, 225, 18); texta(getnm("Items"), AlignCenterCenter);
 	setdialog(135, 113, 214, 264); paint_identify_items();
 	setdialog(404, 82, 209, 325); paint_description(12, -1, 2);
@@ -344,5 +396,6 @@ static void paint_store() {
 void open_store() {
 	last_store = bsdata<storei>::elements;
 	need_update_items = true;
+	room_rent = -1;
 	scene(paint_store);
 }

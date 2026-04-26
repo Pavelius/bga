@@ -241,11 +241,7 @@ static void player_skill_information(stringbuilder& sb) {
 }
 
 static void item_name(stringbuilder& sb) {
-	auto& ei = last_item->geti();
-	if(ei.basic && !last_item->identified)
-		sb.add(ei.basic->getname());
-	else
-		sb.add(last_item->getname());
+	sb.add(last_item->getname());
 }
 
 static void addv(stringbuilder& sb, const classa& v) {

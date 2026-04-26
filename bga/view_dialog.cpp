@@ -4,6 +4,7 @@
 #include "ambient.h"
 #include "audio.h"
 #include "colorgrad.h"
+#include "console.h"
 #include "creature.h"
 #include "draw.h"
 #include "form.h"
@@ -92,7 +93,7 @@ static void set_invalidate() {
 	description_cash_size = -1;
 }
 
-static void cbsetintds() {
+void cbsetintds() {
 	auto p = (int*)hot.object;
 	*p = hot.param;
 	set_invalidate();
@@ -339,15 +340,6 @@ static void tips(const nameable& e) {
 	tips(e.id);
 }
 
-//void button(resn res, unsigned short f1, unsigned short f2, unsigned key) {
-//	auto p = gres(res);
-//	auto& f = p->get(f1);
-//	width = f.sx; height = f.sy;
-//	button_check(key);
-//	button_check_sound(res);
-//	image(p, button_pressed ? f2 : f1, 0);
-//}
-
 void button(sprite* p, unsigned short f1, unsigned short f2, unsigned key) {
 	auto& f = p->get(f1);
 	width = f.sx; height = f.sy;
@@ -396,7 +388,6 @@ static point get_text_offset(sprite* pr) {
 void button(sprite* pr, unsigned short f1, unsigned short f2, unsigned key, const char* id, bool need_getname) {
 	auto push_caret = caret;
 	button(pr, f1, f2, key);
-	caret = caret;
 	if(button_pressed)
 		caret = caret + get_pressed_offset(pr);
 	auto push_height = height;
@@ -495,7 +486,7 @@ void edit(char* string, size_t maximum, unsigned text_flags, bool upper_case) {
 		auto push_caret = caret;
 		auto tw = textw(string);
 		auto x = aligned(caret.x, width, text_flags, tw);
-		caret.x = x + textw(string, caret_index);
+		caret.x = x + textw(string, caret_index) + 1;
 		line(caret.x, caret.y + texth() - 2);
 		caret = push_caret;
 	}
@@ -809,7 +800,7 @@ static void paint_number(int v, unsigned flags) {
 	}
 	auto push_caret = caret;
 	caret.x = aligned(caret.x, width, flags, w);
-	if((flags & (AlignLeftCenter| AlignRightCenter |AlignCenterCenter))!=0)
+	if((flags & (AlignLeftCenter | AlignRightCenter | AlignCenterCenter)) != 0)
 		caret.y += (height - h) / 2;
 	else if((flags & (AlignLeftBottom | AlignRightBottom | AlignCenterBottom)) != 0)
 		caret.y += (height - h);
@@ -828,6 +819,8 @@ void paint_item(const item* pi, int current_count, int choose_count) {
 	setoffset(2, 2);
 	width = 32;
 	height = 32;
+	if(pi->needidentify())
+		layer(colors::blue);
 	if(!player->isusable(*pi))
 		layer(colors::red);
 	image(pma_items, pi->geti().avatar * 2, 0);
@@ -1680,7 +1673,9 @@ static void paint_item_description() {
 	if(last_item->needidentify()) {
 		setdialog(20, 432); button(pb1, 1, 2, 'I', "Identify"); fire(identify_item);
 	}
-	setdialog(179, 432); button(pb1, 1, 2, 'U', "UseItem");
+	if(last_item->canuse()) {
+		setdialog(179, 432); button(pb1, 1, 2, 'U', "UseItem");
+	}
 	setdialog(338, 432); button(pb1, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
 	setdialog(28, 115, 435, 299); paint_description(17, -6, 12);
 }
@@ -1826,7 +1821,7 @@ void open_worldmap() {
 	scene(paint_worldmap);
 }
 
-static void paint_confirm() {
+static void view_confirm() {
 	paint_dialog("GUIERR", 1);
 	setdialog(28, 28, 221, 64); texta(description, AlignCenterCenter);
 	setdialog(18, 104); button(pma_butstd, 1, 2, KeyEnter, "Yes"); fire(buttonok);
@@ -1834,12 +1829,42 @@ static void paint_confirm() {
 }
 
 bool confirm(const char* id, ...) {
-	XVA_FORMAT(id)
-		pushdescription push;
+	pushdescription push;
+	XVA_FORMAT(id);
 	description.clear();
 	description.addv(getnm(id), format_param);
-	open_dialog(paint_confirm, true);
+	open_dialog(view_confirm, true);
 	return getresult() != 0;
+}
+
+static void view_message() {
+	paint_dialog("GUIERR", 1);
+	setdialog(28, 28, 221, 64); texta(description, AlignCenterCenter);
+	setdialog(64, 104); button(pma_butstd, 1, 2, KeyEnter, "OK"); fire(buttonok);
+	hotkey(KeyEscape, buttonok);
+}
+
+void warning(const char* id, ...) {
+	pushdescription push;
+	XVA_FORMAT(id);
+	description.clear();
+	description.addv(getnm(id), format_param);
+	play_sound("GAM_47");
+	open_dialog(view_message, true);
+}
+
+void statusv(const char* prefix, const char* format, const char* format_param) {
+	char temp[260]; stringbuilder sb(temp);
+	sb.addv(format, format_param);
+	printcnv("[");
+	printcnv(prefix);
+	printcnv(temp);
+	printcnv("]\n");
+}
+
+void statusr(const char* id, ...) {
+	XVA_FORMAT(id);
+	statusv("-", getnm(id), format_param);
 }
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color) {

@@ -21,7 +21,6 @@ BasicAbility: Базовая способность
 BeginGame: Начать игру
 Benefit: Преемущество
 Biography: Биография
-Buy: Купить
 Cancel: Отмена
 Character: Персонаж
 CharacterGeneration: Создание персонажа
@@ -128,20 +127,11 @@ Random: Случайно
 Range30: 30 футов
 Replay: Заново
 Required: Требования
-RestParty: Отдых
-Rooms: Снять комнату
-RoomMerchant: Купеческая
-RoomNoble: Благородная
-RoomPeasant: Крестьянская
-RoomQuality: Качество комнаты
-RoomRoyal: Королевская
-Rumors: Слухи
 Save: Сохранить
 SaveGame: Сохранить игру
 SavingThrows: Броски спасения
 SelectParty: Выбирайте партию
 SelectAllParty: Выбрать всю партию
-Sell: Продать
 SinglePlayer: Один игрок
 SkillPoints: Очки навыков
 SkillPointsLeft: Осталось очков навыков
@@ -154,7 +144,6 @@ Spells: Заклинания
 StartAbility: %+2i %-1
 StartOver: Начать заново
 StartSkill: %+2i %-1
-Steal: Украсть
 Version: Версия
 WeaponStatistic: Статистика оружия
 Weight: Вес
@@ -174,17 +163,6 @@ WorldMap: Карта мира
 Class: Класс 
 Race: Раса
 
-BuyAndSell: Покупка и продажа
-BuyItem: Купить
-Cost: Стоимость
-Price: Цена
-Store: Магазин
-SellItem: Продать
-UseItem: Использовать
-UseSteal: Украсть
-
-HelgateStreetMerchant: Купец из Хеллгейта
-
 BuyItemsTotal: %ItemListTotal зм
 SellItemsTotal: %ItemListTotal зм
 
@@ -193,6 +171,3 @@ ActionDefend: Защищаться
 ActionStop: Остановить
 
 HandsOfFury: Руки ярости
-
-UserAllowIdentifyInfo: За небольшую плату в [%StoreIdentiyCost] золотых вы можете опознать неизвестные вам предметы, которые могут обладать полезными волшебными свойствами.\n\nНередко вам попадуться проклятые предметы, которые вместо пользы будут приносить вред.
-UserPurchaseDrinksInfo: Купив выпивку местным посетителям таверны вы сможете узнать последние слухи. В зависимости от качества выпивки люди будут более охотно с вами разговаривать.

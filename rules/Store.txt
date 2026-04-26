@@ -1,5 +1,5 @@
 #Store
 
-HelgateStreetMerchant type(ShopStore) steal_difficult(15)
+HelgateStreetMerchant type(ShopStore) steal_difficult(15) room_prices(10 20 100 200)
  flags UserAllowBuy UserAllowSell UserPurchaseDrinks UserAllowIdentify AllowRoyalRoom AllowPeasantRoom
  items LongSword PotionOfHealing+10 LargeShield

@@ -63,6 +63,7 @@ struct item {
 	constexpr explicit operator bool() const { return count > 0; }
 	void			add(item& v);
 	bool			canequip(wearn v) const;
+	bool			canuse() const { return geti().use.operator bool(); }
 	void			clear() { type = 0; count = 0; data = 0; }
 	bool			equal(const item& v) const { return type == v.type && data == v.data; }
 	int				getcost() const { return geti().cost; }

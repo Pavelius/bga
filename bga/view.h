@@ -36,6 +36,7 @@ void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key = 0
 void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key, const char* id, bool need_getname = true);
 void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed, bool need_getname = true);
 void button_check(unsigned key);
+void cbsetintds();
 void change_panel_mode();
 void change_zoom_factor();
 void checkbox(int& source, int value, sprite* res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key);
@@ -90,9 +91,12 @@ void set_description(const nameable* object);
 void set_description_id(const char* id);
 void setdialog(int x, int y);
 void setdialog(int x, int y, int w, int h);
+void statusv(const char* prefix, const char* format, const char* format_param);
+void statusr(const char* id, ...);
 void stoneslot(unsigned short f1, unsigned short f2, unsigned key = 0);
 void texta(sprite* ps, const char* string, unsigned flags);
 void update_area_music();
 void update_frames();
+void warning(const char* id, ...);
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color);

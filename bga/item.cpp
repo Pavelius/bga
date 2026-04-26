@@ -38,7 +38,11 @@ void weaponi::clear() {
 }
 
 const char* item::getname() const {
-	return getnm(geti().id);
+	auto& ei = geti();
+	if(ei.basic && !identified)
+		return ei.basic->getname();
+	else
+		return getnm(ei.id);
 }
 
 int itemi::getcritical() const {
