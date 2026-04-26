@@ -10,6 +10,7 @@
 
 enum areaf : unsigned char {
 	AreaScounted, AreaVisited,
+	AreaOutdoor, AreaCity, AreaForest, AreaDungeon,
 };
 enum areafn : unsigned char {
 	StateExplored, StateVisible,
@@ -74,6 +75,7 @@ const sprite* get_minimap();
 const sprite* get_area_sprites();
 
 bool archive_ard(iostream& file, bool writemode);
+void area_read(const char* url);
 void block_creatures();
 void block_creatures(fnvisible allow, bool keep);
 void block_movement(int range);

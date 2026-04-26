@@ -90,14 +90,15 @@ const char* log::skipws(const char* p) {
 				p++;
 			continue;
 		}
-		if(p[0] == '/' && p[1] == '/') { // End line comment
-			p += 2;
-			while(*p && *p != 10 && *p != 13)
-				p++;
-		}
 		if(p[0] == '/' && p[1] == '*') { // Complex comment
 			p += 2;
 			while(*p && !(p[0] == '*' && p[1] == '/'))
+				p++;
+			continue;
+		}
+		if(p[0] == '/' && p[1] == '/') { // End line comment
+			p += 2;
+			while(*p && *p != 10 && *p != 13)
 				p++;
 		}
 		break;

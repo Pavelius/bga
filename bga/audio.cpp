@@ -6,7 +6,7 @@
 extern array character_speech;
 
 bool audio_allow_sfx = true;
-bool audio_allow_music = true;
+bool audio_allow_music = false;
 
 void play_music_raw(void* object);
 

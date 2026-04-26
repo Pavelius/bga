@@ -106,6 +106,13 @@ BSMETA(color) = {
 BSMETA(colorgrad) = {
 	BSREQ(id), BSREQ(indecies),
 	{}};
+BSMETA(container) = {
+	{}};
+BSMETA(creature) = {
+	BSREQ(area_index),
+	BSREQ(position_index),
+	BSREQ(orientation),
+	{}};
 BSMETA(damagei) = {
 	BSREQ(id),
 	{}};
@@ -260,6 +267,8 @@ BSDATA(varianti) = {
 	{"Class", VAR(classi, 1), ftinfo<classi>},
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"Condition", VAR(conditioni, 1), 0, 0, fnscript<conditioni>, fttest<conditioni>},
+	{"Container", VAR(container, 0)},
+	{"Creature", VAR(creature, 3)},
 	{"DayPart", VAR(periodi, 1)},
 	{"Diety", VAR(dietyi, 1)},
 	{"Entrance", VAR(entrancei, 1)},

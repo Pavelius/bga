@@ -73,6 +73,7 @@
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="bam_util.cpp" />
     <ClCompile Include="bsreq.cpp" />
+    <ClCompile Include="area_read.cpp" />
     <ClCompile Include="bstream.cpp" />
     <ClCompile Include="calendar.cpp" />
     <ClCompile Include="class.cpp" />

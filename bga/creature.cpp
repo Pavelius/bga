@@ -535,3 +535,9 @@ void party_add_item(item& v) {
 			p->additem(v);
 	}
 }
+
+bool creature::roll(skilln v, int bonus) {
+	auto chance = get(v) + getbonus(bsdata<skilli>::elements[v].ability);
+	auto difficult = 10 - bonus;
+	return d20() + chance >= difficult;
+}

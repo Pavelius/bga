@@ -27,6 +27,7 @@ struct creature : actor, avatarable, spellv {
 	bool			isparty() const;
 	bool			isselected() const;
 	bool			isusable(const item& it) const;
+	bool			roll(skilln value, int bonus = 0); // Default roll against difficult 10.
 	void			update();
 	void			update_abilities();
 };

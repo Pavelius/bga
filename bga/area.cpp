@@ -180,6 +180,12 @@ void read_area(areai* area) {
 		return;
 	if(!load_mmp_file(area->id))
 		return;
+	if(!area->is(AreaVisited)) {
+		char temp[64]; stringbuilder sb(temp);
+		sb.add("areas/%1.inf", area->id);
+		area_read(temp);
+		area->set(AreaVisited);
+	}
 }
 
 bool is_state(unsigned short index, areafn v) {

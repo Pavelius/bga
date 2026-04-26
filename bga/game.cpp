@@ -22,6 +22,8 @@
 #include "view.h"
 #include "worldmap.h"
 
+// #define AREA_DISAPEAR
+
 using namespace draw;
 
 gamei game;
@@ -41,6 +43,7 @@ template<> void archive::set<areai>(areai& e) {
 	set(e.doors_trapped);
 	set(e.region_disabled);
 	set(e.animate_disabled);
+	set(e.flags);
 }
 
 static void use_all_doors() {
@@ -95,7 +98,9 @@ static void load_area(areai* area) {
 }
 
 void enter(const char* location) {
+#ifdef AREA_DISAPEAR
 	scene_disapear(0, colors::black);
+#endif
 	auto pn = bsdata<entrancei>::find(location);
 	if(!pn)
 		return;
@@ -105,8 +110,10 @@ void enter(const char* location) {
 #endif
 	setcamera(pn->position);
 	setparty(pn->position, pn->orientation);
+#ifdef AREA_DISAPEAR
 	update_frames();
 	scene_appear(view_game_area, 0);
+#endif
 	next_scene(open_game);
 }
 
