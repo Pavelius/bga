@@ -36,6 +36,24 @@ int	storei::getcost(storefn v) const {
 		if(identify_percent)
 			n = n * identify_percent / 100;
 		return n;
+	case UserAllowBuy:
+		n = buy_percent;
+		if(!n)
+			n = 150;
+		n -= game.abilities[Reputation] / 3;
+		if(n < 100)
+			n = 100;
+		return n;
+	case UserAllowSell:
+		n = sell_percent;
+		if(!n)
+			n = 40;
+		n += game.abilities[Reputation] / 3;
+		if(n < 5)
+			n = 5;
+		else if(n > 95)
+			n = 95;
+		return n;
 	case AllowPeasantRoom:
 		return room_prices[0];
 	case AllowMerchantRoom:

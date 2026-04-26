@@ -1677,7 +1677,9 @@ static void paint_item_description() {
 	paint_dialog("GIITMH08");
 	setdialog(36, 37, 357, 30); texta(metrics::h1, str("%ItemName"), AlignCenterCenter);
 	setdialog(430, 20, 64, 64); paint_item_avatar();
-	setdialog(20, 432); button(pb1, 1, 2, 'I', "Identify"); fire(identify_item);
+	if(last_item->needidentify()) {
+		setdialog(20, 432); button(pb1, 1, 2, 'I', "Identify"); fire(identify_item);
+	}
 	setdialog(179, 432); button(pb1, 1, 2, 'U', "UseItem");
 	setdialog(338, 432); button(pb1, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
 	setdialog(28, 115, 435, 299); paint_description(17, -6, 12);

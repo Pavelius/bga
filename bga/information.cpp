@@ -97,7 +97,7 @@ static void addb(stringbuilder& sb, abilityn i, int value, bool skip_zero = true
 	addb(sb, bsdata<abilityi>::elements[i].id, value, bsdata<abilityi>::elements[i].format, skip_zero);
 }
 
-static void add_description(stringbuilder& sb, const char* id, const char* id_basic = 0) {
+static void add_description(stringbuilder& sb, const char* id, const char* id_basic) {
 	auto pn = getnme(ids(id, "Info"));
 	if(!pn && id_basic)
 		pn = getnme(ids(id_basic, "Info"));
@@ -241,7 +241,11 @@ static void player_skill_information(stringbuilder& sb) {
 }
 
 static void item_name(stringbuilder& sb) {
-	sb.add(last_item->getname());
+	auto& ei = last_item->geti();
+	if(ei.basic && !last_item->identified)
+		sb.add(ei.basic->getname());
+	else
+		sb.add(last_item->getname());
 }
 
 static void addv(stringbuilder& sb, const classa& v) {
@@ -281,28 +285,40 @@ static void spell_information(stringbuilder& sb) {
 	add_saving_throws(sb);
 }
 
+static void add_description(stringbuilder& sb, const item* pi) {
+	auto& ei = pi->geti();
+	if(ei.basic && !pi->identified)
+		add_description(sb, ei.basic->id, 0);
+	else if(ei.basic)
+		add_description(sb, ei.id, ei.basic->id);
+	else
+		add_description(sb, ei.id, 0);
+}
+
 static void item_information(stringbuilder& sb) {
-	auto& ei = last_item->geti();
-	add_description(sb, ei.id, ei.basic ? ei.basic->id : 0);
-	addb(sb, "MagicBonus", ei.magic, "%+1i");
-	if(ei.wear == QuickWeapon) {
-		addb(sb, "AttackBonus", ei.weapon.bonus, "%+1i");
-		addd(sb, "Damage", ei.weapon.damage, ei.weapon.type);
-		if(ei.is(Flaming)) {
+	add_description(sb, last_item);
+	auto pi = &last_item->geti();
+	if(pi->basic && !last_item->identified)
+		pi = pi->basic;
+	addb(sb, "MagicBonus", pi->magic, "%+1i");
+	if(pi->wear == QuickWeapon) {
+		addb(sb, "AttackBonus", pi->weapon.bonus, "%+1i");
+		addd(sb, "Damage", pi->weapon.damage, pi->weapon.type);
+		if(pi->is(Flaming)) {
 			sb.adds("%-And ");
 			addv(sb, {1, 6}, Fire);
 		}
-		if(ei.is(Frost)) {
+		if(pi->is(Frost)) {
 			sb.adds("%-And ");
 			addv(sb, {1, 6}, Cold);
 		}
-		add_critical(sb, ei.getcritical(), ei.getmultiplier(), ei.flags);
+		add_critical(sb, pi->getcritical(), pi->getmultiplier(), pi->flags);
 	}
-	add_statistics(sb, ei.wearing);
-	add_db(sb, "MaxDexterityBonus", ei.max_dex_bonus);
-	if(ei.required)
-		addv(sb, "Required", bsdata<feati>::elements[ei.required].getname());
-	addv(sb, "Weight", getkg(ei.weight));
+	add_statistics(sb, pi->wearing);
+	add_db(sb, "MaxDexterityBonus", pi->max_dex_bonus);
+	if(pi->required)
+		addv(sb, "Required", bsdata<feati>::elements[pi->required].getname());
+	addv(sb, "Weight", getkg(pi->weight));
 }
 
 static void passed_time(stringbuilder& sb) {
@@ -420,7 +436,7 @@ static void add_advantages(stringbuilder& sb, variant parent) {
 
 template<> void ftinfo<racei>(const void* object, stringbuilder& sb) {
 	auto p = (racei*)object;
-	add_description(sb, p->id);
+	add_description(sb, p->id, 0);
 	addh(sb, "Description");
 	if(p->favor)
 		addv<classi>(sb, "FavorClass", p->favor);
@@ -431,7 +447,7 @@ template<> void ftinfo<racei>(const void* object, stringbuilder& sb) {
 
 template<> void ftinfo<classi>(const void* object, stringbuilder& sb) {
 	auto p = (classi*)object;
-	add_description(sb, p->id);
+	add_description(sb, p->id, 0);
 	addh(sb, "HitPoints"); sb.addn("+1d%1i %-PerLevel", p->hit_points);
 	addh(sb, "SkillPoints"); sb.addn("%1i+%-IntellegenceBonus %-PerLevel", p->skill_points);
 	adds(sb, bsdata<alignmenti>::source, "Alignment", p->alignment, 0, 8);
@@ -441,7 +457,7 @@ template<> void ftinfo<classi>(const void* object, stringbuilder& sb) {
 
 template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
 	auto p = (skilli*)object;
-	add_description(sb, p->id);
+	add_description(sb, p->id, 0);
 	sb.add("\n\n");
 	addv<abilityi>(sb, "BasicAbility", p->ability);
 	// sb.add("%BasicAbility: %1", bsdata<abilityi>::elements[p->ability].getname());
@@ -449,7 +465,7 @@ template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
 
 template<> void ftinfo<feati>(const void* object, stringbuilder& sb) {
 	auto p = (feati*)object;
-	add_description(sb, p->id);
+	add_description(sb, p->id, 0);
 	add_special(sb, p->id, "Benefit");
 	add_special(sb, p->id, "Normal");
 	add_value(sb, "Required", p->require);

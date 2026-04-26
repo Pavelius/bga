@@ -225,8 +225,21 @@ static int get_back_frame() {
 	}
 }
 
+static void buy_goods() {
+	auto total = shop_goods.total() * last_store->getcost(UserAllowBuy) / 100;
+	for(auto& e : shop_goods) {
+		if(!e.count)
+			continue;
+		item it(e.source->type, e.count);
+		e.source->setcount(e.source->count - e.count);
+		party_add_item(it);
+	}
+	player->coins += total;
+	need_update_items = true;
+}
+
 static void sell_goods() {
-	auto total = player_goods.total();
+	auto total = player_goods.total() * last_store->getcost(UserAllowSell) / 100;
 	for(auto& e : player_goods) {
 		if(!e.count)
 			continue;

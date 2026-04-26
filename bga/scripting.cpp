@@ -94,12 +94,17 @@ static bool if_spellcaster() {
 	return r > 0;
 }
 
+static void identify_item(int bonus) {
+	last_item->identify(bonus);
+}
+
 BSDATA(conditioni) = {
 	{"IfSpellcaster", if_spellcaster},
 };
 BSDATAF(conditioni)
 BSDATA(script) = {
 	{"Damage", damage_change},
+	{"IdentifyItem", identify_item},
 	{"Heal", heal},
 	{"PartyMember", party_member},
 };

@@ -4,9 +4,9 @@ HelpElements
  elements Ability Race Class Skill Feat
 
 DebugPlayer1
- elements LongSword Helm PotionOfHealing+10
+ elements BattleAxe Helm PotionOfHealing+10
 DebugPlayer2
- elements LargeShield HelmFull PotionOfHealing+2
+ elements LargeShield HelmFull PotionOfHealing+2 LongSwordFlaming
 DebugStart
  elements InsideBackpack DebugPlayer1 PartyMember+1 DebugPlayer2
 

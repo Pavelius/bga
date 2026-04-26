@@ -523,3 +523,15 @@ void creature::getattack(weaponi& result, const item& weapon) const {
 		result.bonus += get(AttackMelee);
 	}
 }
+
+void party_add_item(item& v) {
+	// Add to current player
+	player->additem(v);
+	if(!v)
+		return;
+	// Add to other party player from begin
+	for(auto p : party) {
+		if(p)
+			p->additem(v);
+	}
+}

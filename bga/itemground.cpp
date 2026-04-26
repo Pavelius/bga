@@ -15,8 +15,7 @@ void add_item(short unsigned area, point position, item& v) {
 			}
 		}
 	}
-	auto p = bsdata<itemground>::add();
-	p->clear();
+	auto p = bsdata<itemground>::addz();
 	p->type = v.type;
 	p->count = v.count;
 	p->data = v.data;

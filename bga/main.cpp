@@ -36,6 +36,7 @@ int main(int argc, char* argv[]) {
 #ifdef _DEBUG
 	util_main();
 #endif // _DEBUG
+	initialize_items();
 	initialize_translation();
 	initialize_colorgrad();
 	initialize_feats();

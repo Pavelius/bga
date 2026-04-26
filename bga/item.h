@@ -65,18 +65,21 @@ struct item {
 	bool			canequip(wearn v) const;
 	void			clear() { type = 0; count = 0; data = 0; }
 	bool			equal(const item& v) const { return type == v.type && data == v.data; }
-	void			identify(int v) { identified = v; }
-	bool			is(itemf v) const { return geti().is(v); }
-	bool			is(wearn v) const;
-	bool			isweapon() const { return geti().weapon.operator bool(); }
 	int				getcost() const { return geti().cost; }
 	int				getcostall() const;
 	const itemi&	geti() const { return bsdata<itemi>::elements[type]; }
 	void			getinfo(stringbuilder& sb) const;
 	const char*		getname() const;
 	int				getweight() const { return count * geti().weight; }
+	void			identify(int v) { identified = v; }
+	bool			is(itemf v) const { return geti().is(v); }
+	bool			is(wearn v) const;
+	bool			isweapon() const { return geti().weapon.operator bool(); }
+	bool			needidentify() const { return geti().basic && !identified; }
 	void			setcount(int v);
 };
 extern item* last_item;
 extern item* party_item;
 extern item* store_item;
+
+void initialize_items();

@@ -47,6 +47,7 @@ void create_character(gendern gender);
 void create_npc(point position, const char* id);
 bool have_multiselect();
 bool have_selection();
+void party_add_item(item& v);
 void player_finish();
 void raise_class(classn classv);
 void raise_race(racen race);

@@ -132,5 +132,29 @@ void item::setcount(int v) {
 		clear();
 }
 
-static void add_item(short unsigned area, short unsigned index, item& v) {
+void initialize_items() {
+	for(auto& e : bsdata<itemi>()) {
+		if(e.basic) {
+			if(!e.weight)
+				e.weight = e.basic->weight;
+			if(!e.required)
+				e.required = e.basic->required;
+			if(!e.flags)
+				e.flags = e.basic->flags;
+			if(!e.weapon)
+				e.weapon = e.basic->weapon;
+			if(!e.cost)
+				e.cost = e.basic->cost;
+			if(!e.avatar)
+				e.avatar = e.basic->avatar;
+			if(!e.equiped)
+				e.equiped = e.basic->equiped;
+			if(!e.wear)
+				e.wear = e.basic->wear;
+		}
+		if(e.weapon) {
+			e.weapon.damage.b += e.magic;
+			e.weapon.bonus += e.magic;
+		}
+	}
 }
