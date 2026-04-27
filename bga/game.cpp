@@ -4,7 +4,7 @@
 #include "archive.h"
 #include "console.h"
 #include "container.h"
-#include "creature.h"
+#include "creaturea.h"
 #include "door.h"
 #include "draw.h"
 #include "entrance.h"
@@ -90,6 +90,7 @@ void party_move(point v) {
 }
 
 static void load_area(areai* area) {
+	need_update_creatures = true;
 	audio_reset();
 	read_area(area);
 	use_all_doors();
@@ -205,13 +206,17 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	a.set(bsdata<creature>::source);
 	a.set(bsdata<itemground>::source);
 	if(!write_mode) {
+#ifdef AREA_DISAPEAR
 		scene_disapear(0, colors::black);
+#endif
 		auto p = bsdata<areai>::find(area_name);
 		if(!p)
 			return false;
 		load_area(p);
+#ifdef AREA_DISAPEAR
 		update_frames();
 		scene_appear(view_game_area, 0);
+#endif
 		next_scene(open_game);
 	}
 	return true;

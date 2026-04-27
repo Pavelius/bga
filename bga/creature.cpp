@@ -79,7 +79,7 @@ void apply_portraits() {
 }
 
 void player_finish() {
-	player->update();
+	update_player();
 	player->hp = player->hp_max;
 	player->stop();
 }
@@ -214,26 +214,13 @@ static int get_skill_points(classn v) {
 	return n;
 }
 
-void create_npc(point position, const char* id) {
-	player = 0;
-	auto pn = bsdata<npci>::find(id);
-	if(!pn)
-		return;
-	player = bsdata<creature>::add();
-	player->clear();
-	player->npc = getbsi(pn);
-	player->area_index = current_area;
-	player->gender = pn->gender;
-	player->portrait = 0xFFFF;
-	copy(player->basic, *((statable*)pn));
-	for(auto i = Commoner; i <= Wizard; i = (classn)(i + 1)) {
-		if(!pn->classes[i])
-			continue;
-		for(auto n = 0; n < pn->classes[i]; n++)
-			raise_class(i);
+void create_abilities(bool allow_random) {
+	for(auto i = Strenght; i <= Charisma; i = (abilityn)(i + 1)) {
+		if(allow_random)
+			player->basic.abilities[i] = 9 + xrand(0, 3);
+		else
+			player->basic.abilities[i] = 10;
 	}
-	player_finish();
-	player->setposition(position);
 }
 
 void create_character(racen race, gendern gender, classn classv, unsigned short portrait) {

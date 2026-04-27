@@ -1,6 +1,6 @@
 #include "area.h"
 #include "bsreq.h"
-#include "creature.h"
+#include "creaturea.h"
 #include "container.h"
 #include "log.h"
 #include "logvalue.h"
@@ -55,18 +55,19 @@ static const char* create_creature(const char* p) {
 	player = bsdata<creature>::add();
 	player->clear();
 	player->area_index = current_area;
+	player->portrait = 0xFFFF;
 	p = psnum(p, player->position_index);
 	p = psnum(p, player->orientation);
-	// Type
+	player->position = i2sc(player->position_index);
 	p = skipws(psidf(p, sb));
 	auto pm = bsdata<npci>::find(temp);
 	if(pm)
-		fnscript<npci>(pm - bsdata<npci>::elements, 0);
+		ftscript<npci>(pm - bsdata<npci>::elements, 0);
 	else
 		apply_custom(temp);
-	player->position = i2sc(player->position_index);
 	p = read_variants(p);
-	update_player();
+	player_finish();
+	need_update_creatures = true;
 	return p;
 }
 

@@ -85,6 +85,7 @@
     <ClCompile Include="console.cpp" />
     <ClCompile Include="container.cpp" />
     <ClCompile Include="creature.cpp" />
+    <ClCompile Include="creaturea.cpp" />
     <ClCompile Include="cre_util.cpp" />
     <ClCompile Include="damage.cpp" />
     <ClCompile Include="dice.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="condition.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="container.h" />
+    <ClInclude Include="creaturea.h" />
     <ClInclude Include="damage.h" />
     <ClInclude Include="dice.h" />
     <ClInclude Include="diety.h" />

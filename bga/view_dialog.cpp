@@ -5,7 +5,7 @@
 #include "audio.h"
 #include "colorgrad.h"
 #include "console.h"
-#include "creature.h"
+#include "creaturea.h"
 #include "draw.h"
 #include "form.h"
 #include "formation.h"

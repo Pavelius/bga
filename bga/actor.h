@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ability.h"
 #include "class.h"
 #include "coloration.h"
@@ -5,8 +7,6 @@
 #include "race.h"
 #include "resname.h"
 #include "wearable.h"
-
-#pragma once
 
 struct sprite;
 struct npci;

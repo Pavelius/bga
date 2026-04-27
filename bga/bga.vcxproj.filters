@@ -476,6 +476,9 @@
     <ClCompile Include="area_read.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="creaturea.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -803,6 +806,9 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="itemground.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="creaturea.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

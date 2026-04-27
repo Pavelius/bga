@@ -1,8 +1,8 @@
+#pragma once
+
 #include "actor.h"
 #include "portrait.h"
 #include "spell.h"
-
-#pragma once
 
 enum alignmentn : unsigned char;
 enum dietyn : unsigned char;
@@ -42,9 +42,9 @@ int skill_points_per_level(classn v);
 void apply_portraits();
 void check_combat();
 void clear_selection();
+void create_abilities(bool allow_random);
 void create_character(racen race, gendern gender, classn classv, unsigned short portrait);
 void create_character(gendern gender);
-void create_npc(point position, const char* id);
 bool have_multiselect();
 bool have_selection();
 void party_add_item(item& v);

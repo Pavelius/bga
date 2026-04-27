@@ -11,7 +11,7 @@ union variant;
 typedef void (*fngetinfo)(const void* object, variant v, stringbuilder& sb);
 
 struct varianti {
-	typedef void(*fnscript)(int index, int bonus);
+	typedef void(*ftscript)(int index, int bonus);
 	typedef void(*fnread)(const char* url);
 	typedef bool(*fntest)(int index, int bonus);
 	const char*		id;
@@ -20,7 +20,7 @@ struct varianti {
 	int             key_count;
 	fnstatus		pstatus;
 	fngetinfo		pgetinfo;
-	fnscript		pscript;
+	ftscript		pscript;
 	fntest			ptest;
 	fnread			pread;
 	fnevent			pinitialize;

@@ -4,7 +4,7 @@
 #include "calendar.h"
 #include "console.h"
 #include "container.h"
-#include "creature.h"
+#include "creaturea.h"
 #include "door.h"
 #include "draw.h"
 #include "drawable.h"
@@ -248,12 +248,11 @@ static void update_floattext_tail() {
 }
 
 static void prepare_creatures() {
-	for(auto& e : bsdata<creature>()) {
-		if(!e.ispresent())
+	update_creatures();
+	for(auto p : creatures) {
+		if(!p->position.in(last_area))
 			continue;
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
+		objects.add(p);
 	}
 }
 

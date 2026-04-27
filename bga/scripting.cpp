@@ -25,14 +25,14 @@ static int get_bonus(int counter, int minimum = 1) {
 	return counter;
 }
 
-template<> void fnscript<abilityi>(int value, int counter) {
+template<> void ftscript<abilityi>(int value, int counter) {
 	switch(modifier) {
 	case Permanent: player->basic.abilities[value] += counter; break;
 	default: player->abilities[value] += counter; break;
 	}
 }
 
-template<> void fnscript<feati>(int value, int counter) {
+template<> void ftscript<feati>(int value, int counter) {
 	if(counter >= 0) {
 		switch(modifier) {
 		case Permanent: player->basic.feats.set(value); break;
@@ -41,12 +41,22 @@ template<> void fnscript<feati>(int value, int counter) {
 	}
 }
 
-template<> void fnscript<form>(int value, int counter) {
+template<> void ftscript<form>(int value, int counter) {
 	auto& e = bsdata<form>::elements[value];
 	execute(e.command, e.param1, e.param2, (void*)e.object);
 }
 
-template<> void fnscript<itemi>(int value, int counter) {
+template<> void ftscript<classi>(int value, int counter) {
+	auto m = get_bonus(counter);
+	switch(modifier) {
+	case Permanent:
+		for(int i = 0; i < m; i++)
+			raise_class((classn)value);
+		break;
+	}
+}
+
+template<> void ftscript<itemi>(int value, int counter) {
 	if(counter >= 0) {
 		counter = get_bonus(counter);
 		item it(value, counter);
@@ -59,24 +69,27 @@ template<> void fnscript<itemi>(int value, int counter) {
 	}
 }
 
-template<> void fnscript<listi>(int value, int counter) {
-	auto push_modifier = modifier;
+template<> void ftscript<listi>(int value, int counter) {
+	pushvalue push(modifier);
 	script_run(bsdata<listi>::elements[value].elements);
-	modifier = push_modifier;
 }
 
-template<> void fnscript<npci>(int value, int counter) {
+template<> void ftscript<npci>(int value, int counter) {
 	auto pm = bsdata<npci>::elements + value;
 	player->gender = pm->gender;
 	player->race = pm->race;
 	player->alignment = pm->alignment;
 	player->npc = getbsi(pm);
 	memcpy(player->colors, pm->colors, sizeof(player->colors));
+	create_abilities(true);
+	pushvalue push(modifier, Permanent);
+	script_run(bsdata<racei>::elements[player->race].elements);
+	script_run(pm->elements);
 }
 
 static void damage_change(int bonus) {
-	fnscript<abilityi>(DamageMelee, bonus);
-	fnscript<abilityi>(DamageRanged, bonus);
+	ftscript<abilityi>(DamageMelee, bonus);
+	ftscript<abilityi>(DamageRanged, bonus);
 }
 
 static void heal(int bonus) {
