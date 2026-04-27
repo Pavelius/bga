@@ -7,14 +7,17 @@
 enum alignmentn : unsigned char;
 enum dietyn : unsigned char;
 
-struct creature : actor, avatarable, spellv {
-	statable		basic;
+struct creature : actor, statable, classa, avatarable, spellv {
+	racen			race;
+	gendern			gender;
 	alignmentn		alignment;
 	dietyn			diety;
+	statable		basic;
 	char			initiative;
 	short			hp, hp_max;
 	unsigned		experience;
 	resname			name;
+	short unsigned	speak;
 	explicit operator bool() const { return hp > 0; }
 	void			select();
 	void			clear();

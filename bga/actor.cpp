@@ -120,17 +120,17 @@ void actor::wait(unsigned milliseconds) {
 	delay += milliseconds;
 }
 
-static sprite::cicle* get_cicle(sprite* ps, animaten action, int o) {
+static int get_cicle(sprite* ps, animaten action, int o) {
 	switch(ps->cicles) {
 	case anm_a1o8:
-		return ps->gcicle(bsdata<animatei>::elements[action].a1o8 * 8 + o / 2);
+		return bsdata<animatei>::elements[action].a1o8 * 8 + o / 2;
 	case anm_hg1o8:
-		return ps->gcicle(bsdata<animatei>::elements[action].hg1o8 * 8 + o / 2);
+		return bsdata<animatei>::elements[action].hg1o8 * 8 + o / 2;
 	default:
 		// Standat character animation
 		if(o >= max_sprite_directions)
 			o = (max_sprite_directions - 1) * 2 - o;
-		return ps->gcicle(action * max_sprite_directions + o);
+		return action * max_sprite_directions + o;
 	}
 }
 
@@ -143,20 +143,14 @@ static unsigned get_flags(sprite* ps, int o) {
 	}
 }
 
-void actor::resetframes() {
+void actor::resetframe() {
 	sprite* ps = getsprite();
 	if(!ps)
 		return;
-	auto ff = get_flags(ps, orientation);
-	auto pc = get_cicle(ps, action, orientation);
-	auto fb = pc->start;
-	auto fe = pc->start + pc->count;
-	if(frame >= fb && frame < fe && frame_start == fb && frame_stop == fe && ff == frame_flags)
-		return;
-	frame_flags = ff;
-	frame_start = pc->start;
-	frame_stop = frame_start + pc->count - 1;
-	frame = frame_start;
+	cicle = get_cicle(ps, action, orientation);
+	frame_flags = get_flags(ps, orientation);
+	auto pc = ps->gcicle(cicle);
+	frame = 0;
 }
 
 void actor::stop() {
@@ -175,7 +169,7 @@ void actor::lookat(point destination) {
 
 void actor::lookat(directionn direction) {
 	setorientation(direction);
-	resetframes();
+	resetframe();
 }
 
 void actor::moveto(point destination) {
@@ -183,8 +177,6 @@ void actor::moveto(point destination) {
 		return;
 	area_index = current_area;
 	lookat(destination);
-	//setposition(new_position);
-	//stop();
 	setanimate(AnimateMove);
 	move_start = position;
 	move_stop = destination;
@@ -201,12 +193,10 @@ unsigned actor::getwait() const {
 
 void actor::setreverse(animaten v) {
 	setanimate(v);
-	iswap(frame_start, frame_stop);
-	frame = frame_start;
+	// TODO: set backward animate
 }
 
 void actor::nextaction() {
-	resetaction();
 	switch(action) {
 	case AnimateStand:
 		if(chance(10))
@@ -254,12 +244,14 @@ void actor::updateanimate() {
 	while(delay < 0) {
 		auto prev_action = action;
 		wait(getwait());
-		if(frame == frame_stop)
+		auto ps = getsprite();
+		if(!ps)
+			continue;
+		auto pc = ps->gcicle(cicle);
+		if(++frame == pc->count) {
+			frame = 0;
 			nextaction();
-		else if(frame < frame_stop)
-			frame++;
-		else
-			frame--;
+		}
 		if(action == AnimateMove) {
 			movestep(getspeed());
 			if(!ismoving())

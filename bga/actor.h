@@ -31,19 +31,15 @@ enum animaten : unsigned char {
 enum gendern : unsigned char;
 enum directionn : unsigned char;
 
-struct actor : moveable, coloration, statable, classa, wearable {
-	racen			race;
-	gendern			gender;
+struct actor : moveable, coloration, wearable {
 	short unsigned	resid[4]; // Images overlays. 0xFFFF is none.
-	short unsigned	cicle;
-	short unsigned	position_index;
-	animaten		action;
-	short unsigned	area_index;
-	short unsigned	frame, frame_stop, frame_start;
+	short unsigned	cicle; // Current animation cicle
+	short unsigned	frame;
 	unsigned		frame_flags;
+	animaten		action;
 	unsigned char	orientation;
+	short unsigned	area_index;
 	int				delay;
-	short unsigned	speak;
 	featf			feats;
 	void			animateattack(drawable* target);
 	void			animatedamage();
@@ -66,9 +62,8 @@ private:
 	sprite*			getsprite() const;
 	unsigned		getwait() const;
 	void			nextaction();
-	void			resetaction() { frame = frame_start; }
-	void			resetframes();
-	void			setanimate(animaten v) { action = v; resetframes(); }
+	void			resetframe();
+	void			setanimate(animaten v) { action = v; resetframe(); }
 	void			setreverse(animaten v);
 	void			wait(unsigned milliseconds);
 };
