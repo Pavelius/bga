@@ -366,7 +366,7 @@ static void character_feats(stringbuilder& sb) {
 		if(!e.is(GeneralFeat))
 			continue;
 		auto n = e.getindex();
-		if(!player->basic.is(n))
+		if(!player->is(n))
 			continue;
 		sb.addn(e.getname());
 	}

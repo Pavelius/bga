@@ -33,12 +33,8 @@ template<> void ftscript<abilityi>(int value, int counter) {
 }
 
 template<> void ftscript<feati>(int value, int counter) {
-	if(counter >= 0) {
-		switch(modifier) {
-		case Permanent: player->basic.feats.set(value); break;
-		default: player->feats.set(value); break;
-		}
-	}
+	if(counter >= 0)
+		player->feats.set(value);
 }
 
 template<> void ftscript<form>(int value, int counter) {
@@ -79,12 +75,14 @@ template<> void ftscript<npci>(int value, int counter) {
 	player->gender = pm->gender;
 	player->race = pm->race;
 	player->alignment = pm->alignment;
-	player->npc = getbsi(pm);
 	memcpy(player->colors, pm->colors, sizeof(player->colors));
 	create_abilities(true);
 	pushvalue push(modifier, Permanent);
 	script_run(bsdata<racei>::elements[player->race].elements);
 	script_run(pm->elements);
+	for(int i = 0; i < lenghtof(pm->resid); i++)
+		player->resid[i] = getbsi(pm->resid[i]);
+	player->feats.remove(DynamicAnimation);
 }
 
 static void damage_change(int bonus) {

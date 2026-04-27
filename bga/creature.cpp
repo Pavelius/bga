@@ -108,7 +108,8 @@ void creature::clear() {
 	memset(this, 0, sizeof(*this));
 	area_index = 0xFFFF;
 	move_order = 0xFFFF;
-	npc = 0xFFFF;
+	for(auto& e : resid)
+		e = 0xFFFF;
 }
 
 static short unsigned random_portrait_no_party(gendern gender) {
@@ -128,7 +129,7 @@ void raise_class(classn classv) {
 	player->classes[classv] += 1;
 	auto level = player->classes[classv];
 	if(level == 1)
-		player->basic.feats.add(0, ei.proficient);
+		player->feats.add(0, ei.proficient);
 	apply_advance(v, player->classes[classv]);
 	if(player->getlevel() == 1 && ischaracter(classv))
 		player->basic.abilities[HitPoints] += ei.hit_points;
@@ -234,6 +235,7 @@ void create_character(racen race, gendern gender, classn classv, unsigned short 
 	apply_portraits();
 	raise_class(classv);
 	raise_random_skills(get_skill_points(classv));
+	player->set(DynamicAnimation);
 	player_finish();
 }
 
@@ -253,21 +255,16 @@ void create_party_character(int index) {
 	raise_class(e.type);
 	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1))
 		player->basic.skills[i] = e.skills[i];
-	player->basic.feats.add(e.feats);
+	player->feats.add(e.feats);
 	for(auto i : e.items) {
 		if(!i)
 			break;
 		item it(i);
 		player->equip(it);
 	}
+	player->set(DynamicAnimation);
 	player_finish();
 }
-
-//void create_character(gendern gender) {
-//	auto pi = random_portrait_no_party(gender);
-//	auto p = bsdata<portraiti>::elements + pi;
-//	create_character(p->race, p->gender, p->classv, pi);
-//}
 
 bool creature::isclass(skilln v) const {
 	for(auto i = (classn)0; i <= Wizard; i = (classn)(i + 1)) {
@@ -335,65 +332,10 @@ static void update_abilities() {
 		player->hp = player->hp_max;
 }
 
-static short unsigned get_resid(item equipment, int ws) {
-	static int ai[] = {max_weapon_anim * 3, max_weapon_anim * 2, max_weapon_anim * 1, 0};
-	if(!equipment)
-		return 0xFFFF;
-	auto p = equipment.geti().equiped;
-	if(!p)
-		return 0xFFFF;
-	return getbsi(p + ai[ws]);
-}
-
-static short unsigned get_character_animation(racen race, gendern gender, classn type, int ai, int& ws) {
-	auto& ei = bsdata<racei>::elements[race];
-	auto i = (gender == Female) ? 1 : 0;
-	auto p = ei.res[i];
-	if(!p)
-		return 0xFFFF;
-	auto n = bsdata<classi>::elements[type].ai; // Animation class: 0 - default, 1 - cleric, 2 - theif, 3 - wizard, 4 - monk.
-	auto w = ei.ws[i]; // `ws` is index of weapon set
-	// Allowed animation set (by count of animation types)
-	// 10 - CDMB1, CDMB2, CDMB3, CDMC4, CDMF4, CDMT1, CDMW1, CDMW2, CDMW3, CDMW4
-	// 11 - CHFB1, CHFB2, CHFB3, CHFC4, CHFF4, CHFM1, CHFT1, CHFW1, CHFW2, CHFW3, CHFW4,
-	//  6 - CIMB1, CIMB2, CIMB3, CIMC4, CIMF4, CIMT1
-	if(n == 0 && ai == 3)
-		ai = 4; // Default animation have other index for heavy armor
-	switch(ei.resm) {
-	case 10:
-		switch(n) {
-		case 2: case 4: p += 5; break;
-		case 3: p += 6 + ai; break;
-		default: p += ai; break;
-		}
-		break;
-	case 6:
-		switch(n) {
-		case 2: case 3: case 4: p += 5; break;
-		default: p += ai; break;
-		}
-		break;
-	default:
-		switch(n) {
-		case 2: p += 6; break;
-		case 3: p += 7 + ai; break;
-		case 4: p += 5; break;
-		default: p += ai; break;
-		}
-		break;
-	}
-	return getbsi(p);
-}
-
 static void update_animation() {
 	if(player->is(DynamicAnimation)) {
-		int ws = 0;
-		player->resid[0] = get_character_animation(player->race, player->gender, player->getmainclass(), 0, ws);
-		if(player->resid[0] != 0xFFFF) {
-			player->resid[1] = get_resid(player->getweapon(), ws);
-			player->resid[2] = get_resid(player->wears[Head], ws);
-			player->resid[3] = get_resid(player->getoffhand(), ws);
-		}
+		set_resid(player->resid, player->race, player->gender, player->getmainclass(), get_armor_index(player->wears[Body]),
+			player->getweapon(), player->getoffhand(), player->wears[Head]);
 	}
 }
 
@@ -431,7 +373,7 @@ bool creature::isusable(const item& it) const {
 	auto n = it.geti().required;
 	if(!n)
 		return true;
-	return basic.is(n);
+	return is(n);
 }
 
 void creature::select() {
@@ -547,7 +489,7 @@ static bool is_allow(creature* p, variants source) {
 			if(p->basic.abilities[v.value] < v.counter)
 				return false;
 		} else if(v.iskind<feati>()) {
-			if(!p->basic.feats.is(v.value))
+			if(!p->feats.is(v.value))
 				return false;
 		} else if(v.iskind<conditioni>()) {
 			if(!bsdata<conditioni>::elements[v.value].proc())
@@ -558,7 +500,7 @@ static bool is_allow(creature* p, variants source) {
 }
 
 bool creature::isallow(featn v) const {
-	if(basic.is(v))
+	if(is(v))
 		return true;
 	return is_allow(const_cast<creature*>(this), bsdata<feati>::elements[v].require);
 }

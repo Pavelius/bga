@@ -9,7 +9,6 @@
 #include "wearable.h"
 
 struct sprite;
-struct npci;
 
 const int max_weapon_anim = 26;
 
@@ -44,14 +43,13 @@ struct actor : moveable, coloration, statable, classa, wearable {
 	unsigned		frame_flags;
 	unsigned char	orientation;
 	int				delay;
-	unsigned short	npc, enemy_id;
 	short unsigned	speak;
+	featf			feats;
 	void			animateattack(drawable* target);
 	void			animatedamage();
 	rect			getbox() const;
 	point			getlu() const;
 	int				getmovement() const { return 6; }
-	npci*			getnpc() const; // Monster and other template characters.
 	int				getspeed() const { return 7; }
 	int				getsize() const { return 1; }
 	bool			ispresent() const;
@@ -65,8 +63,7 @@ struct actor : moveable, coloration, statable, classa, wearable {
 	void			stop();
 	void			updateanimate();
 private:
-	sprite*			getsprite(int& ws) const;
-	sprite*			getsprite() const { int ws; return getsprite(ws); }
+	sprite*			getsprite() const;
 	unsigned		getwait() const;
 	void			nextaction();
 	void			resetaction() { frame = frame_start; }
@@ -78,6 +75,5 @@ private:
 
 int get_armor_index(const item& e);
 
-sprite* get_character_res(racen race, gendern gender, classn type, int ai, int& ws);
-
-void paperdoll(const coloration& colors, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm);
+void paperdoll(const coloration& colors, short unsigned* resid, int animation, int orientation, int frame_tick);
+void set_resid(short unsigned* resid, racen race, gendern gender, classn type, int ai, const item& weapon, const item& offhand, const item& helm);

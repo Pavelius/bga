@@ -30,7 +30,7 @@ extern array console_data;
 
 int game_panel_mode;
 
-unsigned caret_index;
+int caret_index;
 bool button_pressed, button_executed, button_hilited, button_sound, input_disabled;
 bool need_update_items;
 
@@ -473,7 +473,7 @@ static void color_picker_line(int index, int count, int dx) {
 
 void edit(char* string, int maximum, unsigned text_flags, bool upper_case) {
 	pushrect push;
-	auto lenght = zlen(string);
+	int lenght = zlen(string);
 	if(caret_index > lenght)
 		caret_index = lenght;
 	texta(string, text_flags);
@@ -1017,9 +1017,7 @@ void paperdoll() {
 	auto push_caret = caret;
 	caret.x += width / 2;
 	caret.y += height / 2 + 20;
-	paperdoll(*player,
-		player->race, player->gender, player->getmainclass(), 1, orientation, current_tick / 100,
-		player->wears[Body], player->getweapon(), player->getoffhand(), player->wears[Head]);
+	paperdoll(*player, player->resid, 1, orientation, current_tick / 100);
 	caret = push_caret;
 	switch(hot.key) {
 	case KeyLeft:

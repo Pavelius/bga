@@ -270,9 +270,9 @@ static void change_feat() {
 	auto v = hot.param;
 	auto n = (featn)hot.param2;
 	if(v >= 0)
-		player->basic.feats.set(n);
+		player->feats.set(n);
 	else
-		player->basic.feats.remove(n);
+		player->feats.remove(n);
 	feat_points -= (char)v;
 }
 
@@ -313,7 +313,7 @@ static void paint_skill_row(void* object) {
 
 static featn get_next_feat(featn v) {
 	while(v) {
-		if(!player->basic.is(v))
+		if(!player->is(v))
 			return v;
 		auto n = bsdata<feati>::elements[v].upgrade;
 		if(!n)
@@ -325,12 +325,12 @@ static featn get_next_feat(featn v) {
 
 static featn get_feat(featn v) {
 	while(v) {
-		if(!player->basic.is(v))
+		if(!player->is(v))
 			break;
 		auto n = bsdata<feati>::elements[v].upgrade;
 		if(!n)
 			break;
-		if(!player->basic.is(n))
+		if(!player->is(n))
 			break;
 		v = n;
 	}
@@ -346,7 +346,7 @@ static void paint_feat_row(void* object) {
 	auto pf = get_feat(bf);
 	auto b = 3 * (bf % 3);
 	auto allow_plus = feat_points > 0 && uf && !player->is(uf) && player->isallow(uf);
-	auto allow_minus = pf && player->basic.is(pf) && !before_skills_apply.basic.is(pf);
+	auto allow_minus = pf && player->is(pf) && !before_skills_apply.is(pf);
 	tips_click(p);
 	pushrect push; height = 28;
 	caret.x = push.caret.x + 206;
@@ -364,7 +364,7 @@ static void paint_feat_row(void* object) {
 	// Show all points possible
 	caret.x += 190; caret.y += 12;
 	while(true) {
-		image(pma_pfcm, player->basic.is(bf) ? 0 : 1, 0);
+		image(pma_pfcm, player->is(bf) ? 0 : 1, 0);
 		caret.x -= 12;
 		bf = bsdata<feati>::elements[bf].upgrade;
 		if(!bf)
@@ -626,17 +626,17 @@ static bool choose_step_action() {
 	case ChooseSkills:
 		*player = before_skills_apply;
 		player->basic.abilities[SkillPoints] = skill_points_per_level(player->getmainclass()) * 4;
-		if(player->basic.is(BonusSkills))
+		if(player->is(BonusSkills))
 			player->basic.abilities[SkillPoints] += 4;
 		select_skills();
 		if(!scene(paint_choose_skills))
 			return false;
-		feat_points = player->basic.is(BonusFeat) ? 2 : 1;
+		feat_points = player->is(BonusFeat) ? 2 : 1;
 		select_feats(GeneralFeat);
 		header_id = "Feats";
 		if(!scene(paint_choose_feats))
 			return false;
-		if(player->basic.is(BonusFighterFeat)) {
+		if(player->is(BonusFighterFeat)) {
 			feat_points = 1;
 			header_id = "FighterFeats";
 			select_feats(FighterFeat);
@@ -702,8 +702,8 @@ static bool open_character_generation(creature& copy) {
 	before_skills_apply = *player;
 	player->basic.skills[Intimidate] += 4;
 	player->basic.skills[CraftWeapon] += 4;
-	player->basic.feats.set(ImprovedInitiative);
-	player->basic.feats.set(PowerAttack);
+	player->feats.set(ImprovedInitiative);
+	player->feats.set(PowerAttack);
 	player->update();
 	current_step = ChooseName;
 	//current_step = ChooseGender;

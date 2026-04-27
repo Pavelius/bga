@@ -28,7 +28,6 @@ using namespace draw;
 static worldmapi::area* current_world_area_hilite;
 static vector<item*> container_items, items;
 
-void paperdoll(color* pallette, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm);
 void scale2x(void* void_dst, unsigned dst_slice, const void* void_src, unsigned src_slice, unsigned width, unsigned height);
 
 const int tile_size = 64;

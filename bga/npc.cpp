@@ -2,7 +2,7 @@
 #include "rfiles.h"
 
 sprite* npci::getres(int n) {
-	if(res[n])
-		return res[n]->get();
+	if(resid[n])
+		return resid[n]->get();
 	return 0;
 }

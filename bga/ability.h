@@ -20,11 +20,9 @@ struct abilityi : nameable {
 struct statable : skilla {
 	char		abilities[Stamina + 1];
 	damagea		resist;
-	featf		feats;
 	void		clear();
 	int			get(abilityn v) const { return abilities[v]; }
 	int			get(damagen v) const { return resist[v]; }
 	int			get(skilln v) const { return skills[v]; }
 	int			getbonus(abilityn v) const { return abilities[v] / 2 - 5; }
-	bool		is(featn v) const { return feats.is(v); }
 };

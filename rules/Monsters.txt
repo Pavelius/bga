@@ -1,4 +1,4 @@
 #NPC
 
-GoblinWarrior race(Goblin) cr(-4) res(MGO1)
+GoblinWarrior race(Goblin) cr(-4) resid(MGO1)
  elements Warrior+1 BattleAxe Shield

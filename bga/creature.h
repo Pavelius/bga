@@ -22,12 +22,14 @@ struct creature : actor, avatarable, spellv {
 	short unsigned	getindex() const;
 	const char*		getname() const { return name; }
 	int				getspellslots(classn type, int spell_level) const;
+	bool			is(featn v) const { return feats.is(v); }
 	bool			isallow(featn v) const;
 	bool			isclass(skilln v) const;
 	bool			isparty() const;
 	bool			isselected() const;
 	bool			isusable(const item& it) const;
 	bool			roll(skilln value, int bonus = 0); // Default roll against difficult 10.
+	void			set(featn v) { feats.set(v); }
 	void			update();
 };
 extern creature* player;
@@ -44,7 +46,6 @@ void check_combat();
 void clear_selection();
 void create_abilities(bool allow_random);
 void create_character(racen race, gendern gender, classn classv, unsigned short portrait);
-void create_character(gendern gender);
 bool have_multiselect();
 bool have_selection();
 void party_add_item(item& v);

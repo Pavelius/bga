@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 	sys_cursor(false);
 	sys_timer(64);
 	//next_scene(start_main);
-	//next_scene(open_main_menu);
+	next_scene(open_main_menu);
 	start_scene();
 	return 0;
 }

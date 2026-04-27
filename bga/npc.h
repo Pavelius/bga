@@ -20,7 +20,7 @@ struct npci : nameable, classa, coloration, statable {
 	dietyn		diety;
 	racen		race;
 	char		cr;
-	rfpma*		res[2]; // Resources
+	rfpma*		resid[2]; // Resources
 	variants	elements;
 	sprite* getres(int n);
 };

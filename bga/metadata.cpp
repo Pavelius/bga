@@ -167,7 +167,7 @@ BSMETA(magici) = {
 BSMETA(npci) = {
 	BSREQ(id),
 	BSREQ(cr),
-	BSREQ(res),
+	BSREQ(resid),
 	BSENM(race, racei),
 	BSREQ(elements),
 	BSDST(abilities, abilityi),
@@ -188,7 +188,7 @@ BSMETA(racei) = {
 	BSREQ(id),
 	BSREQ(skin), BSREQ(hairs),
 	BSENM(favor, classi),
-	BSREQ(res), BSREQ(ws), BSREQ(resm),
+	BSENM(res, rfpma), BSREQ(ws), BSREQ(ai),
 	BSREQ(elements),
 	{}};
 BSMETA(rangei) = {

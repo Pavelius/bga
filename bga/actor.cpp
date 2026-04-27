@@ -4,13 +4,15 @@
 #include "draw.h"
 #include "gender.h"
 #include "math.h"
-#include "npc.h"
 #include "order.h"
+#include "pushvalue.h"
 #include "rand.h"
 #include "rfiles.h"
 #include "timer.h"
 
 using namespace draw;
+
+static color pallette[256];
 
 struct animatei : nameable {
 	int a1o8, hg1o8, g26o9;
@@ -51,8 +53,8 @@ assert_enum(animatei, AnimateCastFourRelease)
 
 const int max_sprite_directions = 9;
 
-const int anm_a1o8 = 104;
 const int anm_hg1o8 = 32;
+const int anm_a1o8 = 104;
 const int anm_g26o9 = 108;
 
 int get_armor_index(const item& e) {
@@ -64,74 +66,54 @@ int get_armor_index(const item& e) {
 	}
 }
 
-sprite* get_character_res(racen race, gendern gender, classn type, int ai, int& ws) {
-	// `ai` is armor index
-	// 0 - no armor
-	// 1 - light (or leather) armor
-	// 2 - medium armor (chaimail and other)
-	// 3 - heavy armor (plate and like)
+static short unsigned get_resid(item equipment, int ws) {
+	static int ai[] = {max_weapon_anim * 3, max_weapon_anim * 2, max_weapon_anim * 1, 0};
+	if(!equipment)
+		return 0xFFFF;
+	auto p = equipment.geti().equiped;
+	if(!p)
+		return 0xFFFF;
+	return getbsi(p + ai[ws]);
+}
+
+void set_resid(short unsigned* resid, racen race, gendern gender, classn type, int ai, const item& weapon, const item& offhand, const item& helm) {
+	static char animation[][5][4] = {
+		{{0, 1, 2, 3}, // 11 animations (Human-like)
+		{0, 1, 2, 4},
+		{6, 6, 6, 6},
+		{7, 8, 9, 10},
+		{5, 5, 5, 5}},
+		{{0, 1, 2, 3}, // 10 animations (Elf-like)
+		{0, 1, 2, 4},
+		{5, 5, 5, 5},
+		{6, 7, 8, 9},
+		{5, 5, 5, 5}},
+		{{0, 1, 2, 3}, // 6 animations (Halfling-like)
+		{0, 1, 2, 4},
+		{5, 5, 5, 5},
+		{5, 5, 5, 5},
+		{5, 5, 5, 5}},
+	};
 	auto& ei = bsdata<racei>::elements[race];
 	auto i = (gender == Female) ? 1 : 0;
-	auto p = ei.res[i];
-	if(!p)
-		return 0;
-	auto n = bsdata<classi>::elements[type].ai; // Animation class: 0 - default, 1 - cleric, 2 - theif, 3 - wizard, 4 - monk.
-	ws = ei.ws[i]; // `ws` is index of weapon set
-	// Allowed animation set (by count of animation types)
-	// 10 - CDMB1, CDMB2, CDMB3, CDMC4, CDMF4, CDMT1, CDMW1, CDMW2, CDMW3, CDMW4
-	// 11 - CHFB1, CHFB2, CHFB3, CHFC4, CHFF4, CHFM1, CHFT1, CHFW1, CHFW2, CHFW3, CHFW4,
-	//  6 - CIMB1, CIMB2, CIMB3, CIMC4, CIMF4, CIMT1
-	if(n == 0 && ai == 3)
-		ai = 4; // Default animation have other index for heavy armor
-	switch(ei.resm) {
-	case 10:
-		switch(n) {
-		case 2: case 4: p += 5; break;
-		case 3: p += 6 + ai; break;
-		default: p += ai; break;
-		}
-		break;
-	case 6:
-		switch(n) {
-		case 2: case 3: case 4: p += 5; break;
-		default: p += ai; break;
-		}
-		break;
-	default:
-		switch(n) {
-		case 2: p += 6; break;
-		case 3: p += 7 + ai; break;
-		case 4: p += 5; break;
-		default: p += ai; break;
-		}
-		break;
-	}
-	return p->get();
+	auto r = ei.res[i];
+	if(!r)
+		return;
+	auto w = ei.ws[i];
+	resid[0] = r + animation[ei.ai][bsdata<classi>::elements[type].ai][ai];
+	resid[1] = get_resid(weapon, w);
+	resid[2] = get_resid(helm, w);
+	resid[3] = get_resid(offhand, w);
 }
 
 bool actor::ispresent() const {
 	return area_index == current_area;
 }
 
-//static animaten common(animaten v) {
-//	switch(v) {
-//	case AnimateStand: case AnimateCombatStanceTwoHanded: case AnimateCombatStance:
-//		return AnimateStand;
-//	default:
-//		return v;
-//	}
-//}
-
-npci* actor::getnpc() const {
-	return (npc == 0xFFFF) ? 0 : bsdata<npci>::elements + npc;
-}
-
-sprite* actor::getsprite(int& ws) const {
-	auto npc = getnpc();
-	if(!npc)
-		return get_character_res(race, gender, getmainclass(), get_armor_index(wears[Body]), ws);
-	else
-		return npc->getres(0);
+sprite* actor::getsprite() const {
+	if(resid[0] == 0xFFFF)
+		return 0;
+	return bsdata<rfpma>::get(resid[0]).get();
 }
 
 void actor::wait(unsigned milliseconds) {
@@ -178,7 +160,7 @@ void actor::resetframes() {
 }
 
 void actor::stop() {
-	if(is(ReadyToBattle)) {
+	if(feats.is(ReadyToBattle)) {
 		if(getweapon().geti().is(TwoHanded))
 			setanimate(AnimateCombatStanceTwoHanded);
 		else
@@ -288,46 +270,29 @@ void actor::updateanimate() {
 	}
 }
 
-static void painting_equipment(item equipment, int ws, int frame, unsigned flags, color* pallette) {
-	static int ai[] = {max_weapon_anim * 3, max_weapon_anim * 2, max_weapon_anim * 1, 0};
-	if(!equipment)
-		return;
-	auto p = equipment.geti().equiped;
-	if(!p)
-		return;
-	p += ai[ws];
-	image(p->get(), frame, flags, pallette);
-}
-
 static void apply_shadow(color* pallette, color fore) {
 	for(auto i = 0; i < 256; i++)
 		pallette[i] = pallette[i] * fore;
 }
 
-void paperdoll(color* pallette, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
-	sprite* source;
-	unsigned flags;
-	int ws;
-	source = get_character_res(race, gender, type, get_armor_index(armor), ws);
-	if(!source)
-		return;
+void paperdoll(const coloration& colors, short unsigned* resid, int animation, int orientation, int frame_tick) {
+	pushvalue push(palt, pallette);
+	colors.setpallette(pallette);
 	const int directions = 9;
 	int o = orientation;
+	unsigned flags = ImagePallette;
 	if(o >= directions) {
-		flags = ImageMirrorH;
+		flags |= ImageMirrorH;
 		o = (9 - 1) * 2 - o;
-	} else
-		flags = 0;
-	auto frame = source->ganim(animation * directions + o, frame_tick);
-	image(source, frame, flags, pallette);
-	painting_equipment(weapon, ws, frame, flags, pallette);
-	painting_equipment(helm, ws, frame, flags, pallette);
-	painting_equipment(offhand, ws, frame, flags, pallette);
-}
-
-void paperdoll(const coloration& colors, racen race, gendern gender, classn type, int animation, int orientation, int frame_tick, const item& armor, const item& weapon, const item& offhand, const item& helm) {
-	color pallette[256]; colors.setpallette(pallette);
-	paperdoll(pallette, race, gender, type, animation, orientation, frame_tick, armor, weapon, offhand, helm);
+	}
+	for(auto i = 0; i < 4; i++) {
+		auto ri = resid[i];
+		if(ri == 0xFFFF)
+			continue;
+		auto ps = bsdata<rfpma>::ptr(ri)->get();
+		auto frame = ps->ganim(animation * directions + o, frame_tick);
+		image(caret.x, caret.y, ps, frame, flags);
+	}
 }
 
 point actor::getlu() const {
@@ -335,19 +300,20 @@ point actor::getlu() const {
 }
 
 void actor::paint() const {
-	int ws;
-	auto ps = getsprite(ws);
-	if(!ps)
-		return;
-	if(ps->cicles == anm_a1o8)
-		image(ps, frame, frame_flags);
-	else {
-		color pallette[256]; setpallette(pallette);
+	pushvalue push(palt);
+	auto flags = frame_flags;
+	if(feats.is(DynamicAnimation)) {
+		palt = pallette;
+		setpallette(pallette);
 		apply_shadow(pallette, get_shadow(getlu()));
-		image(ps, frame, frame_flags, pallette);
-		painting_equipment(getweapon(), ws, frame, frame_flags, pallette);
-		painting_equipment(wears[Head], ws, frame, frame_flags, pallette);
-		painting_equipment(getoffhand(), ws, frame, frame_flags, pallette);
+		flags |= ImagePallette;
+	}
+	for(auto n : resid) {
+		if(n == 0xFFFF)
+			continue;
+		auto ps = bsdata<rfpma>::ptr(n)->get();
+		auto pc = ps->gcicle(cicle);
+		image(ps, pc->start + frame, flags);
 	}
 }
 

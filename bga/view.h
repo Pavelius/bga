@@ -11,7 +11,7 @@ struct sprite;
 
 enum resn : unsigned short;
 
-extern unsigned caret_index;
+extern int caret_index;
 extern bool button_pressed, button_executed, button_hilited, input_disabled;
 extern int game_panel_mode;
 
