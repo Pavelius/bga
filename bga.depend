@@ -13,14 +13,14 @@
 
 1776924738 /home/user-331/projects/bga/bga/nameable.h
 
-1776924738 /home/user-331/projects/bga/bga/feat.h
+1777271352 /home/user-331/projects/bga/bga/feat.h
 	"flagable.h"
 	"nameable.h"
 	"variant.h"
 
 1776924738 /home/user-331/projects/bga/bga/flagable.h
 
-1776929272 /home/user-331/projects/bga/bga/variant.h
+1777269772 /home/user-331/projects/bga/bga/variant.h
 	"sliceu.h"
 	"stringbuilder.h"
 
@@ -35,7 +35,7 @@
 
 1776932066 /home/user-331/projects/bga/bga/slice.h
 
-1777013229 /home/user-331/projects/bga/bga/stringbuilder.h
+1777271281 /home/user-331/projects/bga/bga/stringbuilder.h
 	"slice.h"
 	<stdarg.h>
 
@@ -70,7 +70,7 @@
 1777013229 /home/user-331/projects/bga/bga/animation.h
 	"drawable.h"
 
-1776924738 /home/user-331/projects/bga/bga/drawable.h
+1777269772 /home/user-331/projects/bga/bga/drawable.h
 	"adat.h"
 	"point.h"
 
@@ -126,7 +126,7 @@
 
 1776924738 /home/user-331/projects/bga/bga/arcfile.h
 
-1776924738 /home/user-331/projects/bga/bga/timer.h
+1777269772 /home/user-331/projects/bga/bga/timer.h
 
 1776924738 source:/home/user-331/projects/bga/bga/arcfile.cpp
 	"arcfile.h"
@@ -149,7 +149,7 @@
 	"creature.h"
 	"direction.h"
 
-1777013229 /home/user-331/projects/bga/bga/area.h
+1777269772 /home/user-331/projects/bga/bga/area.h
 	"arcfile.h"
 	"color.h"
 	"flagable.h"
@@ -160,12 +160,12 @@
 
 1776924738 /home/user-331/projects/bga/bga/color.h
 
-1776924738 /home/user-331/projects/bga/bga/creature.h
+1777269772 /home/user-331/projects/bga/bga/creature.h
 	"actor.h"
 	"portrait.h"
 	"spell.h"
 
-1777013229 /home/user-331/projects/bga/bga/actor.h
+1777269772 /home/user-331/projects/bga/bga/actor.h
 	"ability.h"
 	"class.h"
 	"coloration.h"
@@ -177,13 +177,13 @@
 1777013229 /home/user-331/projects/bga/bga/class.h
 	"nameable.h"
 
-1776924738 /home/user-331/projects/bga/bga/coloration.h
+1777269772 /home/user-331/projects/bga/bga/coloration.h
 	"color.h"
 
 1776924738 /home/user-331/projects/bga/bga/moveable.h
 	"drawable.h"
 
-1777013229 /home/user-331/projects/bga/bga/race.h
+1777269772 /home/user-331/projects/bga/bga/race.h
 	"ability.h"
 	"colorgrad.h"
 	"variant.h"
@@ -197,12 +197,11 @@
 1776924738 /home/user-331/projects/bga/bga/wearable.h
 	"item.h"
 
-1777013229 /home/user-331/projects/bga/bga/item.h
+1777269772 /home/user-331/projects/bga/bga/item.h
 	"ability.h"
 	"dice.h"
 	"magic.h"
 	"range.h"
-	"resid.h"
 	"variant.h"
 	"wear.h"
 
@@ -219,7 +218,7 @@
 1776924738 /home/user-331/projects/bga/bga/wear.h
 	"nameable.h"
 
-1776924738 /home/user-331/projects/bga/bga/portrait.h
+1777269772 /home/user-331/projects/bga/bga/portrait.h
 	"gender.h"
 
 1776924738 /home/user-331/projects/bga/bga/gender.h
@@ -249,7 +248,7 @@
 1776924738 /home/user-331/projects/bga/bga/attack.h
 	"item.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/audio.cpp
+1777269772 source:/home/user-331/projects/bga/bga/audio.cpp
 	"audio.h"
 	"bsdata.h"
 	"rfiles.h"
@@ -277,7 +276,7 @@
 	"game.h"
 	"calendar.h"
 
-1776924738 /home/user-331/projects/bga/bga/game.h
+1777269772 /home/user-331/projects/bga/bga/game.h
 	"nameable.h"
 	"point.h"
 	"slice.h"
@@ -325,22 +324,24 @@
 1777037153 /home/user-331/projects/bga/bga/script.h
 	"variant.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/console.cpp
+1777269772 source:/home/user-331/projects/bga/bga/console.cpp
 	"array.h"
 	"console.h"
 	"slice.h"
 
-1776924738 /home/user-331/projects/bga/bga/console.h
+1777269772 /home/user-331/projects/bga/bga/console.h
 	"stringbuilder.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/container.cpp
+1777269772 source:/home/user-331/projects/bga/bga/container.cpp
+	"area.h"
 	"container.h"
+	"itemground.h"
 
-1777013229 /home/user-331/projects/bga/bga/container.h
+1777269772 /home/user-331/projects/bga/bga/container.h
 	"drawable.h"
 	"sliceu.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/creature.cpp
+1777271620 source:/home/user-331/projects/bga/bga/creature.cpp
 	"advance.h"
 	"area.h"
 	"collection.h"
@@ -360,7 +361,7 @@
 1776924738 /home/user-331/projects/bga/bga/advance.h
 	"variant.h"
 
-1776924738 /home/user-331/projects/bga/bga/modifier.h
+1777269772 /home/user-331/projects/bga/bga/modifier.h
 
 1776945236 /home/user-331/projects/bga/bga/npc.h
 	"ability.h"
@@ -376,7 +377,8 @@
 	"resname.h"
 	"feat.h"
 
-1777013229 /home/user-331/projects/bga/bga/view.h
+1777270337 /home/user-331/projects/bga/bga/view.h
+	"point.h"
 
 1776924738 source:/home/user-331/projects/bga/bga/damage.cpp
 	"bsdata.h"
@@ -397,7 +399,7 @@
 1776933531 source:/home/user-331/projects/bga/bga/direction.cpp
 	"direction.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/actor.cpp
+1777269772 source:/home/user-331/projects/bga/bga/actor.cpp
 	"actor.h"
 	"area.h"
 	"bsdata.h"
@@ -410,12 +412,12 @@
 	"rfiles.h"
 	"timer.h"
 
-1776933187 /home/user-331/projects/bga/bga/draw.h
+1777269772 /home/user-331/projects/bga/bga/draw.h
 	"color.h"
 	"point.h"
 	"stringbuilder.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/area.cpp
+1777269772 source:/home/user-331/projects/bga/bga/area.cpp
 	"ambient.h"
 	"animation.h"
 	"archive.h"
@@ -429,7 +431,6 @@
 	"rfiles.h"
 	"floattext.h"
 	"io_stream.h"
-	"itemground.h"
 	"math.h"
 	"rand.h"
 	"region.h"
@@ -439,18 +440,19 @@
 	"point.h"
 	"sliceu.h"
 
-1776924738 /home/user-331/projects/bga/bga/entrance.h
-	"drawable.h"
+1777269772 /home/user-331/projects/bga/bga/entrance.h
+	"nameable.h"
+	"point.h"
 
 1776924738 /home/user-331/projects/bga/bga/floattext.h
 	"color.h"
 	"drawable.h"
 
-1776924738 /home/user-331/projects/bga/bga/itemground.h
+1777269772 /home/user-331/projects/bga/bga/itemground.h
 	"drawable.h"
 	"item.h"
 
-1777013229 /home/user-331/projects/bga/bga/region.h
+1777269772 /home/user-331/projects/bga/bga/region.h
 	"drawable.h"
 	"rect.h"
 	"sliceu.h"
@@ -464,7 +466,7 @@
 	"area.h"
 	"door.h"
 
-1776933016 source:/home/user-331/projects/bga/bga/draw.cpp
+1777269772 source:/home/user-331/projects/bga/bga/draw.cpp
 	"color.h"
 	"draw.h"
 	"io_stream.h"
@@ -481,14 +483,14 @@
 	"draw.h"
 	"slice.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/drawable.cpp
+1777269772 source:/home/user-331/projects/bga/bga/drawable.cpp
 	"animation.h"
 	"drawable.h"
 	"door.h"
 	"region.h"
 	"screenshoot.h"
 
-1776924738 /home/user-331/projects/bga/bga/screenshoot.h
+1777269772 /home/user-331/projects/bga/bga/screenshoot.h
 	"point.h"
 	"draw.h"
 
@@ -497,7 +499,7 @@
 	"entrance.h"
 	"stringbuilder.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/feat.cpp
+1777271382 source:/home/user-331/projects/bga/bga/feat.cpp
 	"bsdata.h"
 	"feat.h"
 
@@ -515,27 +517,27 @@
 1776924738 /home/user-331/projects/bga/bga/formation.h
 	"point.h"
 
-1777020630 source:/home/user-331/projects/bga/bga/game.cpp
+1777269772 source:/home/user-331/projects/bga/bga/game.cpp
 	"ambient.h"
 	"audio.h"
 	"area.h"
 	"archive.h"
 	"console.h"
 	"container.h"
-	"creature.h"
+	"creaturea.h"
 	"door.h"
 	"draw.h"
 	"entrance.h"
 	"formation.h"
 	"game.h"
 	"itemground.h"
-	"iteminside.h"
 	"order.h"
-	"playlist.h"
 	"rand.h"
 	"region.h"
 	"saveheader.h"
 	"script.h"
+	"screenshoot.h"
+	"store.h"
 	"timer.h"
 	"view.h"
 	"worldmap.h"
@@ -582,7 +584,7 @@
 	"array.h"
 	"nameable.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/information.cpp
+1777269772 source:/home/user-331/projects/bga/bga/information.cpp
 	"ability.h"
 	"advance.h"
 	"alignment.h"
@@ -596,6 +598,7 @@
 	"saveheader.h"
 	"school.h"
 	"script.h"
+	"store.h"
 	"stringbuilder.h"
 	"stringvar.h"
 
@@ -625,7 +628,7 @@
 	"stringbuilder.h"
 	"slice.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/item.cpp
+1777269772 source:/home/user-331/projects/bga/bga/item.cpp
 	"flagable.h"
 	"item.h"
 
@@ -654,7 +657,7 @@
 
 1776924738 /home/user-331/projects/bga/bga/scrollable.h
 
-1776924738 /home/user-331/projects/bga/bga/store.h
+1777269772 /home/user-331/projects/bga/bga/store.h
 	"item.h"
 	"nameable.h"
 	"variant.h"
@@ -673,7 +676,7 @@
 	"log.h"
 	"stringbuilder.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/log.cpp
+1777269772 source:/home/user-331/projects/bga/bga/log.cpp
 	"io_stream.h"
 	"log.h"
 	"slice.h"
@@ -712,7 +715,7 @@
 
 1776924738 source:/home/user-331/projects/bga/bga/math.cpp
 
-1777013229 source:/home/user-331/projects/bga/bga/metadata.cpp
+1777269772 source:/home/user-331/projects/bga/bga/metadata.cpp
 	"ability.h"
 	"advance.h"
 	"alignment.h"
@@ -739,7 +742,6 @@
 	"modifier.h"
 	"npc.h"
 	"party.h"
-	"playlist.h"
 	"portrait.h"
 	"race.h"
 	"region.h"
@@ -756,7 +758,7 @@
 1776929014 /home/user-331/projects/bga/bga/form.h
 	"nameable.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/modifier.cpp
+1777269772 source:/home/user-331/projects/bga/bga/modifier.cpp
 	"bsdata.h"
 	"modifier.h"
 	"script.h"
@@ -772,7 +774,7 @@
 	"namestr.h"
 	"stringbuilder.h"
 
-1777014941 source:/home/user-331/projects/bga/bga/main.cpp
+1777271644 source:/home/user-331/projects/bga/bga/main.cpp
 	"ability.h"
 	"area.h"
 	"audio.h"
@@ -788,7 +790,6 @@
 	"option.h"
 	"party.h"
 	"rand.h"
-	"resid.h"
 	"rfiles.h"
 	"script.h"
 	"spell.h"
@@ -842,7 +843,7 @@
 
 1776924738 /home/user-331/projects/bga/bga/mtevent.h
 
-1776924738 source:/home/user-331/projects/bga/bga/portrait.cpp
+1777269772 source:/home/user-331/projects/bga/bga/portrait.cpp
 	"bsdata.h"
 	"collection.h"
 	"class.h"
@@ -863,20 +864,19 @@
 1776924738 source:/home/user-331/projects/bga/bga/resinfo.cpp
 	"resinfo.h"
 
-1776924738 /home/user-331/projects/bga/bga/resinfo.h
-	"resid.h"
+1777269772 /home/user-331/projects/bga/bga/resinfo.h
+	"view.h"
 
 1776924738 source:/home/user-331/projects/bga/bga/resname.cpp
 	"resname.h"
 	"stringbuilder.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/rfiles.cpp
+1777269772 source:/home/user-331/projects/bga/bga/rfiles.cpp
 	"area.h"
 	"bsreq.h"
 	"draw.h"
 	"stringbuilder.h"
 	"rfiles.h"
-	"resid.h"
 
 1776924738 source:/home/user-331/projects/bga/bga/scale2x.cpp
 
@@ -884,24 +884,29 @@
 	"bsdata.h"
 	"school.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/screenshoot.cpp
+1777269772 source:/home/user-331/projects/bga/bga/screenshoot.cpp
 	"screenshoot.h"
+	"timer.h"
 
 1777037141 source:/home/user-331/projects/bga/bga/script.cpp
 	"bsreq.h"
 	"rand.h"
 	"script.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/scripting.cpp
+1777269772 source:/home/user-331/projects/bga/bga/scripting.cpp
 	"colorgrad.h"
+	"container.h"
 	"condition.h"
 	"console.h"
 	"creature.h"
 	"draw.h"
-	"iteminside.h"
 	"form.h"
 	"game.h"
+	"itemground.h"
+	"list.h"
+	"npc.h"
 	"modifier.h"
+	"pushvalue.h"
 	"script.h"
 	"store.h"
 	"stringvar.h"
@@ -921,9 +926,10 @@
 	"creature.h"
 	"spell.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/store.cpp
+1777269772 source:/home/user-331/projects/bga/bga/store.cpp
 	"bsdata.h"
-	"iteminside.h"
+	"itemground.h"
+	"game.h"
 	"store.h"
 
 1777013229 source:/home/user-331/projects/bga/bga/stringbuilder.cpp
@@ -960,25 +966,25 @@
 	"bsreq.h"
 	"variant.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/view_area.cpp
+1777269772 source:/home/user-331/projects/bga/bga/view_area.cpp
 	"animation.h"
 	"area.h"
 	"audio.h"
 	"calendar.h"
 	"console.h"
 	"container.h"
-	"creature.h"
+	"creaturea.h"
 	"door.h"
 	"draw.h"
 	"drawable.h"
 	"floattext.h"
 	"game.h"
+	"itemground.h"
 	"keybind.h"
 	"math.h"
 	"order.h"
 	"pushvalue.h"
 	"region.h"
-	"resid.h"
 	"resinfo.h"
 	"rfiles.h"
 	"timer.h"
@@ -986,7 +992,7 @@
 	"view.h"
 	"worldmap.h"
 
-1776946108 source:/home/user-331/projects/bga/bga/view_generate.cpp
+1777269772 source:/home/user-331/projects/bga/bga/view_generate.cpp
 	"alignment.h"
 	"answers.h"
 	"area.h"
@@ -1013,33 +1019,32 @@
 	"draw.h"
 	"view_list.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/view_save_load.cpp
+1777269772 source:/home/user-331/projects/bga/bga/view_save_load.cpp
 	"draw.h"
 	"io_stream.h"
 	"game.h"
-	"resid.h"
 	"saveheader.h"
 	"slice.h"
 	"vector.h"
 	"view.h"
 	"view_list.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/view_store.cpp
+1777269772 source:/home/user-331/projects/bga/bga/view_store.cpp
+	"audio.h"
 	"creature.h"
 	"draw.h"
 	"game.h"
-	"iteminside.h"
+	"itemground.h"
 	"pushvalue.h"
-	"resid.h"
 	"store.h"
 	"vector.h"
 	"view.h"
 	"view_list.h"
 
-1776924738 source:/home/user-331/projects/bga/bga/view_tool.cpp
+1777269772 source:/home/user-331/projects/bga/bga/view_tool.cpp
+	"audio.h"
 	"draw.h"
 	"creature.h"
-	"resid.h"
 	"view.h"
 
 1776924738 source:/home/user-331/projects/bga/bga/wear.cpp
@@ -1054,14 +1059,15 @@
 	"bsdata.h"
 	"worldmap.h"
 
-1777013229 source:/home/user-331/projects/bga/bga/view_dialog.cpp
+1777271259 source:/home/user-331/projects/bga/bga/view_dialog.cpp
 	"action.h"
 	"array.h"
 	"area.h"
 	"ambient.h"
 	"audio.h"
 	"colorgrad.h"
-	"creature.h"
+	"console.h"
+	"creaturea.h"
 	"draw.h"
 	"form.h"
 	"formation.h"
@@ -1069,9 +1075,7 @@
 	"help.h"
 	"keybind.h"
 	"option.h"
-	"playlist.h"
 	"pushvalue.h"
-	"resid.h"
 	"resinfo.h"
 	"screenshoot.h"
 	"timer.h"
@@ -1106,4 +1110,27 @@
 	"draw.h"
 	"stringbuilder.h"
 	"timer.h"
+
+1777269772 /home/user-331/projects/bga/bga/creaturea.h
+	"creature.h"
+	"collection.h"
+
+1777269772 source:/home/user-331/projects/bga/bga/area_read.cpp
+	"area.h"
+	"bsreq.h"
+	"creaturea.h"
+	"container.h"
+	"log.h"
+	"logvalue.h"
+	"npc.h"
+	"pushvalue.h"
+	"script.h"
+	"variant.h"
+
+1777269772 source:/home/user-331/projects/bga/bga/creaturea.cpp
+	"area.h"
+	"creaturea.h"
+
+1777269772 source:/home/user-331/projects/bga/bga/itemground.cpp
+	"itemground.h"
 

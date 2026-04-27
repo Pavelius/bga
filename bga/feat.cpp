@@ -72,6 +72,7 @@ BSDATA(feati) = {
 	{"BonusFeat"},
 	{"BonusFighterFeat"},
 	{"BonusSkills"},
+	{"DynamicAnimation"},
 	{"ReadyToBattle"},
 };
 assert_enum(feati, ReadyToBattle)

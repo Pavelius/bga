@@ -34,7 +34,7 @@ enum featn : unsigned char {
 	WhirlwindAttack,
 	FastMovement, Illiteracy,
 	HateGoblinoids, Infravision, BonusFeat, BonusFighterFeat, BonusSkills,
-	ReadyToBattle,
+	DynamicAnimation, ReadyToBattle,
 };
 struct feati : nameable {
 	unsigned	flags;

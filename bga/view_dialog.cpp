@@ -62,16 +62,15 @@ static sprite* pma_spells;
 static sprite* pma_scrsb;
 
 static char description_text[4096];
-static size_t description_cash_size;
+static int description_cash_size;
 static int character_info_mode;
 static int current_topic_list, cash_topic_list, current_content_list;
 static int current_spell_level;
 static vector<nameable*> content;
 static vector<spelli*> spells;
 static stringbuilder description(description_text);
-static unsigned long tips_stamp;
 static char* input_string;
-static size_t input_string_size;
+static int input_string_size;
 
 static void paint_game_inventory();
 
@@ -381,10 +380,6 @@ static point get_pressed_offset(sprite* pr) {
 	return {1, 1};
 }
 
-static point get_text_offset(sprite* pr) {
-	return {0, 1};
-}
-
 void button(sprite* pr, unsigned short f1, unsigned short f2, unsigned key, const char* id, bool need_getname) {
 	auto push_caret = caret;
 	button(pr, f1, f2, key);
@@ -476,7 +471,7 @@ static void color_picker_line(int index, int count, int dx) {
 	caret = push_caret;
 }
 
-void edit(char* string, size_t maximum, unsigned text_flags, bool upper_case) {
+void edit(char* string, int maximum, unsigned text_flags, bool upper_case) {
 	pushrect push;
 	auto lenght = zlen(string);
 	if(caret_index > lenght)
@@ -519,7 +514,7 @@ static void scroll(sprite* pr, int fu, int fd, int bar, int& origin, int maximum
 	if(!maximum)
 		return;
 	auto& f = pr->get(fu);
-	auto w = f.sx;
+	// auto w = f.sx;
 	auto h = f.sy;
 	auto sh = pr->get(bar).sy;
 	pushrect push;
@@ -1252,7 +1247,7 @@ static void ability(abilityn v) {
 	texta(str("%+1i", n), AlignCenterCenter);
 }
 
-static void paint_list(void* source, size_t size, int& origin, int& current, int maximum, int per_page, fngetname get_name, unsigned flags) {
+void paint_list(void* source, int size, int& origin, int& current, int maximum, int per_page, fngetname get_name, unsigned flags) {
 	pushrect push;
 	pushfore push_fore;
 	input_mouse_table(origin, maximum, per_page, 1);
@@ -1304,7 +1299,7 @@ static void paint_list(const array& source, int& origin, int& current, int per_p
 	scroll(gres("GBTNSCRL"), 0, 2, 4, origin, maximum, per_page, 1);
 }
 
-void paint_list(void* data, size_t size, int maximum, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc, bool ref_list) {
+void paint_list(void* data, int size, int maximum, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc, bool ref_list) {
 	pushrect push;
 	pushfore push_fore;
 	auto push_clip = clipping; setclipall();
@@ -1732,7 +1727,7 @@ static void paint_name_dialog() {
 	setdialog(141, 84); button(pma_butstd, 1, 2, KeyEnter, "Done", 3, input_string[0] != 0); fire(buttonok);
 }
 
-bool open_name(char* result, size_t size) {
+bool open_name(char* result, int size) {
 	if(!result)
 		return false;
 	input_string = result;

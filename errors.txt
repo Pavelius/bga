@@ -1,3 +1,45 @@
-﻿Error in file `UnknownNames.txt`:
- Define translation for `GoblinWarrior`
- Define translation for `Nazghuul`
+Error in file `rules/Colors.txt`:
+ Line 3: Unknown type in requisit `number`
+ Line 3: Unknown type in requisit ``
+ Line 3: Unknown type in requisit `text`
+ Line 3: Unknown type in requisit ``
+ Line 4: Unknown type in requisit `number`
+ Line 4: Unknown type in requisit ``
+ Line 4: Unknown type in requisit `text`
+ Line 4: Unknown type in requisit ``
+ Line 5: Unknown type in requisit `number`
+ Line 5: Unknown type in requisit ``
+ Line 5: Unknown type in requisit `text`
+ Line 5: Unknown type in requisit ``
+ Line 6: Unknown type in requisit `number`
+ Line 6: Unknown type in requisit ``
+ Line 6: Unknown type in requisit `text`
+ Line 6: Unknown type in requisit ``
+ Line 7: Unknown type in requisit `number`
+ Line 7: Unknown type in requisit ``
+ Line 7: Unknown type in requisit `text`
+ Line 7: Unknown type in requisit ``
+ Line 7: Unknown type in requisit ``
+ Line 7: Unknown type in requisit ``
+ Line 8: Unknown type in requisit `number`
+ Line 8: Unknown type in requisit ``
+ Line 8: Unknown type in requisit `text`
+ Line 8: Unknown type in requisit ``
+ Line 9: Unknown type in requisit `number`
+ Line 9: Unknown type in requisit ``
+ Line 9: Unknown type in requisit `text`
+ Line 9: Unknown type in requisit ``
+ Line 11: Unknown type in requisit `number`
+ Line 11: Unknown type in requisit ``
+ Line 11: Unknown type in requisit `text`
+ Line 11: Unknown type in requisit ``
+ Line 11: Unknown type in requisit ``
+ Line 11: Unknown type in requisit ``
+ Line 11: Unknown type in requisit `|жчя`
+ Line 11: Unknown type in requisit `уъUHеHмH}шHEшHЗиº`
+ Line 11: Unknown type in requisit ``
+ Line 11: Unknown type in requisit `pжчя`
+ Line 11: Unknown type in requisit `|жчя`
+Error in file `rules/Worldmap.txt`:
+ Line 3: Not found ResSND identifier `MX1000A`
+ Line 4: Not found ResSND identifier `MX1100A`

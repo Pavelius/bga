@@ -386,10 +386,15 @@ static short unsigned get_character_animation(racen race, gendern gender, classn
 }
 
 static void update_animation() {
-	int ws = 0;
-	auto a1 = get_character_animation(player->race, player->gender, player->getmainclass(), 0, ws);
-	if(a1 == 0xFFFF)
-		return; // Animation not need to be update by race
+	if(player->is(DynamicAnimation)) {
+		int ws = 0;
+		player->resid[0] = get_character_animation(player->race, player->gender, player->getmainclass(), 0, ws);
+		if(player->resid[0] != 0xFFFF) {
+			player->resid[1] = get_resid(player->getweapon(), ws);
+			player->resid[2] = get_resid(player->wears[Head], ws);
+			player->resid[3] = get_resid(player->getoffhand(), ws);
+		}
+	}
 }
 
 void update_player() {
@@ -398,6 +403,7 @@ void update_player() {
 	update_abilities();
 	update_skills();
 	update_weight();
+	update_animation();
 }
 
 void creature::update() {
@@ -461,7 +467,7 @@ int	creature::getspellslots(classn type, int spell_level) const {
 	auto bonus_spells = 0;
 	if(ability_bonus > 0)
 		bonus_spells = (ability_bonus + 4 - spell_level) / 4;
-	auto class_level = classes[type];
+	// auto class_level = classes[type];
 	return 1 + bonus_spells;
 }
 

@@ -81,7 +81,7 @@ public:
 	void trimr();
 	void upper();
 	size_t getmaximum() const { return pe - pb - 1; }
-	size_t size() const { return p - pb; }
+	int size() const { return p - pb; }
 	char* get() const { return p; }
 	const char* begin() const { return pb; }
 	const char* end() const { return pe; }
