@@ -422,6 +422,11 @@ static void paint_markers(const creature* p) {
 	fore = push_fore;
 }
 
+static void paint_ground() {
+	auto p = (itemground*)last_object;
+	image(pma_ground, p->geti().ground, 0);
+}
+
 static void paint_creature() {
 	auto p = (creature*)last_object;
 	if(p->ishilite())
@@ -500,6 +505,8 @@ static void paint_object() {
 		paint_creature();
 	else if(bsdata<animation>::have(last_object))
 		paint_animation();
+	else if(bsdata<itemground>::have(last_object))
+		paint_ground();
 }
 
 static bool is_hilite() {

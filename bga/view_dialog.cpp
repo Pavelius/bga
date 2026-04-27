@@ -46,6 +46,7 @@ sprite* pma_butstd;
 sprite* pma_butopt1;
 sprite* pma_cursors;
 sprite* pma_cursarw;
+sprite* pma_ground;
 sprite* pma_port[2];
 sprite* pma_pfcm;
 sprite* pma_stoneslot;
@@ -1905,6 +1906,7 @@ void initialize_interface() {
 	pma_scrsb = gres("GCOMMSB");
 	pma_butstd = gres("GBTNSTD");
 	pma_butinv2 = gres("INVBUT2");
+	pma_ground = gres("GROUND");
 }
 
 BSDATA(form) = {

@@ -19,6 +19,7 @@ extern sprite* pma_butopt1;
 extern sprite* pma_butstd;
 extern sprite* pma_cursors;
 extern sprite* pma_cursarw;
+extern sprite* pma_ground;
 extern sprite* pma_port[2];
 extern sprite* pma_stoneslot;
 extern sprite* pma_pfcm;

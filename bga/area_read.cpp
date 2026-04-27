@@ -2,6 +2,7 @@
 #include "bsreq.h"
 #include "creaturea.h"
 #include "container.h"
+#include "itemground.h"
 #include "log.h"
 #include "logvalue.h"
 #include "npc.h"
@@ -68,8 +69,10 @@ static const char* create_creature(const char* p) {
 	if(pm) {
 		set_player_name(temp);
 		ftscript<npci>(pm - bsdata<npci>::elements, 0);
-	} else
+	} else {
 		set_player_name(temp);
+		player->feats.set(DynamicAnimation);
+	}
 	p = read_variants(p);
 	player_finish();
 	need_update_creatures = true;
@@ -84,6 +87,16 @@ static const char* create_container(const char* p) {
 	return p;
 }
 
+static const char* create_item(const char* p) {
+	short unsigned index = 0;
+	p = psnum(p, index);
+	auto pi = bsdata<itemground>::addz();
+	pi->area = current_area;
+	pi->position = i2sc(index);
+	p = read_variants(p);
+	return p;
+}
+
 static const char* read_block(const char* p) {
 	stringbuilder sb(temp);
 	p = skipws(psidf(p, sb));
@@ -91,6 +104,8 @@ static const char* read_block(const char* p) {
 		return create_creature(p);
 	else if(equal(temp, "Container"))
 		return create_container(p);
+	else if(equal(temp, "Item"))
+		return create_item(p);
 	return p;
 }
 

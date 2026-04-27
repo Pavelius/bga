@@ -1,3 +1,4 @@
+#include "alignment.h"
 #include "colorgrad.h"
 #include "container.h"
 #include "condition.h"
@@ -68,6 +69,32 @@ template<> void ftscript<itemi>(int value, int counter) {
 template<> void ftscript<listi>(int value, int counter) {
 	pushvalue push(modifier);
 	script_run(bsdata<listi>::elements[value].elements);
+}
+
+template<> void ftscript<racei>(int value, int counter) {
+	if(modifier==Permanent)
+		player->race = (racen)value;
+}
+
+template<> void ftscript<alignmenti>(int value, int counter) {
+	if(modifier == Permanent)
+		player->alignment = (alignmentn)value;
+}
+
+template<> void ftscript<genderi>(int value, int counter) {
+	if(modifier == Permanent)
+		player->gender = (gendern)value;
+}
+
+template<> void ftscript<rfpma>(int value, int counter) {
+	if(modifier == Permanent) {
+		for(auto& e : player->resid) {
+			if(e == 0xFFFF) {
+				e = value;
+				break;
+			}
+		}
+	}
 }
 
 template<> void ftscript<npci>(int value, int counter) {

@@ -1,2 +1,2 @@
-﻿Error in file `rules/Monsters.txt`:
- Line 3: Not found requisit `res`
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `StrongLeader`

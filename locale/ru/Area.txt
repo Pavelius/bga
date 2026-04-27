@@ -1,5 +1,6 @@
 GoblinWarrior: Гоблин-воин
 Nazghuul: Нажхуул
+StrongLeader: Лидер
 
 AR1000: Доки Таргоса
 AR1100: Таргос
