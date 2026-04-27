@@ -50,6 +50,10 @@ static const char* read_variants(const char* p) {
 	return p;
 }
 
+static void set_player_name(const char* id) {
+	player->name.set(getnm(id));
+}
+
 static const char* create_creature(const char* p) {
 	stringbuilder sb(temp); sb.clear();
 	player = bsdata<creature>::add();
@@ -61,10 +65,11 @@ static const char* create_creature(const char* p) {
 	player->position = i2sc(player->position_index);
 	p = skipws(psidf(p, sb));
 	auto pm = bsdata<npci>::find(temp);
-	if(pm)
+	if(pm) {
+		set_player_name(temp);
 		ftscript<npci>(pm - bsdata<npci>::elements, 0);
-	else
-		apply_custom(temp);
+	} else
+		set_player_name(temp);
 	p = read_variants(p);
 	player_finish();
 	need_update_creatures = true;

@@ -50,7 +50,6 @@ BSDATA(animatei) = {
 assert_enum(animatei, AnimateCastFourRelease)
 
 const int max_sprite_directions = 9;
-const int max_weapon_anim = 26;
 
 const int anm_a1o8 = 104;
 const int anm_hg1o8 = 32;

@@ -335,6 +335,63 @@ static void update_abilities() {
 		player->hp = player->hp_max;
 }
 
+static short unsigned get_resid(item equipment, int ws) {
+	static int ai[] = {max_weapon_anim * 3, max_weapon_anim * 2, max_weapon_anim * 1, 0};
+	if(!equipment)
+		return 0xFFFF;
+	auto p = equipment.geti().equiped;
+	if(!p)
+		return 0xFFFF;
+	return getbsi(p + ai[ws]);
+}
+
+static short unsigned get_character_animation(racen race, gendern gender, classn type, int ai, int& ws) {
+	auto& ei = bsdata<racei>::elements[race];
+	auto i = (gender == Female) ? 1 : 0;
+	auto p = ei.res[i];
+	if(!p)
+		return 0xFFFF;
+	auto n = bsdata<classi>::elements[type].ai; // Animation class: 0 - default, 1 - cleric, 2 - theif, 3 - wizard, 4 - monk.
+	auto w = ei.ws[i]; // `ws` is index of weapon set
+	// Allowed animation set (by count of animation types)
+	// 10 - CDMB1, CDMB2, CDMB3, CDMC4, CDMF4, CDMT1, CDMW1, CDMW2, CDMW3, CDMW4
+	// 11 - CHFB1, CHFB2, CHFB3, CHFC4, CHFF4, CHFM1, CHFT1, CHFW1, CHFW2, CHFW3, CHFW4,
+	//  6 - CIMB1, CIMB2, CIMB3, CIMC4, CIMF4, CIMT1
+	if(n == 0 && ai == 3)
+		ai = 4; // Default animation have other index for heavy armor
+	switch(ei.resm) {
+	case 10:
+		switch(n) {
+		case 2: case 4: p += 5; break;
+		case 3: p += 6 + ai; break;
+		default: p += ai; break;
+		}
+		break;
+	case 6:
+		switch(n) {
+		case 2: case 3: case 4: p += 5; break;
+		default: p += ai; break;
+		}
+		break;
+	default:
+		switch(n) {
+		case 2: p += 6; break;
+		case 3: p += 7 + ai; break;
+		case 4: p += 5; break;
+		default: p += ai; break;
+		}
+		break;
+	}
+	return getbsi(p);
+}
+
+static void update_animation() {
+	int ws = 0;
+	auto a1 = get_character_animation(player->race, player->gender, player->getmainclass(), 0, ws);
+	if(a1 == 0xFFFF)
+		return; // Animation not need to be update by race
+}
+
 void update_player() {
 	copy(*static_cast<statable*>(player), player->basic);
 	update_wears();

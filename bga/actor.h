@@ -11,6 +11,8 @@
 struct sprite;
 struct npci;
 
+const int max_weapon_anim = 26;
+
 enum animaten : unsigned char {
 	AnimateMove,
 	AnimateStand, AnimateStandRelax, AnimateStandLook,
@@ -31,6 +33,10 @@ enum gendern : unsigned char;
 enum directionn : unsigned char;
 
 struct actor : moveable, coloration, statable, classa, wearable {
+	racen			race;
+	gendern			gender;
+	short unsigned	resid[4]; // Images overlays. 0xFFFF is none.
+	short unsigned	cicle;
 	short unsigned	position_index;
 	animaten		action;
 	short unsigned	area_index;
@@ -39,8 +45,6 @@ struct actor : moveable, coloration, statable, classa, wearable {
 	unsigned char	orientation;
 	int				delay;
 	unsigned short	npc, enemy_id;
-	racen			race;
-	gendern			gender;
 	short unsigned	speak;
 	void			animateattack(drawable* target);
 	void			animatedamage();
