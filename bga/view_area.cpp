@@ -428,9 +428,12 @@ static void paint_ground() {
 	auto p = (itemground*)last_object;
 	auto n = p->geti().ground;
 	auto& f = pma_ground->get(n);
+	if(hot.mouse.in(f.getrect(caret.x, caret.y, 0)))
+		hilite_object = last_object;
 	if(f.pallette) {
 		memcpy(pallette, pma_ground->ptr(f.pallette), sizeof(pallette));
-		pallette[1] = color(64, 64, 64);
+		if(hilite_object != last_object)
+			pallette[1] = color(64, 64, 64);
 	}
 	image(pma_ground, n, ImagePallette);
 }
@@ -562,7 +565,7 @@ static void apply_hilite_command() {
 			p->use(!p->isopen());
 		} else if(bsdata<container>::have(hilite_object)) {
 			auto p = (container*)(drawable*)hilite_object;
-			// print("This is %1", p->name);
+			print("This is container %1i", getbsi(p));
 			party_action(p, p->launch, open_container);
 		} else if(bsdata<creature>::have(hilite_object)) {
 			if(combat_mode) {
