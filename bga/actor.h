@@ -35,7 +35,6 @@ struct actor : moveable, coloration, wearable {
 	short unsigned	resid[4]; // Images overlays. 0xFFFF is none.
 	short unsigned	cicle; // Current animation cicle
 	short unsigned	frame;
-	unsigned		frame_flags;
 	animaten		action;
 	unsigned char	orientation;
 	short unsigned	area_index;
@@ -60,6 +59,7 @@ struct actor : moveable, coloration, wearable {
 	void			stop();
 	void			updateanimate();
 private:
+	unsigned		getflags() const;
 	sprite*			getsprite() const;
 	unsigned		getwait() const;
 	void			nextaction();

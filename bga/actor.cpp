@@ -135,6 +135,8 @@ static int get_cicle(sprite* ps, animaten action, int o) {
 }
 
 static unsigned get_flags(sprite* ps, int o) {
+	if(!ps)
+		return 0;
 	switch(ps->cicles) {
 	case anm_a1o8: case anm_hg1o8:
 		return 0;
@@ -148,8 +150,6 @@ void actor::resetframe() {
 	if(!ps)
 		return;
 	cicle = get_cicle(ps, action, orientation);
-	frame_flags = get_flags(ps, orientation);
-	auto pc = ps->gcicle(cicle);
 	frame = 0;
 }
 
@@ -191,7 +191,7 @@ rect actor::getrect() const {
 	auto ps = getsprite();
 	if(!ps)
 		return rect();
-	return ps->get(ps->ganim(cicle, frame)).getrect(position.x, position.y, frame_flags);
+	return ps->get(ps->ganim(cicle, frame)).getrect(position.x, position.y, get_flags(ps, orientation));
 }
 
 unsigned actor::getwait() const {
@@ -298,9 +298,13 @@ point actor::getlu() const {
 	return a2s(position, getsize());
 }
 
+unsigned actor::getflags() const {
+	return get_flags(getsprite(), orientation);
+}
+
 void actor::paint() const {
 	pushvalue push(palt);
-	auto flags = frame_flags;
+	auto flags = getflags();
 	if(feats.is(DynamicAnimation)) {
 		palt = pallette;
 		setpallette(pallette);
