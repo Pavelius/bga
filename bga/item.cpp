@@ -151,6 +151,8 @@ void initialize_items() {
 				e.cost = e.basic->cost;
 			if(!e.avatar)
 				e.avatar = e.basic->avatar;
+			if(!e.ground)
+				e.ground = e.basic->ground;
 			if(!e.equiped)
 				e.equiped = e.basic->equiped;
 			if(!e.wear)

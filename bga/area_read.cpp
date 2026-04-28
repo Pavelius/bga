@@ -5,6 +5,7 @@
 #include "itemground.h"
 #include "log.h"
 #include "logvalue.h"
+#include "modifier.h"
 #include "npc.h"
 #include "pushvalue.h"
 #include "script.h"
@@ -38,6 +39,11 @@ static const char* psnum(const char* p, unsigned char& value) {
 	return psnum(p, &value, sizeof(value));
 }
 
+static const char* psidf(const char* p) {
+	stringbuilder sb(temp); sb.clear();
+	return psidf(p, sb);
+}
+
 static void apply_custom(const char* id) {
 }
 
@@ -56,20 +62,21 @@ static void set_player_name(const char* id) {
 }
 
 static const char* create_creature(const char* p) {
-	stringbuilder sb(temp); sb.clear();
-	player = bsdata<creature>::add();
+	player = bsdata<creature>::addz();
 	player->clear();
 	player->area_index = current_area;
 	player->portrait = 0xFFFF;
 	p = psnum(p, player->position_index);
 	p = psnum(p, player->orientation);
 	player->position = i2sc(player->position_index);
-	p = skipws(psidf(p, sb));
+	p = skipws(psidf(p));
+	pushvalue push(modifier, Permanent);
 	auto pm = bsdata<npci>::find(temp);
 	if(pm) {
 		set_player_name(temp);
 		ftscript<npci>(pm - bsdata<npci>::elements, 0);
 	} else {
+		create_abilities(true);
 		set_player_name(temp);
 		player->feats.set(DynamicAnimation);
 	}
@@ -90,16 +97,20 @@ static const char* create_container(const char* p) {
 static const char* create_item(const char* p) {
 	short unsigned index = 0;
 	p = psnum(p, index);
-	auto pi = bsdata<itemground>::addz();
-	pi->area = current_area;
-	pi->position = i2sc(index);
+	p = skipws(psidf(p));
+	auto pi = bsdata<itemi>::find(temp);
+	if(!pi) {
+		log::errorp(p, "Not found item description `%1`", temp);
+		pi = bsdata<itemi>::elements;
+	}
+	item it(pi - bsdata<itemi>::elements);
+	add_item(current_area, i2sc(index), it);
 	p = read_variants(p);
 	return p;
 }
 
 static const char* read_block(const char* p) {
-	stringbuilder sb(temp);
-	p = skipws(psidf(p, sb));
+	p = skipws(psidf(p));
 	if(equal(temp, "Creature"))
 		return create_creature(p);
 	else if(equal(temp, "Container"))

@@ -1,6 +1,7 @@
 #include "animation.h"
 #include "drawable.h"
 #include "door.h"
+#include "itemground.h"
 #include "region.h"
 #include "screenshoot.h"
 
@@ -23,6 +24,8 @@ int drawable::getpriority() const {
 	}
 	else if(bsdata<region>::have(this))
 		return 2 * 5;
+	else if(bsdata<itemground>::have(this))
+		return 2 * 5 + 1;
 	return 5 * 5;
 }
 

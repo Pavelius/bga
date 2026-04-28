@@ -44,10 +44,10 @@ template<> void ftscript<form>(int value, int counter) {
 }
 
 template<> void ftscript<classi>(int value, int counter) {
-	auto m = get_bonus(counter);
+	counter = get_bonus(counter);
 	switch(modifier) {
 	case Permanent:
-		for(int i = 0; i < m; i++)
+		for(int i = 0; i < counter; i++)
 			raise_class((classn)value);
 		break;
 	}

@@ -8,7 +8,7 @@
 
 NoItem
 
-BattleAxe weight(6) cost(100) avatar(72) equiped(WQLAX) wear(QuickWeapon) required(MartialWeaponAxe)
+BattleAxe weight(6) cost(100) avatar(72) ground(24) equiped(WQLAX) wear(QuickWeapon) required(MartialWeaponAxe)
  weapon type(Slashing) damage(1 8)
  flags Dangerous
 BattleAxeP1 avatar(73) magic(1) basic(BattleAxe)
@@ -16,14 +16,14 @@ BattleAxeP2 avatar(74) magic(2) basic(BattleAxe)
 BattleAxeP3 avatar(75) magic(3) basic(BattleAxe)
 BattleAxeP4 avatar(76) magic(4) basic(BattleAxe)
 BattleAxeP5 avatar(77) magic(5) basic(BattleAxe)
-LongSword weight(4) cost(15) avatar(821) equiped(WQLS1) wear(QuickWeapon) required(MartialWeaponSword)
+LongSword weight(4) cost(15) avatar(821) ground(28) equiped(WQLS1) wear(QuickWeapon) required(MartialWeaponSword)
  weapon type(Slashing) damage(1 8)
  flags Balanced
 LongSwordFlaming cost(15) avatar(821) equiped(WQLS1) magic(2) basic(LongSword)
  flags Flaming
 Mace weight(12) cost(12) avatar(484) equiped(WQLMC) wear(QuickWeapon) required(SimpleWeaponMace)
  weapon type(Bludgeon) damage(1 8)
-TwoHandedSword weight(8) cost(15) avatar(866) equiped(WQLS2) wear(QuickWeapon) required(MartialWeaponGreatSword)
+TwoHandedSword weight(8) cost(15) avatar(866) ground(30) equiped(WQLS2) wear(QuickWeapon) required(MartialWeaponGreatSword)
  weapon type(Slashing) damage(2 6)
  flags Balanced TwoHanded
 
@@ -36,10 +36,10 @@ ScaleMail weight(30) cost(50) avatar(50) wear(Body) max_dex_bonus(3) required(Ar
 HalfPlate weight(50) cost(600) avatar(42) wear(Body) max_dex_bonus(-1) required(ArmorProficiencyHeavy)
  wearing ArmorBonus+7 SpellFailure+40 ArmorCheckPenalty-7
 
-LargeShield weight(20) cost(5) avatar(740) wear(QuickOffhand) equiped(WQLD2) required(ShieldProficiency)
+LargeShield weight(20) cost(5) avatar(740) ground(10) wear(QuickOffhand) equiped(WQLD2) required(ShieldProficiency)
  wearing ArmorBonus+2 SpellFailure+15 ArmorCheckPenalty-2
 
-Helm weight(5) cost(5) avatar(437) wear(Head) equiped(WQLH1) required(ArmorProficiencyMedium)
+Helm weight(5) cost(5) avatar(437) ground(12) wear(Head) equiped(WQLH1) required(ArmorProficiencyMedium)
 HelmFull weight(10) cost(10) avatar(442) wear(Head) equiped(WQLH0) required(ArmorProficiencyMedium)
 
 PotionOfHealing weight(1) cost(150) avatar(620) wear(QuickItem)

@@ -8,4 +8,8 @@ Creature 15405 8 StrongLeader Human Male Fighter+4 LeatherArmor LongSword
 Creature 17442 6 GoblinWarrior
 Creature 18465 10 Nazghuul GoblinWarrior // Standart monster Golblin warrior with unique identifier `Nazghuul`
 
+Item 13617 LongSword
+Item 13617 LeatherArmor
+Item 13617 Helm
+
 Container 4 LongSword LeatherArmor SetLocked // Container identified by number

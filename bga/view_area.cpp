@@ -25,6 +25,7 @@
 
 using namespace draw;
 
+static color pallette[256];
 static worldmapi::area* current_world_area_hilite;
 static vector<item*> container_items, items;
 
@@ -423,8 +424,15 @@ static void paint_markers(const creature* p) {
 }
 
 static void paint_ground() {
+	pushvalue push(palt, pallette);
 	auto p = (itemground*)last_object;
-	image(pma_ground, p->geti().ground, 0);
+	auto n = p->geti().ground;
+	auto& f = pma_ground->get(n);
+	if(f.pallette) {
+		memcpy(pallette, pma_ground->ptr(f.pallette), sizeof(pallette));
+		pallette[1] = color(64, 64, 64);
+	}
+	image(pma_ground, n, ImagePallette);
 }
 
 static void paint_creature() {
