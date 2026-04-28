@@ -25,6 +25,11 @@
 
 using namespace draw;
 
+struct renderi : nameable {
+	const array&	source;
+	fnevent			paint;
+};
+
 static color pallette[256];
 static worldmapi::area* current_world_area_hilite;
 static vector<item*> container_items, items;
@@ -932,3 +937,13 @@ void open_container() {
 		return;
 	scene(paint_container_area);
 }
+
+BSDATA(renderi) = {
+	{"Animation", bsdata<animation>::source, paint_animation},
+	{"Container", bsdata<container>::source, paint_container},
+	{"Creature", bsdata<creature>::source, paint_creature},
+	{"Door", bsdata<door>::source, paint_door},
+	{"Item", bsdata<itemground>::source, paint_ground},
+	{"Region", bsdata<region>::source, paint_region},
+};
+BSDATAF(renderi)
