@@ -32,7 +32,7 @@ static floattext* find_exist(const void* data) {
 	return 0;
 }
 
-void add_float_text(point position, const char* format, int width, unsigned millisecond, const void* data) {
+void add_float_text(point position, const char* format, int width, int millisecond, const void* data) {
 	if(!format)
 		return;
 	auto push_width = draw::width;
@@ -50,7 +50,7 @@ void add_float_text(point position, const char* format, int width, unsigned mill
 	p->position.x = p->box.x1;
 	p->position.y = p->box.y1;
 	p->fore = colors::text;
-	p->stop_visible = current_game_tick + millisecond;
+	p->delay = current_game_tick + millisecond;
 	p->data = data;
 	draw::width = push_width;
 	draw::height = push_height;

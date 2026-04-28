@@ -187,6 +187,13 @@ rect actor::getbox() const {
 	return {position.x - s * 8, position.y - s * 6, position.x + s * 8, position.y + s * 6};
 }
 
+rect actor::getrect() const {
+	auto ps = getsprite();
+	if(!ps)
+		return rect();
+	return ps->get(ps->ganim(cicle, frame)).getrect(position.x, position.y, frame_flags);
+}
+
 unsigned actor::getwait() const {
 	return 74;
 }

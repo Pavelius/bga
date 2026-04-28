@@ -25,14 +25,27 @@
 
 using namespace draw;
 
+typedef bool(*fnrenderallow)(const drawable* p);
+typedef int(*fnrenderget)(const drawable* p);
+
 struct renderi : nameable {
 	const array&	source;
+	drawable*		elements;
 	fnevent			paint;
+	fnrenderallow	allow;
+	fnrenderget		priority;
+};
+
+struct drawobject {
+	drawable* object;
+	renderi* render;
 };
 
 static color pallette[256];
 static worldmapi::area* current_world_area_hilite;
 static vector<item*> container_items, items;
+static adat<drawobject> objects;
+static rect clipped_area;
 
 void scale2x(void* void_dst, unsigned dst_slice, const void* void_src, unsigned src_slice, unsigned width, unsigned height);
 
@@ -41,6 +54,177 @@ const int tile_size = 64;
 static point hotspot;
 static rect last_screen, last_area;
 static int zoom_factor = 1;
+
+static bool allow_clipped_area(const drawable* p) {
+	return p->position.in(clipped_area);
+}
+
+static bool allow_region(const drawable* object) {
+	auto p = (region*)object;
+	if(p->type == RegionTriger)
+		return false;
+	return p->box.intersect(last_area);
+}
+
+static bool allow_container(const drawable* object) {
+	auto p = (container*)object;
+	return p->box.intersect(last_area);
+}
+
+static bool allow_door(const drawable* object) {
+	auto p = (door*)object;
+	return p->getrect().intersect(last_area);
+}
+
+static bool allow_animate(const drawable* object) {
+	auto p = (animation*)object;
+	if(!p->isvisible())
+		return false;
+	return allow_clipped_area(object);
+}
+
+static bool allow_ground(const drawable* object) {
+	auto p = (itemground*)object;
+	if(p->area != current_area)
+		return false;
+	if(p->inside())
+		return false;
+	return allow_clipped_area(object);
+}
+
+static void add_object(renderi* pm, drawable* p) {
+	auto pn = objects.add();
+	pn->object = p;
+	pn->render = pm;
+}
+
+static void add_objects(renderi* pm) {
+	if(!pm->allow)
+		return;
+	auto sz = pm->source.element_size;
+	auto pe = (unsigned char*)pm->elements + sz * pm->source.count;
+	for(auto p = pm->elements; (unsigned char*)p < pe; p = (drawable*)((char*)p + sz)) {
+		if(!pm->allow(p))
+			continue;
+		auto pn = objects.add();
+		pn->object = p;
+		pn->render = pm;
+	}
+}
+
+static void paint_float_text(floattext* p) {
+	pushrect push;
+	auto push_fore = draw::fore;
+	auto push_alpha = draw::alpha;
+	width = p->box.width();
+	height = p->box.height();
+	fore = colors::black;
+	alpha = 128;
+	strokeout(rectf, metrics::border + metrics::padding);
+	alpha = push_alpha;
+	fore = push_fore;
+	textf(p->format);
+}
+
+static void update_floattext_tail() {
+	auto pb = bsdata<floattext>::begin();
+	auto pe = bsdata<floattext>::end();
+	while(pe > pb) {
+		pe--;
+		if(*(pe))
+			break;
+		bsdata<floattext>::source.count--;
+	}
+}
+
+static void paint_float_text() {
+	pushrect push;
+	for(auto& e : bsdata<floattext>()) {
+		if(!e)
+			continue;
+		if(e.delay <= 0) {
+			e.clear();
+			continue;
+		}
+		e.delay -= current_tick_delta;
+		if(!e.box.intersect(last_area))
+			continue;
+		caret = e.position - camera;
+		caret.x += last_screen.x1;
+		caret.y += last_screen.y1;
+		paint_float_text(&e);
+	}
+	update_floattext_tail();
+}
+
+static int priority_normal(const drawable* object) {
+	return object->position.y;
+}
+
+static int priority_ground(const drawable* object) {
+	auto p = (itemground*)object;
+	return object->position.y - 1000 - p->geti().ground;
+}
+
+static int priority_door(const drawable* object) {
+	auto p = (door*)object;
+	return p->getrect().y2 - 8;
+}
+
+static int priority_region(const drawable* object) {
+	auto p = (door*)object;
+	return p->getrect().y2 - 1000 - 8;
+}
+
+static int priority_animate(const drawable* object) {
+	auto p = (animation*)object;
+	return object->position.y + p->height;
+}
+
+static int compare_drawobject(const void* v1, const void* v2) {
+	auto p1 = (drawobject*)v1;
+	auto p2 = (drawobject*)v2;
+	auto n1 = p1->render->priority(p1->object);
+	auto n2 = p2->render->priority(p2->object);
+	if(n1 != n2)
+		return n1 - n2;
+	if(p1->object->position.x != p1->object->position.y)
+		return p1->object->position.x - p2->object->position.x;
+	return p1->object - p2->object;
+}
+
+static void prepare_creatures() {
+	update_creatures();
+	auto pm = bsdata<renderi>::find("Creature");
+	if(!pm)
+		return;
+	for(auto p : creatures) {
+		if(!p->position.in(clipped_area))
+			continue;
+		if(!p->getrect().intersect(last_area))
+			continue;
+		add_object(pm, p);
+	}
+}
+
+static void paint_objects() {
+	pushrect push;
+	clipped_area = last_area;
+	clipped_area.offset(-128);
+	update_floattext_tail();
+	objects.clear();
+	for(auto& e : bsdata<renderi>())
+		add_objects(&e);
+	prepare_creatures();
+	objects.sort(compare_drawobject);
+	for(auto& e : objects) {
+		last_object = e.object;
+		caret = last_object->position - camera;
+		caret.x += last_screen.x1;
+		caret.y += last_screen.y1;
+		e.render->paint();
+	}
+}
 
 static unsigned get_game_tick() {
 	return current_tick / 64;
@@ -234,107 +418,10 @@ static void set_visible_area() {
 	}
 	last_area.set(caret.x, caret.y, caret.x + mx, caret.y + my);
 	last_area.move(camera.x, camera.y);
-	last_area.offset(-128, -128);
 	if(hot.mouse.in(last_screen))
 		hotspot = hot.mouse - caret + camera;
 	else
 		hotspot = {-1000, -1000};
-}
-
-static void update_floattext_tail() {
-	auto pb = bsdata<floattext>::begin();
-	auto pe = bsdata<floattext>::end();
-	while(pe > pb) {
-		pe--;
-		if(*(pe))
-			break;
-		bsdata<floattext>::source.count--;
-	}
-}
-
-static void prepare_creatures() {
-	update_creatures();
-	for(auto p : creatures) {
-		if(!p->position.in(last_area))
-			continue;
-		objects.add(p);
-	}
-}
-
-static void prepare_floattext() {
-	for(auto& e : bsdata<floattext>()) {
-		if(!e)
-			continue;
-		if(e.stop_visible < current_game_tick) {
-			e.clear();
-			continue;
-		}
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_animation() {
-	for(auto& e : bsdata<animation>()) {
-		if(!e.position.in(last_area))
-			continue;
-		if(!e.isvisible())
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_containers() {
-	for(auto& e : bsdata<container>()) {
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_regions() {
-	for(auto& e : bsdata<region>()) {
-		if(e.type == RegionTriger)
-			continue;
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_doors() {
-	for(auto& e : bsdata<door>()) {
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_items() {
-	for(auto& e : bsdata<itemground>()) {
-		if(e.inside())
-			continue;
-		if(!e.position.in(last_area))
-			continue;
-		objects.add(&e);
-	}
-}
-
-static void prepare_objects() {
-	objects.clear();
-	prepare_animation();
-	prepare_containers();
-	prepare_creatures();
-	prepare_doors();
-	prepare_floattext();
-	prepare_regions();
-	prepare_items();
-	update_floattext_tail();
-}
-
-static void sort_objects() {
-	objects.sort(drawable::compare);
 }
 
 static void polygon(const sliceu<point>& source) {
@@ -467,21 +554,6 @@ static void paint_animation() {
 		image(pr, pr->ganim(p->frame, get_game_tick()), p->is(Mirrored) ? ImageMirrorV : 0);
 }
 
-static void paint_float_text() {
-	pushrect push;
-	auto p = (floattext*)last_object;
-	auto push_fore = draw::fore;
-	auto push_alpha = draw::alpha;
-	width = p->box.width();
-	height = p->box.height();
-	fore = colors::black;
-	alpha = 128;
-	strokeout(rectf, metrics::border + metrics::padding);
-	alpha = push_alpha;
-	fore = push_fore;
-	textf(p->format);
-}
-
 static void paint_door() {
 	auto p = (door*)last_object;
 	if(hotspot.in(p->box)) {
@@ -516,34 +588,6 @@ static void paint_container() {
 		polygon_green_filled(p->points, p->box);
 		polygon_green(p->points);
 		cursor.cicle = 2;
-	}
-}
-
-static void paint_object() {
-	if(bsdata<door>::have(last_object))
-		paint_door();
-	else if(bsdata<region>::have(last_object))
-		paint_region();
-	else if(bsdata<container>::have(last_object))
-		paint_container();
-	else if(bsdata<floattext>::have(last_object))
-		paint_float_text();
-	else if(bsdata<creature>::have(last_object))
-		paint_creature();
-	else if(bsdata<animation>::have(last_object))
-		paint_animation();
-	else if(bsdata<itemground>::have(last_object))
-		paint_ground();
-}
-
-static void paint_objects() {
-	pushrect push;
-	for(auto p : objects) {
-		last_object = p;
-		caret = last_object->position - camera;
-		caret.x += last_screen.x1;
-		caret.y += last_screen.y1;
-		paint_object();
 	}
 }
 
@@ -674,9 +718,8 @@ static void paint_area_map() {
 #ifdef _DEBUG
 	paint_block_area();
 #endif // _DEBUG
-	prepare_objects();
-	sort_objects();
 	paint_objects();
+	paint_float_text();
 	apply_hilite_command();
 	if(combat_mode)
 		apply_command_combat();
@@ -788,8 +831,6 @@ static void paint_area_map_screen() {
 	auto push_clip = clipping; setclip();
 	set_visible_area();
 	paint_tiles();
-	prepare_objects();
-	sort_objects();
 	paint_objects();
 	clipping = push_clip;
 }
@@ -939,11 +980,11 @@ void open_container() {
 }
 
 BSDATA(renderi) = {
-	{"Animation", bsdata<animation>::source, paint_animation},
-	{"Container", bsdata<container>::source, paint_container},
-	{"Creature", bsdata<creature>::source, paint_creature},
-	{"Door", bsdata<door>::source, paint_door},
-	{"Item", bsdata<itemground>::source, paint_ground},
-	{"Region", bsdata<region>::source, paint_region},
+	{"Animation", bsdata<animation>::source, bsdata<animation>::elements, paint_animation, allow_animate, priority_animate},
+	{"Container", bsdata<container>::source, bsdata<container>::elements, paint_container, allow_clipped_area, priority_normal},
+	{"Creature", bsdata<creature>::source, bsdata<creature>::elements, paint_creature, 0, priority_normal},
+	{"Door", bsdata<door>::source, bsdata<door>::elements, paint_door, allow_door, priority_door},
+	{"Item", bsdata<itemground>::source, bsdata<itemground>::elements, paint_ground, allow_ground, priority_ground},
+	{"Region", bsdata<region>::source, bsdata<region>::elements, paint_region, allow_region, priority_region},
 };
 BSDATAF(renderi)

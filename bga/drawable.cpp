@@ -5,7 +5,6 @@
 #include "region.h"
 #include "screenshoot.h"
 
-drawablea objects;
 drawable* hilite_drawable;
 drawable* last_object;
 

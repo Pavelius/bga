@@ -1,4 +1,3 @@
-#include "adat.h"
 #include "point.h"
 
 #pragma once
@@ -15,8 +14,6 @@ struct drawable {
 	bool		ishilite() const { return this == hilite_object; };
 	void		setposition(point v) { position = v; }
 };
-typedef adat<drawable*, 512> drawablea;
-extern drawablea objects;
 extern drawable* last_object;
 
 bool inside(point t, point* points, int count);
