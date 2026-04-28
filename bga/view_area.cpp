@@ -437,6 +437,8 @@ static void paint_ground() {
 
 static void paint_creature() {
 	auto p = (creature*)last_object;
+	if(hotspot.in(p->getbox()))
+		hilite_object = last_object;
 	if(p->ishilite())
 		cursor.cicle = 0;
 	paint_markers(p);
@@ -474,6 +476,11 @@ static void paint_float_text() {
 
 static void paint_door() {
 	auto p = (door*)last_object;
+	if(hotspot.in(p->box)) {
+		auto n = p->getpoints();
+		if(inside(hotspot, n.begin(), n.size()))
+			hilite_object = last_object;
+	}
 	if(p->ishilite()) {
 		polygon_green_filled(p->getpoints(), p->box);
 		polygon_green(p->getpoints());
@@ -483,6 +490,8 @@ static void paint_door() {
 
 static void paint_region() {
 	auto p = (region*)last_object;
+	if(hotspot.in(p->box) && inside(hotspot, p->points.begin(), p->points.size()))
+		hilite_object = last_object;
 	if(p->ishilite()) {
 		switch(p->type) {
 		case RegionInfo: cursor.cicle = 22; break;
@@ -493,6 +502,8 @@ static void paint_region() {
 
 static void paint_container() {
 	auto p = (container*)last_object;
+	if(hotspot.in(p->box) && inside(hotspot, p->points.begin(), p->points.size()))
+		hilite_object = last_object;
 	if(p->ishilite()) {
 		polygon_green_filled(p->points, p->box);
 		polygon_green(p->points);
@@ -517,38 +528,13 @@ static void paint_object() {
 		paint_ground();
 }
 
-static bool is_hilite() {
-	if(bsdata<door>::have(last_object)) {
-		auto p = (door*)last_object;
-		if(hotspot.in(p->box)) {
-			auto n = p->getpoints();
-			return inside(hotspot, n.begin(), n.size());
-		}
-	} else if(bsdata<region>::have(last_object)) {
-		auto p = (region*)last_object;
-		if(hotspot.in(p->box))
-			return inside(hotspot, p->points.begin(), p->points.size());
-	} else if(bsdata<container>::have(last_object)) {
-		auto p = (container*)last_object;
-		if(hotspot.in(p->box))
-			return inside(hotspot, p->points.begin(), p->points.size());
-	} else if(bsdata<creature>::have(last_object)) {
-		auto p = (creature*)last_object;
-		return hotspot.in(p->getbox());
-	}
-	return false;
-}
-
 static void paint_objects() {
 	pushrect push;
-	hilite_drawable = 0;
 	for(auto p : objects) {
 		last_object = p;
 		caret = last_object->position - camera;
 		caret.x += last_screen.x1;
 		caret.y += last_screen.y1;
-		if(is_hilite())
-			hilite_drawable = last_object;
 		paint_object();
 	}
 }
@@ -558,11 +544,11 @@ static const char* gettipsname(point position) {
 }
 
 static void apply_hilite_command() {
-	if(!hilite_drawable)
+	if(!hilite_object)
 		return;
 	if(hot.key == MouseLeft && !hot.pressed) {
-		if(bsdata<region>::have(hilite_drawable)) {
-			auto p = (region*)hilite_drawable;
+		if(bsdata<region>::have(hilite_object)) {
+			auto p = (region*)(drawable*)hilite_object;
 			if(p->type == RegionInfo) {
 				auto pn = getnme(gettipsname(p->position));
 				if(pn) {
@@ -571,18 +557,18 @@ static void apply_hilite_command() {
 				}
 			} else if(p->type == RegionTravel)
 				enter(p->move_to_entrance);
-		} else if(bsdata<door>::have(hilite_drawable)) {
-			auto p = (door*)hilite_drawable;
+		} else if(bsdata<door>::have(hilite_object)) {
+			auto p = (door*)(drawable*)hilite_object;
 			p->use(!p->isopen());
-		} else if(bsdata<container>::have(hilite_drawable)) {
-			auto p = (container*)hilite_drawable;
+		} else if(bsdata<container>::have(hilite_object)) {
+			auto p = (container*)(drawable*)hilite_object;
 			// print("This is %1", p->name);
 			party_action(p, p->launch, open_container);
-		} else if(bsdata<creature>::have(hilite_drawable)) {
+		} else if(bsdata<creature>::have(hilite_object)) {
 			if(combat_mode) {
 
 			} else
-				execute(choose_creature, 0, 0, hilite_drawable);
+				execute(choose_creature, 0, 0, (drawable*)hilite_object);
 		}
 	}
 }
@@ -596,7 +582,7 @@ static void move_party() {
 }
 
 static void apply_command() {
-	if(hilite_drawable)
+	if(hilite_object)
 		return;
 	if(hot.mouse.in(last_screen)) {
 		if(hot.pressed) {
@@ -629,7 +615,7 @@ static void apply_command() {
 }
 
 static void apply_command_combat() {
-	if(hilite_drawable)
+	if(hilite_object)
 		return;
 	if(!hot.mouse.in(last_screen))
 		return;

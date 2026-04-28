@@ -114,6 +114,7 @@ extern int				border, padding;
 }
 
 extern point camera;
+extern void*			hilite_object;
 
 namespace draw {
 struct hoti {
@@ -163,7 +164,6 @@ extern rect				clipping; // Clipping area
 extern fnevent			domodal;
 extern point			dragmouse, caret, tips_caret, tips_size;
 extern color			fore, fore_stroke;
-extern const void*		hilite_object;
 extern unsigned char    alpha;
 extern int				width, height, fsize, dialog_width;
 extern bool				control_hilited;

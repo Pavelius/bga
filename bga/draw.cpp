@@ -45,7 +45,7 @@ double				draw::linw = 1.0;
 color*				draw::palt;
 rect				draw::clipping;
 hoti				draw::hot;
-const void*			draw::hilite_object;
+void*				hilite_object;
 // Locale draw variables
 static draw::surface default_surface;
 draw::surface*		draw::canvas = &default_surface;
