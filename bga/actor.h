@@ -44,9 +44,7 @@ struct actor : moveable, coloration, wearable {
 	void			animatedamage();
 	rect			getbox() const;
 	rect			getrect() const;
-	point			getlu() const;
 	int				getmovement() const { return 6; }
-	int				getspeed() const { return 7; }
 	int				getsize() const { return 1; }
 	bool			ispresent() const;
 	void			lookat(point destination);
