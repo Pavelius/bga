@@ -45,7 +45,6 @@
     <Text Include="..\rules\Hotkeys.txt" />
     <Text Include="..\rules\Monsters.txt" />
     <Text Include="..\rules\Classes.txt" />
-    <Text Include="..\rules\Colors.txt" />
     <Text Include="..\rules\Basic.txt" />
     <Text Include="..\rules\Diety.txt" />
     <Text Include="..\rules\Feats.txt" />

@@ -626,6 +626,10 @@ static void apply_hilite_command() {
 }
 
 static void jump_party() {
+	for(auto p : party) {
+		if(p)
+			p->stop();
+	}
 	setparty(hot.param);
 }
 

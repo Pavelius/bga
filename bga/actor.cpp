@@ -121,6 +121,8 @@ void actor::wait(unsigned milliseconds) {
 }
 
 static int get_cicle(sprite* ps, animaten action, int o) {
+	if(!ps)
+		return 0;
 	switch(ps->cicles) {
 	case anm_a1o8:
 		return bsdata<animatei>::elements[action].a1o8 * 8 + o / 2;
@@ -146,10 +148,7 @@ static unsigned get_flags(sprite* ps, int o) {
 }
 
 void actor::resetframe() {
-	sprite* ps = getsprite();
-	if(!ps)
-		return;
-	cicle = get_cicle(ps, action, orientation);
+	cicle = get_cicle(getsprite(), action, orientation);
 	frame = 0;
 }
 
@@ -294,10 +293,6 @@ void paperdoll(const coloration& colors, short unsigned* resid, int animation, i
 	}
 }
 
-point actor::getlu() const {
-	return a2s(position, getsize());
-}
-
 unsigned actor::getflags() const {
 	return get_flags(getsprite(), orientation);
 }
@@ -308,7 +303,7 @@ void actor::paint() const {
 	if(feats.is(DynamicAnimation)) {
 		palt = pallette;
 		setpallette(pallette);
-		apply_shadow(pallette, get_shadow(getlu()));
+		apply_shadow(pallette, get_shadow(position));
 		flags |= ImagePallette;
 	}
 	for(auto n : resid) {

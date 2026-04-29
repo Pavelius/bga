@@ -1,5 +1,4 @@
 #include "rules/Entrances.txt"
-#include "rules/Colors.txt"
 #include "rules/Races.txt"
 #include "rules/Classes.txt"
 #include "rules/Items.txt"

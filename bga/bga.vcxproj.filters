@@ -27,9 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\rules\Colors.txt">
-      <Filter>rules</Filter>
-    </Text>
     <Text Include="..\rules\Items.txt">
       <Filter>rules</Filter>
     </Text>

@@ -1,11 +1,11 @@
 #include "color.h"
-#include "adat.h"
+#include "slice.h"
 
 #pragma once
 
 struct colorgrad {
-	const char*			id;
-	adat<unsigned char> indecies;
+	const char*				id;
+	slice<unsigned char>	indecies;
 };
 
 extern color pallette[256];

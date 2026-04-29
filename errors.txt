@@ -1,1 +1,1 @@
-﻿Can't find file 'areas/AR1005.inf'
+﻿Can't find file 'rules/Colors.txt'
