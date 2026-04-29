@@ -1,17 +1,19 @@
+#include "action.h"
 #include "advance.h"
 #include "area.h"
 #include "collection.h"
 #include "condition.h"
 #include "creature.h"
+#include "draw.h"
 #include "math.h"
 #include "modifier.h"
 #include "npc.h"
-#include "order.h"
 #include "party.h"
 #include "pushvalue.h"
 #include "rand.h"
 #include "script.h"
 #include "rfiles.h"
+#include "timer.h"
 #include "view.h"
 
 creature* party[6];
@@ -107,7 +109,7 @@ static void apply_advance(variant v, int level) {
 void creature::clear() {
 	memset(this, 0, sizeof(*this));
 	area_index = 0xFFFF;
-	move_order = 0xFFFF;
+	order_move = 0xFFFF;
 	for(auto& e : resid)
 		e = 0xFFFF;
 }
@@ -536,4 +538,114 @@ bool creature::roll(skilln v, int bonus) {
 	auto chance = get(v) + getbonus(bsdata<skilli>::elements[v].ability);
 	auto difficult = 10 - bonus;
 	return d20() + chance >= difficult;
+}
+
+void creature::stop() {
+	if(feats.is(ReadyToBattle)) {
+		if(getweapon().geti().is(TwoHanded))
+			set(AnimateCombatStanceTwoHanded);
+		else
+			set(AnimateCombatStance);
+	} else
+		set(AnimateStand);
+}
+
+static void activate_action(creature* p) {
+	if(!p->order)
+		return;
+	auto& ei = bsdata<actioni>::elements[p->order.counter];
+	if(ei.proc)
+		draw::execute(ei.proc, (long)p, 0, p->order.getpointer());
+}
+
+void creature::updateanimate() {
+	delay -= current_tick_delta;
+	while(delay < 0) {
+		auto prev_action = action;
+		delay += getmps();
+		auto ps = getsprite();
+		if(!ps)
+			continue;
+		auto pc = ps->gcicle(cicle);
+		if(++frame == pc->count) {
+			frame = 0;
+			nextaction();
+		}
+		if(action == AnimateMove) {
+			movestep(getspeed());
+			if(!ismoving())
+				stop();
+		}
+		if(prev_action != action)
+			activate_action(this);
+	}
+}
+
+void creature::nextaction() {
+	switch(action) {
+	case AnimateStand:
+		if(chance(10))
+			set(chance(50) ? AnimateStandLook : AnimateStandRelax);
+		break;
+	case AnimateCastFour:
+		set(AnimateCastFourRelease);
+		break;
+	case AnimateCastThird:
+		set(AnimateCastRelease);
+		break;
+	case AnimateCast:
+		set(AnimateCastThirdRelease);
+		break;
+	case AnimateGetHitAndDrop:
+		delay += xrand(300, 1200);
+		set(AnimateAgony);
+		break;
+	case AnimateAgony:
+		if(chance(20))
+			setreverse(AnimateGetUp);
+		else
+			delay += xrand(1000, 10000);
+		break;
+	case AnimateMeleeOneHanded: case AnimateMeleeOneHandedSwing: case AnimateMeleeOneHandedThrust:
+	case AnimateMeleeTwoHanded: case AnimateMeleeTwoHandedSwing: case AnimateMeleeTwoHandedThrust:
+	case AnimateMeleeTwoWeapon: case AnimateMeleeTwoWeaponSwing: case AnimateMeleeTwoWeaponThrust:
+	case AnimateShootBow: case AnimateShootSling: case AnimateShootXBow:
+	case AnimateGetUp:
+	case AnimateCastFourRelease:
+	case AnimateCastThirdRelease:
+	case AnimateCastRelease:
+	case AnimateStandLook:
+	case AnimateStandRelax:
+	case AnimateGetHit:
+		stop();
+		break;
+	default:
+		break;
+	}
+}
+
+void creature::setreverse(animaten v) {
+	set(v);
+	// TODO: set backward animate
+}
+
+//void creature::readybattle(bool v) {
+//	feats.set(ReadyToBattle, v);
+//	stop();
+//}
+
+void creature::fixattack(drawable* target) {
+	lookat(target->position);
+	auto& w = getweapon();
+	auto n = xrand(0, 2);
+	if(getoffhand().isweapon())
+		set((animaten)(AnimateMeleeTwoWeapon + n));
+	else if(w.is(TwoHanded))
+		set((animaten)(AnimateMeleeTwoHanded + n));
+	else
+		set((animaten)(AnimateMeleeOneHanded + n));
+}
+
+void creature::fixdamage() {
+	set(AnimateGetHit);
 }

@@ -106,6 +106,7 @@ BSMETA(colorgrad) = {
 	BSREQ(id), BSREQ(indecies),
 	{}};
 BSMETA(container) = {
+	BSREQ(position), BSREQ(launch),
 	{}};
 BSMETA(creature) = {
 	BSREQ(area_index),
@@ -266,6 +267,7 @@ BSDATA(varianti) = {
 	{"Class", VAR(classi, 1), ftinfo<classi>, 0, ftscript<classi>},
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"Condition", VAR(conditioni, 1), 0, 0, ftscript<conditioni>, fttest<conditioni>},
+	{"Container", VAR(container, 0)},
 	{"DayPart", VAR(periodi, 1)},
 	{"Diety", VAR(dietyi, 1)},
 	{"Entrance", VAR(entrancei, 1)},

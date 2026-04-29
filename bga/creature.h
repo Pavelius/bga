@@ -13,6 +13,7 @@ struct creature : actor, statable, classa, avatarable, spellv {
 	alignmentn		alignment;
 	dietyn			diety;
 	statable		basic;
+	featf			feats;
 	char			initiative;
 	short			hp, hp_max;
 	unsigned		experience;
@@ -21,8 +22,11 @@ struct creature : actor, statable, classa, avatarable, spellv {
 	explicit operator bool() const { return hp > 0; }
 	void			select();
 	void			clear();
+	void			fixattack(drawable* target);
+	void			fixdamage();
 	void			getattack(weaponi& result, const item& weapon) const;
 	short unsigned	getindex() const;
+	int				getmps() const { return 74; }
 	const char*		getname() const { return name; }
 	int				getspellslots(classn type, int spell_level) const;
 	bool			is(featn v) const { return feats.is(v); }
@@ -31,9 +35,14 @@ struct creature : actor, statable, classa, avatarable, spellv {
 	bool			isparty() const;
 	bool			isselected() const;
 	bool			isusable(const item& it) const;
+	void			nextaction();
 	bool			roll(skilln value, int bonus = 0); // Default roll against difficult 10.
 	void			set(featn v) { feats.set(v); }
+	void			set(animaten v) { actor::set(v); }
+	void			setreverse(animaten v);
+	void			stop();
 	void			update();
+	void			updateanimate();
 };
 extern creature* player;
 extern creature* party[6];

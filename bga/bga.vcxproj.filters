@@ -338,9 +338,6 @@
     <ClCompile Include="store.cpp">
       <Filter>logic</Filter>
     </ClCompile>
-    <ClCompile Include="order.cpp">
-      <Filter>logic</Filter>
-    </ClCompile>
     <ClCompile Include="locale.cpp">
       <Filter>support</Filter>
     </ClCompile>
@@ -677,9 +674,6 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="store.h">
-      <Filter>logic</Filter>
-    </ClInclude>
-    <ClInclude Include="order.h">
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="flagable.h">

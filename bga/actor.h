@@ -39,32 +39,22 @@ struct actor : moveable, coloration, wearable {
 	unsigned char	orientation;
 	short unsigned	area_index;
 	int				delay;
-	featf			feats;
-	void			animateattack(drawable* target);
-	void			animatedamage();
 	rect			getbox() const;
+	unsigned		getflags() const;
 	rect			getrect() const;
+	int				getspeed() const { return 7; }
+	sprite*			getsprite() const;
 	int				getmovement() const { return 6; }
 	int				getsize() const { return 1; }
 	bool			ispresent() const;
 	void			lookat(point destination);
 	void			lookat(directionn direction);
 	void			moveto(point destination);
-	void			paint() const;
-	void			readybattle(bool v);
+	void			paint(bool use_colors) const;
+	void			set(animaten v) { action = v; updateframe(); }
 	void			setorientation(unsigned char v) { orientation = v; }
 	void			setposition(point v);
-	void			stop();
-	void			updateanimate();
-private:
-	unsigned		getflags() const;
-	sprite*			getsprite() const;
-	unsigned		getwait() const;
-	void			nextaction();
-	void			resetframe();
-	void			setanimate(animaten v) { action = v; resetframe(); }
-	void			setreverse(animaten v);
-	void			wait(unsigned milliseconds);
+	void			updateframe();
 };
 
 int get_armor_index(const item& e);

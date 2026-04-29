@@ -4,6 +4,8 @@
 #include "point.h"
 #include "slice.h"
 
+enum actionn : unsigned char;
+
 enum gamen : unsigned char {
 	Reputation, Progress, Chapter, Blessing, Rounds,
 	IdentifyCost,
@@ -32,7 +34,7 @@ void game_auto_save();
 bool game_chance(int v);
 void game_quick_load();
 void game_quick_save();
-void party_action(void* object, point target_position, fnevent apply);
+void party_action(void* object, point target_position, actionn action);
 void party_move(point v);
 void setcamera(point v);
 void setparty(point v, unsigned char orientation = 0xFF);

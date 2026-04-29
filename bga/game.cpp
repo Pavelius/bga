@@ -1,3 +1,4 @@
+#include "action.h"
 #include "ambient.h"
 #include "audio.h"
 #include "area.h"
@@ -11,7 +12,6 @@
 #include "formation.h"
 #include "game.h"
 #include "itemground.h"
-#include "order.h"
 #include "rand.h"
 #include "region.h"
 #include "saveheader.h"
@@ -80,7 +80,7 @@ void party_move(point v) {
 	auto p = get_selected();
 	if(!p)
 		return;
-	clear_orders(player);
+	player->order.clear();
 	auto start_position = p->position;
 	for(auto p : party_selected) {
 		if(!p)
@@ -276,16 +276,19 @@ point get_action_position(void* object, point nearest) {
 	return {0, 0};
 }
 
-void party_action(void* object, point target_position, fnevent apply) {
+void party_action(void* object, point target_position, actionn action) {
 	if(!player)
 		return;
-	clear_orders(player);
+	if(!bsdata<actioni>::elements[action].proc)
+		return;
+	player->order.clear();
 	auto position = player->position;
 	if(distance(position, target_position) > 24) {
 		player->moveto(target_position);
-		add_order(player, object, apply);
+		player->order = object;
+		player->order.counter = action;
 	} else
-		execute(apply, 0, 0, object);
+		execute(bsdata<actioni>::elements[action].proc, (long)player, 0, object);
 }
 
 void gamei::clear() {

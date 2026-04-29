@@ -4,7 +4,6 @@
 #include "draw.h"
 #include "gender.h"
 #include "math.h"
-#include "order.h"
 #include "pushvalue.h"
 #include "rand.h"
 #include "rfiles.h"
@@ -106,20 +105,6 @@ void set_resid(short unsigned* resid, racen race, gendern gender, classn type, i
 	resid[3] = get_resid(offhand, w);
 }
 
-bool actor::ispresent() const {
-	return area_index == current_area;
-}
-
-sprite* actor::getsprite() const {
-	if(resid[0] == 0xFFFF)
-		return 0;
-	return bsdata<rfpma>::get(resid[0]).get();
-}
-
-void actor::wait(unsigned milliseconds) {
-	delay += milliseconds;
-}
-
 static int get_cicle(sprite* ps, animaten action, int o) {
 	if(!ps)
 		return 0;
@@ -147,19 +132,19 @@ static unsigned get_flags(sprite* ps, int o) {
 	}
 }
 
-void actor::resetframe() {
-	cicle = get_cicle(getsprite(), action, orientation);
-	frame = 0;
+bool actor::ispresent() const {
+	return area_index == current_area;
 }
 
-void actor::stop() {
-	if(feats.is(ReadyToBattle)) {
-		if(getweapon().geti().is(TwoHanded))
-			setanimate(AnimateCombatStanceTwoHanded);
-		else
-			setanimate(AnimateCombatStance);
-	} else
-		setanimate(AnimateStand);
+sprite* actor::getsprite() const {
+	if(resid[0] == 0xFFFF)
+		return 0;
+	return bsdata<rfpma>::get(resid[0]).get();
+}
+
+void actor::updateframe() {
+	cicle = get_cicle(getsprite(), action, orientation);
+	frame = 0;
 }
 
 void actor::lookat(point destination) {
@@ -168,7 +153,7 @@ void actor::lookat(point destination) {
 
 void actor::lookat(directionn direction) {
 	setorientation(direction);
-	resetframe();
+	updateframe();
 }
 
 void actor::moveto(point destination) {
@@ -176,7 +161,7 @@ void actor::moveto(point destination) {
 		return;
 	area_index = current_area;
 	lookat(destination);
-	setanimate(AnimateMove);
+	set(AnimateMove);
 	move_start = position;
 	move_stop = destination;
 }
@@ -193,84 +178,36 @@ rect actor::getrect() const {
 	return ps->get(ps->ganim(cicle, frame)).getrect(position.x, position.y, get_flags(ps, orientation));
 }
 
-unsigned actor::getwait() const {
-	return 74;
-}
-
-void actor::setreverse(animaten v) {
-	setanimate(v);
-	// TODO: set backward animate
-}
-
-void actor::nextaction() {
-	switch(action) {
-	case AnimateStand:
-		if(chance(10))
-			setanimate(chance(50) ? AnimateStandLook : AnimateStandRelax);
-		break;
-	case AnimateCastFour:
-		setanimate(AnimateCastFourRelease);
-		break;
-	case AnimateCastThird:
-		setanimate(AnimateCastRelease);
-		break;
-	case AnimateCast:
-		setanimate(AnimateCastThirdRelease);
-		break;
-	case AnimateGetHitAndDrop:
-		wait(xrand(300, 1200));
-		setanimate(AnimateAgony);
-		break;
-	case AnimateAgony:
-		if(chance(20))
-			setreverse(AnimateGetUp);
-		else
-			wait(xrand(1000, 10000));
-		break;
-	case AnimateMeleeOneHanded: case AnimateMeleeOneHandedSwing: case AnimateMeleeOneHandedThrust:
-	case AnimateMeleeTwoHanded: case AnimateMeleeTwoHandedSwing: case AnimateMeleeTwoHandedThrust:
-	case AnimateMeleeTwoWeapon: case AnimateMeleeTwoWeaponSwing: case AnimateMeleeTwoWeaponThrust:
-	case AnimateShootBow: case AnimateShootSling: case AnimateShootXBow:
-	case AnimateGetUp:
-	case AnimateCastFourRelease:
-	case AnimateCastThirdRelease:
-	case AnimateCastRelease:
-	case AnimateStandLook:
-	case AnimateStandRelax:
-	case AnimateGetHit:
-		stop();
-		break;
-	default:
-		break;
-	}
-}
-
-void actor::updateanimate() {
-	delay -= current_tick_delta;
-	while(delay < 0) {
-		auto prev_action = action;
-		wait(getwait());
-		auto ps = getsprite();
-		if(!ps)
-			continue;
-		auto pc = ps->gcicle(cicle);
-		if(++frame == pc->count) {
-			frame = 0;
-			nextaction();
-		}
-		if(action == AnimateMove) {
-			movestep(getspeed());
-			if(!ismoving())
-				stop();
-		}
-		if(prev_action != action)
-			activate_order(this);
-	}
-}
-
 static void apply_shadow(color* pallette, color fore) {
 	for(auto i = 0; i < 256; i++)
 		pallette[i] = pallette[i] * fore;
+}
+
+unsigned actor::getflags() const {
+	return get_flags(getsprite(), orientation);
+}
+
+void actor::paint(bool use_colors) const {
+	pushvalue push(palt);
+	auto flags = getflags();
+	if(use_colors) {
+		palt = pallette;
+		setpallette(pallette);
+		apply_shadow(pallette, get_shadow(position));
+		flags |= ImagePallette;
+	}
+	for(auto n : resid) {
+		if(n == 0xFFFF)
+			continue;
+		auto ps = bsdata<rfpma>::ptr(n)->get();
+		auto pc = ps->gcicle(cicle);
+		image(ps, pc->start + frame, flags);
+	}
+}
+
+void actor::setposition(point v) {
+	position = v;
+	position_index = s2i(v);
 }
 
 void paperdoll(const coloration& colors, short unsigned* resid, int animation, int orientation, int frame_tick) {
@@ -291,52 +228,4 @@ void paperdoll(const coloration& colors, short unsigned* resid, int animation, i
 		auto frame = ps->ganim(animation * directions + o, frame_tick);
 		image(caret.x, caret.y, ps, frame, flags);
 	}
-}
-
-unsigned actor::getflags() const {
-	return get_flags(getsprite(), orientation);
-}
-
-void actor::paint() const {
-	pushvalue push(palt);
-	auto flags = getflags();
-	if(feats.is(DynamicAnimation)) {
-		palt = pallette;
-		setpallette(pallette);
-		apply_shadow(pallette, get_shadow(position));
-		flags |= ImagePallette;
-	}
-	for(auto n : resid) {
-		if(n == 0xFFFF)
-			continue;
-		auto ps = bsdata<rfpma>::ptr(n)->get();
-		auto pc = ps->gcicle(cicle);
-		image(ps, pc->start + frame, flags);
-	}
-}
-
-void actor::readybattle(bool v) {
-	feats.set(ReadyToBattle, v);
-	stop();
-}
-
-void actor::animateattack(drawable* target) {
-	lookat(target->position);
-	auto& w = getweapon();
-	auto n = xrand(0, 2);
-	if(getoffhand().isweapon())
-		setanimate((animaten)(AnimateMeleeTwoWeapon + n));
-	else if(w.is(TwoHanded))
-		setanimate((animaten)(AnimateMeleeTwoHanded + n));
-	else
-		setanimate((animaten)(AnimateMeleeOneHanded + n));
-}
-
-void actor::animatedamage() {
-	setanimate(AnimateGetHit);
-}
-
-void actor::setposition(point v) {
-	position = v;
-	position_index = s2i(a2s(v, getsize()));
 }

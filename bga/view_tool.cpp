@@ -76,28 +76,24 @@ static void view_area_info() {
 	setdialog(231, 127); button(pb2, 0, 2);
 }
 
-static void test_battle_stance() {
-	player->readybattle(!player->is(ReadyToBattle));
-}
-
 static void test_animation_hit() {
 	if(player == party[0])
-		player->animateattack(party[1]);
+		player->fixattack(party[1]);
 	else
-		player->animateattack(party[0]);
+		player->fixattack(party[0]);
 }
 
 static void test_animation_hit_drop() {
-	player->animatedamage();
+	player->fixdamage();
 }
 
 void input_debug() {
 	switch(hot.key) {
 	case 'A': execute(test_animation_hit); break;
 	case 'Q': execute(test_animation_hit_drop); break;
-	case 'W': execute(test_battle_stance); break;
+	// case 'W': execute(test_battle_stance); break;
 	case Ctrl + 'D': execute(open_store); break;
-	case Ctrl + 'C': execute(open_container, 0, 0); break;
+	case Ctrl + 'C': execute(open_items, 0, 0); break;
 	case Ctrl + 'I': execute(open_scene, 0, 0, util_items_list); break;
 	case Ctrl + 'F': execute(open_scene, 0, 0, view_chapter); break;
 	default: break;

@@ -1,3 +1,4 @@
+#include "action.h"
 #include "animation.h"
 #include "area.h"
 #include "audio.h"
@@ -13,7 +14,6 @@
 #include "itemground.h"
 #include "keybind.h"
 #include "math.h"
-#include "order.h"
 #include "pushvalue.h"
 #include "region.h"
 #include "resinfo.h"
@@ -537,7 +537,7 @@ static void paint_creature() {
 	if(p->ishilite())
 		cursor.cicle = 0;
 	paint_markers(p);
-	p->paint();
+	p->paint(p->is(DynamicAnimation));
 }
 
 static void paint_animation() {
@@ -615,7 +615,7 @@ static void apply_hilite_command() {
 		} else if(bsdata<container>::have(hilite_object)) {
 			auto p = (container*)(drawable*)hilite_object;
 			print("This is container %1i", getbsi(p));
-			party_action(p, p->launch, open_container);
+			party_action(p, p->launch, ActionOpenItems);
 		} else if(bsdata<creature>::have(hilite_object)) {
 			if(combat_mode) {
 
@@ -761,7 +761,6 @@ void paint_area() {
 	paint_area_map_zoomed(paint_area_map);
 	apply_shifer();
 	apply_keybinding();
-	update_orders();
 }
 
 static point minimap_origin, minimap_size;
@@ -975,9 +974,11 @@ static void paint_container_area() {
 	paint_pick_container();
 }
 
-void open_container() {
+void open_items() {
+	pushvalue push_player(player);
 	pushvalue push_container(last_container);
 	last_container = (container*)hot.object;
+	player = (creature*)hot.param;
 	if(!last_container)
 		return;
 	scene(paint_container_area);

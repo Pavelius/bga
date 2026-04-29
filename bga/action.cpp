@@ -1,7 +1,9 @@
 #include "action.h"
 #include "bsdata.h"
+#include "view.h"
 
 BSDATA(actioni) = {
+	{"NoAction"},
 	{"ActionDefend", 0 * 4},
 	{"ActionTurn", 1 * 4},
 	{"ActionCast", 2 * 4},
@@ -21,5 +23,6 @@ BSDATA(actioni) = {
 	{"ActionWildernessLore", 16 * 4},
 	{"ActionMeleeAttack", 17 * 4},
 	{"ActionRangeAttack", 18 * 4},
+	{"ActionOpenItems", 0, open_items},
 };
-assert_enum(actioni, ActionRangeAttack)
+assert_enum(actioni, ActionOpenItems)
