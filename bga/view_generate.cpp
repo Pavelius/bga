@@ -412,8 +412,8 @@ static void paint_choose_skills() {
 	setdialog(254 + 27, 61 + 55, 205, 28); texta(getnm("SkillPointsLeft"), AlignCenterCenter);
 	setdialog(254 + 241, 61 + 55, 33, 28); texta(str("%1i", skill_points), AlignCenterCenter);
 	setdialog(254 + 31, 61 + 90, 254, 360);
-	paint_list(records.data, records.element_size, records.count, origin, per_page,
-		paint_skill_row, 36, {-9, 3}, -6, 0, 0, true);
+	paint_list(records.data, 0, records.count, origin, per_page,
+		paint_skill_row, 36, {-9, 3}, -6, 0, 0);
 	paint_footer_answer(skill_points <= 1);
 	paint_description();
 }
@@ -428,8 +428,8 @@ static void paint_choose_feats() {
 	setdialog(254 + 27, 61 + 55, 205, 28); texta(getnm("FeatPointsLeft"), AlignCenterCenter);
 	setdialog(254 + 241, 61 + 55, 33, 28); texta(str("%1i", feat_points), AlignCenterCenter);
 	setdialog(254 + 31, 61 + 90, 254, 360);
-	paint_list(records.data, records.element_size, records.count, origin, per_page,
-		paint_feat_row, 36, {-9, 3}, -6, 0, 0, true);
+	paint_list(records.data, 0, records.count, origin, per_page,
+		paint_feat_row, 36, {-9, 3}, -6, 0, 0);
 	paint_footer_answer(feat_points == 0);
 	paint_description();
 }
@@ -482,8 +482,8 @@ static void paint_choose_sound() {
 	image(254, 87, gres("GUIACG"), 6, 0);
 	setdialog(254 + 28, 61 + 59, 220, 320);
 	correct_table(current_value, sounds.count);
-	paint_list(sounds.data, sounds.element_size, sounds.count, origin, per_page,
-		paint_sound_row, row_height, {11, -4}, 10, pick_current_sound, 0, true);
+	paint_list(sounds.data, 0, sounds.count, origin, per_page,
+		paint_sound_row, row_height, {11, -4}, 10, pick_current_sound, 0);
 	// setdialog(254 + 22, 61 + 429); button(GBTNLRG, 1, 2);
 	setdialog(254 + 20, 61 + 392); button(gres("GBTNLRG"), 1, 2, 'P', "PlaySound"); fire(play_sound_set, current_value);
 	paint_footer_answer(true);
@@ -809,8 +809,8 @@ static void paint_select_party() {
 	paint_game_dialog("GCGPARTY");
 	setdialog(180, 25, 441, 37); texta(metrics::h1, getnm("SelectParty"), AlignCenterCenter);
 	setdialog(22, 130, 212, 351);
-	paint_list(records.data, records.element_size, records.count, origin, per_page,
-		paint_party_row, 62, {0, 0}, 0, 0, 0, true);
+	paint_list(records.data, 0, records.count, origin, per_page,
+		paint_party_row, 62, {0, 0}, 0, 0, 0);
 	setdialog(280, 136, 474, 338); paint_description(11, -4, 11);
 	setdialog(204, 550); button(pma_butstd, 1, 2, 0, "Modify");
 	setdialog(341, 550); button(pma_butstd, 1, 2, KeyEscape, "Cancel"); fire(buttoncancel);

@@ -90,6 +90,7 @@ static const char* create_container(const char* p) {
 	short unsigned index = 0;
 	p = psnum(p, index);
 	last_container = bsdata<container>::elements + index;
+	pushvalue push(modifier, InsideContainer);
 	p = read_variants(p);
 	return p;
 }

@@ -1298,7 +1298,7 @@ static void paint_list(const array& source, int& origin, int& current, int per_p
 	scroll(gres("GBTNSCRL"), 0, 2, 4, origin, maximum, per_page, 1);
 }
 
-void paint_list(void* data, int size, int maximum, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc, bool ref_list) {
+void paint_list(void* data, int size, int maximum, int& origin, int per_page, fncommand proc, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc) {
 	pushrect push;
 	pushfore push_fore;
 	auto push_clip = clipping; setclipall();
@@ -1308,11 +1308,16 @@ void paint_list(void* data, int size, int maximum, int& origin, int per_page, fn
 	auto im = maximum;
 	if(im > origin + per_page)
 		im = origin + per_page;
+	auto ref_list = false;
 	auto push_dialog = dialog_start;
+	if(!size) {
+		size = sizeof(void*);
+		ref_list = true;
+	}
 	for(list_row_index = origin; list_row_index < im; list_row_index++) {
 		button_hilited = ishilite();
 		auto p = (char*)data + list_row_index * size;
-		if(size == sizeof(void*) && ref_list)
+		if(ref_list)
 			p = *((char**)p);
 		dialog_start = caret;
 		proc(p);
@@ -1334,6 +1339,57 @@ void paint_list(void* data, int size, int maximum, int& origin, int per_page, fn
 	caret = caret + scr;
 	height = push.height + scr_height; width = 12;
 	scroll(gres("GBTNSCRL"), 0, 2, 4, origin, maximum, per_page, 1);
+}
+
+void paint_list(void* data, int size, int maximum, int& origin, int row_count, int per_row, fncommand proc, int row_width, int row_height, point scr, int scr_height, fnevent action_proc, fnevent info_proc) {
+	pushrect push;
+	pushfore push_fore;
+	auto push_clip = clipping; setclipall();
+	auto per_page = row_count * per_row;
+	input_mouse_table(origin, maximum, per_page, per_row);
+	height = row_height; width = row_width;
+	correct_table(origin, maximum, per_page);
+	auto im = maximum;
+	if(im > origin + per_page)
+		im = origin + per_page;
+	auto ref_list = false;
+	auto push_dialog = dialog_start;
+	if(!size) {
+		size = sizeof(void*);
+		ref_list = true;
+	}
+	auto push_caret = caret;
+	for(list_row_index = origin; list_row_index < im; list_row_index++) {
+		auto n = list_row_index - origin;
+		button_hilited = ishilite();
+		auto p = (char*)data + list_row_index * size;
+		if(ref_list)
+			p = *((char**)p);
+		dialog_start = caret;
+		proc(p);
+		if(button_hilited) {
+			if(hot.key == MouseLeft && !hot.pressed) {
+				if(action_proc)
+					execute(action_proc, list_row_index, 0, p);
+			} else if(hot.key == MouseRight && !hot.pressed) {
+				if(info_proc)
+					execute(info_proc, list_row_index, 0, p);
+			}
+		}
+		if((n % per_row) == (per_row - 1)) {
+			caret.x = push_caret.x;
+			caret.y += row_height;
+		} else
+			caret.x += row_width;
+	}
+	caret = push_caret;
+	dialog_start = push_dialog;
+	clipping = push_clip;
+	caret.x += push.width;
+	caret.y = push.caret.y;
+	caret = caret + scr;
+	height = push.height + scr_height; width = 12;
+	scroll(gres("GBTNSCRL"), 0, 2, 4, origin, maximum, row_count, per_row);
 }
 
 static void paint_topic_lists() {
@@ -1573,7 +1629,7 @@ static void paint_game_spells() {
 		spell_type_filter();
 		spell_level_filter();
 		select_spells();
-		setdialog(494, 80, 207, 331); paint_list(spells.data, spells.element_size, spells.count, origin, 8, paint_spell, 42, {7, -1}, -1, spell_action, open_spell_info, true);
+		setdialog(494, 80, 207, 331); paint_list(spells.data, 0, spells.count, origin, 8, paint_spell, 42, {7, -1}, -1, spell_action, open_spell_info);
 		setdialog(252, 78); paint_spell_memorized();
 		auto m = spell_slot_maximum();
 		auto u = spell_slot_used();

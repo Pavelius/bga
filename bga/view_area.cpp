@@ -21,6 +21,7 @@
 #include "timer.h"
 #include "vector.h"
 #include "view.h"
+#include "view_list.h"
 #include "worldmap.h"
 
 using namespace draw;
@@ -946,26 +947,64 @@ static int container_frame(container::typen type) {
 	}
 }
 
+static void pick_container_item() {
+	need_update_items = true;
+	auto p = (item*)hot.object;
+	player->additem(*p);
+}
+
+static void pick_player_item() {
+	need_update_items = true;
+	auto p = (item*)hot.object;
+	last_container->add(*p);
+}
+
+static void view_container_item(void* object) {
+	pushrect push;
+	auto p = (item*)object;
+	paint_item(p);
+}
+
+static void view_player_item(void* object) {
+	pushrect push;
+	auto p = (item*)object;
+	paint_item(p);
+}
+
+static void view_container_items() {
+	static int origin;
+	paint_list(container_items.data, 0, container_items.count, origin, 2, 5,
+		view_container_item, 45, 44, {10, 1}, -4, pick_container_item, 0);
+}
+
+static void view_player_items() {
+	static int origin;
+	paint_list(items.data, 0, items.count, origin, 2, 2,
+		view_player_item, 45, 44, {10, 1}, -4, pick_player_item, 0);
+}
+
 static void paint_pick_container() {
 	auto pc = gres("CONTAINER");
 	paint_game_dialog(0, 476, "GUICONT", 1);
-	setdialog(62, 25); image(pc, container_frame(last_container->type), 0);
+	setdialog(60, 25); image(pc, container_frame(last_container->type), 0);
 	setdialog(430, 28); image(pc, 1, 0);
 	setdialog(150, 22); stoneslot(0, 0);
 	setdialog(195, 22); stoneslot(0, 0);
-	setdialog(239, 22); stoneslot(0, 0);
-	setdialog(283, 22); stoneslot(0, 0);
-	setdialog(327, 22); stoneslot(0, 0);
+	setdialog(240, 22); stoneslot(0, 0);
+	setdialog(285, 22); stoneslot(0, 0);
+	setdialog(330, 22); stoneslot(0, 0);
 	setdialog(150, 65); stoneslot(0, 0);
 	setdialog(195, 65); stoneslot(0, 1);
-	setdialog(239, 65); stoneslot(0, 1);
-	setdialog(283, 65); stoneslot(0, 1);
-	setdialog(327, 65); stoneslot(0, 1);
+	setdialog(240, 65); stoneslot(0, 1);
+	setdialog(285, 65); stoneslot(0, 1);
+	setdialog(330, 65); stoneslot(0, 1);
+	setdialog(148, 21, 222, 90); view_container_items();
 	//Scroll GBTNSCRL 375 24 12 76 frames(1 0 3 2 4 5)
-	setdialog(509, 22); stoneslot(0, 0);
-	setdialog(553, 22); stoneslot(0, 0);
-	setdialog(553, 65); stoneslot(0, 0);
-	setdialog(509, 65); stoneslot(0, 0);
+	setdialog(510, 22); stoneslot(0, 0);
+	setdialog(555, 22); stoneslot(0, 0);
+	setdialog(510, 65); stoneslot(0, 0);
+	setdialog(555, 65); stoneslot(0, 0);
+	setdialog(508, 21, 222, 90); view_player_items();
 	//Scroll GBTNSCRL 602 24 12 76 frames(1 0 3 2 4 5)
 	setdialog(661, 78, 70, 20); texta(str("%1i", player->coins), AlignRightCenter);
 	setdialog(684, 28); button(pma_butopt1, 1, 2, KeyEscape); fire(buttoncancel);
@@ -980,7 +1019,7 @@ static void select_items(vector<item*>& source, short unsigned area, point posit
 	for(auto& e : bsdata<itemground>()) {
 		if(e.area != area)
 			continue;
-		if(e.position == position)
+		if(e && e.position == position)
 			source.add(&e);
 	}
 }
@@ -992,6 +1031,13 @@ static void update_items() {
 	if(last_container) {
 		container_items.clear();
 		select_items(container_items, current_area, {getbsi(last_container), itemground::Container});
+	}
+	if(player) {
+		items.clear();
+		for(auto& e : player->backpack()) {
+			if(e)
+				items.add(&e);
+		}
 	}
 }
 

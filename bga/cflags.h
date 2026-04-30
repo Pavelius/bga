@@ -1,10 +1,8 @@
-#ifdef _MSC_VER
-#include "my_initialize_list.h"
-#else
-#include <initializer_list>
-#endif
-
 #pragma once
+
+constexpr unsigned fg(unsigned v) { return 1 << v; }
+template<typename... Args>
+constexpr unsigned fg(unsigned v, Args... args) { return fg(v) | fg(args...); }
 
 // Abstract flag data bazed on enumerator
 template<typename T, typename DT = unsigned>
@@ -12,8 +10,8 @@ class cflags {
 	DT data = 0;
 public:
 	constexpr cflags() : data(0) {}
-	constexpr cflags(const T v) : data(1<<v) {}
-	cflags(const std::initializer_list<T>& list) : data() { for(auto e : list) add(e); }
+	constexpr cflags(const T v) : data(v) {}
+	template<typename... Args>constexpr cflags(Args... args) : data(fg(args...)) {}
 	constexpr explicit operator bool() const { return data != 0; }
 	constexpr void add(const T v) { data |= 1 << v; }
 	constexpr void add(const cflags& e) { data |= e.data; }

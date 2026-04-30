@@ -2,6 +2,7 @@
 #include "area.h"
 #include "audio.h"
 #include "bsreq.h"
+#include "cflags.h"
 #include "colorgrad.h"
 #include "console.h"
 #include "creature.h"

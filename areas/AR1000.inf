@@ -12,4 +12,4 @@ Item 13617 LongSword
 Item 13617 LeatherArmor
 Item 13617 Helm
 
-Container 4 LongSword LeatherArmor SetLocked // Container identified by number
+Container 4 LongSword LeatherArmor BattleAxe SetLocked // Container identified by number

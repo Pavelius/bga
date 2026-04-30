@@ -7,7 +7,7 @@ void itemground::clear() {
 void add_item(short unsigned area, point position, item& v) {
 	// Add to existing item
 	for(auto& e : bsdata<itemground>()) {
-		if(e.area == area && e.position == position && e.equal(v)) {
+		if(e && e.area == area && e.position == position && e.equal(v)) {
 			e.add(v);
 			if(!v) {
 				last_item = &e;
