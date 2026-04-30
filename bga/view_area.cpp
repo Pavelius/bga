@@ -35,7 +35,6 @@ struct renderi : nameable {
 	fnrenderallow	allow;
 	fnrenderget		priority;
 };
-
 struct drawobject {
 	drawable* object;
 	renderi* render;
@@ -595,6 +594,16 @@ static const char* gettipsname(point position) {
 	return str("%3Info%1i_%2i", position.x, position.y, area_name);
 }
 
+static point get_action_position(void* object, point nearest) {
+	if(bsdata<region>::have(object)) {
+		auto p = (region*)object;
+		return p->use;
+	} else if(bsdata<door>::have(object)) {
+		auto p = (door*)object;
+	}
+	return {0, 0};
+}
+
 static void apply_hilite_command() {
 	if(!hilite_object)
 		return;
@@ -611,11 +620,13 @@ static void apply_hilite_command() {
 				enter(p->move_to_entrance);
 		} else if(bsdata<door>::have(hilite_object)) {
 			auto p = (door*)(drawable*)hilite_object;
-			p->use(!p->isopen());
+			debugmsg("Open door %1i", getbsi(p));
+			if(player)
+				party_action(p->getactivate(player->position), ActionOpenDoor, getbsi(p));
 		} else if(bsdata<container>::have(hilite_object)) {
 			auto p = (container*)(drawable*)hilite_object;
-			print("This is container %1i", getbsi(p));
-			party_action(p, p->launch, ActionOpenItems);
+			debugmsg("Get in container %1i", getbsi(p));
+			party_action(p->launch, ActionOpenContainer, getbsi(p));
 		} else if(bsdata<creature>::have(hilite_object)) {
 			if(combat_mode) {
 
@@ -965,8 +976,28 @@ static void mouse_area_cancel() {
 		breakmodal(0);
 }
 
+static void select_items(vector<item*>& source, short unsigned area, point position) {
+	for(auto& e : bsdata<itemground>()) {
+		if(e.area != area)
+			continue;
+		if(e.position == position)
+			source.add(&e);
+	}
+}
+
+static void update_items() {
+	if(!need_update_items)
+		return;
+	need_update_items = false;
+	if(last_container) {
+		container_items.clear();
+		select_items(container_items, current_area, {getbsi(last_container), itemground::Container});
+	}
+}
+
 static void paint_container_area() {
 	update_frames();
+	update_items();
 	setcaret(0, 0, 800, 476);
 	mouse_area_cancel();
 	paint_area_map_zoomed(paint_area_map);
@@ -974,13 +1005,12 @@ static void paint_container_area() {
 	paint_pick_container();
 }
 
-void open_items() {
-	pushvalue push_player(player);
-	pushvalue push_container(last_container);
-	last_container = (container*)hot.object;
-	player = (creature*)hot.param;
-	if(!last_container)
+void open_container() {
+	if(hot.param2 == 0xFFFF)
 		return;
+	pushvalue push_player(player, (creature*)hot.param);
+	pushvalue push_container(last_container, (container*)bsdata<container>::elements + hot.param2);
+	need_update_items = true;
 	scene(paint_container_area);
 }
 

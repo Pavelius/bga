@@ -551,21 +551,22 @@ void creature::stop() {
 }
 
 static void activate_action(creature* p) {
-	if(!p->order)
-		return;
-	auto& ei = bsdata<actioni>::elements[p->order.counter];
-	if(ei.proc)
-		draw::execute(ei.proc, (long)p, 0, p->order.getpointer());
+	if(p->order) {
+		auto& ei = bsdata<actioni>::elements[p->order.action];
+		if(ei.proc)
+			draw::execute(ei.proc, (long)p, p->order.target);
+		p->order.clear();
+	}
 }
 
 void creature::updateanimate() {
 	delay -= current_tick_delta;
 	while(delay < 0) {
-		auto prev_action = action;
 		delay += getmps();
 		auto ps = getsprite();
 		if(!ps)
 			continue;
+		auto prev_action = action;
 		auto pc = ps->gcicle(cicle);
 		if(++frame == pc->count) {
 			frame = 0;

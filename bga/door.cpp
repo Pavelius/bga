@@ -26,3 +26,10 @@ void door::use(bool open) {
 	else
 		p->doors_opened.remove(index);
 }
+
+point door::getactivate(point nearest) const {
+	auto d = distance(position, nearest);
+	if(position_alternate && d > distance(position_alternate, nearest))
+		return position_alternate;
+	return position;
+}

@@ -93,7 +93,7 @@ void input_debug() {
 	case 'Q': execute(test_animation_hit_drop); break;
 	// case 'W': execute(test_battle_stance); break;
 	case Ctrl + 'D': execute(open_store); break;
-	case Ctrl + 'C': execute(open_items, 0, 0); break;
+	case Ctrl + 'C': execute(open_container, (long)player, 4); break;
 	case Ctrl + 'I': execute(open_scene, 0, 0, util_items_list); break;
 	case Ctrl + 'F': execute(open_scene, 0, 0, view_chapter); break;
 	default: break;

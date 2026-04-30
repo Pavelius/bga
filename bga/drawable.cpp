@@ -5,45 +5,10 @@
 #include "region.h"
 #include "screenshoot.h"
 
-drawable* hilite_drawable;
 drawable* last_object;
 
 void drawable::clear() {
 	memset(this, 0, sizeof(*this));
-}
-
-int drawable::getpriority() const {
-	if(bsdata<door>::have(this))
-		return 3 * 5;
-	else if(bsdata<animation>::have(this)) {
-		auto p = (animation*)this;
-		if(p->is(NotCover))
-			return 5 * 5;
-		return 3 * 5 + 1;
-	}
-	else if(bsdata<region>::have(this))
-		return 2 * 5;
-	else if(bsdata<itemground>::have(this))
-		return 2 * 5 + 1;
-	return 5 * 5;
-}
-
-int drawable::compare(const void* v1, const void* v2) {
-	auto p1 = *((drawable**)v1);
-	auto p2 = *((drawable**)v2);
-	auto n1 = p1->getpriority();
-	auto n2 = p2->getpriority();
-	auto r1 = n1 / 5;
-	auto r2 = n2 / 5;
-	if(r1 != r2)
-		return r1 - r2;
-	if(p1->position.y != p2->position.y)
-		return p1->position.y - p2->position.y;
-	if(n1 != n2)
-		return n1 - n2;
-	if(p1->position.x != p2->position.x)
-		return p1->position.x - p2->position.x;
-	return p1 - p2;
 }
 
 bool inside(point t, point* points, int count) {

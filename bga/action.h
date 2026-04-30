@@ -7,10 +7,10 @@ typedef void(*fnevent)();
 enum actionn : unsigned char {
 	NoAction,
 	ActionDefend, ActionTurn, ActionCast, ActionAttack, ActionUseItem,
-	ActionInspiration, ActionTheivery, ActionHide, ActionUnkn1, ActionSearch,
+	ActionInspiration, ActionTheivery, ActionHide, ActionHead, ActionSearch,
 	ActionSpecialAbility, ActionStop, ActionLeft, ActionRight, ActionPlayMusic,
 	ActionEntangle, ActionWildernessLore, ActionMeleeAttack, ActionRangeAttack,
-	ActionOpenItems,
+	ActionOpenContainer, ActionOpenDoor,
 };
 struct actioni : nameable {
 	int			avatar;

@@ -60,7 +60,7 @@ long open_dialog(fnevent proc, bool faded);
 void open_dialog();
 void open_item_count();
 void open_item_description();
-void open_items();
+void open_container();
 bool open_name(char* result, int size);
 void open_game();
 void open_load_game();

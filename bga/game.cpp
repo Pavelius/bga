@@ -46,6 +46,13 @@ template<> void archive::set<areai>(areai& e) {
 	set(e.flags);
 }
 
+void debugmsg(const char* format, ...) {
+#ifdef _DEBUG
+	XVA_FORMAT(format);
+	printcnv(format, format_param);
+#endif
+}
+
 static void use_all_doors() {
 	for(auto& e : bsdata<door>())
 		e.use(e.isopen());
@@ -96,6 +103,7 @@ static void load_area(areai* area) {
 	use_all_doors();
 	update_area_music();
 	initialize_area_ambients();
+	need_update_creatures = true;
 }
 
 void enter(const char* location) {
@@ -106,9 +114,7 @@ void enter(const char* location) {
 	if(!pn)
 		return;
 	load_area(pn->area);
-#ifdef _DEBUG
-	print("Enter location [%1]", pn->id);
-#endif
+	debugmsg("Enter location [%1]", pn->id);
 	setcamera(pn->position);
 	setparty(pn->position, pn->orientation);
 #ifdef AREA_DISAPEAR
@@ -255,28 +261,7 @@ static void create_game() {
 	game.set(Rounds, xrand(10, 30));
 }
 
-point get_action_position(void* object, point nearest) {
-	if(bsdata<region>::have(object)) {
-		auto p = (region*)object;
-		return p->use;
-	} else if(bsdata<door>::have(object)) {
-		auto p = (door*)object;
-		auto d = distance(p->position, nearest);
-		if(p->position_alternate && d > distance(p->position_alternate, nearest))
-			return p->position_alternate;
-		return p->position;
-	} else if(bsdata<container>::have(object)) {
-		auto p = (container*)object;
-		return p->launch;
-	} else if(bsdata<creature>::have(object)) {
-		//if(combat_mode) {
-		//} else
-		//	execute(choose_creature, 0, 0, object);
-	}
-	return {0, 0};
-}
-
-void party_action(void* object, point target_position, actionn action) {
+void party_action(point target_position, actionn action, short unsigned target) {
 	if(!player)
 		return;
 	if(!bsdata<actioni>::elements[action].proc)
@@ -285,10 +270,10 @@ void party_action(void* object, point target_position, actionn action) {
 	auto position = player->position;
 	if(distance(position, target_position) > 24) {
 		player->moveto(target_position);
-		player->order = object;
-		player->order.counter = action;
+		player->order.target = target;
+		player->order.action = action;
 	} else
-		execute(bsdata<actioni>::elements[action].proc, (long)player, 0, object);
+		execute(bsdata<actioni>::elements[action].proc, (long)player, target);
 }
 
 void gamei::clear() {
@@ -311,3 +296,34 @@ int game_rand(int v1, int v2) {
 bool game_chance(int v) {
 	return (rand() % 100) < v;
 }
+
+static void open_door() {
+	auto p = getbs<door>((short unsigned)hot.param2);
+	p->use(!p->isopen());
+}
+
+BSDATA(actioni) = {
+	{"NoAction"},
+	{"ActionDefend", 0 * 4},
+	{"ActionTurn", 1 * 4},
+	{"ActionCast", 2 * 4},
+	{"ActionAttack", 3 * 4},
+	{"ActionUseItem", 4 * 4},
+	{"ActionInspiration", 5 * 4},
+	{"ActionTheivery", 6 * 4},
+	{"ActionHide", 7 * 4},
+	{"ActionHead", 8 * 4},
+	{"ActionSearch", 9 * 4},
+	{"ActionSpecialAbility", 10 * 4},
+	{"ActionStop", 11 * 4},
+	{"ActionLeft", 12 * 4},
+	{"ActionRight", 13 * 4},
+	{"ActionPlayMusic", 14 * 4},
+	{"ActionEntangle", 15 * 4},
+	{"ActionWildernessLore", 16 * 4},
+	{"ActionMeleeAttack", 17 * 4},
+	{"ActionRangeAttack", 18 * 4},
+	{"ActionOpenContainer", 0, open_container},
+	{"ActionOpenDoor", 0, open_door},
+};
+assert_enum(actioni, ActionOpenDoor)
