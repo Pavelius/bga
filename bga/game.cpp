@@ -302,9 +302,6 @@ static void open_door() {
 	p->use(!p->isopen());
 }
 
-static void pick_items() {
-}
-
 BSDATA(actioni) = {
 	{"NoAction"},
 	{"ActionDefend", 0 * 4},
@@ -328,6 +325,6 @@ BSDATA(actioni) = {
 	{"ActionRangeAttack", 18 * 4},
 	{"ActionOpenContainer", 0, open_container},
 	{"ActionOpenDoor", 0, open_door},
-	{"ActionPickItems", 0, pick_items},
+	{"ActionPickItems", 0, open_ground_items},
 };
 assert_enum(actioni, ActionPickItems)

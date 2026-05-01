@@ -1066,7 +1066,7 @@ static void view_gorund_item(void* object) {
 static void view_ground_items() {
 	static int origin;
 	paint_list(items.data, 0, items.count, origin, 2, 2,
-		view_gorund_item, 40, 40, {5, 3}, -14, pick_gorund_item, 0);
+		view_gorund_item, 40, 40, {5, 3}, -7, pick_gorund_item, 0);
 }
 
 static void paint_game_inventory() {

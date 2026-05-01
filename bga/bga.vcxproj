@@ -154,6 +154,7 @@
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="variant.cpp" />
     <ClCompile Include="view_area.cpp" />
+    <ClCompile Include="view_container.cpp" />
     <ClCompile Include="view_dialog.cpp" />
     <ClCompile Include="view_generate.cpp" />
     <ClCompile Include="view_list.cpp" />
