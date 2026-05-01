@@ -628,6 +628,11 @@ static void apply_hilite_command() {
 			auto p = (container*)(drawable*)hilite_object;
 			debugmsg("Get in container %1i", getbsi(p));
 			party_action(p->launch, ActionOpenContainer, getbsi(p));
+		} else if(bsdata<itemground>::have(hilite_object)) {
+			auto p = (itemground*)(drawable*)hilite_object;
+			debugmsg("Items position %1i", s2i(p->position));
+			if(player)
+				party_action(p->position, ActionPickItems, getbsi(p));
 		} else if(bsdata<creature>::have(hilite_object)) {
 			if(combat_mode) {
 
@@ -974,13 +979,13 @@ static void view_player_item(void* object) {
 static void view_container_items() {
 	static int origin;
 	paint_list(container_items.data, 0, container_items.count, origin, 2, 5,
-		view_container_item, 45, 44, {10, 1}, -4, pick_container_item, 0);
+		view_container_item, 45, 44, {5, 3}, -14, pick_container_item, 0);
 }
 
 static void view_player_items() {
 	static int origin;
 	paint_list(items.data, 0, items.count, origin, 2, 2,
-		view_player_item, 45, 44, {10, 1}, -4, pick_player_item, 0);
+		view_player_item, 45, 44, {5, 3}, -14, pick_player_item, 0);
 }
 
 static void paint_pick_container() {
@@ -1004,7 +1009,7 @@ static void paint_pick_container() {
 	setdialog(555, 22); stoneslot(0, 0);
 	setdialog(510, 65); stoneslot(0, 0);
 	setdialog(555, 65); stoneslot(0, 0);
-	setdialog(508, 21, 222, 90); view_player_items();
+	setdialog(508, 21, 90, 90); view_player_items();
 	//Scroll GBTNSCRL 602 24 12 76 frames(1 0 3 2 4 5)
 	setdialog(661, 78, 70, 20); texta(str("%1i", player->coins), AlignRightCenter);
 	setdialog(684, 28); button(pma_butopt1, 1, 2, KeyEscape); fire(buttoncancel);

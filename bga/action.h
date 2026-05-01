@@ -10,7 +10,7 @@ enum actionn : unsigned char {
 	ActionInspiration, ActionTheivery, ActionHide, ActionHead, ActionSearch,
 	ActionSpecialAbility, ActionStop, ActionLeft, ActionRight, ActionPlayMusic,
 	ActionEntangle, ActionWildernessLore, ActionMeleeAttack, ActionRangeAttack,
-	ActionOpenContainer, ActionOpenDoor,
+	ActionOpenContainer, ActionOpenDoor, ActionPickItems,
 };
 struct actioni : nameable {
 	int			avatar;

@@ -11,6 +11,7 @@
 #include "formation.h"
 #include "game.h"
 #include "help.h"
+#include "itemground.h"
 #include "keybind.h"
 #include "option.h"
 #include "pushvalue.h"
@@ -69,6 +70,7 @@ static int current_topic_list, cash_topic_list, current_content_list;
 static int current_spell_level;
 static vector<nameable*> content;
 static vector<spelli*> spells;
+static vector<item*> items;
 static stringbuilder description(description_text);
 static char* input_string;
 static int input_string_size;
@@ -229,6 +231,8 @@ static void setgameproc(fnevent v, bool cancel_mode) {
 static void setgameproc() {
 	auto p = (fnevent)hot.object;
 	auto m = (bool)hot.param;
+	if(p == paint_game_inventory)
+		need_update_items = true;
 	setgameproc(p, m);
 }
 
@@ -1039,7 +1043,34 @@ static void paperdoll_dragable() {
 	}
 }
 
+static void update_items() {
+	if(!need_update_items)
+		return;
+	need_update_items = false;
+	items.clear();
+	auto position = player->position;
+	for(auto& e : bsdata<itemground>()) {
+		if(e.area == current_area && e && e.position == position)
+			items.add(&e);
+	}
+}
+
+static void pick_gorund_item() {
+}
+
+static void view_gorund_item(void* object) {
+	auto p = (item*)object;
+	paint_item(p);
+}
+
+static void view_ground_items() {
+	static int origin;
+	paint_list(items.data, 0, items.count, origin, 2, 2,
+		view_gorund_item, 40, 40, {5, 3}, -14, pick_gorund_item, 0);
+}
+
 static void paint_game_inventory() {
+	update_items();
 	paint_game_dialog("GUIINV");
 	paint_game_player();
 	setdialog(339, 86, 126, 160); paperdoll_dragable();
@@ -1070,7 +1101,7 @@ static void paint_game_inventory() {
 	setdialog(612, 299, 36, 36); stoneslot(1, 1, 0);
 	setdialog(612, 339, 36, 36); stoneslot(1, 1, 0);
 	setdialog(612, 379, 36, 36); stoneslot(1, 1, 0);
-	//	Scroll GBTNSCRL 655 302 12 112 frames(1 0 3 2 4 5)
+	setdialog(570, 298, 80, 120); view_ground_items();
 	setdialog(575, 20, 206, 22); texta(getnm("QuickWeapon"), AlignCenterCenter);
 	setdialog(572, 48); quick_weapon(0);
 	setdialog(572, 88); quick_weapon(1);
