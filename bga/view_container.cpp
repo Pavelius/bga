@@ -22,10 +22,12 @@ static vector<item*> container_items, items;
 
 static int container_frame(container::typen type) {
 	switch(type) {
+	case container::Altar: return 0;
 	case container::Bag: return 1;
 	case container::Barrel: return 3;
-	case container::Altar: return 0;
 	case container::Body: return 4;
+	case container::Chest: return 7;
+	case container::Crate: return 8;
 	case container::Spellbook: return 5;
 	default: return 0;
 	}

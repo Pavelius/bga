@@ -627,11 +627,11 @@ static void apply_hilite_command() {
 				party_action(p->getactivate(player->position), ActionOpenDoor, getbsi(p));
 		} else if(bsdata<container>::have(hilite_object)) {
 			auto p = (container*)(drawable*)hilite_object;
-			debugmsg("Get in container %1i", getbsi(p));
+			debugmsg("Get in container %1i (type %2i)", getbsi(p), p->type);
 			party_action(p->launch, ActionOpenContainer, getbsi(p));
 		} else if(bsdata<itemground>::have(hilite_object)) {
 			auto p = (itemground*)(drawable*)hilite_object;
-			debugmsg("Items position %1i", s2i(p->position));
+			debugmsg("Pick items %1i", s2i(p->position));
 			if(player)
 				party_action(p->position, ActionPickItems, getbsi(p));
 		} else if(bsdata<creature>::have(hilite_object)) {

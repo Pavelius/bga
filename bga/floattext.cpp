@@ -3,23 +3,25 @@
 #include "floattext.h"
 #include "timer.h"
 
+using namespace draw;
+
 void floattext::clear() {
 	memset(this, 0, sizeof(*this));
 }
 
 void floattext::paint() const {
-	draw::pushrect push;
-	auto push_fore = draw::fore;
-	auto push_alpha = draw::alpha;
-	draw::width = box.width();
-	draw::height = box.height();
-	draw::fore = colors::black;
-	draw::alpha = 128;
-	draw::strokeout(draw::rectf, metrics::border + metrics::padding);
-	draw::alpha = push_alpha;
-	draw::fore = fore;
-	draw::textf(format);
-	draw::fore = push_fore;
+	pushrect push;
+	auto push_fore = fore;
+	auto push_alpha = alpha;
+	width = box.width();
+	height = box.height();
+	::fore = colors::black;
+	alpha = 128;
+	draw::strokeout(rectf, metrics::border + metrics::padding);
+	alpha = push_alpha;
+	::fore = this->fore;
+	textf(format);
+	::fore = push_fore;
 }
 
 static floattext* find_exist(const void* data) {
@@ -50,7 +52,7 @@ void add_float_text(point position, const char* format, int width, int milliseco
 	p->position.x = p->box.x1;
 	p->position.y = p->box.y1;
 	p->fore = colors::text;
-	p->delay = current_game_tick + millisecond;
+	p->delay = millisecond;
 	p->data = data;
 	draw::width = push_width;
 	draw::height = push_height;
