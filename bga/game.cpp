@@ -22,7 +22,7 @@
 #include "view.h"
 #include "worldmap.h"
 
-#define AREA_DISAPEAR
+// #define AREA_DISAPEAR
 
 using namespace draw;
 

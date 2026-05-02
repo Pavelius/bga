@@ -29,7 +29,6 @@
     <Text Include="..\locale\ru\Generate.txt" />
     <Text Include="..\locale\ru\Items.txt" />
     <Text Include="..\locale\ru\Names.txt" />
-    <Text Include="..\locale\ru\NamesNewbe.txt" />
     <Text Include="..\locale\ru\Options.txt" />
     <Text Include="..\locale\ru\Races.txt" />
     <Text Include="..\locale\ru\Skills.txt" />

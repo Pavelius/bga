@@ -13,7 +13,27 @@
 
 using namespace log;
 
+typedef const char* (*fnstrparse)(const char* p);
+
 static char temp[512];
+
+static bool equalid(const char* p, const char* s) {
+	if(!p || !s)
+		return false;
+	while(*s && *p)
+		if(*p++ != *s++)
+			return false;
+	return !isnum(*p) && p[0] != '_' && !ischa(*p);
+}
+
+static const char* skip(const char* p, char v) {
+	if(p[0] != v) {
+		char symbol[2] = {v, 0};
+		errorp(p, "Expected `%1`", symbol);
+		return skipline(p);
+	}
+	return skipws(p + 1);
+}
 
 static const char* psnum(const char* p, void* object, int size) {
 	int number = 0;
@@ -44,9 +64,6 @@ static const char* psidf(const char* p) {
 	return psidf(p, sb);
 }
 
-static void apply_custom(const char* id) {
-}
-
 static const char* read_variants(const char* p) {
 	stringbuilder sb(temp);
 	while(*p == '_' || ischa(*p)) {
@@ -59,6 +76,36 @@ static const char* read_variants(const char* p) {
 
 static void set_player_name(const char* id) {
 	player->name.set(getnm(id));
+}
+
+static const char* read_array(const char* p, unsigned char* values, int maximum) {
+	auto index = 0;
+	while(isnum(*p) && index < maximum) {
+		int value = 0;
+		p = psnum(p, value);
+		p = skipws(p);
+		values[index++] = (unsigned char)value;
+	}
+	// Zero fill
+	while(index < maximum)
+		values[index++] = 0;
+	return p;
+}
+
+static const char* psvalue(const char* p, const char* id, fnstrparse proc) {
+	if(equalid(p, id)) {
+		auto n = zlen(id);
+		if(p[n] != '(')
+			return p;
+		p = skipws(p + n + 1);
+		p = proc(p);
+		p = skip(p, ')');
+	}
+	return p;
+}
+
+static const char* read_colors(const char* p) {
+	return read_array(p, player->colors, lenghtof(player->colors));
 }
 
 static const char* create_creature(const char* p) {
@@ -79,6 +126,13 @@ static const char* create_creature(const char* p) {
 		create_abilities(true);
 		set_player_name(temp);
 		player->feats.set(DynamicAnimation);
+	}
+	while(*p) {
+		auto p1 = p;
+		p = psvalue(p, "colors", read_colors);
+		if(p1 != p)
+			continue;
+		break;
 	}
 	p = read_variants(p);
 	player_finish();

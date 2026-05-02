@@ -26,8 +26,8 @@
 
 using namespace draw;
 
-typedef bool(*fnrenderallow)(const drawable* p);
 typedef int(*fnrenderget)(const drawable* p);
+typedef bool(*fnrenderallow)(const drawable* p);
 
 struct renderi : nameable {
 	const array&	source;
@@ -35,6 +35,7 @@ struct renderi : nameable {
 	fnevent			paint;
 	fnrenderallow	allow;
 	fnrenderget		priority;
+	fnrenderallow	hilite;
 };
 struct drawobject {
 	drawable* object;
@@ -208,6 +209,24 @@ static void prepare_creatures() {
 	}
 }
 
+static void hilite_objects() {
+	if(hilite_object)
+		return;
+	pushrect push;
+	auto pb = objects.begin();
+	for(auto p = objects.end() - 1; p >= pb; p--) {
+		if(!p->render->hilite)
+			continue;
+		caret = p->object->position - camera;
+		caret.x += last_screen.x1;
+		caret.y += last_screen.y1;
+		if(p->render->hilite(p->object)) {
+			hilite_object = p->object;
+			break;
+		}
+	}
+}
+
 static void paint_objects() {
 	pushrect push;
 	clipped_area = last_area;
@@ -218,6 +237,7 @@ static void paint_objects() {
 		add_objects(&e);
 	prepare_creatures();
 	objects.sort(compare_drawobject);
+	hilite_objects();
 	for(auto& e : objects) {
 		last_object = e.object;
 		caret = last_object->position - camera;
@@ -516,13 +536,20 @@ static void paint_markers(const creature* p) {
 	fore = push_fore;
 }
 
+static bool hilite_ground(const drawable* pv) {
+	auto p = (itemground*)pv;
+	auto n = p->geti().ground;
+	auto& f = pma_ground->get(n);
+	return hot.mouse.in(f.getrect(caret.x, caret.y, 0));
+}
+
 static void paint_ground() {
 	pushvalue push(palt, pallette);
 	auto p = (itemground*)last_object;
 	auto n = p->geti().ground;
 	auto& f = pma_ground->get(n);
-	if(hot.mouse.in(f.getrect(caret.x, caret.y, 0)))
-		hilite_object = last_object;
+	if(p->ishilite())
+		cursor.cicle = 2;
 	if(f.pallette) {
 		memcpy(pallette, pma_ground->ptr(f.pallette), sizeof(pallette));
 		if(hilite_object != last_object)
@@ -531,10 +558,13 @@ static void paint_ground() {
 	image(pma_ground, n, ImagePallette);
 }
 
+static bool hilite_creature(const drawable* pv) {
+	auto p = (creature*)pv;
+	return hotspot.in(p->getbox());
+}
+
 static void paint_creature() {
 	auto p = (creature*)last_object;
-	if(hotspot.in(p->getbox()))
-		hilite_object = last_object;
 	if(p->ishilite())
 		cursor.cicle = 0;
 	paint_markers(p);
@@ -555,13 +585,17 @@ static void paint_animation() {
 		image(pr, pr->ganim(p->frame, get_game_tick()), p->is(Mirrored) ? ImageMirrorV : 0);
 }
 
-static void paint_door() {
-	auto p = (door*)last_object;
+static bool hilite_door(const drawable* pv) {
+	auto p = (door*)pv;
 	if(hotspot.in(p->box)) {
 		auto n = p->getpoints();
-		if(inside(hotspot, n.begin(), n.size()))
-			hilite_object = last_object;
+		return inside(hotspot, n.begin(), n.size());
 	}
+	return false;
+}
+
+static void paint_door() {
+	auto p = (door*)last_object;
 	if(p->ishilite()) {
 		polygon_green_filled(p->getpoints(), p->box);
 		polygon_green(p->getpoints());
@@ -569,16 +603,24 @@ static void paint_door() {
 	}
 }
 
+static bool hilite_region(const drawable* pv) {
+	auto p = (region*)pv;
+	return hotspot.in(p->box) && inside(hotspot, p->points.begin(), p->points.size());
+}
+
 static void paint_region() {
 	auto p = (region*)last_object;
-	if(hotspot.in(p->box) && inside(hotspot, p->points.begin(), p->points.size()))
-		hilite_object = last_object;
 	if(p->ishilite()) {
 		switch(p->type) {
 		case RegionInfo: cursor.cicle = 22; break;
 		case RegionTravel: cursor.cicle = 34; break;
 		}
 	}
+}
+
+static bool hilite_container(const drawable* pv) {
+	auto p = (container*)pv;
+	return hotspot.in(p->box) && inside(hotspot, p->points.begin(), p->points.size());
 }
 
 static void paint_container() {
@@ -947,11 +989,11 @@ void* choose_combat_action() {
 }
 
 BSDATA(renderi) = {
-	{"Animation", bsdata<animation>::source, bsdata<animation>::elements, paint_animation, allow_animate, priority_animate},
-	{"Container", bsdata<container>::source, bsdata<container>::elements, paint_container, allow_clipped_area, priority_normal},
-	{"Creature", bsdata<creature>::source, bsdata<creature>::elements, paint_creature, 0, priority_normal},
-	{"Door", bsdata<door>::source, bsdata<door>::elements, paint_door, allow_door, priority_door},
-	{"Item", bsdata<itemground>::source, bsdata<itemground>::elements, paint_ground, allow_ground, priority_ground},
-	{"Region", bsdata<region>::source, bsdata<region>::elements, paint_region, allow_region, priority_region},
+	{"Animation", bsdata<animation>::source, bsdata<animation>::elements, paint_animation, allow_animate, priority_animate, 0},
+	{"Container", bsdata<container>::source, bsdata<container>::elements, paint_container, allow_clipped_area, priority_normal, hilite_container},
+	{"Creature", bsdata<creature>::source, bsdata<creature>::elements, paint_creature, 0, priority_normal, hilite_creature},
+	{"Door", bsdata<door>::source, bsdata<door>::elements, paint_door, allow_door, priority_door, hilite_door},
+	{"Item", bsdata<itemground>::source, bsdata<itemground>::elements, paint_ground, allow_ground, priority_ground, hilite_ground},
+	{"Region", bsdata<region>::source, bsdata<region>::elements, paint_region, allow_region, priority_region, hilite_region},
 };
 BSDATAF(renderi)

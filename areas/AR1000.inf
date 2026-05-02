@@ -4,6 +4,14 @@
 // - Comments can be applied.
 // - Container items can be stored in common list.
 
+Creature 19356 5 Hedron colors(12 5 46 38 28 30 23) Human Male Fighter+1
+Creature 20390 5 Eldgull colors(13 5 43 42 28 30 23) Human Male Warrior+1
+Creature 18045 5 Screed colors(12 0 36 37 28 30 23) Human Male Warrior+1
+Creature 19290 5 Reig colors(12 2 57 37 28 30 23) Human Male Warrior+1
+Creature 20309 5 Jon colors(12 3 57 37 28 30 23) Human Male Warrior+1
+Creature 11391 5 Brogan colors(12 2 57 37 28 30 23) Human Male Warrior+1
+Creature 31016 5 Jorun colors(14 0 65 40 28 30 23) Human Male Warrior+3
+
 Creature 15405 8 StrongLeader Human Male Fighter+4 LeatherArmor LongSword
 Creature 17442 6 GoblinWarrior
 Creature 18465 10 Nazghuul GoblinWarrior // Standart monster Golblin warrior with unique identifier `Nazghuul`

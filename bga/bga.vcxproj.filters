@@ -75,9 +75,6 @@
     <Text Include="..\locale\ru\Names.txt">
       <Filter>locale</Filter>
     </Text>
-    <Text Include="..\locale\ru\NamesNewbe.txt">
-      <Filter>locale</Filter>
-    </Text>
     <Text Include="..\locale\ru\Skills.txt">
       <Filter>locale</Filter>
     </Text>

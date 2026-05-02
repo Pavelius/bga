@@ -1,2 +1,2 @@
-﻿Can't find file 'areas/AR1001.inf'
-Can't find file 'areas/AR1005.inf'
+﻿Error in file `areas/AR1000.inf`:
+ Line 7: Expected `)`

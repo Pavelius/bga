@@ -1,6 +1,13 @@
+Brogan: Броган
+Eldgull: Элдгулл
+Hedron: Хедрон
+Jon: Йон
+Jorun: Йорун
 GoblinWarrior: Гоблин-воин
 Nazghuul: Нажхуул
+Reig: Рейг
 StrongLeader: Лидер
+Screed: Скрид
 
 AR1000: Доки Таргоса
 AR1100: Таргос
