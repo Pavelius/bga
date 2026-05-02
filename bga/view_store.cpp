@@ -291,9 +291,11 @@ static void inn_rest() {
 	auto total = checkout(player_goods, (storefn)room_rent);
 	if(!check_coins(total))
 		return;
+	game_disappear();
 	player->coins -= total;
 	for(auto p : party) {
 	}
+	game_appear();
 }
 
 static void paint_buy_sell() {

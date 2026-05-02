@@ -22,7 +22,7 @@
 #include "view.h"
 #include "worldmap.h"
 
-// #define AREA_DISAPEAR
+#define AREA_DISAPEAR
 
 using namespace draw;
 
@@ -185,6 +185,17 @@ bool rowsaveheaderi::read() {
 	return true;
 }
 
+void game_disappear() {
+	scene_disapear(0, colors::black);
+}
+
+void game_appear(bool need_next_scene) {
+	update_frames();
+	scene_appear(view_game_area, 0);
+	if(need_next_scene)
+		next_scene(open_game);
+}
+
 bool rowsaveheaderi::serial(bool write_mode) {
 	char temp[260];
 	io::file flo(get_save_url(temp, file), write_mode ? StreamWrite : StreamRead);
@@ -213,15 +224,14 @@ bool rowsaveheaderi::serial(bool write_mode) {
 	a.set(bsdata<itemground>::source);
 	if(!write_mode) {
 #ifdef AREA_DISAPEAR
-		scene_disapear(0, colors::black);
+		game_disappear();
 #endif
 		auto p = bsdata<areai>::find(area_name);
 		if(!p)
 			return false;
 		load_area(p);
 #ifdef AREA_DISAPEAR
-		update_frames();
-		scene_appear(view_game_area, 0);
+		game_appear(false);
 #endif
 		next_scene(open_game);
 	}
