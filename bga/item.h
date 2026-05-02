@@ -57,7 +57,7 @@ struct item {
 		};
 		unsigned char data;
 	};
-	constexpr item() : type(0), count(1), data(0) {}
+	constexpr item() : type(0), count(0), data(0) {}
 	item(unsigned short type) : type(type), count(geti().count ? geti().count : 1), data(0) {}
 	item(unsigned short type, int count) : type(type), count((unsigned char)count), data(0) {}
 	constexpr explicit operator bool() const { return count > 0; }

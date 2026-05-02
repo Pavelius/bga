@@ -40,7 +40,7 @@ static bool game_pause;
 static fnevent game_proc;
 static fnoperation drag_drop_proc;
 static item *drag_item_source, *drag_item_dest;
-static item drag_item;
+static item drag_item, drag_ground_item;
 static char edit_field[32];
 
 sprite* pma_butstd;
@@ -873,8 +873,15 @@ static bool drag_drop_item() {
 	auto p2 = get_creature(drag_item_dest);
 	*drag_item_source = *drag_item_dest;
 	*drag_item_dest = drag_item;
-	p1->update();
-	p2->update();
+	if(p1)
+		p1->update();
+	if(p2)
+		p2->update();
+	if(drag_ground_item) {
+		add_item(current_area, player->position, drag_ground_item);
+		drag_ground_item.clear();
+	}
+	need_update_items = true;
 	return true;
 }
 
@@ -926,6 +933,11 @@ static void paint_drag_target(item* pi, wearn slot) {
 			}
 		}
 	}
+}
+
+static void ground_stoneslot(int f) {
+	stoneslot(f, f);
+	paint_drag_target(&drag_ground_item, Backpack);
 }
 
 static void paint_item_dragable(item* pi) {
@@ -1055,18 +1067,16 @@ static void update_items() {
 	}
 }
 
-static void pick_gorund_item() {
-}
-
 static void view_gorund_item(void* object) {
 	auto p = (item*)object;
-	paint_item(p);
+	if(*p)
+		paint_item_dragable(p);
 }
 
 static void view_ground_items() {
 	static int origin;
-	paint_list(items.data, 0, items.count, origin, 2, 2,
-		view_gorund_item, 40, 40, {5, 3}, -7, pick_gorund_item, 0);
+	paint_list(items.data, 0, items.count, origin, 3, 2,
+		view_gorund_item, 40, 40, {5, 3}, -7, 0, 0);
 }
 
 static void paint_game_inventory() {
@@ -1095,12 +1105,12 @@ static void paint_game_inventory() {
 	setdialog(611, 228, 36, 36); inventory(QuickItem, 1);
 	setdialog(650, 228, 36, 36); inventory(QuickItem, 2);
 	setdialog(574, 270, 111, 22); texta(getnm("Ground"), AlignCenterCenter);
-	setdialog(572, 299, 36, 36); stoneslot(0, 0, 0);
-	setdialog(572, 339, 36, 36); stoneslot(0, 0, 0);
-	setdialog(572, 379, 36, 36); stoneslot(0, 0, 0);
-	setdialog(612, 299, 36, 36); stoneslot(1, 1, 0);
-	setdialog(612, 339, 36, 36); stoneslot(1, 1, 0);
-	setdialog(612, 379, 36, 36); stoneslot(1, 1, 0);
+	setdialog(572, 299, 36, 36); ground_stoneslot(0);
+	setdialog(572, 339, 36, 36); ground_stoneslot(1);
+	setdialog(572, 379, 36, 36); ground_stoneslot(2);
+	setdialog(612, 299, 36, 36); ground_stoneslot(3);
+	setdialog(612, 339, 36, 36); ground_stoneslot(0);
+	setdialog(612, 379, 36, 36); ground_stoneslot(1);
 	setdialog(570, 298, 80, 120); view_ground_items();
 	setdialog(575, 20, 206, 22); texta(getnm("QuickWeapon"), AlignCenterCenter);
 	setdialog(572, 48); quick_weapon(0);
@@ -1420,7 +1430,7 @@ void paint_list(void* data, int size, int maximum, int& origin, int row_count, i
 	caret.y = push.caret.y;
 	caret = caret + scr;
 	height = push.height + scr_height; width = 12;
-	scroll(gres("GBTNSCRL"), 0, 2, 4, origin, maximum, row_count, per_row);
+	scroll(gres("GBTNSCRL"), 0, 2, 4, origin, maximum, row_count * per_row, per_row);
 }
 
 static void paint_topic_lists() {
