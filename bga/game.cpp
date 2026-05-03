@@ -18,6 +18,7 @@
 #include "script.h"
 #include "screenshoot.h"
 #include "store.h"
+#include "talk.h"
 #include "timer.h"
 #include "view.h"
 #include "worldmap.h"

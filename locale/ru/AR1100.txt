@@ -1,52 +1,51 @@
-п»ї#AR1100Info915_1690
-"The Weeping Widow Inn"
+#AR1100Info915_1690
+"Таверна "Плачущая вдова"
 
 #AR1100Info1084_1988
-This crane looks like it's designed to haul lumber from the cliffs below.
+Похоже, этот подъёмник водрузили на край утёса, чтобы поднимать и опускать брёвна.
 
 #AR1100Info2723_271
-You were WONDERING where that smell was coming from.  Damn, that smells good.
+Вам ИНТЕРЕСНО, откуда идёт этот запах. Дьявол, как вкусно пахнет!
 
 #AR1100Info2202_344
-There's something suspicious about this cart.  Everytime you turn away, you swear it's looking at you - but when you turn around... nothing.
+В этой тележке есть что-то подозрительное. Всякий раз, когда ты отворачиваешься, то можешь поклясться, что она смотрит на вас - но стоит повернуться к ней и... ничего.
 
 #AR1100Info573_933
-This weapons rack is covered with frost-covered shields and axes.  None of them look serviceable.
-
+Эта стойка с оружием забита покрытыми инеем щитами и топорами - на вид уже никуда не годными.
 
 #AR1100Info651_926
-These barrels look like they've been roped off to prevent them from hurting innocent bystanders.  
+Видимо, эти бочки сдвинули в сторону, чтобы не ранить ни в чём не повинных зевак. 
 
 #AR1100Info47_1589
-The logs on this cart have merchant marks on them from Lonelywood and Bremen. You notice a few planks and boards lie amongst the logs - that look like they were stripped from a house.
+На этой телеге лежат брёвна с торговыми знаками Лонливуда и Бремена. Среди брёвен можно заметить несколько планок и досок. Похоже, они были оторваны от какого-то дома.
 
 #AR1100Info352_978
-These casks bear the mark of Bremen on them.  They look like they've been tapped recently. 
+На этих бочках клейма Бремена. Похоже, их осушили совсем недавно. 
 
 #AR1100Info113_415
-This cart reminds you of an umber hulk head.  Or an ankheg.  You shiver involuntarily.
+Эта телега напоминает голову бурого увальня. Или анкега. Вы ненароком вздрагиваете.
 
 #AR1100Info365_496
-This house looks like it was abandoned recently, and it has been boarded up.
+Этот дом заколочен досками, и выглядит так, будто его забросили совсем недавно.
 
 #AR1100Info251_1002
-This house looks like it was abandoned recently, and it has been boarded up.
+Этот дом заколочен досками, и выглядит так, будто его забросили совсем недавно.
 
 #AR1100Info124_1396
-This empty house has been boarded up, and a scratched message on the front of the door reads "Bryn Shander."
+Этот пустой дом был заколочен досками, а на его двери нацарапана надпись "Брин Шандер".
 
 #AR1100Info1003_1045
-The door to this house has been nailed shut.
+Дверь этого дома заколочена гвоздями.
 
 #AR1100Info2430_1786
-This looks like it might have once been a teamster's house.  The door has been nailed shut, and it will not open.
+Судя по внешнему виду этого дома, он мог быть жилищем погонщика. Его дверь заколочена гвоздями, и её не открыть.
 
 #AR1100Info1703_1073
-The door to this small cottage has been nailed shut, and scratched on the door are the words, "Gone to Bryn Shander."
+Дверь этого маленького коттеджа заколочена, а на его двери нацарапаны слова: "Ушёл в Брин Шандер".
 
 #AR1100Info1688_777
-This door is nailed shut, and it will not open.  The house looks like it was abandoned recently. 
+Эта дверь заколочена, и её не открыть. Этот дом выглядит так, будто его покинули совсем недавно. 
 
 #AR1100Info1631_1822
-"Gallaway Trade Depot"
+"Торговый склад Галлавея"
 

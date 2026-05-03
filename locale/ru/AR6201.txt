@@ -1,12 +1,12 @@
-п»ї#AR6201Info553_833
-This burned out fire pit looks only a few days old.
+#AR6201Info553_833
+Этому прогоревшему кострищу, похоже, всего несколько дней.
 
 #AR6201Info557_725
-This dead barbarian is well frozen over. However, it is well exposed and intact, leading you to believe that this corpse is only a few days old.
+Мёртвый варвар хорошо заморожен. Однако труп, лёжа на открытом месте, всё ещё цел. Это позволяет предположить, что он лежит тут всего несколько дней.
 
 #AR6201Info641_733
-This dead barbarian is well frozen over. However, it is well exposed and intact, leading you to believe that this corpse is only a few days old.
+Мёртвый варвар хорошо заморожен. Однако труп, лёжа на открытом месте, всё ещё цел. Это позволяет предположить, что он лежит тут всего несколько дней.
 
 #AR6201Info937_841
-An immense boulder that must have fallen from one of the surrounding mountainsides.
+Огромный валун, который, должно быть, упал с одного из окружающих горных склонов..
 

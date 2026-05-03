@@ -1,159 +1,159 @@
-п»ї#AR4102Info2725_1791
-This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
+#AR4102Info2725_1791
+Это, по-видимому, один из компонентов странного устройства, управляющего комнатой. Вокруг ощущается могучая аура волшебства.
 
 #AR4102Info2702_2061
-This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
+Это, по-видимому, один из компонентов странного устройства, управляющего комнатой. Вокруг ощущается могучая аура волшебства.
 
 #AR4102Info1153_676
-This intricately-carved altar is made entirely of ice, but pulsates as if driven by a heartbeat.
+Этот искусно вырезанный алтарь целиком сделан изо льда, но при он этом пульсирует, будто движимый биением сердца.
 
 #AR4102Info833_692
-This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
+Эта ледяная жила берёт начало от потолка и несёт ручейки крови в эту комнату.
 
 #AR4102Info922_598
-This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
+Эта ледяная жила берёт начало от потолка и несёт ручейки крови в эту комнату.
 
 #AR4102Info971_593
-This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
+Эта ледяная жила берёт начало от потолка и несёт ручейки крови в эту комнату.
 
 #AR4102Info1299_733
-This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
+Эта ледяная жила берёт начало от потолка и несёт ручейки крови в эту комнату.
 
 #AR4102Info1317_760
-This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
+Эта ледяная жила берёт начало от потолка и несёт ручейки крови в эту комнату.
 
 #AR4102Info1227_859
-This vein of ice is attached to the ceiling and carries rivulets of blood into this room.
+Эта ледяная жила берёт начало от потолка и несёт ручейки крови в эту комнату.
 
 #AR4102Info2584_1911
-This appears to be one of the components belonging to the strange device that dominates this room.  It looks to be the victim of a recent, violent explosion.
+Это, по-водимому, один из компонентов странного устройства, управляющего комнатой. Похоже, это жертва недавнего сильного взрыва.
 
 #AR4102Info2812_1868
-This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
+Это, по-видимому, один из компонентов странного устройства, управляющего комнатой. Вокруг ощущается могучая аура волшебства.
 
 #AR4102Info2899_1918
-This appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
+Это, по-видимому, один из компонентов странного устройства, управляющего комнатой. Вокруг ощущается могучая аура волшебства.
 
 #AR4102Info2748_1945
-This platform appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
+Эта платформа, по-видимому, один из компонентов странного устройства, управляющего комнатой. Вокруг неё ощущается могучая аура волшебства.
 
 #AR4102Info2788_2050
-This platform appears to be one of the components belonging to the strange device that dominates this room.  Strong magic emanates from it.
+Эта платформа, по-видимому, один из компонентов странного устройства, управляющего комнатой. Вокруг неё ощущается могучая аура волшебства.
 
 #AR4102Info1212_251
-This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
+На этом столе разложено антикварное оружие и доспехи. К сожалению, всё - очень тонкой работы, в настоящем бою от него будет мало толку.
 
 #AR4102Info1391_218
-This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
+На этом столе разложено антикварное оружие и доспехи. К сожалению, всё - очень тонкой работы, в настоящем бою от него будет мало толку.
 
 #AR4102Info1527_221
-This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
+На этом столе разложено антикварное оружие и доспехи. К сожалению, всё - очень тонкой работы, в настоящем бою от него будет мало толку.
 
 #AR4102Info1815_317
-This table contains an assortment of vintage armor pieces and weaponry.  Unfortunately they're too delicate to be used effectively.
+На этом столе разложено антикварное оружие и доспехи. К сожалению, всё - очень тонкой работы, в настоящем бою от него будет мало толку.
 
 #AR4102Info799_2500
-This empty coffin belongs to High Priestess Cathin.
+Это пустой гроб верховной жрицы Катин.
 
 #AR4102Info873_2530
-This empty coffin belongs to High Priestess Lysara.
+Это пустой гроб верховной жрицы Лисары.
 
 #AR4102Info945_2561
-This empty coffin belongs to High Priestess Oria.
+Это пустой гроб верховной жрицы Ории.
 
 #AR4102Info2490_946
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info2047_1456
-A finely crafted prism, sitting at the center of this large device, catches the ray of intense light coming from above.  The symbol of a lightning bolt has been carved into the base of the device.
+Искусно вырезанная призма, расположенная в центре этого странного устройства, ловит луч интенсивного света, идущий сверху. В основании устройства вырезан символ молнии.
 
 #AR4102Info505_1542
-This crystal mirror contains what appear to be individuals trapped within several extradimensional compartments.
+В этом кристаллическом зеркале отражаются запертые в нескольких внепространственных измерениях существа.
 
 #AR4102Info1642_2708
-This switch is labeled 'Mode Activator'.
+Над рычагом надпись "Активация режима".
 
 #AR4102Info1708_2671
-This switch is labeled 'Mode Selector 1'.
+Над рычагом надпись "Выбор режима 1".
 
 #AR4102Info1761_2611
-This switch is labeled 'Mode Selector 2'.
+Над рычагом надпись "Выбор режима 2".
 
 #AR4102Info1896_2420
-This switch is labeled 'Rank Selector 1'.
+Над рычагом надпись "Выбор уровня мастерства 1".
 
 #AR4102Info1955_2353
-This switch is labeled 'Rank Selector 2'.
+Над рычагом надпись "Выбор уровня мастерства 2".
 
 #AR4102Info2011_2295
-This switch is labeled 'Rank Selector 3'.
+Над рычагом надпись "Выбор уровня мастерства 3".
 
 #AR4102Info2073_2291
-This switch is labeled 'Rank Selector 4'.
+Над рычагом надпись "Выбор уровня мастерства 4".
 
 #AR4102Info2137_2313
-This switch is labeled ''Rank Selector 5'.
+Над рычагом надпись "Выбор уровня мастерства 5".
 
 #AR4102Info2207_2343
-This switch is labeled ''Rank Selector 6'.
+Над рычагом надпись "Выбор уровня мастерства 6".
 
 #AR4102Info2486_950
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info3700_1459
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info2867_2417
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info102_1211
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info902_269
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info2357_1438
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info2206_1640
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info1737_1422
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info1638_1250
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info1903_1242
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info442_763
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info159_1500
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info1166_1935
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info792_2405
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info1064_2524
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info1526_2092
-This charred mirror seems to have repeatedly been struck by lightning.
+Похоже, в это обугленное зеркало неоднократно ударяла молния.
 
 #AR4102Info2389_2426
-This switch is labeled ''Rank Selector 7'.
+Над рычагом надпись "Выбор уровня мастерства 7".
 
 #AR4102Info2454_2454
-This switch is labeled ''Rank Selector 8'.
+Над рычагом надпись "Выбор уровня мастерства 8".
 
 #AR4102Info2524_2485
-This switch is labeled ''Rank Selector 9'.
+Над рычагом надпись "Выбор уровня мастерства 9".
 
 #AR4102Info2588_2512
-This switch is labeled ''Rank Selector 10'.
+Над рычагом надпись "Выбор уровня мастерства 10".
 

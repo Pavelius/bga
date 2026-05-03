@@ -1,12 +1,12 @@
-п»ї#AR1102Info273_455
-These pallets appear to have the trade symbols of Bremen and Shaengarne on them. 
+#AR1102Info273_455
+Эти грузовые поддоны, похоже, помечены символами Бремена и Шенгарна.
 
 #AR1102Info821_249
-Someone has engraved the image of a rearing lion and a cackling witch on the side of this wardrobe.
+Кто-то выгравировал изображение стоящего на задних лапах льва и хихикающей ведьмы на боку этого шкафа.
 
 #AR1102Info518_173
-This stuffed leopard raises more questions than it answers.
+Это набитое чучело леопарда вызывает больше вопросов, чем даёт ответов.
 
 #AR1102Info344_110
-This cabinet has been left open - several rolls of bandages and cloth are inside.
+Этот шкаф был оставлен открытым. В нём лежит несколько рулонов бинта и ткани.
 

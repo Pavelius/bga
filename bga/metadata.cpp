@@ -34,6 +34,7 @@
 #include "spell.h"
 #include "store.h"
 #include "stringvar.h"
+#include "talk.h"
 #include "variant.h"
 #include "worldmap.h"
 
@@ -231,6 +232,9 @@ BSMETA(storeti) = {
 BSMETA(stringvari) = {
 	BSREQ(id),
 	{}};
+BSMETA(talki) = {
+	BSREQ(id),
+	{}};
 BSMETA(weaponi) = {
 	BSREQ(bonus),
 	BSENM(type, damagei),
@@ -289,6 +293,7 @@ BSDATA(varianti) = {
 	{"Spell", VAR(spelli, 1)},
 	{"Store", VAR(storei, 1)},
 	{"StringVar", VAR(stringvari, 1)},
+	{"Talk", VAR(talki, 1), 0, 0, 0, 0, read_talk},
 	{"Type", VAR(varianti, 1)},
 	{"WorldArea", VAR(worldmapi::area, 1)},
 	{"WorldLink", VAR(worldmapi::link, 3)},

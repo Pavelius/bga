@@ -1,15 +1,15 @@
-п»ї#AR5201Info1914_739
-These drinks, supplied for those relaxing in this spacious foyer, include spring and flavored water as well as various sorts of tea.
+#AR5201Info1914_739
+Среди этих напитков, предлагаемых для отдыхающих в этом просторном зале, - родниковая и ароматизированная вода, а также чай различных сортов.
 
 #AR5201Info945_185
-The monks probably use these wooden swords to practice dodging or catching rather than actually wielding them.
+Эти деревянные мечи скорее всего служат монахам для отработки захватов и уклонений. В бою они ими, почти наверняка, не пользуются.
 
 #AR5201Info647_359
-The aroma of freshly baked bread emanates from this refreshingly warm oven and fills the entire kitchen.
+Приятный аромат свежевыпеченного хлеба исходит из этой тёплой печи и заполняет собой всю кухню.
 
 #AR5201Info541_369
-These sacks hold flour, grain, and so on.
+В этих мешках хранится зерно, мука и прочие припасы.
 
 #AR5201Info427_464
-These kegs hold fresh mountain water rather than wine or ale - the monks probably don't throw much of a bacchanal.
+В этих бочонках хранится не вино и не эль, а просто чистая вода из горных ручьёв. Вероятно, монахи не особо увлекаются выпивкой.
 

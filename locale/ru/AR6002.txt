@@ -1,75 +1,75 @@
-п»ї#AR6002Info413_1119
-Carved into this stone marker are the following words: "Hrothgar's Glen.  Dedicated to the men and women from Easthaven who attempted to aid Kuldahar in its time of need.  1284 DR."
+#AR6002Info413_1119
+На этом каменном памятнике высечены следующие слова: "Долина Хротгара. В память о мужчинах и женщинах Восточной Гавани, которые откликнулись на призыв Кулдахара в час нужды. 1284 ЛД".
 
 #AR6002Info674_381
-"Hrothgar of Hillsfar.  Leader of the Easthaven Expedition.  d. 1281."
+"Хротгар из Хиллсфара. Командир экспедиции из Восточной Гавани. Умер в 1281."
 
 #AR6002Info591_393
-"Accalia of Tempus.  Warrior-Priestess.  b. 1255 - d. 1281."
+"Аккалия, жрица Темпуса. Годы жизни: 1255 - 1281."
 
 #AR6002Info491_399
-"Erevain Blacksheaf.  Martyred Hero of Dragon's Eye.  d. 1281."
+"Эревейн Чёрный Сноп. Герой-мученик Глаза Дракона. Умер в 1281 год."
 
 #AR6002Info805_423
-"Hildreth Highhammer.  Dwarven Warrior.  d. 1281."
+"Хилдрет Вышний Молот, воительница дварфов. Умерла в 1281."
 
 #AR6002Info892_406
-"Kaleel Potts.  Loyal Husband.  b. 1250 - d. 1281."
+"Калель Поттс. Верный муж. Годы жизни: 1250 - 1281."
 
 #AR6002Info982_396
-"Turbesh.  Father of Jermsy and Betha.  d. 1281."
+"Тарбеш. Отец Джермси и Беты. Умер в 1281."
 
 #AR6002Info1092_433
-"Betha.  Daughter of Turbesh.  Sister of Jermsy.  d. 1281."
+"Бета. Дочь Тарбеша, сестра Джермси. Умерла в 1281."
 
 #AR6002Info370_523
-"Silas.  Brother of Mirek.  b. 1262. - d. 1281."
+"Силас. Брат Мирека. Рожд. 1262 - умер 1281."
 
 #AR6002Info496_502
-"Brother Gus.  Servant of Ilmater.  d. 1282."
+"Брат Гус. Слуга Ильматера. Умер в 1282."
 
 #AR6002Info622_543
-"Brother Ferg.  Servant of Ilmater.  d. 1282."
+"Брат Ферг. Слуга Ильматера. Умер в 1282."
 
 #AR6002Info872_538
-"Brady Willows.  Husband of Alma Willows.  b. 1216 - d. 1281."
+"Брейди Виллоус. Муж Альмы Виллоус. Годы жизни: 1216 - 1281."
 
 #AR6002Info977_513
-"Alma Willows.  Wife of Brady Willows.  b. 1221 - d. 1281."
+"Альма Виллоус. Жена Брейди Виллоуса. Годы жизни: 1221 - 1281."
 
 #AR6002Info1075_516
-"The Voice of Durdel Anatha.  Cursed Paladin of Torm.  Put to rest in 1282 DR."
+"Глас Дурдель Анаты. Проклятый паладин Торма. Упокоен в 1282 ЛД"
 
 #AR6002Info473_683
-"Thad Meriwether.  Merchant.  d. 1285."
+"Тад Меривейзер. Торговец. Умер в 1285."
 
 #AR6002Info578_661
-"Iphegenia.  'Mother Egenia'.  Humble Servant of Ilmater.  d. 1296."
+"Ифегения. "Мать Эгения". Скромная служительница Ильматера. Умерла в 1296."
 
 #AR6002Info789_993
-"Kaison.  Thrown from his steed along Slow Cedric's Gallop.  d. 1301."
+"Кайсон. Свалился с лошади во время Неспешных скачек Седрика. Умер в 1301."
 
 #AR6002Info936_1108
-"Hattoch.  The Darkest Man of the North, Terror of Bremen.  d. 1301."
+"Хатточ. Самый тёмный человек Севера, ужас Бремена. Умер в 1301."
 
 #AR6002Info976_946
-"Dray.  Froze in a Blizzard near the Sea of Moving Ice.  d. 1299."
+"Дрей. Замёрз во время бурана близ Моря Движущихся Льдов. Умер в 1299."
 
 #AR6002Info1125_1076
-"Eliza Becek.  Representative to the Ten-Towns and Driver of the Meatwagon along the Bremen Trail.  Lost in the Great Blizzard of 1301."
+"Элиза Бицек. Представитель Десяти Городов и управляющая мясного фургона на Бременском Тракте. Потеряна во время Великого Бурана 1301 года."
 
 #AR6002Info1148_903
-"Jediza Flim.  A Spirited Fellow.  d. 1301."
+"Джедиза Флим. Духовная подруга. Умерла в 1301."
 
 #AR6002Info1311_1016
-"Jimvold the Gardener.  A Master of His Trade.  d. 1301."
+"Джимвольд Садовник. Мастер своего дела. Умер в 1301."
 
 #AR6002Info1443_751
-"Verdan.  A Fine Musician.  d. 1309."
+"Вердан. Прекрасный музыкант. Умер в 1309."
 
 #AR6002Info1627_841
-"Kyanka.  Writer of Humorous Stories.  d. 1302."
+"Киянка. Автор юмористических рассказов. Умер в 1302."
 
 #AR6002Info1331_848
-"Old Kholsa, traveler and farmer.  Perished in his bed at the age of a hundred and seven. d.1300."
+"Старый Хольза, путешественник и фермер. Скончался в своей постели в возрасте ста семи лет. Умер в 1300."
 

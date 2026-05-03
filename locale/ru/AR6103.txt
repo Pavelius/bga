@@ -1,18 +1,18 @@
-п»ї#AR6103Info1613_1718
-This raised drawbridge, covered with candle wax and suspended over a bottomless chasm, connects to the room beyond.
+#AR6103Info1613_1718
+Этот поднятый разводной мост, покрытый свечным воском и нависающий над бездной, ведёт в комнату на той стороне.
 
 #AR6103Info1951_2498
-There's a tunnel here that's built for a snake to slither through, but it looks traversable if one person at a time squeezed through.
+Этот туннель построен так, чтобы в него могли проскальзывать змеи. Через него можно проползти и человекоподобному существу, но только по одному за раз.
 
 #AR6103Info3136_2167
-There's a tunnel here that's built for a snake to slither through, but it looks traversable if one person at a time squeezed through.
+Этот туннель построен так, чтобы в него могли проскальзывать змеи. Через него можно проползти и человекоподобному существу, но только по одному за раз.
 
 #AR6103Info1735_577
-Written in calligraphy on this archway is the phrase:  "Pass ye under Sseth's Eye only whom thou art yuan-ti to cleanse thyself with meditation and quiet prayer."
+На этой арке каллиграфическим почерком написана фраза: "Пройди под Оком Ссета лишь тот, чья суть юань-ти, дабы очистить себя созерцанием и тихой молитвой".
 
 #AR6103Info727_1547
-The opening mechanism to this large metal door operates on a timer, but you feel it could be bypassed with the proper tools and expertise.
+Открывающий механизм этой большой металлической двери управляется таймером, но ты чувствуешь, что его вполне можно взломать, имея соответствующие инструменты и навыки.
 
 #AR6103Info1666_1340
-This statue depicts a horrific scene of snakes devouring a human alive.
+Эта скульптура изображает ужасную сцену змей, пожирающих человека заживо.
 

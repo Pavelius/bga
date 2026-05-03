@@ -1,18 +1,18 @@
-п»ї#AR6304Info914_804
-These barrels, and the bags next to them, contain foodstuffs.  It looks as though they are being used to make the next meal for the guards on this floor of the keep.
+#AR6304Info914_804
+В этих бочках и мешках находится провизия. Похоже, что именно из этих припасов готовят пищу для стражников, которые охраняют этот этаж.
 
 #AR6304Info865_456
-This hallway seems to have been recently repaired.  However, upon closer examination into its dark reaches, you can see that it has been sealed off and leads to nowhere.
+Судя по всему, этот коридор был недавно отремонтирован. Однако, при ближайшем рассмотрении его затемнённой части, можно заметить, что он опечатан и никуда не ведёт.
 
 #AR6304Info2119_387
-This hallway leads to the War Tower.
+Этот коридор ведёт в Башню Войны.
 
 #AR6304Info2718_1185
-This hallway leads to the Cleric Tower.
+Этот коридор ведёт в Башню Священников.
 
 #AR6304Info1472_2058
-This hallway leads to the Officer Tower.
+Этот коридор ведёт в Башню Офицеров.
 
 #AR6304Info194_1163
-This hallway leads to the Wizard Tower.
+Этот коридор ведёт в Башню Мага.
 

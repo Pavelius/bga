@@ -1,0 +1,89 @@
+Creature 26441 0 colors(12 0 40 37 28 30 23) 01_GiaVer_03 Fighter+5
+Creature 27983 4 colors(12 0 40 37 28 30 23) 01_GiaVer_04 Fighter+5
+Creature 30798 10 colors(12 0 40 37 28 30 23) 01_GiaVer_06 Fighter+5
+Creature 29253 10 colors(12 0 40 37 28 30 23) 01_GiaVer_07 Fighter+5
+Creature 33092 2 colors(12 0 49 37 28 30 23) 02_OrcArE_01 Orc Male Fighter+2
+Creature 33351 0 colors(12 0 49 37 28 30 23) 02_OrcArE_02 Orc Male Fighter+2
+Creature 35158 8 colors(12 0 49 37 28 30 23) 02_OrcArE_03 Orc Male Fighter+2
+Creature 38234 2 colors(12 0 49 37 28 30 23) 02_OrcArE_04 Orc Male Fighter+2
+Creature 38751 0 colors(12 0 49 37 28 30 23) 02_OrcArE_05 Orc Male Fighter+2
+Creature 30575 4 colors(12 0 49 37 28 30 23) 03_OrcArE_01 Orc Male Fighter+2
+Creature 28531 4 colors(12 0 49 37 28 30 23) 03_OrcArE_02 Orc Male Fighter+2
+Creature 31349 14 colors(12 0 49 37 28 30 23) 03_OrcArE_03 Orc Male Fighter+2
+Creature 29050 12 colors(12 0 49 37 28 30 23) 03_OrcArE_04 Orc Male Fighter+2
+Creature 33387 6 colors(12 0 49 37 28 30 23) 03_OrcArE_05 Orc Male Fighter+2
+Creature 37470 0 colors(12 0 60 37 28 30 23) 02_OroCo Orc Male Fighter+8
+Creature 30071 14 colors(12 0 60 37 28 30 23) 03_OroCo Orc Male Fighter+8
+Creature 25119 12 colors(19 0 65 46 28 30 23) 04_HobE_01 Male Fighter+4
+Creature 25639 2 colors(19 0 65 46 28 30 23) 04_HobE_02 Male Fighter+4
+Creature 29994 0 colors(12 0 49 37 28 30 23) 05_OrcArE_01 Orc Male Fighter+2
+Creature 29478 2 colors(12 0 49 37 28 30 23) 05_OrcArE_02 Orc Male Fighter+2
+Creature 27928 0 colors(12 0 49 37 28 30 23) 05_OrcArE_03 Orc Male Fighter+2
+Creature 29199 0 colors(12 0 49 37 28 30 23) 05_OrcArE_04 Orc Male Fighter+2
+Creature 28424 2 colors(12 0 49 37 28 30 23) 05_OrcArE_05 Orc Male Fighter+2
+Creature 24592 14 colors(12 0 49 37 28 30 23) 05_OrcArE_06 Orc Male Fighter+2
+Creature 22289 12 colors(12 0 49 37 28 30 23) 05_OrcArE_07 Orc Male Fighter+2
+Creature 27917 0 colors(12 0 60 37 28 30 23) 05_OroCo Orc Male Fighter+8
+Creature 16662 6 colors(12 0 60 37 28 30 23) 06_OroCo Orc Male Fighter+8
+Creature 17168 4 colors(12 0 49 37 28 30 23) 06_OrcArE_01 Orc Male Fighter+2
+Creature 15380 6 colors(12 0 49 37 28 30 23) 06_OrcArE_02 Orc Male Fighter+2
+Creature 18194 4 colors(12 0 49 37 28 30 23) 06_OrcArE_03 Orc Male Fighter+2
+Creature 20361 14 colors(12 0 49 37 28 30 23) OrcArE_01 Orc Male Fighter+2
+Creature 17544 10 colors(12 0 49 37 28 30 23) OrcArE_02 Orc Male Fighter+2
+Creature 14219 12 colors(12 0 49 37 28 30 23) OrcArE_03 Orc Male Fighter+2
+Creature 11920 14 colors(12 0 49 37 28 30 23) OrcArE_04 Orc Male Fighter+2
+Creature 9103 10 colors(12 0 49 37 28 30 23) OrcArE_05 Orc Male Fighter+2
+Creature 34126 14 colors(12 0 51 37 28 30 23) 02_OrcSh Orc Male Cleric+7
+Creature 18313 0 colors(12 0 51 37 28 30 23) 03_OrcSh Orc Male Cleric+7
+Creature 15130 0 colors(12 0 51 37 28 30 23) 06_OrcSh Orc Male Cleric+7
+Creature 26897 4 colors(12 0 56 37 28 30 23) 05_OrcWD Orc Male Wizard+6
+Creature 13691 10 colors(12 0 36 37 28 30 23) 07_GobSh Goblin Male Cleric+6
+Creature 8570 2 colors(12 0 56 37 28 30 23) 07_GobSor_01 Orc Male Wizard+6
+Creature 9340 4 colors(12 0 56 37 28 30 23) 07_GobSor_02 Orc Male Wizard+6
+Creature 13173 2 colors(12 0 54 37 28 30 23) 07_GobHo_01 Goblin Male Fighter+3
+Creature 14448 10 colors(12 0 54 37 28 30 23) 07_GobHo_02 Goblin Male Fighter+3
+Creature 13438 0 colors(12 0 54 37 28 30 23) 07_GobHo_03 Goblin Male Fighter+3
+Creature 13697 2 colors(12 0 54 37 28 30 23) 07_GobHo_04 Goblin Male Fighter+3
+Creature 8834 10 colors(12 0 54 37 28 30 23) 07_GobHo_05 Goblin Male Fighter+3
+Creature 8054 14 colors(12 0 54 37 28 30 23) 07_GobHo_06 Goblin Male Fighter+3
+Creature 14707 8 colors(12 0 54 37 28 30 23) 07_GobHoE_07 Goblin Male Fighter+4
+Creature 14210 4 colors(12 0 54 37 28 30 23) 07_GobHoE_08 Goblin Male Fighter+4
+Creature 14205 10 colors(12 0 54 37 28 30 23) 07_GobHoE_09 Goblin Male Fighter+4
+Creature 8318 8 colors(12 0 54 37 28 30 23) 07_GobHoE_10 Goblin Male Fighter+4
+Creature 14975 8 colors(12 0 54 37 28 30 23) 07_GobHoE_11 Goblin Male Fighter+4
+Creature 11131 4 colors(12 0 54 37 28 30 23) 07_GobHoE_12 Goblin Male Fighter+4
+Creature 11339 0 colors(12 0 56 37 28 30 23) 09_OrcWD_01 Orc Male Wizard+6
+Creature 16440 6 colors(12 0 51 37 28 30 23) 09_OrcSh Orc Male Cleric+7
+Creature 12615 12 colors(12 0 60 37 28 30 23) 09_OroCo Orc Male Fighter+8
+Creature 17205 8 colors(12 0 56 37 28 30 23) 09_OrcWD_02 Orc Male Wizard+6
+Creature 25632 12 colors(19 0 58 66 30 30 23) 04_HobAr_01 Male Fighter+3
+Creature 26408 4 colors(19 0 58 66 30 30 23) 04_HobAr_02 Male Fighter+3
+Creature 25123 0 colors(19 0 58 66 30 30 23) 04_HobAr_03 Male Fighter+3
+Creature 26661 6 colors(19 0 58 66 30 30 23) 04_HobAr_04 Male Fighter+3
+Creature 24860 0 colors(19 0 58 66 30 30 23) 04_HobAr_05 Male Fighter+3
+Creature 26657 10 colors(19 0 65 46 28 30 23) 04_HobSe Male Fighter+4
+Creature 13089 14 colors(12 0 49 37 28 30 23) 06_OrcE_01 Orc Male Fighter+5
+Creature 16161 10 colors(12 0 49 37 28 30 23) 06_OrcE_02 Orc Male Fighter+5
+Creature 17450 8 colors(12 0 49 37 28 30 23) 06_OrcE_03 Orc Male Fighter+5
+Creature 12915 0 colors(12 0 47 37 28 30 23) 07_GobOv1 Goblin Male Fighter+5
+Creature 4960 4 colors(12 0 39 37 28 30 23) 08_Bug_02 Male Fighter+6
+Creature 4184 14 colors(12 0 39 37 28 30 23) 08_Bug_04 Male Fighter+6
+Creature 5465 10 colors(12 0 39 37 28 30 23) 08_Bug_06 Male Fighter+6
+Creature 5973 2 colors(12 0 39 37 28 30 23) 08_Bug_07 Male Fighter+6
+Creature 16191 0 colors(12 0 59 37 28 30 23) 09_Orog_03 Orc Male Fighter+4
+Creature 18239 8 colors(12 0 59 37 28 30 23) 09_Orog_04 Orc Male Fighter+4
+Creature 17220 4 colors(12 0 59 37 28 30 23) 09_Orog_05 Orc Male Fighter+4
+Creature 12604 2 colors(12 0 59 37 28 30 23) 09_Orog_06 Orc Male Fighter+4
+Creature 11586 14 colors(12 0 59 37 28 30 23) 09_Orog_07 Orc Male Fighter+4
+Creature 15689 14 colors(12 0 59 37 28 30 23) 09_Orog_08 Orc Male Fighter+4
+Creature 13638 14 colors(12 0 47 37 28 30 23) 09_OrcHSh Orc Male Cleric+11
+Creature 10606 0 colors(12 0 39 37 28 30 23) Bug_06 Male Fighter+6
+Creature 22814 14 colors(12 0 39 37 28 30 23) Bug_07 Male Fighter+6
+Creature 25905 14 colors(10 3 43 44 28 30 23) Braston Human Female Ranger+5
+Creature 24108 0 colors(20 7 29 91 21 0 22) Half Goblin Goblin Male Fighter+4
+Creature 25399 2 colors(20 7 29 91 21 0 22) Half Goblin Goblin Male Fighter+4
+Creature 9295 10 colors(12 0 71 37 28 30 23) Hardened Ice Troll Fighter+6
+Creature 7253 0 colors(12 0 71 37 28 30 23) Hardened Ice Troll Fighter+6
+Creature 10854 6 colors(12 0 86 37 28 30 23) Troll Male Fighter+6
+Creature 37933 10 colors(10 3 43 44 28 30 23) Braston_Watcher Human Female Ranger+5
+Creature 26989 4 colors(10 3 43 44 28 30 23) Braston_Wrong_Way Human Female Ranger+5

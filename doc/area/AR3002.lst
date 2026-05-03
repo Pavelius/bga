@@ -1,0 +1,141 @@
+Creature 49836 14 colors(12 0 47 37 28 30 23) 01_OroPus Orc Male Fighter+5
+Creature 50353 2 colors(12 0 51 37 28 30 23) 01_OrcSh Orc Male Cleric+9
+Creature 53685 4 colors(12 0 59 37 28 30 23) 01_Oro_01 Orc Male Fighter+3
+Creature 54472 6 colors(12 0 59 37 28 30 23) 01_Oro_03 Orc Male Fighter+3
+Creature 53954 12 colors(12 0 59 37 28 30 23) 01_Oro_04 Orc Male Fighter+3
+Creature 51885 8 colors(12 0 59 37 28 30 23) 01_Oro_05 Orc Male Fighter+3
+Creature 52136 4 colors(12 0 59 37 28 30 23) 01_Oro_06 Orc Male Fighter+3
+Creature 51362 14 colors(12 0 48 37 28 30 23) 01_OrcAr_01 Orc Male Fighter+3
+Creature 53156 8 colors(12 0 49 37 28 30 23) 01_OrcArE_03 Orc Male Fighter+5
+Creature 50614 8 colors(12 0 48 37 28 30 23) 01_OrcAr_04 Orc Male Fighter+3
+Creature 49593 4 colors(12 0 48 37 28 30 23) 01_OrcAr_05 Orc Male Fighter+3
+Creature 180 14 colors(12 0 48 37 28 30 23) 01_SOrcAr_01 Orc Male Fighter+4
+Creature 50857 14 colors(12 0 48 37 28 30 23) 01_SOrcAr_02 Orc Male Fighter+4
+Creature 40149 10 colors(12 0 60 37 28 30 23) 02_SOro_01 Orc Male Fighter+3
+Creature 40925 2 colors(12 0 60 37 28 30 23) 02_SOro_02 Orc Male Fighter+3
+Creature 43488 4 colors(12 0 60 37 28 30 23) 02_SOro_03 Orc Male Fighter+3
+Creature 45153 12 colors(12 0 57 37 28 30 23) 03_Oty_01 Fighter+6
+Creature 43875 4 colors(12 0 57 37 28 30 23) 03_Oty_02 Fighter+6
+Creature 48939 12 colors(12 0 47 37 28 30 23) 04_OroTas Orc Male Fighter+6
+Creature 44841 4 colors(12 0 56 37 28 30 23) 04_OrcWD Orc Male Wizard+6
+Creature 44852 0 colors(12 0 51 37 28 30 23) 04_OrcSh Orc Male Cleric+9
+Creature 45623 6 colors(12 0 59 37 28 30 23) 04_Oro_01 Orc Male Fighter+3
+Creature 47674 12 colors(12 0 49 37 28 30 23) 04_OrcWa_01 Orc Male Fighter+2
+Creature 48957 10 colors(12 0 49 37 28 30 23) 04_OrcWa_02 Orc Male Fighter+2
+Creature 51525 12 colors(12 0 49 37 28 30 23) 04_OrcWa_03 Orc Male Fighter+2
+Creature 47665 14 colors(12 0 49 37 28 30 23) 04_OrcWa_04 Orc Male Fighter+2
+Creature 48180 6 colors(12 0 49 37 28 30 23) 04_OrcWaE_05 Orc Male Fighter+4
+Creature 52807 12 colors(12 0 49 37 28 30 23) 04_OrcWaE_06 Orc Male Fighter+4
+Creature 50227 12 colors(12 0 59 37 28 30 23) 04_Oro_03 Orc Male Fighter+3
+Creature 50232 4 colors(12 0 59 37 28 30 23) 04_Oro_04 Orc Male Fighter+3
+Creature 57421 10 colors(12 0 39 37 28 30 23) 05_Bug_01 Male Fighter+6
+Creature 54861 14 colors(12 0 39 37 28 30 23) 05_Bug_02 Male Fighter+6
+Creature 56146 2 colors(12 0 39 37 28 30 23) 05_Bug_03 Male Fighter+6
+Creature 56158 8 colors(12 0 54 37 28 30 23) 05_GobHoE_04 Goblin Male Fighter+2
+Creature 55640 10 colors(20 7 29 91 21 0 29) 05_GobHo_05 Goblin Male Fighter+2
+Creature 55905 8 colors(20 7 29 91 21 0 29) 05_GobHo_06 Goblin Male Fighter+2
+Creature 56662 0 colors(20 7 29 91 21 0 29) 05_GobHo_07 Goblin Male Fighter+2
+Creature 57686 8 colors(12 0 54 37 28 30 23) 05_GobHoE_08 Goblin Male Fighter+2
+Creature 57180 2 colors(12 0 54 37 28 30 23) 05_GobHoE_09 Goblin Male Fighter+2
+Creature 57689 10 colors(20 7 29 91 21 0 29) 05_GobHo_10 Goblin Male Fighter+2
+Creature 35433 14 colors(9 0 58 46 28 30 23) 07_OgrCh Male Fighter+5
+Creature 36209 4 colors(10 0 41 47 30 30 23) 07_Ogr_02 Male Fighter+4
+Creature 35172 2 colors(10 0 41 47 30 30 23) 07_SOgr_01 Male Fighter+4
+Creature 33899 12 colors(10 0 41 47 30 30 23) 07_SOgr_02 Male Fighter+4
+Creature 18099 2 colors(12 0 57 37 28 30 23) Cow_01 Fighter+1
+Creature 19409 10 colors(12 0 57 37 28 30 23) Cow_02 Fighter+1
+Creature 17608 6 colors(12 0 57 37 28 30 23) Cow_03 Fighter+1
+Creature 17346 10 colors(12 0 57 37 28 30 23) Cow_04 Fighter+1
+Creature 19134 14 colors(12 0 57 37 28 30 23) Cow_05 Fighter+1
+Creature 22470 12 colors(12 0 57 37 28 30 23) Chicken_01 Fighter+1
+Creature 18116 0 colors(12 0 57 37 28 30 23) Chicken_02 Fighter+1
+Creature 18631 4 colors(12 0 57 37 28 30 23) Chicken_03 Fighter+1
+Creature 19396 0 colors(12 0 57 37 28 30 23) Chicken_04 Fighter+1
+Creature 18890 0 colors(12 0 57 37 28 30 23) Dog_01 Fighter+1
+Creature 18874 0 colors(12 0 57 37 28 30 23) Dog_02 Fighter+1
+Creature 18851 2 colors(12 0 57 37 28 30 23) Dead_Cow_01 Fighter+1
+Creature 20634 14 colors(12 0 57 37 28 30 23) Dead_Cow_02 Fighter+1
+Creature 22157 10 colors(12 0 57 37 28 30 23) Dead_Cow_03 Fighter+1
+Creature 21139 0 colors(12 0 57 37 28 30 23) Dead_Dog_01 Fighter+1
+Creature 22167 2 colors(12 0 57 37 28 30 23) Dead_Dog_02 Fighter+1
+Creature 24462 10 colors(12 0 57 37 28 30 23) 08_HobGum Male Fighter+5
+Creature 37225 2 colors(12 0 56 37 28 30 23) 08_OrcWD_01 Orc Male Wizard+6
+Creature 37739 2 colors(12 0 56 37 28 30 23) 08_OrcWD_02 Orc Male Wizard+6
+Creature 22155 12 colors(12 0 49 37 28 30 23) 08_OrcWaE_01 Orc Male Fighter+4
+Creature 21390 0 colors(12 0 49 37 28 30 23) 08_OrcWaE_02 Orc Male Fighter+4
+Creature 22422 10 colors(12 0 49 37 28 30 23) 08_OrcWaE_04 Orc Male Fighter+4
+Creature 18598 4 colors(12 0 49 37 28 30 23) 08_OrcWaE_05 Orc Male Fighter+4
+Creature 19108 6 colors(12 0 49 37 28 30 23) 08_OrcWaE_06 Orc Male Fighter+4
+Creature 20122 2 colors(12 0 49 37 28 30 23) 08_OrcWa_07 Orc Male Fighter+2
+Creature 21400 10 colors(12 0 49 37 28 30 23) 08_OrcWa_08 Orc Male Fighter+2
+Creature 19360 10 colors(12 0 49 37 28 30 23) 08_OrcWa_09 Orc Male Fighter+2
+Creature 20892 6 colors(12 0 49 37 28 30 23) 08_OrcWa_10 Orc Male Fighter+2
+Creature 21549 14 colors(12 0 47 37 28 30 23) 09_GobKru Goblin Male Fighter+6
+Creature 55638 12 colors(12 0 36 37 28 30 23) 05_GobSor_01 Goblin Male Wizard+3
+Creature 57184 4 colors(12 0 36 37 28 30 23) 05_GobSh_01 Goblin Male Cleric+11
+Creature 36195 0 colors(12 0 36 37 28 30 23) 09_GobSh_02 Goblin Male Cleric+11
+Creature 21066 4 colors(12 0 57 37 28 30 23) Dead_Dog Fighter+1
+Creature 41862 0 colors(12 0 57 37 28 30 23) DRUM_5 Fighter+1
+Creature 27062 0 colors(12 0 57 37 28 30 23) DRUM_6 Fighter+1
+Creature 49330 14 colors(12 0 56 37 28 30 23) 01_OrcWD_01 Orc Male Wizard+6
+Creature 57514 10 colors(10 0 41 47 30 30 23) 01_SOgr_02 Male Fighter+4
+Creature 42715 6 colors(12 0 49 37 28 30 23) 02_SOrcWa_01 Orc Male Fighter+2
+Creature 40409 0 colors(12 0 49 37 28 30 23) 02_SOrcWa_02 Orc Male Fighter+2
+Creature 42205 12 colors(12 0 48 37 28 30 23) 02_OrcRu Orc Male Fighter+2
+Creature 43871 0 colors(12 0 52 37 28 30 23) Dead_Drowned_Dead_1 Fighter+17
+Creature 40537 0 colors(12 0 52 37 28 30 23) Dead_Drowned_Dead_2 Fighter+17
+Creature 39516 2 colors(14 0 57 37 28 30 23) Fire_Beetle_1 Fighter+1
+Creature 41824 0 colors(14 0 70 37 28 30 23) Fire_Beetle_Queen Fighter+7
+Creature 40547 4 colors(14 0 57 37 28 30 23) Fire_Beetle_2 Fighter+1
+Creature 43111 0 colors(14 0 57 37 28 30 23) Fire_Beetle_3 Fighter+1
+Creature 44650 2 colors(14 0 57 37 28 30 23) Fire_Beetle_4 Fighter+1
+Creature 39001 0 colors(14 0 57 37 28 30 23) Fire_Beetle_5 Fighter+1
+Creature 46451 12 colors(14 0 57 37 28 30 23) Fire_Beetle_6 Fighter+1
+Creature 45431 2 colors(14 0 57 37 28 30 23) Fire_Beetle_7 Fighter+1
+Creature 46968 6 colors(14 0 57 37 28 30 23) Fire_Beetle_8 Fighter+1
+Creature 44647 0 colors(14 0 57 37 28 30 23) Dead_Skeleton_1 Fighter+3
+Creature 46198 4 colors(14 0 57 37 28 30 23) Dead_Skeleton_2 Fighter+3
+Creature 45160 0 colors(14 0 57 37 28 30 23) Dead_Skeleton_3 Fighter+3
+Creature 39522 12 colors(14 0 57 37 28 30 23) Dead_Skeleton_4 Fighter+3
+Creature 44407 8 colors(12 0 52 37 28 30 23) Dead_Drowned_Dead Fighter+17
+Creature 47213 0 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 38491 12 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 40543 4 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 40551 12 colors(12 0 52 37 28 30 23) Dead_Drowned_Dead Fighter+17
+Creature 21812 4 GoblinWarrior
+Creature 22323 6 GoblinWarrior
+Creature 22825 10 GoblinWarrior
+Creature 21279 2 GoblinWarrior
+Creature 23327 4 GoblinWarrior
+Creature 20298 0 GoblinWarrior
+Creature 20556 2 GoblinWarrior
+Creature 20808 12 GoblinWarrior
+Creature 23874 2 GoblinWarrior
+Creature 23102 0 GoblinWarrior
+Creature 24637 10 GoblinWarrior
+Creature 30233 12 colors(12 0 67 37 28 30 23) 10_Hardened_Fire_Troll_2 Fighter+6
+Creature 30998 12 colors(12 0 67 37 28 30 23) 10_Hardened_Fire_Troll_1 Fighter+6
+Creature 16231 14 colors(12 0 67 37 28 30 23) 11_Hardened_Fire_Troll_3 Fighter+6
+Creature 16225 12 colors(12 0 67 37 28 30 23) 11_Hardened_Fire_Troll_4 Fighter+6
+Creature 17516 14 colors(12 0 70 37 28 30 23) 11_Ilquag Goblin Male Fighter+5
+Creature 31263 12 colors(12 0 70 37 28 30 23) 10_Tequag Goblin Male Fighter+5
+Creature 14164 12 GoblinWarrior
+Creature 15956 12 GoblinWarrior
+Creature 22088 0 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 22602 0 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 19008 0 colors(14 0 57 37 28 30 23) Skeleton Fighter+3
+Creature 21816 0 colors(14 0 57 37 28 30 23) Skeleton Fighter+3
+Creature 30736 6 colors(12 0 51 37 28 30 23) 10_Barghest_Welp_1 Male Fighter+5
+Creature 29970 8 colors(12 0 51 37 28 30 23) 10_Barghest_Welp_2 Male Fighter+5
+Creature 14941 4 colors(12 0 51 37 28 30 23) 11_Young_Barghest_Welp Male Fighter+5
+Creature 15709 4 colors(12 0 51 37 28 30 23) 11_Young_Barghest_Welp Male Fighter+5
+Creature 40597 0 colors(12 0 86 37 28 30 23) 06_Troll_1 Male Fighter+6
+Creature 41356 14 colors(12 0 86 37 28 30 23) 06_Troll_2 Male Fighter+6
+Creature 19763 0 GoblinWarrior
+Creature 23611 12 GoblinWarrior
+Creature 9556 2 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 14153 10 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 13138 0 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 7500 10 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 8533 8 colors(14 0 57 37 28 30 23) Dead_Skeleton Fighter+3
+Creature 19630 10 colors(12 0 48 37 28 30 23) 08_OrcRu Orc Male Fighter+2

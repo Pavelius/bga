@@ -65,10 +65,10 @@ bool io::file::create(const char* url, unsigned flags) {
 	if(handle == (void*)-1)
 		handle = 0;
 	else {
-		if((flags&(StreamText | StreamWrite)) == (StreamText | StreamWrite)) {
-			static unsigned char header_utf8[] = {0xEF, 0xBB, 0xBF};
-			write(header_utf8, sizeof(header_utf8));
-		}
+		//if((flags&(StreamText | StreamWrite)) == (StreamText | StreamWrite)) {
+		//	static unsigned char header_utf8[] = {0xEF, 0xBB, 0xBF};
+		//	write(header_utf8, sizeof(header_utf8));
+		//}
 	}
 	return (*this);
 }

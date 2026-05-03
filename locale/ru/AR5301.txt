@@ -1,12 +1,12 @@
-п»ї#AR5301Info1036_554
-This web-shrouded bronze statue seems oddly out of place.  The craftsmanship is fine, but it does not appear to be finished.
+#AR5301Info1036_554
+Эта покрытая паутиной статуя выглядит здесь не на своём месте. Мастерство исполнения - прекрасное, но она не выглядит законченной.
 
 #AR5301Info2982_2515
-This strange substance has the appearance of liquid webbing and molten metal.  Despite this, the pool is perfectly still and does not give off any heat.
+Это странное вещество похоже на расплавленный металл, однако, несмотря на это, поверхность водоёма абсолютно неподвижна, и от неё не исходит тепло.
 
 #AR5301Info3418_2454
-This strange substance has the appearance of liquid webbing and molten metal.  Despite this, the pool is perfectly still and does not give off any heat.
+Это странное вещество похоже на расплавленный металл, однако, несмотря на это, поверхность водоёма абсолютно неподвижна, и от неё не исходит тепло.
 
 #AR5301Info1639_1731
-This appears to be a small but well-stocked alchemical laboratory.
+Это небольшая, но хорошо оборудованная алхимическая лаборатория.
 

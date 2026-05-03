@@ -110,6 +110,7 @@ void creature::clear() {
 	memset(this, 0, sizeof(*this));
 	area_index = 0xFFFF;
 	order_move = 0xFFFF;
+	talk = 0xFFFF;
 	for(auto& e : resid)
 		e = 0xFFFF;
 }
@@ -586,26 +587,23 @@ void creature::nextaction() {
 	switch(action) {
 	case AnimateStand:
 		if(chance(10))
-			set(chance(50) ? AnimateStandLook : AnimateStandRelax);
+			set(chance(60) ? AnimateStandLook : AnimateStandRelax);
 		break;
 	case AnimateCastFour:
 		set(AnimateCastFourRelease);
 		break;
 	case AnimateCastThird:
-		set(AnimateCastRelease);
+		set(AnimateCastThirdRelease);
 		break;
 	case AnimateCast:
-		set(AnimateCastThirdRelease);
+		set(AnimateCastRelease);
 		break;
 	case AnimateGetHitAndDrop:
 		delay += xrand(300, 1200);
 		set(AnimateAgony);
 		break;
 	case AnimateAgony:
-		if(chance(20))
-			setreverse(AnimateGetUp);
-		else
-			delay += xrand(1000, 10000);
+		delay += xrand(1000, 10000);
 		break;
 	case AnimateMeleeOneHanded: case AnimateMeleeOneHandedSwing: case AnimateMeleeOneHandedThrust:
 	case AnimateMeleeTwoHanded: case AnimateMeleeTwoHandedSwing: case AnimateMeleeTwoHandedThrust:

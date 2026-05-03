@@ -1,0 +1,75 @@
+Creature 9888 2 colors(12 0 77 37 28 30 23) Cutscene_Commander Orc Female Fighter+10
+Creature 11423 8 colors(0 0 32 0 0 0 0) Cutscene_Orc_Warrior Orc Female Fighter+4
+Creature 9871 0 colors(12 0 57 37 28 30 23) Support_Beam_North Fighter+10
+Creature 16024 0 colors(12 0 57 37 28 30 23) Support_Beam_South Fighter+10
+Creature 10379 0 colors(12 0 57 37 28 30 23) Ogre_North Female Fighter+4
+Creature 16020 8 colors(12 0 57 37 28 30 23) Ogre_South Female Fighter+4
+Creature 26203 4 colors(12 0 84 37 28 30 23) Bugbear_Captain_1 Male Fighter+6
+Creature 29797 4 colors(12 0 73 37 28 30 23) GTH01_04 Orc Male Cleric+4
+Creature 32093 4 colors(0 0 7 0 0 0 0) GTH01_05 Orc Male Fighter+3
+Creature 27494 4 colors(0 0 7 0 0 0 0) GTH01_06 Orc Male Fighter+3
+Creature 32081 6 colors(12 0 112 37 28 30 23) GTH01_07 Orc Female Fighter+6
+Creature 30804 6 colors(12 0 112 37 28 30 23) GTH01_08 Orc Female Fighter+6
+Creature 33880 6 colors(12 0 57 37 28 30 23) GTH01_09 Orc Female Fighter+6
+Creature 26215 4 colors(12 0 57 37 28 30 23) GTH01_10 Orc Female Fighter+6
+Creature 19775 2 colors(12 0 84 37 28 30 23) Bugbear_Captain_2 Male Fighter+6
+Creature 22316 4 colors(12 0 45 37 28 30 23) GTH02_01 Male Fighter+3
+Creature 23356 4 colors(12 0 45 37 28 30 23) GTH02_02 Male Fighter+3
+Creature 24622 4 colors(12 0 44 37 28 30 23) GTH02_03 Male Fighter+3
+Creature 20020 4 colors(12 0 44 37 28 30 23) GTH02_04 Male Fighter+3
+Creature 23619 2 colors(12 0 69 37 28 30 23) GTH02_05 Orc Female Fighter+1
+Creature 16963 2 colors(12 0 69 37 28 30 23) GTH02_06 Orc Female Fighter+1
+Creature 16692 2 colors(12 0 69 37 28 30 23) GTH02_07 Orc Female Fighter+1
+Creature 21563 2 colors(0 0 15 0 0 0 0) GTH02_08 Orc Female Fighter+4
+Creature 18247 2 colors(0 0 15 0 0 0 0) GTH02_09 Orc Female Fighter+4
+Creature 16692 2 colors(0 0 15 0 0 0 0) GTH02_10 Orc Female Fighter+4
+Creature 21059 2 colors(12 0 73 37 28 30 23) GTH02_11 Orc Male Cleric+4
+Creature 21299 4 colors(12 0 112 37 28 30 23) GTH02_12 Orc Female Fighter+6
+Creature 22581 4 colors(12 0 112 37 28 30 23) GTH02_13 Orc Female Fighter+6
+Creature 21559 2 colors(12 2 18 45 30 27 22) GTH02_14 HalfElf Male Wizard+6
+Creature 10324 2 colors(12 0 84 37 28 30 23) Bugbear_Captain_3 Male Fighter+6
+Creature 11595 2 colors(0 0 7 0 0 0 0) GTH03_01 Orc Male Fighter+3
+Creature 11588 2 colors(0 0 7 0 0 0 0) GTH03_02 Orc Male Fighter+3
+Creature 9287 2 colors(0 0 7 0 0 0 0) GTH03_03 Orc Male Fighter+3
+Creature 10302 2 colors(12 0 114 37 28 30 23) GTH03_04 Female Fighter+7
+Creature 9780 14 colors(12 0 114 37 28 30 23) GTH03_05 Female Fighter+7
+Creature 13378 2 colors(12 0 114 37 28 30 23) GTH03_06 Female Fighter+7
+Creature 18963 0 colors(12 0 84 37 28 30 23) Bugbear_Captain_4 Male Fighter+6
+Creature 22549 4 colors(12 0 69 37 28 30 23) GTH04_02 Orc Female Fighter+1
+Creature 24342 4 colors(12 0 69 37 28 30 23) GTH04_03 Orc Female Fighter+1
+Creature 22549 4 colors(12 0 57 37 28 30 23) GTH04_04 Orc Female Fighter+6
+Creature 24342 4 colors(12 0 57 37 28 30 23) GTH04_05 Orc Female Fighter+6
+Creature 23069 4 colors(12 2 18 45 30 27 22) GTH04_06 HalfElf Male Wizard+6
+Creature 21274 2 colors(12 0 112 37 28 30 23) GTH04_07 Orc Female Fighter+6
+Creature 24604 4 colors(12 0 112 37 28 30 23) GTH04_08 Orc Female Fighter+6
+Creature 16486 4 colors(12 0 84 37 28 30 23) Bugbear_Captain_5 Male Fighter+6
+Creature 15733 2 colors(12 0 104 37 28 30 23) GTH05_01 Human Male Cleric+4
+Creature 14699 4 colors(12 0 80 37 28 30 23) GTH05_02 Female Fighter+3
+Creature 16758 0 colors(12 0 64 37 28 30 23) GTH05_03 Fighter+6
+Creature 12917 2 colors(12 0 69 37 28 30 23) GTH05_04 Orc Female Fighter+1
+Creature 14718 2 colors(12 0 69 37 28 30 23) GTH05_05 Orc Female Fighter+1
+Creature 17281 2 colors(12 0 69 37 28 30 23) GTH05_06 Orc Female Fighter+1
+Creature 15733 2 colors(12 0 88 37 28 30 23) GTH05_07 Human Male Cleric+7
+Creature 14699 4 colors(12 0 24 37 28 30 23) GTH05_08 Female Fighter+4
+Creature 12917 2 colors(0 0 15 0 0 0 0) GTH05_09 Orc Female Fighter+4
+Creature 14718 2 colors(0 0 15 0 0 0 0) GTH05_10 Orc Female Fighter+4
+Creature 17281 2 colors(0 0 15 0 0 0 0) GTH05_11 Orc Female Fighter+4
+Creature 15199 2 colors(12 0 112 37 28 30 23) GTH05_12 Orc Female Fighter+6
+Creature 19300 2 colors(12 0 112 37 28 30 23) GTH05_13 Orc Female Fighter+6
+Creature 28503 4 colors(0 0 86 0 0 0 0) GTH01_01 Orc Female Fighter+3
+Creature 30298 6 colors(0 0 86 0 0 0 0) GTH01_02 Orc Female Fighter+3
+Creature 27998 4 colors(0 0 86 0 0 0 0) GTH01_03 Orc Female Fighter+3
+Creature 23819 4 colors(0 0 105 0 0 0 0) GTH04_01 Female Fighter+5
+Creature 12165 0 colors(31 2 66 45 30 27 22) Xuki HalfElf Female Wizard+6
+Creature 11914 0 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 12432 4 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 13968 4 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 14725 2 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 15497 6 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 17029 6 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 14961 4 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 18549 8 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 13929 0 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 14691 4 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 18285 6 colors(0 0 55 0 0 0 0) Animated Villager Male +1
+Creature 18535 2 colors(0 0 55 0 0 0 0) Animated Villager Male +1

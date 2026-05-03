@@ -1,18 +1,18 @@
-п»ї#AR4000Info476_569
-This large wolves' den appears to have been used recently.
+#AR4000Info476_569
+Волки, кажется, ещё совсем недавно были в этом просторном волчьем логове.
 
 #AR4000Info426_1837
-This boring beetle nest was unearthed when Oswald's airship shattered the tree above it upon impact.  It appears to be on the verge of collapse.
+Это гнездо жуков-точильщиков было вывернуто из земли при крушении летучего корабля Освальда: задетое килем дерево раскололось и упало, выворачивая корни из земли. Кажется, что оно вот-вот упадёт.
 
 #AR4000Info2399_715
-Chiseled into this stone archway is the barely visible word, "ANDORA."
+На каменной арке выбито полустёртое слово "АНДОРА".
 
 #AR4000Info2543_448
-You glance inside but see nothing of interest.
+Ты заглядываешь внутрь, но не видишь ничего интересного.
 
 #AR4000Info2736_594
-You glance inside but see nothing of interest.
+Ты заглядываешь внутрь, но не видишь ничего интересного.
 
 #AR4000Info3083_518
-You glance inside but see nothing of interest.
+Ты заглядываешь внутрь, но не видишь ничего интересного.
 

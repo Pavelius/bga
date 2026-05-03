@@ -150,6 +150,7 @@
     <ClCompile Include="surface_serial.cpp" />
     <ClCompile Include="szdup.cpp" />
     <ClCompile Include="tag.cpp" />
+    <ClCompile Include="talk.cpp" />
     <ClCompile Include="thread.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="variant.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="spell.h" />
     <ClInclude Include="store.h" />
     <ClInclude Include="stringvar.h" />
+    <ClInclude Include="talk.h" />
     <ClInclude Include="thread.h" />
     <ClInclude Include="portrait.h" />
     <ClInclude Include="region.h" />

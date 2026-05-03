@@ -1,0 +1,135 @@
+Creature 37171 2 colors(12 0 20 37 28 30 23) Torak1 Orc Male Fighter+5
+Creature 37419 2 colors(12 0 103 37 28 30 23) T1_Orc_1 Orc Male Fighter+1
+Creature 38703 2 colors(12 0 103 37 28 30 23) T1_Orc_2 Orc Male Fighter+1
+Creature 40499 2 colors(12 0 103 37 28 30 23) T1_Orc_3 Orc Male Fighter+1
+Creature 40760 4 colors(12 0 103 37 28 30 23) T1_Orc_4 Orc Male Fighter+1
+Creature 36902 0 colors(12 0 103 37 28 30 23) T1_Orc_5 Orc Male Fighter+1
+Creature 38454 2 colors(12 0 103 37 28 30 23) T1_Orc_6 Orc Male Fighter+1
+Creature 34856 0 colors(12 0 103 37 28 30 23) T1_Orc_7 Orc Male Fighter+1
+Creature 36143 2 colors(12 0 103 37 28 30 23) T1_Orc_8 Orc Male Fighter+1
+Creature 37128 14 colors(12 0 69 37 28 30 23) T1_Archer_1 Orc Female Fighter+1
+Creature 37133 14 colors(12 0 69 37 28 30 23) T1_Archer_2 Orc Female Fighter+1
+Creature 36882 14 colors(12 0 69 37 28 30 23) T1_Archer_3 Orc Female Fighter+1
+Creature 37419 2 colors(0 0 86 0 0 0 0) T1_Orc_9 Orc Female Fighter+3
+Creature 38703 2 colors(0 0 86 0 0 0 0) T1_Orc_10 Orc Female Fighter+3
+Creature 40499 2 colors(0 0 86 0 0 0 0) T1_Orc_11 Orc Female Fighter+3
+Creature 37128 14 colors(0 0 7 0 0 0 0) T1_Archer_4 Orc Male Fighter+3
+Creature 37133 14 colors(0 0 7 0 0 0 0) T1_Archer_5 Orc Male Fighter+3
+Creature 36882 14 colors(0 0 7 0 0 0 0) T1_Archer_6 Orc Male Fighter+3
+Creature 37419 2 colors(0 0 32 0 0 0 0) T1_Orc_12 Orc Female Fighter+4
+Creature 38703 2 colors(0 0 32 0 0 0 0) T1_Orc_13 Orc Female Fighter+4
+Creature 40499 2 colors(0 0 32 0 0 0 0) T1_Orc_14 Orc Female Fighter+4
+Creature 37128 14 colors(0 0 15 0 0 0 0) T1_Archer_7 Orc Female Fighter+4
+Creature 37133 14 colors(0 0 15 0 0 0 0) T1_Archer_8 Orc Female Fighter+4
+Creature 36882 14 colors(0 0 15 0 0 0 0) T1_Archer_9 Orc Female Fighter+4
+Creature 36902 0 colors(0 0 86 0 0 0 0) T1_Orc_15 Orc Female Fighter+3
+Creature 34856 0 colors(0 0 86 0 0 0 0) T1_Orc_16 Orc Female Fighter+3
+Creature 36143 2 colors(0 0 86 0 0 0 0) T1_Orc_17 Orc Female Fighter+3
+Creature 38454 2 colors(0 0 86 0 0 0 0) T1_Orc_18 Orc Female Fighter+3
+Creature 40760 4 colors(0 0 86 0 0 0 0) T1_Orc_19 Orc Female Fighter+3
+Creature 24239 0 colors(12 0 20 37 28 30 23) Torak2 Orc Male Fighter+5
+Creature 27048 0 colors(12 0 103 37 28 30 23) T2_Orc_1 Orc Male Fighter+1
+Creature 27062 0 colors(12 0 103 37 28 30 23) T2_Orc_2 Orc Male Fighter+1
+Creature 22432 10 colors(12 0 103 37 28 30 23) T2_Orc_3 Orc Male Fighter+1
+Creature 20398 2 colors(12 0 103 37 28 30 23) T2_Orc_4 Orc Male Fighter+1
+Creature 20125 14 colors(12 0 103 37 28 30 23) T2_Orc_5 Orc Male Fighter+1
+Creature 19109 0 colors(12 0 103 37 28 30 23) T2_Orc_6 Orc Male Fighter+1
+Creature 21900 12 colors(12 0 103 37 28 30 23) T2_Orc_7 Orc Male Fighter+1
+Creature 16812 0 colors(12 0 69 37 28 30 23) T2_Archer_1 Orc Female Fighter+1
+Creature 14505 0 colors(12 0 69 37 28 30 23) T2_Archer_2 Orc Female Fighter+1
+Creature 16534 14 colors(12 0 69 37 28 30 23) T2_Archer_3 Orc Female Fighter+1
+Creature 27048 0 colors(0 0 86 0 0 0 0) T2_Orc_8 Orc Male Fighter+3
+Creature 27062 0 colors(0 0 86 0 0 0 0) T2_Orc_9 Orc Male Fighter+3
+Creature 19109 0 colors(0 0 86 0 0 0 0) T2_Orc_10 Orc Male Fighter+3
+Creature 21900 12 colors(0 0 86 0 0 0 0) T2_Orc_11 Orc Male Fighter+3
+Creature 16534 14 colors(0 0 7 0 0 0 0) T2_Archer_4 Orc Male Fighter+3
+Creature 16812 0 colors(0 0 7 0 0 0 0) T2_Archer_5 Orc Male Fighter+3
+Creature 27048 0 colors(0 0 32 0 0 0 0) T2_Orc_12 Orc Male Fighter+4
+Creature 27062 0 colors(0 0 32 0 0 0 0) T2_Orc_13 Orc Male Fighter+4
+Creature 22432 10 colors(0 0 32 0 0 0 0) T2_Orc_14 Orc Male Fighter+4
+Creature 20398 2 colors(0 0 32 0 0 0 0) T2_Orc_15 Orc Male Fighter+4
+Creature 14505 0 colors(0 0 15 0 0 0 0) T2_Archer_6 Orc Female Fighter+4
+Creature 10118 0 colors(0 0 86 0 0 0 0) T3_Orc_1 Orc Female Fighter+3
+Creature 8835 0 colors(12 0 103 37 28 30 23) T3_Orc_2 Orc Male Fighter+1
+Creature 8841 0 colors(12 0 103 37 28 30 23) T3_Orc_3 Orc Male Fighter+1
+Creature 9619 0 colors(12 0 69 37 28 30 23) T3_Archer_1 Orc Female Fighter+1
+Creature 8602 0 colors(12 0 69 37 28 30 23) T3_Archer_2 Orc Female Fighter+1
+Creature 7585 0 colors(0 0 7 0 0 0 0) T3_Archer_3 Orc Male Fighter+3
+Creature 8835 0 colors(0 0 86 0 0 0 0) T3_Orc_4 Orc Female Fighter+3
+Creature 8841 0 colors(0 0 86 0 0 0 0) T3_Orc_5 Orc Female Fighter+3
+Creature 9619 0 colors(0 0 7 0 0 0 0) T3_Archer_4 Orc Male Fighter+3
+Creature 8602 0 colors(0 0 7 0 0 0 0) T3_Archer_5 Orc Male Fighter+3
+Creature 10118 0 colors(0 0 32 0 0 0 0) T3_Orc_6 Orc Female Fighter+4
+Creature 8835 0 colors(0 0 32 0 0 0 0) T3_Orc_7 Orc Female Fighter+4
+Creature 8841 0 colors(0 0 32 0 0 0 0) T3_Orc_8 Orc Female Fighter+4
+Creature 9619 0 colors(0 0 15 0 0 0 0) T3_Archer_6 Orc Female Fighter+4
+Creature 8602 0 colors(0 0 15 0 0 0 0) T3_Archer_7 Orc Female Fighter+4
+Creature 7585 0 colors(0 0 15 0 0 0 0) T3_Archer_8 Orc Female Fighter+4
+Creature 24129 6 colors(0 0 7 0 0 0 0) T4_Firestarter_1 Orc Male Fighter+4
+Creature 20809 4 colors(12 0 103 37 28 30 23) T4_Orc_1 Orc Male Fighter+1
+Creature 15169 2 colors(12 0 103 37 28 30 23) T4_Orc_2 Orc Male Fighter+1
+Creature 21077 4 colors(12 0 103 37 28 30 23) T4_Orc_3 Orc Male Fighter+1
+Creature 18513 2 colors(12 0 103 37 28 30 23) T4_Orc_4 Orc Male Fighter+1
+Creature 18781 0 colors(12 0 103 37 28 30 23) T4_Orc_5 Orc Male Fighter+1
+Creature 15664 0 colors(12 0 103 37 28 30 23) T4_Orc_6 Orc Male Fighter+1
+Creature 25371 4 colors(12 0 103 37 28 30 23) T4_Orc_7 Orc Male Fighter+1
+Creature 23147 4 colors(12 0 103 37 28 30 23) T4_Orc_8 Orc Male Fighter+1
+Creature 19050 2 colors(12 0 69 37 28 30 23) T4_Archer_1 Orc Female Fighter+1
+Creature 16203 0 colors(12 0 69 37 28 30 23) T4_Archer_2 Orc Female Fighter+1
+Creature 18041 2 colors(12 0 69 37 28 30 23) T4_Archer_3 Orc Female Fighter+1
+Creature 20810 4 colors(0 0 86 0 0 0 0) T4_Orc_9 Orc Female Fighter+3
+Creature 15169 2 colors(0 0 86 0 0 0 0) T4_Orc_10 Orc Female Fighter+3
+Creature 25371 4 colors(0 0 86 0 0 0 0) T4_Orc_11 Orc Female Fighter+3
+Creature 15664 0 colors(0 0 86 0 0 0 0) T4_Orc_12 Orc Female Fighter+3
+Creature 19050 2 colors(0 0 7 0 0 0 0) T4_Archer_4 Orc Male Fighter+3
+Creature 20810 4 colors(0 0 32 0 0 0 0) T4_Orc_13 Orc Female Fighter+4
+Creature 18513 2 colors(0 0 32 0 0 0 0) T4_Orc_14 Orc Female Fighter+4
+Creature 18781 0 colors(0 0 32 0 0 0 0) T4_Orc_15 Orc Female Fighter+4
+Creature 16203 0 colors(0 0 7 0 0 0 0) T4_Archer_5 Orc Male Fighter+3
+Creature 18041 2 colors(0 0 7 0 0 0 0) T4_Archer_6 Orc Male Fighter+3
+Creature 23593 12 colors(12 0 103 37 28 30 23) T4_Orc_16 Orc Male Fighter+1
+Creature 17973 2 colors(12 0 103 37 28 30 23) T4_Orc_17 Orc Male Fighter+1
+Creature 21020 14 colors(12 0 103 37 28 30 23) T4_Orc_18 Orc Male Fighter+1
+Creature 13109 2 colors(12 0 103 37 28 30 23) T4_Orc_19 Orc Male Fighter+1
+Creature 11561 2 colors(12 0 103 37 28 30 23) T4_Orc_20 Orc Male Fighter+1
+Creature 25367 12 colors(12 0 103 37 28 30 23) T4_Orc_21 Orc Male Fighter+1
+Creature 10302 4 colors(12 0 67 37 28 30 23) T5_Highland_Cat_1 Fighter+4
+Creature 9826 4 colors(12 0 67 37 28 30 23) T5_Highland_Cat_2 Fighter+4
+Creature 5739 0 colors(12 0 67 37 28 30 23) T5_Highland_Cat_3 Fighter+4
+Creature 21295 4 colors(12 19 61 39 28 30 23) Peasant_1 Human Male Fighter+1
+Creature 19768 0 colors(12 12 67 52 28 30 23) Peasant_2 Human Male Fighter+1
+Creature 23093 2 colors(12 12 70 52 28 30 23) Peasant_3 Human Male Fighter+1
+Creature 21299 8 colors(12 0 57 37 28 30 23) Peasant_4 Human Male Fighter+1
+Creature 20282 12 colors(12 10 69 37 28 30 23) Peasant_5 Human Male Fighter+1
+Creature 20528 8 colors(12 19 61 39 28 30 23) Peasant_6 Human Male Fighter+1
+Creature 22322 8 colors(12 19 61 39 28 30 23) Peasant_7 Human Male Fighter+1
+Creature 22074 2 colors(12 12 67 52 28 30 23) Peasant_8 Human Male Fighter+1
+Creature 20020 6 colors(12 12 70 52 28 30 23) Peasant_9 Human Male Fighter+1
+Creature 22839 14 colors(12 0 57 37 28 30 23) Peasant_10 Human Male Fighter+1
+Creature 21308 12 colors(12 10 69 37 28 30 23) Peasant_11 Human Male Fighter+1
+Creature 21048 14 colors(12 19 61 39 28 30 23) Peasant_12 Human Male Fighter+1
+Creature 36262 4 colors(12 0 57 0 22 28 22) Arte Human Female Fighter+1
+Creature 32033 0 colors(12 0 52 37 28 30 23) Vrek Male Fighter+6
+Creature 35870 0 colors(12 4 66 63 27 30 23) Emma Human Female Cleric+8
+Creature 27310 2 colors(12 0 67 37 28 30 23) Kaitlin Human Female Fighter+1
+Creature 20525 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 21036 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 21548 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 22317 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 22575 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 23088 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 23602 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 23863 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 23353 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 19249 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 19251 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 19253 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 19514 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 20028 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 20542 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 21055 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 21822 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 22333 0 colors(12 0 40 37 28 30 23) Keg Fighter+4
+Creature 21045 0 colors(12 0 40 37 28 30 23) DynoKeg Wizard+4
+Creature 21303 0 colors(12 0 40 37 28 30 23) DynoKeg Wizard+4
+Creature 27036 14 colors(0 0 15 0 0 0 0) T2_Archer_7 Orc Female Fighter+4

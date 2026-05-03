@@ -1,0 +1,70 @@
+Creature 22911 6 colors(114 1 55 25 0 0 0) Ritual_Initiate_01 Human Female Cleric+2
+Creature 23684 6 colors(114 1 55 25 0 0 0) Ritual_Initiate_02 Human Female Cleric+2
+Creature 24717 6 colors(114 1 55 25 0 0 0) Ritual_Initiate_03 Human Female Cleric+2
+Creature 25233 6 colors(114 1 55 25 0 0 0) Ritual_Initiate_04 Human Female Cleric+2
+Creature 24467 10 colors(20 27 66 69 32 30 23) Ritual_Pureblood_Fighter_01 Male Fighter+7
+Creature 23951 10 colors(20 27 66 69 32 30 23) Ritual_Pureblood_Fighter_02 Male Fighter+7
+Creature 22145 10 colors(20 27 66 69 32 30 23) Ritual_Pureblood_Sorcerer_01 Female Wizard+7
+Creature 22919 10 colors(20 27 66 69 32 30 23) Ritual_Pureblood_Sorcerer_02 Female Wizard+7
+Creature 21125 10 colors(12 0 52 37 28 30 23) Ritual_Yuan-Ti_05 Male Fighter+13
+Creature 21898 10 colors(12 0 52 37 28 30 23) Ritual_Yuan-Ti_06 Male Fighter+13
+Creature 22674 10 colors(12 0 52 37 28 30 23) Ritual_Yuan-Ti_07 Male Fighter+13
+Creature 23190 10 colors(12 0 52 37 28 30 23) Ritual_Yuan-Ti_08 Male Fighter+13
+Creature 19849 10 colors(12 0 53 37 28 30 23) Ritual_Yuan-Ti_Elite_01 Male Fighter+13
+Creature 20365 10 colors(12 0 53 37 28 30 23) Ritual_Yuan-Ti_Elite_02 Male Fighter+13
+Creature 21397 10 colors(12 0 53 37 28 30 23) Ritual_Yuan-Ti_Elite_03 Male Fighter+13
+Creature 22169 10 colors(12 0 53 37 28 30 23) Ritual_Yuan-Ti_Elite_04 Male Fighter+13
+Creature 14225 2 colors(12 0 53 37 28 30 23) Ritual_Yuan-Ti_Archer_01 Male Fighter+13
+Creature 17322 2 colors(12 0 53 37 28 30 23) Ritual_Yuan-Ti_Archer_02 Male Fighter+13
+Creature 16274 2 colors(12 0 49 37 28 30 23) Ritual_Yuan-Ti_Priest_02 Male Cleric+9
+Creature 18081 2 colors(12 0 49 37 28 30 23) Ritual_Yuan-Ti_Priest_03 Male Cleric+9
+Creature 16539 2 colors(12 0 48 37 28 30 23) Ojaiha Female Cleric+15
+Creature 53891 8 colors(12 0 52 37 28 30 23) Yuan-Ti1 Male Fighter+13
+Creature 52616 4 colors(12 0 52 37 28 30 23) Yuan-Ti2 Male Fighter+13
+Creature 51840 14 colors(12 0 52 37 28 30 23) Yuan-Ti3 Male Fighter+13
+Creature 21299 8 colors(12 0 52 37 28 30 23) Yuan-Ti4 Male Fighter+13
+Creature 19235 6 colors(12 0 52 37 28 30 23) Yuan-Ti5 Male Fighter+13
+Creature 17957 4 colors(12 0 52 37 28 30 23) Yuan-Ti6 Male Fighter+13
+Creature 7979 2 colors(12 0 52 37 28 30 23) Yuan-Ti7 Male Fighter+13
+Creature 53909 0 colors(20 27 66 69 32 30 23) Pureblood_Fighter1 Male Fighter+7
+Creature 54426 2 colors(20 27 66 69 32 30 23) Pureblood_Fighter2 Male Fighter+7
+Creature 55161 14 colors(114 1 55 25 0 0 0) Initiate1 Human Female Cleric+2
+Creature 56698 10 colors(114 1 55 25 0 0 0) Initiate2 Human Female Cleric+2
+Creature 19507 0 colors(12 0 49 37 28 30 23) Yuan-Ti_Priest1 Male Cleric+9
+Creature 16924 14 colors(12 0 49 37 28 30 23) Yuan-Ti_Priest2 Male Cleric+9
+Creature 6689 0 colors(12 0 49 37 28 30 23) Yuan-Ti_Priest3 Male Cleric+9
+Creature 39366 2 colors(12 0 53 37 28 30 23) Yuan_Ti_Archer_Guard_02 Male Fighter+13
+Creature 44897 10 colors(12 0 53 37 28 30 23) Yuan_Ti_Archer_Guard_03 Male Fighter+13
+Creature 32839 6 colors(12 0 53 37 28 30 23) Yuan_Ti_Archer_Guard_05 Male Fighter+13
+Creature 5178 14 colors(12 0 53 37 28 30 23) Yuan_Ti_Archer_Guard_07 Male Fighter+13
+Creature 10443 2 colors(12 0 53 37 28 30 23) Yuan_Ti_Archer_Guard_10 Male Fighter+13
+Creature 29644 14 colors(0 0 50 0 0 0 0) Histachii1 Human Fighter+7
+Creature 28622 14 colors(0 0 50 0 0 0 0) Histachii2 Human Fighter+7
+Creature 27856 14 colors(0 0 50 0 0 0 0) Histachii3 Human Fighter+7
+Creature 32998 6 colors(0 0 50 0 0 0 0) Histachii4 Human Fighter+7
+Creature 31975 6 colors(0 0 50 0 0 0 0) Histachii5 Human Fighter+7
+Creature 30696 6 colors(0 0 50 0 0 0 0) Histachii6 Human Fighter+7
+Creature 49944 10 colors(10 0 21 0 32 32 0) Viper_Fang1 Male Rogue+9
+Creature 46122 8 colors(10 0 21 0 32 32 0) Viper_Fang2 Male Rogue+9
+Creature 43567 6 colors(10 0 21 0 32 32 0) Viper_Fang3 Male Rogue+9
+Creature 45102 8 colors(10 0 21 0 32 32 0) Viper_Fang4 Male Rogue+9
+Creature 44328 10 colors(10 0 21 0 32 32 0) Viper_Fang5 Male Rogue+9
+Creature 46116 10 colors(10 0 21 0 32 32 0) Viper_Fang6 Male Rogue+9
+Creature 44811 14 colors(10 0 21 0 32 32 0) Viper_Fang7 Male Rogue+9
+Creature 39692 12 colors(10 0 21 0 32 32 0) Viper_Fang8 Male Rogue+9
+Creature 40730 2 colors(10 0 21 0 32 32 0) Viper_Fang9 Male Rogue+9
+Creature 43052 14 colors(15 27 65 27 29 30 29) Ashra Female Fighter+19
+Creature 46647 12 colors(0 0 58 0 0 0 0) Coiled_Cabal1 Female Wizard+9
+Creature 48690 10 colors(0 0 58 0 0 0 0) Coiled_Cabal2 Female Wizard+9
+Creature 48698 8 colors(0 0 58 0 0 0 0) Coiled_Cabal3 Female Wizard+9
+Creature 51504 10 colors(0 0 58 0 0 0 0) Coiled_Cabal4 Female Wizard+9
+Creature 50231 8 colors(0 0 58 0 0 0 0) Coiled_Cabal5 Female Wizard+9
+Creature 55113 14 colors(0 0 58 0 0 0 0) Coiled_Cabal6 Female Wizard+9
+Creature 54621 6 colors(0 0 58 0 0 0 0) Coiled_Cabal7 Female Wizard+9
+Creature 44862 0 colors(12 0 83 37 28 30 23) Inhatri Female Wizard+13
+Creature 49107 6 colors(0 0 55 0 0 0 0) Heartless_Dead1 Female Fighter+8
+Creature 49115 14 colors(0 0 55 0 0 0 0) Heartless_Dead6 Female Fighter+8
+Creature 49118 8 colors(0 0 55 0 0 0 0) Heartless_Dead7 Female Fighter+8
+Creature 48093 10 colors(0 0 55 0 0 0 0) Heartless_Dead8 Female Fighter+8
+Creature 55948 6 colors(12 0 52 37 28 30 23) Apati Male Fighter+12
+Creature 53136 0 colors(0 0 112 0 0 0 0) Jezrael Female Fighter+10

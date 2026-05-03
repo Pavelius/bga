@@ -1,63 +1,63 @@
-п»ї#AR6001Info376_702
-This dilapidated tower appears to have fallen apart with age and the growth of the tree behind it.
+#AR6001Info376_702
+Эта полуразвалившаяся башня пришла в такое плачевное состояние под грузом лет и стараниями растущего за ней дерева.
 
 #AR6001Info1086_1901
-These smithing materials look like they were haphazardly dragged here and left in a corner.
+Все эти приспособления и материалы кузнечного дела свалены абы как, словно их притащили, бросили куда придётся, да так и оставили.
 
 #AR6001Info1602_2468
-This mound of stones holds a glowing green gemstone.  Even at this distance, you can feel the warmth emanating from its shining facets.
+На этой груде камней высится мерцающий зеленоватый светом драгоценный камень. Даже на таком расстоянии можно почувствовать тепло, исходящее от его сияющих граней.
 
 #AR6001Info2471_1772
-These two statues appear to be of druids.  Though the bodies are similar, the faces are quite different.  The left statue has a plaque at the bottom that reads, "Tolben."  The right statue's plaque reads, "Arundel."
+Эти две статуи, по-видимому, изображают друидов. Хоть их тела и схожи, лица совершенно разные. У подножия левой статуи находится табличка с надписью "Толбен". На табличке у подножия правой статуи написано "Арундель".
 
 #AR6001Info1027_1120
-These huge roots have recently been hacked apart.
+Эти могучие корни совсем недавно изрубили на куски.
 
 #AR6001Info509_1186
-These huge roots have recently been hacked apart.
+Эти могучие корни совсем недавно изрубили на куски.
 
 #AR6001Info212_1967
-This home has been hastily boarded up... it looks as if the occupants had to leave quickly.
+Этот дом был наспех заколочен досками... похоже, его жильцам пришлось быстро покинуть его.
 
 #AR6001Info863_1733
-This home has been hastily boarded up... it looks as if the occupants had to leave quickly.
+Этот дом был наспех заколочен досками... похоже, его жильцам пришлось быстро покинуть его.
 
 #AR6001Info708_1124
-This structure looks like it might have been a store of some sort, but the entrance has been boarded up, and the word "CLOSED" has been carved on one of the planks.
+Это строение похоже на магазин, но вход заколочен досками, и на одной из них написано "ЗАКРЫТО".
 
 #AR6001Info1199_586
-Carved above the entrance to this structure is the silhouette of a great tree with a man resting beneath it.  The door is nailed shut, however, and the word "No Vacancy - Gerbash" has been carved into one of the planks. 
+Над входом в это здание вырезан силуэт большого дерева с отдыхающим под ним человека. Однако дверь заколочена, а на одной из досок вырезано: "Мест нет. Гербаш".
 
 #AR6001Info1577_479
-The sign of the hammer is above this door, but the building is closed, and it doesn't look like it's seen much life in the past few months.
+Над этой дверью изображён молот, но дверь заперта, и не похоже, чтобы здесь за последние несколько месяцев вообще кто-то бывал.
 
 #AR6001Info2962_160
-It looks like a small stairway once led up to the door of this building, but it looks to have been torn down and used to nail up the door. 
+Судя по всему, когда-то к двери этого здания вела лесенка, но потом её разломали на доски, чтобы заколотить ими дверь.
 
 #AR6001Info3420_519
-This structure looks like it might have been a store of some sort, but the entrance has been boarded up, and the word "CLOSED" has been carved on one of the planks.
+Это строение похоже на магазин, но вход заколочен досками, и на одной из них написано "ЗАКРЫТО".
 
 #AR6001Info3723_908
-Unlike the other buildings, this one appears to extend out over the eastern ridge of Kuldahar.  There is no sign of life within, and the door is sealed shut much like the other buildings. 
+Это здание, в отличие от других, расположилось на восточном гребне Кулдахара. Внутри нет никаких признаков жизни, а дверь заколочена, как и в других домах.
 
 #AR6001Info2783_1358
-A sign above the door of this structure depicts a great wind carrying seven silhouettes up into the air.  The structure is sealed, but the wood used in the building's construction does not look native to Kuldahar.
+На табличке над дверью этого строения изображены семь силуэтов, поднимаемых сильным ветром. Дом заколочен досками, а дерево, из которого он построен, похоже не из Кулдахара.
 
 #AR6001Info3008_1818
-A name engraved above the door reads, "Mirek, Keeper of the Vale."  The door is sealed, and there is no sign of life within.
+Над этой дверью выгравировано имя: "Мирек, хранитель Долины". Дверь заколочена, и внутри нет никаких признаков жизни.
 
 #AR6001Info1984_1617
-A potter's wheel decorates the sign above the entrance.  The door is nailed shut, and the word "CLOSED" has been chiseled into the wood.
+Вывеску над входом украшает гончарный круг. Дверь заколочено, а на досках вырезано "ЗАКРЫТО".
 
 #AR6001Info2032_898
-An old sign above this door shows a tangle of roots around a beer mug.  It may have once been an inn, but it looks to have been abandoned a short while ago.
+На старой вывеске над дверью изображена пивная кружка, опутанная корнями. Возможно, когда-то это был трактир, но недавно, похоже, он был заброшен.
 
 #AR6001Info2182_959
-This looks to be an old storehouse for the inn next door.  The entrance has been nailed shut, and there is no sign of anyone within.
+Похоже, это старый склад для трактира по соседству. Вход наглухо заколочен, и внутри нет никаких признаков жизни.
 
 #AR6001Info1845_877
-This looks like a modest dwelling attached to the inn next door.  There is no sign of any inhabitants, and the door is sealed shut.
+Это скромный жилой дом, пристроенный к трактиру. В нём никто не живёт, а дверь забита гвоздями.
 
 #AR6001Info3183_2644
-Based on the sudden drop, it looks as if an earthquake or stone shape spell was used to terminate this path. 
+Судя по неожиданному обрыву, для того, чтобы прервать этот путь, было использовано заклинание землетрясения или придания формы камню.
 

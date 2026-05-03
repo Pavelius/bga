@@ -1,15 +1,15 @@
-п»ї#AR6303Info1784_1653
-These stairs are a shattered ruin.  Only the first few steps remain, hanging in the open air.
+#AR6303Info1784_1653
+Эта лестница разрушена, от неё осталась лишь пара первых ступенек, висящих в воздухе.
 
 #AR6303Info2124_1779
-This is a small reflecting pool.  The waters are quiet, but a disturbing green in color.
+Это небольшой, тихий водоём. Его вода окрашена в отталкивающий зелёный цвет, но спокойна.
 
 #AR6303Info1680_216
-This is a large window sealed by a retractable metalic iris.  However, you cannot find the mechanism to open the iris...  Perhaps there isn't one.
+Это большое окно закрыто выдвижной металлической створкой, но найти механизм, открывающий створку, не удаётся. Возможно, его просто нет.
 
 #AR6303Info2180_1039
-This is a small reflecting pool.  The waters are quiet, but a disturbing green in color.
+Это небольшой, тихий водоём. Его вода окрашена в отталкивающий зелёный цвет, но спокойна.
 
 #AR6303Info2584_907
-A radiant pool, unsettlingly vibrant with magical power.
+Лучистый бассейн, вибрирующий от магической энергии.
 

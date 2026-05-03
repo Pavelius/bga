@@ -1,12 +1,12 @@
-п»ї#AR6401Info345_827
-The floor here has been crudely patched with wooden planks.  Looking through a crack between the boards, you can see the ruined portion of the tower below.
+#AR6401Info345_827
+Пол здесь был наскоро заделан деревянными досками. Глядя в щель между досками, можно увидеть разрушенную часть башни внизу.
 
 #AR6401Info330_446
-This is a small writing desk.
+Это небольшой письменный стол.
 
 #AR6401Info854_283
-A strange growth seems to be claiming this table and anything on it.
+Странная поросль опутала весь стол и всё, что на нём стояло.
 
 #AR6401Info955_458
-This table is filled with alchemical equipment.
+Этот стол заставлен алхимическим оборудованием.
 

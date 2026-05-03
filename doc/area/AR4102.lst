@@ -1,0 +1,111 @@
+Creature 30993 2 colors(113 2 0 0 0 0 0) 02_Assassin_01 HalfOrc Male Rogue+12
+Creature 31251 2 colors(113 40 91 24 30 97 10) 02_Bishop_02 HalfOrc Male Cleric+15
+Creature 31766 2 colors(113 6 104 37 32 32 104) 02_Mystic_03 HalfOrc Female Sorcerer+12
+Creature 32024 2 colors(113 100 59 99 67 80 60) 02_Warrior_04 HalfOrc Female Fighter+12
+Creature 35374 2 colors(106 95 57 56 63 0 96) 02_Henchman_05 Elf Male Fighter+1
+Creature 32797 2 colors(106 95 57 56 63 0 96) 02_Henchman_06 Elf Male Fighter+1
+Creature 32539 2 colors(106 95 57 56 63 0 96) 02_Henchman_07 Elf Male Fighter+1
+Creature 33569 2 colors(106 95 57 56 63 0 96) 02_Henchman_08 Elf Male Fighter+1
+Creature 33827 2 colors(106 95 57 56 63 0 96) 02_Henchman_09 Elf Male Fighter+1
+Creature 34085 2 colors(106 95 57 56 63 0 96) 02_Henchman_10 Elf Male Fighter+1
+Creature 34343 2 colors(106 95 57 56 63 0 96) 02_Henchman_11 Elf Male Fighter+1
+Creature 34601 2 colors(106 95 57 56 63 0 96) 02_Henchman_12 Elf Male Fighter+1
+Creature 35116 2 colors(106 95 57 56 63 0 96) 02_Henchman_13 Elf Male Fighter+1
+Creature 17592 2 colors(87 0 71 71 79 79 68) Oria Human Female Cleric+10
+Creature 28225 6 colors(114 68 58 57 67 47 47) Nickademus Human Male Wizard+20
+Creature 55431 10 colors(12 0 71 37 28 30 23) GameMaster Fighter+16
+Creature 44558 10 colors(12 0 71 37 28 30 23) Champion_02 Fighter+16
+Creature 24908 12 colors(12 0 71 37 28 30 23) Champion_03 Fighter+16
+Creature 52151 4 colors(12 0 71 37 28 30 23) Champion_04 Fighter+16
+Creature 8588 2 colors(12 0 57 37 28 30 23) Crystal_Golem Male Fighter+16
+Creature 31928 10 colors(12 3 54 50 32 32 22) 03_Cultist_01 Human Male Wizard+13
+Creature 44212 6 colors(12 3 54 50 32 32 22) 03_Cultist_02 Human Male Wizard+13
+Creature 39048 14 colors(12 3 54 50 32 32 22) 03_Cultist_03 Human Male Wizard+13
+Creature 37028 10 colors(12 3 54 50 32 32 22) 03_Cultist_04 Human Male Wizard+13
+Creature 31919 4 colors(12 0 57 37 28 30 23) 03_Soarsmen_05 Male Fighter+7
+Creature 34758 0 colors(12 0 57 37 28 30 23) 03_Soarsmen_06 Male Fighter+7
+Creature 40380 4 colors(12 0 57 37 28 30 23) 03_Soarsmen_07 Male Fighter+7
+Creature 42910 8 colors(12 0 57 37 28 30 23) 03_Soarsmen_08 Male Fighter+7
+Creature 40339 0 colors(12 0 57 37 28 30 23) 03_Soarsmen_09 Male Fighter+7
+Creature 38819 0 colors(12 0 57 37 28 30 23) 03_Soarsmen_10 Male Fighter+7
+Creature 18099 12 colors(12 0 57 37 28 30 23) 01_Wolf_01 Male Fighter+6
+Creature 18884 4 colors(12 0 57 37 28 30 23) 01_Wolf_02 Male Fighter+6
+Creature 12726 0 colors(12 0 57 37 28 30 23) 01_Wolf_03 Male Fighter+6
+Creature 15303 10 colors(12 0 57 37 28 30 23) 01_Wolf_04 Male Fighter+6
+Creature 15036 2 colors(12 0 57 37 28 30 23) 01_Wolf_05 Male Fighter+6
+Creature 28807 10 colors(12 0 57 37 28 30 23) 01_Wolf_06 Male Fighter+6
+Creature 16046 2 colors(12 0 57 37 28 30 23) 01_Wolf_07 Male Fighter+6
+Creature 15029 10 colors(12 0 57 37 28 30 23) 01_Wolf_08 Male Fighter+6
+Creature 17088 8 colors(12 0 57 37 28 30 23) 01_Wolf_09 Male Fighter+6
+Creature 22457 4 colors(12 0 57 37 28 30 23) 01_Wolf_10 Male Fighter+6
+Creature 19127 2 colors(12 0 57 37 28 30 23) 01_Wolf_11 Male Fighter+6
+Creature 19621 14 colors(12 0 57 37 28 30 23) 01_Wolf_12 Male Fighter+6
+Creature 24002 0 colors(12 74 71 57 31 31 31) 01_Frosttouch_14 Human Female Cleric+8
+Creature 24280 8 colors(12 74 71 57 31 31 31) 01_Frosttouch_15 Human Female Cleric+8
+Creature 28385 2 colors(12 74 71 57 31 31 31) 01_Frosttouch_16 Human Female Cleric+8
+Creature 22731 2 colors(12 74 71 57 31 31 31) 01_Frosttouch_17 Human Female Cleric+8
+Creature 26329 6 colors(12 74 71 57 31 31 31) 01_Frosttouch_18 Human Female Cleric+8
+Creature 25057 0 colors(12 74 71 57 31 31 31) 01_Frosttouch_19 Human Female Cleric+8
+Creature 40296 4 colors(12 74 71 57 31 31 31) 01_Frosttouch_20 Human Female Cleric+8
+Creature 15737 2 colors(12 79 58 57 31 31 31) 01_Postulant_21 Human Female Cleric+4
+Creature 24777 2 colors(12 79 58 57 31 31 31) 01_Postulant_22 Human Female Cleric+4
+Creature 20444 0 colors(12 79 58 57 31 31 31) 01_Postulant_23 Human Female Cleric+4
+Creature 20172 0 colors(12 79 58 57 31 31 31) 01_Postulant_24 Human Female Cleric+4
+Creature 51118 12 colors(12 79 58 57 31 31 31) 01_Postulant_25 Human Female Cleric+4
+Creature 18396 6 colors(12 79 58 57 31 31 31) 01_Postulant_26 Human Female Cleric+4
+Creature 21985 8 colors(12 79 58 57 31 31 31) 01_Postulant_27 Human Female Cleric+4
+Creature 23751 2 colors(12 79 68 57 31 31 31) 01_Stormsister_28 Human Female Cleric+6
+Creature 45777 14 colors(12 74 71 57 31 31 31) 01_Frosttouch_29 Human Male Cleric+8
+Creature 17555 10 colors(12 74 71 57 31 31 31) 01_Frosttouch_30 Human Male Cleric+8
+Creature 11096 2 colors(12 74 71 57 31 31 31) 01_Frosttouch_31 Human Male Cleric+8
+Creature 11347 6 colors(12 0 57 37 28 30 23) 01_Bear_32 Male Fighter+8
+Creature 12121 14 colors(12 0 57 37 28 30 23) 01_Bear_33 Male Fighter+8
+Creature 46549 14 colors(12 0 57 37 28 30 23) 01_Bear_34 Male Fighter+8
+Creature 27074 2 colors(12 79 68 57 31 31 31) 01_Stormsister_35 Human Female Cleric+6
+Creature 55671 10 colors(12 79 68 57 31 31 31) 01_Stormsister_36 Human Female Cleric+6
+Creature 23053 0 colors(12 79 68 57 31 31 31) 01_Stormsister_37 Human Female Cleric+6
+Creature 33502 0 colors(12 79 68 57 31 31 31) 01_Stormsister_38 Human Female Cleric+6
+Creature 38962 14 colors(12 79 68 57 31 31 31) 01_Stormsister_39 Human Female Cleric+6
+Creature 18801 10 colors(12 79 68 57 31 31 31) 01_Stormsister_40 Human Female Cleric+6
+Creature 21658 2 colors(12 79 68 57 31 31 31) 01_Stormsister_41 Human Female Cleric+6
+Creature 54392 2 colors(12 79 68 57 31 31 31) 01_Stormsister_42 Human Female Cleric+6
+Creature 28029 14 colors(12 79 68 57 31 31 31) 01_Stormsister_43 Human Female Cleric+6
+Creature 32625 10 colors(12 79 68 57 31 31 31) 01_Stormsister_44 Human Female Cleric+6
+Creature 30862 2 colors(12 79 68 57 31 31 31) 01_Stormsister_45 Human Female Cleric+6
+Creature 35202 6 colors(12 79 68 57 31 31 31) 01_Stormsister_46 Human Female Cleric+6
+Creature 51841 0 colors(12 0 57 37 28 30 23) 01_Bear_47 Male Fighter+8
+Creature 25612 8 colors(12 0 57 37 28 30 23) 01_Bear_48 Male Fighter+8
+Creature 33505 0 colors(12 0 57 37 28 30 23) 01_Bear_49 Male Fighter+8
+Creature 56982 2 colors(12 0 57 37 28 30 23) 01_Bear_50 Male Fighter+8
+Creature 41809 14 colors(12 0 57 37 28 30 23) 04_Shadow_01 Fighter+3
+Creature 48720 10 colors(12 0 57 37 28 30 23) 04_Shadow_02 Fighter+3
+Creature 41798 12 colors(12 0 57 37 28 30 23) 04_Shadow_03 Fighter+3
+Creature 41549 14 colors(12 0 57 37 28 30 23) 04_Shadow_04 Fighter+3
+Creature 48468 10 colors(12 0 57 37 28 30 23) 04_Shadow_05 Fighter+3
+Creature 43078 12 colors(12 0 57 37 28 30 23) 04_Shadow_06 Fighter+3
+Creature 50744 10 colors(12 0 57 37 28 30 23) 04_Shadow_07 Fighter+3
+Creature 44363 12 colors(12 0 57 37 28 30 23) 04_Shadow_08 Fighter+3
+Creature 51266 10 colors(12 0 57 37 28 30 23) 04_Shadow_09 Fighter+3
+Creature 51531 2 colors(12 0 57 37 28 30 23) 04_Shadow_10 Fighter+3
+Creature 46655 0 colors(12 0 57 37 28 30 23) 04_Shadow_11 Fighter+3
+Creature 53063 8 colors(12 0 57 37 28 30 23) 04_Shadow_12 Fighter+3
+Creature 47415 12 colors(12 0 57 37 28 30 23) 04_Shadow_13 Fighter+3
+Creature 53562 10 colors(12 0 57 37 28 30 23) 04_Shadow_14 Fighter+3
+Creature 48955 14 colors(12 0 57 37 28 30 23) 04_Shadow_15 Fighter+3
+Creature 14408 2 colors(12 0 57 37 28 30 23) CagedFury Male Fighter+30
+Creature 17592 2 colors(87 0 71 71 79 79 68) Oria Human Female Cleric+16
+Creature 17592 2 colors(87 0 71 71 79 79 68) Oria Human Female Cleric+20
+Creature 8751 0 colors(12 79 58 57 31 31 31) 06_Postulant_01 Human Female Cleric+4
+Creature 9527 4 colors(12 74 71 57 31 31 31) 06_Frosttouch_02 Human Female Cleric+8
+Creature 9012 2 colors(12 79 68 57 31 31 31) 06_Stormsister_03 Human Female Cleric+6
+Creature 28178 8 colors(12 0 57 37 28 30 23) 06_Wolf_04 Male Fighter+6
+Creature 28952 6 colors(12 0 57 37 28 30 23) 06_Bear_05 Male Fighter+8
+Creature 27412 4 colors(12 0 38 37 28 30 23) 06_Barbarian_Warrior_06 Human Male Fighter+4
+Creature 514 0 colors(0 0 55 0 0 0 0) INVISIBLE Cleric+30
+Creature 56205 0 colors(87 105 71 71 27 27 68) OriaEssence Female Wizard+10
+Creature 20245 10 colors(12 3 54 50 32 32 22) 08_Guestroom_01 Human Male Wizard+13
+Creature 35138 6 colors(12 3 54 50 32 32 22) 08_Guestroom_02 Human Male Wizard+13
+Creature 16161 0 colors(12 0 38 37 28 30 23) 08_Guestroom_05 Human Male Fighter+4
+Creature 51557 12 colors(12 0 38 37 28 30 23) 08_Guestroom_06 Human Male Fighter+4
+Creature 36465 8 colors(12 0 38 37 28 30 23) 08_Guestroom_07 Human Male Fighter+4
+Creature 9025 14 colors(12 0 38 37 28 30 23) 08_Guestroom_08 Human Male Fighter+4

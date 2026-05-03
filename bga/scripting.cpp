@@ -15,6 +15,7 @@
 #include "script.h"
 #include "store.h"
 #include "stringvar.h"
+#include "talk.h"
 #include "timer.h"
 #include "view.h"
 
@@ -110,6 +111,10 @@ template<> void ftscript<npci>(int value, int counter) {
 	for(int i = 0; i < lenghtof(pm->resid); i++)
 		player->resid[i] = getbsi(pm->resid[i]);
 	player->feats.remove(DynamicAnimation);
+}
+
+template<> void ftscript<talki>(int value, int counter) {
+	player->talk = value;
 }
 
 static void damage_change(int bonus) {

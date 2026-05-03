@@ -1,6 +1,6 @@
-п»ї#AR6010Info385_154
-This stove is burning away, but you didn't notice any smoke coming from the outside of the building.  Perhaps it is being shunted somewhere else.
+#AR6010Info385_154
+В этой печи пылает огонь, но вы не заметили дыма снаружи здания. Возможно, он куда-то отводится.
 
 #AR6010Info77_317
-This cot looks like it hasn't been slept in in some time.
+Эта кровать выглядит так, как будто на ней давно не спали.
 

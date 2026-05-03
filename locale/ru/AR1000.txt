@@ -1,24 +1,24 @@
-п»ї#AR1000Info1577_71
-This mighty wooden crane looks like it was designed to haul lumber up the cliff to the town of Targos above.
+#AR1000Info1577_71
+Похоже, этот крепкий деревянный кран был собран для подъёма брёвен на утёс, прямиком на окраину города Таргос.
 
 #AR1000Info1979_906
-Inscribed on the side of this ship is the name, "The Wicked Wench."
+На борту этого корабля выведено его название: "Ведьма".
 
 #AR1000Info576_1203
-This ship looks like it was recently shored and pieces of the hull were removed. 
+Этот корабль выглядит так, словно причалил совсем недавно. Тем не менее, часть обшивки корпуса уже снята.
 
 #AR1000Info2552_1016
-One of the smaller fishing boats used by the crew of the Wicked Wench on Maer Dualdon.  You considered using it as a life boat several times during the journey.
+Одна из небольших рыбачьих лодок, использовалась командой "Ведьмы" на Маэр Дуалдоне. Похоже, что лодка успела несколько раз послужить в качестве спасательной шлюпки.
 
 #AR1000Info1981_1371
-The side of this ship bears the inscription, "Gutboy's Revenge."
+На борту этого корабля красуется надпись: "Месть лоцмана".
 
 #AR1000Info2676_2131
-Although a light still shines from above, the door to this lighthouse has been hastily boarded up.  There is no way inside.
+Хоть дневное светило всё ещё сияет в небе, дверь этого маяка уже крепко заперта. Попасть внутрь не получится.
 
 #AR1000Info2369_1681
-Inscribed on the hull of this ship is the name "Dualdon's Wake."
+На борту этого судна выведена надпись: "Пробуждение Дуалдона".
 
 #AR1000Info971_1847
-"The Salty Dog Tavern"
+Таверна "Солёный пёс"
 

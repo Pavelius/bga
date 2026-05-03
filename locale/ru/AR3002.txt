@@ -1,18 +1,18 @@
-п»ї#AR3002Info2427_305
-This wooden archway has one foreboding, glowing ward rune on each side of it.
+#AR3002Info2427_305
+На каждой стороне этой деревянной арки мягким светом сияет охранная руна.
 
 #AR3002Info2497_267
-This wooden archway has one foreboding, glowing ward rune on each side of it.
+На каждой стороне этой деревянной арки мягким светом сияет охранная руна.
 
 #AR3002Info1428_1973
-The ability to discern what this long dead carcass once was is impossible.  The skeletal remains have been picked clean and the bones themselves are twisted and disintegrating.
+Уже невозможно определить, какому животному принадлежал этот скелет. Обглоданные кости уже почти рассыпались в прах.
 
 #AR3002Info2488_419
-This archway seems to be protected by magical wards that cannot be disarmed by conventional means. 
+Похоже, этот арочный проход защищён магическим заслоном, который невозможно снять обычными средствами.
 
 #AR3002Info2275_353
-This primitive etching resembles a ward stone, and is similar, but with subtle differences, to the ward stone etching on the opposite side of the archway.
+Этот примитивный рисунок напоминает рунный камень, и он похож - с небольшими отклонениями - на изображение рунного камня на противоположной стороне арочного проёма.
 
 #AR3002Info2578_253
-This primitive etching resembles a ward stone, and is similar, but with subtle differences, to the ward stone etching on the opposite side of the archway.
+Этот примитивный рисунок напоминает рунный камень, и он похож - с небольшими отклонениями - на изображение рунного камня на противоположной стороне арочного проёма.
 

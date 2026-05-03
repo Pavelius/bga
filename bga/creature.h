@@ -19,6 +19,7 @@ struct creature : actor, statable, classa, avatarable, spellv {
 	unsigned		experience;
 	resname			name;
 	short unsigned	speak;
+	short unsigned	talk;
 	explicit operator bool() const { return hp > 0; }
 	void			select();
 	void			clear();

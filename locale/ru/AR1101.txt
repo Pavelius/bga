@@ -1,15 +1,15 @@
-п»ї#AR1101Info309_169
-This bed doesn't look like it's been slept in.
+#AR1101Info309_169
+Судя по виду этой кровати, на ней ещё никто не спал.
 
 #AR1101Info373_343
-This armor looks more ceremonial than practical.  It bears the colors of Neverwinter on the tabard.
+Эта броня больше похожа на ритуальную, чем на настоящую. На её накидке изображён герб Невервинтера.
 
 #AR1101Info714_256
-This frightening-looking stove has a menacing air about it.  It seems to be daring you to stick your hand into its maw.
+Эта пугающего вида плита имеет угрожающий вид. Она словно бросает вам вызов - настолько ли вы смелы, чтобы засунуть руку в её утробу.
 
 #AR1101Info521_201
-This stove is the twin of the ugly one across the room, except there is more ash and soot covering its surface.
+Эта печь - точная копия той уродливой печи из другого угла комнаты, за исключением того, что в этой больше пепла и сажи.
 
 #AR1101Info666_223
-A thick crust of oatmeal and cinnamon covers the interior of this pot. 
+Толстая корка овсяной муки и корицы покрывает внутренности этого горшка. 
 

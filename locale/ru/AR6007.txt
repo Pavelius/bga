@@ -1,12 +1,12 @@
-п»ї#AR6007Info396_171
-This small, stumpy bed looks recently made, and the sheets are neatly turned at the top.  
+#AR6007Info396_171
+Эта маленькая, покосившаяся кровать выглядит недавно убранной; простыни аккуратно подвёрнуты сверху.
 
 #AR6007Info309_89
-The flasks and beakers on these shelves look like they survived the bumpy ride to Kuldahar intact. 
+Колбы и мензурки на этих полках выглядят так, будто они пережили тряску во время дороги в Кулдахар без каких-либо повреждений.
 
 #AR6007Info418_112
-These books looks like they weathered the bumpy ride from the Underdark plateau pretty well. 
+Эти книги выглядят так, будто они хорошо перенесли тряску по дороге с плато Андердарка.
 
 #AR6007Info527_139
-These books looks like they weathered the bumpy ride from the Underdark plateau pretty well. 
+Эти книги выглядят так, будто они хорошо перенесли тряску по дороге с плато Андердарка.
 

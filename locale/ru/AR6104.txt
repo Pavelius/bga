@@ -1,45 +1,45 @@
-пїњ#AR6104Info1526_2547
-This bridge has received a considerable amount of damage and cannot be traversed in its current state.  It looks like it could be safer to walk on if bound with enough rope.
+#AR6104Info1526_2547
+Ётот мост получил значительные повреждени€. —ейчас по нему пройти нельз€. ≈сли его укрепить верЄвкой, он станет безопаснее.
 
 #AR6104Info1527_2550
-This bridge has been partially repaired with rope and is still somewhat unsafe to walk on, but it can be traversed.
+Ётот мост укреплЄн верЄвкой и до сих пор небезопасен, но пройти по нему теперь можно.
 
 #AR6104Info1527_2551
-This bridge has been completely repaired and can be traversed safely.
+Ётот мост полностью отремонтирован, и ходить по нему безопасно.
 
 #AR6104Info1648_1006
-It's difficult to tell, but this is the remnant of a once impressive jewel-encrusted throne.
+“ак сразу и не скажешь, но эти обломки - всЄ, что осталось от некогда величественного трона, инкрустированного драгоценными камн€ми.
 
 #AR6104Info1648_999
-This is a large, jewel-encrusted throne.
+Ёто большой, инкрустированный драгоценными камн€ми трон.
 
 #AR6104Info1228_1955
-This once imposing citadel lies in ruins.
+Ёта некогда впечатл€юща€ цитадель ныне лежит в развалинах.
 
 #AR6104Info1226_1954
-This grand citadel, made from obsidian, seems suitable for large-sized individuals.
+Ёта грациозна€ цитадель, сделанна€ из обсидиана, кажетс€ подход€щим местом дл€ обитателей огромного роста.
 
 #AR6104Info1936_2076
-This once majestic palace has been completely destroyed.
+Ќекогда величавый дворец теперь разрушен до основани€.
 
 #AR6104Info1939_2061
-This palace, delicately carved from a block of obsidian, looks elegant yet simple.
+Ётот дворец, из€щно высеченный в цельном массиве обсидиана, выгл€дит элегантно и в то же врем€ просто.
 
 #AR6104Info2640_1993
-This open architecture shows signs that it once functioned as an embassy, but has fallen victim to intense combat that took place here.
+—уд€ по всему, это строение с открытой архитектурой, некогда было посольством, но было разрушено в ходе напр€жЄнных боЄв, произошедших здесь.
 
 #AR6104Info2638_1985
-This open architecture appears to be an embassy.
+Ёто строение с открытой архитектурой, суд€ по всему, посольство.
 
 #AR6104Info2383_1463
-This amphitheatre currently stands in disrepair but has seen recent use.
+—ейчас этот амфитеатр в плачевном состо€нии, но совсем недавно им пользовались.
 
 #AR6104Info2385_1448
-This open amphitheatre, carved from obsidian, has bleachers wrapping around one end and a stage on the other.
+Ёто открытый амфитеатр, высеченный в обсидиане, с трибунами на одной стороне и сценой на другой.
 
 #AR6104Info2420_1054
-Some of the bars on this large iron-wrought cage have been pulled apart by a being of great strength.
+Ќекоторые пруть€ этой большой, кованной железом клетки были раздвинуты - по-видимому, каким-то очень сильным существом.
 
 #AR6104Info2422_1053
-This large iron-wrought cage is sealed tight.
+Ёта больша€, окованна€ железом клетка прочно заперта.
 

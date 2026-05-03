@@ -1,78 +1,78 @@
-п»ї#AR5302Info419_1898
-A sturdy table covered with smithy's tools.
+#AR5302Info419_1898
+На крепком столе лежат кузнечные инструменты.
 
 #AR5302Info704_1530
-A sturdy table covered with smithy's tools.
+На крепком столе лежат кузнечные инструменты.
 
 #AR5302Info962_1662
-A sturdy table covered with smithy's tools.
+На крепком столе лежат кузнечные инструменты.
 
 #AR5302Info1333_2500
-These arrow slits allow archers to fire upon anyone coming through the citadel's gate.
+Эти бойницы позволяют лучникам обстреливать всех, кто проходит через ворота цитадели.
 
 #AR5302Info1412_2383
-These arrow slits allow archers to fire upon anyone coming through the citadel's gate.
+Эти бойницы позволяют лучникам обстреливать всех, кто проходит через ворота цитадели.
 
 #AR5302Info2672_2349
-These sacks hold flour, grain, and so on.
+В этих мешках хранится зерно, мука и прочие припасы.
 
 #AR5302Info2736_2478
-These sacks hold flour, grain, and so on.
+В этих мешках хранится зерно, мука и прочие припасы.
 
 #AR5302Info2782_2452
-These sacks hold flour, grain, and so on.
+В этих мешках хранится зерно, мука и прочие припасы.
 
 #AR5302Info3160_2244
-These sacks hold flour, grain, and so on.
+В этих мешках хранится зерно, мука и прочие припасы.
 
 #AR5302Info3228_2190
-These sacks hold flour, grain, and so on.
+В этих мешках хранится зерно, мука и прочие припасы.
 
 #AR5302Info3333_2122
-These sacks hold flour, grain, and so on.
+В этих мешках хранится зерно, мука и прочие припасы.
 
 #AR5302Info2805_2476
-While these barrels don't contain anything useful, at least you won't have to waste any time smashing them.
+В этих бочках нет ничего полезного, так что, по крайней мере, не придётся тратить время на то, чтобы их разбить.
 
 #AR5302Info3136_2468
-While these barrels don't contain anything useful, at least you won't have to waste any time smashing them.
+В этих бочках нет ничего полезного, так что, по крайней мере, не придётся тратить время на то, чтобы их разбить.
 
 #AR5302Info3067_1719
-These steaming basins are the source of the room's humidity.
+Влажным воздухом комната обязана именно этим ёмкостям с идущим от них паром.
 
 #AR5302Info3122_1566
-These steaming basins are the source of the room's humidity.
+Влажным воздухом комната обязана именно этим ёмкостям с идущим от них паром.
 
 #AR5302Info2739_1699
-This painting depicts an underground landscape.  The cavern ceiling "sky" is ablaze with the golden light of bioluminescent algae.
+На этой картине изображён подземный пейзаж. "Небо", представляющее из себя потолок пещеры, озарено золотистым светом биолюминесцентных водорослей.
 
 #AR5302Info2902_1343
-This painting depicts a bleak, hilly landscape.  The sky is utterly black, without stars or moon - it's possible that the scene represents a vast subterranean cavern.
+На этой картине изображён мрачный холмистый пейзаж. Небо абсолютно чёрное, без звёзд и луны - возможно, на картине нарисован не наземный мир, а огромная подземная пещера.
 
 #AR5302Info3032_1327
-This strange painting appears to be swirls of color arranged to be aesthetically pleasing but without resembling any actual scene or object.
+На этой странное картине нарисованы цветовые вихри, изображённые так, чтоб быть эстетически привлекательными. В то же время они они не похожи ни на один известный реальный предмет или место.
 
 #AR5302Info3402_1127
-This painting depicts an intricate arc-like structure rising from and reflected in the surface of some underground body of water.  The cavern walls glow with an eerie green light.
+На этой картине изображена замысловатая дугообразная структура, поднимающаяся из поверхности какого-то подземного водоёма и отражающаяся в нём. Стены пещеры мерцают пугающим зелёным светом.
 
 #AR5302Info3583_1084
-This painting depicts an underground landscape.  The cavern ceiling "sky" is ablaze with the golden light of bioluminescent algae.
+На этой картине изображён подземный пейзаж. "Небо", представляющее из себя потолок пещеры, озарено золотистым светом биолюминесцентных водорослей.
 
 #AR5302Info681_1005
-This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
+Это устройство представляет собой неподвижную конструкцию, предназначенную для обстрела нарушителей электрическими разрядами. Эту конструкцию можно уничтожить, разбив оберегающий его прочный мерцающий панцирь, или если опытный плут найдёт скрытый люк, открывающий доступ к внутренностями механизма для последующего его обезвреживания.
 
 #AR5302Info1093_1186
-This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
+Это устройство представляет собой неподвижную конструкцию, предназначенную для обстрела нарушителей электрическими разрядами. Эту конструкцию можно уничтожить, разбив оберегающий его прочный мерцающий панцирь, или если опытный плут найдёт скрытый люк, открывающий доступ к внутренностями механизма для последующего его обезвреживания.
 
 #AR5302Info1261_2011
-This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
+Это устройство представляет собой неподвижную конструкцию, предназначенную для обстрела нарушителей электрическими разрядами. Эту конструкцию можно уничтожить, разбив оберегающий его прочный мерцающий панцирь, или если опытный плут найдёт скрытый люк, открывающий доступ к внутренностями механизма для последующего его обезвреживания.
 
 #AR5302Info2688_2124
-This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
+Это устройство представляет собой неподвижную конструкцию, предназначенную для обстрела нарушителей электрическими разрядами. Эту конструкцию можно уничтожить, разбив оберегающий его прочный мерцающий панцирь, или если опытный плут найдёт скрытый люк, открывающий доступ к внутренностями механизма для последующего его обезвреживания.
 
 #AR5302Info2528_1452
-This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
+Это устройство представляет собой неподвижную конструкцию, предназначенную для обстрела нарушителей электрическими разрядами. Эту конструкцию можно уничтожить, разбив оберегающий его прочный мерцающий панцирь, или если опытный плут найдёт скрытый люк, открывающий доступ к внутренностями механизма для последующего его обезвреживания.
 
 #AR5302Info2890_931
-This device is an immobile construct designed to fire arcs of electricity at intruders.  The construct may be destroyed by shattering the tough, pearlescent shell that protects it or, if a skilled rogue can find the always-hidden hatch that allows access to its delicate internals, it may be dismantled and disarmed.
+Это устройство представляет собой неподвижную конструкцию, предназначенную для обстрела нарушителей электрическими разрядами. Эту конструкцию можно уничтожить, разбив оберегающий его прочный мерцающий панцирь, или если опытный плут найдёт скрытый люк, открывающий доступ к внутренностями механизма для последующего его обезвреживания.
 

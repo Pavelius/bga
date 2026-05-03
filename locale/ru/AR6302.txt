@@ -1,6 +1,6 @@
-п»ї#AR6302Info2146_2100
-The wood planks that surround these holes look like they cannot possibly hold the weight of the slaves that are diligently working around it.
+#AR6302Info2146_2100
+Деревянные доски вокруг этих дыр выглядят так, словно они не могут выдержать вес рабов, усердно работающих рядом.
 
 #AR6302Info2711_1363
-With all the beakers and tubes of bubbling liquid upon this desk, it's safe to assume this is some sort of potion lab.
+Судя по тому, сколько колб и пробирок с кипящими жидкостями стоит на столе, можно заключить, что это какая-то лаборатория по варке зелий.
 

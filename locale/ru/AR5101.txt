@@ -1,57 +1,57 @@
-п»ї#AR5101Info396_637
-The shield of this dour-faced dwarf statue is emblazoned with a broken crossbow bolt.
+#AR5101Info396_637
+На щите этой статуи дварфа с мрачным лицом изображён сломанный арбалетный болт.
 
 #AR5101Info975_929
-The shield of this dour-faced dwarf statue is emblazoned with a broken crossbow bolt.
+На щите этой статуи дварфа с мрачным лицом изображён сломанный арбалетный болт.
 
 #AR5101Info241_338
-This huge statue of the duergar deity Laduguer seems to glare down upon you judgmentally.
+Эта огромная статуя бога дуэргаров, Ладугвера. Кажется, она оценивающе взирает на тебя с высоты своего величия.
 
 #AR5101Info2405_487
-This person must have perished in terrible agony... they weren't even allowed to die with their boots on.
+Кажется, этот человек умер в ужасный мучениях... И, похоже, пока он страдал, с него ещё и сняли сапоги.
 
 #AR5101Info2320_414
-An iron maiden - it looks almost cozy in a "bloody spikes driven into your face, chest and bowels" sort of way.
+Это железная дева. Она выглядит очень уютной, для тех, конечно, кому нравится "острые железные шипы вбитые в грудь, лицо и кишки".
 
 #AR5101Info2749_1418
-These appear to be large, stone-shelled eggs that are imbedded, out of reach, into the cavern wall.
+Это похоже на огромные яйца с каменной скорлупой, вмурованные в стену пещеры, вне пределов досягаемости.
 
 #AR5101Info2919_1571
-These appear to be large, stone-shelled eggs that are imbedded, out of reach, into the cavern wall.
+Это похоже на огромные яйца с каменной скорлупой, вмурованные в стену пещеры, вне пределов досягаемости.
 
 #AR5101Info3125_1387
-These appear to be large, stone-shelled eggs that are imbedded, out of reach, into the cavern wall.
+Это похоже на огромные яйца с каменной скорлупой, вмурованные в стену пещеры, вне пределов досягаемости.
 
 #AR5101Info290_433
-This altar is emblazoned with dwarven runes: Laduguer, the Exile, the Gray Protector, Master of Crafts, the Slave Driver, the Taskmaster, the Harsh.
+Этот алтарь расписан дварфскими рунами: Ладугвер Суровый, Изгнанник, Серый Защитник, Мастер Ремёсел, Работорговец, Надзиратель.
 
 #AR5101Info344_419
-This altar is emblazoned with dwarven runes: Laduguer, the Exile, the Gray Protector, Master of Crafts, the Slave Driver, the Taskmaster, the Harsh.
+Этот алтарь расписан дварфскими рунами: Ладугвер Суровый, Изгнанник, Серый Защитник, Мастер Ремёсел, Работорговец, Надзиратель.
 
 #AR5101Info651_356
-These are sacks of grain, dried mushrooms, salted meats and so on.  Despite the dizzying variety of foodstuffs, all look wholly unpalatable.
+В этих мешках хранится зерно, сушёные грибы, вяленое мясо и прочая снедь. Несмотря на обилие и разнообразие еды, вся она выглядит абсолютно непривлекательной.
 
 #AR5101Info943_420
-These are kegs of dark duergar bitter-ale, a thick, potent, and foul-tasting brew known to make even the stoutest of gold dwarves grimace in disgust.
+В этих бочонках хранится дуэргарский тёмный эль. Этот крепкий и плотный напиток обладает настолько дрянным вкусом, что даже видавшие виды золотые дварфы не могут его пить без гримасы отвращения.
 
 #AR5101Info727_264
-These are kegs of dark duergar bitter-ale, a thick, potent, and foul-tasting brew known to make even the stoutest of gold dwarves grimace in disgust.
+В этих бочонках хранится дуэргарский тёмный эль. Этот крепкий и плотный напиток обладает настолько дрянным вкусом, что даже видавшие виды золотые дварфы не могут его пить без гримасы отвращения.
 
 #AR5101Info669_292
-These are kegs of dark duergar bitter-ale, a thick, potent, and foul-tasting brew known to make even the stoutest of gold dwarves grimace in disgust.
+В этих бочонках хранится дуэргарский тёмный эль. Этот крепкий и плотный напиток обладает настолько дрянным вкусом, что даже видавшие виды золотые дварфы не могут его пить без гримасы отвращения.
 
 #AR5101Info2613_555
-An iron maiden - it looks almost cozy in a "bloody spikes driven into your face, chest and bowels" sort of way.
+Это железная дева. Она выглядит очень уютной, для тех, конечно, кому нравится "острые железные шипы вбитые в грудь, лицо и кишки".
 
 #AR5101Info1793_424
-A bucket of thick orcish gruel known as "karap."  You do NOT want to eat this.
+Ведро орочьего варева, известного под названием "карап". Ты точно НЕ хочешь это пробовать.
 
 #AR5101Info1970_456
-A bucket of thick orcish gruel known as "karap."  You do NOT want to eat this.
+Ведро орочьего варева, известного под названием "карап". Ты точно НЕ хочешь это пробовать.
 
 #AR5101Info1982_600
-A bucket of thick orcish gruel known as "karap."  You do NOT want to eat this.
+Ведро орочьего варева, известного под названием "карап". Ты точно НЕ хочешь это пробовать.
 
 #AR5101Info1428_287
-These are keys to the old dungeon cells that now serve as quarters for Dargab's orc slave-soldiers.
+Это ключи от старого тюремного подземелья, ставшего казармами для орочьих солдат-рабов Даргаба.
 

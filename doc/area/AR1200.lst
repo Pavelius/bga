@@ -1,0 +1,109 @@
+Creature 51360 2 colors(12 1 37 37 28 30 23) Swift_Thomas Human Male Fighter+1
+Creature 10662 6 colors(13 0 64 48 28 30 23) Olap_Soothammer Dwarf Male Fighter+3
+Creature 44840 6 colors(12 4 57 41 28 30 22) Isherwood Human Male Fighter+3
+Creature 38430 4 colors(12 2 57 37 28 30 23) Archer_1_W_Wall Human Male Fighter+1
+Creature 42269 4 colors(12 2 57 37 28 30 23) Archer_2_W_Wall Human Male Fighter+1
+Creature 46363 4 colors(12 2 57 37 28 30 23) Archer_3_W_Wall Human Male Fighter+1
+Creature 55344 2 colors(12 2 57 37 28 30 23) Soldier_1_SW_Catapult Human Male Fighter+1
+Creature 34877 6 colors(12 2 57 37 28 30 23) Soldier_2_NW_Catapult Human Male Fighter+1
+Creature 18004 2 colors(12 2 57 37 28 30 23) Soldier_1_Gate Human Male Fighter+1
+Creature 21828 10 colors(12 2 57 37 28 30 23) Soldier_2_Gate Human Male Fighter+1
+Creature 23139 2 colors(12 2 57 37 28 30 23) Soldier_3_Gate Human Male Fighter+1
+Creature 25172 2 colors(12 0 46 47 28 30 23) Merc_1_Gate Human Male Fighter+1
+Creature 25936 10 colors(12 0 46 47 28 30 23) Merc_3_Gate Human Male Fighter+1
+Creature 14460 0 colors(12 2 57 37 28 30 23) Soldier_1_N_Catapult Human Male Fighter+1
+Creature 19578 10 colors(12 2 57 37 28 30 23) Soldier_2_N_Catapult Human Male Fighter+1
+Creature 12205 6 colors(12 2 57 37 28 30 23) Soldier_1_N_Palisade Human Male Fighter+1
+Creature 12702 8 colors(12 2 57 37 28 30 23) Soldier_2_N_Palisade Human Male Fighter+1
+Creature 23486 2 colors(12 2 57 37 28 30 23) Soldier_1_M_Catapult Human Male Fighter+1
+Creature 27826 10 colors(12 2 57 37 28 30 23) Soldier_2_M_Catapult Human Male Fighter+1
+Creature 9949 4 colors(12 2 57 37 28 30 23) Soldier_1_NE_Palisade Human Male Fighter+1
+Creature 55721 2 colors(12 2 57 37 28 30 23) Soldier_Shawford_Guard Human Male Fighter+1
+Creature 31026 14 colors(12 2 57 37 28 30 23) Archer_1_NW_Catapult Human Male Fighter+1
+Creature 46734 0 colors(12 0 40 37 28 30 23) TRAINING_KEG Fighter+1
+Creature 45961 14 colors(12 2 57 37 28 30 23) Trainee_1_S Human Male Fighter+1
+Creature 47499 10 colors(12 2 57 37 28 30 23) Trainee_2_S Human Male Fighter+1
+Creature 48018 6 colors(12 2 57 37 28 30 23) Trainee_3_S Human Male Fighter+1
+Creature 47478 2 colors(12 2 63 64 28 30 23) Harlesford Human Male Fighter+1
+Creature 57654 4 colors(12 0 64 43 28 30 23) Caulder Human Male Fighter+1
+Creature 43095 12 colors(12 2 57 37 28 30 23) Drill_Sergeant_West Human Male Fighter+1
+Creature 45461 2 colors(12 2 57 37 28 30 23) Weapon_Instructor Human Male Fighter+1
+Creature 42596 4 colors(12 2 57 37 28 30 23) Recruit_1_W Human Male Fighter+1
+Creature 43876 4 colors(12 2 57 37 28 30 23) Recruit_2_W Human Male Fighter+1
+Creature 41824 4 colors(12 2 57 37 28 30 23) Recruit_3_W Human Male Fighter+1
+Creature 43104 4 colors(12 2 57 37 28 30 23) Recruit_4_W Human Male Fighter+1
+Creature 44128 4 colors(12 2 57 37 28 30 23) Recruit_5_W Human Male Fighter+1
+Creature 32120 14 colors(12 2 57 37 28 30 23) Menon Human Male Fighter+1
+Creature 20936 8 colors(12 3 57 37 28 30 23) Gable Human Male Fighter+1
+Creature 19154 6 colors(12 4 57 37 28 30 23) Kadence Human Male Fighter+1
+Creature 30922 10 colors(12 0 46 47 28 30 23) Anson Human Male Fighter+1
+Creature 28872 14 colors(12 0 46 47 28 30 23) Tarran Human Male Fighter+1
+Creature 28109 0 colors(12 0 46 47 28 30 23) Illigmar Human Male Fighter+1
+Creature 35788 12 colors(12 2 57 37 28 30 23) Tabard_Mooncalf Human Male Fighter+1
+Creature 48844 2 colors(12 1 46 47 28 30 23) Niles Human Male Fighter+1
+Creature 36528 8 colors(12 2 57 37 28 30 23) Drill_Sergeant_E Human Male Fighter+1
+Creature 34734 0 colors(12 2 57 37 28 30 23) Recruit_1_E Human Male Fighter+1
+Creature 34738 0 colors(12 2 57 37 28 30 23) Recruit_2_E Human Male Fighter+1
+Creature 33708 0 colors(12 2 57 37 28 30 23) Recruit_3_E Human Male Fighter+1
+Creature 33712 0 colors(12 2 57 37 28 30 23) Recruit_4_E Human Male Fighter+1
+Creature 33717 0 colors(12 2 57 37 28 30 23) Recruit_5_E Human Male Fighter+1
+Creature 46983 12 GoblinWarrior
+Creature 45708 0 GoblinWarrior
+Creature 45953 14 GoblinWarrior
+Creature 48264 10 colors(12 0 5 37 28 30 23) 01_Wolf_01 Fighter+2
+Creature 43383 14 GoblinWarrior
+Creature 43886 14 GoblinWarrior
+Creature 45932 12 GoblinWarrior
+Creature 41310 14 GoblinWarrior
+Creature 42845 12 GoblinWarrior
+Creature 39773 14 colors(12 0 53 37 28 30 23) 03_Vghotan Goblin Male Fighter+5
+Creature 42856 2 colors(12 0 5 37 28 30 23) 03_Wolf_01 Fighter+2
+Creature 45156 6 colors(12 0 5 37 28 30 23) 03_Wolf_02 Fighter+2
+Creature 43088 0 GoblinWarrior
+Creature 38761 2 GoblinWarrior
+Creature 31337 10 GoblinWarrior
+Creature 32875 14 GoblinWarrior
+Creature 32870 10 GoblinWarrior
+Creature 9685 0 colors(12 0 47 37 28 30 23) 05_Ghotrag Goblin Male Fighter+5
+Creature 12496 10 GoblinWarrior
+Creature 12250 6 GoblinWarrior
+Creature 13522 10 GoblinWarrior
+Creature 13273 6 GoblinWarrior
+Creature 10447 14 GoblinWarrior
+Creature 10201 2 GoblinWarrior
+Creature 14293 8 GoblinWarrior
+Creature 11214 12 GoblinWarrior
+Creature 11227 4 GoblinWarrior
+Creature 21331 6 colors(12 0 36 37 28 30 23) 06_Caballus Goblin Male Wizard+7
+Creature 20052 14 GoblinWarrior
+Creature 21068 14 GoblinWarrior
+Creature 18765 14 GoblinWarrior
+Creature 20043 14 GoblinWarrior
+Creature 22868 14 GoblinWarrior
+Creature 21593 14 GoblinWarrior
+Creature 22102 14 GoblinWarrior
+Creature 22875 14 GoblinWarrior
+Creature 20047 14 GoblinWarrior
+Creature 19026 14 GoblinWarrior
+Creature 12707 6 GoblinWarrior
+Creature 12457 14 GoblinWarrior
+Creature 11685 0 GoblinWarrior
+Creature 15010 10 GoblinWarrior
+Creature 14762 14 GoblinWarrior
+Creature 13728 4 GoblinWarrior
+Creature 13740 12 GoblinWarrior
+Creature 15527 2 GoblinWarrior
+Creature 58005 8 colors(12 3 52 54 28 30 24) 08_Phaen Human Male Wizard+6
+Creature 56977 8 GoblinWarrior
+Creature 56983 8 GoblinWarrior
+Creature 55701 8 GoblinWarrior
+Creature 58512 8 GoblinWarrior
+Creature 58265 8 GoblinWarrior
+Creature 26008 6 colors(13 0 66 75 28 30 21) 09_Black_Geoffrey Human Male Fighter+3
+Creature 24720 4 colors(12 1 54 38 28 30 23) 09_Blanchard Human Male Fighter+3
+Creature 11734 6 colors(12 0 36 37 28 30 23) 05_Caballus Goblin Male Wizard+7
+Creature 13734 8 colors(12 0 36 37 28 30 23) 07_Caballus Goblin Male Wizard+7
+Creature 11218 0 colors(12 0 51 37 28 30 23) 05_Fog_Gob Goblin Male Fighter+1
+Creature 12710 0 colors(12 0 51 37 28 30 23) 07_Fog_Gob Goblin Male Fighter+1
+Creature 21584 0 colors(12 0 51 37 28 30 23) 06_Fog_Gob Goblin Male Fighter+1
+Creature 9938 0 GoblinWarrior

@@ -1,12 +1,12 @@
-п»ї#AR1104Info540_176
-You did notice there weren't any cows in town.  Horrifying.
+#AR1104Info540_176
+Думаю, вы заметили, что в городе нет ни одной коровы. Ужасно.
 
 #AR1104Info576_105
-You did notice there weren't any cows in town.  Horrifying.
+Думаю, вы заметили, что в городе нет ни одной коровы. Ужасно.
 
 #AR1104Info597_153
-You did notice there weren't any cows in town.  Horrifying.
+Думаю, вы заметили, что в городе нет ни одной коровы. Ужасно.
 
 #AR1104Info660_247
-A well-stocked bar.  You see Cormyrian Brandy and Knee-Cracker Cider amongst the bottles. 
+Полностью забитый выпивкой погребок. Среди бутылок можно увидеть Кормирский бренди и Сидр-Ноголом. 
 

@@ -9,16 +9,18 @@ iostream& iostream::operator<<(const int n) {
 }
 
 iostream& iostream::operator<<(const char* t) {
-	if(!t)
+	if(!t || t[0] == 0)
 		return *this;
-	// ѕриведем формат строки из стандартной кодировки
-	while(*t) {
-		char temp[8];
-		char* s1 = temp;
-		unsigned u = szget(&t, codepage::W1251);
-		s1 = szput(s1, u, codepage::UTF8);
-		write(temp, s1 - temp);
-	}
+	//// ѕриведем формат строки из стандартной кодировки
+	//while(*t) {
+	//	char temp[8];
+	//	char* s1 = temp;
+	//	unsigned u = szget(&t, codepage::W1251);
+	//	s1 = szput(s1, u, codepage::UTF8);
+	//	write(temp, s1 - temp);
+	//}
+	auto n = zlen(t);
+	write(t, n);
 	return *this;
 }
 

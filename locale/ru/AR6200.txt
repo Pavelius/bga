@@ -1,54 +1,51 @@
-п»ї#AR6200Info371_366
-This haphazardly constructed wooden apparatus seems to have been used to tie up individuals, similar to a crucifixion.  Judging from the amount of blood on the object, it is safe to assume that sacrifices were performed here as well. 
+#AR6200Info371_366
+Это странное и непонятное деревянное сооружение, по-видимому, служило для привязывания людей, на манер распятия. Судя по количеству засохшей кровью, можно предположить, что его также использовали и для жертвоприношений. 
 
 #AR6200Info501_402
-In all appearances, this looks to be a blood covered, makeshift altar made from found scrap wood, stones and even bones. 
+По всей видимости, это покрытый засохшей кровью самодельный алтарь, сделанный из кусков древесины, камней и даже костей.
 
 #AR6200Info2521_838
-A large remnant of an ancient catapult that looks like it's been through hundreds of years of fierce weather. 
+Большой обломок древней катапульты, который, судя по всему, пережил не одну сотню лет жестокий погодных условий.
 
 #AR6200Info2586_1012
-A large remnant of an ancient catapult that looks like it's been through hundreds of years of fierce weather. 
+Большой обломок древней катапульты, который, судя по всему, пережил не одну сотню лет жестокий погодных условий.
 
 #AR6200Info2016_2050
-These elven scout tents more closely resemble small, decrepit tombs.
+Эти палатки эльфийских разведчиков больше похожи на маленькие ветхие гробницы.
 
 #AR6200Info781_584
-Despite the fact that the canvases of the orc tents are torn, weather beaten and essentially useless, the ropes that hold them up are remarkably sturdy and not damaged what-so-ever.
-
+Несмотря на то, что полотнища палаток орков разорваны во многих местах и уже практически бесполезны, верёвки, которые удерживают палатки, выглядят прочными и ничуть не повреждены.
 
 #AR6200Info950_765
-Despite the fact that the canvases of the orc tents are torn, weather beaten and essentially useless, the ropes that hold them up are remarkably sturdy and not damaged what-so-ever.
-
+Несмотря на то, что полотнища палаток орков разорваны во многих местах и уже практически бесполезны, верёвки, которые удерживают палатки, выглядят прочными и ничуть не повреждены.
 
 #AR6200Info1096_218
-Despite the fact that the canvases of the orc tents are torn, weather beaten and essentially useless, the ropes that hold them up are remarkably sturdy and not damaged what-so-ever.
-
+Несмотря на то, что полотнища палаток орков разорваны во многих местах и уже практически бесполезны, верёвки, которые удерживают палатки, выглядят прочными и ничуть не повреждены.
 
 #AR6200Info1453_1583
-A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
+Большой участок льда, заполненный телами древних воинов эльфов и орков. Лёд выглядит тонким - ходить по нему крайне опасно.
 
 #AR6200Info2732_792
-A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
+Большой участок льда, заполненный телами древних воинов эльфов и орков. Лёд выглядит тонким - ходить по нему крайне опасно.
 
 #AR6200Info1828_1334
-A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
+Большой участок льда, заполненный телами древних воинов эльфов и орков. Лёд выглядит тонким - ходить по нему крайне опасно.
 
 #AR6200Info1929_1359
-A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
+Большой участок льда, заполненный телами древних воинов эльфов и орков. Лёд выглядит тонким - ходить по нему крайне опасно.
 
 #AR6200Info2492_1407
-A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
+Большой участок льда, заполненный телами древних воинов эльфов и орков. Лёд выглядит тонким - ходить по нему крайне опасно.
 
 #AR6200Info2438_1885
-A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
+Большой участок льда, заполненный телами древних воинов эльфов и орков. Лёд выглядит тонким - ходить по нему крайне опасно.
 
 #AR6200Info2792_1483
-A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
+Большой участок льда, заполненный телами древних воинов эльфов и орков. Лёд выглядит тонким - ходить по нему крайне опасно.
 
 #AR6200Info3095_975
-A large ice patch filled with the bodies of ancient orc and elven warriors.  The ice itself looks to be particularly thin, so walking on it would be extremely hazardous.
+Большой участок льда, заполненный телами древних воинов эльфов и орков. Лёд выглядит тонким - ходить по нему крайне опасно.
 
 #AR6200Info3628_1443
-This waterfall is partially frozen.  However, the water that is falling churns and cracks the broken ice in its basin.  When you listen carefully, you can hear what sounds like a large stream flowing from the falls, to under the ground, and towards the fields.
+Этот водопад частично замёрз, но падающая вниз вода раскалывает лёд у подножия. Внимательно вслушиваясь, вы можете различить звук потока, который струится с гор и оттуда уходит вниз, в сторону полей.
 

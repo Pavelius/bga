@@ -1,0 +1,45 @@
+Creature 17441 0 colors(9 0 52 50 30 27 22) Food_Cook Human Female Fighter+1
+Creature 16200 0 colors(0 5 66 63 29 29 23) Riki Female Rogue+15
+Creature 8026 0 colors(12 4 57 31 22 29 23) Jaebrilla Human Female Fighter+1
+Creature 19851 2 colors(0 0 55 0 0 0 0) HatemasterDrothan Orc Male Cleric+18
+Creature 17310 0 colors(0 0 55 0 0 0 0) RuinlordEradru Orc Male Cleric+18
+Creature 29327 0 colors(0 0 55 0 0 0 0) RuinlordGaduCrum Orc Male Cleric+18
+Creature 13096 10 colors(12 1 39 14 93 24 22) Food_Worker1 Human Female Fighter+1
+Creature 20757 6 colors(12 5 50 14 93 24 22) Food_Worker4 Human Female Fighter+1
+Creature 17704 10 colors(12 0 72 14 93 100 22) Food_Worker2 Human Female Fighter+1
+Creature 16154 6 colors(12 2 56 52 93 100 22) Food_Worker3 Human Female Fighter+1
+Creature 33069 2 colors(12 0 57 57 92 100 94) AL_SleepSlave1 Human Male Fighter+1
+Creature 35633 14 colors(12 0 57 57 92 100 94) AL_SleepSlave2 Human Male Fighter+1
+Creature 34346 10 colors(12 0 57 37 28 30 23) AL_Instructor Male Fighter+9
+Creature 31535 0 colors(12 0 57 37 28 30 23) AL_RedAbishai1 Male Fighter+12
+Creature 32562 2 colors(12 0 57 37 28 30 23) AL_RedAbishai2 Male Fighter+12
+Creature 33844 4 colors(12 0 57 37 28 30 23) AL_RedAbishai3 Male Fighter+12
+Creature 31271 0 colors(0 0 55 0 0 0 0) AL_Ruinlord1 Orc Female Cleric+18
+Creature 37420 10 colors(0 0 55 0 0 0 0) AL_Ruinlord2 Orc Female Cleric+18
+Creature 36406 6 colors(12 0 73 37 28 30 23) AL_GlabrezuGuard1 Male Fighter+10
+Creature 37427 6 colors(12 0 73 37 28 30 23) AL_GlabrezuGuard2 Male Fighter+10
+Creature 35462 2 colors(9 9 46 63 98 100 46) GB_ThayvianMage1 Human Female Fighter+26
+Creature 32599 4 colors(15 0 67 37 28 30 23) PatrollingGuard1 HalfOrc Female Bard+16
+Creature 32605 12 colors(15 0 67 37 28 30 23) PatrollingGuard2 HalfOrc Male Bard+16
+Creature 14738 0 colors(112 19 47 66 47 47 29) SlayerKnightofXvim1 Paladin+19
+Creature 19869 4 colors(112 19 47 66 47 47 29) SlayerKnightofXvim2 Paladin+19
+Creature 34947 14 colors(15 27 67 37 28 30 21) GB_Guard1 Orc Male Fighter+15
+Creature 36229 10 colors(15 27 67 37 28 30 21) GB_Guard2 Orc Male Fighter+15
+Creature 36487 8 colors(20 7 66 47 21 29 0) GB_HalfGoblin1 Goblin Male Fighter+15
+Creature 39285 0 colors(20 7 66 47 21 29 0) GB_HalfGoblin2 Goblin Male Fighter+15
+Creature 40310 8 colors(19 3 67 37 28 30 21) GB_Guard3 Human Female Fighter+15
+Creature 38790 0 colors(19 3 67 37 28 30 21) GB_Guard4 Human Female Fighter+15
+Creature 30088 6 colors(19 3 67 37 28 30 21) GB_Guard5 Human Female Fighter+15
+Creature 32903 0 colors(14 0 67 37 28 30 21) GB_Guard6 HalfElf Male Fighter+15
+Creature 39558 8 colors(14 0 67 37 28 30 21) GB_Guard7 HalfElf Male Fighter+15
+Creature 31900 12 colors(14 0 67 37 28 30 21) GB_Guard8 HalfElf Male Fighter+15
+Creature 32925 10 colors(15 0 67 37 28 30 23) GB_YuanTiHalfbreed1 Female Fighter+12
+Creature 38023 14 colors(15 0 67 37 28 30 23) GB_YuanTiHalfbreed2 Female Fighter+12
+Creature 40569 12 colors(9 1 46 63 98 100 47) GB_ThayvianMage2 Human Female Fighter+26
+Creature 34704 10 colors(9 1 46 63 98 100 47) GB_ThayvianMage3 Human Female Fighter+26
+Creature 30606 8 colors(12 0 39 37 28 30 23) GB_Bugbear1 Male Fighter+12
+Creature 35478 6 colors(12 0 39 37 28 30 23) GB_Bugbear2 Male Fighter+12
+Creature 31112 0 colors(9 1 46 63 98 100 47) GB_ThayvianMage4 Human Female Fighter+26
+Creature 38793 6 colors(14 0 67 37 28 30 21) GB_Guard9 HalfElf Male Fighter+15
+Creature 31385 12 colors(14 0 67 37 28 30 21) GB_Guard10 HalfElf Male Fighter+15
+Creature 32900 12 colors(20 18 66 47 21 29 0) GB_HalfGoblin3 Goblin Male Fighter+14

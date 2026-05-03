@@ -476,6 +476,9 @@
     <ClCompile Include="view_chat.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="talk.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -803,6 +806,9 @@
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="creaturea.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="talk.h">
       <Filter>logic</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,15 +1,15 @@
-п»ї#AR2100Info1878_363
-You open the door and glance inside.  You see nothing of interest.
+#AR2100Info1878_363
+Вы открыли дверь, заглянули внутрь и не увидели там ничего интересного.
 
 #AR2100Info1094_119
-This area is littered with junk.
+Здесь полно всякого хлама.
 
 #AR2100Info1282_85
-This appears to be an entrance to a cave.  The ground outside is littered with carrion.
+Похоже, это вход в пещеру. Земля рядом с ним усыпана разлагающимися останками.
 
 #AR2100Info1449_81
-This appears to be an entrance to a cave.  The ground outside is littered with carrion.
+Похоже, это вход в пещеру. Земля рядом с ним усыпана разлагающимися останками.
 
 #AR2100Info1760_706
-This small cabin is unapproachable.  How anyone could get to it without resorting to magic is beyond you.
+К этой хижине подойти невозможно. Как кто-то смог добраться до неё, не прибегая к магии, - загадка для тебя.
 

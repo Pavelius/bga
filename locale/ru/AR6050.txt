@@ -1,33 +1,33 @@
-п»ї#AR6050Info1170_185
-This weathered stone monument looks ancient, perhaps hundreds of years old.  It seems to lead into a small alcove-area, but there is no sign of an altar or worship statue. 
+#AR6050Info1170_185
+Этот истёртый ветрами каменный проход выглядит древним, на вид ему несколько сотен лет. Он ведёт в маленькую нишу, но в ней нет никаких признаков алтаря или статуи для поклонения.
 
 #AR6050Info903_254
-This six-armed female figure has the tail of a serpent and a menacing gaze.
+Эта шестирукая фигура женщины со змеиным хвостом смотрит довольно угрожающе.
 
 #AR6050Info707_1025
-This six-armed female figure has the tail of a serpent and a menacing gaze.
+Эта шестирукая фигура женщины со змеиным хвостом смотрит довольно угрожающе.
 
 #AR6050Info2217_997
-This six-armed female figure has the tail of a serpent and a menacing gaze.
+Эта шестирукая фигура женщины со змеиным хвостом смотрит довольно угрожающе.
 
 #AR6050Info1970_984
-This ancient stone altar looks to be hundreds of years old.  It seems to have been used recently, but you don't see any offerings upon the altar.
+Этому древнему каменному алтарю, похоже, сотни лет. Судя по всему, его недавно его использовали, но на нём не видно никаких подношений.
 
 #AR6050Info2090_1487
-This six-armed female figure has the tail of a serpent and a menacing gaze.
+Эта шестирукая фигура женщины со змеиным хвостом смотрит довольно угрожающе.
 
 #AR6050Info1422_1623
-This six-armed female figure has the tail of a serpent and a menacing gaze.
+Эта шестирукая фигура женщины со змеиным хвостом смотрит довольно угрожающе.
 
 #AR6050Info607_256
-This stele is carved with ancient runes, but time and storms have worn them away so as to be almost unreadable.
+Эта стела испещрена древними рунами, но время и непогода истёрли их так, что их почти невозможно прочесть.
 
 #AR6050Info1674_482
-This stele is carved with ancient runes, but time and storms have worn them away so as to be almost unreadable.
+Эта стела испещрена древними рунами, но время и непогода истёрли их так, что их почти невозможно прочесть.
 
 #AR6050Info298_614
-This structure appears hundreds of years old, but there is no moss or vines growing on it.  The entire structure has a malevolence about it, and just looking at it makes you uneasy.
+Этому сооружению, судя по всему, сотни лет, но оно не покрыто ни мхом, ни лианами. Его окружает зловещая аура; даже от простого взгляда на него становится не по себе.
 
 #AR6050Info645_1599
-This stele appears rooted in place, and it resembles many of the stele you have seen scattered throughout the jungle.  The various stele seem almost interchangable.
+Эта стела, судя по всему, вросла в землю. Она напоминает многие другие стелы, которые встречались в джунглях. Стелы кажутся вполне взаимозаменяемыми.
 

@@ -1,15 +1,15 @@
-п»ї#AR3100Info733_1012
-This wooden pylon has one glowing ward rune, similar to the ones on the wooden archway in the Goblin Warrens.
+#AR3100Info733_1012
+На этом деревянном столбе светится руна, похожая на те, что были на деревянной арке в гоблинских пещерах.
 
 #AR3100Info907_1072
-This wooden pylon has one glowing ward rune, similar to the ones on the wooden archway in the Goblin Warrens.
+На этом деревянном столбе светится руна, похожая на те, что были на деревянной арке в гоблинских пещерах.
 
 #AR3100Info575_1742
-This banner bears the silhouette of a chimera.
+На этом знамени изображён силуэт химеры.
 
 #AR3100Info829_1829
-This banner bears the silhouette of a chimera.
+На этом знамени изображён силуэт химеры.
 
 #AR3100Info2173_534
-Rising steam bellows from this rusty, iron grate.  On the inside can be seen three thick, steel bars which lock the grate from the inside.  Gaining access to the inside of the fortress through this grate looks very unlikely.
+Из этой ржавой железной решётки поднимается пар. За ней видно три толстых стальных прута, что запирают решётку изнутри. Вряд ли получится попасть в крепость через эту решётку.
 

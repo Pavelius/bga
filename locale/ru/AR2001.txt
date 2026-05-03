@@ -1,12 +1,12 @@
-п»ї#AR2001Info413_1636
-You open the door and glance inside.  You see nothing of interest.
+#AR2001Info413_1636
+Вы открыли дверь, заглянули внутрь и не увидели там ничего интересного.
 
 #AR2001Info492_1444
-This is an outhouse.
+Это хозяйственная постройка.
 
 #AR2001Info269_555
-This is an outhouse.
+Это хозяйственная постройка.
 
 #AR2001Info2097_286
-A landslide has blocked the pass.  It appears to have been deliberately caused.  You see the bodies of goblins among the rubble.
+Похоже, что кто-то намеренно устроил сход лавины, чтобы перекрыть перевал. Среди камней видны трупы гоблинов.
 
