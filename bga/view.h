@@ -36,6 +36,7 @@ const char* getkg(int weight);
 void* choose_answers();
 void* choose_combat_action();
 
+void add_description(const char* format);
 void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key = 0);
 void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key, const char* id, bool need_getname = true);
 void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed, bool need_getname = true);
@@ -108,5 +109,6 @@ void update_area_music();
 void update_frames();
 void view_game_area();
 void warning(const char* id, ...);
+void widget_answers();
 
 unsigned char open_color_pick(unsigned char current_color, unsigned char default_color);

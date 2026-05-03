@@ -156,6 +156,11 @@ void set_description(const char* format) {
 	description_cash_size = -1;
 }
 
+void add_description(const char* format) {
+	description.add(format);
+	description_cash_size = -1;
+}
+
 void set_description(const nameable* object) {
 	description.clear();
 	description_cash_size = -1;
@@ -1982,9 +1987,15 @@ static void tips_main() {
 	paint_cursor();
 }
 
+static void textf_widgets() {
+	if(equal(textf_widget, "answers"))
+		widget_answers();
+}
+
 void initialize_ui() {
 	set_cursor();
 	ptips = tips_main;
+	textf_proc = textf_widgets;
 }
 
 void initialize_interface() {

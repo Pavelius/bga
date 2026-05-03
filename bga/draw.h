@@ -293,6 +293,9 @@ void* scene(fnevent proc);
 void setneedupdate();
 }
 
+extern char textf_widget[32];
+extern fnevent textf_proc;
+
 void sys_caption(const char* string);
 void sys_create_window(int x, int y, int width, int height, unsigned flags, int bpp, bool full_screen);
 void sys_cursor(bool show);

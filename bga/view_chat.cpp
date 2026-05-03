@@ -49,3 +49,46 @@ static void view_chat_dialog() {
 void* choose_answers() {
 	return scene(view_chat_dialog);
 }
+
+static void check_text(const char* value, unsigned key) {
+	pushrect push;
+	textfs(value);
+	button_check(key);
+}
+
+static unsigned answers_hotkey(int index) {
+	static char keys[] = {
+		'1', '2', '3', '4', '5', '6', '7', '8', '9',
+		'A', 'B', 'C', 'D', 'E', 'F'
+	};
+	if(index < lenghtof(keys))
+		return keys[index];
+	return 0;
+}
+
+void widget_answers() {
+	pushfore push_fore;
+	caret.x += 32; width -= 32;
+	auto color_normal = colors::red.mix(colors::text, 64);
+	auto color_hilite = colors::red.mix(colors::text);
+	auto color_pressed = colors::red.mix(colors::text, 192);
+	auto push_caret = caret;
+	auto push_width = width;
+	auto index = 0;
+	for(auto& e : an) {
+		caret.x = push_caret.x;
+		width = push_width;
+		fore = color_normal;
+		text(str("%1i)", index + 1));
+		caret.x += 24; width -= 24;
+		check_text(e.text, answers_hotkey(index));
+		if(button_pressed)
+			fore = color_pressed;
+		else if(button_hilited)
+			fore = color_hilite;
+		textf(e.text);
+		if(button_executed)
+			execute(buttonparam, (long)e.value);
+		index++;
+	}
+}

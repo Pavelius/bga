@@ -10,10 +10,14 @@
 using namespace draw;
 
 int draw::tab_pixels = 0;
+
 static const char* text_start_string;
 static int text_start_horiz;
 static bool force_full_render;
 static point maxcaret;
+
+char	textf_widget[32];
+fnevent textf_proc;
 
 static void apply_line_feed(int x1, int dy) {
 	if(maxcaret.x < caret.x)
@@ -135,6 +139,14 @@ static const char* parse_widget_command(const char* p) {
 			paint_centered(name);
 		} else if(equaln(p, "tab"))
 			tab_pixels = getparam(p);
+		else {
+			stringbuilder sb(textf_widget); sb.clear();
+			p = getparam(p, sb);
+			auto push_caret = caret;
+			if(textf_proc)
+				textf_proc();
+			height = caret.y - push_caret.y;
+		}
 		if(tips && ishilite())
 			tips_sb.add(tips);
 		p = skip_line(p);

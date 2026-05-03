@@ -1,3 +1,4 @@
+#include "answers.h"
 #include "audio.h"
 #include "draw.h"
 #include "creature.h"
@@ -89,6 +90,10 @@ static void test_animation_hit_drop() {
 
 static void test_chat() {
 	set_description("[Тордек]: Прекрасный день для того чтобы узнать свежие новости не так ли? Вы ведь знаете уже свежие новости? Ну про гоблинов?");
+	add_description("\n\n$answers");
+	an.clear();
+	an.add(test_animation_hit_drop, "Нет. Мы же только прибыли.");
+	an.add(test_animation_hit, "И что там по гоблинам?");
 	choose_answers();
 }
 
