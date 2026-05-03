@@ -87,13 +87,18 @@ static void test_animation_hit_drop() {
 	player->fixdamage();
 }
 
+static void test_chat() {
+	set_description("[Тордек]: Прекрасный день для того чтобы узнать свежие новости не так ли? Вы ведь знаете уже свежие новости? Ну про гоблинов?");
+	choose_answers();
+}
+
 void input_debug() {
 	switch(hot.key) {
 	case 'A': execute(test_animation_hit); break;
 	case 'Q': execute(test_animation_hit_drop); break;
 	// case 'W': execute(test_battle_stance); break;
 	case Ctrl + 'D': execute(open_store); break;
-	case Ctrl + 'C': execute(open_container, (long)player, 4); break;
+	case Ctrl + 'C': execute(test_chat, 0, 0); break;
 	case Ctrl + 'I': execute(open_scene, 0, 0, util_items_list); break;
 	case Ctrl + 'F': execute(open_scene, 0, 0, view_chapter); break;
 	default: break;

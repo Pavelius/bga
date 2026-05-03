@@ -1,5 +1,5 @@
 Brogan: Броган
-Brohn_Dead: Брон
+Brohn: Брон
 Crandall: Крендал
 Eldgull: Элдгулл
 Hedron: Хедрон

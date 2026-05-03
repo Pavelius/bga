@@ -5,6 +5,7 @@
 typedef void (*fnevent)();
 typedef void (*fncommand)(void* object);
 
+struct creature;
 struct item;
 struct nameable;
 struct sprite;
@@ -17,6 +18,7 @@ extern int game_panel_mode;
 
 extern sprite* pma_butopt1;
 extern sprite* pma_butstd;
+extern sprite* pma_butlrg2;
 extern sprite* pma_cursors;
 extern sprite* pma_cursarw;
 extern sprite* pma_ground;
@@ -31,6 +33,7 @@ sprite* gres(const char* id);
 
 const char* getkg(int weight);
 
+void* choose_answers();
 void* choose_combat_action();
 
 void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key = 0);
@@ -75,6 +78,7 @@ void paint_action_panel_combat();
 void paint_action_panel_player();
 void paint_action_panel_na();
 void paint_area();
+void paint_area_no_command();
 void paint_area_no_keys();
 void paint_description(int scr_x, int scr_y, int scr_height);
 void paint_dialog(const char* id, int frame = 0);
@@ -89,6 +93,7 @@ void paint_list(void* data, int size, int maximum, int& origin, int row_count, i
 void paint_minimap();
 void paint_worldmap_area();
 void paperdoll();
+void portrait_small(creature* pc, bool player_hilite);
 void set_description();
 void set_description(const char* format);
 void set_description(const nameable* object);

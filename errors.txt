@@ -1,1 +1,2 @@
-﻿Can't find file 'areas/AR1000.inf'
+﻿Error in file `UnknownNames.txt`:
+ Define translation for `Continue`

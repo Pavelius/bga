@@ -44,6 +44,7 @@ static item drag_item, drag_ground_item;
 static char edit_field[32];
 
 sprite* pma_butstd;
+sprite* pma_butlrg2;
 sprite* pma_butopt1;
 sprite* pma_cursors;
 sprite* pma_cursarw;
@@ -382,6 +383,8 @@ static void button(formationn id, formationn& value) {
 }
 
 static point get_pressed_offset(sprite* pr) {
+	if(pr == pma_butlrg2)
+		return {1, 2};
 	return {1, 1};
 }
 
@@ -653,7 +656,7 @@ void get_player_portrait(surface& sm, int index) {
 	canvas = push_canvas;
 }
 
-static void portrait_small(creature* pc, bool player_hilite) {
+void portrait_small(creature* pc, bool player_hilite) {
 	pushrect push;
 	if(!input_disabled) {
 		if(player_hilite) {
@@ -2002,6 +2005,7 @@ void initialize_interface() {
 	pma_form = gres("FORM");
 	pma_scrsb = gres("GCOMMSB");
 	pma_butstd = gres("GBTNSTD");
+	pma_butlrg2 = gres("GBTNLRG2");
 	pma_butinv2 = gres("INVBUT2");
 	pma_ground = gres("GROUND");
 }

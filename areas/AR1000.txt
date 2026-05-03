@@ -12,25 +12,28 @@ Creature 20309 10 colors(12 3 57 37 28 30 23) Jon Human Male Fighter+1
 Creature 11391 6 colors(12 2 57 37 28 30 23) Brogan Human Male Fighter+1
 Creature 31016 6 colors(14 0 65 40 28 30 23) Jorun Dwarf Male Fighter+3
 Creature 39530 4 colors(12 4 57 37 28 30 23) Crandall Human Male Fighter+1
-Creature 46360 2 colors(12 0 59 37 28 30 23) Dead_Townsperson_2 Human Male Fighter+1
+Creature 19799 14 colors(12 2 57 37 28 30 23) Brohn Human Male Fighter+1
 
 Creature 16159 14 GoblinWarrior
 Creature 21026 14 GoblinWarrior
-Creature 22310 6 colors(12 0 59 37 28 30 23) Dead_Townsperson_0 Human Male Fighter+1
-Creature 19799 14 colors(12 2 57 37 28 30 23) Brohn_Dead Human Male Fighter+1
+
+// Dead persons
+Creature 46360 2 colors(12 0 59 37 28 30 23) Human Male Warrior+1
+Creature 22310 6 colors(12 0 59 37 28 30 23) Human Male Warrior+1
+Creature 8303 14 colors(12 2 57 37 28 30 23) Human Male Warrior+1
+
 Creature 13924 2 GoblinWarrior
 Creature 12123 14 GoblinWarrior
 Creature 8563 2 GoblinWarrior
-Creature 8303 14 colors(12 2 57 37 28 30 23) Dead_Soldier_0 Human Male Fighter+1
 Creature 30500 14 GoblinWarrior
 Creature 32556 4 GoblinWarrior
 Creature 32291 10 GoblinWarrior
 Creature 40486 10 GoblinWarrior
 Creature 38700 2 GoblinWarrior
-Creature 38952 14 colors(12 0 59 37 28 30 23) Dead_Townsperson_1 Human Male Fighter+1
+Creature 38952 14 colors(12 0 59 37 28 30 23) Human Male Fighter+1
 Creature 37465 8 GoblinWarrior
-Creature 34135 0 colors(12 2 57 37 28 30 23) Dead_Soldier_1 Human Male Fighter+1
-Creature 31371 2 colors(12 0 63 37 28 30 23) Dead_Sailor Human Male Fighter+1
+Creature 34135 0 colors(12 2 57 37 28 30 23) Human Male Fighter+1
+Creature 31371 2 colors(12 0 63 37 28 30 23) Human Male Fighter+1
 Creature 31111 12 GoblinWarrior
 Creature 32136 10 GoblinWarrior
 Creature 46463 4 GoblinWarrior

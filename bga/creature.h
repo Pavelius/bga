@@ -45,6 +45,7 @@ struct creature : actor, statable, classa, avatarable, spellv {
 	void			updateanimate();
 };
 extern creature* player;
+extern creature* opponent;
 extern creature* party[6];
 extern creature* party_selected[16];
 

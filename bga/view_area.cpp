@@ -792,6 +792,17 @@ static void paint_area_map() {
 	clipping = push_clip;
 }
 
+static void paint_area_map_no_command() {
+	auto push_clip = clipping; setclipall();
+	set_visible_area();
+	set_standart_cursor();
+	paint_tiles();
+	paint_movement_target();
+	paint_objects();
+	paint_float_text();
+	clipping = push_clip;
+}
+
 static void paint_area_map_zoom_factor(fnevent proc) {
 	auto push_clipping = clipping;
 	auto push_mouse = hot.mouse; hot.mouse.x /= zoom_factor; hot.mouse.y /= zoom_factor;
@@ -815,6 +826,11 @@ static void paint_area_map_zoomed(fnevent proc) {
 		proc();
 	else
 		paint_area_map_zoom_factor(proc);
+}
+
+void paint_area_no_command() {
+	paint_area_map_zoomed(paint_area_map_no_command);
+	apply_shifer();
 }
 
 void paint_area_no_keys() {
