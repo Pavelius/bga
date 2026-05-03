@@ -17,6 +17,7 @@ HalfOrc hairs(HairNormal) skin(SkinNormal) favor(Barbarian) res(CHMB1 CHFB1) ws(
 
 Goblin
  elements Dexterity+1 Constitution+1 Wisdow+1 Charisma-2
+Orc
 
 #List
 

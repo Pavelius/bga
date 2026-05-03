@@ -1,1 +1,6 @@
-﻿
+﻿Dead_Sailor: 
+Dead_Soldier_0: 
+Dead_Soldier_1: 
+Dead_Townsperson_0: 
+Dead_Townsperson_1: 
+Dead_Townsperson_2: 

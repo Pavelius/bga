@@ -116,6 +116,13 @@ static const char* create_creature(const char* p) {
 	p = psnum(p, player->position_index);
 	p = psnum(p, player->orientation);
 	player->position = i2sc(player->position_index);
+	while(*p) {
+		auto p1 = p;
+		p = psvalue(p, "colors", read_colors);
+		if(p1 != p)
+			continue;
+		break;
+	}
 	p = skipws(psidf(p));
 	pushvalue push(modifier, Permanent);
 	auto pm = bsdata<npci>::find(temp);
@@ -126,13 +133,6 @@ static const char* create_creature(const char* p) {
 		create_abilities(true);
 		set_player_name(temp);
 		player->feats.set(DynamicAnimation);
-	}
-	while(*p) {
-		auto p1 = p;
-		p = psvalue(p, "colors", read_colors);
-		if(p1 != p)
-			continue;
-		break;
 	}
 	p = read_variants(p);
 	player_finish();

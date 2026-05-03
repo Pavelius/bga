@@ -182,7 +182,7 @@ void read_area(areai* area) {
 		return;
 	if(!area->is(AreaVisited)) {
 		char temp[64]; stringbuilder sb(temp);
-		sb.add("areas/%1.inf", area->id);
+		sb.add("areas/%1.txt", area->id);
 		area_read(temp);
 		area->set(AreaVisited);
 	}
