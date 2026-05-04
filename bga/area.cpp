@@ -257,8 +257,8 @@ const sprite* get_area_sprites() {
 point get_free(point position, int size) {
 	int i = s2i(position);
 	if(!is_block(i, size))
-		return i2s(i);
-	return i2s(get_free_index(i, 1, size));
+		return i2sc(i);
+	return i2sc(get_free_index(i, 1, size));
 }
 
 short unsigned to(short unsigned index, directionn d) {

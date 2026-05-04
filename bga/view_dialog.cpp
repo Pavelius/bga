@@ -1917,6 +1917,7 @@ void open_item_count() {
 
 void open_game() {
 	game_proc = 0;
+	clear_path_map();
 	scene(view_game);
 }
 
