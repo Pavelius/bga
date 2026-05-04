@@ -306,6 +306,38 @@ static void paint_tiles() {
 	}
 }
 
+static void paint_fow() {
+	auto sp = gres("FOGOWAR");
+	if(!sp)
+		return;
+	auto tx0 = camera.x / 32;
+	auto ty0 = camera.y / 32;
+	auto tdx = width / 32 + 1;
+	auto tdy = height / 32 + 1;
+	auto tx1 = tx0 + tdx;
+	auto ty1 = ty0 + tdy;
+	if(tx1 > area_width / 2 - 1)
+		tx1 = area_width / 2 - 1;
+	if(ty1 > area_height_tiles / 2 - 1)
+		ty1 = area_height_tiles / 2 - 1;
+	int ty = ty0;
+	pushrect push;
+	pushfore push_fore(colors::black);
+	width = 32;
+	height = 32;
+	while(ty <= ty1) {
+		int tx = tx0;
+		while(tx <= tx1) {
+			caret.x = last_screen.x1 + tx * 32 - camera.x;
+			caret.y = last_screen.y1 + ty * 32 - camera.y;
+			if(!is_state(point(tx * 32, ty * 32), StateExplored))
+				rectf();
+			tx++;
+		}
+		ty++;
+	}
+}
+
 static void paint_block_area() {
 	static bool show;
 	if(hot.key == Ctrl + 'B')
@@ -783,6 +815,7 @@ static void paint_area_map() {
 	paint_block_area();
 #endif // _DEBUG
 	paint_objects();
+	paint_fow();
 	paint_float_text();
 	apply_hilite_command();
 	if(combat_mode)

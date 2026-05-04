@@ -577,6 +577,8 @@ void creature::updateanimate() {
 			movestep(getspeed());
 			if(!ismoving())
 				stop();
+			if(isparty())
+				need_update_visibility = true;
 		}
 		if(prev_action != action)
 			activate_action(this);

@@ -53,8 +53,8 @@ extern unsigned char area_state[256 * 256];
 extern short unsigned area_tiles[64 * 64];
 extern short unsigned area_cost[256 * 256];
 extern short unsigned area_width, area_height, area_height_tiles;
-extern unsigned area_explored[128 * 4];
-extern unsigned area_visible[128 * 4];
+extern unsigned area_explored[256 * 8];
+extern unsigned area_visible[256 * 8];
 extern bool combat_mode;
 extern bool need_update_visibility;
 

@@ -1,2 +1,1 @@
-Error in file `rules/Basic.txt`:
- Line 14: In type `Talk` don't defined file reader
+Can't find file 'areas/AR1001.txt'
