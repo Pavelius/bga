@@ -141,6 +141,7 @@ void update_area_music() {
 
 void update_frames() {
 	update_tick();
+	update_visibility();
 	audio_update_channels();
 	update_area_music();
 	if(!game_pause) {

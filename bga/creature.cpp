@@ -448,7 +448,7 @@ static void play_human_action() {
 	auto object = choose_combat_action();
 	if(object >= area_cost && object < area_cost + lenghtof(area_cost)) {
 		auto move_index = (short unsigned*)object - area_cost;
-		auto move_position = s2a(i2s(move_index), player->getsize());
+		auto move_position = i2s(move_index);
 		player->lookat(move_position);
 		player->setposition(move_position);
 	} else if(bsdata<creature>::have(object)) {

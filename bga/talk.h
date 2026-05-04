@@ -22,11 +22,18 @@ struct talkei {
 };
 
 struct talki : nameable {
+	enum flagn : unsigned char {
+		Loaded, Error
+	};
 	sliceu<talkei>	elements;
+	unsigned		flags;
 	const talkei*	find(int index) const;
+	bool			is(flagn v) const { return (flags & (1 << v)) != 0; }
+	void			set(flagn v) { flags |= (1 << v); }
 };
 
 talki* find_talk(const talkei* p);
+talki* get_talk(const char* p);
 
 talkei* find_speech(const talki* current_talk, int id);
 

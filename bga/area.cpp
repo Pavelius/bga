@@ -25,7 +25,10 @@ unsigned char area_light[256 * 256];
 unsigned short area_tiles[64 * 64];
 unsigned short area_width, area_height, area_height_tiles;
 
+unsigned area_visible[128 * 4];
+
 bool combat_mode;
+bool need_update_visibility;
 short unsigned current_area = -1;
 static rfpma* pma_area;
 static rfpma* pma_minimap;
@@ -188,12 +191,38 @@ void read_area(areai* area) {
 	}
 }
 
-bool is_state(unsigned short index, areafn v) {
-	return (area_state[index] & (0x80 >> v)) != 0;
+bool is_state(point v, areafn i) {
+	auto x = v.x / 16;
+	auto y = v.y / 16;
+	return area_state[y * 256 + x] & (0x80 >> i);
 }
 
-void set_state(unsigned short index, areafn v) {
-	area_state[index] |= (0x80 >> v);
+void set_state(point v, areafn i) {
+	auto x = v.x / 16;
+	auto y = v.y / 16;
+	if(x < 0 || x >= 128 || y < 0 || y >= 128)
+		return;
+	area_state[y * 256 + x] |= (0x80 >> i);
+}
+
+static void set_light(int x, int y, int x1, int y1, areafn n) {
+}
+
+static void set_state(point v, int r, areafn n) {
+	auto x = v.x / 16;
+	auto y = v.y / 16;
+	auto y1 = y - r;
+	auto x1 = x - r;
+	auto y2 = y + r;
+	auto x2 = x + r;
+	for(auto x1 = x - r; x1 < x2; x1++) {
+		set_light(x, y, x1, y1, n);
+		set_light(x, y, x1, y2, n);
+	}
+	for(auto y1 = y - r; y1 < y2; y1++) {
+		set_light(x, y, x2, y1, n);
+		set_light(x, y, x2, y1, n);
+	}
 }
 
 bool is_block(short unsigned index) {
@@ -226,10 +255,10 @@ const sprite* get_area_sprites() {
 }
 
 point get_free(point position, int size) {
-	int i = s2i(a2s(position, size));
+	int i = s2i(position);
 	if(!is_block(i, size))
-		return s2a(i2s(i), size);
-	return s2a(i2s(get_free_index(i, 1, size)), size);
+		return i2s(i);
+	return i2s(get_free_index(i, 1, size));
 }
 
 short unsigned to(short unsigned index, directionn d) {
@@ -407,4 +436,17 @@ areai* get_area() {
 	if(current_area == 0xFFFF)
 		return 0;
 	return bsdata<areai>::elements + current_area;
+}
+
+void update_visibility() {
+	if(!need_update_visibility)
+		return;
+	need_update_visibility = false;
+	for(auto p : party) {
+		if(!p)
+			continue;
+		auto radius = 16;
+		set_state(p->position, radius, StateExplored);
+		set_state(p->position, radius, StateVisible);
+	}
 }

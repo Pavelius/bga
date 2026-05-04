@@ -114,6 +114,27 @@ void read_talk(const char* url) {
 	current_talk->elements.setend();
 }
 
+static bool read_talk(talki* current_talk) {
+	if(!current_talk)
+		return false;
+	char temp[4096]; stringbuilder sb(temp);
+	sb.clear(); sb.add("locale/%1/%2.tlk", current_locale, current_talk->id);
+	auto p = log::read(temp);
+	if(!p)
+		return false;
+	current_talk->elements.setbegin();
+	while(*p) {
+		if(!isevent(p)) {
+			log::errorp(p, "Expected symbol `#` followed by event number");
+			break;
+		}
+		p = read_event(p + 1, sb);
+	}
+	log::close();
+	current_talk->elements.setend();
+	return true;
+}
+
 void talkei::clear() {
 	memset((void*)this, 0, sizeof(*this));
 }
@@ -126,6 +147,20 @@ talki* find_talk(const talkei* p) {
 			return &e;
 	}
 	return 0;
+}
+
+talki* get_talk(const char* id) {
+	auto pm = bsdata<talki>::find(id);
+	if(!pm)
+		return 0;
+	if(!pm->is(talki::Loaded)) {
+		pm->set(talki::Loaded);
+		if(!read_talk(pm))
+			pm->set(talki::Error);
+	}
+	if(pm->is(talki::Error))
+		return 0;
+	return pm;
 }
 
 talkei* find_speech(const talki* current_talk, int id) {

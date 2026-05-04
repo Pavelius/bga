@@ -94,6 +94,9 @@
     <ClCompile Include="draw_text.cpp" />
     <ClCompile Include="draw_textf.cpp" />
     <ClCompile Include="feat.cpp" />
+    <ClCompile Include="bsfile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="floattext.cpp" />
     <ClCompile Include="font_util.cpp" />
     <ClCompile Include="formation.cpp" />
@@ -188,6 +191,9 @@
     <ClInclude Include="attack.h" />
     <ClInclude Include="audio.h" />
     <ClInclude Include="bsdata.h" />
+    <ClInclude Include="bsfile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="calendar.h" />
     <ClInclude Include="cflags.h" />
     <ClInclude Include="class.h" />

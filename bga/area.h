@@ -44,8 +44,6 @@ inline short unsigned m2i(int x, int y) { return (y << 8) + x; }
 inline short unsigned s2i(point v) { return m2i(v.x / 16, v.y / 12); }
 inline point i2s(short unsigned v) { return point(i2x(v) * 16, i2y(v) * 12); }
 inline point i2sc(short unsigned v) { return point(i2x(v) * 16 + 8, i2y(v) * 12 + 6); }
-inline point a2s(point v, int size) { return point(v.x - 8 * (size - 1), v.y - 6 * (size - 1)); }
-inline point s2a(point v, int size) { return point(v.x + 8 * size, v.y + 6 * size); }
 
 extern char	area_name[12];
 extern color area_light_pallette[256];
@@ -55,7 +53,10 @@ extern unsigned char area_state[256 * 256];
 extern short unsigned area_tiles[64 * 64];
 extern short unsigned area_cost[256 * 256];
 extern short unsigned area_width, area_height, area_height_tiles;
+extern unsigned area_explored[128 * 4];
+extern unsigned area_visible[128 * 4];
 extern bool combat_mode;
+extern bool need_update_visibility;
 
 areai* get_area();
 unsigned char get_look(point s, point d); // Determine orientation
@@ -86,8 +87,9 @@ void clear_path_map();
 void create_wave(short unsigned start, int size);
 bool is_block(short unsigned index);
 bool is_block(short unsigned index, int size);
-bool is_state(short unsigned index, areafn v);
+bool is_state(point v, areafn i);
 void read_area(areai* area);
 void setcamera(point v);
-void set_state(short unsigned index, areafn v);
+void set_state(point v, areafn i);
 void set_tile(short unsigned index, short unsigned tile);
+void update_visibility();

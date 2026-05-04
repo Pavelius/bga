@@ -17,6 +17,7 @@
 #include "rfiles.h"
 #include "script.h"
 #include "spell.h"
+#include "talk.h"
 #include "timer.h"
 #include "view.h"
 #include "worldmap.h"
@@ -32,6 +33,7 @@ int main(int argc, char* argv[]) {
 	// srand(923811);
 	stringbuilder::custom = main_identifier;
 	initialize_resources();
+	// initialize_data(bsdata<talki>::source, "locale/%1", "*.tlk");
 	bsreq::read("rules/Basic.txt");
 	read_options();
 #ifdef _DEBUG

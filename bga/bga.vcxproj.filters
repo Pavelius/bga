@@ -479,6 +479,9 @@
     <ClCompile Include="talk.cpp">
       <Filter>logic</Filter>
     </ClCompile>
+    <ClCompile Include="bsfile.cpp">
+      <Filter>support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ability.h">
@@ -810,6 +813,9 @@
     </ClInclude>
     <ClInclude Include="talk.h">
       <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="bsfile.h">
+      <Filter>support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

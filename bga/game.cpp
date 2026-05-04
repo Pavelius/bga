@@ -118,6 +118,7 @@ void enter(const char* location) {
 	debugmsg("Enter location [%1]", pn->id);
 	setcamera(pn->position);
 	setparty(pn->position, pn->orientation);
+	need_update_visibility = true;
 #ifdef AREA_DISAPEAR
 	update_frames();
 	scene_appear(view_game_area, 0);
