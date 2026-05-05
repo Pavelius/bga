@@ -643,11 +643,15 @@ static void paint_ground() {
 
 static bool hilite_creature(const drawable* pv) {
 	auto p = (creature*)pv;
+	if(!is_visible(hotspot))
+		return false;
 	return hotspot.in(p->getbox());
 }
 
 static void paint_creature() {
 	auto p = (creature*)last_object;
+	if(!is_visible(p->position))
+		return;
 	if(p->ishilite())
 		cursor.cicle = 0;
 	paint_markers(p);

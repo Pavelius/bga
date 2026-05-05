@@ -203,6 +203,10 @@ bool is_explored(unsigned* data, int x, int y) {
 	return (data[y * 4 + x / 32] & (1 << (x % 32))) != 0;
 }
 
+bool is_visible(point v) {
+	return is_explored(area_visible, v.x / 32, v.y / 32);
+}
+
 bool is_block(short unsigned index) {
 	//0 - Obstacle - impassable, light blocking (черный)
 	//1 - Sand ? (burgandy)

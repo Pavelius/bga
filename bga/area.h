@@ -85,6 +85,7 @@ void create_wave(short unsigned start, int size);
 bool is_block(short unsigned index);
 bool is_block(short unsigned index, int size);
 bool is_explored(unsigned* data, int x, int y);
+bool is_visible(point v);
 void read_area(areai* area);
 void setcamera(point v);
 void set_tile(short unsigned index, short unsigned tile);
