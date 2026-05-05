@@ -306,14 +306,59 @@ static void paint_tiles() {
 	}
 }
 
+static unsigned char fog_corner(unsigned* data, int x, int y) {
+	unsigned char r = 0;
+	if(!is_explored(data, x, y - 1))
+		r |= 1;
+	if(!is_explored(data, x + 1, y))
+		r |= 2;
+	if(!is_explored(data, x, y + 1))
+		r |= 4;
+	if(!is_explored(data, x - 1, y))
+		r |= 8;
+	return r;
+}
+
+static void view_dark_fog(sprite* ps, unsigned char corner) {
+	switch(corner) {
+	case 1: image(ps, 0, 0); break;
+	case 2: image(caret.x + 32, caret.y, ps, 1, ImageMirrorH); break;
+	case 3: image(caret.x + 32, caret.y, ps, 4, ImageMirrorH); break;
+	case 4: image(caret.x, caret.y + 32, ps, 0, ImageMirrorV); break;
+	case 6: image(caret.x + 32, caret.y + 32, ps, 4, ImageMirrorV | ImageMirrorH); break;
+	case 8: image(ps, 1, 0); break;
+	case 9: image(ps, 4, 0); break;
+	case 12: image(caret.x, caret.y + 32, ps, 4, ImageMirrorV); break;
+	default: break;
+	}
+}
+
+static void view_light_fog(sprite* ps, unsigned char corner) {
+	switch(corner) {
+	case 1: image(ps, 2, 0); break;
+	case 2: image(caret.x + 32, caret.y, ps, 3, ImageMirrorH); break;
+	case 3: image(ps, 7, 0); break;
+	case 4: image(caret.x, caret.y + 32, ps, 2, ImageMirrorV); break;
+	case 6: image(caret.x, caret.y + 32, ps, 7, ImageMirrorV); break;
+	case 8: image(caret.x, caret.y, ps, 3, 0); break;
+	case 9: image(caret.x, caret.y, ps, 6, 0); break;
+	case 12: image(caret.x, caret.y + 32, ps, 6, ImageMirrorV); break;
+	default: break;
+	}
+}
+
 static void paint_fow() {
 	auto sp = gres("FOGOWAR");
 	if(!sp)
 		return;
-	auto tx0 = camera.x / 32;
-	auto ty0 = camera.y / 32;
-	auto tdx = width / 32 + 1;
-	auto tdy = height / 32 + 1;
+	auto pa = get_area();
+	if(!pa)
+		return;
+	const auto sz = 32;
+	auto tx0 = camera.x / sz;
+	auto ty0 = camera.y / sz;
+	auto tdx = width / sz + 1;
+	auto tdy = height / sz + 1;
 	auto tx1 = tx0 + tdx;
 	auto ty1 = ty0 + tdy;
 	if(tx1 > area_width / 2 - 1)
@@ -323,15 +368,21 @@ static void paint_fow() {
 	int ty = ty0;
 	pushrect push;
 	pushfore push_fore(colors::black);
-	width = 32;
-	height = 32;
+	width = sz; height = sz;
 	while(ty <= ty1) {
 		int tx = tx0;
 		while(tx <= tx1) {
 			caret.x = last_screen.x1 + tx * 32 - camera.x;
 			caret.y = last_screen.y1 + ty * 32 - camera.y;
-			if(!is_state(point(tx * 32, ty * 32), StateExplored))
+			if(!is_explored(pa->explore, tx, ty))
 				rectf();
+			else {
+				if(!is_explored(area_visible, tx, ty))
+					image(sp, 5, 0);
+				else
+					view_light_fog(sp, fog_corner(area_visible, tx, ty));
+				view_dark_fog(sp, fog_corner(pa->explore, tx, ty));
+			}
 			tx++;
 		}
 		ty++;

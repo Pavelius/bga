@@ -25,6 +25,8 @@ unsigned char area_light[256 * 256];
 unsigned short area_tiles[64 * 64];
 unsigned short area_width, area_height, area_height_tiles;
 
+unsigned area_visible[128 * 4];
+
 bool combat_mode;
 bool need_update_visibility;
 short unsigned current_area = -1;
@@ -189,14 +191,16 @@ void read_area(areai* area) {
 	}
 }
 
-bool is_state(point v, areafn i) {
-	return area_state[s2i(v)] & (0x80 >> i);
-}
-
-static void set_state(int x, int y, areafn i) {
-	if(x < 0 || y < 0 || x >= area_width || y >= area_height)
-		return;
-	area_state[y * 256 + x] |= (0x80 >> i);
+bool is_explored(unsigned* data, int x, int y) {
+	if(x < 0)
+		x = 0;
+	if(y < 0)
+		y = 0;
+	if(x > area_width / 2)
+		x = area_width / 2;
+	if(y > area_height_tiles / 2)
+		y = area_height_tiles / 2;
+	return (data[y * 4 + x / 32] & (1 << (x % 32))) != 0;
 }
 
 bool is_block(short unsigned index) {
@@ -218,6 +222,11 @@ bool is_block(short unsigned index) {
 	//15 - Grass (белый)
 	unsigned char a = area_state[index] & 0x0F;
 	return a == 0 || a == 8 || a == 10 || a == 12 || a == 13;
+}
+
+static bool is_block_light(short unsigned i) {
+	unsigned char a = area_state[i] & 0x0F;
+	return a == 0;
 }
 
 const sprite* get_minimap() {
@@ -412,14 +421,21 @@ areai* get_area() {
 	return bsdata<areai>::elements + current_area;
 }
 
-static bool is_light_pass(int x, int y, areafn f) {
+static bool is_light_pass(int x, int y) {
 	if(y < 0 || x < 0 || y >= area_height || x >= area_width)
 		return false;
-	area_state[y * 256 + x] |= (0x80 >> f);
-	return is_block(y * 256 + x);
+	auto x1 = x / 2;
+	auto y1 = y * 12 / 32;
+	auto ai = y1 * 4 + x1 / 32;
+	auto af = 1 << (x1 % 32);
+	auto pa = get_area();
+	if(pa)
+		pa->explore[ai] |= af;
+	area_visible[ai] |= af;
+	return !is_block_light(y * 256 + x);
 }
 
-static void set_light_pass(int x0, int y0, int x1, int y1, areafn f) {
+static void set_light_pass(int x0, int y0, int x1, int y1) {
 	int dx = iabs(x1 - x0), sx = x0 < x1 ? 1 : -1;
 	int dy = -iabs(y1 - y0), sy = y0 < y1 ? 1 : -1;
 	int err = dx + dy, e2;
@@ -430,11 +446,11 @@ static void set_light_pass(int x0, int y0, int x1, int y1, areafn f) {
 				break;
 			err += dy;
 			if(e2 <= dx) {
-				if(!is_light_pass(x0, y0 + sy, f))
+				if(!is_light_pass(x0, y0 + sy))
 					return;
 			}
 			x0 += sx;
-			if(!is_light_pass(x0, y0, f))
+			if(!is_light_pass(x0, y0))
 				return;
 		}
 		if(e2 <= dx) {
@@ -442,33 +458,31 @@ static void set_light_pass(int x0, int y0, int x1, int y1, areafn f) {
 				break;
 			err += dx;
 			if(2 * err >= dy)
-				if(!is_light_pass(x0 + sx, y0, f))
+				if(!is_light_pass(x0 + sx, y0))
 					return;
 			y0 += sy;
-			if(!is_light_pass(x0, y0, f))
+			if(!is_light_pass(x0, y0))
 				return;
 		}
 	}
 }
 
-static void set_state(point v, int r, areafn f) {
+static void set_state(point v, int r) {
 	auto x = v.x / 16;
 	auto y = v.y / 12;
-	auto y1 = y - r;
-	auto x1 = x - r;
-	auto y2 = y + r;
-	auto x2 = x + r;
+	auto y1 = y - r, y2 = y + r;
+	auto x1 = x - r, x2 = x + r;
 	for(auto x1 = x - r; x1 < x2; x1++) {
 		if(x1 < 0 || x1 >= area_width)
 			continue;
-		set_light_pass(x, y1, x1, y1, f);
-		set_light_pass(x, y2, x1, y2, f);
+		set_light_pass(x, y, x1, y1);
+		set_light_pass(x, y, x1, y2);
 	}
 	for(auto y1 = y - r; y1 < y2; y1++) {
 		if(y1 < 0 || y1 >= area_height)
 			continue;
-		set_light_pass(x1, y, x1, y1, f);
-		set_light_pass(x2, y, x2, y1, f);
+		set_light_pass(x, y, x1, y1);
+		set_light_pass(x, y, x2, y1);
 	}
 }
 
@@ -476,10 +490,11 @@ void update_visibility() {
 	if(!need_update_visibility)
 		return;
 	need_update_visibility = false;
+	memset(area_visible, 0, sizeof(area_visible));
 	for(auto p : party) {
 		if(!p)
 			continue;
 		auto radius = 16;
-		set_state(p->position, radius, StateExplored);
+		set_state(p->position, radius);
 	}
 }

@@ -12,9 +12,6 @@ enum areaf : unsigned char {
 	AreaScounted, AreaVisited,
 	AreaOutdoor, AreaCity, AreaForest, AreaDungeon,
 };
-enum areafn : unsigned char {
-	StateExplored, StateVisible,
-};
 enum areablockn : short unsigned {
 	PassableMaximum = 0xFFF0,
 	Blocked, BlockedCreature, BlockedLeft, BlockedUp,
@@ -27,11 +24,12 @@ struct rfsnd;
 
 struct areai : arcfile {
 	typedef flagable<2, unsigned> flag64;
-	rfsnd* music;
-	flag64 doors_opened, doors_trapped, doors_locked;
-	flag32 region_disabled;
-	flag64 animate_disabled;
-	flag32 flags;
+	rfsnd*		music;
+	flag64		doors_opened, doors_trapped, doors_locked;
+	flag32		region_disabled;
+	flag64		animate_disabled;
+	flag32		flags;
+	unsigned	explore[128 * 4];
 	bool is(areaf v) const { return flags.is(v); }
 	void set(areaf v) { flags.set(v); }
 	void remove(areaf v) { flags.remove(v); }
@@ -53,8 +51,7 @@ extern unsigned char area_state[256 * 256];
 extern short unsigned area_tiles[64 * 64];
 extern short unsigned area_cost[256 * 256];
 extern short unsigned area_width, area_height, area_height_tiles;
-extern unsigned area_explored[256 * 8];
-extern unsigned area_visible[256 * 8];
+extern unsigned area_visible[128 * 4];
 extern bool combat_mode;
 extern bool need_update_visibility;
 
@@ -87,9 +84,8 @@ void clear_path_map();
 void create_wave(short unsigned start, int size);
 bool is_block(short unsigned index);
 bool is_block(short unsigned index, int size);
-bool is_state(point v, areafn i);
+bool is_explored(unsigned* data, int x, int y);
 void read_area(areai* area);
 void setcamera(point v);
-void set_state(point v, areafn i);
 void set_tile(short unsigned index, short unsigned tile);
 void update_visibility();

@@ -43,7 +43,7 @@ using namespace draw;
 BSDATAC(advancei, 512)
 BSDATAC(ambient, 64)
 BSDATAC(animation, 128)
-BSDATAC(areai, 512)
+BSDATAC(areai, 256)
 BSDATAC(calendari, 128)
 BSDATAC(container, 128)
 BSDATAC(creature, 256)

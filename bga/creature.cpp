@@ -574,11 +574,16 @@ void creature::updateanimate() {
 			nextaction();
 		}
 		if(action == AnimateMove) {
+			auto prev_index = position_index;
 			movestep(getspeed());
+			position_index = s2i(position);
 			if(!ismoving())
 				stop();
-			if(isparty())
-				need_update_visibility = true;
+			if(isparty()) {
+				// Only party member update explore
+				if(prev_index != position_index)
+					need_update_visibility = true;
+			}
 		}
 		if(prev_action != action)
 			activate_action(this);
