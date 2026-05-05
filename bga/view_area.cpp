@@ -342,7 +342,7 @@ static void view_light_fog(sprite* ps, unsigned char corner) {
 	case 6: image(caret.x, caret.y + 32, ps, 7, ImageMirrorV); break;
 	case 8: image(caret.x, caret.y, ps, 3, 0); break;
 	case 9: image(caret.x, caret.y, ps, 6, 0); break;
-	case 12: image(caret.x, caret.y + 32, ps, 6, ImageMirrorV); break;
+	case 12: image(caret.x, caret.y + 33, ps, 6, ImageMirrorV); break;
 	default: break;
 	}
 }
