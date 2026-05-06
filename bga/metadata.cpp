@@ -4,7 +4,6 @@
 #include "ambient.h"
 #include "animation.h"
 #include "area.h"
-#include "calendar.h"
 #include "bsreq.h"
 #include "color.h"
 #include "condition.h"
@@ -43,7 +42,6 @@ BSDATAC(advancei, 512)
 BSDATAC(ambient, 64)
 BSDATAC(animation, 128)
 BSDATAC(areai, 256)
-BSDATAC(calendari, 128)
 BSDATAC(container, 128)
 BSDATAC(creature, 256)
 BSDATAC(door, 64)
@@ -83,11 +81,6 @@ BSMETA(alignmenti) = {
 BSMETA(areai) = {
 	BSREQ(id),
 	BSREQ(music),
-	{}};
-BSMETA(calendari) = {
-	BSREQ(id),
-	BSENM(period, periodi),
-	BSREQ(duration),
 	{}};
 BSMETA(classi) = {
 	BSREQ(id),
@@ -169,9 +162,6 @@ BSMETA(npci) = {
 	BSREQ(elements),
 	BSDST(abilities, abilityi),
 	BSDST(classes, classi),
-	{}};
-BSMETA(periodi) = {
-	BSREQ(id),
 	{}};
 BSMETA(point) = {
 	BSREQ(x), BSREQ(y),
@@ -263,12 +253,10 @@ BSDATA(varianti) = {
 	{"Advance", VAR(advancei, 2)},
 	{"Alignment", VAR(alignmenti, 1), 0, 0, ftscript<alignmenti>},
 	{"Area", VAR(areai, 1)},
-	{"Calendar", VAR(calendari, 1)},
 	{"Class", VAR(classi, 1), ftinfo<classi>, 0, ftscript<classi>},
 	{"ColorGrad", VAR(colorgrad, 1)},
 	{"Condition", VAR(conditioni, 1), 0, 0, ftscript<conditioni>, fttest<conditioni>},
 	{"Container", VAR(container, 0)},
-	{"DayPart", VAR(periodi, 1)},
 	{"Diety", VAR(dietyi, 1)},
 	{"Entrance", VAR(entrancei, 1)},
 	{"Feat", VAR(feati, 1), ftinfo<feati>, 0, ftscript<feati>},

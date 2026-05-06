@@ -107,6 +107,10 @@ static void load_area(areai* area) {
 	need_update_creatures = true;
 }
 
+int getminute() {
+	return game.get(Rounds);
+}
+
 void enter(const char* location) {
 #ifdef AREA_DISAPEAR
 	scene_disapear(0, colors::black);

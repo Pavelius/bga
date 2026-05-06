@@ -39,7 +39,6 @@
     <Text Include="..\locale\ru\UnknownNames.txt" />
     <Text Include="..\parties\HandsOfFury.txt" />
     <Text Include="..\rules\Advance.txt" />
-    <Text Include="..\rules\Calendar.txt" />
     <Text Include="..\rules\Entrances.txt" />
     <Text Include="..\rules\General.txt" />
     <Text Include="..\rules\Hotkeys.txt" />

@@ -332,7 +332,7 @@ static void passed_time(stringbuilder& sb) {
 
 static void real_time(stringbuilder& sb, const io::file::datei& v) {
 	sb.adds("%1i", v.day);
-	sb.adds("%-1", getnm(get_real_month_of(v.month)));
+	sb.adds("%-1", getnm(months_id[v.month - 1]));
 	sb.adds("%1i", v.year);
 	sb.add(", %1.2i:%2.2i", v.hour, v.minute);
 }

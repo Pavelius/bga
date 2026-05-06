@@ -15,13 +15,13 @@ struct periodi : nameable {
 };
 
 int getday();
-int getday(unsigned passed);
 int getminute();
-int getminute(unsigned value);
 int gethour();
-int gethour(unsigned passed);
 
-const char* get_real_month(int number);
-const char* get_real_month_of(int number);
+extern const char* months_id[];
+extern const char* special_day_id[];
 
 bool active_time(unsigned shedule);
+
+void get_game_date(unsigned minutes, int& year, int& month, int& day, int& special);
+void set_game_date(unsigned& minutes, int year, int month, int day, int special = 0);

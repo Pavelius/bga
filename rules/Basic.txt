@@ -5,7 +5,6 @@
 #include "rules/Advance.txt"
 #include "rules/Store.txt"
 #include "rules/Worldmap.txt"
-#include "rules/Calendar.txt"
 #include "rules/Feats.txt"
 #include "rules/Spells.txt"
 #include "rules/Diety.txt"

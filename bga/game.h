@@ -24,6 +24,7 @@ extern int last_number;
 
 const char* get_save_url(char* result, const char* id);
 
+int getminute();
 int game_rand(int v1, int v2);
 
 void debugmsg(const char* format, ...);
