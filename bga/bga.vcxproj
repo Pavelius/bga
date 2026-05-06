@@ -214,7 +214,6 @@
     <ClInclude Include="feat.h" />
     <ClInclude Include="flagable.h" />
     <ClInclude Include="floattext.h" />
-    <ClInclude Include="form.h" />
     <ClInclude Include="formation.h" />
     <ClInclude Include="ftflag.h" />
     <ClInclude Include="game.h" />

@@ -7,7 +7,6 @@
 #include "console.h"
 #include "creaturea.h"
 #include "draw.h"
-#include "form.h"
 #include "formation.h"
 #include "game.h"
 #include "help.h"
@@ -663,20 +662,23 @@ void get_player_portrait(surface& sm, int index) {
 	canvas = push_canvas;
 }
 
-void portrait_small(creature* pc, bool player_hilite) {
+void portrait_small(creature* p, bool player_hilite) {
 	pushrect push;
 	if(!input_disabled) {
 		if(player_hilite) {
-			if(pc == player)
+			if(p == player)
 				hilight_protrait();
-		} else if(pc->isselected())
+		} else if(p->isselected())
 			hilight_protrait();
 	}
 	setoffset(2, 2);
-	image(pma_port[0], pc->portrait, 0);
-	if(drag_item_source && player != pc && ishilite()) {
-		drag_item_dest = pc->wears;
-		hilight_drag_protrait();
+	image(pma_port[0], p->portrait, 0);
+	if(ishilite()) {
+		tips_sb.add(p->name);
+		if(drag_item_source && player != p) {
+			drag_item_dest = p->wears;
+			hilight_drag_protrait();
+		}
 	}
 }
 
@@ -1842,27 +1844,29 @@ bool open_name(char* result, int size) {
 }
 
 static bool paint_tips() {
-	static rect tips_area;
+	static point position;
 	static unsigned long tips_stamp;
-	auto n = getcputime();
-	if(tips_area != hot.hilite) {
-		tips_stamp = n;
-		tips_area = hot.hilite;
-	}
-	if(!tips_sb)
-		return false;
-	if(tips_stamp + optvalues[ToolTipsDelay] > n)
-		return false;
 	const char* pn = tips_sb;
-	if(!pn)
+	if(!pn || pn[0]==0)
 		return false;
 	auto ps = gres("TOOLTIP");
 	if(!ps)
 		return false;
+	auto n = getcputime();
+	if(!tips_stamp)
+		tips_stamp = n;
+	if(tips_stamp + optvalues[ToolTipsDelay] > n) {
+		position = hot.mouse;
+		return false;
+	}
+	if(position && distance(position, hot.mouse) > 4) {
+		position.clear();
+		tips_stamp = 0;
+		return false;
+	}
 	const int pad_x = 8;
-	//const int pad_y = 4;
-	caret.x = tips_area.x1;
-	caret.y = tips_area.y2 + 4;
+	caret.x = position.x;
+	caret.y = position.y + 4;
 	width = textw(pn) + pad_x * 2;
 	height = 32;
 	if(caret.x >= getwidth() - width - 8)
@@ -2023,15 +2027,3 @@ void initialize_interface() {
 	pma_butinv2 = gres("INVBUT2");
 	pma_ground = gres("GROUND");
 }
-
-BSDATA(form) = {
-	{"ChangePanelMode", change_panel_mode},
-	{"OpenAutomap", setgameproc, 0, 0, paint_game_automap},
-	{"OpenCharacterSheet", setgameproc, 0, 0, paint_game_character},
-	{"OpenCharacterSpells", setgameproc, 0, 0, paint_game_spells},
-	{"OpenInventory", setgameproc, 0, 0, paint_game_inventory},
-	{"OpenJournal", setgameproc, 0, 0, paint_game_journal},
-	{"GameQuickLoad", game_quick_load},
-	{"GameQuickSave", game_quick_save},
-};
-BSDATAF(form);

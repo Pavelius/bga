@@ -793,9 +793,6 @@
     <ClInclude Include="keybind.h">
       <Filter>support</Filter>
     </ClInclude>
-    <ClInclude Include="form.h">
-      <Filter>support</Filter>
-    </ClInclude>
     <ClInclude Include="arcfile.h">
       <Filter>support</Filter>
     </ClInclude>

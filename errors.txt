@@ -1,3 +1,8 @@
-Can't find file 'areas/AR1100.txt'
-Can't find file 'areas/AR1104.txt'
-Can't find file 'areas/AR1105.txt'
+Error in file `rules/Hotkeys.txt`:
+ Line 3: Can't find variant `ChangePanelMode`
+ Line 4: Can't find variant `GameQuickSave`
+ Line 5: Can't find variant `OpenAutomap`
+ Line 6: Can't find variant `OpenCharacterSheet`
+ Line 7: Can't find variant `OpenCharacterSpells`
+ Line 8: Can't find variant `OpenInventory`
+ Line 9: Can't find variant `OpenJournal`

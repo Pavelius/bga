@@ -745,6 +745,11 @@ static point get_action_position(void* object, point nearest) {
 static void apply_hilite_command() {
 	if(!hilite_object)
 		return;
+	if(bsdata<creature>::have(hilite_object)) {
+		auto p = (creature*)hilite_object;
+		if(p->name[0])
+			tips_sb.add(p->name);
+	}
 	if(hot.key == MouseLeft && !hot.pressed) {
 		if(bsdata<region>::have(hilite_object)) {
 			auto p = (region*)(drawable*)hilite_object;

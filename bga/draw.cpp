@@ -2579,27 +2579,6 @@ void draw::fire(bool run, fnevent proc, long value, long value2, void* object) {
 		execute(proc, value, value2, object);
 }
 
-void draw::tipspos() {
-	caret = tips_caret;
-	width = 320;
-	if(tips_size.y) {
-		width = tips_size.x;
-		height = tips_size.y;
-		return;
-	}
-	textfs(tips_sb);
-	// Calculate rect
-	if(!tips_size.x) {
-		if(hot.hilite) {
-			caret.x = hot.hilite.x1;
-			caret.y = hot.hilite.y2 + 2;
-		} else {
-			caret.x = hot.mouse.x + 32;
-			caret.y = hot.mouse.y + 32;
-		}
-	}
-}
-
 void draw::set(int x, int y) {
 	caret.x = x - camera.x;
 	caret.y = y - camera.y;

@@ -5,7 +5,6 @@
 #include "console.h"
 #include "creature.h"
 #include "draw.h"
-#include "form.h"
 #include "game.h"
 #include "itemground.h"
 #include "list.h"
@@ -38,11 +37,6 @@ template<> void ftscript<abilityi>(int value, int counter) {
 template<> void ftscript<feati>(int value, int counter) {
 	if(counter >= 0)
 		player->feats.set(value);
-}
-
-template<> void ftscript<form>(int value, int counter) {
-	auto& e = bsdata<form>::elements[value];
-	execute(e.command, e.param1, e.param2, (void*)e.object);
 }
 
 template<> void ftscript<classi>(int value, int counter) {

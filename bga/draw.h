@@ -269,7 +269,6 @@ int						texth(const char* string, int width);
 int						textw(int sym);
 int						textw(const char* string, int count = -1);
 int						textw(rect& rc, const char* string);
-void					tipspos();
 void					updatewindow();
 void					write(const char* url, unsigned char* bits, int width, int height, int bpp, int scanline, color* pallette);
 void					vertical(fnevent proc);
