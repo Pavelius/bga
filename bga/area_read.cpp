@@ -111,7 +111,7 @@ static const char* read_colors(const char* p) {
 static const char* create_creature(const char* p) {
 	player = bsdata<creature>::addz();
 	player->clear();
-	player->area_index = current_area;
+	player->gender = Male;
 	player->portrait = 0xFFFF;
 	p = psnum(p, player->position_index);
 	p = psnum(p, player->orientation);

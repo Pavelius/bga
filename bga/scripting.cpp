@@ -100,7 +100,7 @@ template<> void ftscript<rfpma>(int value, int counter) {
 
 template<> void ftscript<npci>(int value, int counter) {
 	auto pm = bsdata<npci>::elements + value;
-	player->gender = pm->gender;
+	player->gender = Male;
 	player->race = pm->race;
 	player->alignment = pm->alignment;
 	memcpy(player->colors, pm->colors, sizeof(player->colors));
@@ -151,6 +151,11 @@ static void identify_item(int bonus) {
 	last_item->identify(bonus);
 }
 
+static void set_dead(int bonus) {
+	player->hp = -10;
+	player->set(AnimateAgony);
+}
+
 BSDATA(conditioni) = {
 	{"IfSpellcaster", if_spellcaster},
 };
@@ -160,5 +165,6 @@ BSDATA(script) = {
 	{"IdentifyItem", identify_item},
 	{"Heal", heal},
 	{"PartyMember", party_member},
+	{"SetDead", set_dead},
 };
 BSDATAF(script)

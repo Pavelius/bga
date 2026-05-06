@@ -10,7 +10,7 @@ void update_creatures() {
 	need_update_creatures = false;
 	creatures.clear();
 	for(auto& e : bsdata<creature>()) {
-		if(!e || e.area_index != current_area)
+		if(e.area_index != current_area)
 			continue;
 		creatures.add(&e);
 	}

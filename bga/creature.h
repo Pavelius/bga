@@ -20,7 +20,7 @@ struct creature : actor, statable, classa, avatarable, spellv {
 	resname			name;
 	short unsigned	speak;
 	short unsigned	talk;
-	explicit operator bool() const { return hp > 0; }
+	explicit operator bool() const { return gender != NoGender; }
 	void			select();
 	void			clear();
 	void			fixattack(drawable* target);
@@ -59,7 +59,6 @@ void apply_portraits();
 void check_combat();
 void clear_selection();
 void create_abilities(bool allow_random);
-void create_character(racen race, gendern gender, classn classv, unsigned short portrait);
 bool have_multiselect();
 bool have_selection();
 void party_add_item(item& v);

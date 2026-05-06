@@ -3,7 +3,8 @@
 #include "nameable.h"
 
 enum gendern : unsigned char {
-	NoGender, Male, Female
+	NoGender,
+	Male, Female
 };
 struct genderi : nameable {
 };

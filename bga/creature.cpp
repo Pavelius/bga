@@ -82,8 +82,10 @@ void apply_portraits() {
 
 void player_finish() {
 	update_player();
-	player->hp = player->hp_max;
+	if(player->hp >= 0)
+		player->hp = player->hp_max;
 	player->stop();
+	player->area_index = current_area;
 }
 
 static void apply(const variants& source) {
@@ -227,26 +229,10 @@ void create_abilities(bool allow_random) {
 	}
 }
 
-void create_character(racen race, gendern gender, classn classv, unsigned short portrait) {
-	player = bsdata<creature>::add();
-	player->clear();
-	player->area_index = current_area;
-	player->gender = gender;
-	player->portrait = portrait;
-	player->race = race;
-	random_ability();
-	apply_portraits();
-	raise_class(classv);
-	raise_random_skills(get_skill_points(classv));
-	player->set(DynamicAnimation);
-	player_finish();
-}
-
 void create_party_character(int index) {
 	auto& e = last_party->characters[index];
 	player = bsdata<creature>::add();
 	player->clear();
-	player->area_index = current_area;
 	player->gender = e.gender;
 	player->portrait = e.portrait;
 	player->alignment = e.alignment;
@@ -542,7 +528,9 @@ bool creature::roll(skilln v, int bonus) {
 }
 
 void creature::stop() {
-	if(feats.is(ReadyToBattle)) {
+	if(hp <= 0)
+		set(AnimateAgony);
+	else if(feats.is(ReadyToBattle)) {
 		if(getweapon().geti().is(TwoHanded))
 			set(AnimateCombatStanceTwoHanded);
 		else

@@ -15,7 +15,6 @@ enum dietyn : unsigned char;
 enum racen : unsigned char;
 
 struct npci : nameable, classa, coloration, statable {
-	gendern		gender;
 	alignmentn	alignment;
 	dietyn		diety;
 	racen		race;

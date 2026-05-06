@@ -721,7 +721,8 @@ static bool open_character_generation(creature& copy) {
 
 static void create_character() {
 	auto index = hot.param;
-	creature character; character.clear();
+	creature character;
+	character.clear();
 	if(!open_character_generation(character))
 		return;
 	party[index] = bsdata<creature>::addz();

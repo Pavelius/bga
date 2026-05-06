@@ -498,7 +498,7 @@ void update_visibility() {
 	for(auto p : party) {
 		if(!p)
 			continue;
-		auto radius = 16;
+		auto radius = 24;
 		set_state(p->position, radius);
 	}
 }

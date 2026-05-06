@@ -159,9 +159,9 @@ void actor::lookat(directionn direction) {
 void actor::moveto(point destination) {
 	if(destination == position)
 		return;
-	area_index = current_area;
 	lookat(destination);
 	set(AnimateMove);
+	area_index = current_area;
 	move_start = position;
 	move_stop = destination;
 }
