@@ -1573,14 +1573,23 @@ static void paint_game_automap() {
 }
 
 static void paint_spell_description() {
-	paint_dialog("GUISPL", 2);
-	setdialog(22, 22, 343, 20); texta(getnm("Spell"), AlignCenterCenter);
-	setdialog(22, 52, 343, 20); texta(metrics::font, colors::yellow, last_spell->getname(), AlignCenterCenter);
-	setdialog(27, 87, 355, 304); paint_description(14, -5, 9);
-	setdialog(375, 22); image(pma_spells, last_spell->avatar, 0);
-	//Scroll GBTNSCRL 396 82 12 313 frames(1 0 3 2 4 5)
-	setdialog(135, 402); button(gres("GBTNMED"), 1, 2, KeyEscape, "Done"); fire(buttoncancel);
+	auto pb1 = gres("GBTNMED");
+	paint_dialog("GIITMH08");
+	setdialog(36, 37, 357, 30); texta(metrics::h1, last_spell->getname(), AlignCenterCenter);
+	setdialog(446, 36); image(pma_spells, last_spell->avatar, 0);
+	setdialog(338, 432); button(pb1, 1, 2, KeyEscape, "Done"); fire(buttoncancel);
+	setdialog(28, 115, 435, 299); paint_description(17, -6, 12);
 }
+
+//static void paint_spell_description_old() {
+//	paint_dialog("GUISPL", 2);
+//	setdialog(22, 22, 343, 20); texta(getnm("Spell"), AlignCenterCenter);
+//	setdialog(22, 52, 343, 20); texta(metrics::font, colors::yellow, last_spell->getname(), AlignCenterCenter);
+//	setdialog(27, 87, 355, 304); paint_description(14, -5, 9);
+//	setdialog(375, 22); image(pma_spells, last_spell->avatar, 0);
+//	//Scroll GBTNSCRL 396 82 12 313 frames(1 0 3 2 4 5)
+//	setdialog(135, 402); button(gres("GBTNMED"), 1, 2, KeyEscape, "Done"); fire(buttoncancel);
+//}
 
 static void open_spell_info() {
 	last_spell = (spelli*)hot.object;
@@ -1897,8 +1906,8 @@ static bool paint_tips() {
 	image(caret.x + 3, caret.y, ps, 0, ImageNoOffset);
 	clipping = push_clip;
 	image(caret.x + width - 3, caret.y, ps, 4, ImageNoOffset);
-	caret.y += (32 - texth()) / 2;
-	caret.x += pad_x;
+	caret.y += (30 - texth()) / 2;
+	caret.x += pad_x - 2;
 	text(pn);
 	return true;
 }

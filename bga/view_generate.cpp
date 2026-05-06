@@ -842,6 +842,7 @@ void open_select_party() {
 		for(auto i = 0; i < lenghtof(last_party->characters); i++) {
 			create_party_character(i);
 			party[i] = player;
+			add_player_spellbooks();
 		}
 	}
 	start_new_game();
