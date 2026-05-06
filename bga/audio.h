@@ -2,6 +2,9 @@
 
 struct rfsnd;
 
+extern bool audio_allow_sfx;
+extern bool audio_allow_music;
+
 int audio_lenght(const void* object);
 
 void audio_play(void* object);

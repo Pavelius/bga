@@ -39,6 +39,7 @@ int main(int argc, char* argv[]) {
 #ifdef _DEBUG
 	util_main();
 #endif // _DEBUG
+	audio_allow_music = false;
 	initialize_items();
 	initialize_translation();
 	initialize_colorgrad();

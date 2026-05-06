@@ -3,6 +3,7 @@
 #include "audio.h"
 #include "area.h"
 #include "archive.h"
+#include "calendar.h"
 #include "console.h"
 #include "container.h"
 #include "creaturea.h"
@@ -108,7 +109,7 @@ static void load_area(areai* area) {
 }
 
 int getminute() {
-	return game.get(Rounds);
+	return game.get(Rounds) / 10;
 }
 
 void enter(const char* location) {
@@ -271,10 +272,21 @@ void game_quick_load() {
 	game_quick_save(false);
 }
 
+static void set_game_time(int year, int month, int day, int special, int hour, int minute) {
+	unsigned r = 0;
+	set_game_date(r, year, month, day, special);
+	r = ((r * 24 * 60) + hour * 60 + minute) * 10;
+	game.set(Rounds, r);
+}
+
 static void create_game() {
 	game.clear();
 	game.set(IdentifyCost, 100);
-	game.set(Rounds, xrand(10, 30));
+	set_game_time(1372, 2, 12, 0, 10, 0);
+	int year, month, day, special, hour, minutes;
+	get_game_date(game.get(Rounds) / (24 * 60 * 10), year, month, day, special);
+	hour = gethour();
+	minutes = getminute() % 60;
 }
 
 void party_action(point target_position, actionn action, short unsigned target) {

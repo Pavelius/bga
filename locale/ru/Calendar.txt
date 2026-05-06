@@ -24,10 +24,27 @@ OctoberOf: Октября
 NovemberOf: Ноября
 DecemberOf: Декабря
 
+JanuaryOfGame: Глубокой зимы
+FebruaryOfGame: Когтей зимы
+MarchOfGame: Заката зимы
+AprilOfGame: Штормов
+MayOfGame: Распускания
+JuneOfGame: Времени цветов
+JulyOfGame: Жары
+AugustOfGame: Высого солнца
+SeptemberOfGame: Увядания
+OctoberOfGame: Листопада
+NovemberOfGame: Гниения
+DecemberOfGame: Глубокой ночи
+
 Year: Год
 Week: Неделя
+
 Day: День
+DayPl: Дней
+
 Hour: Час
+HourPl: Часов
 
 Minute: Минута
 MinuteOf: Минут
