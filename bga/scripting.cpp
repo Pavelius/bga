@@ -12,6 +12,7 @@
 #include "npc.h"
 #include "modifier.h"
 #include "pushvalue.h"
+#include "race.h"
 #include "script.h"
 #include "store.h"
 #include "stringvar.h"
@@ -100,7 +101,7 @@ template<> void ftscript<rfpma>(int value, int counter) {
 
 template<> void ftscript<npci>(int value, int counter) {
 	auto pm = bsdata<npci>::elements + value;
-	player->gender = Male;
+	player->gender = Male; // Character only valid if gender not empty.
 	player->race = pm->race;
 	player->alignment = pm->alignment;
 	memcpy(player->colors, pm->colors, sizeof(player->colors));

@@ -10,6 +10,7 @@
 #include "npc.h"
 #include "party.h"
 #include "pushvalue.h"
+#include "race.h"
 #include "rand.h"
 #include "script.h"
 #include "rfiles.h"

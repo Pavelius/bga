@@ -168,6 +168,13 @@ static int priority_ground(const drawable* object) {
 	return object->position.y - 1000 - p->geti().ground;
 }
 
+static int priority_creature(const drawable* object) {
+	auto p = (creature*)object;
+	if(p->action==AnimateAgony)
+		return object->position.y - 2000;
+	return object->position.y;
+}
+
 static int priority_door(const drawable* object) {
 	auto p = (door*)object;
 	return p->getrect().y2 - 8;
@@ -764,6 +771,9 @@ static void apply_hilite_command() {
 			if(player)
 				party_action(p->position, ActionPickItems, getbsi(p));
 		} else if(bsdata<creature>::have(hilite_object)) {
+			auto p = (creature*)hilite_object;
+			if(p->action == AnimateAgony)
+				return; // Dead creature can't be selected.
 			if(combat_mode) {
 
 			} else
@@ -1095,7 +1105,7 @@ void* choose_combat_action() {
 BSDATA(renderi) = {
 	{"Animation", bsdata<animation>::source, bsdata<animation>::elements, paint_animation, allow_animate, priority_animate, 0},
 	{"Container", bsdata<container>::source, bsdata<container>::elements, paint_container, allow_clipped_area, priority_normal, hilite_container},
-	{"Creature", bsdata<creature>::source, bsdata<creature>::elements, paint_creature, 0, priority_normal, hilite_creature},
+	{"Creature", bsdata<creature>::source, bsdata<creature>::elements, paint_creature, 0, priority_creature, hilite_creature},
 	{"Door", bsdata<door>::source, bsdata<door>::elements, paint_door, allow_door, priority_door, hilite_door},
 	{"Item", bsdata<itemground>::source, bsdata<itemground>::elements, paint_ground, allow_ground, priority_ground, hilite_ground},
 	{"Region", bsdata<region>::source, bsdata<region>::elements, paint_region, allow_region, priority_region, hilite_region},

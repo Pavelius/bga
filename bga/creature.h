@@ -2,12 +2,14 @@
 
 #include "actor.h"
 #include "portrait.h"
+#include "resname.h"
 #include "spell.h"
+#include "wearable.h"
 
 enum alignmentn : unsigned char;
 enum dietyn : unsigned char;
 
-struct creature : actor, statable, classa, avatarable, spellv {
+struct creature : actor, statable, classa, avatarable, wearable, spellv {
 	racen			race;
 	gendern			gender;
 	alignmentn		alignment;

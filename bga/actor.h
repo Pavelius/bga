@@ -1,14 +1,14 @@
 #pragma once
 
-#include "ability.h"
-#include "class.h"
 #include "coloration.h"
 #include "moveable.h"
-#include "race.h"
-#include "resname.h"
-#include "wearable.h"
+//#include "resname.h"
 
+struct item;
 struct sprite;
+
+enum classn : unsigned char;
+enum racen : unsigned char;
 
 const int max_weapon_anim = 26;
 
@@ -31,7 +31,7 @@ enum animaten : unsigned char {
 enum gendern : unsigned char;
 enum directionn : unsigned char;
 
-struct actor : moveable, coloration, wearable {
+struct actor : moveable, coloration {
 	short unsigned	resid[4]; // Images overlays. 0xFFFF is none.
 	short unsigned	cicle; // Current animation cicle
 	short unsigned	frame;

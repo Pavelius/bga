@@ -15,6 +15,7 @@
 #include "keybind.h"
 #include "option.h"
 #include "pushvalue.h"
+#include "race.h"
 #include "resinfo.h"
 #include "screenshoot.h"
 #include "timer.h"

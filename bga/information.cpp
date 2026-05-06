@@ -8,6 +8,7 @@
 #include "item.h"
 #include "io_stream.h"
 #include "math.h"
+#include "race.h"
 #include "saveheader.h"
 #include "school.h"
 #include "script.h"
