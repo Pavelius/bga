@@ -875,6 +875,13 @@ static void paint_movement_target() {
 	alpha = push_alpha;
 }
 
+static void paint_dark_time() {
+	pushfore push(color(30, 24, 54));
+	auto push_alpha = alpha; alpha = 128;
+	rectf();
+	alpha = push_alpha;
+}
+
 static void paint_area_map() {
 	auto push_clip = clipping; setclipall();
 	set_visible_area();
@@ -885,6 +892,7 @@ static void paint_area_map() {
 	paint_block_area();
 #endif // _DEBUG
 	paint_objects();
+	// paint_dark_time();
 	paint_fow();
 	paint_float_text();
 	apply_hilite_command();
