@@ -370,6 +370,19 @@ static void button(actionn id) {
 	caret.x += width + 4;
 }
 
+static void button(const item& e) {
+	auto push = caret;
+	button(pma_butact, 100, 101, 0);
+	if(button_pressed) {
+		caret.x += 1;
+		caret.y += 1;
+	}
+	if(e)
+		paint_item(&e);
+	caret = push;
+	caret.x += width + 4;
+}
+
 static void buttona(sprite* ps, int f1, bool checked) {
 	auto push_caret = caret;
 	button(pma_butact, checked ? 111 : 108, 109, 0);
@@ -750,8 +763,12 @@ static void paint_player_actions() {
 		button(ActionStop);
 		for(auto i = FormationT; i <= FormationProtect; i = formationn(i + 1))
 			button(i, current_formation);
-	} else {
-
+	} else if(player) {
+		button(ActionDefend);
+		button(player->getweapon());
+		button(player->getoffhand());
+		button(ActionSpecialAbility);
+		button(ActionCast);
 	}
 }
 
@@ -1853,6 +1870,8 @@ static bool paint_tips() {
 	if(!ps)
 		return false;
 	auto n = getcputime();
+	if(hot.pressed)
+		tips_stamp = 0;
 	if(!tips_stamp)
 		tips_stamp = n;
 	if(tips_stamp + optvalues[ToolTipsDelay] > n) {

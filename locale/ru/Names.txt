@@ -168,6 +168,8 @@ SellItemsTotal: %ItemListTotal зм
 
 ActionAttack: Атаковать
 ActionDefend: Защищаться
+ActionCast: Создать заклинание
+ActionSpecialAbility: Специальная способность
 ActionStop: Остановить
 
 HandsOfFury: Руки ярости
