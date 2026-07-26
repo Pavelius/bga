@@ -154,7 +154,9 @@
     <ClCompile Include="szdup.cpp" />
     <ClCompile Include="tag.cpp" />
     <ClCompile Include="talk.cpp" />
-    <ClCompile Include="thread.cpp" />
+    <ClCompile Include="thread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="variant.cpp" />
     <ClCompile Include="view_area.cpp" />
@@ -215,7 +217,9 @@
     <ClInclude Include="flagable.h" />
     <ClInclude Include="floattext.h" />
     <ClInclude Include="formation.h" />
-    <ClInclude Include="ftflag.h" />
+    <ClInclude Include="ftflag.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="game.h" />
     <ClInclude Include="command.h" />
     <ClInclude Include="geography.h" />
@@ -248,7 +252,9 @@
     <ClInclude Include="store.h" />
     <ClInclude Include="stringvar.h" />
     <ClInclude Include="talk.h" />
-    <ClInclude Include="thread.h" />
+    <ClInclude Include="thread.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="portrait.h" />
     <ClInclude Include="region.h" />
     <ClInclude Include="resinfo.h" />
