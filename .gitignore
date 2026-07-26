@@ -366,3 +366,4 @@ FodyWeavers.xsd
 *.arc
 /save/Quicksave.sav
 /locale/ru/UnknownNames.txt
+/errors.txt
