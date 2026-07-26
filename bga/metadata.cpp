@@ -261,7 +261,6 @@ BSDATA(varianti) = {
 	{"Entrance", VAR(entrancei, 1)},
 	{"Feat", VAR(feati, 1), ftinfo<feati>, 0, ftscript<feati>},
 	{"Gender", VAR(genderi, 1), 0, 0, ftscript<genderi>},
-	{"Hotkey", VAR(keybind, 2)},
 	{"Item", VAR(itemi, 1), 0, 0, ftscript<itemi>},
 	{"List", VAR(listi, 1), 0, 0, ftscript<listi>},
 	{"Modifier", VAR(modifieri, 1), 0, 0, ftscript<modifieri>},

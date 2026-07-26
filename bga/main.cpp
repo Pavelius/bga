@@ -32,14 +32,13 @@ int main(int argc, char* argv[]) {
 	srand(getcputime());
 	// srand(923811);
 	stringbuilder::custom = main_identifier;
-	initialize_resources();
-	// initialize_data(bsdata<talki>::source, "locale/%1", "*.tlk");
-	bsreq::read("rules/Basic.txt");
-	read_options();
+	initialize_resources(); // First - load resources and get identifiers.
+	bsreq::read("rules/Basic.txt"); // Second - load rules.
+	read_options(); // Third - load options.
 #ifdef _DEBUG
 	util_main();
 #endif // _DEBUG
-	audio_allow_music = false;
+	// audio_allow_music = false;
 	initialize_items();
 	initialize_translation();
 	initialize_colorgrad();
@@ -47,7 +46,6 @@ int main(int argc, char* argv[]) {
 	initialize_parties();
 	initialize_ui();
 	initialize_interface();
-	initialize_keybind();
 	if(log::errors)
 		return -1;
 	metrics::font = gres("NORMAL");
@@ -64,7 +62,6 @@ int main(int argc, char* argv[]) {
 	initialize(getnm("AppTitle"));
 	sys_cursor(false);
 	sys_timer(64);
-	//next_scene(start_main);
 	next_scene(open_main_menu);
 	start_scene();
 	return 0;

@@ -1,9 +1,0 @@
-#Hotkey
-
-"H"			ChangePanelMode
-"G"			GameQuickSave
-"M"			OpenAutomap
-"C"			OpenCharacterSheet
-"S"			OpenCharacterSpells
-"I"			OpenInventory
-"J"			OpenJournal

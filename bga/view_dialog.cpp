@@ -286,9 +286,9 @@ void paint_game_dialog(int x, int y, const char* id, int frame) {
 	image(gres(id), frame, 0);
 }
 
-void hotkey(unsigned key, fnevent proc, int param) {
+void hotkey(unsigned key, fnevent proc, int param, void* object) {
 	if(hot.key == key)
-		execute(proc, param);
+		execute(proc, param, 0, object);
 }
 
 void button_check(unsigned key) {
@@ -1495,8 +1495,6 @@ static void paint_content_lists() {
 
 static void paint_help() {
 	paint_game_dialog("GUIHELP");
-	// paint_action_panel_na();
-	// paint_game_panel_na();
 	setdialog(300, 23, 200, 30); texta(metrics::h1, getnm("Information"), AlignCenterCenter);
 	setdialog(297, 373); button(gres("GBTNBFRM"), 1, 2, KeyEscape, "Close"); fire(buttoncancel);
 	setdialog(74, 72, 95, 286); paint_topic_lists();
@@ -1721,6 +1719,23 @@ static void paint_game_spells() {
 	}
 }
 
+static void change_panel_mode() {
+	game_panel_mode = (++game_panel_mode) % 3;
+}
+
+static void common_hotkeys(bool panels_keys = false) {
+	hotkey('Z', change_zoom_factor);
+	hotkey('H', change_panel_mode);
+	hotkey('G', game_quick_save);
+	if(panels_keys) {
+		hotkey('M', setgameproc, 0, paint_game_automap);
+		hotkey('C', setgameproc, 0, paint_game_character);
+		hotkey('S', setgameproc, 0, paint_game_spells);
+		hotkey('I', setgameproc, 0, paint_game_inventory);
+		hotkey('J', setgameproc, 0, paint_game_journal);
+	}
+}
+
 void paint_game_panel(bool allow_input, bool combat_mode) {
 	pushrect push;
 	auto push_dialog = dialog_start;
@@ -1740,7 +1755,6 @@ void paint_game_panel(bool allow_input, bool combat_mode) {
 		setdialog(576, 3); button(pb1, 0, 1, '*'); fire(select_all_party); tips("SelectAllParty");
 		setdialog(703, 2); button(pb1, 2, 3); tips("RestParty");
 		setdialog(575, 72); button(pb1, 16, 17); tips("ModifyParty");
-		hotkey('Z', change_zoom_factor);
 	} else {
 		setdialog(575, 2, 225, 105);
 		layer(colors::black, 128);
@@ -1753,10 +1767,6 @@ void paint_game_panel(bool allow_input, bool combat_mode) {
 	dialog_start = push_dialog;
 }
 
-void change_panel_mode() {
-	game_panel_mode = (++game_panel_mode) % 3;
-}
-
 void view_game_area() {
 	switch(game_panel_mode) {
 	case 0:
@@ -1764,15 +1774,18 @@ void view_game_area() {
 		paint_area();
 		setcaret(0, 433); paint_action_panel();
 		paint_game_panel();
+		common_hotkeys(false);
 		break;
 	case 1:
 		setcaret(0, 0, 800, 433 + 107);
 		paint_area();
 		setcaret(0, 433 + 107); paint_action_panel();
+		common_hotkeys(true);
 		break;
 	default:
 		setcaret(0, 0, 800, 600);
 		paint_area();
+		common_hotkeys(true);
 		break;
 	}
 }

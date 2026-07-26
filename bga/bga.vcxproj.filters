@@ -111,9 +111,6 @@
     <Text Include="..\parties\HandsOfFury.txt">
       <Filter>locale</Filter>
     </Text>
-    <Text Include="..\rules\Hotkeys.txt">
-      <Filter>rules</Filter>
-    </Text>
     <Text Include="..\rules\Entrances.txt">
       <Filter>rules</Filter>
     </Text>

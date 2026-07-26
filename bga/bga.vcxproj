@@ -41,7 +41,6 @@
     <Text Include="..\rules\Advance.txt" />
     <Text Include="..\rules\Entrances.txt" />
     <Text Include="..\rules\General.txt" />
-    <Text Include="..\rules\Hotkeys.txt" />
     <Text Include="..\rules\Monsters.txt" />
     <Text Include="..\rules\Classes.txt" />
     <Text Include="..\rules\Basic.txt" />
@@ -111,7 +110,9 @@
     <ClCompile Include="item.cpp" />
     <ClCompile Include="itema.cpp" />
     <ClCompile Include="itemground.cpp" />
-    <ClCompile Include="keybind.cpp" />
+    <ClCompile Include="keybind.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="list.cpp" />
     <ClCompile Include="locale.cpp" />
     <ClCompile Include="log.cpp" />
@@ -221,7 +222,9 @@
     <ClInclude Include="help.h" />
     <ClInclude Include="itema.h" />
     <ClInclude Include="itemground.h" />
-    <ClInclude Include="keybind.h" />
+    <ClInclude Include="keybind.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="logvalue.h" />
     <ClInclude Include="manager.h" />
     <ClInclude Include="math.h" />

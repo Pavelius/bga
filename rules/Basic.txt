@@ -9,7 +9,6 @@
 #include "rules/Spells.txt"
 #include "rules/Diety.txt"
 #include "rules/Monsters.txt"
-// #include "rules/Hotkeys.txt"
 #include "locale/%1" Talk "*.tlk"
 
 #include "rules/General.txt"

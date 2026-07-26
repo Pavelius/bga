@@ -12,7 +12,6 @@
 #include "floattext.h"
 #include "game.h"
 #include "itemground.h"
-#include "keybind.h"
 #include "math.h"
 #include "pushvalue.h"
 #include "region.h"
@@ -956,7 +955,6 @@ void paint_area_no_keys() {
 
 void paint_area() {
 	paint_area_no_keys();
-	apply_keybinding();
 }
 
 static point minimap_origin, minimap_size;

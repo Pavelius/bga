@@ -28,7 +28,6 @@ extern sprite* pma_pfcm;
 
 extern bool need_update_items;
 
-sprite* gres(resn i);
 sprite* gres(const char* id);
 
 const char* getkg(int weight);
@@ -42,7 +41,6 @@ void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key, co
 void button(sprite* pres, unsigned short f1, unsigned short f2, unsigned key, const char* id, unsigned short fd, bool allowed, bool need_getname = true);
 void button_check(unsigned key);
 void cbsetintds();
-void change_panel_mode();
 void change_zoom_factor();
 void checkbox(int& source, int value, sprite* res, unsigned short f1, unsigned short f2, unsigned short fc, unsigned key);
 void choose_creature();
@@ -53,7 +51,7 @@ void edit(char* string, int maximum, unsigned text_flags, bool upper_case = fals
 void edit_number();
 void fire(fnevent proc, long param = 0, long param2 = 0, void* object = 0);
 void fire(fnevent proc, long param, long param2, fnevent object);
-void hotkey(unsigned key, fnevent proc, int param = 0);
+void hotkey(unsigned key, fnevent proc, int param = 0, void* object = 0);
 void initialize_ui();
 void initialize_interface();
 void input_debug();
