@@ -125,6 +125,7 @@ Quiver: Колчан
 QuitMainMenu: Покинуть игру
 Random: Случайно
 Range30: 30 футов
+Range80: 80 футов
 Replay: Заново
 Required: Требования
 Save: Сохранить

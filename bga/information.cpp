@@ -107,7 +107,7 @@ static void add_description(stringbuilder& sb, const char* id, const char* id_ba
 	if(!pn)
 		return;
 	sb.addn(pn);
-	sb.add("\n\n");
+	// sb.add("\n\n");
 }
 
 static void add_special(stringbuilder& sb, const char* id, const char* id_special) {
