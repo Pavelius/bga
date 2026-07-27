@@ -187,6 +187,7 @@ BSMETA(schooli) = {
 BSMETA(skilli) = {
 	BSREQ(id),
 	BSENM(ability, abilityi),
+	BSFLG(synergy, skilli),
 	{}};
 BSMETA(spelli) = {
 	BSREQ(id),

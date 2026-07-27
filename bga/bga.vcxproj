@@ -48,6 +48,7 @@
     <Text Include="..\rules\Feats.txt" />
     <Text Include="..\rules\Items.txt" />
     <Text Include="..\rules\Races.txt" />
+    <Text Include="..\rules\Skills.txt" />
     <Text Include="..\rules\Spells.txt" />
     <Text Include="..\rules\Store.txt" />
     <Text Include="..\rules\Worldmap.txt" />
