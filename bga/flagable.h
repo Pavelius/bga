@@ -11,6 +11,7 @@ class flagable {
 public:
 	constexpr explicit operator bool() const { for(auto e : data) if(e) return true; return false; }
 	constexpr flagable() : data{0} {}
+	template<typename... Ts> constexpr flagable(short unsigned v, Ts... args) : flagable(args...) { set(v); }
 	constexpr void add(const flagable<N, T>& v) { for(unsigned i = 0; i < N; i++) data[i] |= v.data[i]; }
 	constexpr void add(int n, const T v) { data[n] |= v; }
 	constexpr void clear() { for(unsigned i = 0; i < N; i++) data[i] = 0; }
@@ -26,7 +27,7 @@ class flagable<1, T> {
 public:
 	constexpr explicit operator bool() const { return data != 0; }
 	constexpr flagable() : data(0) {}
-	constexpr flagable(T data) : data(data) {}
+	template<typename... Ts> constexpr flagable(short unsigned v, Ts... args) : flagable(args...) { set(v); }
 	constexpr void add(const flagable<1, T>& v) { data |= v.data; }
 	constexpr void clear() { data = 0; }
 	constexpr bool is(short unsigned v) const { return (data & (1 << v)) != 0; }

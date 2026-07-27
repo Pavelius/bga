@@ -123,9 +123,6 @@
     <Text Include="..\areas\AR1000.txt">
       <Filter>areas</Filter>
     </Text>
-    <Text Include="..\rules\Skills.txt">
-      <Filter>rules</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ability.cpp">
@@ -665,9 +662,6 @@
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="my_initialize_list.h">
-      <Filter>support</Filter>
-    </ClInclude>
-    <ClInclude Include="ftflag.h">
       <Filter>support</Filter>
     </ClInclude>
     <ClInclude Include="worldmap.h">
