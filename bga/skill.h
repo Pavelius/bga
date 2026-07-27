@@ -14,6 +14,7 @@ enum skilln : unsigned char {
 typedef flagable<1, unsigned> skillf;
 struct skilli : nameable {
 	abilityn	ability;
+	skillf		synergy; // Get bonus +2 if skill have 5+ rang.
 	skilln		getindex() const;
 };
 struct skilla {

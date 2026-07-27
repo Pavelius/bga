@@ -294,9 +294,21 @@ static void update_weight() {
 	player->allowed_weight = maptbl(heavy_load, strenght);
 }
 
+static int get_synergy_bonus(skilln v) {
+	auto result = 0;
+	auto& synergy = bsdata<skilli>::elements[v].synergy;
+	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1)) {
+		if(synergy.is(i) && player->basic.skills[i] >= 5)
+			result += 2;
+	}
+	return result;
+}
+
 static void update_skills() {
-	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1))
+	for(auto i = (skilln)0; i <= WildernessLore; i = (skilln)(i + 1)) {
 		player->skills[i] += player->getbonus(bsdata<skilli>::elements[i].ability);
+		player->skills[i] += get_synergy_bonus(i);
+	}
 }
 
 static void update_abilities() {

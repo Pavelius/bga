@@ -452,12 +452,24 @@ template<> void ftinfo<classi>(const void* object, stringbuilder& sb) {
 	adds(sb, bsdata<feati>::source, "ProficientArmor", p->proficient, ArmorProficiencyLight, ShieldProficiency);
 }
 
+static void add_synergy_skills(stringbuilder& sb, skilli* p, const char* header) {
+	for(auto& e : bsdata<skilli>()) {
+		if(!p->synergy.is(e.getindex()))
+			continue;
+		if(header) {
+			addh(sb, header);
+			header = 0;
+		}
+		sb.addn(e.getname());
+	}
+}
+
 template<> void ftinfo<skilli>(const void* object, stringbuilder& sb) {
 	auto p = (skilli*)object;
 	add_description(sb, p->id, 0);
-	sb.add("\n\n");
-	addv<abilityi>(sb, "BasicAbility", p->ability);
-	// sb.add("%BasicAbility: %1", bsdata<abilityi>::elements[p->ability].getname());
+	addh(sb, "BasicAbility");
+	sb.addn(bsdata<abilityi>::elements[p->ability].getname());
+	add_synergy_skills(sb, p, "SynergySkills");
 }
 
 template<> void ftinfo<feati>(const void* object, stringbuilder& sb) {

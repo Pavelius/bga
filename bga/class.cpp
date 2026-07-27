@@ -21,7 +21,7 @@ classn classi::getindex() const {
 	return (classn)(this - bsdata<classi>::elements);
 }
 
-classn	classa::getmainclass() const {
+classn classa::getmainclass() const {
 	auto result = Commoner;
 	auto value = 0;
 	for(auto i = Commoner; i <= Wizard; i = (classn)(i + 1)) {
@@ -47,7 +47,8 @@ unsigned classa::getnextlevel() const {
 
 bool ischaracter(classn v) {
 	switch(v) {
-	case Cleric: case Fighter: case Ranger: case Rogue: case Sorcerer: case Wizard:
+	case Barbarian: case Bard: case Fighter: case Cleric: case Druid:
+	case Paladin: case Ranger: case Rogue: case Sorcerer: case Wizard:
 		return true;
 	default:
 		return false;

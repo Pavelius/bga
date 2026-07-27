@@ -590,8 +590,10 @@ static bool choose_step_action() {
 		break;
 	case ChooseRace:
 		*player = before_race_apply;
-		for(auto& e : bsdata<racei>())
-			add_answer(&e);
+		for(auto& e : bsdata<racei>()) {
+			if(e.character())
+				add_answer(&e);
+		}
 		if(!scene(paint_choose_step))
 			return false;
 		raise_race((racen)bsdata<racei>::source.indexof(current_answer));
@@ -681,10 +683,7 @@ static bool generate_step_by_step() {
 	}
 }
 
-static bool open_character_generation(creature& copy) {
-	auto push_player = player;
-	player = &copy;
-#ifdef _DEBUG
+static void generate_test_character() {
 	player->gender = Female;
 	player->portrait = 14;
 	apply_portraits();
@@ -708,9 +707,16 @@ static bool open_character_generation(creature& copy) {
 	player->update();
 	current_step = ChooseName;
 	//current_step = ChooseGender;
-#else
+}
+
+static bool open_character_generation(creature& copy) {
+	auto push_player = player;
+	player = &copy;
+//#ifdef _DEBUG
+//	generate_test_character();
+//#else
 	current_step = ChooseGender;
-#endif // _DEBUG
+//#endif // _DEBUG
 	auto result = generate_step_by_step();
 	player_finish();
 	portraits.clear();
