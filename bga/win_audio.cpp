@@ -1,9 +1,4 @@
-#include "adat.h"
 #include "audio.h"
-#include "io_stream.h"
-#include "mtevent.h"
-#include "slice.h"
-#include "thread.h"
 
 namespace {
 // WAV file header structure
@@ -15,11 +10,11 @@ struct wav {
 	// format sub-chunk
 	char            subchunk1ID[4]; // "fmt "
 	unsigned        subchunk1Size; // Size of the fmt chunk (16 for PCM)
-	unsigned short  audioFormat;   // Audio format (1 for PCM)
-	unsigned short  numChannels;   // Number of channels (1 = mono, 2 = stereo)
-	unsigned        sampleRate;    // Sampling rate (e.g., 44100 Hz)
-	unsigned        byteRate;      // Byte rate = SampleRate * NumChannels * BitsPerSample / 8
-	unsigned short  blockAlign;    // Block align = NumChannels * BitsPerSample / 8
+	unsigned short  audioFormat; // Audio format (1 for PCM)
+	unsigned short  numChannels; // Number of channels (1 = mono, 2 = stereo)
+	unsigned        sampleRate; // Sampling rate (e.g., 44100 Hz)
+	unsigned        byteRate; // Byte rate = SampleRate * NumChannels * BitsPerSample / 8
+	unsigned short  blockAlign; // Block align = NumChannels * BitsPerSample / 8
 	unsigned short  bitsPerSample; // Bits per sample (e.g., 8, 16, 24, 32)
 	// data sub-chunk
 	char            subchunk2ID[4]; // "data"
@@ -85,19 +80,14 @@ enum channelplayn : unsigned char {
 };
 
 struct channelinfo {
-	void*		object; // wav data playing
 	volatile channelplayn mode;
-	void*       handle;
 	WAVEHDR     header;
+	void*		object; // wav data playing
+	void*       handle;
 	explicit operator bool() const { return handle != 0; }
-	int getindex() const;
 };
 static channelinfo music_channel;
 static channelinfo channels[16];
-
-int channelinfo::getindex() const {
-	return this - channels;
-}
 
 static void channel_check_done(channelinfo* p) {
 	if(!p->handle)
@@ -150,15 +140,24 @@ static void channel_write(channelinfo* p, void* object) {
 	waveOutWrite(p->handle, &p->header, sizeof(WAVEHDR));
 }
 
+static void channel_reset(channelinfo* p) {
+	if(p->handle && p->mode == ChannelPlayed)
+		waveOutReset(p->handle);
+}
+
+static channelinfo* free_channel() {
+	audio_update_channels();
+	for(auto& e : channels) {
+		if(e.mode == ChannelReady)
+			return &e;
+	}
+	return 0;
+}
+
 void audio_update_channels() {
 	channel_check_done(&music_channel);
 	for(auto& e : channels)
 		channel_check_done(&e);
-}
-
-static void channel_reset(channelinfo* p) {
-	if(p->handle && p->mode == ChannelPlayed)
-		waveOutReset(p->handle);
 }
 
 void audio_reset() {
@@ -166,15 +165,6 @@ void audio_reset() {
 	for(auto& e : channels)
 		channel_reset(&e);
 	audio_update_channels();
-}
-
-static channelinfo* find_channel() {
-	audio_update_channels();
-	for(auto& e : channels) {
-		if(e.mode == ChannelReady)
-			return &e;
-	}
-	return 0;
 }
 
 void play_music_raw(void* object) {
@@ -188,7 +178,7 @@ void play_music_raw(void* object) {
 }
 
 void audio_play(void* object) {
-	auto p = find_channel();
+	auto p = free_channel();
 	if(!p)
 		return;
 	channel_write(p, object);
